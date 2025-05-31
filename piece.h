@@ -9,12 +9,12 @@
 #include "id.h"
 #include "piece_type.h"
 #include "piece_action.h"
-#include "game_coordinat.h"
-#include "message.h"
+//#include "game_coordinat.h"
+//#include "message.h"
 #include "message_type.h"
-#include "starting_position_type.h"
+//#include "starting_position_type.h"
 #include "race.h"
-#include "side.h"
+//#include "side.h"
 #include "read_only.h"
 
 #include <string>
@@ -90,6 +90,9 @@ public:
 
   /// Increase the kill count by one
   void increase_kill_count() noexcept { ++m_kill_count; }
+
+  /// Can the unit be captured by en-passant?
+  bool is_enpassantable() const noexcept { return false; }
 
   /// Is the piece selected?
   bool is_selected() const noexcept { return m_is_selected; }
@@ -240,6 +243,9 @@ bool has_moved(const piece& p) noexcept;
 
 /// Is the unit dead?
 bool is_dead(const piece& p) noexcept;
+
+/// Can the unit be captured by en-passant?
+bool is_enpassantable(const piece& p) noexcept;
 
 /// Is the unit idle?
 bool is_idle(const piece& p) noexcept;

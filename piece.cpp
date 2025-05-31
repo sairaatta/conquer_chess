@@ -339,6 +339,11 @@ bool is_dead(const piece& p) noexcept
   return p.get_health() <= 0.0;
 }
 
+bool is_enpassantable(const piece& p) noexcept
+{
+  return p.is_enpassantable();
+}
+
 bool is_idle(const piece& p) noexcept
 {
   return !has_actions(p);
@@ -722,6 +727,11 @@ void test_piece()
     assert(!has_just_double_moved(h, delta_t(1.0)));
     assert(has_just_double_moved(h, delta_t(2.0)));
     assert(!has_just_double_moved(h, delta_t(3.0)));
+  }
+  // is_enpassantable
+  {
+      const auto p{get_test_white_king()};
+      assert(!is_enpassantable(p));
   }
   // is_idle
   {

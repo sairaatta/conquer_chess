@@ -4,6 +4,7 @@
 /// Functions to work on collections of pieces
 #include "board_to_text_options.h"
 #include "piece.h"
+#include "starting_position_type.h"
 
 /// Surround the 8x8 strings of a chessboard by coordinats
 /// Without coordinats:
