@@ -38,6 +38,26 @@ void test_game_class()
   }
   // game::tick
   {
+    // a2-a4 makes a pawn en-passantable
+    {
+      game g;
+      piece& p{get_piece_at(g, "a2")};
+      p.add_action(
+        piece_action(
+          chess_color::white,
+          piece_type::pawn,
+          piece_action_type::move,
+          "a2",
+          "a4"
+        )
+      );
+      assert(!p.is_enpassantable());
+      g.tick(delta_t(0.5));
+      g.tick(delta_t(0.5));
+      assert(p.is_enpassantable());
+      assert(is_piece_at(g, square("a4")));
+    }
+
     // #27: a2-a4 takes as long as b2-b3
     {
       game g;

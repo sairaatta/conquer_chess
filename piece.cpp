@@ -3,7 +3,6 @@
 #include "helper.h"
 #include "piece_type.h"
 #include "square.h"
-#include "message.h"
 #include "game.h"
 
 #include <algorithm>
@@ -316,6 +315,15 @@ piece get_test_white_knight() noexcept
   );
 }
 
+piece get_test_white_pawn() noexcept
+{
+  return piece(
+    chess_color::white,
+    piece_type::pawn,
+    square("e2")
+  );
+}
+
 bool has_actions(const piece& p) noexcept
 {
   return count_piece_actions(p) != 0;
@@ -339,14 +347,27 @@ bool is_dead(const piece& p) noexcept
   return p.get_health() <= 0.0;
 }
 
-bool is_enpassantable(const piece& p) noexcept
+bool is_enpassantable(const piece& p)
 {
   return p.is_enpassantable();
 }
 
+
+bool piece::is_enpassantable() const
+{
+  assert(is_pawn(*this));
+  return false;
+}
+
+
 bool is_idle(const piece& p) noexcept
 {
   return !has_actions(p);
+}
+
+bool is_pawn(const piece& p) noexcept
+{
+  return p.get_type() == piece_type::pawn;
 }
 
 void piece::receive_damage(const double damage)
@@ -685,6 +706,12 @@ void test_piece()
     assert(p.get_type() == piece_type::knight);
     assert(p.get_color() == chess_color::white);
   }
+  // get_test_white_pawn
+  {
+    const auto p{get_test_white_pawn()};
+    assert(p.get_type() == piece_type::pawn);
+    assert(p.get_color() == chess_color::white);
+  }
   // has_actions
   {
     const auto p{get_test_white_king()};
@@ -730,7 +757,8 @@ void test_piece()
   }
   // is_enpassantable
   {
-      const auto p{get_test_white_king()};
+      const auto p{get_test_white_pawn()};
+      assert(is_pawn(p));
       assert(!is_enpassantable(p));
   }
   // is_idle
@@ -1094,6 +1122,9 @@ void tick_move(
   // Are we done with the action?
   if (f_too_much >= 1.0)
   {
+    // Can this piece now be captured by en passant?
+    // Or should it be found in a piece's history ..?
+
     // The whole goal of the operation
     assert(p.get_current_square() == first_action.get_to());
     p.set_current_action_time(delta_t(0.0));

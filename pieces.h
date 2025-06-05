@@ -176,7 +176,8 @@ std::vector<piece> get_standard_starting_pieces(
 ) noexcept;
 
 
-/// Get the pieces before an en passant becomes possible
+/// Create a setup of pieces in which en passant becomes possible
+/// in the next move
 std::vector<piece> get_pieces_before_en_passant(
   const race white_race = race::classic,
   const race black_race = race::classic
