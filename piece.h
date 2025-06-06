@@ -56,7 +56,7 @@ public:
   /// Get the color of the piece, i.e. white or black
   const auto& get_color() const noexcept { return m_color.get_value(); }
 
-  const auto& get_current_action_time() const noexcept { return m_current_action_time; }
+  delta_t get_current_action_time() const;
 
   const auto& get_current_square() const noexcept { return m_current_square; }
 
@@ -65,6 +65,9 @@ public:
 
   /// Get the ID of the piece
   const auto& get_id() const noexcept { return m_id.get_value(); }
+
+  /// Get the in-game time according to this piece
+  const auto& get_in_game_time() const noexcept { return m_time; }
 
   /// Get the number of pieces this piece has killd
   int get_kill_count() const noexcept { return m_kill_count; }
@@ -130,6 +133,8 @@ private:
   read_only<chess_color> m_color;
 
   /// Time that the current action is taking
+  /// Is always between 0.0 (start) and 1.0 (done).
+  /// When it passes 1.0, the current action is done.
   delta_t m_current_action_time;
 
   /// The square the piece occupies now

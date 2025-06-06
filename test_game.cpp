@@ -38,6 +38,20 @@ void test_game_class()
   }
   // game::tick
   {
+    // Pieces have the same clock
+    {
+      game g;
+      assert(g.get_time() == delta_t(0.0));
+      for (const piece& p: g.get_pieces())
+      {
+        assert(p.get_in_game_time() == g.get_time());
+      }
+      g.tick(delta_t(0.1));
+      for (const piece& p: g.get_pieces())
+      {
+        assert(p.get_in_game_time() == g.get_time());
+      }
+    }
     // a2-a4 makes a pawn en-passantable
     {
       game g;

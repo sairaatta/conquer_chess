@@ -40,7 +40,7 @@ public:
   /// Get the in-game time
   const auto& get_time() const noexcept { return m_t; }
 
-  /// Go to the next frame
+  /// Go to the next frame.
   void tick(const delta_t& dt = delta_t(1.0));
 
 private:
@@ -54,8 +54,15 @@ private:
   /// All pieces in the game
   std::vector<piece> m_pieces;
 
-  /// The time
+  /// The central game time
   delta_t m_t;
+
+
+  /// Both the game and the pieces keep track of the time.
+  /// game::m_t is the cenral game time,
+  /// and piece::m_time is the piece's idea of what time it is.
+  /// These should be equal at the start and end of a tick
+  void check_game_and_pieces_agree_on_the_time() const;
 };
 
 /// Can this piece castle kingside?

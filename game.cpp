@@ -272,7 +272,13 @@ bool can_do_promote(
   return can_promote(selected_piece);
 }
 
-
+void game::check_game_and_pieces_agree_on_the_time() const
+{
+  for (const piece& p: m_pieces)
+  {
+    assert(p.get_in_game_time() == m_t);
+  }
+}
 
 void clear_piece_messages(game& g) noexcept
 {
@@ -1402,10 +1408,18 @@ bool piece_with_id_is_at(
 
 void game::tick(const delta_t& dt)
 {
+  check_game_and_pieces_agree_on_the_time();
   assert(count_dead_pieces(m_pieces) == 0);
 
   // Do those piece_actions
-  for (auto& p: m_pieces) p.tick(dt, *this);
+  for (auto& p: m_pieces)
+  {
+    const auto t_before = p.get_in_game_time();
+    p.tick(dt, *this);
+    const auto t_after = p.get_in_game_time();
+    assert(t_before + dt == t_after);
+  }
+
 
   // Remove dead pieces
   m_pieces.erase(
@@ -1420,6 +1434,9 @@ void game::tick(const delta_t& dt)
 
   // Keep track of the time
   m_t += dt;
+
+  // Assume the game and its pieces agree on the time again
+  check_game_and_pieces_agree_on_the_time();
 }
 
 void unselect_all_pieces(

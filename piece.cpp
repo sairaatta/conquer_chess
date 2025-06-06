@@ -287,6 +287,13 @@ std::string describe_actions(const piece& p)
   return t;
 }
 
+delta_t piece::get_current_action_time() const
+{
+  assert(m_current_action_time.get() >= 0.0);
+  assert(m_current_action_time.get() <= 1.0);
+  return m_current_action_time;
+}
+
 double get_f_health(const piece& p) noexcept
 {
   return p.get_health() / p.get_max_health();
@@ -1016,33 +1023,35 @@ void piece::tick(
     case piece_action_type::move:
       m_has_moved = true; // Whatever happens, this piece has tried to move
       m_is_selected = false; //
-      return tick_move(*this, dt, g);
+      tick_move(*this, dt, g);
+      break;
     case piece_action_type::attack:
-      return tick_attack(*this, dt, g);
+      tick_attack(*this, dt, g);
+      break;
     case piece_action_type::unselect:
       assert(m_is_selected);
       m_is_selected = false;
       remove_first(m_actions);
-      return;
+      break;
     case piece_action_type::select:
       assert(!m_is_selected);
       m_is_selected = true;
       remove_first(m_actions);
-      return;
+      break;
     case piece_action_type::castle_kingside:
       m_is_selected = false; //
       #ifdef FIX_ISSUE_3
-      return tick_castle_kingside(*this, dt, g);
+      tick_castle_kingside(*this, dt, g);
       #else
-      return;
       #endif // FIX_ISSUE_3
+      break;
     case piece_action_type::castle_queenside:
       m_is_selected = false; //
       #ifdef FIX_ISSUE_3
-      return tick_castle_queenside(*this, dt, g);
+      tick_castle_queenside(*this, dt, g);
       #else
-      return;
       #endif // FIX_ISSUE_3
+      break;
     case piece_action_type::promote_to_knight:
     case piece_action_type::promote_to_bishop:
     case piece_action_type::promote_to_rook:
