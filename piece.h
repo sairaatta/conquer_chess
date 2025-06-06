@@ -67,7 +67,7 @@ public:
   const auto& get_id() const noexcept { return m_id.get_value(); }
 
   /// Get the in-game time according to this piece
-  const auto& get_in_game_time() const noexcept { return m_time; }
+  const auto& get_in_game_time() const noexcept { return m_in_game_time; }
 
   /// Get the number of pieces this piece has killd
   int get_kill_count() const noexcept { return m_kill_count; }
@@ -165,7 +165,7 @@ private:
   read_only<race> m_race;
 
   /// The time (in chess move time)
-  delta_t m_time;
+  delta_t m_in_game_time;
 
   /// The type of piece, e.g. king, queen, rook, bishop, knight, pawn
   read_only<piece_type> m_type;

@@ -27,7 +27,7 @@ piece::piece(
     m_kill_count{0},
     m_max_health{::get_max_health(type)},
     m_race{r},
-    m_time{delta_t(0.0)},
+    m_in_game_time{delta_t(0.0)},
     m_type{type}
 {
 
@@ -1005,7 +1005,7 @@ void piece::tick(
 {
   if (m_actions.empty())
   {
-    m_time += dt;
+    m_in_game_time += dt;
     return;
   }
   const auto action_type{m_actions[0].get_action_type()};
@@ -1014,7 +1014,7 @@ void piece::tick(
     || get_last_action(m_action_history) != m_actions[0]
   )
   {
-    m_action_history.add_action(m_time, m_actions[0]);
+    m_action_history.add_action(m_in_game_time, m_actions[0]);
   }
   assert(get_last_action(m_action_history) == m_actions[0]);
 
@@ -1072,7 +1072,7 @@ void piece::tick(
     }
   }
 
-  m_time += dt;
+  m_in_game_time += dt;
 }
 
 void tick_attack(

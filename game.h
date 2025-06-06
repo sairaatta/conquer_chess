@@ -37,8 +37,9 @@ public:
   /// Get all the pieces
   const auto& get_pieces() const noexcept { return m_pieces; }
 
-  /// Get the in-game time
-  const auto& get_time() const noexcept { return m_t; }
+  /// Get the in-game time.
+  /// The game and pieces should agree on the in-game time.
+  const auto& get_in_game_time() const noexcept { return m_in_game_time; }
 
   /// Go to the next frame.
   void tick(const delta_t& dt = delta_t(1.0));
@@ -55,7 +56,7 @@ private:
   std::vector<piece> m_pieces;
 
   /// The central game time
-  delta_t m_t;
+  delta_t m_in_game_time;
 
 
   /// Both the game and the pieces keep track of the time.

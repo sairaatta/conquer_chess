@@ -30,7 +30,7 @@ game::game(
   : m_game_options{go},
     m_lobby_options{lo},
     m_pieces{get_starting_pieces(go, lo)},
-    m_t{0.0}
+    m_in_game_time{0.0}
 {
 
 }
@@ -276,7 +276,7 @@ void game::check_game_and_pieces_agree_on_the_time() const
 {
   for (const piece& p: m_pieces)
   {
-    assert(p.get_in_game_time() == m_t);
+    assert(p.get_in_game_time() == m_in_game_time);
   }
 }
 
@@ -666,7 +666,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
       if (is_empty(g, to_square)
         && is_piece_at(g, enemy_square)
         && get_piece_at(g, enemy_square).get_color() == enemy_color
-        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_time())
+        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
         actions.push_back(piece_action(color, type, piece_action_type::en_passant, from, to_square));
@@ -679,7 +679,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
       if (is_empty(g, to_square)
         && is_piece_at(g, enemy_square)
         && get_piece_at(g, enemy_square).get_color() == enemy_color
-        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_time())
+        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
         actions.push_back(piece_action(color, type, piece_action_type::en_passant, from, to_square));
@@ -697,7 +697,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
       if (is_empty(g, to_square)
         && is_piece_at(g, enemy_square)
         && get_piece_at(g, enemy_square).get_color() == enemy_color
-        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_time())
+        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
         assert(!"YAY, triggered en-passant for FIX_ISSUE_21");
@@ -711,7 +711,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
       if (is_empty(g, to_square)
         && is_piece_at(g, enemy_square)
         && get_piece_at(g, enemy_square).get_color() == enemy_color
-        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_time())
+        && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
         assert(!"YAY");
@@ -1307,7 +1307,7 @@ const piece& get_piece_at(const game& g, const std::string& coordinat_str)
 
 const delta_t& get_time(const game& g) noexcept
 {
-  return g.get_time();
+  return g.get_in_game_time();
 }
 
 bool has_selected_pieces(const game& g, const chess_color player)
@@ -1433,7 +1433,7 @@ void game::tick(const delta_t& dt)
   assert(count_dead_pieces(m_pieces) == 0);
 
   // Keep track of the time
-  m_t += dt;
+  m_in_game_time += dt;
 
   // Assume the game and its pieces agree on the time again
   check_game_and_pieces_agree_on_the_time();
@@ -1467,7 +1467,7 @@ std::string to_pgn(const game& g)
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept
 {
   os
-    << "Time: " << g.get_time() << " ticks\n"
+    << "Time: " << g.get_in_game_time() << " ticks\n"
     << to_board_str(g.get_pieces(), board_to_text_options(true, true)) << '\n'
     << "Lobby options: " << g.get_lobby_options() << '\n'
     << "Game options: " << g.get_game_options();
