@@ -44,3 +44,5 @@ game
 doc/
 build/
 *.bak
+html/
+latex/
