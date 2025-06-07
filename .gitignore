@@ -43,3 +43,4 @@ game
 *.pgn
 doc/
 build/
+*.bak
