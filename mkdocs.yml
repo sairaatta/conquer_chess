@@ -5,10 +5,8 @@ edit_uri: blob/main/docs/
 nav:
   - Start: index.md
   - FAQ: faq.md 
-  - Design: 
-    - Architecture: architecture.md
-    - Developer documentation: docs/README.md
-    - Developer documentation from HTML: docs/index.html
+  - Architecture: architecture.md
+  - Developer documentation: docs/index.html
 
 theme:
   name: material
