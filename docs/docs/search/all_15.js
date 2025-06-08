@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['what_20are_20the_20rules_20of_20conquer_20chess_20compared_20to_20chess_0',['What are the rules of Conquer Chess compared to chess?',['../d0/d0b/md_docs_2faq.html#autotoc_md10',1,'']]],
-  ['what_20is_20conquer_20chess_1',['What is Conquer Chess?',['../d0/d0b/md_docs_2faq.html#autotoc_md6',1,'']]],
-  ['what_20is_20the_20game_20speed_2',['What is the game speed?',['../d0/d0b/md_docs_2faq.html#autotoc_md13',1,'']]],
-  ['where_20did_20you_20get_20you_20example_20games_20from_3',['Where did you get you example games from?',['../d0/d0b/md_docs_2faq.html#autotoc_md11',1,'']]],
-  ['white_4',['white',['../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3ad508fe45cecaf653904a0e774084bb5c',1,'chess_color.h']]],
-  ['why_20the_20name_20conquer_20chess_3a_20battle_20for_20liberty_5',['Why the name &apos;Conquer Chess: Battle for Liberty&apos;?',['../d0/d0b/md_docs_2faq.html#autotoc_md7',1,'']]],
-  ['would_5fbe_5fvalid_6',['would_be_valid',['../de/d9d/game__view_8h.html#a66be601e7757a24a59d0fb539c017400',1,'would_be_valid(const game_view &amp;view, chess_color player_color):&#160;game_view.cpp'],['../db/def/game__view_8cpp.html#a66be601e7757a24a59d0fb539c017400',1,'would_be_valid(const game_view &amp;view, chess_color player_color):&#160;game_view.cpp']]]
+  ['queen_0',['queen',['../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3a72545f3f86fad045a26ed54abd2bbb9f',1,'piece_type.h']]],
+  ['queen_5fend_5fgame_1',['queen_end_game',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5ac33f4293a87e63924d2001fadd9e273b',1,'starting_position_type.h']]],
+  ['queen_5fside_2',['queen_side',['../d0/d7c/castling__type_8h.html#a49809f96ba89d92eda8cdbb820983884a136007d1d572239ac45e26cf94f70a9a',1,'castling_type.h']]],
+  ['questions_3',['Frequently Asked Questions',['../d0/d0b/md_docs_2faq.html',1,'']]],
+  ['quit_4',['quit',['../d2/d17/menu__view__item_8h.html#a1e5480d66ab9bf428c60565a61b3e742adbd73c2b545209688ed794c0d5413d5a',1,'menu_view_item.h']]]
 ];

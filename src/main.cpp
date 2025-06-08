@@ -1,5 +1,11 @@
-/// Use LOGIC_ONLY to be able to run on GHA
+/// @mainpage Conquer Chess
+///
+/// Welcome to Conquer Chess
+///
+/// - [Conquer Chess homepage](https://richelbilderbeek.github.io/conquer_chess/)
 
+
+// Use LOGIC_ONLY to be able to run on GHA
 #include "asserts.h"
 #include "about_view_layout.h"
 #include "action_history.h"
