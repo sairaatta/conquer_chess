@@ -90,29 +90,29 @@ $(document).ready(function() { init_codefold(1); });
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="../../da/d96/asserts_8h.html#a3c72d1890c02c34c3be1658ea7a513d8">    9</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../da/d96/asserts_8h.html#a3c72d1890c02c34c3be1658ea7a513d8">assert_eq</a>(<span class="keyword">const</span> T&amp; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">lhs</a>, <span class="keyword">const</span> T&amp; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>)</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="keywordflow">if</span> (<a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">lhs</a> != <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>)</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    std::stringstream s;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    s</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>      &lt;&lt; <span class="stringliteral">&quot;Assertion failed: &#39;lhs == rhs&#39;\n&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>      &lt;&lt; <span class="stringliteral">&quot;lhs: &quot;</span> &lt;&lt; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">lhs</a> &lt;&lt; <span class="charliteral">&#39;\n&#39;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      &lt;&lt; <span class="stringliteral">&quot;rhs: &quot;</span> &lt;&lt; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    ;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::cerr &lt;&lt; s.str();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">throw</span> std::logic_error(s.str());</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  }</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../da/d96/asserts_8h.html#a3c72d1890c02c34c3be1658ea7a513d8">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../da/d96/asserts_8h.html#a3c72d1890c02c34c3be1658ea7a513d8">assert_eq</a>(<span class="keyword">const</span> T&amp; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">lhs</a>, <span class="keyword">const</span> T&amp; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keywordflow">if</span> (<a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">lhs</a> != <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    std::stringstream s;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    s</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>      &lt;&lt; <span class="stringliteral">&quot;Assertion failed: &#39;lhs == rhs&#39;\n&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      &lt;&lt; <span class="stringliteral">&quot;lhs: &quot;</span> &lt;&lt; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">lhs</a> &lt;&lt; <span class="charliteral">&#39;\n&#39;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>      &lt;&lt; <span class="stringliteral">&quot;rhs: &quot;</span> &lt;&lt; <a class="code hl_enumvalue" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    ;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    std::cerr &lt;&lt; s.str();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">throw</span> std::logic_error(s.str());</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
 </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../da/d96/asserts_8h.html#a5556fe2766323699667a40d273aeb8e8">test_asserts</a>();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../da/d96/asserts_8h.html#a5556fe2766323699667a40d273aeb8e8">test_asserts</a>();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif </span><span class="comment">// ASSERTS_H</span></div>
-<div class="ttc" id="aasserts_8h_html_a3c72d1890c02c34c3be1658ea7a513d8"><div class="ttname"><a href="../../da/d96/asserts_8h.html#a3c72d1890c02c34c3be1658ea7a513d8">assert_eq</a></div><div class="ttdeci">void assert_eq(const T &amp;lhs, const T &amp;rhs)</div><div class="ttdef"><b>Definition</b> asserts.h:9</div></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif </span><span class="comment">// ASSERTS_H</span></div>
+<div class="ttc" id="aasserts_8h_html_a3c72d1890c02c34c3be1658ea7a513d8"><div class="ttname"><a href="../../da/d96/asserts_8h.html#a3c72d1890c02c34c3be1658ea7a513d8">assert_eq</a></div><div class="ttdeci">void assert_eq(const T &amp;lhs, const T &amp;rhs)</div><div class="ttdoc">Assert that the sides are equal.</div><div class="ttdef"><b>Definition</b> asserts.h:10</div></div>
 <div class="ttc" id="aasserts_8h_html_a5556fe2766323699667a40d273aeb8e8"><div class="ttname"><a href="../../da/d96/asserts_8h.html#a5556fe2766323699667a40d273aeb8e8">test_asserts</a></div><div class="ttdeci">void test_asserts()</div><div class="ttdoc">Tests the asserts.</div><div class="ttdef"><b>Definition</b> asserts.cpp:5</div></div>
 <div class="ttc" id="aside_8h_html_afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e"><div class="ttname"><a href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">side::rhs</a></div><div class="ttdeci">@ rhs</div></div>
 <div class="ttc" id="aside_8h_html_afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e"><div class="ttname"><a href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">side::lhs</a></div><div class="ttdeci">@ lhs</div></div>

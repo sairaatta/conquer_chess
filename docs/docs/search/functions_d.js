@@ -13,7 +13,7 @@ var searchData=
   ['play_5fcountdown_10',['play_countdown',['../db/db2/classsound__effects.html#afcc336df1289e250b46df53cb832c057',1,'sound_effects']]],
   ['play_5fhide_11',['play_hide',['../db/db2/classsound__effects.html#a4fe4b0df97b0cd2c4d5ba52a7ac8ca0f',1,'sound_effects']]],
   ['played_5fgame_5fview_12',['played_game_view',['../d0/d02/classplayed__game__view.html#a2eccba7723c43de77cacfa8ea4ceaf72',1,'played_game_view']]],
-  ['played_5fgame_5fview_5flayout_13',['played_game_view_layout',['../de/d61/classplayed__game__view__layout.html#a0eab7a247d08e29ca5e25276ea29fde3',1,'played_game_view_layout']]],
+  ['played_5fgame_5fview_5flayout_13',['played_game_view_layout',['../de/d61/classplayed__game__view__layout.html#a3d9a11f03de9825432b2bfa574c64209',1,'played_game_view_layout']]],
   ['process_5fevent_14',['process_event',['../de/d9d/game__view_8h.html#a4c315cb026ae2ba7089e61a353659d2e',1,'process_event(game_controller &amp;c, const sf::Event &amp;event, const game_view_layout &amp;layout):&#160;game_view.cpp'],['../db/def/game__view_8cpp.html#a4c315cb026ae2ba7089e61a353659d2e',1,'process_event(game_controller &amp;c, const sf::Event &amp;event, const game_view_layout &amp;layout):&#160;game_view.cpp']]],
   ['process_5finput_15',['process_input',['../df/d93/classphysical__controller.html#ade3232a9916e5844de365866de083970',1,'physical_controller']]],
   ['process_5fnext_16',['process_next',['../d2/d44/classresource__loader.html#ac22689e086ff5c6b3704de7b2dcd532d',1,'resource_loader']]],

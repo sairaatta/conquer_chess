@@ -85,7 +85,6 @@ $(function() {
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="../../dc/dd7/piece__action__type_8h_source.html">piece_action_type.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../d5/d88/game__coordinat_8h_source.html">game_coordinat.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d7/d3c/square_8h_source.html">square.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../de/d45/piece__type_8h_source.html">piece_type.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -93,43 +92,37 @@ Include dependency graph for piece_action.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d7/d7b/piece__action_8h__incl.png" border="0" usemap="#ainclude_2piece__action_8h" alt=""/></div>
 <map name="ainclude_2piece__action_8h" id="ainclude_2piece__action_8h">
-<area shape="rect" title=" " alt="" coords="373,5,539,31"/>
-<area shape="rect" title=" " alt="" coords="255,225,319,251"/>
-<area shape="poly" title=" " alt="" coords="381,33,281,52,169,79,117,95,72,113,36,133,13,154,8,165,13,176,27,187,49,198,110,214,179,225,241,231,241,236,179,230,109,219,48,203,24,192,8,179,3,165,8,150,33,128,69,108,115,90,168,73,280,47,380,28"/>
-<area shape="rect" title=" " alt="" coords="937,225,996,251"/>
-<area shape="poly" title=" " alt="" coords="540,20,607,26,685,36,767,52,846,76,916,101,942,119,966,151,975,181,974,212,969,211,970,182,961,153,939,123,913,106,844,81,765,58,684,41,607,31,539,25"/>
-<area shape="rect" title=" " alt="" coords="646,225,709,251"/>
-<area shape="poly" title=" " alt="" coords="540,27,649,45,770,71,827,87,877,106,917,127,943,150,952,164,955,177,952,189,946,199,922,214,887,225,803,237,723,240,723,235,802,232,886,220,920,210,942,195,947,187,949,177,947,166,939,154,914,131,875,111,825,93,769,76,648,50,539,33"/>
-<area shape="rect" href="../../dc/dd7/piece__action__type_8h.html" title=" " alt="" coords="153,152,305,177"/>
-<area shape="poly" title=" " alt="" coords="439,33,261,147,258,142,436,29"/>
-<area shape="rect" href="../../d5/d88/game__coordinat_8h.html" title=" " alt="" coords="387,79,525,104"/>
-<area shape="poly" title=" " alt="" coords="459,31,459,65,453,65,453,31"/>
-<area shape="rect" href="../../d7/d3c/square_8h.html" title=" " alt="" coords="591,79,670,104"/>
-<area shape="poly" title=" " alt="" coords="485,28,590,71,588,76,483,33"/>
-<area shape="rect" href="../../de/d45/piece__type_8h.html" title=" " alt="" coords="23,152,129,177"/>
-<area shape="poly" title=" " alt="" coords="426,33,119,150,118,145,424,28"/>
-<area shape="poly" title=" " alt="" coords="241,176,271,213,266,216,237,179"/>
-<area shape="poly" title=" " alt="" coords="302,175,633,227,632,232,301,180"/>
-<area shape="poly" title=" " alt="" coords="438,106,370,154,307,216,304,213,366,150,435,102"/>
-<area shape="rect" href="../../d7/db1/ccfwd_8h.html" title=" " alt="" coords="477,152,547,177"/>
-<area shape="poly" title=" " alt="" coords="467,103,496,140,492,143,463,106"/>
-<area shape="rect" href="../../d8/d10/chess__color_8h.html" title=" " alt="" coords="623,152,732,177"/>
-<area shape="poly" title=" " alt="" coords="492,101,629,145,628,150,491,107"/>
-<area shape="rect" title=" " alt="" coords="380,152,452,177"/>
-<area shape="poly" title=" " alt="" coords="452,106,431,141,427,139,447,103"/>
-<area shape="poly" title=" " alt="" coords="623,179,333,231,332,226,622,173"/>
-<area shape="poly" title=" " alt="" coords="724,175,925,224,923,229,723,180"/>
-<area shape="poly" title=" " alt="" coords="680,178,680,212,675,212,675,178"/>
-<area shape="poly" title=" " alt="" coords="627,106,602,142,583,163,561,180,503,207,441,224,382,234,333,238,332,233,382,229,440,219,501,202,558,175,580,159,597,139,622,103"/>
-<area shape="poly" title=" " alt="" coords="670,93,739,99,819,110,893,126,922,137,943,150,954,163,961,179,968,211,963,212,956,181,949,166,939,154,920,142,892,131,818,115,738,104,670,98"/>
-<area shape="poly" title=" " alt="" coords="671,100,712,118,731,132,746,151,751,170,743,189,728,206,711,220,707,216,725,202,738,186,745,170,741,153,727,136,709,123,669,104"/>
-<area shape="poly" title=" " alt="" coords="613,106,545,147,542,142,610,102"/>
-<area shape="poly" title=" " alt="" coords="640,103,664,139,660,142,636,106"/>
-<area shape="poly" title=" " alt="" coords="597,107,464,150,463,145,595,101"/>
-<area shape="rect" href="../../d0/d7c/castling__type_8h.html" title=" " alt="" coords="807,152,929,177"/>
-<area shape="poly" title=" " alt="" coords="669,101,817,145,816,151,668,107"/>
-<area shape="poly" title=" " alt="" coords="111,175,243,219,241,224,109,180"/>
-<area shape="poly" title=" " alt="" coords="129,173,142,175,420,209,632,230,632,235,420,214,141,180,128,178"/>
+<area shape="rect" title=" " alt="" coords="237,5,404,31"/>
+<area shape="rect" title=" " alt="" coords="223,225,287,251"/>
+<area shape="poly" title=" " alt="" coords="238,33,179,47,118,71,61,106,36,128,16,153,8,176,15,194,35,207,64,218,138,230,209,234,209,239,137,236,62,223,32,212,11,197,3,176,11,151,33,124,58,101,115,66,178,42,236,28"/>
+<area shape="rect" title=" " alt="" coords="698,225,756,251"/>
+<area shape="poly" title=" " alt="" coords="404,20,555,32,733,54,819,71,895,92,955,119,979,134,996,150,1005,164,1008,177,1006,189,999,199,975,214,939,225,852,237,770,240,770,234,851,231,938,220,972,209,995,195,1001,187,1003,177,1000,166,992,154,975,138,953,123,893,97,817,76,732,60,554,37,404,26"/>
+<area shape="rect" title=" " alt="" coords="314,225,377,251"/>
+<area shape="poly" title=" " alt="" coords="325,31,345,211,340,211,319,31"/>
+<area shape="rect" href="../../dc/dd7/piece__action__type_8h.html" title=" " alt="" coords="26,152,178,177"/>
+<area shape="poly" title=" " alt="" coords="304,33,132,147,129,142,302,29"/>
+<area shape="rect" href="../../d7/d3c/square_8h.html" title=" " alt="" coords="557,79,636,104"/>
+<area shape="poly" title=" " alt="" coords="365,28,544,74,543,79,364,33"/>
+<area shape="rect" href="../../de/d45/piece__type_8h.html" title=" " alt="" coords="202,152,308,177"/>
+<area shape="poly" title=" " alt="" coords="318,32,268,141,264,138,313,30"/>
+<area shape="poly" title=" " alt="" coords="128,175,219,217,217,222,125,180"/>
+<area shape="poly" title=" " alt="" coords="142,175,302,221,300,226,140,180"/>
+<area shape="poly" title=" " alt="" coords="561,107,428,154,353,189,290,221,287,216,351,184,426,150,559,102"/>
+<area shape="poly" title=" " alt="" coords="632,102,669,121,688,134,704,150,720,180,727,211,722,212,715,182,700,154,684,138,667,125,629,106"/>
+<area shape="poly" title=" " alt="" coords="571,106,474,154,374,219,371,215,471,150,569,102"/>
+<area shape="rect" title=" " alt="" coords="618,152,690,177"/>
+<area shape="poly" title=" " alt="" coords="608,103,638,139,634,143,604,106"/>
+<area shape="rect" href="../../d7/db1/ccfwd_8h.html" title=" " alt="" coords="765,152,836,177"/>
+<area shape="poly" title=" " alt="" coords="630,102,756,145,754,150,628,107"/>
+<area shape="rect" href="../../d8/d10/chess__color_8h.html" title=" " alt="" coords="484,152,594,177"/>
+<area shape="poly" title=" " alt="" coords="589,106,559,143,555,139,585,103"/>
+<area shape="rect" href="../../d0/d7c/castling__type_8h.html" title=" " alt="" coords="860,152,981,177"/>
+<area shape="poly" title=" " alt="" coords="637,99,856,146,854,152,636,104"/>
+<area shape="poly" title=" " alt="" coords="494,180,301,228,300,223,493,175"/>
+<area shape="poly" title=" " alt="" coords="570,175,686,218,684,223,568,180"/>
+<area shape="poly" title=" " alt="" coords="509,180,391,223,389,218,507,175"/>
+<area shape="poly" title=" " alt="" coords="258,178,258,212,252,212,252,178"/>
+<area shape="poly" title=" " alt="" coords="271,175,322,214,318,219,268,179"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -137,119 +130,99 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d6/d3b/piece__action_8h__dep__incl.png" border="0" usemap="#ainclude_2piece__action_8hdep" alt=""/></div>
 <map name="ainclude_2piece__action_8hdep" id="ainclude_2piece__action_8hdep">
-<area shape="rect" title=" " alt="" coords="1365,5,1531,31"/>
-<area shape="rect" href="../../d3/d8b/action__history_8h.html" title=" " alt="" coords="1361,79,1535,104"/>
-<area shape="poly" title=" " alt="" coords="1451,44,1451,79,1445,79,1445,44"/>
-<area shape="rect" href="../../d9/d39/piece_8h.html" title=" " alt="" coords="1975,152,2095,177"/>
-<area shape="poly" title=" " alt="" coords="1508,31,1989,149,1987,155,1507,37"/>
-<area shape="rect" href="../../db/dcb/piece__action_8cpp.html" title=" " alt="" coords="2345,225,2500,251"/>
-<area shape="poly" title=" " alt="" coords="1523,31,1760,76,1934,111,2107,149,2383,223,2382,228,2106,155,1933,116,1759,81,1522,36"/>
-<area shape="rect" href="../../d9/d20/piece__actions_8h.html" title=" " alt="" coords="259,299,434,324"/>
-<area shape="poly" title=" " alt="" coords="1392,37,391,301,389,296,1391,32"/>
-<area shape="rect" href="../../d4/d84/user__inputs_8h.html" title=" " alt="" coords="803,225,963,251"/>
-<area shape="poly" title=" " alt="" coords="1406,38,913,228,911,223,1405,33"/>
-<area shape="poly" title=" " alt="" coords="1549,102,1975,153,1974,159,1549,108"/>
-<area shape="rect" href="../../df/d0a/main_8cpp.html" title=" " alt="" coords="1334,460,1439,485"/>
-<area shape="poly" title=" " alt="" coords="1347,95,999,98,779,105,555,116,345,134,171,160,104,176,53,194,21,215,13,226,10,237,11,313,10,368,17,389,35,410,54,417,94,424,224,436,611,453,1035,464,1334,468,1334,473,1035,469,611,459,224,441,93,429,53,422,32,414,12,392,5,369,5,313,5,236,8,223,17,211,51,189,103,171,170,155,345,129,554,111,779,100,999,93,1347,90"/>
-<area shape="rect" href="../../d8/da5/action__history_8cpp.html" title=" " alt="" coords="1367,152,1529,177"/>
-<area shape="poly" title=" " alt="" coords="1451,118,1451,152,1445,152,1445,118"/>
-<area shape="rect" href="../../d1/d08/game__options_8h.html" title=" " alt="" coords="1759,225,1937,251"/>
-<area shape="poly" title=" " alt="" coords="1993,185,1879,228,1877,223,1991,180"/>
-<area shape="rect" href="../../dd/d2d/piece_8cpp.html" title=" " alt="" coords="3065,379,3172,405"/>
-<area shape="poly" title=" " alt="" coords="2070,182,2097,201,2122,224,2139,252,2146,278,2154,301,2162,312,2175,322,2196,330,2229,338,2327,349,2453,356,2594,360,2864,364,3025,369,3069,377,3068,382,3025,375,2864,369,2594,365,2453,361,2327,354,2228,343,2194,335,2172,326,2158,315,2149,304,2141,279,2134,254,2118,227,2093,205,2067,187"/>
-<area shape="rect" href="../../dd/da4/pieces_8h.html" title=" " alt="" coords="2194,225,2321,251"/>
-<area shape="poly" title=" " alt="" coords="2084,179,2222,223,2220,228,2082,184"/>
-<area shape="poly" title=" " alt="" coords="2108,177,2361,223,2360,228,2107,182"/>
-<area shape="rect" href="../../d8/d57/sfml__helper_8cpp.html" title=" " alt="" coords="1961,225,2109,251"/>
-<area shape="poly" title=" " alt="" coords="2037,191,2037,225,2032,225,2032,191"/>
-<area shape="rect" href="../../d2/dd5/game_8h.html" title=" " alt="" coords="1440,299,1563,324"/>
-<area shape="poly" title=" " alt="" coords="1779,256,1558,301,1557,296,1778,251"/>
-<area shape="rect" href="../../d4/dad/options__view_8cpp.html" title=" " alt="" coords="2033,460,2191,485"/>
-<area shape="poly" title=" " alt="" coords="1868,259,1934,329,2022,410,2059,437,2093,458,2090,462,2056,441,2018,414,1930,333,1865,263"/>
-<area shape="rect" href="../../df/dd9/game_8cpp.html" title=" " alt="" coords="283,379,392,405"/>
-<area shape="poly" title=" " alt="" coords="1745,246,1376,264,1143,280,908,301,655,329,545,347,404,375,375,382,374,377,403,369,544,341,654,324,908,296,1142,275,1375,259,1745,240"/>
-<area shape="rect" href="../../d6/d20/loading__view_8h.html" title=" " alt="" coords="1603,379,1773,405"/>
-<area shape="poly" title=" " alt="" coords="1828,262,1702,381,1698,377,1824,258"/>
-<area shape="rect" href="../../db/d71/lobby__view_8h.html" title=" " alt="" coords="2646,379,2805,405"/>
-<area shape="poly" title=" " alt="" coords="1909,251,2065,296,2097,310,2129,321,2204,337,2268,346,2379,353,2491,355,2557,360,2634,369,2674,377,2673,382,2633,375,2556,365,2491,361,2379,358,2268,352,2203,342,2127,327,2095,315,2063,301,1907,257"/>
-<area shape="rect" href="../../db/d69/menu__view_8h.html" title=" " alt="" coords="1798,379,1957,405"/>
-<area shape="poly" title=" " alt="" coords="1855,264,1878,379,1872,380,1850,265"/>
-<area shape="rect" href="../../d9/d28/options__view_8h.html" title=" " alt="" coords="2451,379,2621,405"/>
-<area shape="poly" title=" " alt="" coords="1895,253,2014,296,2046,310,2078,321,2178,342,2257,351,2337,357,2439,369,2480,377,2479,382,2438,375,2336,362,2256,356,2177,348,2076,327,2044,315,2012,301,1893,258"/>
-<area shape="rect" href="../../db/dae/game__options_8cpp.html" title=" " alt="" coords="2185,299,2349,324"/>
-<area shape="poly" title=" " alt="" coords="1929,250,2200,296,2199,301,1928,256"/>
-<area shape="rect" href="../../de/d9d/game__view_8h.html" title=" " alt="" coords="2033,379,2191,405"/>
-<area shape="poly" title=" " alt="" coords="1577,320,1968,369,2033,378,2032,383,1968,375,1576,325"/>
-<area shape="rect" href="../../db/def/game__view_8cpp.html" title=" " alt="" coords="2876,460,3023,485"/>
-<area shape="poly" title=" " alt="" coords="1576,312,2393,333,2812,350,2947,360,2986,365,3004,370,3012,382,3013,395,3004,420,2985,443,2965,462,2962,458,2981,440,2999,417,3008,394,3007,384,3001,374,2985,370,2946,365,2811,356,2393,338,1576,317"/>
-<area shape="poly" title=" " alt="" coords="1464,332,1437,350,1414,374,1402,395,1395,419,1389,460,1384,459,1390,418,1397,393,1410,370,1433,346,1461,328"/>
-<area shape="rect" href="../../df/d43/played__game__view_8h.html" title=" " alt="" coords="2829,372,2990,412"/>
-<area shape="poly" title=" " alt="" coords="1576,312,2196,332,2555,349,2704,359,2817,369,2828,371,2828,376,2817,375,2704,364,2555,354,2196,337,1576,317"/>
-<area shape="rect" href="../../df/d52/chess__move_8cpp.html" title=" " alt="" coords="1425,379,1578,405"/>
-<area shape="poly" title=" " alt="" coords="1504,338,1504,379,1499,379,1499,338"/>
-<area shape="poly" title=" " alt="" coords="1426,317,909,336,617,353,496,363,404,375,373,382,372,377,403,369,495,358,617,347,909,331,1426,312"/>
-<area shape="rect" href="../../d9/dd8/game__controller_8cpp.html" title=" " alt="" coords="1022,379,1199,405"/>
-<area shape="poly" title=" " alt="" coords="1432,329,1168,382,1167,377,1431,324"/>
-<area shape="rect" href="../../d7/d99/physical__controller_8cpp.html" title=" " alt="" coords="803,379,997,405"/>
-<area shape="poly" title=" " alt="" coords="1426,323,1237,345,1010,375,964,382,963,377,1009,369,1236,340,1426,318"/>
-<area shape="poly" title=" " alt="" coords="1577,312,2366,335,2796,352,2954,361,3047,369,3081,377,3080,382,3046,375,2953,366,2796,358,2365,341,1576,317"/>
-<area shape="rect" href="../../d5/d12/replayer_8cpp.html" title=" " alt="" coords="1224,379,1349,405"/>
-<area shape="poly" title=" " alt="" coords="1458,331,1319,382,1317,377,1456,326"/>
-<area shape="rect" href="../../d4/dc0/test__game_8cpp.html" title=" " alt="" coords="416,379,557,405"/>
-<area shape="poly" title=" " alt="" coords="1426,319,988,341,746,357,570,375,531,382,530,377,569,369,745,352,987,336,1425,313"/>
-<area shape="rect" href="../../de/dab/test__game__scenarios_8cpp.html" title=" " alt="" coords="2216,379,2427,405"/>
-<area shape="poly" title=" " alt="" coords="1577,315,1853,335,2204,369,2255,377,2255,382,2204,375,1853,340,1576,320"/>
-<area shape="rect" href="../../d5/d46/user__inputs_8cpp.html" title=" " alt="" coords="581,379,728,405"/>
-<area shape="poly" title=" " alt="" coords="1426,320,1147,341,791,375,729,382,728,377,790,369,1146,336,1426,315"/>
-<area shape="rect" href="../../d5/d3f/controls__view_8cpp.html" title=" " alt="" coords="2246,460,2407,485"/>
-<area shape="poly" title=" " alt="" coords="2157,407,2296,457,2294,462,2155,412"/>
-<area shape="poly" title=" " alt="" coords="2176,405,2204,409,2876,463,2875,468,2204,415,2175,410"/>
-<area shape="rect" href="../../d4/d9e/lobby__view_8cpp.html" title=" " alt="" coords="2643,460,2789,485"/>
-<area shape="poly" title=" " alt="" coords="2178,405,2204,409,2321,426,2412,436,2621,457,2643,460,2643,465,2621,463,2412,441,2320,431,2203,415,2177,410"/>
-<area shape="poly" title=" " alt="" coords="2019,408,1968,415,1440,469,1439,464,1968,409,2019,403"/>
-<area shape="rect" href="../../d3/de2/menu__view_8cpp.html" title=" " alt="" coords="2463,460,2609,485"/>
-<area shape="poly" title=" " alt="" coords="2181,405,2204,409,2470,457,2469,463,2203,415,2180,410"/>
-<area shape="poly" title=" " alt="" coords="2115,418,2115,460,2109,460,2109,418"/>
-<area shape="poly" title=" " alt="" coords="2851,420,2745,462,2743,457,2849,415"/>
-<area shape="poly" title=" " alt="" coords="2815,416,2591,463,2590,457,2814,410"/>
-<area shape="rect" href="../../d7/d02/played__game__view_8cpp.html" title=" " alt="" coords="3079,460,3276,485"/>
-<area shape="poly" title=" " alt="" coords="2987,413,3139,457,3137,462,2986,418"/>
-<area shape="poly" title=" " alt="" coords="1632,411,1431,463,1430,457,1630,405"/>
-<area shape="rect" href="../../d5/d3a/loading__view_8cpp.html" title=" " alt="" coords="1704,460,1861,485"/>
-<area shape="poly" title=" " alt="" coords="1714,412,1770,458,1767,462,1711,416"/>
-<area shape="poly" title=" " alt="" coords="2725,419,2720,460,2715,459,2720,418"/>
-<area shape="poly" title=" " alt="" coords="2686,412,2564,462,2562,458,2684,407"/>
-<area shape="poly" title=" " alt="" coords="1810,410,1786,415,1595,445,1440,467,1439,462,1594,440,1785,409,1809,405"/>
-<area shape="poly" title=" " alt="" coords="1971,403,2020,409,2463,461,2462,466,2020,415,1970,408"/>
-<area shape="poly" title=" " alt="" coords="1854,416,1798,462,1795,458,1851,412"/>
-<area shape="poly" title=" " alt="" coords="2493,412,2358,462,2356,457,2492,407"/>
-<area shape="poly" title=" " alt="" coords="2576,408,2691,458,2689,462,2573,413"/>
-<area shape="poly" title=" " alt="" coords="2539,418,2539,460,2533,460,2533,418"/>
-<area shape="poly" title=" " alt="" coords="2464,410,2439,415,2176,463,2175,457,2438,409,2463,405"/>
-<area shape="poly" title=" " alt="" coords="2180,249,1563,307,1563,302,2180,244"/>
-<area shape="poly" title=" " alt="" coords="2334,248,2426,255,2539,258,2792,265,2917,276,3030,294,3079,308,3122,325,3158,345,3186,370,3197,393,3197,418,3185,461,3180,459,3192,417,3191,394,3182,374,3155,350,3120,330,3077,313,3029,300,2916,281,2792,271,2539,263,2426,260,2334,253"/>
-<area shape="poly" title=" " alt="" coords="2263,264,2268,298,2262,299,2258,265"/>
-<area shape="rect" href="../../d9/d64/about__view_8cpp.html" title=" " alt="" coords="2512,299,2659,324"/>
-<area shape="poly" title=" " alt="" coords="2323,251,2533,296,2531,301,2322,256"/>
-<area shape="rect" href="../../d5/d21/pieces_8cpp.html" title=" " alt="" coords="2373,299,2488,324"/>
-<area shape="poly" title=" " alt="" coords="2299,253,2403,296,2401,301,2297,258"/>
-<area shape="poly" title=" " alt="" coords="312,333,290,351,273,373,266,393,267,402,272,410,287,417,318,423,422,434,735,452,1081,463,1334,468,1333,473,1081,468,735,457,422,440,317,428,285,422,269,414,262,403,260,393,268,371,286,347,309,329"/>
-<area shape="poly" title=" " alt="" coords="346,338,341,379,336,379,341,337"/>
-<area shape="poly" title=" " alt="" coords="380,328,467,377,464,381,378,333"/>
-<area shape="poly" title=" " alt="" coords="405,325,610,377,609,382,404,330"/>
-<area shape="rect" href="../../d6/db4/piece__actions_8cpp.html" title=" " alt="" coords="46,379,207,405"/>
-<area shape="poly" title=" " alt="" coords="302,331,159,382,158,377,301,326"/>
-<area shape="poly" title=" " alt="" coords="829,257,405,375,378,382,377,377,403,369,827,252"/>
-<area shape="poly" title=" " alt="" coords="888,264,901,379,896,379,883,264"/>
-<area shape="poly" title=" " alt="" coords="855,261,673,381,670,377,852,256"/>
-<area shape="rect" href="../../d6/d23/game__controller_8h.html" title=" " alt="" coords="921,299,1111,324"/>
-<area shape="poly" title=" " alt="" coords="917,255,995,296,993,301,915,259"/>
-<area shape="poly" title=" " alt="" coords="1125,314,1499,334,1733,350,1968,369,2033,377,2032,382,1968,375,1732,355,1498,339,1125,320"/>
-<area shape="poly" title=" " alt="" coords="908,328,851,341,805,359,790,369,783,381,783,395,792,410,819,423,872,435,1024,452,1196,462,1334,467,1334,473,1195,468,1023,457,871,440,818,428,789,414,778,396,777,380,786,366,803,354,850,336,906,323"/>
-<area shape="poly" title=" " alt="" coords="1042,331,1098,377,1095,381,1039,335"/>
-<area shape="poly" title=" " alt="" coords="989,334,919,381,916,377,986,330"/>
-<area shape="poly" title=" " alt="" coords="1069,325,1248,377,1246,382,1067,330"/>
-<area shape="poly" title=" " alt="" coords="950,330,708,382,707,377,949,324"/>
+<area shape="rect" title=" " alt="" coords="2333,5,2499,31"/>
+<area shape="rect" href="../../d3/d8b/action__history_8h.html" title=" " alt="" coords="2169,79,2343,104"/>
+<area shape="poly" title=" " alt="" coords="2379,39,2283,81,2281,76,2377,34"/>
+<area shape="rect" href="../../d9/d39/piece_8h.html" title=" " alt="" coords="1983,152,2103,177"/>
+<area shape="poly" title=" " alt="" coords="2320,34,2239,52,2157,81,2127,98,2099,117,2057,154,2053,149,2096,113,2124,93,2155,76,2237,47,2319,29"/>
+<area shape="rect" href="../../db/dcb/piece__action_8cpp.html" title=" " alt="" coords="2528,225,2683,251"/>
+<area shape="poly" title=" " alt="" coords="2437,40,2597,223,2593,227,2433,43"/>
+<area shape="rect" href="../../d9/d20/piece__actions_8h.html" title=" " alt="" coords="2329,225,2503,251"/>
+<area shape="poly" title=" " alt="" coords="2419,45,2419,225,2413,225,2413,45"/>
+<area shape="rect" href="../../d4/d84/user__inputs_8h.html" title=" " alt="" coords="2572,152,2732,177"/>
+<area shape="poly" title=" " alt="" coords="2450,35,2521,76,2636,150,2633,154,2519,81,2447,40"/>
+<area shape="rect" href="../../d2/dd5/game_8h.html" title=" " alt="" coords="1692,225,1815,251"/>
+<area shape="poly" title=" " alt="" coords="2172,109,2075,128,1971,155,1864,192,1780,228,1778,223,1862,187,1970,149,2074,123,2171,104"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html" title=" " alt="" coords="2130,387,2235,412"/>
+<area shape="poly" title=" " alt="" coords="2358,95,2539,112,2643,128,2745,149,2818,165,2897,179,2976,193,3047,209,3105,230,3126,242,3141,257,3149,274,3149,294,3140,316,3120,341,3107,347,3080,353,2995,363,2739,380,2236,399,2236,394,2738,375,2995,358,3079,348,3105,342,3117,337,3135,313,3144,293,3144,276,3137,260,3123,247,3102,234,3046,214,2975,198,2896,184,2817,170,2743,155,2642,133,2538,117,2357,100"/>
+<area shape="poly" title=" " alt="" coords="2210,111,2078,154,2076,149,2208,106"/>
+<area shape="rect" href="../../d8/da5/action__history_8cpp.html" title=" " alt="" coords="2175,152,2337,177"/>
+<area shape="poly" title=" " alt="" coords="2259,118,2259,152,2253,152,2253,118"/>
+<area shape="rect" href="../../de/d9d/game__view_8h.html" title=" " alt="" coords="1651,306,1810,331"/>
+<area shape="poly" title=" " alt="" coords="1749,265,1737,307,1731,305,1744,263"/>
+<area shape="rect" href="../../db/def/game__view_8cpp.html" title=" " alt="" coords="1263,387,1409,412"/>
+<area shape="poly" title=" " alt="" coords="1678,248,1355,276,1210,291,1147,301,1138,316,1139,329,1148,341,1165,352,1212,371,1266,384,1265,389,1210,376,1162,357,1145,345,1134,331,1133,314,1144,296,1209,285,1355,271,1678,243"/>
+<area shape="poly" title=" " alt="" coords="1791,255,1868,296,1896,318,1925,336,1978,356,2033,371,2130,389,2129,395,2032,376,1976,361,1923,341,1893,322,1865,301,1788,259"/>
+<area shape="rect" href="../../df/d43/played__game__view_8h.html" title=" " alt="" coords="686,299,847,339"/>
+<area shape="poly" title=" " alt="" coords="1679,248,1604,253,1395,265,1231,270,1069,279,860,301,848,303,847,298,860,296,1068,274,1231,264,1394,259,1604,248,1678,243"/>
+<area shape="rect" href="../../df/d52/chess__move_8cpp.html" title=" " alt="" coords="1158,306,1311,331"/>
+<area shape="poly" title=" " alt="" coords="1679,251,1516,272,1324,301,1287,309,1286,303,1324,296,1515,267,1678,245"/>
+<area shape="rect" href="../../df/dd9/game_8cpp.html" title=" " alt="" coords="1517,306,1627,331"/>
+<area shape="poly" title=" " alt="" coords="1715,259,1599,308,1597,304,1713,254"/>
+<area shape="rect" href="../../d9/dd8/game__controller_8cpp.html" title=" " alt="" coords="1937,306,2114,331"/>
+<area shape="poly" title=" " alt="" coords="1807,252,1986,303,1985,309,1805,257"/>
+<area shape="rect" href="../../d7/d99/physical__controller_8cpp.html" title=" " alt="" coords="2504,306,2699,331"/>
+<area shape="poly" title=" " alt="" coords="1829,248,2002,265,2137,274,2271,282,2442,296,2509,303,2509,309,2441,301,2271,287,2136,279,2001,270,1828,253"/>
+<area shape="rect" href="../../dd/d2d/piece_8cpp.html" title=" " alt="" coords="555,306,661,331"/>
+<area shape="poly" title=" " alt="" coords="1679,248,1604,253,1462,260,1342,262,1137,262,1038,263,933,269,814,281,674,301,643,309,642,303,673,296,813,276,933,264,1038,258,1137,256,1342,257,1462,255,1604,248,1678,243"/>
+<area shape="rect" href="../../d5/d12/replayer_8cpp.html" title=" " alt="" coords="2139,306,2264,331"/>
+<area shape="poly" title=" " alt="" coords="1829,248,2126,296,2158,303,2157,309,2125,301,1828,254"/>
+<area shape="rect" href="../../d4/dc0/test__game_8cpp.html" title=" " alt="" coords="2288,306,2429,331"/>
+<area shape="poly" title=" " alt="" coords="1829,248,1956,262,2055,270,2153,279,2276,296,2313,303,2312,309,2276,301,2152,284,2054,275,1955,267,1828,253"/>
+<area shape="rect" href="../../de/dab/test__game__scenarios_8cpp.html" title=" " alt="" coords="872,306,1083,331"/>
+<area shape="poly" title=" " alt="" coords="1678,248,1376,274,1102,301,1048,309,1048,303,1101,296,1376,269,1678,243"/>
+<area shape="rect" href="../../d5/d46/user__inputs_8cpp.html" title=" " alt="" coords="2773,306,2920,331"/>
+<area shape="poly" title=" " alt="" coords="1829,248,2077,267,2271,273,2465,279,2711,296,2773,303,2773,309,2710,301,2464,284,2271,278,2077,273,1828,253"/>
+<area shape="rect" href="../../d5/d3f/controls__view_8cpp.html" title=" " alt="" coords="1650,387,1811,412"/>
+<area shape="poly" title=" " alt="" coords="1733,345,1733,386,1728,386,1728,345"/>
+<area shape="poly" title=" " alt="" coords="1662,337,1639,341,1395,389,1394,384,1638,336,1661,332"/>
+<area shape="rect" href="../../d4/d9e/lobby__view_8cpp.html" title=" " alt="" coords="1087,387,1233,412"/>
+<area shape="poly" title=" " alt="" coords="1665,337,1639,341,1445,368,1251,389,1233,392,1232,386,1250,384,1445,362,1638,336,1664,331"/>
+<area shape="poly" title=" " alt="" coords="1804,331,1830,336,2130,387,2129,392,1829,341,1803,337"/>
+<area shape="rect" href="../../d3/de2/menu__view_8cpp.html" title=" " alt="" coords="804,387,951,412"/>
+<area shape="poly" title=" " alt="" coords="1667,337,1639,341,1499,356,1307,372,951,396,951,391,1307,366,1499,351,1638,336,1666,331"/>
+<area shape="poly" title=" " alt="" coords="862,336,1103,384,1102,389,861,342"/>
+<area shape="poly" title=" " alt="" coords="806,345,862,384,859,388,803,349"/>
+<area shape="rect" href="../../d7/d02/played__game__view_8cpp.html" title=" " alt="" coords="392,387,589,412"/>
+<area shape="poly" title=" " alt="" coords="688,345,532,389,530,384,686,340"/>
+<area shape="poly" title=" " alt="" coords="1984,183,1801,228,1800,223,1982,178"/>
+<area shape="poly" title=" " alt="" coords="2042,191,2029,306,2024,306,2037,190"/>
+<area shape="poly" title=" " alt="" coords="1969,174,1324,227,948,264,792,283,674,301,644,309,643,303,673,296,791,278,947,258,1323,221,1969,169"/>
+<area shape="poly" title=" " alt="" coords="2056,189,2075,220,2103,248,2183,271,2312,303,2310,309,2182,277,2100,253,2071,224,2051,192"/>
+<area shape="poly" title=" " alt="" coords="2117,170,2163,175,2244,180,2314,181,2433,179,2490,181,2550,187,2617,200,2696,223,2737,240,2776,263,2834,304,2831,308,2774,267,2735,245,2694,228,2616,206,2549,192,2489,186,2433,184,2314,186,2244,185,2162,180,2117,176"/>
+<area shape="rect" href="../../dd/da4/pieces_8h.html" title=" " alt="" coords="881,225,1007,251"/>
+<area shape="poly" title=" " alt="" coords="1969,173,1008,235,1007,230,1969,168"/>
+<area shape="poly" title=" " alt="" coords="2117,173,2528,224,2527,230,2116,178"/>
+<area shape="rect" href="../../d8/d57/sfml__helper_8cpp.html" title=" " alt="" coords="1839,225,1987,251"/>
+<area shape="poly" title=" " alt="" coords="2011,186,1936,227,1933,223,2008,182"/>
+<area shape="poly" title=" " alt="" coords="1022,239,1470,259,1694,275,1775,285,1822,296,1837,306,1846,316,1855,327,1868,336,1936,362,2006,379,2073,389,2130,394,2129,399,2073,395,2005,385,1934,367,1865,341,1851,331,1842,320,1834,310,1820,301,1774,290,1694,281,1469,264,1021,244"/>
+<area shape="poly" title=" " alt="" coords="867,243,696,246,490,255,393,262,310,272,249,285,228,293,217,301,204,321,206,337,221,351,245,363,314,381,392,390,392,396,313,386,243,368,217,356,202,340,199,320,213,297,226,288,247,280,309,267,393,257,490,250,696,241,867,237"/>
+<area shape="poly" title=" " alt="" coords="1021,241,1240,259,1373,274,1506,296,1536,303,1535,309,1505,301,1372,280,1240,264,1021,246"/>
+<area shape="rect" href="../../d9/d64/about__view_8cpp.html" title=" " alt="" coords="5,306,152,331"/>
+<area shape="poly" title=" " alt="" coords="867,245,562,262,367,278,171,301,130,309,129,303,170,296,367,273,562,257,867,239"/>
+<area shape="rect" href="../../db/dae/game__options_8cpp.html" title=" " alt="" coords="227,306,391,331"/>
+<area shape="poly" title=" " alt="" coords="867,248,658,269,404,301,363,309,362,303,404,296,657,264,867,243"/>
+<area shape="rect" href="../../d4/dad/options__view_8cpp.html" title=" " alt="" coords="1336,306,1493,331"/>
+<area shape="poly" title=" " alt="" coords="1021,248,1323,296,1361,303,1360,309,1322,301,1020,253"/>
+<area shape="rect" href="../../d5/d21/pieces_8cpp.html" title=" " alt="" coords="416,306,531,331"/>
+<area shape="poly" title=" " alt="" coords="867,251,717,271,543,301,513,309,512,303,542,296,716,266,866,245"/>
+<area shape="poly" title=" " alt="" coords="2513,250,2638,272,2687,284,2713,297,2722,319,2720,330,2712,341,2687,353,2642,364,2510,381,2360,392,2236,399,2236,393,2359,387,2509,376,2641,359,2686,348,2709,337,2715,328,2717,319,2709,301,2685,289,2637,277,2512,255"/>
+<area shape="poly" title=" " alt="" coords="2315,253,2123,265,1974,268,1826,276,1740,286,1639,301,1608,309,1607,303,1638,296,1739,280,1825,271,1973,263,2123,260,2314,248"/>
+<area shape="poly" title=" " alt="" coords="2402,263,2369,307,2365,304,2397,260"/>
+<area shape="poly" title=" " alt="" coords="2498,250,2755,296,2792,303,2791,309,2754,301,2497,256"/>
+<area shape="rect" href="../../d6/db4/piece__actions_8cpp.html" title=" " alt="" coords="2945,306,3106,331"/>
+<area shape="poly" title=" " alt="" coords="2517,248,2932,296,2973,303,2972,309,2932,301,2517,254"/>
+<area shape="poly" title=" " alt="" coords="2677,186,2697,216,2701,234,2697,252,2684,271,2667,286,2631,308,2628,304,2664,282,2680,267,2692,250,2696,234,2692,218,2672,189"/>
+<area shape="poly" title=" " alt="" coords="2715,179,2758,197,2798,223,2815,243,2829,265,2846,304,2841,307,2824,268,2811,246,2794,227,2755,201,2713,184"/>
+<area shape="rect" href="../../d6/d23/game__controller_8h.html" title=" " alt="" coords="2114,225,2305,251"/>
+<area shape="poly" title=" " alt="" coords="2568,182,2281,228,2280,223,2567,177"/>
+<area shape="poly" title=" " alt="" coords="2127,255,1801,309,1800,303,2126,250"/>
+<area shape="poly" title=" " alt="" coords="2312,250,2391,269,2423,282,2443,297,2452,319,2443,340,2430,352,2409,362,2355,378,2294,389,2236,396,2236,391,2293,384,2354,373,2407,357,2427,348,2439,337,2447,319,2439,300,2420,286,2390,274,2311,256"/>
+<area shape="poly" title=" " alt="" coords="2171,258,2053,308,2051,304,2169,253"/>
+<area shape="poly" title=" " alt="" coords="2280,251,2545,303,2544,309,2279,256"/>
+<area shape="poly" title=" " alt="" coords="2209,265,2205,306,2200,306,2204,264"/>
+<area shape="poly" title=" " alt="" coords="2319,249,2711,296,2774,304,2773,310,2710,301,2318,254"/>
+<area shape="poly" title=" " alt="" coords="2100,250,1782,274,1506,301,1465,309,1464,303,1505,296,1781,269,2100,244"/>
 </map>
 </div>
 </div>

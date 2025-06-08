@@ -6,7 +6,7 @@ var searchData=
   ['use_5ftwo_5fkeyboards_3',['USE_TWO_KEYBOARDS',['../df/d0a/main_8cpp.html#aa6a3dc0c8fa17a6b018021b17ea9b329',1,'main.cpp']]],
   ['user_20input_4',['Handling user input',['../d2/d64/md_docs_2architecture.html#autotoc_md2',1,'']]],
   ['user_20input_20handled_5',['How is the user input handled?',['../d0/d0b/md_docs_2faq.html#autotoc_md18',1,'']]],
-  ['user_5finput_6',['user_input',['../df/d60/classuser__input.html#a1684868f79b17f0805faa9d6ca3f8636',1,'user_input::user_input()'],['../df/d60/classuser__input.html',1,'user_input']]],
+  ['user_5finput_6',['user_input',['../df/d60/classuser__input.html#acc381692708d9566bf1395cef7c0c139',1,'user_input::user_input()'],['../df/d60/classuser__input.html',1,'user_input']]],
   ['user_5finput_2ecpp_7',['user_input.cpp',['../dc/d2b/user__input_8cpp.html',1,'']]],
   ['user_5finput_2eh_8',['user_input.h',['../da/dbb/user__input_8h.html',1,'']]],
   ['user_5finput_5ftype_9',['user_input_type',['../d7/de7/user__input__type_8h.html#afb12242cff78e1daafb90d5d1deb5b09',1,'user_input_type.h']]],

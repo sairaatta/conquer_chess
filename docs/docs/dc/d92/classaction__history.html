@@ -84,13 +84,15 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abf30a7c418c63cfbe2af1fb2b1175ef2" id="r_abf30a7c418c63cfbe2af1fb2b1175ef2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html#abf30a7c418c63cfbe2af1fb2b1175ef2">action_history</a> (const std::vector&lt; std::pair&lt; <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a>, <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt; &gt; &amp;timed_actions={})</td></tr>
 <tr class="separator:abf30a7c418c63cfbe2af1fb2b1175ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5934c46e3078d7cd16191e721d3c8c2" id="r_af5934c46e3078d7cd16191e721d3c8c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html#af5934c46e3078d7cd16191e721d3c8c2">add_action</a> (const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> &amp;t, const <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &amp;action) noexcept</td></tr>
-<tr class="memdesc:af5934c46e3078d7cd16191e721d3c8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an action, when started.  <br /></td></tr>
-<tr class="separator:af5934c46e3078d7cd16191e721d3c8c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6fb643aa3c0e500658ba24ac468d937" id="r_ae6fb643aa3c0e500658ba24ac468d937"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html#ae6fb643aa3c0e500658ba24ac468d937">add_action</a> (const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> &amp;in_game_time, const <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &amp;action) noexcept</td></tr>
+<tr class="memdesc:ae6fb643aa3c0e500658ba24ac468d937"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an action, when started.  <br /></td></tr>
+<tr class="separator:ae6fb643aa3c0e500658ba24ac468d937"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f1e6dc3d71f5855e4f7197b3acded62" id="r_a4f1e6dc3d71f5855e4f7197b3acded62"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html#a4f1e6dc3d71f5855e4f7197b3acded62">get_timed_actions</a> () const noexcept</td></tr>
 <tr class="separator:a4f1e6dc3d71f5855e4f7197b3acded62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The collected in-game times of actions, in chrononical order </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abf30a7c418c63cfbe2af1fb2b1175ef2" name="abf30a7c418c63cfbe2af1fb2b1175ef2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf30a7c418c63cfbe2af1fb2b1175ef2">&#9670;&#160;</a></span>action_history()</h2>
 
@@ -110,8 +112,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af5934c46e3078d7cd16191e721d3c8c2" name="af5934c46e3078d7cd16191e721d3c8c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5934c46e3078d7cd16191e721d3c8c2">&#9670;&#160;</a></span>add_action()</h2>
+<a id="ae6fb643aa3c0e500658ba24ac468d937" name="ae6fb643aa3c0e500658ba24ac468d937"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6fb643aa3c0e500658ba24ac468d937">&#9670;&#160;</a></span>add_action()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -123,7 +125,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void action_history::add_action </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
+          <td class="paramname"><em>in_game_time</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -170,6 +172,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Get the collected in-game times of actions, in chrononical order </p>
 
 </div>
 </div>

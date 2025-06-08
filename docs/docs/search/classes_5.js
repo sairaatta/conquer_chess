@@ -2,7 +2,7 @@ var searchData=
 [
   ['game_0',['game',['../d0/d51/classgame.html',1,'']]],
   ['game_5fcontroller_1',['game_controller',['../df/d15/classgame__controller.html',1,'']]],
-  ['game_5fcoordinat_2',['game_coordinat',['../db/d84/classgame__coordinat.html',1,'']]],
+  ['game_5fcoordinate_2',['game_coordinate',['../d6/d10/classgame__coordinate.html',1,'']]],
   ['game_5flog_3',['game_log',['../d8/dd0/classgame__log.html',1,'']]],
   ['game_5foptions_4',['game_options',['../d3/d4c/classgame__options.html',1,'']]],
   ['game_5frect_5',['game_rect',['../d5/d33/classgame__rect.html',1,'']]],

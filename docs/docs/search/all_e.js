@@ -51,7 +51,7 @@ var searchData=
   ['played_5fgame_5fview_48',['played_game_view',['../d0/d02/classplayed__game__view.html#a2eccba7723c43de77cacfa8ea4ceaf72',1,'played_game_view::played_game_view()'],['../d0/d02/classplayed__game__view.html',1,'played_game_view']]],
   ['played_5fgame_5fview_2ecpp_49',['played_game_view.cpp',['../d7/d02/played__game__view_8cpp.html',1,'']]],
   ['played_5fgame_5fview_2eh_50',['played_game_view.h',['../df/d43/played__game__view_8h.html',1,'']]],
-  ['played_5fgame_5fview_5flayout_51',['played_game_view_layout',['../de/d61/classplayed__game__view__layout.html',1,'played_game_view_layout'],['../de/d61/classplayed__game__view__layout.html#a0eab7a247d08e29ca5e25276ea29fde3',1,'played_game_view_layout::played_game_view_layout()']]],
+  ['played_5fgame_5fview_5flayout_51',['played_game_view_layout',['../de/d61/classplayed__game__view__layout.html',1,'played_game_view_layout'],['../de/d61/classplayed__game__view__layout.html#a3d9a11f03de9825432b2bfa574c64209',1,'played_game_view_layout::played_game_view_layout()']]],
   ['played_5fgame_5fview_5flayout_2ecpp_52',['played_game_view_layout.cpp',['../d7/d5d/played__game__view__layout_8cpp.html',1,'']]],
   ['played_5fgame_5fview_5flayout_2eh_53',['played_game_view_layout.h',['../df/de7/played__game__view__layout_8h.html',1,'']]],
   ['portraits_54',['portraits',['../d8/d20/md_resources_2textures_2portraits_2README.html',1,'']]],
