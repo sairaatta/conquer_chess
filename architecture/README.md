@@ -2,7 +2,7 @@
 
 The key and mouse talk to `user_inputs`, or: `user_inputs` handles all the `sf::Event`s.
 However, not all events are valid. For example, an LMB can be ignored if all players
-use the keyboard. `user_inputs` only keeps the keys that are setup in the 
+use the keyboard. `user_inputs` only keeps the keys that are setup in the
 'Key Settings'/'Controls' dialog.
 
 Input                   |Class                               |Output

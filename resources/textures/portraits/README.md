@@ -2,18 +2,18 @@
 
 Image                                   |Image                                |Description                         |Adapted from picture at URL
 ----------------------------------------|-------------------------------------|------------------------------------|--------------------------------------------------------------------------------------
-![](classic_black_bishop_portrait.jpg)  |`classic_black_bishop_portrait.jpg`  |Joris Vercammen                     |https://commons.wikimedia.org/wiki/File:Abp.Joris_Vercammen_01.jpg
-![](classic_black_knight_portrait.jpg)  |`classic_black_knight_portrait.jpg`  |Dom Quichote                        |https://commons.wikimedia.org/wiki/File:Bronze_statues_of_Don_Quixote_and_Sancho_Panza.jpg
-![](classic_black_king_portrait.jpg)    |`classic_black_king_portrait.jpg`    |Prins Claus                         |https://commons.wikimedia.org/wiki/File:Prince_Claus_of_the_Netherlands_1986.jpg
-![](classic_black_rook_portrait.jpg)    |`classic_black_rook_portrait.jpg`    |De Waag at night                    |https://commons.wikimedia.org/wiki/File:De_Waag,_Amsterdam.jpg
-![](classic_black_pawn_portrait.jpg)    |`classic_black_pawn_portrait.jpg`    |Axel Törneman's 'Farmer in Brittany'|https://commons.wikimedia.org/wiki/File:Farmer_in_Brittany_by_Axel_T%C3%B6rneman.jpg
-![](classic_black_queen_portrait.jpg)   |`classic_black_queen_portrait.jpg`   |Queen Beatrix                       |https://commons.wikimedia.org/wiki/File:Queen_Beatrix_and_Wim_Pijbes.jpg
-![](classic_white_bishop_portrait.jpg)  |`classic_white_bishop_portrait.jpg`  |Antje Jackeleen                     |https://commons.wikimedia.org/wiki/File:Biskopsvigning_2014-12-14_001.jpg
-![](classic_white_king_portrait.jpg)    |`classic_white_king_portrait.jpg`    |Carl XVI Gustaf                     |https://commons.wikimedia.org/wiki/File:Carlos_Gustavo_da_Su%C3%A9cia_(meio_corpo).jpg
-![](classic_white_knight_portrait.jpg)  |`classic_white_knight_portrait.jpg`  |Streiff                             |https://sv.wikipedia.org/wiki/Streiff#/media/Fil:Streiff_-_Livrustkammaren_-_32931.tif
-![](classic_white_pawn_portrait.jpg)    |`classic_white_pawn_portrait.jpg`    |Else Berg's 'Portrait of a farmer'  |https://commons.wikimedia.org/wiki/File:Else_Berg_Portrait_of_a_farmer.jpg
-![](classic_white_queen_portrait.jpg)   |`classic_white_queen_portrait.jpg`   |Silvia Renate Sommerlath            |https://commons.wikimedia.org/wiki/Category:Queen_Silvia_of_Sweden#/media/File:Queen_Silvia_of_Sweden_in_2018.jpg
-![](classic_white_rook_portrait.jpg)    |`classic_white_rook_portrait.jpg`    |Uppsala Slott                       |https://commons.wikimedia.org/wiki/Category:Uppsala_slott#/media/File:Schloss_Uppsala.jpg
+![](classic_black_bishop_portrait.jpg)  |`classic_black_bishop_portrait.jpg`  |Joris Vercammen                     |<https://commons.wikimedia.org/wiki/File:Abp.Joris_Vercammen_01.jpg>
+![](classic_black_knight_portrait.jpg)  |`classic_black_knight_portrait.jpg`  |Dom Quichote                        |<https://commons.wikimedia.org/wiki/File:Bronze_statues_of_Don_Quixote_and_Sancho_Panza.jpg>
+![](classic_black_king_portrait.jpg)    |`classic_black_king_portrait.jpg`    |Prins Claus                         |<https://commons.wikimedia.org/wiki/File:Prince_Claus_of_the_Netherlands_1986.jpg>
+![](classic_black_rook_portrait.jpg)    |`classic_black_rook_portrait.jpg`    |De Waag at night                    |<https://commons.wikimedia.org/wiki/File:De_Waag,_Amsterdam.jpg>
+![](classic_black_pawn_portrait.jpg)    |`classic_black_pawn_portrait.jpg`    |Axel Törneman's 'Farmer in Brittany'|<https://commons.wikimedia.org/wiki/File:Farmer_in_Brittany_by_Axel_T%C3%B6rneman.jpg>
+![](classic_black_queen_portrait.jpg)   |`classic_black_queen_portrait.jpg`   |Queen Beatrix                       |<https://commons.wikimedia.org/wiki/File:Queen_Beatrix_and_Wim_Pijbes.jpg>
+![](classic_white_bishop_portrait.jpg)  |`classic_white_bishop_portrait.jpg`  |Antje Jackeleen                     |<https://commons.wikimedia.org/wiki/File:Biskopsvigning_2014-12-14_001.jpg>
+![](classic_white_king_portrait.jpg)    |`classic_white_king_portrait.jpg`    |Carl XVI Gustaf                     |<https://commons.wikimedia.org/wiki/File:Carlos_Gustavo_da_Su%C3%A9cia_(meio_corpo).jpg>
+![](classic_white_knight_portrait.jpg)  |`classic_white_knight_portrait.jpg`  |Streiff                             |<https://sv.wikipedia.org/wiki/Streiff#/media/Fil:Streiff_-_Livrustkammaren_-_32931.tif>
+![](classic_white_pawn_portrait.jpg)    |`classic_white_pawn_portrait.jpg`    |Else Berg's 'Portrait of a farmer'  |<https://commons.wikimedia.org/wiki/File:Else_Berg_Portrait_of_a_farmer.jpg>
+![](classic_white_queen_portrait.jpg)   |`classic_white_queen_portrait.jpg`   |Silvia Renate Sommerlath            |<https://commons.wikimedia.org/wiki/Category:Queen_Silvia_of_Sweden#/media/File:Queen_Silvia_of_Sweden_in_2018.jpg>
+![](classic_white_rook_portrait.jpg)    |`classic_white_rook_portrait.jpg`    |Uppsala Slott                       |<https://commons.wikimedia.org/wiki/Category:Uppsala_slott#/media/File:Schloss_Uppsala.jpg>
 
 Image                                   |Image                                |Terms used
 ----------------------------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ Image                                   |Image                                |T
 ![](protoss_black_knight_portrait.jpg)  |`protoss_black_knight_portrait.jpg`  |`3130037647_starcraft_2__protoss__a_black_pawn__chess__symbol__symbolic__full_view__single_piece`
 ![](protoss_black_king_portrait.jpg)    |`protoss_black_king_portrait.jpg`    |`starcraft 2, chesspiece, protoss, black king, face, close-up`
 ![](protoss_black_rook_portrait.jpg)    |`protoss_black_rook_portrait.jpg`    |`starcraft 2, chesspiece, protoss, black rook, face, close-up, beast`
-![](protoss_black_pawn_portrait.jpg)    |`protoss_black_pawn_portrait.jpg`    |`starcraft 2, chesspiece, protoss, black pawn, face, close-up,  futuristic` 
+![](protoss_black_pawn_portrait.jpg)    |`protoss_black_pawn_portrait.jpg`    |`starcraft 2, chesspiece, protoss, black pawn, face, close-up,  futuristic`
 ![](protoss_black_queen_portrait.jpg)   |`protoss_black_queen_portrait.jpg`   |`starcraft 2, chesspiece, protoss, black queen, face, close-up, futuristic`
 ![](protoss_white_bishop_portrait.jpg)  |`protoss_white_bishop_portrait.jpg`  |`2328029875_starcraft_2__protoss__a_white_queen__symbol__symbolic__full_view__one_chesspiece__simple`
 ![](protoss_white_king_portrait.jpg)    |`protoss_white_king_portrait.jpg`    |.
