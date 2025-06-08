@@ -203,7 +203,9 @@ bool menu_view::process_events()
       {
         set_selected(get_previous(m_selected));
       }
-      else if (key_pressed == sf::Keyboard::Key::Space)
+      else if (key_pressed == sf::Keyboard::Key::Space
+        || key_pressed == sf::Keyboard::Key::Return
+      )
       {
         if (m_selected == menu_view_item::start) exec_start();
         else if (m_selected == menu_view_item::options) exec_options();
