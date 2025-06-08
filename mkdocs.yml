@@ -16,7 +16,7 @@ theme:
   font:
     text: Lato
     code: JetBrains Mono
-  logo: resources/title.png
+  logo: screenshots/title.png
   palette:
     primary: black
 
