@@ -95,7 +95,7 @@ void show_pieces(
       && piece.get_actions()[0].get_action_type() == piece_action_type::move
     )
     {
-      const double f{piece.get_current_action_time().get()};
+      const double f{piece.get_current_action_progress().get()};
       int alpha{0};
       if (f < 0.5)
       {

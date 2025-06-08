@@ -1299,7 +1299,7 @@ const piece& get_piece_at(const game& g, const std::string& coordinat_str)
   return get_piece_at(g, square(coordinat_str));
 }
 
-const delta_t& get_time(const game& g) noexcept
+const in_game_time& get_time(const game& g) noexcept
 {
   return g.get_in_game_time();
 }

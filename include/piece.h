@@ -56,7 +56,9 @@ public:
   /// Get the color of the piece, i.e. white or black
   const auto& get_color() const noexcept { return m_color.get_value(); }
 
-  delta_t get_current_action_time() const;
+  /// The progress of the current action,
+  /// which is a value from zero to (and including) one
+  delta_t get_current_action_progress() const;
 
   const auto& get_current_square() const noexcept { return m_current_square; }
 
@@ -101,8 +103,8 @@ public:
   /// @param damage a positive value
   void receive_damage(const double damage);
 
-  /// Set the current time an action has passed
-  void set_current_action_time(const delta_t& t) noexcept;
+  /// Set the current progres an action has passed
+  void set_current_action_progress(const delta_t& t) noexcept;
 
   /// Set the current/occupied square
   void set_current_square(const square& s) noexcept { m_current_square = s; }
@@ -135,7 +137,7 @@ private:
   /// Time that the current action is taking
   /// Is always between 0.0 (start) and 1.0 (done).
   /// When it passes 1.0, the current action is done.
-  delta_t m_current_action_time;
+  delta_t m_current_action_progress;
 
   /// The square the piece occupies now
   square m_current_square;
@@ -164,8 +166,8 @@ private:
   /// The race of this piece
   read_only<race> m_race;
 
-  /// The time (in chess move time)
-  delta_t m_in_game_time;
+  /// The in-game time (in chess moves)
+  in_game_time m_in_game_time;
 
   /// The type of piece, e.g. king, queen, rook, bishop, knight, pawn
   read_only<piece_type> m_type;
@@ -236,7 +238,7 @@ bool has_actions(const piece& p) noexcept;
 /// Only pawns can do this, e.g. e2-e4 or e7-e5
 bool has_just_double_moved(
   const piece& p,
-  const delta_t when
+  const in_game_time when
 ) noexcept;
 
 /// Has this piece (attempted to) move?

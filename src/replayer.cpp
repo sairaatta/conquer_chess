@@ -1,4 +1,6 @@
 #include "replayer.h"
+
+
 #include "game.h"
 #include "game_controller.h"
 
@@ -48,16 +50,16 @@ void test_replayer()
   {
     const replayer r;
     assert(get_n_moves(r) == 0);
-    assert(r.get_last_time() == delta_t(-1.0));
+    assert(r.get_last_time() == in_game_time(-1.0));
   }
   // replayer::do_move on empty replay does nothing
   {
     replayer r;
     game g;
     game_controller c;
-    assert(r.get_last_time() == delta_t(-1.0));
+    assert(r.get_last_time() == in_game_time(-1.0));
     r.do_move(c, g);
-    assert(r.get_last_time() == delta_t(0.0));
+    assert(r.get_last_time() == in_game_time(0.0));
   }
   // replayer::do_move does not increase last_time in 0.1 interval
   {
@@ -65,10 +67,10 @@ void test_replayer()
     game g;
     game_controller c;
     r.do_move(c, g);
-    assert(r.get_last_time() == delta_t(0.0));
+    assert(r.get_last_time() == in_game_time(0.0));
     g.tick(delta_t(0.1));
     r.do_move(c, g);
-    assert(r.get_last_time() == delta_t(0.0));
+    assert(r.get_last_time() == in_game_time(0.0));
   }
   // replayer::do_move on one move does it
   {
@@ -110,3 +112,7 @@ std::ostream& operator<<(std::ostream& os, const replayer& r) noexcept
   return os;
 
 }
+
+#ifdef UNDERSTAND_THE_PURPOSE_OF_REPLAYER
+
+#endif // UNDERSTAND_THE_PURPOSE_OF_REPLAYER

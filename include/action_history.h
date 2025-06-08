@@ -1,7 +1,8 @@
 #ifndef ACTION_HISTORY_H
 #define ACTION_HISTORY_H
 
-#include "delta_t.h"
+#include "ccfwd.h"
+#include "in_game_time.h"
 #include "piece_action.h"
 
 #include <iosfwd>
@@ -13,11 +14,11 @@ class action_history
 {
 public:
   action_history(
-    const std::vector<std::pair<delta_t, piece_action>>& timed_actions  = {}
+    const std::vector<std::pair<in_game_time, piece_action>>& timed_actions  = {}
   );
 
   /// Add an action, when started
-  void add_action(const delta_t& in_game_time, const piece_action& action) noexcept;
+  void add_action(const in_game_time& in_game_time, const piece_action& action) noexcept;
 
   /// Get the collected in-game times of actions,
   /// in chrononical order
@@ -26,15 +27,15 @@ public:
 private:
 
   /// The history of actions (i.e when they started), in chrononical order
-  std::vector<std::pair<delta_t, piece_action>> m_timed_actions;
+  std::vector<std::pair<in_game_time, piece_action>> m_timed_actions;
 
 };
 
 /// Collect all the actions that started in the timespan
 std::vector<piece_action> collect_actions_in_timespan(
   const action_history& history,
-  const delta_t from,
-  const delta_t to
+  const in_game_time from,
+  const in_game_time to
 );
 
 /// Has this piece (i.e. a pawn) just finish a double move forward last time unit?
@@ -45,7 +46,7 @@ std::vector<piece_action> collect_actions_in_timespan(
 /// After that, it was too long ago for en-passant
 bool has_just_double_moved(
   const action_history& action_history,
-  const delta_t when
+  const in_game_time when
 );
 
 const piece_action& get_last_action(const action_history& history);

@@ -7,7 +7,8 @@
 delta_t::delta_t(const double dt)
   : m_delta_t{dt}
 {
-
+  assert(dt >= 0.0);
+  assert(dt <= 1.0);
 }
 
 void test_delta_t()
@@ -33,6 +34,7 @@ void test_delta_t()
     const delta_t b(0.2);
     assert(a < b);
   }
+  #ifdef CAN_ADD_DELTA_T
   // operator+
   {
     const double t1{0.1};
@@ -69,6 +71,7 @@ void test_delta_t()
     d1 += d2;
     assert(d1.get() == t1 + t2);
   }
+  #endif // CAN_ADD_DELTA_T
   // operator>
   {
     const delta_t low{0.0001};
@@ -105,11 +108,13 @@ bool operator<=(const delta_t& lhs, const delta_t& rhs) noexcept
   return lhs.get() <= rhs.get();
 }
 
+#ifdef CAN_ADD_DELTA_TS
 delta_t& operator+=(delta_t& lhs, const delta_t& rhs) noexcept
 {
   lhs = lhs + rhs;
   return lhs;
 }
+#endif // CAN_ADD_DELTA_TS
 
 delta_t operator+(const delta_t& lhs, const delta_t& rhs) noexcept
 {

@@ -163,7 +163,7 @@ std::string get_text_for_action(
 );
 
 /// Get the time in the game
-const delta_t& get_time(const game_view& v) noexcept;
+const in_game_time& get_time(const game_view& v) noexcept;
 
 /// Process the event, by letting the controllers
 /// add actions to the game

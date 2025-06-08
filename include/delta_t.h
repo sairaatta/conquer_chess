@@ -3,12 +3,11 @@
 
 #include <iosfwd>
 
-/// The time, in chess moves.
+/// A change of \link{in_game_time}.
 ///
-/// The time that passes
-/// where
-///   * 0.01 means that only 1% of the full move is done
-///   * 1.0 denotes a full move, i.e. a piece traverses 1.0 game coordinat
+/// The change of time that passes can go from:
+/// - 0.01 means that only 1% of the full move is done
+/// - 1.0 denotes a full move
 class delta_t
 {
 public:
@@ -27,12 +26,15 @@ void test_delta_t();
 bool operator==(const delta_t& lhs, const delta_t& rhs) noexcept;
 bool operator<(const delta_t& lhs, const delta_t& rhs) noexcept;
 bool operator<=(const delta_t& lhs, const delta_t& rhs) noexcept;
-delta_t& operator+=(delta_t& lhs, const delta_t& rhs) noexcept;
-delta_t operator+(const delta_t& lhs, const delta_t& rhs) noexcept;
-delta_t operator-(const delta_t& lhs, const delta_t& rhs) noexcept;
-delta_t operator*(const delta_t& lhs, const delta_t& rhs) noexcept;
 bool operator>(const delta_t& lhs, const delta_t& rhs) noexcept;
 bool operator>=(const delta_t& lhs, const delta_t& rhs) noexcept;
+
+delta_t operator*(const delta_t& lhs, const delta_t& rhs) noexcept;
+delta_t operator+(const delta_t& lhs, const delta_t& rhs) noexcept;
+delta_t operator-(const delta_t& lhs, const delta_t& rhs) noexcept;
+#ifdef CAN_ADD_DELTA_TS
+delta_t& operator+=(delta_t& lhs, const delta_t& rhs) noexcept;
+#endif // CAN_ADD_DELTA_TS
 
 std::ostream& operator<<(std::ostream& os, const delta_t& dt) noexcept;
 

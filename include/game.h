@@ -60,7 +60,7 @@ private:
   std::vector<piece> m_pieces;
 
   /// The central game time
-  delta_t m_in_game_time;
+  in_game_time m_in_game_time;
 
 
   /// Both the game and the pieces keep track of the time.
@@ -396,7 +396,7 @@ std::vector<piece>& get_pieces(game& g) noexcept;
 const std::vector<piece>& get_pieces(const game& g) noexcept;
 
 /// Get the time in the game
-const delta_t& get_time(const game& g) noexcept;
+const in_game_time& get_time(const game& g) noexcept;
 
 /// See if there is at least 1 piece selected
 /// @param g a game

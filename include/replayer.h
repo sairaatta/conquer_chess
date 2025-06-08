@@ -1,8 +1,10 @@
 #ifndef REPLAYER_H
 #define REPLAYER_H
 
+
 #include "ccfwd.h"
 #include "delta_t.h"
+#include "in_game_time.h"
 #include "replay.h"
 
 #include <iosfwd>
@@ -28,7 +30,7 @@ public:
 private:
 
   /// The last time a move was done
-  delta_t m_last_time;
+  in_game_time m_last_time;
 
   /// A replay
   replay m_replay;
@@ -43,5 +45,8 @@ void test_replayer();
 bool operator==(const replayer& lhs, const replayer& rhs) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const replayer& r) noexcept;
+
+#ifdef UNDERSTAND_THE_PURPOSE_OF_REPLAYER
+#endif // UNDERSTAND_THE_PURPOSE_OF_REPLAYER
 
 #endif // REPLAYER_H

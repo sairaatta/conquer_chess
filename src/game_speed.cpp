@@ -63,10 +63,10 @@ void test_game_speed()
   }
   // to_delta_t
   {
-    delta_t last_game_speed{0.0};
+    double last_game_speed{0.0};
     for (const game_speed s: get_all_game_speeds())
     {
-      const auto new_speed{to_delta_t(s)};
+      const auto new_speed{get_speed_multiplier(s)};
       assert(new_speed > last_game_speed);
       last_game_speed = new_speed;
     }
@@ -89,20 +89,20 @@ void test_game_speed()
 #endif // NDEBUG
 }
 
-delta_t to_delta_t(const game_speed speed) noexcept
+double get_speed_multiplier(const game_speed speed) noexcept
 {
   switch (speed)
   {
-    case game_speed::fastest: return delta_t(8.0);
-    case game_speed::faster: return delta_t(4.0);
-    case game_speed::fast: return delta_t(2.0);
-    case game_speed::normal: return delta_t(1.0);
-    case game_speed::slow: return delta_t(0.5);
-    case game_speed::slower: return delta_t(0.25);
+    case game_speed::fastest: return 8.0;
+    case game_speed::faster: return 4.0;
+    case game_speed::fast: return 2.0;
+    case game_speed::normal: return 1.0;
+    case game_speed::slow: return 0.5;
+    case game_speed::slower: return 0.25;
     default:
     case game_speed::slowest:
       assert(speed == game_speed::slowest);
-      return delta_t(0.125);
+      return 0.125;
   }
 }
 

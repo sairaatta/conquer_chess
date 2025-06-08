@@ -29,7 +29,10 @@ game_speed get_previous(const game_speed speed) noexcept;
 /// Test this class and its free functions
 void test_game_speed();
 
-delta_t to_delta_t(const game_speed speed) noexcept;
+/// Convert the game speed to a speed multiplier,
+/// where `game_speed::normal` denotes the baseline
+/// speed of 1 chess move per second
+double get_speed_multiplier(const game_speed speed) noexcept;
 
 std::string to_str(const game_speed speed) noexcept;
 

@@ -19,7 +19,7 @@ piece::piece(
   const race r
 )
   : m_color{color},
-    m_current_action_time{delta_t(0.0)},
+    m_current_action_progress{delta_t(0.0)},
     m_current_square{coordinat},
     m_has_moved{false},
     m_health{::get_max_health(type)},
@@ -28,7 +28,7 @@ piece::piece(
     m_kill_count{0},
     m_max_health{::get_max_health(type)},
     m_race{r},
-    m_in_game_time{delta_t(0.0)},
+    m_in_game_time{in_game_time(0.0)},
     m_type{type}
 {
 
@@ -288,11 +288,11 @@ std::string describe_actions(const piece& p)
   return t;
 }
 
-delta_t piece::get_current_action_time() const
+delta_t piece::get_current_action_progress() const
 {
-  assert(m_current_action_time.get() >= 0.0);
-  assert(m_current_action_time.get() <= 1.0);
-  return m_current_action_time;
+  assert(m_current_action_progress.get() >= 0.0);
+  assert(m_current_action_progress.get() <= 1.0);
+  return m_current_action_progress;
 }
 
 double get_f_health(const piece& p) noexcept
@@ -339,7 +339,7 @@ bool has_actions(const piece& p) noexcept
 
 bool has_just_double_moved(
   const piece& p,
-  const delta_t when
+  const in_game_time when
 ) noexcept
 {
   return has_just_double_moved(p.get_action_history(), when);
@@ -389,9 +389,9 @@ void select(piece& p) noexcept
   p.set_selected(true);
 }
 
-void piece::set_current_action_time(const delta_t& t) noexcept
+void piece::set_current_action_progress(const delta_t& t) noexcept
 {
-  m_current_action_time = t;
+  m_current_action_progress = t;
 }
 
 void piece::set_selected(const bool is_selected) noexcept
@@ -728,9 +728,9 @@ void test_piece()
   // has_just_double_moved, white
   {
     action_history h;
-    assert(!has_just_double_moved(h, delta_t(2.0)));
+    assert(!has_just_double_moved(h, in_game_time(2.0)));
     h.add_action(
-      delta_t(0.5),
+      in_game_time(0.5),
       piece_action(
         chess_color::white,
         piece_type::pawn,
@@ -739,17 +739,17 @@ void test_piece()
         "e4"
       )
     );
-    assert(!has_just_double_moved(h, delta_t(0.0)));
-    assert(!has_just_double_moved(h, delta_t(1.0)));
-    assert(has_just_double_moved(h, delta_t(2.0)));
-    assert(!has_just_double_moved(h, delta_t(3.0)));
+    assert(!has_just_double_moved(h, in_game_time(0.0)));
+    assert(!has_just_double_moved(h, in_game_time(1.0)));
+    assert(has_just_double_moved(h, in_game_time(2.0)));
+    assert(!has_just_double_moved(h, in_game_time(3.0)));
   }
   // has_just_double_moved, black
   {
     action_history h;
-    assert(!has_just_double_moved(h, delta_t(2.0)));
+    assert(!has_just_double_moved(h, in_game_time(2.0)));
     h.add_action(
-      delta_t(0.5),
+      in_game_time(0.5),
       piece_action(
         chess_color::white,
         piece_type::pawn,
@@ -758,10 +758,10 @@ void test_piece()
         "e5"
       )
     );
-    assert(!has_just_double_moved(h, delta_t(0.0)));
-    assert(!has_just_double_moved(h, delta_t(1.0)));
-    assert(has_just_double_moved(h, delta_t(2.0)));
-    assert(!has_just_double_moved(h, delta_t(3.0)));
+    assert(!has_just_double_moved(h, in_game_time(0.0)));
+    assert(!has_just_double_moved(h, in_game_time(1.0)));
+    assert(has_just_double_moved(h, in_game_time(2.0)));
+    assert(!has_just_double_moved(h, in_game_time(3.0)));
   }
   // is_enpassantable
   {
@@ -1125,19 +1125,20 @@ void tick_move(
   assert(first_action.get_action_type() == piece_action_type::move);
 
   // Increase the progress of the action
-  p.set_current_action_time(p.get_current_action_time() + dt);
-  const double f_too_much{p.get_current_action_time().get()};
-  assert(f_too_much >= 0.0);
+  const double new_progress{
+    p.get_current_action_progress().get() + dt.get()
+  };
+  assert(new_progress >= 0.0);
 
   // Are we done with the action?
-  if (f_too_much >= 1.0)
+  if (new_progress >= 1.0)
   {
     // Can this piece now be captured by en passant?
     // Or should it be found in a piece's history ..?
 
     // The whole goal of the operation
     assert(p.get_current_square() == first_action.get_to());
-    p.set_current_action_time(delta_t(0.0));
+    p.set_current_action_progress(delta_t(0.0));
     remove_first(p.get_actions());
     if (p.get_actions().empty())
     {
@@ -1146,7 +1147,8 @@ void tick_move(
     return;
   }
 
-  const double f{std::min(1.0, f_too_much)}; // The fraction of the action done
+  p.set_current_action_progress(p.get_current_action_progress() + dt);
+  const double f{std::min(1.0, new_progress)}; // The fraction of the action done
   assert(f >= 0.0);
   assert(f <= 1.0);
 
@@ -1175,7 +1177,7 @@ void tick_move(
           first_action.get_from()
         )
       );
-      p.set_current_action_time(delta_t(1.0) - p.get_current_action_time()); // Keep progress
+      p.set_current_action_progress(delta_t(1.0) - p.get_current_action_progress()); // Keep progress
       p.add_message(message_type::cannot);
       std::clog << "I cannot" << '\n';
       return;

@@ -81,10 +81,11 @@ void game_view::exec()
     }
 
     // Do a tick, so that one delta_t equals one second under normal game speed
-    m_game.tick(
-      delta_t(1.0 / m_fps_clock.get_fps())
-      * to_delta_t(m_game.get_game_options().get_game_speed())
-    );
+    const delta_t dt{
+        get_speed_multiplier(m_game.get_game_options().get_game_speed())
+      / m_fps_clock.get_fps()
+    };
+    m_game.tick(dt);
 
     // Read the pieces' messages and play their sounds
     process_piece_messages();
@@ -208,7 +209,7 @@ std::string get_text_for_action(
   }
 }
 
-const delta_t& get_time(const game_view& v) noexcept
+const in_game_time& get_time(const game_view& v) noexcept
 {
   return get_time(v.get_game());
 }
@@ -648,7 +649,7 @@ void show_pieces(game_view& view)
       && piece.get_actions()[0].get_action_type() == piece_action_type::move
     )
     {
-      const double f{piece.get_current_action_time().get()};
+      const double f{piece.get_current_action_progress().get()};
       int alpha{0};
       if (f < 0.5)
       {
@@ -926,7 +927,7 @@ void show_unit_paths(game_view& view)
           layout
         )
       };
-      const auto f{piece.get_current_action_time().get()};
+      const auto f{piece.get_current_action_progress().get()};
       assert(f >= 0.0);
       assert(f <= 1.0);
       const auto delta_pixel{to_pixel - from_pixel};

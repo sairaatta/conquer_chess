@@ -1,12 +1,14 @@
 #include "action_history.h"
 
+#include "delta_t.h"
+
 #include <algorithm>
 #include <cassert>
 #include <iostream>
 #include <sstream>
 
 action_history::action_history(
-  const std::vector<std::pair<delta_t, piece_action>>& timed_actions
+  const std::vector<std::pair<in_game_time, piece_action>>& timed_actions
 ) : m_timed_actions{timed_actions}
 {
   assert(
@@ -21,22 +23,22 @@ action_history::action_history(
   );
 }
 
-void action_history::add_action(const delta_t& in_game_time, const piece_action& action) noexcept
+void action_history::add_action(const in_game_time& in_game_time, const piece_action& action) noexcept
 {
   m_timed_actions.push_back(std::make_pair(in_game_time, action));
 }
 
 std::vector<piece_action> collect_actions_in_timespan(
   const action_history& history,
-  const delta_t from,
-  const delta_t to
+  const in_game_time from,
+  const in_game_time to
 )
 {
   assert(from < to);
   std::vector<piece_action> actions;
   for (const auto& p: history.get_timed_actions())
   {
-    const delta_t& t{p.first};
+    const in_game_time& t{p.first};
     if (t >= from && t <= to) actions.push_back(p.second);
   }
   return actions;
@@ -55,12 +57,13 @@ bool has_actions(const action_history& history) noexcept
 
 bool has_just_double_moved(
   const action_history& history,
-  const delta_t when
+  const in_game_time when
 )
 {
   // It takes 1 time unit to do a move
-  const delta_t start_earliest{when - delta_t(2.0)};
-  const delta_t start_latest{when - delta_t(1.0)};
+  const in_game_time start_earliest{
+    when - delta_t(1.0) - delta_t(1.0)};
+  const in_game_time start_latest{when - delta_t(1.0)};
   const std::vector<piece_action> actions{
     collect_actions_in_timespan(
       history,
@@ -77,7 +80,7 @@ bool has_just_double_moved(
 
 action_history merge_action_histories(const std::vector<action_history> histories)
 {
-  std::vector<std::pair<delta_t, piece_action>> timed_actions;
+  std::vector<std::pair<in_game_time, piece_action>> timed_actions;
   for (const auto& history: histories)
   {
     const auto tas{history.get_timed_actions()};
@@ -109,7 +112,7 @@ void test_action_history()
     s << h; // Still empty
     assert(s.str().empty());
     h.add_action(
-      delta_t(1.0),
+      in_game_time(1.0),
       get_test_piece_action()
     );
     s << h;
