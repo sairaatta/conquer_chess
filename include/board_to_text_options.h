@@ -1,6 +1,8 @@
 #ifndef BOARD_TO_TEXT_OPTIONS_H
 #define BOARD_TO_TEXT_OPTIONS_H
 
+/// Options on how to convert a chessboard
+/// to text.
 class board_to_text_options
 {
 public:

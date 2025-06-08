@@ -3,7 +3,7 @@
 #include "action_number.h"
 #include "helper.h"
 #include "game_rect.h"
-#include "game_coordinat.h"
+#include "game_coordinate.h"
 #include "square.h"
 
 #include <cassert>
@@ -12,7 +12,7 @@
 #include <sstream>
 
 game_view_layout::game_view_layout(
-  const screen_coordinat& window_size,
+  const screen_coordinate& window_size,
   const int margin_width
 ) : m_window_size{window_size}
 {
@@ -54,26 +54,26 @@ game_view_layout::game_view_layout(
 
   // Panel 1
   m_units_lhs = screen_rect(
-    screen_coordinat(x1, y1),
-    screen_coordinat(x2, y2)
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
   );
   m_controls_lhs = screen_rect(
-    screen_coordinat(x1, y2),
-    screen_coordinat(x2, y3)
+    screen_coordinate(x1, y2),
+    screen_coordinate(x2, y3)
   );
   m_log_lhs = screen_rect(
-    screen_coordinat(x1, y4),
-    screen_coordinat(x2, y5)
+    screen_coordinate(x1, y4),
+    screen_coordinate(x2, y5)
   );
   m_debug_lhs = screen_rect(
-    screen_coordinat(x1, y6),
-    screen_coordinat(x2, y7)
+    screen_coordinate(x1, y6),
+    screen_coordinate(x2, y7)
   );
 
   // Board
   m_board = screen_rect(
-    screen_coordinat(x3, y1),
-    screen_coordinat(x3 + board_width, y1 + board_height)
+    screen_coordinate(x3, y1),
+    screen_coordinate(x3 + board_width, y1 + board_height)
   );
   // Center board vertically
   const int empty_vertical_space{
@@ -81,25 +81,25 @@ game_view_layout::game_view_layout(
     - (2 * margin_width)
     - get_height(m_board)
   };
-  m_board += screen_coordinat(0, empty_vertical_space / 2);
+  m_board += screen_coordinate(0, empty_vertical_space / 2);
   assert(get_width(m_board) == get_height(m_board));
 
   // Panel 2
   m_units_rhs = screen_rect(
-    screen_coordinat(x5, y1),
-    screen_coordinat(x6, y2)
+    screen_coordinate(x5, y1),
+    screen_coordinate(x6, y2)
   );
   m_controls_rhs = screen_rect(
-    screen_coordinat(x5, y2),
-    screen_coordinat(x6, y3)
+    screen_coordinate(x5, y2),
+    screen_coordinate(x6, y3)
   );
   m_log_rhs = screen_rect(
-    screen_coordinat(x5, y4),
-    screen_coordinat(x6, y5)
+    screen_coordinate(x5, y4),
+    screen_coordinate(x6, y5)
   );
   m_debug_rhs = screen_rect(
-    screen_coordinat(x5, y6),
-    screen_coordinat(x6, y7)
+    screen_coordinate(x5, y6),
+    screen_coordinate(x6, y7)
   );
 
   assert(get_board_width(*this) == get_board_height(*this));
@@ -110,80 +110,80 @@ game_view_layout::game_view_layout(
   {
     const int sz{75};
     m_controls_lhs_key_1 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(0 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(1 * sz, 1 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(1 * sz, 1 * sz)
     );
     m_controls_lhs_key_2 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(1 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(2 * sz, 1 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(1 * sz, 0 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(2 * sz, 1 * sz)
     );
     m_controls_lhs_key_3 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(2 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(3 * sz, 1 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(2 * sz, 0 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(3 * sz, 1 * sz)
     );
     m_controls_lhs_key_4 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(3 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(4 * sz, 1 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(3 * sz, 0 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
     );
 
     m_controls_rhs_key_1 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(0 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(1 * sz, 1 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(1 * sz, 1 * sz)
     );
     m_controls_rhs_key_2 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(1 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(2 * sz, 1 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(1 * sz, 0 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(2 * sz, 1 * sz)
     );
     m_controls_rhs_key_3 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(2 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(3 * sz, 1 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(2 * sz, 0 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(3 * sz, 1 * sz)
     );
     m_controls_rhs_key_4 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(3 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(4 * sz, 1 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(3 * sz, 0 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
     );
   }
   else
   {
     const int sz{75};
     m_controls_lhs_key_1 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(0 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(4 * sz, 1 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
     );
     m_controls_lhs_key_2 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(0 * sz, 1 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(4 * sz, 2 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 1 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 2 * sz)
     );
     m_controls_lhs_key_3 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(0 * sz, 2 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(4 * sz, 3 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 2 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 3 * sz)
     );
     m_controls_lhs_key_4 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinat(0 * sz, 3 * sz),
-      m_controls_lhs.get_tl() + screen_coordinat(4 * sz, 4 * sz)
+      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 3 * sz),
+      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 4 * sz)
     );
 
     m_controls_rhs_key_1 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(0 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(4 * sz, 1 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
     );
     m_controls_rhs_key_2 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(0 * sz, 1 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(4 * sz, 2 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 1 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 2 * sz)
     );
     m_controls_rhs_key_3 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(0 * sz, 2 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(4 * sz, 3 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 2 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 3 * sz)
     );
     m_controls_rhs_key_4 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinat(0 * sz, 3 * sz),
-      m_controls_rhs.get_tl() + screen_coordinat(4 * sz, 4 * sz)
+      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 3 * sz),
+      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 4 * sz)
     );
   }
 }
 
-game_coordinat convert_to_game_coordinat(
-  const screen_coordinat& coordinat,
+game_coordinate convert_to_game_coordinate(
+  const screen_coordinate& coordinat,
   const game_view_layout& layout
 )
 {
@@ -201,14 +201,14 @@ game_coordinat convert_to_game_coordinat(
   const double f_y{
     static_cast<double>(screen_on_board_y) / static_cast<double>(get_board_height(layout))
   };
-  return game_coordinat(
+  return game_coordinate(
     8.0 * f_x,
     8.0 * f_y
   );
 }
 
-screen_coordinat convert_to_screen_coordinat(
-  const game_coordinat& coordinat,
+screen_coordinate convert_to_screen_coordinate(
+  const game_coordinate& coordinat,
   const game_view_layout& layout
 )
 {
@@ -221,7 +221,7 @@ screen_coordinat convert_to_screen_coordinat(
   const double square_height{
     get_square_height(layout)
   };
-  return screen_coordinat(
+  return screen_coordinate(
     tl_board.get_x() + (square_width * coordinat.get_x()),
     tl_board.get_y() + (square_height * coordinat.get_y())
   );
@@ -232,8 +232,8 @@ screen_rect convert_to_screen_rect(
   const game_view_layout& layout
 )
 {
-  const auto& tl{convert_to_screen_coordinat(r.get_tl(), layout)};
-  const auto& br{convert_to_screen_coordinat(r.get_br(), layout)};
+  const auto& tl{convert_to_screen_coordinate(r.get_tl(), layout)};
+  const auto& br{convert_to_screen_coordinate(r.get_br(), layout)};
   return screen_rect(tl, br);
 }
 
@@ -242,8 +242,8 @@ screen_rect convert_to_screen_rect(
   const game_view_layout& layout
 )
 {
-  const game_coordinat tl(s.get_x(), s.get_y());
-  const game_coordinat br(s.get_x() + 1, s.get_y() + 1);
+  const game_coordinate tl(s.get_x(), s.get_y());
+  const game_coordinate br(s.get_x() + 1, s.get_y() + 1);
   const game_rect rect(tl, br);
   return convert_to_screen_rect(rect, layout);
 }
@@ -308,7 +308,7 @@ screen_rect game_view_layout::get_controls_key_icon(
   };
   // Make it square
   const screen_rect square_corner(
-    screen_coordinat(
+    screen_coordinate(
       corner.get_br().get_x() - get_height(corner),
       corner.get_tl().get_y()
     ),
@@ -330,7 +330,7 @@ screen_rect game_view_layout::get_controls_key_input(
   const screen_rect icon_square{get_controls_key_icon(player, key)};
   const screen_rect touching_rect{
     corner.get_tl(),
-    screen_coordinat(
+    screen_coordinate(
       icon_square.get_tl().get_x(),
       icon_square.get_br().get_y()
     )
@@ -446,8 +446,8 @@ void test_game_view_layout()
   // in-game (0,0) must be top-left of screen board
   {
     const game_view_layout layout;
-    const auto tl_board = convert_to_screen_coordinat(
-      game_coordinat(0.0, 0.0),
+    const auto tl_board = convert_to_screen_coordinate(
+      game_coordinate(0.0, 0.0),
       layout
     );
     assert(tl_board.get_x() == layout.get_board().get_tl().get_x());
@@ -458,8 +458,8 @@ void test_game_view_layout()
     const game_view_layout layout;
     const auto board_rect = convert_to_screen_rect(
       game_rect(
-        game_coordinat(0.0, 0.0),
-        game_coordinat(8.0, 8.0)
+        game_coordinate(0.0, 0.0),
+        game_coordinate(8.0, 8.0)
       ),
       layout
     );
@@ -469,8 +469,8 @@ void test_game_view_layout()
   // (no piece can ever have its top-right at the bottom-right of the board)
   {
     const game_view_layout layout;
-    const auto br_board = convert_to_screen_coordinat(
-      game_coordinat(8.0, 8.0),
+    const auto br_board = convert_to_screen_coordinate(
+      game_coordinate(8.0, 8.0),
       layout
     );
     assert(br_board.get_x() == layout.get_board().get_br().get_x());
@@ -483,11 +483,11 @@ void test_game_view_layout()
   // bottom-right of screen board must be in-game (8,8)
   {
     const game_view_layout layout;
-    const auto br_board = convert_to_game_coordinat(
+    const auto br_board = convert_to_game_coordinate(
       layout.get_board().get_br(),
       layout
     );
-    const auto tl_board = convert_to_game_coordinat(
+    const auto tl_board = convert_to_game_coordinate(
       layout.get_board().get_tl(),
       layout
     );

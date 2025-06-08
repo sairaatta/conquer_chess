@@ -2,6 +2,7 @@
 #define PIECES_H
 
 /// Functions to work on collections of pieces
+
 #include "board_to_text_options.h"
 #include "piece.h"
 #include "starting_position_type.h"
@@ -53,7 +54,7 @@ std::vector<std::string> add_legend(
 /// Calculate the distances that each piece has to a coordinat
 std::vector<double> calc_distances(
   const std::vector<piece>& pieces,
-  const game_coordinat& coordinat
+  const game_coordinate& coordinat
 );
 
 /// Collect the history of a game,
@@ -285,7 +286,7 @@ bool has_piece_with_id(
 /// Determine if there is a piece at the coordinat
 bool is_piece_at(
   const std::vector<piece>& pieces,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const double distance = 0.5
 );
 

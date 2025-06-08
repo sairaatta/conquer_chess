@@ -14,7 +14,7 @@
 sf::Color f_health_to_color(const double f);
 
 /// Make 'rectangle' have the same size as the \link{screen_coordinat}
-void set_rect(sf::RectangleShape& rectangle, const screen_coordinat& screen_size);
+void set_rect(sf::RectangleShape& rectangle, const screen_coordinate& screen_size);
 
 /// Make 'rectangle' have the same size and position as the 'screen_rect'
 void set_rect(sf::RectangleShape& rectangle, const screen_rect& screen_rect);

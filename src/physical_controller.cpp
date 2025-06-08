@@ -4,7 +4,7 @@
 #include "game.h"
 #include "game_controller.h"
 #include "game_view_layout.h"
-#include "game_coordinat.h"
+#include "game_coordinate.h"
 #include "sfml_helper.h"
 #include "user_inputs.h"
 #include <cassert>
@@ -51,7 +51,7 @@ physical_controller create_left_keyboard_controller() noexcept
 }
 
 sf::Event create_mouse_button_pressed_event(
-  const screen_coordinat& cursor_pos,
+  const screen_coordinate& cursor_pos,
   const sf::Mouse::Button mouse_button
 )
 {
@@ -63,7 +63,7 @@ sf::Event create_mouse_button_pressed_event(
   return e;
 }
 
-sf::Event create_mouse_moved_event(const screen_coordinat& cursor_pos)
+sf::Event create_mouse_moved_event(const screen_coordinate& cursor_pos)
 {
   sf::Event e;
   e.type = sf::Event::MouseMoved;
@@ -234,10 +234,10 @@ user_inputs physical_controller::process_mouse_moved(
 {
   assert(event.type == sf::Event::MouseMoved);
   const auto mouse_screen_pos{
-    screen_coordinat(event.mouseMove.x, event.mouseMove.y)
+    screen_coordinate(event.mouseMove.x, event.mouseMove.y)
   };
   const auto mouse_game_pos{
-    convert_to_game_coordinat(
+    convert_to_game_coordinate(
       mouse_screen_pos,
       layout
     )
@@ -267,7 +267,7 @@ void test_controller()
     const user_inputs inputs(
       {
         c.process_input(
-          create_mouse_moved_event(screen_coordinat()),
+          create_mouse_moved_event(screen_coordinate()),
           side::lhs,
           layout
         )
@@ -282,7 +282,7 @@ void test_controller()
     const user_inputs inputs(
       {
         c.process_input(
-          create_mouse_button_pressed_event(screen_coordinat(), sf::Mouse::Left),
+          create_mouse_button_pressed_event(screen_coordinate(), sf::Mouse::Left),
           side::lhs,
           layout
         )
@@ -297,7 +297,7 @@ void test_controller()
     const user_inputs inputs(
       {
         c.process_input(
-          create_mouse_button_pressed_event(screen_coordinat(), sf::Mouse::Right),
+          create_mouse_button_pressed_event(screen_coordinate(), sf::Mouse::Right),
           side::lhs,
           layout
         )

@@ -3,7 +3,7 @@
 #ifndef LOGIC_ONLY
 
 #include "about_view.h"
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "game_view.h"
 #include "played_game_view.h"
 #include "options_view.h"
@@ -128,7 +128,7 @@ bool lobby_view::process_events()
       m_window.setView(sf::View(visible_area));
 
       m_layout = lobby_view_layout(
-        screen_coordinat(event.size.width, event.size.height),
+        screen_coordinate(event.size.width, event.size.height),
         get_default_margin_width()
       );
     }
@@ -317,7 +317,7 @@ void show_countdown(lobby_view& v, const int n_left_secs)
 {
   // Text
   const screen_rect window_rect{
-    screen_coordinat(0, 0),
+    screen_coordinate(0, 0),
     v.get_layout().get_window_size()
   };
   sf::Text text;

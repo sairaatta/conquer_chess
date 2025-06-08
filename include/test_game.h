@@ -13,5 +13,4 @@ void test_game_functions();
 /// Test bigger scenarios
 void test_game_scenarios();
 
-
 #endif // TEST_GAME_H

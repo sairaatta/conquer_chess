@@ -6,8 +6,6 @@
 #include <SFML/Audio.hpp>
 
 #include "ccfwd.h"
-#include "chess_color.h"
-#include "piece_type.h"
 #include "message.h"
 
 /// Raw sound effects

@@ -3,8 +3,9 @@
 #include <algorithm>
 #include <cassert>
 #include <numeric>
-#include <iostream>
 #include <sstream>
+
+#include "game_coordinate.h"
 
 std::vector<std::string> add_coordinats(
   const std::vector<std::string>& strs
@@ -58,7 +59,7 @@ std::vector<std::string> add_legend(
 
 std::vector<double> calc_distances(
   const std::vector<piece>& pieces,
-  const game_coordinat& coordinat
+  const game_coordinate& coordinat
 ) {
   std::vector<double> distances;
   distances.reserve(pieces.size());
@@ -906,7 +907,7 @@ bool has_piece_with_id(
 
 bool is_piece_at(
   const std::vector<piece>& pieces,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const double distance
 ) {
   const std::vector<double> distances{

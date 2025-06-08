@@ -5,7 +5,7 @@
 #include "action_number.h"
 
 #include "physical_controllers.h"
-#include "game_coordinat.h"
+#include "game_coordinate.h"
 #include "side.h"
 #include "user_inputs.h"
 
@@ -29,7 +29,7 @@ public:
   void apply_user_inputs_to_game(game& g);
 
   /// Get the a player's cursor position
-  const game_coordinat& get_cursor_pos(const side player_side) const noexcept;
+  const game_coordinate& get_cursor_pos(const side player_side) const noexcept;
 
   /// A mouse user selects one of the four actions by using RMB
   /// and scrollwheel. The mouse user selector stores
@@ -51,12 +51,12 @@ public:
   void set_mouse_user_selector(const action_number& number);
 
   /// Set a player's cursor's position
-  void set_cursor_pos(const game_coordinat& pos, const side player_side) noexcept;
+  void set_cursor_pos(const game_coordinate& pos, const side player_side) noexcept;
 
 private:
 
   /// The in-game coordinat of the LHS user's cursor
-  game_coordinat m_lhs_cursor_pos;
+  game_coordinate m_lhs_cursor_pos;
 
   /// A mouse user selects one of the four actions
   /// (a keyboard user has different keys for that)
@@ -66,7 +66,7 @@ private:
   physical_controllers m_physical_controllers;
 
   /// The in-game coordinat of the RHS user's cursor
-  game_coordinat m_rhs_cursor_pos;
+  game_coordinate m_rhs_cursor_pos;
 
   /// The user inputs that need to be processed
   user_inputs m_user_inputs;
@@ -225,13 +225,13 @@ void do_start_attack_keyboard_player_piece(
 );
 
 /// Get the a player's cursor position
-const game_coordinat& get_cursor_pos(
+const game_coordinate& get_cursor_pos(
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 /// Get the cursor position for a chess color
-const game_coordinat& get_cursor_pos(
+const game_coordinate& get_cursor_pos(
   const game& g,
   const game_controller& c,
   const chess_color cursor_color
@@ -367,7 +367,7 @@ void move_mouse_cursor_to(
 /// Set the cursor's position to the target position
 void set_cursor_pos(
   game_controller& c,
-  const game_coordinat& pos,
+  const game_coordinate& pos,
   const side player_side
 ) noexcept;
 

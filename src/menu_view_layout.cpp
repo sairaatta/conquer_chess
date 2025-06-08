@@ -4,7 +4,7 @@
 #include <cmath>
 
 menu_view_layout::menu_view_layout(
-  const screen_coordinat& window_size,
+  const screen_coordinate& window_size,
   const int margin_width
 ) : m_font_size{64},
     m_window_size{window_size}
@@ -38,32 +38,32 @@ menu_view_layout::menu_view_layout(
   const int y14{y13 + panel_height};
 
   m_title = screen_rect(
-    screen_coordinat(x1, y1),
-    screen_coordinat(x2, y2)
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
   );
   m_subtitle = screen_rect(
-    screen_coordinat(x1, y3),
-    screen_coordinat(x2, y4)
+    screen_coordinate(x1, y3),
+    screen_coordinate(x2, y4)
   );
   m_image = screen_rect(
-    screen_coordinat(x1, y5),
-    screen_coordinat(x2, y6)
+    screen_coordinate(x1, y5),
+    screen_coordinate(x2, y6)
   );
   m_start = screen_rect(
-    screen_coordinat(x1, y7),
-    screen_coordinat(x2, y8)
+    screen_coordinate(x1, y7),
+    screen_coordinate(x2, y8)
   );
   m_options = screen_rect(
-    screen_coordinat(x1, y9),
-    screen_coordinat(x2, y10)
+    screen_coordinate(x1, y9),
+    screen_coordinate(x2, y10)
   );
   m_about = screen_rect(
-    screen_coordinat(x1, y11),
-    screen_coordinat(x2, y12)
+    screen_coordinate(x1, y11),
+    screen_coordinate(x2, y12)
   );
   m_quit = screen_rect(
-    screen_coordinat(x1, y13),
-    screen_coordinat(x2, y14)
+    screen_coordinate(x1, y13),
+    screen_coordinate(x2, y14)
   );
 
   m_font_size = std::min(

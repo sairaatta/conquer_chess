@@ -8,7 +8,8 @@
 #include <iosfwd>
 #include <vector>
 
-/// Representation of a sound effect
+/// Representation of a sound effect.
+///
 /// Use 'MESSAGEs::play' to play it
 class message
 {

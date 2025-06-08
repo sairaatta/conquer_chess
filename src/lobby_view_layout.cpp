@@ -4,7 +4,7 @@
 #include <cmath>
 
 lobby_view_layout::lobby_view_layout(
-  const screen_coordinat& window_size,
+  const screen_coordinate& window_size,
   const int margin_width
 ) : m_font_size{64},
     m_window_size{window_size}
@@ -43,33 +43,33 @@ lobby_view_layout::lobby_view_layout(
   const int y8{y7 + panel_height};
 
   m_image = screen_rect(
-    screen_coordinat(x1, y1),
-    screen_coordinat(x4, y2)
+    screen_coordinate(x1, y1),
+    screen_coordinate(x4, y2)
   );
 
   m_lhs_color = screen_rect(
-    screen_coordinat(x1, y3),
-    screen_coordinat(x2, y4)
+    screen_coordinate(x1, y3),
+    screen_coordinate(x2, y4)
   );
   m_lhs_race = screen_rect(
-    screen_coordinat(x1, y5),
-    screen_coordinat(x2, y6)
+    screen_coordinate(x1, y5),
+    screen_coordinate(x2, y6)
   );
   m_lhs_start = screen_rect(
-    screen_coordinat(x1, y7),
-    screen_coordinat(x2, y8)
+    screen_coordinate(x1, y7),
+    screen_coordinate(x2, y8)
   );
   m_rhs_color = screen_rect(
-    screen_coordinat(x3, y3),
-    screen_coordinat(x4, y4)
+    screen_coordinate(x3, y3),
+    screen_coordinate(x4, y4)
   );
   m_rhs_race = screen_rect(
-    screen_coordinat(x3, y5),
-    screen_coordinat(x4, y6)
+    screen_coordinate(x3, y5),
+    screen_coordinate(x4, y6)
   );
   m_rhs_start = screen_rect(
-    screen_coordinat(x3, y7),
-    screen_coordinat(x4, y8)
+    screen_coordinate(x3, y7),
+    screen_coordinate(x4, y8)
   );
   m_font_size = std::min(
     panel_height / 2,

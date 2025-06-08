@@ -42,14 +42,14 @@ class controls_view_layout
 {
 public:
   explicit controls_view_layout(
-    const screen_coordinat& window_size = get_default_screen_size(),
+    const screen_coordinate& window_size = get_default_screen_size(),
     const int margin_width = get_default_margin_width()
   );
 
   /// Get a screen rect
   const screen_rect& get_selectable_rect(const controls_view_item item) const noexcept;
 
-  screen_coordinat get_window_size() const noexcept { return m_window_size; }
+  screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
   const screen_rect& get_action_1_label() const noexcept { return m_action_1_label; }
   const screen_rect& get_action_1_value() const noexcept { return m_action_1_value; }
@@ -100,7 +100,7 @@ private:
   screen_rect m_up_value;
 
   /// The size of the window
-  screen_coordinat m_window_size;
+  screen_coordinate m_window_size;
 };
 
 /// Get the panels in the layout

@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <sstream>
 
+/// Assert that the sides are equal
 template <class T>
 void assert_eq(const T& lhs, const T& rhs)
 {

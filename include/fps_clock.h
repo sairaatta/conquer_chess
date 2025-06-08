@@ -4,7 +4,8 @@
 #include <SFML/System.hpp>
 
 /// Clock to count the frames per second
-/// Inspired by https://gist.github.com/kenpower/7233967
+///
+/// @note Inspired by https://gist.github.com/kenpower/7233967
 class fps_clock
 {
 public:

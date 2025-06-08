@@ -10,7 +10,8 @@
 
 #include <cassert>
 #include <cmath>
-#include <iostream>
+
+#include "game_coordinate.h"
 
 sf::Color f_health_to_color(const double f)
 {
@@ -22,12 +23,12 @@ sf::Color f_health_to_color(const double f)
   return sf::Color::Green;
 }
 
-void set_rect(sf::RectangleShape& rectangle, const screen_coordinat& screen_size)
+void set_rect(sf::RectangleShape& rectangle, const screen_coordinate& screen_size)
 {
   set_rect(
     rectangle,
     screen_rect(
-      screen_coordinat(0, 0),
+      screen_coordinate(0, 0),
       screen_size
     )
   );
@@ -116,10 +117,10 @@ void show_pieces(
       sprite.setOutlineThickness(2);
     }
     sprite.setOrigin(sf::Vector2f(0.45 * square_width, 0.45 * square_height));
-    const game_coordinat game_pos{
-      to_coordinat(piece.get_current_square()) + game_coordinat(0.0, 0.1)
+    const game_coordinate game_pos{
+      to_coordinat(piece.get_current_square()) + game_coordinate(0.0, 0.1)
     };
-    const screen_coordinat screen_position{
+    const screen_coordinate screen_position{
       rect.get_tl().get_x() + static_cast<int>(game_pos.get_x() * square_width),
       rect.get_tl().get_y() + static_cast<int>(game_pos.get_y() * square_height),
     };
@@ -162,7 +163,7 @@ void show_squares(
     for (int y = 0; y != 8; ++y)
     {
       sf::RectangleShape& s = (x + y) % 2 == 0 ? black_square : white_square;
-      const screen_coordinat square_pos{
+      const screen_coordinate square_pos{
         static_cast<int>(
           rect.get_tl().get_x() + ((0.5 + x) * square_width)
         ),

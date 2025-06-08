@@ -7,11 +7,14 @@
 #include "physical_controller_type.h"
 #include "options_view.h"
 
+#include "game_controller.h"
 #include "controls_view.h"
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "game_options.h"
-#include "game_view.h"
+#include "pieces.h"
+#include "physical_controllers.h"
 #include "sfml_helper.h"
+#include "options_view.h"
 
 #include <cassert>
 #include <iostream>
@@ -182,7 +185,7 @@ bool options_view::process_events()
       const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
       m_window.setView(sf::View(visibleArea));
       m_layout = options_view_layout(
-        screen_coordinat(visibleArea.width, visibleArea.height),
+        screen_coordinate(visibleArea.width, visibleArea.height),
         get_default_margin_width()
       );
     }
@@ -261,7 +264,7 @@ bool options_view::process_events()
     else if (event.type == sf::Event::MouseMoved)
     {
       const auto mouse_screen_pos{
-        screen_coordinat(event.mouseMove.x, event.mouseMove.y)
+        screen_coordinate(event.mouseMove.x, event.mouseMove.y)
       };
       if (is_in(mouse_screen_pos, m_layout.get_chess_board())) set_selected(options_view_item::starting_position);
       else if (is_in(mouse_screen_pos, m_layout.get_game_speed_value())) set_selected(options_view_item::game_speed);

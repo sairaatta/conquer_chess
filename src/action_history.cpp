@@ -21,9 +21,9 @@ action_history::action_history(
   );
 }
 
-void action_history::add_action(const delta_t& t, const piece_action& action) noexcept
+void action_history::add_action(const delta_t& in_game_time, const piece_action& action) noexcept
 {
-  m_timed_actions.push_back(std::make_pair(t, action));
+  m_timed_actions.push_back(std::make_pair(in_game_time, action));
 }
 
 std::vector<piece_action> collect_actions_in_timespan(

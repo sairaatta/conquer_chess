@@ -2,7 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 
 #include "pieces.h"
 #include "sfml_helper.h"
@@ -64,7 +64,7 @@ bool about_view::process_events()
       m_window.setView(sf::View(visible_area));
 
       m_layout = about_view_layout(
-        screen_coordinat(event.size.width, event.size.height),
+        screen_coordinate(event.size.width, event.size.height),
         get_default_margin_width()
       );
     }

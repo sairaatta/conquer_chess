@@ -6,13 +6,14 @@
 #include <vector>
 
 #include "piece_action_type.h"
-#include "game_coordinat.h"
 #include "square.h"
 #include "piece_type.h"
 
-/// An action to be done by a piece, for example:
-/// * Move from d1 to d7
-/// * Attack e5
+/// An action to be done by a piece
+///
+/// Examples:
+/// - Move from d1 to d7
+/// - Attack e5
 class piece_action
 {
 public:

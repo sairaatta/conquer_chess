@@ -1,6 +1,6 @@
 #include "square.h"
 
-#include "game_coordinat.h"
+#include "game_coordinate.h"
 #include "game_rect.h"
 #include "helper.h"
 
@@ -20,7 +20,7 @@ square::square(const std::string& pos)
   assert(is_valid_square_xy(m_x, m_y));
 }
 
-square::square(const game_coordinat& g)
+square::square(const game_coordinate& g)
   : m_x{static_cast<int>(std::trunc(g.get_x()))},
     m_y{static_cast<int>(std::trunc(g.get_y()))}
 {
@@ -594,21 +594,21 @@ void test_square()
   }
   // to_coordinat
   {
-    assert(to_coordinat(square("a1")) == game_coordinat(0.5, 0.5));
+    assert(to_coordinat(square("a1")) == game_coordinate(0.5, 0.5));
     const auto a8{to_coordinat(square("a8"))};
-    assert(a8 == game_coordinat(7.5, 0.5));
-    assert(to_coordinat(square("a8")) == game_coordinat(7.5, 0.5));
-    assert(to_coordinat(square("h1")) == game_coordinat(0.5, 7.5));
-    assert(to_coordinat(square("h8")) == game_coordinat(7.5, 7.5));
+    assert(a8 == game_coordinate(7.5, 0.5));
+    assert(to_coordinat(square("a8")) == game_coordinate(7.5, 0.5));
+    assert(to_coordinat(square("h1")) == game_coordinate(0.5, 7.5));
+    assert(to_coordinat(square("h8")) == game_coordinate(7.5, 7.5));
   }
   // to_game_rect
   {
     const auto a1_created{to_game_rect(square("a1"))};
-    const auto a1_expected{game_rect(game_coordinat(0.0, 0.0), game_coordinat(1.0, 1.0))};
+    const auto a1_expected{game_rect(game_coordinate(0.0, 0.0), game_coordinate(1.0, 1.0))};
     assert(a1_created == a1_expected);
 
     const auto a8_created{to_game_rect(square("a8"))};
-    const auto a8_expected{game_rect(game_coordinat(7.0, 0.0), game_coordinat(8.0, 1.0))};
+    const auto a8_expected{game_rect(game_coordinate(7.0, 0.0), game_coordinate(8.0, 1.0))};
     assert(a8_created == a8_expected);
   }
   // to_str, one square
@@ -664,28 +664,28 @@ chess_color to_color(const square& s) noexcept
   return chess_color::white;
 }
 
-game_coordinat to_coordinat(const square& s) noexcept
+game_coordinate to_coordinat(const square& s) noexcept
 {
-  return game_coordinat(
+  return game_coordinate(
     0.5 + static_cast<double>(s.get_x()),
     0.5 + static_cast<double>(s.get_y())
   );
 }
 
-game_coordinat to_coordinat(const std::string& pos) noexcept
+game_coordinate to_coordinat(const std::string& pos) noexcept
 {
   return to_coordinat(square(pos));
 }
 
 game_rect to_game_rect(const square& s) noexcept
 {
-  const game_coordinat mid{to_coordinat(s)};
-  const game_coordinat tl{
+  const game_coordinate mid{to_coordinat(s)};
+  const game_coordinate tl{
     std::trunc(mid.get_x()),
     std::trunc(mid.get_y())
   };
-  const game_coordinat br{
-    tl + game_coordinat(1.0, 1.0)
+  const game_coordinate br{
+    tl + game_coordinate(1.0, 1.0)
   };
   return game_rect(tl, br);
 }

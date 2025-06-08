@@ -2,7 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "game_view.h"
 #include "options_view.h"
 
@@ -147,7 +147,7 @@ bool controls_view::process_events()
       const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
       m_window.setView(sf::View(visible_area));
       m_layout = controls_view_layout(
-        screen_coordinat(event.size.width, event.size.height),
+        screen_coordinate(event.size.width, event.size.height),
         get_default_margin_width()
       );
     }
@@ -202,7 +202,7 @@ bool controls_view::process_events()
     else if (event.type == sf::Event::MouseMoved)
     {
       const auto mouse_screen_pos{
-        screen_coordinat(event.mouseMove.x, event.mouseMove.y)
+        screen_coordinate(event.mouseMove.x, event.mouseMove.y)
       };
       if (is_in(mouse_screen_pos, m_layout.get_action_1_value())) m_selected = controls_view_item::action_1;
       if (is_in(mouse_screen_pos, m_layout.get_action_2_value())) m_selected = controls_view_item::action_2;

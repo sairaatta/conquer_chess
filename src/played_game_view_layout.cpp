@@ -4,7 +4,7 @@
 #include <cmath>
 
 played_game_view_layout::played_game_view_layout(
-  const screen_coordinat& window_size,
+  const screen_coordinate& window_size,
   const int margin_width
 ) : m_font_size{64},
     m_window_size{window_size}
@@ -18,8 +18,8 @@ played_game_view_layout::played_game_view_layout(
   const int y2{y1 + panel_height};
 
   m_text = screen_rect(
-    screen_coordinat(x1, y1),
-    screen_coordinat(x2, y2)
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
   );
   m_font_size = std::min(
     panel_height / 10,

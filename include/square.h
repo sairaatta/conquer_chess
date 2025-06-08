@@ -14,7 +14,7 @@ class square
 {
 public:
   explicit square(const std::string& pos);
-  explicit square(const game_coordinat& g);
+  explicit square(const game_coordinate& g);
   explicit square(const int x, const int y);
 
   /// Get the x coordinat, starting from 0 for a1/b1/c1/etc.
@@ -167,11 +167,11 @@ chess_color to_color(const square& s) noexcept;
 
 // a1 == (0.5, 0.5)
 // b1 == (0.5, 1.5)
-game_coordinat to_coordinat(const square& s) noexcept;
+game_coordinate to_coordinat(const square& s) noexcept;
 
 // a1 == (0.5, 0.5)
 // b1 == (0.5, 1.5)
-game_coordinat to_coordinat(const std::string& notation) noexcept;
+game_coordinate to_coordinat(const std::string& notation) noexcept;
 
 
 /// Convert a square to a rectangle

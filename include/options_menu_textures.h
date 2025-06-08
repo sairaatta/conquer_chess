@@ -4,8 +4,6 @@
 #ifndef LOGIC_ONLY
 
 #include <SFML/Graphics.hpp>
-#include "chess_color.h"
-#include "piece_type.h"
 #include "options_view_item.h"
 
 /// The games' icon_textures

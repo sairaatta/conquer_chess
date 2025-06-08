@@ -1,7 +1,7 @@
 #ifndef PHYSICAL_CONTROLLERS_H
 #define PHYSICAL_CONTROLLERS_H
 
-#include "chess_color.h"
+#include "ccfwd.h"
 #include "physical_controller.h"
 #include <vector>
 

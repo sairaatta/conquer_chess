@@ -9,6 +9,7 @@
 #include "controls_view_layout.h"
 #include "controls_view_item.h"
 
+/// The 'Controls' dialog
 class controls_view
 {
 public:

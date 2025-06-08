@@ -32,11 +32,12 @@
 #include "options_view_layout.h"
 #include "pgn_string.h"
 #include "piece_actions.h"
+#include "pieces.h"
 #include "race.h"
 #include "sfml_helper.h"
 #include "read_only.h"
 #include "replay.h"
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "test_game.h"
 
 #include <SFML/Graphics.hpp>
@@ -68,7 +69,7 @@ void test()
   test_fps_clock();
   test_game();
   test_game_controller();
-  test_game_coordinat();
+  test_game_coordinate();
   test_game_options();
   test_game_rect();
   test_game_speed();
@@ -98,7 +99,7 @@ void test()
   test_read_only();
   test_replay();
   test_replayer();
-  test_screen_coordinat();
+  test_screen_coordinate();
   test_screen_rect();
   test_side();
   test_sfml_helper();

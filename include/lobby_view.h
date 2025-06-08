@@ -11,6 +11,7 @@
 #include "lobby_options.h"
 #include "physical_controllers.h"
 
+/// The Lobby screen
 class lobby_view
 {
 public:

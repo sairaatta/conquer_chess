@@ -6,7 +6,7 @@
 #include <cmath>
 
 options_view_layout::options_view_layout(
-  const screen_coordinat& window_size,
+  const screen_coordinate& window_size,
   const int margin_size
 ) : m_window_size{window_size}
 {
@@ -109,58 +109,58 @@ options_view_layout::options_view_layout(
   const int y10{y9 + controller_height};
 
   m_game_speed_label = screen_rect(
-    screen_coordinat(x1, y1),
-    screen_coordinat(x3, y2)
+    screen_coordinate(x1, y1),
+    screen_coordinate(x3, y2)
   );
   m_game_speed_value = screen_rect(
-    screen_coordinat(x3, y1),
-    screen_coordinat(x5, y2)
+    screen_coordinate(x3, y1),
+    screen_coordinate(x5, y2)
   );
 
   m_music_volume_label = screen_rect(
-    screen_coordinat(x1, y2),
-    screen_coordinat(x3, y3)
+    screen_coordinate(x1, y2),
+    screen_coordinate(x3, y3)
   );
   m_music_volume_value = screen_rect(
-    screen_coordinat(x3, y2),
-    screen_coordinat(x5, y3)
+    screen_coordinate(x3, y2),
+    screen_coordinate(x5, y3)
   );
 
   m_sound_effects_volume_label = screen_rect(
-    screen_coordinat(x1, y3),
-    screen_coordinat(x3, y4)
+    screen_coordinate(x1, y3),
+    screen_coordinate(x3, y4)
   );
   m_sound_effects_volume_value = screen_rect(
-    screen_coordinat(x3, y3),
-    screen_coordinat(x5, y4)
+    screen_coordinate(x3, y3),
+    screen_coordinate(x5, y4)
   );
 
   m_starting_pos_label = screen_rect(
-    screen_coordinat(x1, y4),
-    screen_coordinat(x3, y5)
+    screen_coordinate(x1, y4),
+    screen_coordinate(x3, y5)
   );
   m_starting_pos_value = screen_rect(
-    screen_coordinat(x3, y4),
-    screen_coordinat(x5, y5)
+    screen_coordinate(x3, y4),
+    screen_coordinate(x5, y5)
   );
 
 
   m_chess_board = screen_rect(
-    screen_coordinat(chess_board_tl_x, y6),
-    screen_coordinat(chess_board_br_x, y7)
+    screen_coordinate(chess_board_tl_x, y6),
+    screen_coordinate(chess_board_br_x, y7)
   );
 
   m_controls_label = screen_rect(
-    screen_coordinat(x2, y8),
-    screen_coordinat(x4, y9)
+    screen_coordinate(x2, y8),
+    screen_coordinate(x4, y9)
   );
   m_left_controls_value = screen_rect(
-    screen_coordinat(x2, y9),
-    screen_coordinat(x_mid, y10)
+    screen_coordinate(x2, y9),
+    screen_coordinate(x_mid, y10)
   );
   m_right_controls_value = screen_rect(
-    screen_coordinat(x_mid, y9),
-    screen_coordinat(x4, y10)
+    screen_coordinate(x_mid, y9),
+    screen_coordinate(x4, y10)
   );
 
   m_font_size = std::min(

@@ -2,7 +2,7 @@
 #define PIECE_ACTIONS_H
 
 /// Work on collections of piece_action
-///
+
 #include <iosfwd>
 #include <vector>
 

@@ -1,16 +1,20 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "ccfwd.h"
 #include "game_options.h"
-#include "pieces.h"
 #include "message.h"
 #include "lobby_options.h"
-
+#include "piece.h"
+#include "piece_action_type.h"
+#include "action_history.h"
+#include "read_only.h"
 #include <iosfwd>
 #include <optional>
 #include <vector>
 
-/// Contains the game logic.
+/// The game logic.
+///
 /// All data types used by this class are STL and/or Boost
 ///
 /// This class is part of an MVC Design Pattern:
@@ -275,10 +279,10 @@ std::vector<piece> find_pieces(
 );
 
 /// Get the piece that is closest to the coordinat
-const piece& get_closest_piece_to(const game& g, const game_coordinat& coordinat);
+const piece& get_closest_piece_to(const game& g, const game_coordinate& coordinat);
 
 /// Get the piece that is closest to the coordinat
-piece& get_closest_piece_to(game& g, const game_coordinat& coordinat);
+piece& get_closest_piece_to(game& g, const game_coordinate& coordinat);
 
 game get_default_game() noexcept;
 
@@ -309,7 +313,7 @@ read_only<id> get_id(const game& g, const square& s);
 /// Get the index of the piece that is closest to the coordinat
 int get_index_of_closest_piece_to(
   const game& g,
-  const game_coordinat& coordinat
+  const game_coordinate& coordinat
 );
 
 /// Create a game in which it is only a king versus a king,
@@ -428,7 +432,7 @@ bool is_idle(const game& g) noexcept;
 /// Determine if there is a piece at the coordinat
 bool is_piece_at(
   const game& g,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const double distance = 0.5
 );
 

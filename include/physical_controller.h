@@ -3,11 +3,12 @@
 
 #include "ccfwd.h"
 #include "key_bindings.h"
-#include "user_input.h"
 #include "physical_controller_type.h"
-
+#include "side.h"
 #include <iosfwd>
 
+/// A physical controller.
+///
 /// A physical controller is a class that takes input from
 /// a mouse or keyboard and converts these into
 /// the right 'user_input'.
@@ -78,12 +79,12 @@ physical_controller create_left_keyboard_controller() noexcept;
 
 /// Create an sf::Event with type sf::Event::MouseButtonPressed
 sf::Event create_mouse_button_pressed_event(
-  const screen_coordinat& cursor_pos,
+  const screen_coordinate& cursor_pos,
   const sf::Mouse::Button mouse_button
 );
 
 /// Create an sf::Event with type sf::Event::MouseMoved
-sf::Event create_mouse_moved_event(const screen_coordinat& cursor_pos);
+sf::Event create_mouse_moved_event(const screen_coordinate& cursor_pos);
 
 
 /// Create a keyboard controller

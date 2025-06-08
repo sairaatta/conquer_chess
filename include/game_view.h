@@ -14,8 +14,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <optional>
-
 /// The game's main window
 /// Displays the game class
 class game_view
@@ -149,7 +147,7 @@ chess_color get_player_color(
 ) noexcept;
 
 /// Get the player position
-const game_coordinat& get_cursor_pos(
+const game_coordinate& get_cursor_pos(
   const game_view& view,
   const side player
 ) noexcept;

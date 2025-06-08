@@ -4,7 +4,7 @@
 #include <cmath>
 
 controls_view_layout::controls_view_layout(
-  const screen_coordinat& window_size,
+  const screen_coordinate& window_size,
   const int margin_width
 ) : m_window_size{window_size}
 {
@@ -39,96 +39,96 @@ controls_view_layout::controls_view_layout(
   const int y11{y10 + panel_height};
 
   m_controller_type_label = screen_rect(
-    screen_coordinat(x1, y1),
-    screen_coordinat(x2, y2)
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
   );
   m_controller_type_value = screen_rect(
-    screen_coordinat(x2, y1),
-    screen_coordinat(x3, y2)
+    screen_coordinate(x2, y1),
+    screen_coordinate(x3, y2)
   );
 
 
   m_up_label = screen_rect(
-    screen_coordinat(x1, y3),
-    screen_coordinat(x2, y4)
+    screen_coordinate(x1, y3),
+    screen_coordinate(x2, y4)
   );
   m_up_value = screen_rect(
-    screen_coordinat(x2, y3),
-    screen_coordinat(x3, y4)
+    screen_coordinate(x2, y3),
+    screen_coordinate(x3, y4)
   );
   m_right_label = screen_rect(
-    screen_coordinat(x1, y4),
-    screen_coordinat(x2, y5)
+    screen_coordinate(x1, y4),
+    screen_coordinate(x2, y5)
   );
   m_right_value = screen_rect(
-    screen_coordinat(x2, y4),
-    screen_coordinat(x3, y5)
+    screen_coordinate(x2, y4),
+    screen_coordinate(x3, y5)
   );
   m_down_label = screen_rect(
-    screen_coordinat(x1, y5),
-    screen_coordinat(x2, y6)
+    screen_coordinate(x1, y5),
+    screen_coordinate(x2, y6)
   );
   m_down_value = screen_rect(
-    screen_coordinat(x2, y5),
-    screen_coordinat(x3, y6)
+    screen_coordinate(x2, y5),
+    screen_coordinate(x3, y6)
   );
   m_left_label = screen_rect(
-    screen_coordinat(x1, y6),
-    screen_coordinat(x2, y7)
+    screen_coordinate(x1, y6),
+    screen_coordinate(x2, y7)
   );
   m_left_value = screen_rect(
-    screen_coordinat(x2, y6),
-    screen_coordinat(x3, y7)
+    screen_coordinate(x2, y6),
+    screen_coordinate(x3, y7)
   );
   m_action_1_label = screen_rect(
-    screen_coordinat(x1, y7),
-    screen_coordinat(x2, y8)
+    screen_coordinate(x1, y7),
+    screen_coordinate(x2, y8)
   );
   m_action_1_value = screen_rect(
-    screen_coordinat(x2, y7),
-    screen_coordinat(x3, y8)
+    screen_coordinate(x2, y7),
+    screen_coordinate(x3, y8)
   );
   m_action_2_label = screen_rect(
-    screen_coordinat(x1, y8),
-    screen_coordinat(x2, y9)
+    screen_coordinate(x1, y8),
+    screen_coordinate(x2, y9)
   );
   m_action_2_value = screen_rect(
-    screen_coordinat(x2, y8),
-    screen_coordinat(x3, y9)
+    screen_coordinate(x2, y8),
+    screen_coordinate(x3, y9)
   );
   m_action_3_label = screen_rect(
-    screen_coordinat(x1, y9),
-    screen_coordinat(x2, y10)
+    screen_coordinate(x1, y9),
+    screen_coordinate(x2, y10)
   );
   m_action_3_value = screen_rect(
-    screen_coordinat(x2, y9),
-    screen_coordinat(x3, y10)
+    screen_coordinate(x2, y9),
+    screen_coordinate(x3, y10)
   );
   m_action_4_label = screen_rect(
-    screen_coordinat(x1, y10),
-    screen_coordinat(x2, y11)
+    screen_coordinate(x1, y10),
+    screen_coordinate(x2, y11)
   );
   m_action_4_value = screen_rect(
-    screen_coordinat(x2, y10),
-    screen_coordinat(x3, y11)
+    screen_coordinate(x2, y10),
+    screen_coordinate(x3, y11)
   );
 
 
   m_do_label = screen_rect(
-    screen_coordinat(x4, y3),
-    screen_coordinat(x5, y4)
+    screen_coordinate(x4, y3),
+    screen_coordinate(x5, y4)
   );
   m_do_value = screen_rect(
-    screen_coordinat(x5, y3),
-    screen_coordinat(x6, y4)
+    screen_coordinate(x5, y3),
+    screen_coordinate(x6, y4)
   );
   m_next_label = screen_rect(
-    screen_coordinat(x4, y4),
-    screen_coordinat(x5, y5)
+    screen_coordinate(x4, y4),
+    screen_coordinate(x5, y5)
   );
   m_next_value = screen_rect(
-    screen_coordinat(x5, y4),
-    screen_coordinat(x6, y5)
+    screen_coordinate(x5, y4),
+    screen_coordinate(x6, y5)
   );
 }
 

@@ -8,7 +8,6 @@
 #include "options_view_item.h"
 #include "game_resources.h"
 #include "physical_controllers.h"
-
 #include <SFML/Graphics.hpp>
 
 class options_view

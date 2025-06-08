@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+/// A chess piece color
 enum class chess_color
 {
   black, white

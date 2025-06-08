@@ -1,22 +1,16 @@
 #include "game.h"
 
-#include "asserts.h"
 #include "game_options.h"
 #include "piece_actions.h"
-#include "game_view_layout.h"
 #include "id.h"
-#include "sound_effects.h"
-#include "screen_rect.h"
+#include "layout.h"
 #include "square.h"
-#include "user_inputs.h"
-
+#include "pieces.h"
 #include <cassert>
 #include <cmath>
 #include <algorithm>
 #include <iostream>
-#include <fstream>
 #include <random>
-#include <sstream>
 
 #ifdef GAME_CONTROLLER_H
 #error 'game' must know nothing about 'game_controller'
@@ -1025,7 +1019,7 @@ std::vector<piece> find_pieces(
 
 const piece& get_closest_piece_to(
   const game& g,
-  const game_coordinat& coordinat
+  const game_coordinate& coordinat
 )
 {
   return g.get_pieces()[get_index_of_closest_piece_to(g, coordinat)];
@@ -1033,7 +1027,7 @@ const piece& get_closest_piece_to(
 
 piece& get_closest_piece_to(
   game& g,
-  const game_coordinat& coordinat
+  const game_coordinate& coordinat
 )
 {
   return g.get_pieces()[get_index_of_closest_piece_to(g, coordinat)];
@@ -1137,7 +1131,7 @@ read_only<id> get_id(const game& g, const square& s)
 
 int get_index_of_closest_piece_to(
   const game& g,
-  const game_coordinat& coordinat
+  const game_coordinate& coordinat
 )
 {
   const std::vector<double> distances{
@@ -1201,7 +1195,7 @@ piece& get_piece_that_moves(game& g, const chess_move& move)
       return piece;
     }
   }
-  assert(!"Should not het here");
+  assert(!"Should not get here");
 }
 
 
@@ -1373,7 +1367,7 @@ bool is_idle(const game& g) noexcept
 
 bool is_piece_at(
   const game& g,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const double distance
 ) {
   return is_piece_at(g.get_pieces(), coordinat, distance);

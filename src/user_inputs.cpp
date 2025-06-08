@@ -1,10 +1,10 @@
 #include "user_inputs.h"
 
-#include "asserts.h"
 #include "game.h"
 #include "game_controller.h"
 #include "square.h"
-#include "game_coordinat.h"
+#include "game_coordinate.h"
+#include "piece.h"
 #include "piece_actions.h"
 
 #include <cassert>
@@ -62,7 +62,7 @@ user_inputs create_control_actions(
 void do_select(
   game& g,
   game_controller& /* c */,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const chess_color player_color
 )
 {
@@ -265,7 +265,7 @@ void process_press_action_1_or_lmb_down(
 
   const side player_side{action.get_player()};
   const chess_color player_color{get_player_color(g, player_side)};
-  const game_coordinat cursor_pos{get_cursor_pos(c, player_side)};
+  const game_coordinate cursor_pos{get_cursor_pos(c, player_side)};
   if (!is_coordinat_on_board(cursor_pos))
   {
     return;
@@ -535,7 +535,7 @@ void process_press_action_4(
 void start_attack(
   game& g,
   game_controller& /* c */,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const chess_color player_color
 )
 {
@@ -573,7 +573,7 @@ void start_attack(
 void start_move_unit(
   game& g,
   game_controller& /* c */,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const chess_color player_color
 )
 {
@@ -618,40 +618,40 @@ void test_user_inputs()
   {
     game g;
     game_controller c;
-    const game_coordinat before{get_cursor_pos(c, side::lhs)};
+    const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_up_action(side::lhs));
     c.apply_user_inputs_to_game(g);
-    const game_coordinat after{get_cursor_pos(c, side::lhs)};
+    const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
   // Move right does something
   {
     game g;
     game_controller c;
-    const game_coordinat before{get_cursor_pos(c, side::lhs)};
+    const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_right_action(side::lhs));
     c.apply_user_inputs_to_game(g);
-    const game_coordinat after{get_cursor_pos(c, side::lhs)};
+    const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
   // Move down does something
   {
     game g;
     game_controller c;
-    const game_coordinat before{get_cursor_pos(c, side::lhs)};
+    const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_down_action(side::lhs));
     c.apply_user_inputs_to_game(g);
-    const game_coordinat after{get_cursor_pos(c, side::lhs)};
+    const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
   // Move left does something
   {
     game g;
     game_controller c;
-    const game_coordinat before{get_cursor_pos(c, side::lhs)};
+    const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_left_action(side::lhs));
     c.apply_user_inputs_to_game(g);
-    const game_coordinat after{get_cursor_pos(c, side::lhs)};
+    const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
   // 37: operator<< for no actions

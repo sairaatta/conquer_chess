@@ -4,7 +4,7 @@
 #include "ccfwd.h"
 
 #include "user_input_type.h"
-#include "game_coordinat.h"
+#include "game_coordinate.h"
 #include "side.h"
 
 #include <iosfwd>
@@ -19,7 +19,7 @@ public:
   explicit user_input(
     const user_input_type type,
     const side player,
-    const std::optional<game_coordinat>& coordinat = {}
+    const std::optional<game_coordinate>& coordinat = {}
   );
   auto get_user_input_type() const noexcept { return m_user_input_type; }
   auto& get_coordinat() const noexcept { return m_coordinat; }
@@ -48,14 +48,14 @@ private:
   ///
   /// @see use \link{does_input_type_need_coordinat} to determine
   /// if the user_input_type needs a coordinat
-  std::optional<game_coordinat> m_coordinat;
+  std::optional<game_coordinate> m_coordinat;
 
   side m_player;
 };
 
 /// The only `user_input` with a coordinat
 user_input create_mouse_move_action(
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const side player
 );
 

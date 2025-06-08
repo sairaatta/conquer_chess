@@ -2,8 +2,9 @@
 #define DELTA_T_H
 
 #include <iosfwd>
-#include <string>
 
+/// The time, in chess moves.
+///
 /// The time that passes
 /// where
 ///   * 0.01 means that only 1% of the full move is done

@@ -10,7 +10,7 @@
 #include <sstream>
 
 game_options::game_options(
-  const screen_coordinat& screen_size,
+  const screen_coordinate& screen_size,
   const starting_position_type starting_position,
   const game_speed speed,
   const int margin_width

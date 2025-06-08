@@ -3,6 +3,7 @@
 #include "asserts.h"
 #include "game.h"
 #include "physical_controllers.h"
+#include "piece.h"
 
 #include <cassert>
 
@@ -420,14 +421,14 @@ void do_select_for_mouse_player(
   assert(get_piece_at(g, s).is_selected());
 }
 
-const game_coordinat& game_controller::get_cursor_pos(const side player) const noexcept
+const game_coordinate& game_controller::get_cursor_pos(const side player) const noexcept
 {
   if (player == side::lhs) return m_lhs_cursor_pos;
   assert(player == side::rhs);
   return m_rhs_cursor_pos;
 }
 
-const game_coordinat& get_cursor_pos(
+const game_coordinate& get_cursor_pos(
   const game_controller&c,
   const side player_side
 ) noexcept
@@ -435,7 +436,7 @@ const game_coordinat& get_cursor_pos(
   return c.get_cursor_pos(player_side);
 }
 
-const game_coordinat& get_cursor_pos(
+const game_coordinate& get_cursor_pos(
   const game& g,
   const game_controller& c,
   const chess_color cursor_color
@@ -449,7 +450,7 @@ square get_cursor_square(
   const side player_side
 )
 {
-  const game_coordinat cursor_pos{get_cursor_pos(c, player_side)};
+  const game_coordinate cursor_pos{get_cursor_pos(c, player_side)};
   assert(is_coordinat_on_board(cursor_pos));
   return square(cursor_pos);
 }
@@ -464,7 +465,7 @@ std::optional<piece_action_type> get_default_piece_action(
   if (has_selected_pieces(g, player_side))
   {
     // Has selected pieces
-    const game_coordinat cursor_pos{get_cursor_pos(c, player_side)};
+    const game_coordinate cursor_pos{get_cursor_pos(c, player_side)};
     if (!is_coordinat_on_board(cursor_pos))
     {
       return {};
@@ -758,7 +759,7 @@ void move_keyboard_cursor_to(
 
 void set_cursor_pos(
   game_controller& c,
-  const game_coordinat& pos,
+  const game_coordinate& pos,
   const side player_side
 ) noexcept
 {
@@ -792,7 +793,7 @@ void game_controller::set_mouse_user_selector(const action_number& number)
 }
 
 void game_controller::set_cursor_pos(
-  const game_coordinat& pos,
+  const game_coordinate& pos,
   const side player_side) noexcept
 {
   if (player_side == side::lhs)
@@ -1250,7 +1251,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(get_keyboard_user_player_color(g, c) == chess_color::white);
     const auto pos_before{get_cursor_pos(c, side::lhs)};
     const auto pos{get_cursor_pos(c, side::lhs)};
-    set_cursor_pos(c, pos + game_coordinat(0.1, 0.1), side::lhs);
+    set_cursor_pos(c, pos + game_coordinate(0.1, 0.1), side::lhs);
     const auto pos_after{get_cursor_pos(c, side::lhs)};
     assert(pos_before != pos_after);
   }
@@ -1261,7 +1262,7 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c;
     const auto pos_before{get_cursor_pos(c, side::rhs)};
     const auto pos{get_cursor_pos(c, side::rhs)};
-    set_cursor_pos(c, pos + game_coordinat(0.1, 0.1), side::rhs);
+    set_cursor_pos(c, pos + game_coordinate(0.1, 0.1), side::rhs);
     const auto pos_after{get_cursor_pos(c, side::rhs)};
     assert(pos_before != pos_after);
   }

@@ -9,7 +9,7 @@
 #include "game_resources.h"
 #include "game_view_layout.h"
 #include "game_rect.h"
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "screen_rect.h"
 #include "sfml_helper.h"
 
@@ -170,7 +170,7 @@ chess_color get_player_color(
   return get_player_color(v.get_game(), player);
 }
 
-const game_coordinat& get_cursor_pos(const game_view& view, const side player) noexcept
+const game_coordinate& get_cursor_pos(const game_view& view, const side player) noexcept
 {
   return get_cursor_pos(view.get_game_controller(), player);
 }
@@ -225,7 +225,7 @@ bool game_view::process_events()
       const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
       m_window.setView(sf::View(visibleArea));
       m_layout = game_view_layout(
-        screen_coordinat(
+        screen_coordinate(
           static_cast<int>(event.size.width),
           static_cast<int>(event.size.height)
         ),
@@ -505,7 +505,7 @@ void show_debug(game_view& view, const side player_side)
     << get_cursor_pos(c, player_side)
     << '\n'
     << "Screen position: "
-    << convert_to_screen_coordinat(get_cursor_pos(c, player_side), layout)
+    << convert_to_screen_coordinate(get_cursor_pos(c, player_side), layout)
     << '\n'
     << "Is there a piece here: "
     << bool_to_str(is_piece_at(g, get_cursor_pos(c, player_side), 0.5))
@@ -543,8 +543,8 @@ void game_view::show_mouse_cursor()
   cursor.setOutlineThickness(2.0);
   cursor.setScale(1.0, 1.0);
   cursor.setOrigin(16.0, 16.0);
-  const screen_coordinat cursor_pos{
-    convert_to_screen_coordinat(
+  const screen_coordinate cursor_pos{
+    convert_to_screen_coordinate(
       get_cursor_pos(m_game_controller, side::rhs),
       layout
     )
@@ -670,8 +670,8 @@ void show_pieces(game_view& view)
       sprite.setOutlineThickness(2);
     }
     sprite.setOrigin(sf::Vector2f(0.45 * square_width, 0.45 * square_height));
-    const auto screen_position = convert_to_screen_coordinat(
-      to_coordinat(piece.get_current_square()) + game_coordinat(0.0, 0.1),
+    const auto screen_position = convert_to_screen_coordinate(
+      to_coordinat(piece.get_current_square()) + game_coordinate(0.0, 0.1),
       layout
     );
     sprite.setPosition(
@@ -750,9 +750,9 @@ void show_square_under_cursor(
   const double square_height{get_square_height(layout)};
   s.setSize(sf::Vector2f(square_width + 1, square_height + 1));
   s.setOrigin(sf::Vector2f(square_width / 2.0, square_height / 2.0));
-  const screen_coordinat square_pos{
-    convert_to_screen_coordinat(
-      game_coordinat(x + 0.5, y + 0.5),
+  const screen_coordinate square_pos{
+    convert_to_screen_coordinate(
+      game_coordinate(x + 0.5, y + 0.5),
       layout
     )
   };
@@ -791,8 +791,8 @@ void show_unit_health_bars(game_view& view)
     //black_box.setScale(1.0, 1.0);
     black_box.setFillColor(sf::Color(0, 0, 0));
     black_box.setOrigin(0.0, 0.0);
-    const auto black_box_pos = convert_to_screen_coordinat(
-      to_coordinat(piece.get_current_square()) + game_coordinat(-0.5, -0.5),
+    const auto black_box_pos = convert_to_screen_coordinate(
+      to_coordinat(piece.get_current_square()) + game_coordinate(-0.5, -0.5),
       layout
     );
     black_box.setPosition(
@@ -812,8 +812,8 @@ void show_unit_health_bars(game_view& view)
 
     health_bar.setFillColor(f_health_to_color(get_f_health(piece)));
     health_bar.setOrigin(0.0, 0.0);
-    const auto health_bar_pos = convert_to_screen_coordinat(
-      to_coordinat(piece.get_current_square()) + game_coordinat(-0.5, -0.5),
+    const auto health_bar_pos = convert_to_screen_coordinate(
+      to_coordinat(piece.get_current_square()) + game_coordinate(-0.5, -0.5),
       layout
     );
     health_bar.setPosition(
@@ -835,13 +835,13 @@ void show_unit_paths(game_view& view)
     for (const auto& action: actions)
     {
       const auto from_pixel{
-        convert_to_screen_coordinat(
+        convert_to_screen_coordinate(
           to_coordinat(action.get_from()),
           layout
         )
       };
       const auto to_pixel{
-        convert_to_screen_coordinat(
+        convert_to_screen_coordinate(
           to_coordinat(action.get_to()),
           layout
         )
@@ -868,10 +868,10 @@ void show_unit_paths(game_view& view)
 
 
     // Collect all the coordinats for the path
-    std::vector<screen_coordinat> coordinats;
+    std::vector<screen_coordinate> coordinats;
     coordinats.reserve(piece.get_actions().size() + 1); // +1 for current position
     coordinats.push_back(
-      convert_to_screen_coordinat(
+      convert_to_screen_coordinate(
         to_coordinat(piece.get_current_square()),
         layout
       )
@@ -882,7 +882,7 @@ void show_unit_paths(game_view& view)
       std::back_inserter(coordinats),
       [layout](const auto& user_input)
       {
-        return convert_to_screen_coordinat(
+        return convert_to_screen_coordinate(
           to_coordinat(user_input.get_to()),
           layout
         );
@@ -915,13 +915,13 @@ void show_unit_paths(game_view& view)
     if (first_action.get_action_type() == piece_action_type::move)
     {
       const auto from_pixel{
-        convert_to_screen_coordinat(
+        convert_to_screen_coordinate(
           to_coordinat(first_action.get_from()),
           layout
         )
       };
       const auto to_pixel{
-        convert_to_screen_coordinat(
+        convert_to_screen_coordinate(
           to_coordinat(first_action.get_to()),
           layout
         )
@@ -959,9 +959,9 @@ void show_unit_sprites(game_view& view, const side player_side)
   const double square_width = get_width(layout.get_units(player_side));
   const double square_height = square_width;
   const auto player_color{get_player_color(view, player_side)};
-  screen_coordinat screen_position{
+  screen_coordinate screen_position{
     layout.get_units(player_side).get_tl()
-    + screen_coordinat(10, 0) // margin
+    + screen_coordinate(10, 0) // margin
   };
 
   for (const auto& piece: get_selected_pieces(view.get_game(), player_color))
@@ -997,14 +997,14 @@ void show_unit_sprites(game_view& view, const side player_side)
     text.setString(s.str());
     text.setCharacterSize(20);
     const auto text_position{
-      screen_position + screen_coordinat(0, square_height + 10)
+      screen_position + screen_coordinate(0, square_height + 10)
     };
     text.setPosition(
       text_position.get_x(),
       text_position.get_y()
     );
     view.get_window().draw(text);
-    screen_position += screen_coordinat(0, square_height);
+    screen_position += screen_coordinate(0, square_height);
   }
 }
 

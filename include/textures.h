@@ -5,11 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "chess_color.h"
-#include "piece_type.h"
-#include "piece_action_type.h"
 #include "physical_controller_type.h"
-#include "race.h"
-#include "options_view_item.h"
 
 /// The games' textures
 /// The raw game resources

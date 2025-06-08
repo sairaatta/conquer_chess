@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+/// The chess race
 enum class race
 {
   classic,

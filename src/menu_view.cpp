@@ -3,7 +3,7 @@
 #ifndef LOGIC_ONLY
 
 #include "about_view.h"
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "game_view.h"
 #include "lobby_view.h"
 #include "played_game_view.h"
@@ -170,7 +170,7 @@ bool menu_view::process_events()
       }
 
       m_layout = menu_view_layout(
-        screen_coordinat(event.size.width, event.size.height),
+        screen_coordinate(event.size.width, event.size.height),
         get_default_margin_width()
       );
     }
@@ -257,7 +257,7 @@ bool menu_view::process_events()
     if (event.type == sf::Event::MouseMoved)
     {
       const auto mouse_screen_pos{
-        screen_coordinat(event.mouseMove.x, event.mouseMove.y)
+        screen_coordinate(event.mouseMove.x, event.mouseMove.y)
       };
       if (is_in(mouse_screen_pos, m_layout.get_start())) set_selected(menu_view_item::start);
       else if (is_in(mouse_screen_pos, m_layout.get_options())) set_selected(menu_view_item::options);
@@ -269,7 +269,7 @@ bool menu_view::process_events()
       if (event.mouseButton.button == sf::Mouse::Left)
       {
         const auto mouse_screen_pos{
-          screen_coordinat(event.mouseButton.x, event.mouseButton.y)
+          screen_coordinate(event.mouseButton.x, event.mouseButton.y)
         };
         if (is_in(mouse_screen_pos, m_layout.get_start())) exec_start();
         else if (is_in(mouse_screen_pos, m_layout.get_options())) exec_options();

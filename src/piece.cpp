@@ -1,9 +1,10 @@
 #include "piece.h"
 
+#include "game.h"
+#include "game_coordinate.h"
 #include "helper.h"
 #include "piece_type.h"
 #include "square.h"
-#include "game.h"
 
 #include <algorithm>
 #include <cassert>

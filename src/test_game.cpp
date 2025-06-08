@@ -1,10 +1,8 @@
 #include "game.h"
 
 #include "asserts.h"
-#include "physical_controllers.h"
-#include "helper.h"
-#include "id.h"
 #include "test_game.h"
+#include "piece.h"
 #include "piece_actions.h"
 
 #include <cassert>

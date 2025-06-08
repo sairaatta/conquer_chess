@@ -1,6 +1,7 @@
 #include "piece_action.h"
 
 #include "piece.h"
+#include "game_coordinate.h"
 
 #include <algorithm>
 #include <cassert>
@@ -92,9 +93,9 @@ void test_piece_action()
   }
   // is_atomic
   {
-    const auto d1{game_coordinat(to_coordinat(square("d1")))};
-    const auto d2{game_coordinat(to_coordinat(square("d2")))};
-    const auto d3{game_coordinat(to_coordinat(square("d3")))};
+    const auto d1{game_coordinate(to_coordinat(square("d1")))};
+    const auto d2{game_coordinate(to_coordinat(square("d2")))};
+    const auto d3{game_coordinate(to_coordinat(square("d3")))};
     assert(is_atomic(piece_action(chess_color::white, piece_type::king, piece_action_type::move, square(d1), square(d2))));
     assert(is_atomic(piece_action(chess_color::white, piece_type::king, piece_action_type::move, square(d2), square(d3))));
     assert(!is_atomic(piece_action(chess_color::white, piece_type::king, piece_action_type::move, square(d1), square(d3))));

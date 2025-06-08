@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-/// The side the player/piece is on
+/// The side the player/piece is on.
 enum class side
 {
   lhs, // left-hand side

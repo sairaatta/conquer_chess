@@ -7,6 +7,8 @@
 #include <iosfwd>
 #include <vector>
 
+/// The collected in-game times of actions,
+/// in chrononical order
 class action_history
 {
 public:
@@ -15,8 +17,10 @@ public:
   );
 
   /// Add an action, when started
-  void add_action(const delta_t& t, const piece_action& action) noexcept;
+  void add_action(const delta_t& in_game_time, const piece_action& action) noexcept;
 
+  /// Get the collected in-game times of actions,
+  /// in chrononical order
   const auto& get_timed_actions() const noexcept { return m_timed_actions; }
 
 private:

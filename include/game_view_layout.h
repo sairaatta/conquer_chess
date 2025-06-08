@@ -3,8 +3,8 @@
 
 #include "ccfwd.h"
 #include "screen_rect.h"
-#include "game_coordinat.h"
-#include "screen_coordinat.h"
+#include "game_coordinate.h"
+#include "screen_coordinate.h"
 #include "layout.h"
 #include "side.h"
 
@@ -45,7 +45,7 @@ class game_view_layout
 {
 public:
   explicit game_view_layout(
-    const screen_coordinat& window_size = get_default_screen_size(),
+    const screen_coordinate& window_size = get_default_screen_size(),
     const int margin_width = get_default_margin_width()
   );
 
@@ -81,7 +81,7 @@ public:
   const screen_rect& get_log(const side player) const noexcept;
   const screen_rect& get_units(const side player) const noexcept;
 
-  screen_coordinat get_window_size() const noexcept { return m_window_size; }
+  screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
 private:
 
@@ -105,12 +105,12 @@ private:
   screen_rect m_units_rhs;
 
   /// The size of the window
-  screen_coordinat m_window_size;
+  screen_coordinate m_window_size;
 };
 
 /// Convert an in-game coordinat to an on-screen coordinat
-screen_coordinat convert_to_screen_coordinat(
-  const game_coordinat& coordinat,
+screen_coordinate convert_to_screen_coordinate(
+  const game_coordinate& coordinat,
   const game_view_layout& layout
 );
 
@@ -127,8 +127,8 @@ screen_rect convert_to_screen_rect(
 );
 
 /// Convert an on-screen coordinat to an in-game coordinat
-game_coordinat convert_to_game_coordinat(
-  const screen_coordinat& coordinat,
+game_coordinate convert_to_game_coordinate(
+  const screen_coordinate& coordinat,
   const game_view_layout& layout
 );
 

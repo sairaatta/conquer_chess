@@ -2,25 +2,20 @@
 #define GAME_OPTIONS_H
 
 #include "ccfwd.h"
-//#include "physical_controllers.h"
-//#include "physical_controller_type.h"
-#include "delta_t.h"
-#include "piece.h"
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "starting_position_type.h"
 #include "volume.h"
 #include "replayer.h"
 #include "game_speed.h"
 
 #include <iosfwd>
-#include <vector>
 
 /// Options for the game, such as speed
 class game_options
 {
 public:
   explicit game_options(
-    const screen_coordinat& screen_size,
+    const screen_coordinate& screen_size,
     const starting_position_type starting_position,
     const game_speed speed,
     const int margin_width
@@ -94,7 +89,7 @@ private:
   replayer m_replayer;
 
   /// The size of the screen in pixels
-  screen_coordinat m_screen_size;
+  screen_coordinate m_screen_size;
 
   /// The starting position
   starting_position_type m_starting_position;

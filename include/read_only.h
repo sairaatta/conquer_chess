@@ -2,8 +2,9 @@
 #define READ_ONLY_H
 
 #include <vector>
-#include <iostream>
+#include <stdexcept>
 
+/// A read-only value.
 template <class T>
 class read_only
 {

@@ -2,7 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
-#include "screen_coordinat.h"
+#include "screen_coordinate.h"
 #include "sfml_helper.h"
 #include "menu_view.h"
 #include <cassert>
@@ -121,8 +121,8 @@ void loading_view::show()
   const auto window_size{m_window.getSize()};
 
   const screen_rect window_rect{
-    screen_coordinat(0, 0),
-    screen_coordinat(
+    screen_coordinate(0, 0),
+    screen_coordinate(
       window_size.x, window_size.y
     )
   };
@@ -166,7 +166,7 @@ void loading_view::show()
     const screen_rect progress_bar_rect{
       screen_rect(
         full_progress_bar_rect.get_tl(),
-        screen_coordinat(
+        screen_coordinate(
           full_progress_bar_rect.get_tl().get_x()
           + (f_progress * get_width(full_progress_bar_rect)),
           full_progress_bar_rect.get_br().get_y()

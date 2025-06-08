@@ -3,12 +3,12 @@
 #include <cassert>
 #include <iostream>
 
-#include "game_coordinat.h"
+#include "game_coordinate.h"
 
 user_input::user_input(
   const user_input_type type,
   const side player,
-  const std::optional<game_coordinat>& coordinat
+  const std::optional<game_coordinate>& coordinat
 ) : m_user_input_type{type},
     m_coordinat{coordinat},
     m_player{player}
@@ -26,7 +26,7 @@ user_input::user_input(
 }
 
 user_input create_mouse_move_action(
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const side player
 )
 {
@@ -93,10 +93,10 @@ user_input create_random_user_input(
 {
   const user_input_type type{create_random_user_input_type(rng_engine)};
   const side player{create_random_side(rng_engine)};
-  std::optional<game_coordinat> maybe_coordinat;
+  std::optional<game_coordinate> maybe_coordinat;
   if (does_input_type_need_coordinat(type))
   {
-    maybe_coordinat = create_random_game_coordinat(rng_engine);
+    maybe_coordinat = create_random_game_coordinate(rng_engine);
   }
   return user_input(
     type,
@@ -109,7 +109,7 @@ void test_user_input()
 {
 #ifndef NDEBUG
   {
-    assert(create_mouse_move_action(game_coordinat(), side::lhs).get_user_input_type() == user_input_type::mouse_move);
+    assert(create_mouse_move_action(game_coordinate(), side::lhs).get_user_input_type() == user_input_type::mouse_move);
     assert(create_press_action_1(side::lhs).get_user_input_type() == user_input_type::press_action_1);
     assert(create_press_action_2(side::lhs).get_user_input_type() == user_input_type::press_action_2);
     assert(create_press_action_3(side::lhs).get_user_input_type() == user_input_type::press_action_3);

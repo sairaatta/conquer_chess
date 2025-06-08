@@ -1,7 +1,8 @@
 #ifndef KEY_BINDINGS_H
 #define KEY_BINDINGS_H
 
-#include "user_input.h"
+#include "ccfwd.h"
+#include "user_input_type.h"
 
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>

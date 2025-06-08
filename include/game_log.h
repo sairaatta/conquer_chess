@@ -5,7 +5,6 @@
 
 #include <SFML/System.hpp>
 
-#include "delta_t.h"
 #include "message.h"
 
 /// The text log in the game

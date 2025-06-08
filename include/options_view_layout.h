@@ -8,7 +8,7 @@
 
 #include <vector>
 
-/// The layout of the options view
+/// The layout of the options view.
 ///
 ///   x   x                 x                        x  x
 ///   1   2                 3                        4  5
@@ -47,7 +47,7 @@ class options_view_layout
 {
 public:
   explicit options_view_layout(
-    const screen_coordinat& window_size = get_default_screen_size(),
+    const screen_coordinate& window_size = get_default_screen_size(),
     const int margin_width = get_default_margin_width()
   );
 
@@ -77,7 +77,7 @@ public:
   /// Get the size of the font that would fit nicely
   int get_font_size() const noexcept { return m_font_size; }
 
-  const screen_coordinat& get_window_size() const noexcept { return m_window_size; }
+  const screen_coordinate& get_window_size() const noexcept { return m_window_size; }
 
 private:
 
@@ -103,7 +103,7 @@ private:
   int m_font_size;
 
   /// The size of the window
-  screen_coordinat m_window_size;
+  screen_coordinate m_window_size;
 };
 
 /// Get the panels in the layout

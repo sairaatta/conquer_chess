@@ -6,7 +6,6 @@
 #include "chess_color.h"
 #include "user_input.h"
 #include "piece_action.h"
-#include "message.h"
 
 #include <iostream>
 #include <vector>
@@ -68,11 +67,11 @@ user_inputs create_control_actions(
   const game& g
 );
 
-/// Process a left-mouse-button, hence a game_coordinat as a coordinat
+/// Process a left-mouse-button, hence a game_coordinate as a coordinat
 void do_select(
   game& g,
   game_controller& c,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const chess_color player_color
 );
 
@@ -152,7 +151,7 @@ void process_press_action_4(
 void start_attack(
   game& g,
   game_controller& c,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const chess_color player_color
 );
 
@@ -160,7 +159,7 @@ void start_attack(
 void start_move_unit(
   game& g,
   game_controller& c,
-  const game_coordinat& coordinat,
+  const game_coordinate& coordinat,
   const chess_color player_color
 );
 
