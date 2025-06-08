@@ -10,6 +10,8 @@
 #include <iostream>
 #include <vector>
 
+/// A collection of user inputs.
+///
 /// The actions in a game, with two types:
 ///  * The control_actions are what the user wants.
 ///    These actions are immediate, processed each tick, and

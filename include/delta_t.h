@@ -7,7 +7,7 @@
 ///
 /// The change of time that passes can go from:
 /// - 0.01 means that only 1% of the full move is done
-/// - 1.0 denotes a full move
+/// - 1.0 denotes the time a full move takes
 class delta_t
 {
 public:
@@ -32,9 +32,6 @@ bool operator>=(const delta_t& lhs, const delta_t& rhs) noexcept;
 delta_t operator*(const delta_t& lhs, const delta_t& rhs) noexcept;
 delta_t operator+(const delta_t& lhs, const delta_t& rhs) noexcept;
 delta_t operator-(const delta_t& lhs, const delta_t& rhs) noexcept;
-#ifdef CAN_ADD_DELTA_TS
-delta_t& operator+=(delta_t& lhs, const delta_t& rhs) noexcept;
-#endif // CAN_ADD_DELTA_TS
 
 std::ostream& operator<<(std::ostream& os, const delta_t& dt) noexcept;
 

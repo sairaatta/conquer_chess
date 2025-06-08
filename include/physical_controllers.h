@@ -5,7 +5,7 @@
 #include "physical_controller.h"
 #include <vector>
 
-/// All the physical controllers
+/// The physical controllers used by all players.
 class physical_controllers
 {
 public:

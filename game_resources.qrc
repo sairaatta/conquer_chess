@@ -83,9 +83,9 @@
         <file>resources/textures/options_menu/sound_effects_volume.jpg</file>
         <file>resources/textures/options_menu/starting_position.jpg</file>
         <file>resources/textures/piece_actions/attack.png</file>
+        <file>resources/textures/piece_actions/attack_en_passant.png</file>
         <file>resources/textures/piece_actions/castle_kingside.png</file>
         <file>resources/textures/piece_actions/castle_queenside.png</file>
-        <file>resources/textures/piece_actions/en_passant.png</file>
         <file>resources/textures/piece_actions/move.png</file>
         <file>resources/textures/piece_actions/promote_to_bishop.png</file>
         <file>resources/textures/piece_actions/promote_to_knight.png</file>

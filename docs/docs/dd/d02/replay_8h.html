@@ -214,7 +214,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d9d/classreplay.html">replay</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of timed chess moves.  <a href="../../d4/d9d/classreplay.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A replay of a regular chess match.  <a href="../../d4/d9d/classreplay.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -229,6 +229,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a32a8516639d53a28d4463006dbeb8449" id="r_a32a8516639d53a28d4463006dbeb8449"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d9d/classreplay.html">replay</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d02/replay_8h.html#a32a8516639d53a28d4463006dbeb8449">get_replay_1</a> () noexcept</td></tr>
 <tr class="separator:a32a8516639d53a28d4463006dbeb8449"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf9f5665104b264dd5773e53d6b8f20e" id="r_aaf9f5665104b264dd5773e53d6b8f20e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d02/replay_8h.html#aaf9f5665104b264dd5773e53d6b8f20e">split_pgn_str</a> (const std::string pgn_str)</td></tr>
+<tr class="memdesc:aaf9f5665104b264dd5773e53d6b8f20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split the PGN string into its moves E.g.  <br /></td></tr>
 <tr class="separator:aaf9f5665104b264dd5773e53d6b8f20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97aa66ba0bb8fdab17e8ed7183fd9335" id="r_a97aa66ba0bb8fdab17e8ed7183fd9335"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d02/replay_8h.html#a97aa66ba0bb8fdab17e8ed7183fd9335">test_replay</a> ()</td></tr>
 <tr class="memdesc:a97aa66ba0bb8fdab17e8ed7183fd9335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test this class and its free functions.  <br /></td></tr>
@@ -429,7 +430,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Split the PGN string into its moves E.g. '1. e4 e5 2. Nc3' will be split into {'e4', 'e5', 'Nc3'} </p>
+
+<p>Split the PGN string into its moves E.g. </p>
+<p>'1. e4 e5 2. Nc3' will be split into {'e4', 'e5', 'Nc3'} </p>
 
 </div>
 </div>

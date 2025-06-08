@@ -8,8 +8,7 @@
 #include "race.h"
 #include "chess_color.h"
 
-/// The games' icon_textures
-/// The raw game resources
+/// The textures used in the Lobby dialog.
 class lobby_menu_textures
 {
 public:

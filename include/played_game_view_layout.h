@@ -6,8 +6,9 @@
 
 #include <vector>
 
-/// The layout of the menu view.
+/// The layout of a 'Played game' dialog.
 ///
+/// ```text
 ///   x          x
 ///   1          2
 ///
@@ -30,7 +31,7 @@
 ///   |          |
 ///   +----------+
 ///    panel_width
-///
+/// ```text
 class played_game_view_layout
 {
 public:

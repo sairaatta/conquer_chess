@@ -4,7 +4,7 @@
 #include <iosfwd>
 #include <vector>
 
-/// The type of chess piece
+/// The type of chess piece.
 enum class piece_type
 {
   bishop,

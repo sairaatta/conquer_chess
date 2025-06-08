@@ -10,7 +10,11 @@
 
 #include <iosfwd>
 
-/// Options for the game, such as speed
+/// Options for the game.
+///
+/// Options for the game, such as speed.
+/// Some options are set by the user in the \link{options_view},
+/// some are variables obtained by tuning the game.
 class game_options
 {
 public:

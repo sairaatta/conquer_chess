@@ -3,7 +3,7 @@
 
 #include <vector>
 
-/// The items in the menu view
+/// The items in the Menu dialog.
 enum class menu_view_item
 {
   start, options, about, quit

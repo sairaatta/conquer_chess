@@ -496,9 +496,9 @@ std::optional<piece_action_type> get_default_piece_action(
       // No own piece at cursor, maybe can move/castle/en-passant there?
       assert(get_selected_pieces(g, player_side).size() == 1);
       const auto selected_piece{get_selected_pieces(g, player_side)[0]};
-      if (can_do(g, selected_piece, piece_action_type::en_passant, cursor_square, player_side))
+      if (can_do(g, selected_piece, piece_action_type::attack_en_passant, cursor_square, player_side))
       {
-        return piece_action_type::en_passant;
+        return piece_action_type::attack_en_passant;
       }
       if (can_do(g, selected_piece, piece_action_type::castle_kingside, cursor_square, player_side))
       {

@@ -11,7 +11,7 @@
 #include "menu_view_item.h"
 #include "physical_controllers.h"
 
-/// The main menu dialog
+/// The main Menu dialog.
 class menu_view
 {
 public:

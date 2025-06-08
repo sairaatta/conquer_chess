@@ -7,8 +7,9 @@
 
 #include <vector>
 
-/// The layout of the options view
+/// The layout of the Controls dialog.
 ///
+/// ```text
 ///   x       x        x     x       x        x
 ///   1       2        3     4       5        6
 ///
@@ -37,7 +38,7 @@
 /// | +-------+--------+                        | y11
 /// |                                           |
 /// +-------------------------------------------+
-///
+/// ```
 class controls_view_layout
 {
 public:

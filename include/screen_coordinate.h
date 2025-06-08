@@ -3,8 +3,10 @@
 
 #include <iosfwd>
 
-/// Coordinats on the screen.
+/// The coordinate on a screen.
 ///
+/// The coordinate on the screen, where (0,0) denotes
+/// the top-left pixel of the screen.
 /// @see \link{game_coordinate} for the chessboard coordinats
 class screen_coordinate
 {

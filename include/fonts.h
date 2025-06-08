@@ -3,7 +3,9 @@
 
 #include <SFML/Graphics/Font.hpp>
 
-/// The fonts used by this game
+/// The fonts used by this game.
+///
+/// These are loaded in the constructor.
 class fonts
 {
 public:

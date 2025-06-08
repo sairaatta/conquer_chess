@@ -78,7 +78,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Which key does which action.  
+<p>The key bindings.  
  <a href="../../d9/d0b/classkey__bindings.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../d6/d97/key__bindings_8h_source.html">key_bindings.h</a>&gt;</code></p>
@@ -88,6 +88,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab67b2483ea0484e0f630a5509fe050cf" id="r_ab67b2483ea0484e0f630a5509fe050cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0b/classkey__bindings.html#ab67b2483ea0484e0f630a5509fe050cf">key_bindings</a> (const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca46c48bec0d282018b9d167eef7711b2c">up</a>, const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca7c4f29407893c334a6cb7a87bf045c0d">right</a>, const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca74e8333ad11685ff3bdae589c8f6e34d">down</a>, const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca811882fecd5c7618d7099ebbd39ea254">left</a>, const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4ecac72bad082ce01ff2407c872236c25eff">action_1</a>, const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4ecab62e6a53a39ffe859d314bff2199ba31">action_2</a>, const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4ecaf38844ed29021cb16eae69eb6002c2f8">action_3</a>, const sf::Keyboard::Key <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca32b37ab7786090e067240cc656db42e8">action_4</a>)</td></tr>
 <tr class="separator:ab67b2483ea0484e0f630a5509fe050cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f3d02c7543374aec6abcf0052ea0a37" id="r_a3f3d02c7543374aec6abcf0052ea0a37"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d7/de7/user__input__type_8h.html#afb12242cff78e1daafb90d5d1deb5b09">user_input_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0b/classkey__bindings.html#a3f3d02c7543374aec6abcf0052ea0a37">create_actions</a> (const sf::Keyboard::Key k) const noexcept</td></tr>
+<tr class="memdesc:a3f3d02c7543374aec6abcf0052ea0a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">From an event, create zero or one user inputs.  <br /></td></tr>
 <tr class="separator:a3f3d02c7543374aec6abcf0052ea0a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ebbae4f7d3393113d091d8c30e11630" id="r_a5ebbae4f7d3393113d091d8c30e11630"><td class="memItemLeft" align="right" valign="top">sf::Keyboard::Key&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0b/classkey__bindings.html#a5ebbae4f7d3393113d091d8c30e11630">get_key_for_action</a> (const <a class="el" href="../../d4/d8b/classaction__number.html">action_number</a> &amp;action) const noexcept</td></tr>
 <tr class="memdesc:a5ebbae4f7d3393113d091d8c30e11630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the key for action 1, 2, 3 or 4.  <br /></td></tr>
@@ -106,7 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a01b256cc3c441b0ca29a3e47f8622ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Which key does which action. </p>
+<div class="textblock"><p>The key bindings. </p>
+<p>This class connects a key to an action, where an action can be a cursor movement or an actual action, such as attack, move, etc. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab67b2483ea0484e0f630a5509fe050cf" name="ab67b2483ea0484e0f630a5509fe050cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab67b2483ea0484e0f630a5509fe050cf">&#9670;&#160;</a></span>key_bindings()</h2>
@@ -196,7 +198,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>From an event, create zero or one user inputs. Return the 'user_input_type' corresponding to an event </p>
+
+<p>From an event, create zero or one user inputs. </p>
+<p>Return the 'user_input_type' corresponding to an event </p>
 
 </div>
 </div>

@@ -3,8 +3,13 @@
 
 #include <random>
 
-/// The actions done by the controller,
-/// such as keyboard, mouse and joystick actions
+/// The action a user does.
+///
+/// The action a user does,
+/// which can be general for any controller
+/// (e.g. triggering action 1),
+/// or specific to a physical controller,
+/// such as moving the mouse.
 enum class user_input_type
 {
   press_action_1,

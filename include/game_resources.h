@@ -23,7 +23,7 @@
 
 #include <optional>
 
-/// The raw game resources,
+/// The raw game resources.
 class game_resources
 {
 public:

@@ -157,6 +157,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ad891bf42f5b90ec0d393e69bfc56992e" id="r_ad891bf42f5b90ec0d393e69bfc56992e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#ad891bf42f5b90ec0d393e69bfc56992e">has_actions</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history) noexcept</td></tr>
 <tr class="separator:ad891bf42f5b90ec0d393e69bfc56992e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5044046a09b174c467f449a074e576f7" id="r_a5044046a09b174c467f449a074e576f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#a5044046a09b174c467f449a074e576f7">has_just_double_moved</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history, const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a> when)</td></tr>
+<tr class="memdesc:a5044046a09b174c467f449a074e576f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Has this piece (i.e.  <br /></td></tr>
 <tr class="separator:a5044046a09b174c467f449a074e576f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf7d69555b38c928eefa9c5179eb0ba2" id="r_abf7d69555b38c928eefa9c5179eb0ba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d92/classaction__history.html">action_history</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#abf7d69555b38c928eefa9c5179eb0ba2">merge_action_histories</a> (const std::vector&lt; <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &gt; histories)</td></tr>
 <tr class="memdesc:abf7d69555b38c928eefa9c5179eb0ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine action histories and sort these.  <br /></td></tr>
@@ -275,7 +276,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Has this piece (i.e. a pawn) just finish a double move forward last time unit? Only pawns can do this, e.g. e2-e4 or e7-e5 For example, when at t=0.5, e2-e4 is played, from t=1.5 to t=2.5 this function will return true. Before that, the piece was moving After that, it was too long ago for en-passant </p>
+
+<p>Has this piece (i.e. </p>
+<p>a pawn) just finish a double move forward last time unit? Only pawns can do this, e.g. e2-e4 or e7-e5 For example, when at t=0.5, e2-e4 is played, from t=1.5 to t=2.5 this function will return true. Before that, the piece was moving After that, it was too long ago for en-passant </p>
 
 </div>
 </div>

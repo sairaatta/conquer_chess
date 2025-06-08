@@ -9,7 +9,7 @@
 #include "square.h"
 #include "piece_type.h"
 
-/// An action to be done by a piece
+/// An action to be done by a piece.
 ///
 /// Examples:
 /// - Move from d1 to d7

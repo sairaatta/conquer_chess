@@ -7,7 +7,8 @@
 
 class game_resources;
 
-/// Loads resources
+/// Loads resources gradually, so that progress
+/// can be displayed.
 class resource_loader
 {
 public:

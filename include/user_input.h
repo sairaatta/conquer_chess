@@ -12,7 +12,7 @@
 #include <optional>
 #include <SFML/Window/Event.hpp>
 
-/// A user input
+/// A user input.
 class user_input
 {
 public:

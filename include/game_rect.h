@@ -5,7 +5,9 @@
 
 #include <iosfwd>
 
-/// A rectangle, as down on the screen
+/// A rectangle of game coordinates.
+///
+/// A rectangle of \link{game_coordinate}.
 class game_rect
 {
 public:

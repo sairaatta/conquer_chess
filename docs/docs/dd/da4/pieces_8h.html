@@ -196,14 +196,16 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a1ada943827c87f562001ca7f678a40ea" id="r_a1ada943827c87f562001ca7f678a40ea"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a1ada943827c87f562001ca7f678a40ea">add_coordinats</a> (const std::vector&lt; std::string &gt; &amp;strs)</td></tr>
-<tr class="memdesc:a1ada943827c87f562001ca7f678a40ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to work on collections of pieces.  <br /></td></tr>
+<tr class="memdesc:a1ada943827c87f562001ca7f678a40ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surround the 8x8 strings of a chessboard by coordinats Without coordinats:  <br /></td></tr>
 <tr class="separator:a1ada943827c87f562001ca7f678a40ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ff3ba234fcd8ca1038e4f699596a8e" id="r_ab4ff3ba234fcd8ca1038e4f699596a8e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#ab4ff3ba234fcd8ca1038e4f699596a8e">add_legend</a> (const std::vector&lt; std::string &gt; &amp;strs)</td></tr>
+<tr class="memdesc:ab4ff3ba234fcd8ca1038e4f699596a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a legend to the 8x8 or 12x12 strings of a chessboard.  <br /></td></tr>
 <tr class="separator:ab4ff3ba234fcd8ca1038e4f699596a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad265a4a355163a67538afd66f1ad4034" id="r_ad265a4a355163a67538afd66f1ad4034"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#ad265a4a355163a67538afd66f1ad4034">calc_distances</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d6/d10/classgame__coordinate.html">game_coordinate</a> &amp;coordinat)</td></tr>
 <tr class="memdesc:ad265a4a355163a67538afd66f1ad4034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distances that each piece has to a coordinat.  <br /></td></tr>
 <tr class="separator:ad265a4a355163a67538afd66f1ad4034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77093daad9810ac2d25f6a8e4502db3a" id="r_a77093daad9810ac2d25f6a8e4502db3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d92/classaction__history.html">action_history</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a77093daad9810ac2d25f6a8e4502db3a">collect_action_history</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces)</td></tr>
+<tr class="memdesc:a77093daad9810ac2d25f6a8e4502db3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect the history of a game, i.e.  <br /></td></tr>
 <tr class="separator:a77093daad9810ac2d25f6a8e4502db3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b3e697dd78d380ab9e5d44e59a5f61f" id="r_a5b3e697dd78d380ab9e5d44e59a5f61f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a5b3e697dd78d380ab9e5d44e59a5f61f">count_dead_pieces</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces)</td></tr>
 <tr class="memdesc:a5b3e697dd78d380ab9e5d44e59a5f61f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count the total number of dead pieces.  <br /></td></tr>
@@ -224,52 +226,73 @@ Functions</h2></td></tr>
 <tr class="memdesc:a0607d2b275e078d49e0cd7f158245faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the squares that are occupied.  <br /></td></tr>
 <tr class="separator:a0607d2b275e078d49e0cd7f158245faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd84295e1e03bf99679c7814ada9b569" id="r_abd84295e1e03bf99679c7814ada9b569"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#abd84295e1e03bf99679c7814ada9b569">get_piece_at</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;coordinat)</td></tr>
+<tr class="memdesc:abd84295e1e03bf99679c7814ada9b569"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the piece that at that square, will throw if there is no piece.  <br /></td></tr>
 <tr class="separator:abd84295e1e03bf99679c7814ada9b569"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e37a2381dfeaf45c8f4cdfdc2dec63" id="r_a28e37a2381dfeaf45c8f4cdfdc2dec63"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a28e37a2381dfeaf45c8f4cdfdc2dec63">get_piece_at</a> (std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;coordinat)</td></tr>
+<tr class="memdesc:a28e37a2381dfeaf45c8f4cdfdc2dec63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the piece that at that square, will throw if there is no piece.  <br /></td></tr>
 <tr class="separator:a28e37a2381dfeaf45c8f4cdfdc2dec63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70f7d250a286ca05606379ddd2e6aa3c" id="r_a70f7d250a286ca05606379ddd2e6aa3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d3c/classpiece.html">piece</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a70f7d250a286ca05606379ddd2e6aa3c">get_piece_with_id</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d02/classid.html">id</a> &amp;i)</td></tr>
+<tr class="memdesc:a70f7d250a286ca05606379ddd2e6aa3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a piece with a certain ID Will throw if there is no piece with that ID.  <br /></td></tr>
 <tr class="separator:a70f7d250a286ca05606379ddd2e6aa3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7780a06273a4915674a24357f4fa9f4" id="r_ac7780a06273a4915674a24357f4fa9f4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#ac7780a06273a4915674a24357f4fa9f4">get_possible_bishop_moves</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;focal_piece)</td></tr>
+<tr class="memdesc:ac7780a06273a4915674a24357f4fa9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the possible moves for a focal piece that is a bishop.  <br /></td></tr>
 <tr class="separator:ac7780a06273a4915674a24357f4fa9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03108f2c780e3ba518a66eb6ebd1cc54" id="r_a03108f2c780e3ba518a66eb6ebd1cc54"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a03108f2c780e3ba518a66eb6ebd1cc54">get_possible_king_moves</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;focal_piece)</td></tr>
+<tr class="memdesc:a03108f2c780e3ba518a66eb6ebd1cc54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the possible moves for a focal piece that is a king.  <br /></td></tr>
 <tr class="separator:a03108f2c780e3ba518a66eb6ebd1cc54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a557cc5b0171a60e73c41db762bf3db2c" id="r_a557cc5b0171a60e73c41db762bf3db2c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a557cc5b0171a60e73c41db762bf3db2c">get_possible_knight_moves</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;focal_piece)</td></tr>
+<tr class="memdesc:a557cc5b0171a60e73c41db762bf3db2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the possible moves for a focal piece that is a knight.  <br /></td></tr>
 <tr class="separator:a557cc5b0171a60e73c41db762bf3db2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59294da0d0bab8d85afa7fdd0ef7fd85" id="r_a59294da0d0bab8d85afa7fdd0ef7fd85"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a59294da0d0bab8d85afa7fdd0ef7fd85">get_possible_moves</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;focal_piece)</td></tr>
+<tr class="memdesc:a59294da0d0bab8d85afa7fdd0ef7fd85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the possible moves for a focal piece.  <br /></td></tr>
 <tr class="separator:a59294da0d0bab8d85afa7fdd0ef7fd85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1dc2d11c87cc85815dd9d223de48d3" id="r_afb1dc2d11c87cc85815dd9d223de48d3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#afb1dc2d11c87cc85815dd9d223de48d3">get_possible_pawn_moves</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;focal_piece)</td></tr>
+<tr class="memdesc:afb1dc2d11c87cc85815dd9d223de48d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the possible moves for a focal piece that is a pawn.  <br /></td></tr>
 <tr class="separator:afb1dc2d11c87cc85815dd9d223de48d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ababc68216b8437ed1e64e60ff805b921" id="r_ababc68216b8437ed1e64e60ff805b921"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#ababc68216b8437ed1e64e60ff805b921">get_possible_queen_moves</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;focal_piece)</td></tr>
+<tr class="memdesc:ababc68216b8437ed1e64e60ff805b921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the possible moves for a focal piece that is a queen.  <br /></td></tr>
 <tr class="separator:ababc68216b8437ed1e64e60ff805b921"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44eb8c56d271c7c9aee14687bd36d88e" id="r_a44eb8c56d271c7c9aee14687bd36d88e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a44eb8c56d271c7c9aee14687bd36d88e">get_possible_rook_moves</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &amp;focal_piece)</td></tr>
+<tr class="memdesc:a44eb8c56d271c7c9aee14687bd36d88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the possible moves for a focal piece that is a rook.  <br /></td></tr>
 <tr class="separator:a44eb8c56d271c7c9aee14687bd36d88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbcc632da59496ac26279e268554e483" id="r_adbcc632da59496ac26279e268554e483"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#adbcc632da59496ac26279e268554e483">get_selected_pieces</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> player)</td></tr>
+<tr class="memdesc:adbcc632da59496ac26279e268554e483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the selected pieces.  <br /></td></tr>
 <tr class="separator:adbcc632da59496ac26279e268554e483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf1e5fb521b0d26fba7c6e4b1bba1d67" id="r_adf1e5fb521b0d26fba7c6e4b1bba1d67"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#adf1e5fb521b0d26fba7c6e4b1bba1d67">get_standard_starting_pieces</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
 <tr class="memdesc:adf1e5fb521b0d26fba7c6e4b1bba1d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the pieces in the starting position.  <br /></td></tr>
 <tr class="separator:adf1e5fb521b0d26fba7c6e4b1bba1d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeb00eff9778a53cb4e85e0575b8d6f8" id="r_afeb00eff9778a53cb4e85e0575b8d6f8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#afeb00eff9778a53cb4e85e0575b8d6f8">get_pieces_before_en_passant</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:afeb00eff9778a53cb4e85e0575b8d6f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a setup of pieces in which en passant becomes possible in the next move.  <br /></td></tr>
 <tr class="separator:afeb00eff9778a53cb4e85e0575b8d6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32f7073f94ed6c69754aed7e637d87c4" id="r_a32f7073f94ed6c69754aed7e637d87c4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a32f7073f94ed6c69754aed7e637d87c4">get_pieces_before_scholars_mate</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a32f7073f94ed6c69754aed7e637d87c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces before a scholar's mate.  <br /></td></tr>
 <tr class="separator:a32f7073f94ed6c69754aed7e637d87c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb303ce8e9ce9b059aaf54b038acc5c" id="r_a4bb303ce8e9ce9b059aaf54b038acc5c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a4bb303ce8e9ce9b059aaf54b038acc5c">get_pieces_bishop_and_knight_end_game</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a4bb303ce8e9ce9b059aaf54b038acc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces from a bishop and knight end game.  <br /></td></tr>
 <tr class="separator:a4bb303ce8e9ce9b059aaf54b038acc5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed8d7ea4d4332483b56446793f4fe890" id="r_aed8d7ea4d4332483b56446793f4fe890"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#aed8d7ea4d4332483b56446793f4fe890">get_pieces_kasparov_vs_topalov</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:aed8d7ea4d4332483b56446793f4fe890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces for a Kasparov vs Topalov game, discovered at <a href="https://www.reddit.com/r/chess/comments/fmd7uh/this_is_a_position_from_the_famous_kasparov_vs/">https://www.reddit.com/r/chess/comments/fmd7uh/this_is_a_position_from_the_famous_kasparov_vs/</a>.  <br /></td></tr>
 <tr class="separator:aed8d7ea4d4332483b56446793f4fe890"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a788d8d209337f9bce920958a81055378" id="r_a788d8d209337f9bce920958a81055378"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a788d8d209337f9bce920958a81055378">get_pieces_pawn_all_out_assault</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a788d8d209337f9bce920958a81055378"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces from a standard game, with all pawns moved two squares forward.  <br /></td></tr>
 <tr class="separator:a788d8d209337f9bce920958a81055378"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ead51bebba036b8f50401d6119adbfc" id="r_a0ead51bebba036b8f50401d6119adbfc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a0ead51bebba036b8f50401d6119adbfc">get_pieces_pawns_at_promotion</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a0ead51bebba036b8f50401d6119adbfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces where pawns are at promotion.  <br /></td></tr>
 <tr class="separator:a0ead51bebba036b8f50401d6119adbfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d59aaf40a58c5b3c6070407c845d5b" id="r_a79d59aaf40a58c5b3c6070407c845d5b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a79d59aaf40a58c5b3c6070407c845d5b">get_pieces_pawns_near_promotion</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a79d59aaf40a58c5b3c6070407c845d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces where pawns are near promotion.  <br /></td></tr>
 <tr class="separator:a79d59aaf40a58c5b3c6070407c845d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bfa82546ad6b6b4e8a9a65a7c083106" id="r_a0bfa82546ad6b6b4e8a9a65a7c083106"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a0bfa82546ad6b6b4e8a9a65a7c083106">get_pieces_pawns_nearly_near_promotion</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a0bfa82546ad6b6b4e8a9a65a7c083106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces where pawns are nealy near promotion.  <br /></td></tr>
 <tr class="separator:a0bfa82546ad6b6b4e8a9a65a7c083106"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1254c1d33886fab6d00899cb8fdabcb8" id="r_a1254c1d33886fab6d00899cb8fdabcb8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a1254c1d33886fab6d00899cb8fdabcb8">get_pieces_queen_endgame</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a1254c1d33886fab6d00899cb8fdabcb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces for a queen endgame, which are having only the kings and queens left from a default setup.  <br /></td></tr>
 <tr class="separator:a1254c1d33886fab6d00899cb8fdabcb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebd066f46756b39e57d73d7930a9b702" id="r_aebd066f46756b39e57d73d7930a9b702"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#aebd066f46756b39e57d73d7930a9b702">get_pieces_ready_to_castle</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
 <tr class="memdesc:aebd066f46756b39e57d73d7930a9b702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces for a kings that are ready to castle.  <br /></td></tr>
 <tr class="separator:aebd066f46756b39e57d73d7930a9b702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46641330100a89b2a08530c22c1bad52" id="r_a46641330100a89b2a08530c22c1bad52"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a46641330100a89b2a08530c22c1bad52">get_pieces_ready_to_not_castle</a> (const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
+<tr class="memdesc:a46641330100a89b2a08530c22c1bad52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pieces for a kings that are ready to castle, but cannot, as the king would go through check.  <br /></td></tr>
 <tr class="separator:a46641330100a89b2a08530c22c1bad52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b2cf39dd35b8518f08a7c6502367cde" id="r_a4b2cf39dd35b8518f08a7c6502367cde"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a4b2cf39dd35b8518f08a7c6502367cde">get_starting_pieces</a> (const <a class="el" href="../../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5">starting_position_type</a> t, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> white_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> black_race=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>) noexcept</td></tr>
 <tr class="memdesc:a4b2cf39dd35b8518f08a7c6502367cde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the pieces in the starting position type.  <br /></td></tr>
@@ -287,11 +310,13 @@ Functions</h2></td></tr>
 <tr class="memdesc:a517f894ec6bafc06a76f35e2e9c4ad2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test all these free functions.  <br /></td></tr>
 <tr class="separator:a517f894ec6bafc06a76f35e2e9c4ad2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c48bc973c9a15ecee20835b48375d96" id="r_a1c48bc973c9a15ecee20835b48375d96"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a1c48bc973c9a15ecee20835b48375d96">to_board_str</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../db/dd1/classboard__to__text__options.html">board_to_text_options</a> &amp;<a class="el" href="../../d2/d17/menu__view__item_8h.html#a1e5480d66ab9bf428c60565a61b3e742a93da65a9fd0004d9477aeac024e08e15">options</a>=<a class="el" href="../../db/dd1/classboard__to__text__options.html">board_to_text_options</a>()) noexcept</td></tr>
+<tr class="memdesc:a1c48bc973c9a15ecee20835b48375d96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the pieces as if on a chessboard, such as:  <br /></td></tr>
 <tr class="separator:a1c48bc973c9a15ecee20835b48375d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d0459514c3ed0c30cf44f123cbc40aa" id="r_a5d0459514c3ed0c30cf44f123cbc40aa"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a5d0459514c3ed0c30cf44f123cbc40aa">to_board_strs</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../db/dd1/classboard__to__text__options.html">board_to_text_options</a> &amp;<a class="el" href="../../d2/d17/menu__view__item_8h.html#a1e5480d66ab9bf428c60565a61b3e742a93da65a9fd0004d9477aeac024e08e15">options</a>=<a class="el" href="../../db/dd1/classboard__to__text__options.html">board_to_text_options</a>()) noexcept</td></tr>
 <tr class="memdesc:a5d0459514c3ed0c30cf44f123cbc40aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the pieces as if on a chessboard.  <br /></td></tr>
 <tr class="separator:a5d0459514c3ed0c30cf44f123cbc40aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c27fa3dcacea31b188c24ee9a36d549" id="r_a9c27fa3dcacea31b188c24ee9a36d549"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a9c27fa3dcacea31b188c24ee9a36d549">to_pgn</a> (const std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces)</td></tr>
+<tr class="memdesc:a9c27fa3dcacea31b188c24ee9a36d549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the played game (i.e.  <br /></td></tr>
 <tr class="separator:a9c27fa3dcacea31b188c24ee9a36d549"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc4fcd45f0b331d021461241b88027b" id="r_a7cc4fcd45f0b331d021461241b88027b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da4/pieces_8h.html#a7cc4fcd45f0b331d021461241b88027b">unselect_all_pieces</a> (std::vector&lt; <a class="el" href="../../d8/d3c/classpiece.html">piece</a> &gt; &amp;pieces, const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> <a class="el" href="../../db/d90/lobby__view__item_8h.html#aa96663822bdafb05ef5af33c23950133a70dda5dfb8053dc6d1c492574bce9bfd">color</a>)</td></tr>
 <tr class="memdesc:a7cc4fcd45f0b331d021461241b88027b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unselect all pieces of a certain color.  <br /></td></tr>
@@ -314,8 +339,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Functions to work on collections of pieces. </p>
-<p>Surround the 8x8 strings of a chessboard by coordinats Without coordinats:</p>
+<p>Surround the 8x8 strings of a chessboard by coordinats Without coordinats: </p>
 <p>rp....PR np....PN bp....PB qp....PQ kp....PK bp....PB np....PN rp....PR</p>
 <p>With coordinats:</p>
 <p>12345678 +-----&mdash;+ A|rp....PR|A B|np....PN|B C|bp....PB|C D|qp....PQ|D E|kp....PK|E F|bp....PB|F G|np....PN|G H|rp....PR|H +-----&mdash;+ 12345678 </p>
@@ -337,7 +361,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Add a legend to the 8x8 or 12x12 strings of a chessboard.</p>
+
+<p>Add a legend to the 8x8 or 12x12 strings of a chessboard. </p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Type   </th><th class="markdownTableHeadNone">White   </th><th class="markdownTableHeadNone">Black    </th></tr>
@@ -402,7 +427,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Collect the history of a game, i.e. the moves played in time </p>
+
+<p>Collect the history of a game, i.e. </p>
+<p>the moves played in time </p>
 
 </div>
 </div>
@@ -597,7 +624,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the piece that at that square, will throw if there is no piece </p>
+
+<p>Get the piece that at that square, will throw if there is no piece. </p>
 
 </div>
 </div>
@@ -626,7 +654,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the piece that at that square, will throw if there is no piece </p>
+
+<p>Get the piece that at that square, will throw if there is no piece. </p>
 
 </div>
 </div>
@@ -655,7 +684,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Find a piece with a certain ID Will throw if there is no piece with that ID </p>
+
+<p>Find a piece with a certain ID Will throw if there is no piece with that ID. </p>
 
 </div>
 </div>
@@ -692,7 +722,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Create a setup of pieces in which en passant becomes possible in the next move </p>
+
+<p>Create a setup of pieces in which en passant becomes possible in the next move. </p>
 
 </div>
 </div>
@@ -729,7 +760,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces before a scholar's mate</p><ol type="1">
+
+<p>Get the pieces before a scholar's mate. </p>
+<ol type="1">
 <li>e4 e5</li>
 <li>Qh5 Nc6</li>
 <li>Bc4 Nf6?? (the checkmate is done by Qxf7#) </li>
@@ -770,7 +803,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces from a bishop and knight end game</p><ul>
+
+<p>Get the pieces from a bishop and knight end game. </p>
+<ul>
 <li>White king: e6</li>
 <li>White knight: c4</li>
 <li>White bishop: g4</li>
@@ -812,7 +847,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces for a Kasparov vs Topalov game, discovered at <a href="https://www.reddit.com/r/chess/comments/fmd7uh/this_is_a_position_from_the_famous_kasparov_vs/">https://www.reddit.com/r/chess/comments/fmd7uh/this_is_a_position_from_the_famous_kasparov_vs/</a> </p>
+
+<p>Get the pieces for a Kasparov vs Topalov game, discovered at <a href="https://www.reddit.com/r/chess/comments/fmd7uh/this_is_a_position_from_the_famous_kasparov_vs/">https://www.reddit.com/r/chess/comments/fmd7uh/this_is_a_position_from_the_famous_kasparov_vs/</a>. </p>
 
 </div>
 </div>
@@ -849,7 +885,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces from a standard game, with all pawns moved two squares forward </p>
+
+<p>Get the pieces from a standard game, with all pawns moved two squares forward. </p>
 
 </div>
 </div>
@@ -886,7 +923,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces where pawns are at promotion</p><ul>
+
+<p>Get the pieces where pawns are at promotion. </p>
+<ul>
 <li>White king: e1</li>
 <li>White pawn: a8</li>
 <li>Black king: e8</li>
@@ -928,7 +967,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces where pawns are near promotion</p><ul>
+
+<p>Get the pieces where pawns are near promotion. </p>
+<ul>
 <li>White king: e1</li>
 <li>White pawn: a7</li>
 <li>Black king: e8</li>
@@ -970,7 +1011,9 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces where pawns are nealy near promotion</p><ul>
+
+<p>Get the pieces where pawns are nealy near promotion. </p>
+<ul>
 <li>White king: e1</li>
 <li>White pawn: a6</li>
 <li>Black king: e8</li>
@@ -1012,7 +1055,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces for a queen endgame, which are having only the kings and queens left from a default setup </p>
+
+<p>Get the pieces for a queen endgame, which are having only the kings and queens left from a default setup. </p>
 
 </div>
 </div>
@@ -1087,7 +1131,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the pieces for a kings that are ready to castle, but cannot, as the king would go through check </p>
+
+<p>Get the pieces for a kings that are ready to castle, but cannot, as the king would go through check. </p>
 
 </div>
 </div>
@@ -1116,7 +1161,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the possible moves for a focal piece that is a bishop. This can both be a move or an attack </p>
+
+<p>Get the possible moves for a focal piece that is a bishop. </p>
+<p>This can both be a move or an attack </p>
 
 </div>
 </div>
@@ -1145,7 +1192,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the possible moves for a focal piece that is a king. This can both be a move or an attack </p>
+
+<p>Get the possible moves for a focal piece that is a king. </p>
+<p>This can both be a move or an attack </p>
 
 </div>
 </div>
@@ -1174,7 +1223,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the possible moves for a focal piece that is a knight. This can both be a move or an attack </p>
+
+<p>Get the possible moves for a focal piece that is a knight. </p>
+<p>This can both be a move or an attack </p>
 
 </div>
 </div>
@@ -1203,7 +1254,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the possible moves for a focal piece. This can both be a move or an attack </p>
+
+<p>Get the possible moves for a focal piece. </p>
+<p>This can both be a move or an attack </p>
 
 </div>
 </div>
@@ -1232,7 +1285,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the possible moves for a focal piece that is a pawn. This can both be a move or an attack </p>
+
+<p>Get the possible moves for a focal piece that is a pawn. </p>
+<p>This can both be a move or an attack </p>
 
 </div>
 </div>
@@ -1261,7 +1316,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the possible moves for a focal piece that is a queen. This can both be a move or an attack </p>
+
+<p>Get the possible moves for a focal piece that is a queen. </p>
+<p>This can both be a move or an attack </p>
 
 </div>
 </div>
@@ -1290,7 +1347,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the possible moves for a focal piece that is a rook. This can both be a move or an attack </p>
+
+<p>Get the possible moves for a focal piece that is a rook. </p>
+<p>This can both be a move or an attack </p>
 
 </div>
 </div>
@@ -1319,7 +1378,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get all the selected pieces </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Get all the selected pieces. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">player</td><td>the color of the player, which is white for player 1 </td></tr>
   </table>
@@ -1559,7 +1620,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Show the pieces as if on a chessboard, such as:</p>
+
+<p>Show the pieces as if on a chessboard, such as: </p>
 <p>Without coordinats:</p>
 <p>rp....PR np....PN bp....PB qp....PQ kp....PK bp....PB np....PN rp....PR</p>
 <p>With coordinats:</p>
@@ -1637,7 +1699,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Convert the played game (i.e. the <a class="el" href="../../dc/d92/classaction__history.html">action_history</a>) to pseudo-PGN notation Returns one string with newlines </p>
+
+<p>Convert the played game (i.e. </p>
+<p>the <a class="el" href="../../dc/d92/classaction__history.html" title="The collected in-game times of actions, in chrononical order.">action_history</a>) to pseudo-PGN notation Returns one string with newlines </p>
 
 </div>
 </div>

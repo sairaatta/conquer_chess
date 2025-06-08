@@ -4,7 +4,9 @@
 #include <iosfwd>
 #include <string>
 
-/// The type of controller
+/// The type of controller.
+///
+/// The type of controller that is supported.
 enum class physical_controller_type
 {
   keyboard,

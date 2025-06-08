@@ -1,7 +1,7 @@
 var searchData=
 [
   ['about_0',['about',['../d2/d17/menu__view__item_8h.html#a1e5480d66ab9bf428c60565a61b3e742a46b3931b9959c927df4fc65fdee94b07',1,'menu_view_item.h']]],
-  ['about_5fview_1',['about_view',['../d3/d76/classabout__view.html',1,'about_view'],['../d3/d76/classabout__view.html#a12e9f4a4262ac21f2202051b22337bf5',1,'about_view::about_view()']]],
+  ['about_5fview_1',['about_view',['../d3/d76/classabout__view.html#a12e9f4a4262ac21f2202051b22337bf5',1,'about_view::about_view()'],['../d3/d76/classabout__view.html',1,'about_view']]],
   ['about_5fview_2ecpp_2',['about_view.cpp',['../d9/d64/about__view_8cpp.html',1,'']]],
   ['about_5fview_2eh_3',['about_view.h',['../d5/df6/about__view_8h.html',1,'']]],
   ['about_5fview_5fitem_2ecpp_4',['about_view_item.cpp',['../dc/d28/about__view__item_8cpp.html',1,'']]],
@@ -15,13 +15,13 @@ var searchData=
   ['action_5f2_12',['action_2',['../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4ecab62e6a53a39ffe859d314bff2199ba31',1,'controls_view_item.h']]],
   ['action_5f3_13',['action_3',['../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4ecaf38844ed29021cb16eae69eb6002c2f8',1,'controls_view_item.h']]],
   ['action_5f4_14',['action_4',['../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca32b37ab7786090e067240cc656db42e8',1,'controls_view_item.h']]],
-  ['action_5fhistory_15',['action_history',['../dc/d92/classaction__history.html#ae916346690302cb43d1a34a7490eb2bb',1,'action_history::action_history()'],['../dc/d92/classaction__history.html',1,'action_history']]],
+  ['action_5fhistory_15',['action_history',['../dc/d92/classaction__history.html',1,'action_history'],['../dc/d92/classaction__history.html#ae916346690302cb43d1a34a7490eb2bb',1,'action_history::action_history()']]],
   ['action_5fhistory_2ecpp_16',['action_history.cpp',['../d8/da5/action__history_8cpp.html',1,'']]],
   ['action_5fhistory_2eh_17',['action_history.h',['../d3/d8b/action__history_8h.html',1,'']]],
-  ['action_5fnumber_18',['action_number',['../d4/d8b/classaction__number.html',1,'action_number'],['../d4/d8b/classaction__number.html#a98bba3e3c0af3d06aa63b90b44cb60d8',1,'action_number::action_number()']]],
+  ['action_5fnumber_18',['action_number',['../d4/d8b/classaction__number.html#a98bba3e3c0af3d06aa63b90b44cb60d8',1,'action_number::action_number()'],['../d4/d8b/classaction__number.html',1,'action_number']]],
   ['action_5fnumber_2ecpp_19',['action_number.cpp',['../dc/d08/action__number_8cpp.html',1,'']]],
   ['action_5fnumber_2eh_20',['action_number.h',['../d3/d28/action__number_8h.html',1,'']]],
-  ['add_21',['add',['../d5/d46/user__inputs_8cpp.html#abc5da0160286fcd24613f05b5beb5853',1,'add(user_inputs &amp;current, const user_inputs &amp;to_be_added):&#160;user_inputs.cpp'],['../d4/d84/user__inputs_8h.html#abc5da0160286fcd24613f05b5beb5853',1,'add(user_inputs &amp;current, const user_inputs &amp;to_be_added):&#160;user_inputs.cpp'],['../d4/d4d/classuser__inputs.html#ac50776b41b5554bfb8114db271b3e2b2',1,'user_inputs::add()']]],
+  ['add_21',['add',['../d4/d84/user__inputs_8h.html#abc5da0160286fcd24613f05b5beb5853',1,'add(user_inputs &amp;current, const user_inputs &amp;to_be_added):&#160;user_inputs.cpp'],['../d5/d46/user__inputs_8cpp.html#abc5da0160286fcd24613f05b5beb5853',1,'add(user_inputs &amp;current, const user_inputs &amp;to_be_added):&#160;user_inputs.cpp'],['../d4/d4d/classuser__inputs.html#ac50776b41b5554bfb8114db271b3e2b2',1,'user_inputs::add()']]],
   ['add_5faction_22',['add_action',['../d8/d3c/classpiece.html#a4e08a6f8d84f3767cc815b5042848612',1,'piece::add_action()'],['../dc/d92/classaction__history.html#a546a63ce317f8362c5c07ae2a87f6a07',1,'action_history::add_action()']]],
   ['add_5fcoordinats_23',['add_coordinats',['../dd/da4/pieces_8h.html#a1ada943827c87f562001ca7f678a40ea',1,'add_coordinats(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp'],['../d5/d21/pieces_8cpp.html#a1ada943827c87f562001ca7f678a40ea',1,'add_coordinats(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp']]],
   ['add_5flegend_24',['add_legend',['../dd/da4/pieces_8h.html#ab4ff3ba234fcd8ca1038e4f699596a8e',1,'add_legend(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp'],['../d5/d21/pieces_8cpp.html#ab4ff3ba234fcd8ca1038e4f699596a8e',1,'add_legend(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp']]],
@@ -39,10 +39,11 @@ var searchData=
   ['are_5fon_5fsame_5ffile_36',['are_on_same_file',['../d7/d3c/square_8h.html#a42669158dadebe8641fca82e73361f53',1,'are_on_same_file(const square &amp;a, const square &amp;b) noexcept:&#160;square.cpp'],['../df/dc6/square_8cpp.html#a42669158dadebe8641fca82e73361f53',1,'are_on_same_file(const square &amp;a, const square &amp;b) noexcept:&#160;square.cpp']]],
   ['are_5fon_5fsame_5fhalf_5fdiagonal_37',['are_on_same_half_diagonal',['../d7/d3c/square_8h.html#a9e84040241c63251a44a73d43439fe5d',1,'are_on_same_half_diagonal(const square &amp;a, const square &amp;b) noexcept:&#160;square.cpp'],['../df/dc6/square_8cpp.html#a9e84040241c63251a44a73d43439fe5d',1,'are_on_same_half_diagonal(const square &amp;a, const square &amp;b) noexcept:&#160;square.cpp']]],
   ['are_5fon_5fsame_5frank_38',['are_on_same_rank',['../df/dc6/square_8cpp.html#a35f154b2dc8b6ed37662772f595fe7a3',1,'are_on_same_rank(const square &amp;a, const square &amp;b) noexcept:&#160;square.cpp'],['../d7/d3c/square_8h.html#a35f154b2dc8b6ed37662772f595fe7a3',1,'are_on_same_rank(const square &amp;a, const square &amp;b) noexcept:&#160;square.cpp']]],
-  ['artwork_39',['artwork',['../d5/d10/md_resources_2textures_2lobby__menu_2README.html#autotoc_md37',1,'General artwork'],['../dd/dce/md_resources_2textures_2README.html#autotoc_md46',1,'General artwork']]],
+  ['artwork_39',['artwork',['../d5/d10/md_resources_2textures_2lobby__menu_2README.html#autotoc_md38',1,'General artwork'],['../dd/dce/md_resources_2textures_2README.html#autotoc_md47',1,'General artwork']]],
   ['asked_20questions_40',['Frequently Asked Questions',['../d0/d0b/md_docs_2faq.html',1,'']]],
   ['assert_5feq_41',['assert_eq',['../da/d96/asserts_8h.html#a3c72d1890c02c34c3be1658ea7a513d8',1,'asserts.h']]],
   ['asserts_2ecpp_42',['asserts.cpp',['../d0/db4/asserts_8cpp.html',1,'']]],
   ['asserts_2eh_43',['asserts.h',['../da/d96/asserts_8h.html',1,'']]],
-  ['attack_44',['attack',['../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50afc7e987f23de5bd6562b7c0063cad659',1,'piece_action_type.h']]]
+  ['attack_44',['attack',['../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50afc7e987f23de5bd6562b7c0063cad659',1,'piece_action_type.h']]],
+  ['attack_5fen_5fpassant_45',['attack_en_passant',['../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50ab65ade746300d058337ef319eac8fe2d',1,'piece_action_type.h']]]
 ];

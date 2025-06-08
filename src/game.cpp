@@ -83,7 +83,7 @@ bool can_do(
   const side player_side
 )
 {
-  if (action == piece_action_type::en_passant)
+  if (action == piece_action_type::attack_en_passant)
   {
     return can_do_en_passant(g, selected_piece, cursor_square, player_side);
   }
@@ -663,7 +663,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
         && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
-        actions.push_back(piece_action(color, type, piece_action_type::en_passant, from, to_square));
+        actions.push_back(piece_action(color, type, piece_action_type::attack_en_passant, from, to_square));
       }
     }
     if (y < 7)
@@ -676,7 +676,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
         && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
-        actions.push_back(piece_action(color, type, piece_action_type::en_passant, from, to_square));
+        actions.push_back(piece_action(color, type, piece_action_type::attack_en_passant, from, to_square));
       }
     }
   }
@@ -695,7 +695,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
       )
       {
         assert(!"YAY, triggered en-passant for FIX_ISSUE_21");
-        actions.push_back(piece_action(color, type, piece_action_type::en_passant, from, to_square));
+        actions.push_back(piece_action(color, type, piece_action_type::attack_en_passant, from, to_square));
       }
     }
     if (y < 7)
@@ -709,7 +709,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
       )
       {
         assert(!"YAY");
-        actions.push_back(piece_action(color, type, piece_action_type::en_passant, from, to_square));
+        actions.push_back(piece_action(color, type, piece_action_type::attack_en_passant, from, to_square));
       }
     }
   }
@@ -1075,9 +1075,9 @@ std::optional<piece_action_type> get_default_piece_action(
       // No own piece at cursor, maybe can move/castle/en-passant there?
       assert(get_selected_pieces(g, player_side).size() == 1);
       const auto selected_piece{get_selected_pieces(g, player_side)[0]};
-      if (can_do(g, selected_piece, piece_action_type::en_passant, cursor_square, player_side))
+      if (can_do(g, selected_piece, piece_action_type::attack_en_passant, cursor_square, player_side))
       {
-        return piece_action_type::en_passant;
+        return piece_action_type::attack_en_passant;
       }
       if (can_do(g, selected_piece, piece_action_type::castle_kingside, cursor_square, player_side))
       {

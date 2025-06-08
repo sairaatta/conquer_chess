@@ -226,7 +226,7 @@ void test_piece_action()
           piece_action(
             chess_color::white,
             piece_type::pawn,
-            piece_action_type::en_passant,
+            piece_action_type::attack_en_passant,
             square("e5"),
             square("d6")
           )
@@ -375,7 +375,7 @@ std::string to_str(const piece_action& a) noexcept
       assert(a.get_piece_type() == piece_type::king);
       s << a.get_color() << " " << a.get_piece_type() << " castles queenside";
       break;
-    case piece_action_type::en_passant:
+    case piece_action_type::attack_en_passant:
       assert(a.get_piece_type() == piece_type::pawn);
       s << a.get_color() << " " << a.get_piece_type() << " " << a.get_action_type() << " en-passant from " << a.get_from() << " to " << a.get_to();
       break;

@@ -5,7 +5,9 @@
 #include <string>
 #include <vector>
 
-/// A selectable item at the options_view
+/// A selectable item at in the Options menu.
+///
+/// A thing that can be changed in the Options menu.
 enum class options_view_item
 {
   game_speed,

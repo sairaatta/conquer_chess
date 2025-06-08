@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-/// The starting position type
+/// The starting position type.
 enum class starting_position_type
 {
   before_en_passant,

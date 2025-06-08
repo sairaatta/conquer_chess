@@ -4,10 +4,10 @@
 #include <iosfwd>
 #include <vector>
 
-/// The index/number of the action,
-/// using human counting.
-/// As there are four actions, an action_number
-/// can be 1, 2, 3 or 4.
+/// The number of an action.
+///
+/// As there are four actions (as there are 4 action buttons),
+/// an action_number can be 1, 2, 3 or 4.
 class action_number
 {
 public:

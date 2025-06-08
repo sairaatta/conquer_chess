@@ -8,7 +8,7 @@
 #include "ccfwd.h"
 #include "message.h"
 
-/// Raw sound effects
+/// The sound effects
 class sound_effects
 {
 public:

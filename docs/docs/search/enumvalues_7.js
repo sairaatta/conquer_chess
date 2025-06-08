@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['kasparov_5fvs_5ftopalov_0',['kasparov_vs_topalov',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5ace21cf997261f5e897bf4dac705d084d',1,'starting_position_type.h']]],
-  ['keyboard_1',['keyboard',['../d1/d18/physical__controller__type_8h.html#a21cd4c6791036ca7c7ec96c32869c0dca388a56dbb62a010dc26a378981346247',1,'physical_controller_type.h']]],
-  ['king_2',['king',['../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3ab2086154f101464aab3328ba7e060deb',1,'piece_type.h']]],
-  ['king_5fside_3',['king_side',['../d0/d7c/castling__type_8h.html#a49809f96ba89d92eda8cdbb820983884ad4fab0bcb238067fdc3383b53345dabd',1,'castling_type.h']]],
-  ['kings_5fonly_4',['kings_only',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5abf829778d3f7d47523012bdf78c900d8',1,'starting_position_type.h']]],
-  ['knight_5',['knight',['../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3aefead51028a03db2d63f0e79ba032a82',1,'piece_type.h']]]
+  ['left_0',['left',['../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca811882fecd5c7618d7099ebbd39ea254',1,'controls_view_item.h']]],
+  ['left_5fcontrols_1',['left_controls',['../db/da8/options__view__item_8h.html#a412c507626764f6e0bd81dcc59f0d388a041b261853a6764664f83c6400f868b1',1,'options_view_item.h']]],
+  ['lhs_2',['lhs',['../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e',1,'side.h']]],
+  ['lmb_5fdown_3',['lmb_down',['../d7/de7/user__input__type_8h.html#afb12242cff78e1daafb90d5d1deb5b09aac1fa709b6a569be8328a0ccc4ba8406',1,'user_input_type.h']]]
 ];

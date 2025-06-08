@@ -19,7 +19,7 @@ var searchData=
   ['loading_5fview_16',['loading_view',['../d9/d62/classloading__view.html',1,'loading_view'],['../d9/d62/classloading__view.html#a6c5cc3b786dcae86157f49b6f4f260bd',1,'loading_view::loading_view()']]],
   ['loading_5fview_2ecpp_17',['loading_view.cpp',['../d5/d3a/loading__view_8cpp.html',1,'']]],
   ['loading_5fview_2eh_18',['loading_view.h',['../d6/d20/loading__view_8h.html',1,'']]],
-  ['lobby_20menu_19',['lobby menu',['../d5/d10/md_resources_2textures_2lobby__menu_2README.html',1,'']]],
+  ['lobby_20menu_19',['Lobby menu',['../d5/d10/md_resources_2textures_2lobby__menu_2README.html',1,'']]],
   ['lobby_5fmenu_5ftextures_20',['lobby_menu_textures',['../d5/dee/classlobby__menu__textures.html',1,'lobby_menu_textures'],['../d5/dee/classlobby__menu__textures.html#a54995bc317da624a7a088b59d89f43fd',1,'lobby_menu_textures::lobby_menu_textures()']]],
   ['lobby_5fmenu_5ftextures_2ecpp_21',['lobby_menu_textures.cpp',['../db/d65/lobby__menu__textures_8cpp.html',1,'']]],
   ['lobby_5fmenu_5ftextures_2eh_22',['lobby_menu_textures.h',['../d7/d5e/lobby__menu__textures_8h.html',1,'']]],

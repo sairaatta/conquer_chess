@@ -7,8 +7,7 @@
 #include "chess_color.h"
 #include "physical_controller_type.h"
 
-/// The games' textures
-/// The raw game resources
+/// The games' textures.
 class textures
 {
 public:

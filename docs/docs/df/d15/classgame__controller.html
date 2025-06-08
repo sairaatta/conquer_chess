@@ -78,6 +78,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The class that acts as a controller for game}.  
+ <a href="../../df/d15/classgame__controller.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d6/d23/game__controller_8h_source.html">game_controller.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -94,6 +97,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a253189ea2fd7799557465bc3352f86ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the a player's cursor position.  <br /></td></tr>
 <tr class="separator:a253189ea2fd7799557465bc3352f86ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a240fabe9c743eda5f81f19f4af11b1" id="r_a1a240fabe9c743eda5f81f19f4af11b1"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d15/classgame__controller.html#a1a240fabe9c743eda5f81f19f4af11b1">get_mouse_user_selector</a> () const noexcept</td></tr>
+<tr class="memdesc:a1a240fabe9c743eda5f81f19f4af11b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A mouse user selects one of the four actions by using RMB and scrollwheel.  <br /></td></tr>
 <tr class="separator:a1a240fabe9c743eda5f81f19f4af11b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb308eb18d8ce9a669a4a4134d08dbd3" id="r_adb308eb18d8ce9a669a4a4134d08dbd3"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d15/classgame__controller.html#adb308eb18d8ce9a669a4a4134d08dbd3">get_user_inputs</a> () const noexcept</td></tr>
 <tr class="memdesc:adb308eb18d8ce9a669a4a4134d08dbd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the game users' inputs.  <br /></td></tr>
@@ -109,7 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acd6dbc18ab8b4747b775d791bcc86e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The class that acts as a controller for game}. A <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a>} receives <a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>}. It will use those <a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>} to move the cursors and to do chess moves on the game}. </p>
+<div class="textblock"><p>The class that acts as a controller for game}. </p>
+<p>A <a class="el" href="../../df/d15/classgame__controller.html" title="The class that acts as a controller for game}.">game_controller</a>} receives input from the <a class="el" href="../../d2/d15/classphysical__controllers.html" title="The physical controllers used by all players.">physical_controllers</a>} and send these to the game}. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adc12ca9e0a32dbc6884fef066fa2fd56" name="adc12ca9e0a32dbc6884fef066fa2fd56"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc12ca9e0a32dbc6884fef066fa2fd56">&#9670;&#160;</a></span>game_controller()</h2>
@@ -220,7 +225,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>A mouse user selects one of the four actions by using RMB and scrollwheel. The mouse user selector stores which of the four actions is selected. (a keyboard user has different keys for that) </p>
+
+<p>A mouse user selects one of the four actions by using RMB and scrollwheel. </p>
+<p>The mouse user selector stores which of the four actions is selected. (a keyboard user has different keys for that) </p>
 
 </div>
 </div>

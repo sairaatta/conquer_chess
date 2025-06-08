@@ -78,6 +78,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The text log in the game.  
+ <a href="../../d8/dd0/classgame__log.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d8/d44/game__log_8h_source.html">game_log.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -88,13 +91,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a707b67ffa43439c2aa203b94e81c4436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a message, timestamp will be added.  <br /></td></tr>
 <tr class="separator:a707b67ffa43439c2aa203b94e81c4436"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af965befade523640accfe67798c0ab79" id="r_af965befade523640accfe67798c0ab79"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dd0/classgame__log.html#af965befade523640accfe67798c0ab79">get_last_messages</a> (const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> <a class="el" href="../../db/d90/lobby__view__item_8h.html#aa96663822bdafb05ef5af33c23950133a70dda5dfb8053dc6d1c492574bce9bfd">color</a>) const</td></tr>
+<tr class="memdesc:af965befade523640accfe67798c0ab79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the last messages that were emitted at most 'max_elapsed_time_secs' seconds ago, as a (possibly) multi-line string, for a specific color.  <br /></td></tr>
 <tr class="separator:af965befade523640accfe67798c0ab79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57d997fb3bc3a31c0d206382c0a71d81" id="r_a57d997fb3bc3a31c0d206382c0a71d81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dd0/classgame__log.html#a57d997fb3bc3a31c0d206382c0a71d81">tick</a> ()</td></tr>
 <tr class="memdesc:a57d997fb3bc3a31c0d206382c0a71d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update, so old messages are removed.  <br /></td></tr>
 <tr class="separator:a57d997fb3bc3a31c0d206382c0a71d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The text log in the game Cannot use 'log' due to conflicts with 'std::log' </p>
+<div class="textblock"><p>The text log in the game. </p>
+<dl class="section note"><dt>Note</dt><dd>This class cannot be called <code>log</code>, due to conflicts with <code>std::log</code> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a85ca3c415d75f10c7c3db221c94e3edf" name="a85ca3c415d75f10c7c3db221c94e3edf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85ca3c415d75f10c7c3db221c94e3edf">&#9670;&#160;</a></span>game_log()</h2>
@@ -172,7 +177,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the last messages that were emitted at most 'max_elapsed_time_secs' seconds ago, as a (possibly) multi-line string, for a specific color </p>
+
+<p>Get the last messages that were emitted at most 'max_elapsed_time_secs' seconds ago, as a (possibly) multi-line string, for a specific color. </p>
 
 </div>
 </div>

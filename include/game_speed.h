@@ -1,12 +1,12 @@
 #ifndef GAME_SPEED_H
 #define GAME_SPEED_H
 
-#include "delta_t.h"
-
 #include <iosfwd>
 #include <vector>
 
-/// The game speed
+/// The game speed.
+///
+/// The game speed, expressed in human language.
 enum class game_speed
 {
   slowest, slower, slow, normal, fast, faster, fastest

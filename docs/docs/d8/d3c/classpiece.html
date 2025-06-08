@@ -90,6 +90,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7c94888a9ab099f9870f769741f2d95" id="r_ac7c94888a9ab099f9870f769741f2d95"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#ac7c94888a9ab099f9870f769741f2d95">piece</a> (const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> <a class="el" href="../../db/d90/lobby__view__item_8h.html#aa96663822bdafb05ef5af33c23950133a70dda5dfb8053dc6d1c492574bce9bfd">color</a>, const <a class="el" href="../../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3">piece_type</a> <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca599dcce2998a6b40b1e38e8c6006cb0a">type</a>, const std::string &amp;coordinat, const <a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1f">race</a> r=<a class="el" href="../../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1faf3d64714d1f6e7f71558d4252e84ab58">race::classic</a>)</td></tr>
 <tr class="separator:ac7c94888a9ab099f9870f769741f2d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e08a6f8d84f3767cc815b5042848612" id="r_a4e08a6f8d84f3767cc815b5042848612"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#a4e08a6f8d84f3767cc815b5042848612">add_action</a> (const <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &amp;action)</td></tr>
+<tr class="memdesc:a4e08a6f8d84f3767cc815b5042848612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an action for the piece to do This function will split up the action in smaller atomic actions.  <br /></td></tr>
 <tr class="separator:a4e08a6f8d84f3767cc815b5042848612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd55e67909643e5d40867912fd12fa2e" id="r_abd55e67909643e5d40867912fd12fa2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#abd55e67909643e5d40867912fd12fa2e">add_message</a> (const <a class="el" href="../../d2/d59/message__type_8h.html#a4e0a9e26bf11796d8ca091cb6b3ce470">message_type</a> &amp;<a class="el" href="../../d8/d1d/classmessage.html">message</a>)</td></tr>
 <tr class="memdesc:abd55e67909643e5d40867912fd12fa2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a message, i.e. a thing to say for this piece.  <br /></td></tr>
@@ -110,6 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac583ef92767f198378801d442bad7de3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the color of the piece, i.e. white or black.  <br /></td></tr>
 <tr class="separator:ac583ef92767f198378801d442bad7de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6379ca8b2ae7cf6d7a0f9c17e23439a6" id="r_a6379ca8b2ae7cf6d7a0f9c17e23439a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#a6379ca8b2ae7cf6d7a0f9c17e23439a6">get_current_action_progress</a> () const</td></tr>
+<tr class="memdesc:a6379ca8b2ae7cf6d7a0f9c17e23439a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The progress of the current action, which is a value from zero to (and including) one.  <br /></td></tr>
 <tr class="separator:a6379ca8b2ae7cf6d7a0f9c17e23439a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1ef9dbae17754cb4e9dfcbcfc3f6d4e" id="r_ab1ef9dbae17754cb4e9dfcbcfc3f6d4e"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#ab1ef9dbae17754cb4e9dfcbcfc3f6d4e">get_current_square</a> () const noexcept</td></tr>
 <tr class="separator:ab1ef9dbae17754cb4e9dfcbcfc3f6d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,11 +146,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1a8fc3f74a61b9e663e28dca16a826d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase the kill count by one.  <br /></td></tr>
 <tr class="separator:a1a8fc3f74a61b9e663e28dca16a826d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49d5eb0be18bdbd4aff2bae0c10a5dc3" id="r_a49d5eb0be18bdbd4aff2bae0c10a5dc3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#a49d5eb0be18bdbd4aff2bae0c10a5dc3">is_enpassantable</a> () const</td></tr>
+<tr class="memdesc:a49d5eb0be18bdbd4aff2bae0c10a5dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can the unit be captured by en-passant? Will fail if the piece is not a pawn.  <br /></td></tr>
 <tr class="separator:a49d5eb0be18bdbd4aff2bae0c10a5dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78fcaaa585ee46cea6b8e56444bd0539" id="r_a78fcaaa585ee46cea6b8e56444bd0539"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#a78fcaaa585ee46cea6b8e56444bd0539">is_selected</a> () const noexcept</td></tr>
 <tr class="memdesc:a78fcaaa585ee46cea6b8e56444bd0539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the piece selected?  <br /></td></tr>
 <tr class="separator:a78fcaaa585ee46cea6b8e56444bd0539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7cbaf6c35aaff0d8f3dbdd5dbf54ae4" id="r_ac7cbaf6c35aaff0d8f3dbdd5dbf54ae4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#ac7cbaf6c35aaff0d8f3dbdd5dbf54ae4">receive_damage</a> (const double damage)</td></tr>
+<tr class="memdesc:ac7cbaf6c35aaff0d8f3dbdd5dbf54ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive damage.  <br /></td></tr>
 <tr class="separator:ac7cbaf6c35aaff0d8f3dbdd5dbf54ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b40b15a6fa14054ab374a90f9694156" id="r_a2b40b15a6fa14054ab374a90f9694156"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#a2b40b15a6fa14054ab374a90f9694156">set_current_action_progress</a> (const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> &amp;t) noexcept</td></tr>
 <tr class="memdesc:a2b40b15a6fa14054ab374a90f9694156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current progres an action has passed.  <br /></td></tr>
@@ -160,6 +164,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac20c3949120c4f8b95272db8a71bac88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the selectedness of the piece.  <br /></td></tr>
 <tr class="separator:ac20c3949120c4f8b95272db8a71bac88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d01094566a4c7d9cdb3c20d3b1a7897" id="r_a1d01094566a4c7d9cdb3c20d3b1a7897"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3c/classpiece.html#a1d01094566a4c7d9cdb3c20d3b1a7897">tick</a> (const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> &amp;dt, <a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g)</td></tr>
+<tr class="memdesc:a1d01094566a4c7d9cdb3c20d3b1a7897"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do one frame of movement, resulting in a piece movement of 1 * <a class="el" href="../../dd/df3/classdelta__t.html" title="A change of in_game_time}.">delta_t</a>.  <br /></td></tr>
 <tr class="separator:a1d01094566a4c7d9cdb3c20d3b1a7897"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -277,7 +282,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Add an action for the piece to do This function will split up the action in smaller atomic actions </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d8/d3c/classpiece.html#a1d01094566a4c7d9cdb3c20d3b1a7897">tick</a>' processes the actions </dd></dl>
+
+<p>Add an action for the piece to do This function will split up the action in smaller atomic actions. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d8/d3c/classpiece.html#a1d01094566a4c7d9cdb3c20d3b1a7897" title="Do one frame of movement, resulting in a piece movement of 1 * delta_t.">tick</a>' processes the actions </dd></dl>
 
 </div>
 </div>
@@ -450,7 +457,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The progress of the current action, which is a value from zero to (and including) one </p>
+
+<p>The progress of the current action, which is a value from zero to (and including) one. </p>
 
 </div>
 </div>
@@ -763,7 +771,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Can the unit be captured by en-passant? Will fail if the piece is not a pawn </p>
+
+<p>Can the unit be captured by en-passant? Will fail if the piece is not a pawn. </p>
 
 </div>
 </div>
@@ -809,7 +818,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Receive damage </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Receive damage. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">damage</td><td>a positive value </td></tr>
   </table>
@@ -927,14 +938,16 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Do one frame of movement, resulting in a piece movement of 1 * <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Do one frame of movement, resulting in a piece movement of 1 * <a class="el" href="../../dd/df3/classdelta__t.html" title="A change of in_game_time}.">delta_t</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a></td><td>the fraction of a full move that is done, where 0.01 means that only 1% of the full move is done and 1.0 denotes doing a full move. </td></tr>
+    <tr><td class="paramname"><a class="el" href="../../dd/df3/classdelta__t.html" title="A change of in_game_time}.">delta_t</a></td><td>the fraction of a full move that is done, where 0.01 means that only 1% of the full move is done and 1.0 denotes doing a full move. </td></tr>
     <tr><td class="paramname">occupied_squares</td><td>the squares that are occupied </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd>use '<a class="el" href="../../d8/d3c/classpiece.html#a4e08a6f8d84f3767cc815b5042848612">add_action</a>' to <a class="el" href="../../d4/d84/user__inputs_8h.html#abc5da0160286fcd24613f05b5beb5853" title="Add new user inputs.">add</a> an action to be processed </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>use '<a class="el" href="../../d8/d3c/classpiece.html#a4e08a6f8d84f3767cc815b5042848612" title="Add an action for the piece to do This function will split up the action in smaller atomic actions.">add_action</a>' to <a class="el" href="../../d4/d84/user__inputs_8h.html#abc5da0160286fcd24613f05b5beb5853" title="Add new user inputs.">add</a> an action to be processed </dd></dl>
 
 </div>
 </div>

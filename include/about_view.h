@@ -8,7 +8,7 @@
 #include "about_view_layout.h"
 #include "about_view_item.h"
 
-/// The About screen
+/// The About screen.
 class about_view
 {
 public:

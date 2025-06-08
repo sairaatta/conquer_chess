@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-/// A collection of timed chess moves
+/// A replay of a regular chess match.
 class replay
 {
 public:

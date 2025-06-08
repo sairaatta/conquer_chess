@@ -14,8 +14,11 @@
 
 #include <SFML/Graphics.hpp>
 
-/// The game's main window
-/// Displays the game class
+/// The Game dialog.
+///
+/// The Game dialog shows the game and
+/// displays the \link{game} class.
+/// Here is where most of the action happens.
 class game_view
 {
 public:

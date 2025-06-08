@@ -3,6 +3,9 @@
 
 /// Options on how to convert a chessboard
 /// to text.
+///
+/// This is, for example, used for debugging,
+/// where a plain-text chessboard can be shown.
 class board_to_text_options
 {
 public:

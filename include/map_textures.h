@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "race.h"
 
-/// The games' map_textures
-/// The raw game resources
+/// The textures for the game maps.
 class map_textures
 {
 public:

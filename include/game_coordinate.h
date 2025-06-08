@@ -14,6 +14,7 @@
 ///
 /// @see use \link{screen_coordinate} for a coordinat on the screen
 ///
+/// ```text
 ///        x coordinat
 /// |-----------------------|
 ///
@@ -26,6 +27,7 @@
 /// +--+--+--+--+--+--+--+--+ 7  |
 /// |  |  |  |  |  |  |  |  |    |
 /// +--+--+--+--+--+--+--+--+ 8  -
+/// ```
 class game_coordinate
 {
 public:

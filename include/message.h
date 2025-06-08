@@ -8,9 +8,9 @@
 #include <iosfwd>
 #include <vector>
 
-/// Representation of a sound effect.
+/// A message.
 ///
-/// Use 'MESSAGEs::play' to play it
+/// A message, such as 'a white pawn has been captured'.
 class message
 {
 public:

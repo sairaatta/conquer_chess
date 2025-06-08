@@ -1,7 +1,7 @@
 #ifndef SFML_HELPER_H
 #define SFML_HELPER_H
 
-/// SFML helper functions
+/// @file SFML helper functions
 
 #include "ccfwd.h"
 #include "chess_color.h"

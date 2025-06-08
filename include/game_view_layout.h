@@ -12,8 +12,11 @@
 #include <vector>
 
 
-/// The layout of the game view
+/// The layout of the Game dialog.
 ///
+/// The layout of the Game dialog (\link{game_view}).
+///
+/// ```text
 ///   x          x x             x x          x
 ///   1          2 3             4 5          6
 ///
@@ -40,7 +43,7 @@
 ///   +----------+ +------------+  +----------+
 ///    panel_width  board_width     panel_width
 ///     300 pixels   remainder       300 pixels
-///
+/// ```
 class game_view_layout
 {
 public:

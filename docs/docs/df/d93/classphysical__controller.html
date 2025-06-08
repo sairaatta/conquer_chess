@@ -78,6 +78,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>A physical controller.  
+ <a href="../../df/d93/classphysical__controller.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d2/d72/physical__controller_8h_source.html">physical_controller.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -90,12 +93,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9d431903760c785997c47d274a7eeec3" id="r_a9d431903760c785997c47d274a7eeec3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d1/d18/physical__controller__type_8h.html#a21cd4c6791036ca7c7ec96c32869c0dc">physical_controller_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d93/classphysical__controller.html#a9d431903760c785997c47d274a7eeec3">get_type</a> () const noexcept</td></tr>
 <tr class="separator:a9d431903760c785997c47d274a7eeec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade3232a9916e5844de365866de083970" id="r_ade3232a9916e5844de365866de083970"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d93/classphysical__controller.html#ade3232a9916e5844de365866de083970">process_input</a> (const sf::Event &amp;event, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side, const <a class="el" href="../../d0/d99/classgame__view__layout.html">game_view_layout</a> &amp;layout) const</td></tr>
+<tr class="memdesc:ade3232a9916e5844de365866de083970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the input for this controller.  <br /></td></tr>
 <tr class="separator:ade3232a9916e5844de365866de083970"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae57d8f7bacd1377b9d110d9d9cae3ba6" id="r_ae57d8f7bacd1377b9d110d9d9cae3ba6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d93/classphysical__controller.html#ae57d8f7bacd1377b9d110d9d9cae3ba6">set_type</a> (const <a class="el" href="../../d1/d18/physical__controller__type_8h.html#a21cd4c6791036ca7c7ec96c32869c0dc">physical_controller_type</a> t) noexcept</td></tr>
 <tr class="separator:ae57d8f7bacd1377b9d110d9d9cae3ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A physical controller.</p>
+<div class="textblock"><p>A physical controller. </p>
 <p>A physical controller is a class that takes input from a mouse or keyboard and converts these into the right '<a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>'. sf::Event -&gt; controllers -&gt; <a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a> </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a37fab26f37f8269d565371c68346bed9" name="a37fab26f37f8269d565371c68346bed9"></a>
@@ -218,7 +222,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Process the input for this controller. Returns an an empty vector if this controller is uneffected by the event </p>
+
+<p>Process the input for this controller. </p>
+<p>Returns an an empty vector if this controller is uneffected by the event </p>
 
 </div>
 </div>

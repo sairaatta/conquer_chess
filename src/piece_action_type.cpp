@@ -50,9 +50,9 @@ std::string to_human_str(const piece_action_type t) noexcept
  switch (t)
  {
     case piece_action_type::attack: return "Attack";
+    case piece_action_type::attack_en_passant: return "Capture en-passant";
     case piece_action_type::castle_kingside: return "Castle kingside";
     case piece_action_type::castle_queenside: return "Castle queenside";
-    case piece_action_type::en_passant: return "Capture en-passant";
     case piece_action_type::move: return "Move";
     case piece_action_type::promote_to_bishop: return "Promote to bishop";
     case piece_action_type::promote_to_knight: return "Promote to knight";

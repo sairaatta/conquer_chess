@@ -8,8 +8,7 @@
 #include "piece_type.h"
 #include "race.h"
 
-/// The games' piece_textures
-/// The raw game resources
+/// Textures of the chess pieces
 class piece_textures
 {
 public:

@@ -3,7 +3,7 @@
 
 #include <SFML/Audio/Music.hpp>
 
-/// Holds all the music
+/// All songs
 class songs
 {
 public:

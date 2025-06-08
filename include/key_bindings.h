@@ -10,7 +10,11 @@
 #include <iosfwd>
 #include <vector>
 
-/// Which key does which action
+/// The key bindings.
+///
+/// This class connects a key to an action,
+/// where an action can be a cursor movement
+/// or an actual action, such as attack, move, etc.
 class key_bindings
 {
 public:

@@ -8,8 +8,9 @@
 
 #include <vector>
 
-/// The layout of the options view.
+/// The layout of the Options dialog.
 ///
+/// ```text
 ///   x   x                 x                        x  x
 ///   1   2                 3                        4  5
 ///
@@ -40,9 +41,10 @@
 /// |     +------------------------------------------+     | y10
 /// |                                                      |
 /// +------------------------------------------------------+
+/// ```text
 ///
-/// Top panel must be 400 pixels at least (i.e. with current font size)
-/// Bottom panel must be 400 pixels at least (i.e. with current font size)
+/// - Top panel must be 400 pixels at least (i.e. with current font size)
+/// - Bottom panel must be 400 pixels at least (i.e. with current font size)
 class options_view_layout
 {
 public:

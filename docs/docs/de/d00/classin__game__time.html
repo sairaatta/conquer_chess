@@ -78,6 +78,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The in-game time, in chess moves.  
+ <a href="../../de/d00/classin__game__time.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d6/d96/in__game__time_8h_source.html">in_game_time.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -88,10 +91,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3e68aaf7c714eeddae70ae4b4c590c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The time, in chess moves.</p>
-<p>The time that passes where</p><ul>
-<li>0.01 means that only 1% of the full move is done</li>
-<li>1.0 denotes a full move, i.e. a piece traverses 1.0 game coordinat </li>
+<div class="textblock"><p>The in-game time, in chess moves. </p>
+<p>The in-game time, where</p><ul>
+<li>0.0 is at the start of a game</li>
+<li>1.0 is the earliest time a first move can have finished</li>
+<li>2.0 is the earliest time a piece can have moved twice (assuming the piece completes both moves= </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa628f9e10fa728ae9de42ad482018939" name="aa628f9e10fa728ae9de42ad482018939"></a>

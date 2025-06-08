@@ -9,7 +9,10 @@
 #include "game_options.h"
 #include "physical_controllers.h"
 
-/// Loading screen
+/// The Loading screen.
+///
+/// The Loading screen loads the game resources
+/// and shows the progress in doing so.
 class loading_view
 {
 public:

@@ -10,8 +10,12 @@
 #include "piece_type.h"
 #include "square.h"
 
-/// A chess move, e.g. 'e4'
-// Call it 'chess_move' instead of 'move' to avoid conflicts with 'std::move'
+/// A chess move.
+///
+/// A chess move, e.g. 'e4'.
+///
+/// @note This called is called `chess_move` instead of `move`
+///   to avoid conflicts with `std::move'`.
 class chess_move
 {
 public:

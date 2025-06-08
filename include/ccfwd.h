@@ -1,7 +1,7 @@
 #ifndef CCFWD_H
 #define CCFWD_H
 
-/// Conquer Chess forward declarations
+/// @file Forward declarations
 class action_number;
 class chess_move;
 class delta_t;

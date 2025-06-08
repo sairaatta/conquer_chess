@@ -1,13 +1,18 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+/// @file Helper functions
+
 #include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <string>
 #include <vector>
 
-/// Calculate the angle in degrees
+/// Calculate the angle in degrees.
+///
+/// Calculate the angle in degrees.
+///
 /// dx | dy | o'clock | degrees
 /// ---|----|---------|--------
 ///  1 |  0 |       3 | 0
@@ -16,7 +21,10 @@
 ///  0 | -1 |      12 | 90
 double calc_angle_degrees(const double dx, const double dy);
 
-/// Calculate the angle in radians
+/// Calculate the angle in radians.
+///
+/// Calculate the angle in radians.
+///
 /// dx | dy | o'clock | radians
 /// ---|----|---------|---------
 ///  1 |  0 |       3 | 0.0 * pi
@@ -25,14 +33,19 @@ double calc_angle_degrees(const double dx, const double dy);
 ///  0 | -1 |      12 | 0.5 * pi
 double calc_angle_radians(const double dx, const double dy);
 
-/// Calculate the Euclidean distance between two points
+/// Calculate the Euclidean distance between two points.
+///
+/// Calculate the Euclidean distance between two points.
 double calc_distance(const double dx, const double dy) noexcept;
 
+/// Determine if the difference between two values is less
+/// than the maximum tolerated value.
 template <class T> bool is_close(const T& lhs, const T& rhs, const T& max)
 {
   return std::abs(lhs - rhs) < max;
 }
 
+/// Determine if a value if part of a collection
 template <class T> bool is_present_in(
   const T& element,
   const std::vector<T>& collection
@@ -45,7 +58,9 @@ template <class T> bool is_present_in(
   ) != std::end(collection);
 }
 
-/// Make a sequence in an incluse way:
+/// Make a sequence in an inclusive way.
+///
+/// Make a sequence in an inclusive way:
 /// the first element will be 'from',
 /// the last element will be 'to'
 /// Assumes 'from' and 'to' are different
@@ -55,6 +70,9 @@ std::vector<int> make_sequence(
   const int increment = 1
 );
 
+/// Remove the first element from a collection.
+///
+/// Remove the first element from a collection.
 template <class T>
 void remove_first(T& v)
 {
@@ -62,13 +80,17 @@ void remove_first(T& v)
   v.erase(v.begin());
 }
 
-/// Split a string, from https://www.richelbilderbeek.nl/CppSeperateString.htm
+/// Split a string.
+///
+/// @see From https://www.richelbilderbeek.nl/CppSeperateString.htm
 std::vector<std::string> split_str(
   const std::string& s,
   const char seperator = ' '
 );
 
-/// Test the help functions
+/// Test the help functions.
+///
+/// Test the help functions.
 void test_helper();
 
 #endif // HELPER_H

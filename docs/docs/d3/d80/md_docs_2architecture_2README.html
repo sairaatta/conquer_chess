@@ -115,21 +115,21 @@ Handling user input</h1>
 <div class="line">    Note right of chess_piece: chess_piece::add_action</div>
 <div class="line">    Note right of chess_piece: chess_piece::tick</div>
 <div class="line">    chess_piece-&gt;&gt;chess_piece: process all piece_actions until all are done</div>
-</div><!-- fragment --><p>The key and mouse talk to <code><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a></code>, or: <code><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a></code> handles all the <code>sf::Event</code>s. However, not all events are valid. For example, an LMB can be ignored if all players use the keyboard. <code><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a></code> only keeps the keys that are setup in the 'Key Settings'/'Controls' dialog.</p>
+</div><!-- fragment --><p>The key and mouse talk to <code><a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a></code>, or: <code><a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a></code> handles all the <code>sf::Event</code>s. However, not all events are valid. For example, an LMB can be ignored if all players use the keyboard. <code><a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a></code> only keeps the keys that are setup in the 'Key Settings'/'Controls' dialog.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Input   </th><th class="markdownTableHeadNone">Class   </th><th class="markdownTableHeadNone">Output    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">keyboard and mouse input   </td><td class="markdownTableBodyNone"><code><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a></code> <img src="../../user_inputs.jpg" alt="user_inputs" class="inline"/>   </td><td class="markdownTableBodyNone">Store valid input, ignore invalid input   </td></tr>
+<td class="markdownTableBodyNone">keyboard and mouse input   </td><td class="markdownTableBodyNone"><code><a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a></code> <img src="../../user_inputs.jpg" alt="user_inputs" class="inline"/>   </td><td class="markdownTableBodyNone">Store valid input, ignore invalid input   </td></tr>
 </table>
-<p><code><a class="el" href="../../df/d15/classgame__controller.html">game_controller</a></code> gets all <code><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a></code> and moves the right cursor (there is one cursor for each player) to the right spots. It can select a piece to do a chess move.</p>
+<p><code><a class="el" href="../../df/d15/classgame__controller.html" title="The class that acts as a controller for game}.">game_controller</a></code> gets all <code><a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a></code> and moves the right cursor (there is one cursor for each player) to the right spots. It can select a piece to do a chess move.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Input   </th><th class="markdownTableHeadNone">Class   </th><th class="markdownTableHeadNone">Output    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Valid input   </td><td class="markdownTableBodyNone"><code><a class="el" href="../../df/d15/classgame__controller.html">game_controller</a></code> <img src="../../game_controller.jpg" alt="game_controller" class="inline"/>   </td><td class="markdownTableBodyNone">Moves the cursor, does chess moves   </td></tr>
+<td class="markdownTableBodyNone">Valid input   </td><td class="markdownTableBodyNone"><code><a class="el" href="../../df/d15/classgame__controller.html" title="The class that acts as a controller for game}.">game_controller</a></code> <img src="../../game_controller.jpg" alt="game_controller" class="inline"/>   </td><td class="markdownTableBodyNone">Moves the cursor, does chess moves   </td></tr>
 </table>
-<p>The chess moves that <code><a class="el" href="../../df/d15/classgame__controller.html">game_controller</a></code> suggests may not be valid and do not move pieces. <code>game</code> checks if the chess move is valid and if yes, does the move.</p>
+<p>The chess moves that <code><a class="el" href="../../df/d15/classgame__controller.html" title="The class that acts as a controller for game}.">game_controller</a></code> suggests may not be valid and do not move pieces. <code>game</code> checks if the chess move is valid and if yes, does the move.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Input   </th><th class="markdownTableHeadNone">Class   </th><th class="markdownTableHeadNone">Output    </th></tr>

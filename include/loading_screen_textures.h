@@ -5,8 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-/// The games' loading_screen_textures
-/// The raw game resources
+/// The textures used in the loading screen.
 class loading_screen_textures
 {
 public:

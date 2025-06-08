@@ -7,8 +7,9 @@
 
 #include "message.h"
 
-/// The text log in the game
-/// Cannot use 'log' due to conflicts with 'std::log'
+/// The text log in the game.
+/// @note This class cannot be called `log`,
+/// due to conflicts with `std::log`
 class game_log
 {
 public:

@@ -5,7 +5,11 @@
 
 #include <iosfwd>
 
-/// A rectangle, as down on the screen.
+/// A rectangle on the screen.
+///
+/// A rectangle on the screen, where `(0,0), (1,2)`
+/// denotes the pixels from the top-left corner of the screen,
+/// to the second pixel to the right and the third on down.
 class screen_rect
 {
 public:

@@ -226,6 +226,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d15/classgame__controller.html">game_controller</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class that acts as a controller for game}.  <a href="../../df/d15/classgame__controller.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -234,40 +235,52 @@ Functions</h2></td></tr>
 <tr class="memdesc:a8aa2bac8ab513d5c325163d725336772"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a user input. These will be processed in '<a class="el" href="../../d0/d51/classgame.html#a7896b4bc9339d8777b83e6bbf5bd5982" title="Go to the next frame.">game::tick</a>'.  <br /></td></tr>
 <tr class="separator:a8aa2bac8ab513d5c325163d725336772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a047336dbc7b15d614f82f517bfe0b5b9" id="r_a047336dbc7b15d614f82f517bfe0b5b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a047336dbc7b15d614f82f517bfe0b5b9">add_user_inputs</a> (<a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a> &amp;input)</td></tr>
-<tr class="memdesc:a047336dbc7b15d614f82f517bfe0b5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>. These will be processed in '<a class="el" href="../../d0/d51/classgame.html#a7896b4bc9339d8777b83e6bbf5bd5982" title="Go to the next frame.">game::tick</a>'.  <br /></td></tr>
+<tr class="memdesc:a047336dbc7b15d614f82f517bfe0b5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a>. These will be processed in '<a class="el" href="../../d0/d51/classgame.html#a7896b4bc9339d8777b83e6bbf5bd5982" title="Go to the next frame.">game::tick</a>'.  <br /></td></tr>
 <tr class="separator:a047336dbc7b15d614f82f517bfe0b5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a207ec4b8a3db122d3f218087cba37065" id="r_a207ec4b8a3db122d3f218087cba37065"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a207ec4b8a3db122d3f218087cba37065">can_player_select_piece_at_cursor_pos</a> (const <a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> cursor_color)</td></tr>
 <tr class="memdesc:a207ec4b8a3db122d3f218087cba37065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can the player select a piece at the current mouse position?  <br /></td></tr>
 <tr class="separator:a207ec4b8a3db122d3f218087cba37065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3e27ff9c553ec1571a3022941b36312" id="r_af3e27ff9c553ec1571a3022941b36312"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#af3e27ff9c553ec1571a3022941b36312">collect_all_user_inputses</a> (const <a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c)</td></tr>
+<tr class="memdesc:af3e27ff9c553ec1571a3022941b36312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect all valid '<a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>' for all players.  <br /></td></tr>
 <tr class="separator:af3e27ff9c553ec1571a3022941b36312"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a072b5cf7dc78268a13db0e5bd770212c" id="r_a072b5cf7dc78268a13db0e5bd770212c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a072b5cf7dc78268a13db0e5bd770212c">convert_move_to_user_inputs</a> (const <a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d1/dc5/classchess__move.html">chess_move</a> &amp;<a class="el" href="../../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50a3734a903022249b3010be1897042568e">move</a>)</td></tr>
+<tr class="memdesc:a072b5cf7dc78268a13db0e5bd770212c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a chess move, e.g.  <br /></td></tr>
 <tr class="separator:a072b5cf7dc78268a13db0e5bd770212c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b923a1b915b9d5bf6f4aaf08acc23cc" id="r_a2b923a1b915b9d5bf6f4aaf08acc23cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a2b923a1b915b9d5bf6f4aaf08acc23cc">count_user_inputs</a> (const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c) noexcept</td></tr>
+<tr class="memdesc:a2b923a1b915b9d5bf6f4aaf08acc23cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count the total number of <a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>}s to be done by the <a class="el" href="../../df/d15/classgame__controller.html" title="The class that acts as a controller for game}.">game_controller</a>}.  <br /></td></tr>
 <tr class="separator:a2b923a1b915b9d5bf6f4aaf08acc23cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58b99f67a3da0e7d7b3de6c384026c6a" id="r_a58b99f67a3da0e7d7b3de6c384026c6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a58b99f67a3da0e7d7b3de6c384026c6a">do_move_keyboard_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s)</td></tr>
+<tr class="memdesc:a58b99f67a3da0e7d7b3de6c384026c6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the keyboard player move a piece from the current selected square to a new target.  <br /></td></tr>
 <tr class="separator:a58b99f67a3da0e7d7b3de6c384026c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9f9875a8ab5240e78223f8f636f2d5d" id="r_aa9f9875a8ab5240e78223f8f636f2d5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#aa9f9875a8ab5240e78223f8f636f2d5d">do_move_mouse_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s)</td></tr>
+<tr class="memdesc:aa9f9875a8ab5240e78223f8f636f2d5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the mouse player move a piece from the current selected square to a new target.  <br /></td></tr>
 <tr class="separator:aa9f9875a8ab5240e78223f8f636f2d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59c3a00372693f9ca41504edf5b71e7b" id="r_a59c3a00372693f9ca41504edf5b71e7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a59c3a00372693f9ca41504edf5b71e7b">do_promote_keyboard_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;pawn_location, const <a class="el" href="../../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3">piece_type</a> promote_to)</td></tr>
 <tr class="separator:a59c3a00372693f9ca41504edf5b71e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1efca43011aebb84ae3a61f9ffbd8fd3" id="r_a1efca43011aebb84ae3a61f9ffbd8fd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a1efca43011aebb84ae3a61f9ffbd8fd3">do_select_and_move_keyboard_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;from, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;to)</td></tr>
+<tr class="memdesc:a1efca43011aebb84ae3a61f9ffbd8fd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the keyboard player select a square (assuming that a piece of the right color is there) and let it move to another square.  <br /></td></tr>
 <tr class="separator:a1efca43011aebb84ae3a61f9ffbd8fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d40653b3cd9536e0e116fa8f20754d0" id="r_a2d40653b3cd9536e0e116fa8f20754d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a2d40653b3cd9536e0e116fa8f20754d0">do_select_and_move_keyboard_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const std::string &amp;from_str, const std::string &amp;<a class="el" href="../../d3/d8b/action__history_8h.html#a008e89763d22a5d95697a5cf6007f3ec">to_str</a>)</td></tr>
 <tr class="separator:a2d40653b3cd9536e0e116fa8f20754d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a022f77e9f4f294676f4830c70f0c561c" id="r_a022f77e9f4f294676f4830c70f0c561c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a022f77e9f4f294676f4830c70f0c561c">do_select_and_move_mouse_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;from, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;to)</td></tr>
+<tr class="memdesc:a022f77e9f4f294676f4830c70f0c561c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the mouse player select a square (assuming that a piece of the right color is there) and let it move to another square.  <br /></td></tr>
 <tr class="separator:a022f77e9f4f294676f4830c70f0c561c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eee16d95cdce41cb09c2bc5f09cbc3e" id="r_a9eee16d95cdce41cb09c2bc5f09cbc3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a9eee16d95cdce41cb09c2bc5f09cbc3e">do_select_and_move_mouse_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const std::string &amp;from_str, const std::string &amp;<a class="el" href="../../d3/d8b/action__history_8h.html#a008e89763d22a5d95697a5cf6007f3ec">to_str</a>)</td></tr>
 <tr class="separator:a9eee16d95cdce41cb09c2bc5f09cbc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8613ade6b3b7ef0337254471e8d72045" id="r_a8613ade6b3b7ef0337254471e8d72045"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a8613ade6b3b7ef0337254471e8d72045">do_select_and_promote_keyboard_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;pawn_location, const <a class="el" href="../../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3">piece_type</a> promote_to)</td></tr>
+<tr class="memdesc:a8613ade6b3b7ef0337254471e8d72045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the keyboard player select a square (assuming that a pawn of the right color is there) and let it promote to another type.  <br /></td></tr>
 <tr class="separator:a8613ade6b3b7ef0337254471e8d72045"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af86766f2da7991810ce6bd3de994f6ab" id="r_af86766f2da7991810ce6bd3de994f6ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#af86766f2da7991810ce6bd3de994f6ab">do_select_and_start_attack_keyboard_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;from, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;to)</td></tr>
+<tr class="memdesc:af86766f2da7991810ce6bd3de994f6ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the keyboard player select a square (assuming that a piece of the right color is there) and let it start an attack on another square.  <br /></td></tr>
 <tr class="separator:af86766f2da7991810ce6bd3de994f6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea15b5a9218be50fcb6289b29c0098ab" id="r_aea15b5a9218be50fcb6289b29c0098ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab">do_select_for_keyboard_player</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s)</td></tr>
+<tr class="memdesc:aea15b5a9218be50fcb6289b29c0098ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the keyboard player select the square Assumes that a piece of the right color is there.  <br /></td></tr>
 <tr class="separator:aea15b5a9218be50fcb6289b29c0098ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9973007e7c06e2e7c9b482e08b1ac030" id="r_a9973007e7c06e2e7c9b482e08b1ac030"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a9973007e7c06e2e7c9b482e08b1ac030">do_select_for_mouse_player</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s)</td></tr>
+<tr class="memdesc:a9973007e7c06e2e7c9b482e08b1ac030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the mouse player select the square Assumes that a piece of the right color is there.  <br /></td></tr>
 <tr class="separator:a9973007e7c06e2e7c9b482e08b1ac030"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdb581ae5ecbbd10f39078b3726fa940" id="r_afdb581ae5ecbbd10f39078b3726fa940"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#afdb581ae5ecbbd10f39078b3726fa940">do_start_attack_keyboard_player_piece</a> (<a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s)</td></tr>
+<tr class="memdesc:afdb581ae5ecbbd10f39078b3726fa940"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let the keyboard player attack a piece from the current selected square to a new target.  <br /></td></tr>
 <tr class="separator:afdb581ae5ecbbd10f39078b3726fa940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fad8cf04e3b73e7e8375a4e8b81c21b" id="r_a4fad8cf04e3b73e7e8375a4e8b81c21b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d6/d10/classgame__coordinate.html">game_coordinate</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a4fad8cf04e3b73e7e8375a4e8b81c21b">get_cursor_pos</a> (const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side) noexcept</td></tr>
 <tr class="memdesc:a4fad8cf04e3b73e7e8375a4e8b81c21b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the a player's cursor position.  <br /></td></tr>
@@ -279,12 +292,16 @@ Functions</h2></td></tr>
 <tr class="memdesc:a4f5919abfd2f8ec7d6c4593178c9a8be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the a player's cursor position, as a square}.  <br /></td></tr>
 <tr class="separator:a4f5919abfd2f8ec7d6c4593178c9a8be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefbe6d265d895b5c1a9da1f9be289a9f" id="r_aefbe6d265d895b5c1a9da1f9be289a9f"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="../../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50">piece_action_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#aefbe6d265d895b5c1a9da1f9be289a9f">get_default_piece_action</a> (const <a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side) noexcept</td></tr>
+<tr class="memdesc:aefbe6d265d895b5c1a9da1f9be289a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the default, primary, most likely piece action Returns an empty optional if the current setup cannot result in an action.  <br /></td></tr>
 <tr class="separator:aefbe6d265d895b5c1a9da1f9be289a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa07262b0edbce65ff9fbfeca456752fc" id="r_aa07262b0edbce65ff9fbfeca456752fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#aa07262b0edbce65ff9fbfeca456752fc">get_keyboard_user_player_color</a> (const <a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c)</td></tr>
+<tr class="memdesc:aa07262b0edbce65ff9fbfeca456752fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the color of the keyboard using player Will throw if no user uses a keyboard.  <br /></td></tr>
 <tr class="separator:aa07262b0edbce65ff9fbfeca456752fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3833e541ccaf55502531061510c05a75" id="r_a3833e541ccaf55502531061510c05a75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a3833e541ccaf55502531061510c05a75">get_keyboard_user_player_side</a> (const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c)</td></tr>
+<tr class="memdesc:a3833e541ccaf55502531061510c05a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the side of the controller that uses the keyboard.  <br /></td></tr>
 <tr class="separator:a3833e541ccaf55502531061510c05a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac242a55f82d844b482b1cad7e7ed429a" id="r_ac242a55f82d844b482b1cad7e7ed429a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#ac242a55f82d844b482b1cad7e7ed429a">get_mouse_user_player_color</a> (const <a class="el" href="../../d0/d51/classgame.html">game</a> &amp;g, const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c)</td></tr>
+<tr class="memdesc:ac242a55f82d844b482b1cad7e7ed429a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the color of the mouse using player Will throw if no user uses a mouse.  <br /></td></tr>
 <tr class="separator:ac242a55f82d844b482b1cad7e7ed429a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10be631930f3f5fc2afcf252972bd1e4" id="r_a10be631930f3f5fc2afcf252972bd1e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a10be631930f3f5fc2afcf252972bd1e4">get_mouse_user_player_side</a> (const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c)</td></tr>
 <tr class="memdesc:a10be631930f3f5fc2afcf252972bd1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">What side does the player with the mouse control?  <br /></td></tr>
@@ -302,6 +319,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a6afbb7c7a661aa00285130473c308b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the game users' inputs.  <br /></td></tr>
 <tr class="separator:a6afbb7c7a661aa00285130473c308b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0c557cc9569c2cefaa8a1f753cd053a" id="r_aa0c557cc9569c2cefaa8a1f753cd053a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#aa0c557cc9569c2cefaa8a1f753cd053a">get_user_inputs_to_move_cursor_from_to</a> (const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;from, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;to, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side)</td></tr>
+<tr class="memdesc:aa0c557cc9569c2cefaa8a1f753cd053a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the user inputs to move the cursor to a target square knowing it will be at the 'from' square.  <br /></td></tr>
 <tr class="separator:aa0c557cc9569c2cefaa8a1f753cd053a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9464f3b0e84d5fe0d1475d45eecc4cbf" id="r_a9464f3b0e84d5fe0d1475d45eecc4cbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a9464f3b0e84d5fe0d1475d45eecc4cbf">get_user_inputs_to_move_cursor_to</a> (const <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;to, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side)</td></tr>
 <tr class="memdesc:a9464f3b0e84d5fe0d1475d45eecc4cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the user inputs to move the cursor to a target square.  <br /></td></tr>
@@ -319,12 +337,16 @@ Functions</h2></td></tr>
 <tr class="memdesc:a29c3f192c9ce7aeb67501c04a3a62dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The the player at that side a mouse user?  <br /></td></tr>
 <tr class="separator:a29c3f192c9ce7aeb67501c04a3a62dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd4f84fe509aa070f34b7aaf10085c95" id="r_acd4f84fe509aa070f34b7aaf10085c95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#acd4f84fe509aa070f34b7aaf10085c95">move_cursor_to</a> (<a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const std::string &amp;square_str, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side)</td></tr>
+<tr class="memdesc:acd4f84fe509aa070f34b7aaf10085c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the cursor (i.e.  <br /></td></tr>
 <tr class="separator:acd4f84fe509aa070f34b7aaf10085c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92941c0634bc50a514ebcee954e51558" id="r_a92941c0634bc50a514ebcee954e51558"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a92941c0634bc50a514ebcee954e51558">move_cursor_to</a> (<a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side)</td></tr>
+<tr class="memdesc:a92941c0634bc50a514ebcee954e51558"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the cursor (i.e.  <br /></td></tr>
 <tr class="separator:a92941c0634bc50a514ebcee954e51558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ab3be574f2c509478d8bb049624d3a" id="r_a05ab3be574f2c509478d8bb049624d3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a05ab3be574f2c509478d8bb049624d3a">move_keyboard_cursor_to</a> (<a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side)</td></tr>
+<tr class="memdesc:a05ab3be574f2c509478d8bb049624d3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the cursor (i.e.  <br /></td></tr>
 <tr class="separator:a05ab3be574f2c509478d8bb049624d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9767c00624c5ddc0da0742c3b6cf70de" id="r_a9767c00624c5ddc0da0742c3b6cf70de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#a9767c00624c5ddc0da0742c3b6cf70de">move_mouse_cursor_to</a> (<a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side)</td></tr>
+<tr class="memdesc:a9767c00624c5ddc0da0742c3b6cf70de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the cursor (i.e.  <br /></td></tr>
 <tr class="separator:a9767c00624c5ddc0da0742c3b6cf70de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc50012cba496564056737d59304fa01" id="r_acc50012cba496564056737d59304fa01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d23/game__controller_8h.html#acc50012cba496564056737d59304fa01">set_cursor_pos</a> (<a class="el" href="../../df/d15/classgame__controller.html">game_controller</a> &amp;c, const <a class="el" href="../../d6/d10/classgame__coordinate.html">game_coordinate</a> &amp;pos, const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> player_side) noexcept</td></tr>
 <tr class="memdesc:acc50012cba496564056737d59304fa01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the cursor's position to the target position.  <br /></td></tr>
@@ -401,7 +423,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Add a <a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>. These will be processed in '<a class="el" href="../../d0/d51/classgame.html#a7896b4bc9339d8777b83e6bbf5bd5982" title="Go to the next frame.">game::tick</a>'. </p>
+<p>Add a <a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a>. These will be processed in '<a class="el" href="../../d0/d51/classgame.html#a7896b4bc9339d8777b83e6bbf5bd5982" title="Go to the next frame.">game::tick</a>'. </p>
 
 </div>
 </div>
@@ -466,7 +488,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Collect all valid '<a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>' for all players. Each '<a class="el" href="../../d4/d4d/classuser__inputs.html">user_inputs</a>' equals one '<a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a>' </p><dl class="section see"><dt>See also</dt><dd>use '<a class="el" href="../../d2/dd5/game_8h.html#a21fab66dfb883d1a8b3d24c5c9707734">collect_all_piece_actions</a>' to get all the '<a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a>'s from a <a class="el" href="../../d0/d51/classgame.html">game</a> </dd></dl>
+
+<p>Collect all valid '<a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>' for all players. </p>
+<p>Each '<a class="el" href="../../d4/d4d/classuser__inputs.html" title="A collection of user inputs.">user_inputs</a>' equals one '<a class="el" href="../../df/dc6/classpiece__action.html" title="An action to be done by a piece.">piece_action</a>' </p><dl class="section see"><dt>See also</dt><dd>use '<a class="el" href="../../d2/dd5/game_8h.html#a21fab66dfb883d1a8b3d24c5c9707734" title="Collect all valid moves and attackes at a board for all pieces.">collect_all_piece_actions</a>' to get all the '<a class="el" href="../../df/dc6/classpiece__action.html" title="An action to be done by a piece.">piece_action</a>'s from a <a class="el" href="../../d0/d51/classgame.html" title="The game logic.">game</a> </dd></dl>
 
 </div>
 </div>
@@ -501,7 +525,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Convert a chess move, e.g. e4, to the right user inputs </p>
+
+<p>Convert a chess move, e.g. </p>
+<p>e4, to the right user inputs </p>
 
 </div>
 </div>
@@ -528,7 +554,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Count the total number of <a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>}s to be done by the <a class="el" href="../../df/d15/classgame__controller.html">game_controller</a>}. </p>
+
+<p>Count the total number of <a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>}s to be done by the <a class="el" href="../../df/d15/classgame__controller.html" title="The class that acts as a controller for game}.">game_controller</a>}. </p>
 
 </div>
 </div>
@@ -563,7 +590,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the keyboard player move a piece from the current selected square to a new target </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a1efca43011aebb84ae3a61f9ffbd8fd3">do_select_and_move_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#a58b99f67a3da0e7d7b3de6c384026c6a">do_move_keyboard_player_piece</a>' </dd></dl>
+
+<p>Let the keyboard player move a piece from the current selected square to a new target. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a1efca43011aebb84ae3a61f9ffbd8fd3" title="Let the keyboard player select a square (assuming that a piece of the right color is there) and let i...">do_select_and_move_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab" title="Let the keyboard player select the square Assumes that a piece of the right color is there.">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#a58b99f67a3da0e7d7b3de6c384026c6a" title="Let the keyboard player move a piece from the current selected square to a new target.">do_move_keyboard_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -598,7 +627,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the mouse player move a piece from the current selected square to a new target </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a022f77e9f4f294676f4830c70f0c561c">do_select_and_move_mouse_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#a9973007e7c06e2e7c9b482e08b1ac030">do_select_for_mouse_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#aa9f9875a8ab5240e78223f8f636f2d5d">do_move_mouse_player_piece</a>' </dd></dl>
+
+<p>Let the mouse player move a piece from the current selected square to a new target. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a022f77e9f4f294676f4830c70f0c561c" title="Let the mouse player select a square (assuming that a piece of the right color is there) and let it m...">do_select_and_move_mouse_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#a9973007e7c06e2e7c9b482e08b1ac030" title="Let the mouse player select the square Assumes that a piece of the right color is there.">do_select_for_mouse_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#aa9f9875a8ab5240e78223f8f636f2d5d" title="Let the mouse player move a piece from the current selected square to a new target.">do_move_mouse_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -679,7 +710,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the keyboard player select a square (assuming that a piece of the right color is there) and let it move to another square </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a1efca43011aebb84ae3a61f9ffbd8fd3">do_select_and_move_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#a58b99f67a3da0e7d7b3de6c384026c6a">do_move_keyboard_player_piece</a>' </dd></dl>
+
+<p>Let the keyboard player select a square (assuming that a piece of the right color is there) and let it move to another square. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a1efca43011aebb84ae3a61f9ffbd8fd3" title="Let the keyboard player select a square (assuming that a piece of the right color is there) and let i...">do_select_and_move_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab" title="Let the keyboard player select the square Assumes that a piece of the right color is there.">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#a58b99f67a3da0e7d7b3de6c384026c6a" title="Let the keyboard player move a piece from the current selected square to a new target.">do_move_keyboard_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -760,7 +793,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the mouse player select a square (assuming that a piece of the right color is there) and let it move to another square </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a022f77e9f4f294676f4830c70f0c561c">do_select_and_move_mouse_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#a9973007e7c06e2e7c9b482e08b1ac030">do_select_for_mouse_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#aa9f9875a8ab5240e78223f8f636f2d5d">do_move_mouse_player_piece</a>' </dd></dl>
+
+<p>Let the mouse player select a square (assuming that a piece of the right color is there) and let it move to another square. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a022f77e9f4f294676f4830c70f0c561c" title="Let the mouse player select a square (assuming that a piece of the right color is there) and let it m...">do_select_and_move_mouse_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#a9973007e7c06e2e7c9b482e08b1ac030" title="Let the mouse player select the square Assumes that a piece of the right color is there.">do_select_for_mouse_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#aa9f9875a8ab5240e78223f8f636f2d5d" title="Let the mouse player move a piece from the current selected square to a new target.">do_move_mouse_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -841,7 +876,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the keyboard player select a square (assuming that a pawn of the right color is there) and let it promote to another type </p>
+
+<p>Let the keyboard player select a square (assuming that a pawn of the right color is there) and let it promote to another type. </p>
 
 </div>
 </div>
@@ -882,7 +918,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the keyboard player select a square (assuming that a piece of the right color is there) and let it start an attack on another square </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#af86766f2da7991810ce6bd3de994f6ab">do_select_and_start_attack_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#afdb581ae5ecbbd10f39078b3726fa940">do_start_attack_keyboard_player_piece</a>' </dd></dl>
+
+<p>Let the keyboard player select a square (assuming that a piece of the right color is there) and let it start an attack on another square. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#af86766f2da7991810ce6bd3de994f6ab" title="Let the keyboard player select a square (assuming that a piece of the right color is there) and let i...">do_select_and_start_attack_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab" title="Let the keyboard player select the square Assumes that a piece of the right color is there.">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#afdb581ae5ecbbd10f39078b3726fa940" title="Let the keyboard player attack a piece from the current selected square to a new target.">do_start_attack_keyboard_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -917,7 +955,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the keyboard player select the square Assumes that a piece of the right color is there </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a1efca43011aebb84ae3a61f9ffbd8fd3">do_select_and_move_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#a58b99f67a3da0e7d7b3de6c384026c6a">do_move_keyboard_player_piece</a>' </dd></dl>
+
+<p>Let the keyboard player select the square Assumes that a piece of the right color is there. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a1efca43011aebb84ae3a61f9ffbd8fd3" title="Let the keyboard player select a square (assuming that a piece of the right color is there) and let i...">do_select_and_move_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab" title="Let the keyboard player select the square Assumes that a piece of the right color is there.">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#a58b99f67a3da0e7d7b3de6c384026c6a" title="Let the keyboard player move a piece from the current selected square to a new target.">do_move_keyboard_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -952,7 +992,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the mouse player select the square Assumes that a piece of the right color is there </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a022f77e9f4f294676f4830c70f0c561c">do_select_and_move_mouse_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#a9973007e7c06e2e7c9b482e08b1ac030">do_select_for_mouse_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#aa9f9875a8ab5240e78223f8f636f2d5d">do_move_mouse_player_piece</a>' </dd></dl>
+
+<p>Let the mouse player select the square Assumes that a piece of the right color is there. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#a022f77e9f4f294676f4830c70f0c561c" title="Let the mouse player select a square (assuming that a piece of the right color is there) and let it m...">do_select_and_move_mouse_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#a9973007e7c06e2e7c9b482e08b1ac030" title="Let the mouse player select the square Assumes that a piece of the right color is there.">do_select_for_mouse_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#aa9f9875a8ab5240e78223f8f636f2d5d" title="Let the mouse player move a piece from the current selected square to a new target.">do_move_mouse_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -987,7 +1029,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Let the keyboard player attack a piece from the current selected square to a new target </p><dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#af86766f2da7991810ce6bd3de994f6ab">do_select_and_start_attack_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#afdb581ae5ecbbd10f39078b3726fa940">do_start_attack_keyboard_player_piece</a>' </dd></dl>
+
+<p>Let the keyboard player attack a piece from the current selected square to a new target. </p>
+<dl class="section see"><dt>See also</dt><dd>'<a class="el" href="../../d6/d23/game__controller_8h.html#af86766f2da7991810ce6bd3de994f6ab" title="Let the keyboard player select a square (assuming that a piece of the right color is there) and let i...">do_select_and_start_attack_keyboard_player_piece</a>' does both '<a class="el" href="../../d6/d23/game__controller_8h.html#aea15b5a9218be50fcb6289b29c0098ab" title="Let the keyboard player select the square Assumes that a piece of the right color is there.">do_select_for_keyboard_player</a>' and '<a class="el" href="../../d6/d23/game__controller_8h.html#afdb581ae5ecbbd10f39078b3726fa940" title="Let the keyboard player attack a piece from the current selected square to a new target.">do_start_attack_keyboard_player_piece</a>' </dd></dl>
 
 </div>
 </div>
@@ -1134,7 +1178,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get the default, primary, most likely piece action Returns an empty optional if the current setup cannot result in an action </p>
+
+<p>Get the default, primary, most likely piece action Returns an empty optional if the current setup cannot result in an action. </p>
 
 </div>
 </div>
@@ -1163,7 +1208,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the color of the keyboard using player Will throw if no user uses a keyboard </p>
+
+<p>Get the color of the keyboard using player Will throw if no user uses a keyboard. </p>
 
 </div>
 </div>
@@ -1182,7 +1228,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the side of the controller that uses the keyboard. Assumes there is one controller that uses the keyboard </p>
+
+<p>Get the side of the controller that uses the keyboard. </p>
+<p>Assumes there is one controller that uses the keyboard </p>
 
 </div>
 </div>
@@ -1211,7 +1259,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the color of the mouse using player Will throw if no user uses a mouse </p>
+
+<p>Get the color of the mouse using player Will throw if no user uses a mouse. </p>
 
 </div>
 </div>
@@ -1436,7 +1485,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Create the user inputs to move the cursor to a target square knowing it will be at the 'from' square. This is useful for creating future '<a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>'s, e.g. for white doing e4, the cursor must be moved to e2 to select a pawn, then to e4 to select the target. </p>
+
+<p>Create the user inputs to move the cursor to a target square knowing it will be at the 'from' square. </p>
+<p>This is useful for creating future '<a class="el" href="../../df/d60/classuser__input.html" title="A user input.">user_input</a>'s, e.g. for white doing e4, the cursor must be moved to e2 to select a pawn, then to e4 to select the target. </p>
 
 </div>
 </div>
@@ -1585,7 +1636,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Put the cursor (i.e. the selector, not the mouse pointer) at the desired square. Does not select the square where the cursor is. </p>
+
+<p>Put the cursor (i.e. </p>
+<p>the selector, not the mouse pointer) at the desired square. Does not select the square where the cursor is. </p>
 
 </div>
 </div>
@@ -1620,7 +1673,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Put the cursor (i.e. the selector, not the mouse pointer) at the desired square </p>
+
+<p>Put the cursor (i.e. </p>
+<p>the selector, not the mouse pointer) at the desired square </p>
 
 </div>
 </div>
@@ -1655,7 +1710,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Put the cursor (i.e. the selector) at the desired square </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d6/d23/game__controller_8h.html#acd4f84fe509aa070f34b7aaf10085c95">move_cursor_to</a>} is more general </dd></dl>
+
+<p>Put the cursor (i.e. </p>
+<p>the selector) at the desired square </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d6/d23/game__controller_8h.html#acd4f84fe509aa070f34b7aaf10085c95" title="Put the cursor (i.e.">move_cursor_to</a>} is more general </dd></dl>
 
 </div>
 </div>
@@ -1690,7 +1747,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Put the cursor (i.e. the selector, not the mouse pointer) at the desired square </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d6/d23/game__controller_8h.html#acd4f84fe509aa070f34b7aaf10085c95">move_cursor_to</a>} is more general </dd></dl>
+
+<p>Put the cursor (i.e. </p>
+<p>the selector, not the mouse pointer) at the desired square </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d6/d23/game__controller_8h.html#acd4f84fe509aa070f34b7aaf10085c95" title="Put the cursor (i.e.">move_cursor_to</a>} is more general </dd></dl>
 
 </div>
 </div>

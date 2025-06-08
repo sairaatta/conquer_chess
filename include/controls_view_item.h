@@ -3,7 +3,7 @@
 
 #include <vector>
 
-/// The items in the menu view
+/// The items in the Controls dialog.
 enum class controls_view_item
 {
   type, up, right, down, left,

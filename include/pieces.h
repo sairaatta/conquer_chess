@@ -1,7 +1,7 @@
 #ifndef PIECES_H
 #define PIECES_H
 
-/// Functions to work on collections of pieces
+/// @file Functions to work on collections of pieces
 
 #include "board_to_text_options.h"
 #include "piece.h"

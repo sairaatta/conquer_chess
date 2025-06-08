@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "piece_action_type.h"
 
-/// The games' icon_textures
-/// The raw game resources
+/// The textures for piece actions.
 class piece_action_textures
 {
 public:

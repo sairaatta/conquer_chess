@@ -9,7 +9,9 @@
 #include "chess_color.h"
 #include "castling_type.h"
 
-/// A chess square, e.g. e4
+/// A chess square.
+///
+/// A chess square, e.g. e4.
 class square
 {
 public:

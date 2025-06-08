@@ -9,7 +9,11 @@
 #include "controls_view_layout.h"
 #include "controls_view_item.h"
 
-/// The 'Controls' dialog
+/// The Controls dialog.
+///
+/// The Controls dialog is where the user
+/// determines which controllers (e.g. keyboard
+/// or mouse) are used.
 class controls_view
 {
 public:

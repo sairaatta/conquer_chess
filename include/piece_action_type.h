@@ -4,13 +4,13 @@
 #include <iosfwd>
 #include <vector>
 
-/// The type of actions a piece can do
+/// The type of actions a piece can do.
 enum class piece_action_type
 {
   attack, // a regular attack, not en-passant
+  attack_en_passant, // a special type of attack
   castle_kingside,
   castle_queenside,
-  en_passant, // a type of attack
   move,
   promote_to_bishop,
   promote_to_knight,

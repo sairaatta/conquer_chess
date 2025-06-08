@@ -7,8 +7,9 @@
 
 #include <vector>
 
-/// The layout of the menu view
+/// The layout of the menu view.
 ///
+/// ```text
 ///   x          x
 ///   1          2
 ///
@@ -41,6 +42,7 @@
 ///   |          |
 ///   +----------+
 ///    panel_width
+/// ```
 ///
 class about_view_layout
 {

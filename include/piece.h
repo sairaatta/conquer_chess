@@ -16,7 +16,7 @@
 #include <string>
 #include <vector>
 
-/// A chess piece
+/// A chess piece.
 class piece
 {
 public:

@@ -1,9 +1,7 @@
 #ifndef REPLAYER_H
 #define REPLAYER_H
 
-
 #include "ccfwd.h"
-#include "delta_t.h"
 #include "in_game_time.h"
 #include "replay.h"
 

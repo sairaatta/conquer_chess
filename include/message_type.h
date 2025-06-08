@@ -5,9 +5,7 @@
 #include <string>
 #include <vector>
 
-/// The types of sound effects,
-/// as used by 'sound_effect'
-/// as played by 'sound_effects'
+/// The type of a message.
 enum class message_type
 {
   cannot,

@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 
-/// The loading_screen_fonts used in the loading screen
+/// The fonts used in the loading screen.
 class loading_screen_fonts
 {
 public:

@@ -9,7 +9,7 @@
 #include <vector>
 
 /// The collected in-game times of actions,
-/// in chrononical order
+/// in chrononical order.
 class action_history
 {
 public:

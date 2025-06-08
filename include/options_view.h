@@ -10,6 +10,7 @@
 #include "physical_controllers.h"
 #include <SFML/Graphics.hpp>
 
+/// The Options dialog.
 class options_view
 {
 public:

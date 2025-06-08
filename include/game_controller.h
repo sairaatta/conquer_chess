@@ -12,9 +12,10 @@
 #include <iosfwd>
 
 /// The class that acts as a controller for \link{game}.
-/// A \link{game_controller} receives \link{user_inputs}.
-/// It will use those \link{user_inputs}
-/// to move the cursors and to do chess moves on the \link{game}.
+///
+/// A \link{game_controller} receives input
+/// from the \link{physical_controllers} and send these
+/// to the \link{game}.
 class game_controller
 {
 public:

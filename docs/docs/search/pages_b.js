@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resources_0',['resources',['../de/db4/md_resources_2README.html',1,'']]]
+  ['questions_0',['Frequently Asked Questions',['../d0/d0b/md_docs_2faq.html',1,'']]]
 ];

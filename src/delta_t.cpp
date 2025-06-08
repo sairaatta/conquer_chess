@@ -34,44 +34,33 @@ void test_delta_t()
     const delta_t b(0.2);
     assert(a < b);
   }
-  #ifdef CAN_ADD_DELTA_T
   // operator+
   {
-    const double t1{0.1};
-    const double t2{0.2};
-    const delta_t d1{t1};
-    const delta_t d2{t2};
-    const delta_t d3{d1 + d2};
-    assert(d3.get() == t1 + t2);
+      const double t1{0.1};
+      const double t2{0.2};
+      const delta_t d1{t1};
+      const delta_t d2{t2};
+      const delta_t d3{d1 + d2};
+      assert(d3.get() == t1 + t2);
   }
   // operator-
   {
-    const double t1{0.5};
-    const double t2{0.3};
-    const delta_t d1{t1};
-    const delta_t d2{t2};
-    const delta_t d3{d1 - d2};
-    assert(d3.get() == t1 - t2);
+      const double t1{0.5};
+      const double t2{0.3};
+      const delta_t d1{t1};
+      const delta_t d2{t2};
+      const delta_t d3{d1 - d2};
+      assert(d3.get() == t1 - t2);
   }
   // operator*
   {
-    const double t1{0.1};
-    const double t2{0.2};
-    const delta_t d1{t1};
-    const delta_t d2{t2};
-    const delta_t d3{d1 * d2};
-    assert(d3.get() == t1 * t2);
+      const double t1{0.1};
+      const double t2{0.2};
+      const delta_t d1{t1};
+      const delta_t d2{t2};
+      const delta_t d3{d1 * d2};
+      assert(d3.get() == t1 * t2);
   }
-  // operator+=
-  {
-    const double t1{0.1};
-    const double t2{0.2};
-    delta_t d1{t1};
-    const delta_t d2{t2};
-    d1 += d2;
-    assert(d1.get() == t1 + t2);
-  }
-  #endif // CAN_ADD_DELTA_T
   // operator>
   {
     const delta_t low{0.0001};
@@ -107,14 +96,6 @@ bool operator<=(const delta_t& lhs, const delta_t& rhs) noexcept
 {
   return lhs.get() <= rhs.get();
 }
-
-#ifdef CAN_ADD_DELTA_TS
-delta_t& operator+=(delta_t& lhs, const delta_t& rhs) noexcept
-{
-  lhs = lhs + rhs;
-  return lhs;
-}
-#endif // CAN_ADD_DELTA_TS
 
 delta_t operator+(const delta_t& lhs, const delta_t& rhs) noexcept
 {

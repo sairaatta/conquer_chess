@@ -4,12 +4,13 @@
 #include "ccfwd.h"
 #include <iosfwd>
 
-/// The time, in chess moves.
+/// The in-game time, in chess moves.
 ///
-/// The time that passes
-/// where
-///   * 0.01 means that only 1% of the full move is done
-///   * 1.0 denotes a full move, i.e. a piece traverses 1.0 game coordinat
+/// The in-game time, where
+/// - 0.0 is at the start of a game
+/// - 1.0 is the earliest time a first move can have finished
+/// - 2.0 is the earliest time a piece can have moved twice (assuming
+///   the piece completes both moves=
 class in_game_time
 {
 public:

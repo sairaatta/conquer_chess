@@ -8,8 +8,7 @@
 #include "piece_type.h"
 #include "race.h"
 
-/// The games' piece_portrait_textures
-/// The raw game resources
+/// The textures of the portraits
 class piece_portrait_textures
 {
 public:

@@ -8,8 +8,9 @@
 
 #include <vector>
 
-/// The layout of the lobby view
+/// The layout of the Lobby dialog.
 ///
+/// ```text
 ///   x          x x         x
 ///   1          2 3         4
 ///
@@ -49,7 +50,7 @@
 ///   |          |
 ///   +----------+
 ///    panel_width
-///
+/// ```
 class lobby_view_layout
 {
 public:

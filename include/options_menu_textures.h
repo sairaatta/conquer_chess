@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "options_view_item.h"
 
-/// The games' icon_textures
-/// The raw game resources
+/// Textures in the Options menu.
 class options_menu_textures
 {
 public:

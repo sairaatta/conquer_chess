@@ -8,7 +8,7 @@
 #include "played_game_view_layout.h"
 #include "game.h"
 
-/// View a played Conquer Chess game
+/// Dialog to view a played Conquer Chess game
 class played_game_view
 {
 public:

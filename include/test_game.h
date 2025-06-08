@@ -1,6 +1,8 @@
 #ifndef TEST_GAME_H
 #define TEST_GAME_H
 
+/// @file Tests for the \link{game} class
+
 /// Test the game class and its free functions
 void test_game();
 

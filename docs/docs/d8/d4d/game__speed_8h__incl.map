@@ -1,10 +1,7 @@
 <map id="include/game_speed.h" name="include/game_speed.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="38,5,206,31"/>
-<area shape="rect" id="Node000002" href="$d2/de6/delta__t_8h.html" title=" " alt="" coords="5,79,84,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,33,69,71,66,67,108,29"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="51,152,115,177"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="121,32,93,139,87,138,116,30"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="160,79,223,104"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="135,29,173,67,169,71,132,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,103,73,139,68,141,49,106"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,173,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="13,79,77,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,32,62,68,57,66,80,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="102,79,165,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="99,30,121,66,117,68,94,32"/>
 </map>

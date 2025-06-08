@@ -1,7 +1,7 @@
 #ifndef PGN_STRING_H
 #define PGN_STRING_H
 
-/// A string that is a PGN notation string
+/// A string that is a PGN notation string.
 class pgn_string
 {
 public:

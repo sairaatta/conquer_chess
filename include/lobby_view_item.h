@@ -3,7 +3,9 @@
 
 #include <vector>
 
-/// The items in the lobby view
+/// The items in the Lobby.
+///
+/// The thing that are set in the Lobby dialog.
 enum class lobby_view_item
 {
   color, race, start

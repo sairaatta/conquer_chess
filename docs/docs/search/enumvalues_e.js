@@ -1,11 +1,15 @@
 var searchData=
 [
-  ['race_0',['race',['../db/d90/lobby__view__item_8h.html#aa96663822bdafb05ef5af33c23950133a2e2a7a2e57d1578bf33a559b20c463f6',1,'lobby_view_item.h']]],
-  ['ready_5fto_5fcastle_1',['ready_to_castle',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5a386a2a982c646a7a845ffa5b5eb0c135',1,'starting_position_type.h']]],
-  ['ready_5fto_5fnot_5fcastle_2',['ready_to_not_castle',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5a9f5b1fed89d7891456bca9e3f51b5d79',1,'starting_position_type.h']]],
-  ['rhs_3',['rhs',['../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e',1,'side.h']]],
-  ['right_4',['right',['../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca7c4f29407893c334a6cb7a87bf045c0d',1,'controls_view_item.h']]],
-  ['right_5fcontrols_5',['right_controls',['../db/da8/options__view__item_8h.html#a412c507626764f6e0bd81dcc59f0d388a7c2fd06c049a7c9b58debfdd5f8f82f8',1,'options_view_item.h']]],
-  ['rmb_5fdown_6',['rmb_down',['../d7/de7/user__input__type_8h.html#afb12242cff78e1daafb90d5d1deb5b09ae316ebb5be41e4b52a00c4340f69bcc2',1,'user_input_type.h']]],
-  ['rook_7',['rook',['../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3adc281d39f6e0b745a5fb11ab742cc75f',1,'piece_type.h']]]
+  ['select_0',['select',['../d2/d59/message__type_8h.html#a4e0a9e26bf11796d8ca091cb6b3ce470a99938282f04071859941e18f16efcf42',1,'select:&#160;message_type.h'],['../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50a99938282f04071859941e18f16efcf42',1,'select:&#160;piece_action_type.h']]],
+  ['slow_1',['slow',['../d5/de3/game__speed_8h.html#afe0334e16ff539eae4862884d0ddf4fea4fe9dfe784a2be25dd8aec3b403c3654',1,'game_speed.h']]],
+  ['slower_2',['slower',['../d5/de3/game__speed_8h.html#afe0334e16ff539eae4862884d0ddf4fea018cfa155a71f59242c05da47f3ccb0f',1,'game_speed.h']]],
+  ['slowest_3',['slowest',['../d5/de3/game__speed_8h.html#afe0334e16ff539eae4862884d0ddf4fea61f153c3947ba874f04a91d25c0e1a26',1,'game_speed.h']]],
+  ['sound_5feffects_5fvolume_4',['sound_effects_volume',['../db/da8/options__view__item_8h.html#a412c507626764f6e0bd81dcc59f0d388a0ea974839554a194ebbd661404834894',1,'options_view_item.h']]],
+  ['standard_5',['standard',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5ac00f0c4675b91fb8b918e4079a0b1bac',1,'starting_position_type.h']]],
+  ['start_6',['start',['../db/d90/lobby__view__item_8h.html#aa96663822bdafb05ef5af33c23950133aea2b2676c28c0db26d39331a336c6b92',1,'start:&#160;lobby_view_item.h'],['../d2/d17/menu__view__item_8h.html#a1e5480d66ab9bf428c60565a61b3e742aea2b2676c28c0db26d39331a336c6b92',1,'start:&#160;menu_view_item.h']]],
+  ['start_5fattack_7',['start_attack',['../d2/d59/message__type_8h.html#a4e0a9e26bf11796d8ca091cb6b3ce470af826e755d4f2f137aceb1e57989a11b4',1,'message_type.h']]],
+  ['start_5fcastling_5fkingside_8',['start_castling_kingside',['../d2/d59/message__type_8h.html#a4e0a9e26bf11796d8ca091cb6b3ce470a819180d0952dc6ad5221f6730ed58c0b',1,'message_type.h']]],
+  ['start_5fcastling_5fqueenside_9',['start_castling_queenside',['../d2/d59/message__type_8h.html#a4e0a9e26bf11796d8ca091cb6b3ce470afed1890af29a752fe02427ca563f89a8',1,'message_type.h']]],
+  ['start_5fmove_10',['start_move',['../d2/d59/message__type_8h.html#a4e0a9e26bf11796d8ca091cb6b3ce470a1255c41bfb4d2a95295856eb94e1e551',1,'message_type.h']]],
+  ['starting_5fposition_11',['starting_position',['../db/da8/options__view__item_8h.html#a412c507626764f6e0bd81dcc59f0d388aeedf5e5c6e0a1158290e256f30f7b7c9',1,'options_view_item.h']]]
 ];

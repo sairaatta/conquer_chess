@@ -149,12 +149,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:afa676284a7991b774f0f474c723117f0" id="r_afa676284a7991b774f0f474c723117f0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a>, <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d20/piece__actions_8h.html#afa676284a7991b774f0f474c723117f0">collect_attacked_squares</a> (const std::vector&lt; <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt; &amp;actions)</td></tr>
-<tr class="memdesc:afa676284a7991b774f0f474c723117f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Work on collections of <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a>.  <br /></td></tr>
+<tr class="memdesc:afa676284a7991b774f0f474c723117f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect all the squares that are attacked by each color.  <br /></td></tr>
 <tr class="separator:afa676284a7991b774f0f474c723117f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c85de727edbbb5dd81b01a3927dac71" id="r_a8c85de727edbbb5dd81b01a3927dac71"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d20/piece__actions_8h.html#a8c85de727edbbb5dd81b01a3927dac71">concatenate</a> (const std::vector&lt; <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt; &amp;lhs_actions, const std::vector&lt; <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt; &amp;rhs_actions)</td></tr>
-<tr class="memdesc:a8c85de727edbbb5dd81b01a3927dac71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate the vectors.  <br /></td></tr>
+<tr class="memdesc:a8c85de727edbbb5dd81b01a3927dac71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate vectors.  <br /></td></tr>
 <tr class="separator:a8c85de727edbbb5dd81b01a3927dac71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8993de82707e184101659965bfa942b8" id="r_a8993de82707e184101659965bfa942b8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d20/piece__actions_8h.html#a8993de82707e184101659965bfa942b8">is_in</a> (const <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &amp;action, const std::vector&lt; <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt; &amp;actions) noexcept</td></tr>
+<tr class="memdesc:a8993de82707e184101659965bfa942b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if an action is part of a collection of actions.  <br /></td></tr>
 <tr class="separator:a8993de82707e184101659965bfa942b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae323b18c98d00da761d8b829498906ec" id="r_ae323b18c98d00da761d8b829498906ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d20/piece__actions_8h.html#ae323b18c98d00da761d8b829498906ec">is_square_attacked_by</a> (const std::vector&lt; std::pair&lt; <a class="el" href="../../d5/d20/classsquare.html">square</a>, <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> &gt; &gt; attacked_squares, const <a class="el" href="../../d5/d20/classsquare.html">square</a> &amp;s, const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> enemy_color)</td></tr>
 <tr class="memdesc:ae323b18c98d00da761d8b829498906ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the square attacked by a certain (enemy) color?  <br /></td></tr>
@@ -181,8 +182,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Work on collections of <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a>. </p>
-<p>Collect all the squares that are attacked by each color </p>
+<p>Collect all the squares that are attacked by each color. </p>
 
 </div>
 </div>
@@ -212,7 +212,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Concatenate the vectors. </p>
+<p>Concatenate vectors. </p>
 
 </div>
 </div>
@@ -249,6 +249,8 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Determine if an action is part of a collection of actions. </p>
 
 </div>
 </div>

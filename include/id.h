@@ -3,7 +3,9 @@
 
 #include <iosfwd>
 
-/// An ID, each one being unique
+/// A unique ID.
+///
+/// An ID, each one being unique.
 class id
 {
 public:

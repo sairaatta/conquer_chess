@@ -7,7 +7,10 @@
 
 #include <iosfwd>
 
-/// The options that are set in the lobby
+/// The options that are set in the lobby.
+///
+/// This is where the players decide on their colors
+/// and races.
 class lobby_options
 {
 public:

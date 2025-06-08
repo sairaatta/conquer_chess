@@ -3,6 +3,8 @@
 
 #include <iosfwd>
 
+/// A relative sound intensity.
+///
 /// A relative sound intensity, from 0 to 100%
 class volume
 {

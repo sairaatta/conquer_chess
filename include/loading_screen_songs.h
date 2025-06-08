@@ -3,7 +3,7 @@
 
 #include <SFML/Audio/Music.hpp>
 
-/// All the songs in the loading screen
+/// The songs used in the loading screen.
 class loading_screen_songs
 {
 public:

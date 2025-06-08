@@ -214,6 +214,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html">action_history</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The collected in-game times of actions, in chrononical order.  <a href="../../dc/d92/classaction__history.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -222,6 +223,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a683f1ff89b3b425e51a8294c6168f998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect all the actions that started in the timespan.  <br /></td></tr>
 <tr class="separator:a683f1ff89b3b425e51a8294c6168f998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9b73f15e392a7bdef784259c21b3b7a" id="r_ae9b73f15e392a7bdef784259c21b3b7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d8b/action__history_8h.html#ae9b73f15e392a7bdef784259c21b3b7a">has_just_double_moved</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;<a class="el" href="../../dc/d92/classaction__history.html">action_history</a>, const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a> when)</td></tr>
+<tr class="memdesc:ae9b73f15e392a7bdef784259c21b3b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Has this piece (i.e.  <br /></td></tr>
 <tr class="separator:ae9b73f15e392a7bdef784259c21b3b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6de3563b698ccdf2120f80ae6be5e238" id="r_a6de3563b698ccdf2120f80ae6be5e238"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d8b/action__history_8h.html#a6de3563b698ccdf2120f80ae6be5e238">get_last_action</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history)</td></tr>
 <tr class="separator:a6de3563b698ccdf2120f80ae6be5e238"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -344,7 +346,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Has this piece (i.e. a pawn) just finish a double move forward last time unit? Only pawns can do this, e.g. e2-e4 or e7-e5 For example, when at t=0.5, e2-e4 is played, from t=1.5 to t=2.5 this function will return true. Before that, the piece was moving After that, it was too long ago for en-passant </p>
+
+<p>Has this piece (i.e. </p>
+<p>a pawn) just finish a double move forward last time unit? Only pawns can do this, e.g. e2-e4 or e7-e5 For example, when at t=0.5, e2-e4 is played, from t=1.5 to t=2.5 this function will return true. Before that, the piece was moving After that, it was too long ago for en-passant </p>
 
 </div>
 </div>
