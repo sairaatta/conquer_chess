@@ -81,6 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d3/d8b/action__history_8h_source.html">action_history.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d2/de6/delta__t_8h_source.html">delta_t.h</a>&quot;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
@@ -90,68 +91,73 @@ Include dependency graph for action_history.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../de/d4a/action__history_8cpp__incl.png" border="0" usemap="#asrc_2action__history_8cpp" alt=""/></div>
 <map name="asrc_2action__history_8cpp" id="asrc_2action__history_8cpp">
-<area shape="rect" title=" " alt="" coords="454,5,616,31"/>
-<area shape="rect" href="../../d3/d8b/action__history_8h.html" title=" " alt="" coords="242,79,366,104"/>
-<area shape="poly" title=" " alt="" coords="499,33,355,77,354,72,497,28"/>
-<area shape="rect" title=" " alt="" coords="391,79,476,104"/>
-<area shape="poly" title=" " alt="" coords="520,33,463,73,460,68,517,28"/>
-<area shape="rect" title=" " alt="" coords="500,79,570,104"/>
-<area shape="poly" title=" " alt="" coords="538,31,538,65,532,65,532,31"/>
-<area shape="rect" title=" " alt="" coords="594,79,674,104"/>
-<area shape="poly" title=" " alt="" coords="552,29,608,68,605,73,549,33"/>
-<area shape="rect" title=" " alt="" coords="698,79,772,104"/>
-<area shape="poly" title=" " alt="" coords="568,28,690,71,688,76,566,33"/>
-<area shape="rect" href="../../d2/de6/delta__t_8h.html" title=" " alt="" coords="28,225,106,251"/>
-<area shape="poly" title=" " alt="" coords="287,106,99,220,96,216,284,102"/>
-<area shape="rect" title=" " alt="" coords="199,372,263,397"/>
-<area shape="poly" title=" " alt="" coords="243,104,185,118,122,141,92,157,63,177,38,200,17,227,8,252,14,276,30,297,56,316,121,348,186,369,185,375,119,353,53,321,26,301,9,278,3,252,13,224,34,196,60,173,89,153,120,136,184,113,242,99"/>
-<area shape="rect" href="../../d2/d0a/piece__action_8h.html" title=" " alt="" coords="326,152,442,177"/>
-<area shape="poly" title=" " alt="" coords="319,102,363,141,359,145,315,106"/>
-<area shape="rect" title=" " alt="" coords="918,372,981,397"/>
-<area shape="poly" title=" " alt="" coords="367,101,647,156,795,190,901,223,968,249,994,266,1016,298,1020,317,1013,336,999,352,983,366,979,362,995,348,1008,333,1015,316,1011,300,990,270,966,253,900,228,794,195,646,161,366,106"/>
-<area shape="poly" title=" " alt="" coords="71,251,80,286,89,305,101,322,120,339,142,352,187,370,185,375,139,357,117,343,97,326,84,308,75,287,66,252"/>
-<area shape="poly" title=" " alt="" coords="335,180,287,196,234,220,184,255,163,276,145,300,142,309,142,318,151,335,169,351,192,364,189,368,166,355,147,338,137,319,137,308,141,297,159,272,180,251,231,216,285,191,333,175"/>
-<area shape="rect" title=" " alt="" coords="1068,372,1127,397"/>
-<area shape="poly" title=" " alt="" coords="443,163,533,165,648,173,775,192,839,205,901,223,941,237,972,251,1000,270,1033,297,1063,328,1085,359,1081,362,1058,331,1029,301,997,274,969,256,939,242,900,228,838,210,775,197,648,179,532,170,442,168"/>
-<area shape="poly" title=" " alt="" coords="443,166,579,178,746,201,828,218,900,239,958,265,979,281,995,297,1000,314,997,332,975,364,971,361,992,330,995,315,990,300,975,285,955,270,898,244,827,223,745,206,578,183,442,172"/>
-<area shape="rect" href="../../dc/dd7/piece__action__type_8h.html" title=" " alt="" coords="155,299,307,324"/>
-<area shape="poly" title=" " alt="" coords="374,180,255,291,251,287,370,176"/>
-<area shape="rect" href="../../d7/d3c/square_8h.html" title=" " alt="" coords="689,225,768,251"/>
-<area shape="poly" title=" " alt="" coords="440,175,676,223,675,228,439,180"/>
-<area shape="rect" href="../../de/d45/piece__type_8h.html" title=" " alt="" coords="332,299,437,324"/>
-<area shape="poly" title=" " alt="" coords="387,178,387,285,382,285,382,178"/>
-<area shape="poly" title=" " alt="" coords="234,324,234,358,228,358,228,324"/>
-<area shape="poly" title=" " alt="" coords="307,320,321,321,656,355,905,377,905,382,656,360,320,327,307,325"/>
-<area shape="poly" title=" " alt="" coords="689,250,603,270,503,301,451,326,359,356,277,376,276,371,357,351,449,322,501,296,601,265,688,245"/>
-<area shape="poly" title=" " alt="" coords="768,240,873,257,934,273,994,296,1041,327,1079,360,1075,364,1038,331,991,301,933,278,872,262,767,245"/>
-<area shape="poly" title=" " alt="" coords="768,241,884,259,939,275,959,285,973,297,980,313,980,330,968,361,963,359,975,329,975,314,969,300,956,290,937,280,883,264,767,246"/>
-<area shape="rect" title=" " alt="" coords="754,299,826,324"/>
-<area shape="poly" title=" " alt="" coords="741,249,773,286,769,290,737,253"/>
-<area shape="rect" href="../../d7/db1/ccfwd_8h.html" title=" " alt="" coords="513,299,584,324"/>
-<area shape="poly" title=" " alt="" coords="700,253,591,296,589,291,699,248"/>
-<area shape="rect" href="../../d8/d10/chess__color_8h.html" title=" " alt="" coords="850,299,959,324"/>
-<area shape="poly" title=" " alt="" coords="758,248,864,291,862,296,756,253"/>
-<area shape="rect" href="../../d0/d7c/castling__type_8h.html" title=" " alt="" coords="608,299,729,324"/>
-<area shape="poly" title=" " alt="" coords="721,253,689,290,685,286,716,249"/>
-<area shape="poly" title=" " alt="" coords="850,325,838,327,518,362,277,383,277,377,517,357,837,321,849,320"/>
-<area shape="poly" title=" " alt="" coords="936,322,1056,365,1055,370,935,327"/>
-<area shape="poly" title=" " alt="" coords="914,323,937,359,933,362,910,326"/>
-<area shape="poly" title=" " alt="" coords="361,326,270,369,267,364,359,322"/>
-<area shape="poly" title=" " alt="" coords="437,317,905,375,904,380,437,322"/>
+<area shape="rect" title=" " alt="" coords="385,5,547,31"/>
+<area shape="rect" href="../../d3/d8b/action__history_8h.html" title=" " alt="" coords="224,79,348,104"/>
+<area shape="poly" title=" " alt="" coords="438,33,329,76,327,71,436,28"/>
+<area shape="rect" href="../../d2/de6/delta__t_8h.html" title=" " alt="" coords="5,152,84,177"/>
+<area shape="poly" title=" " alt="" coords="399,33,310,53,214,81,139,114,77,147,74,143,137,109,212,76,308,47,398,28"/>
+<area shape="rect" title=" " alt="" coords="373,79,458,104"/>
+<area shape="poly" title=" " alt="" coords="460,33,434,69,429,66,455,29"/>
+<area shape="rect" title=" " alt="" coords="482,79,551,104"/>
+<area shape="poly" title=" " alt="" coords="477,29,503,66,498,69,472,33"/>
+<area shape="rect" title=" " alt="" coords="575,79,655,104"/>
+<area shape="poly" title=" " alt="" coords="491,28,580,70,577,75,489,33"/>
+<area shape="rect" title=" " alt="" coords="679,79,754,104"/>
+<area shape="poly" title=" " alt="" coords="507,28,666,73,665,78,506,33"/>
+<area shape="rect" href="../../d7/db1/ccfwd_8h.html" title=" " alt="" coords="236,299,307,324"/>
+<area shape="poly" title=" " alt="" coords="292,104,304,167,307,209,302,251,288,287,283,285,297,250,301,209,299,168,287,105"/>
+<area shape="rect" href="../../d6/d96/in__game__time_8h.html" title=" " alt="" coords="160,225,287,251"/>
+<area shape="poly" title=" " alt="" coords="283,106,236,214,231,211,278,103"/>
+<area shape="rect" title=" " alt="" coords="743,372,807,397"/>
+<area shape="poly" title=" " alt="" coords="268,106,239,126,206,153,175,187,151,226,146,242,146,257,156,282,178,303,209,322,251,338,311,351,458,369,611,377,730,380,730,386,611,383,458,374,310,356,250,343,206,326,175,307,152,285,141,258,141,242,146,224,171,184,203,149,236,122,265,102"/>
+<area shape="rect" href="../../d2/d0a/piece__action_8h.html" title=" " alt="" coords="815,152,931,177"/>
+<area shape="poly" title=" " alt="" coords="349,100,361,101,802,153,801,159,360,107,348,105"/>
+<area shape="rect" title=" " alt="" coords="1153,372,1216,397"/>
+<area shape="poly" title=" " alt="" coords="349,100,361,101,488,111,599,111,791,104,881,109,973,126,1021,142,1071,163,1124,190,1181,223,1213,244,1239,265,1248,278,1253,292,1254,307,1248,325,1234,347,1216,365,1212,361,1230,344,1244,323,1248,307,1248,293,1243,280,1235,269,1210,248,1178,228,1122,194,1069,168,1019,147,971,132,880,114,791,109,599,116,488,116,360,107,348,105"/>
+<area shape="poly" title=" " alt="" coords="233,250,258,286,254,289,229,253"/>
+<area shape="poly" title=" " alt="" coords="222,251,216,287,218,306,227,322,252,334,300,345,443,362,602,373,729,379,729,384,602,379,442,368,300,351,250,339,223,326,213,307,210,287,217,250"/>
+<area shape="poly" title=" " alt="" coords="872,178,854,242,839,284,820,325,796,363,791,360,816,323,834,282,849,241,867,177"/>
+<area shape="rect" title=" " alt="" coords="366,372,425,397"/>
+<area shape="poly" title=" " alt="" coords="815,176,709,193,583,220,523,236,470,256,428,277,401,300,395,313,391,328,392,358,387,358,386,327,390,312,397,297,425,273,468,251,522,231,582,214,708,188,814,171"/>
+<area shape="poly" title=" " alt="" coords="931,166,1003,176,1085,198,1126,215,1165,236,1199,264,1228,297,1234,314,1230,332,1210,363,1205,360,1226,330,1229,315,1224,300,1196,268,1162,241,1124,219,1083,203,1002,181,931,171"/>
+<area shape="rect" href="../../dc/dd7/piece__action__type_8h.html" title=" " alt="" coords="910,299,1062,324"/>
+<area shape="poly" title=" " alt="" coords="884,176,971,286,967,290,880,179"/>
+<area shape="rect" href="../../d7/d3c/square_8h.html" title=" " alt="" coords="621,225,700,251"/>
+<area shape="poly" title=" " alt="" coords="839,180,709,223,707,218,838,175"/>
+<area shape="rect" href="../../de/d45/piece__type_8h.html" title=" " alt="" coords="1087,299,1192,324"/>
+<area shape="poly" title=" " alt="" coords="895,175,1108,290,1105,295,893,180"/>
+<area shape="poly" title=" " alt="" coords="953,327,821,371,819,366,951,321"/>
+<area shape="poly" title=" " alt="" coords="1019,322,1141,365,1139,370,1017,327"/>
+<area shape="poly" title=" " alt="" coords="622,249,321,304,320,299,621,244"/>
+<area shape="poly" title=" " alt="" coords="701,242,754,260,779,276,799,297,805,313,804,330,793,361,788,359,799,329,800,314,794,300,775,280,751,265,700,247"/>
+<area shape="poly" title=" " alt="" coords="622,247,510,267,457,282,422,301,413,313,406,328,399,359,394,358,401,326,408,310,419,297,455,277,508,262,621,242"/>
+<area shape="poly" title=" " alt="" coords="700,238,825,244,985,255,1129,272,1179,283,1207,297,1214,312,1215,329,1202,361,1198,359,1209,328,1209,313,1203,301,1177,288,1128,277,985,260,825,249,700,243"/>
+<area shape="rect" title=" " alt="" coords="433,299,505,324"/>
+<area shape="poly" title=" " alt="" coords="631,253,514,296,512,291,629,248"/>
+<area shape="rect" href="../../d8/d10/chess__color_8h.html" title=" " alt="" coords="675,299,785,324"/>
+<area shape="poly" title=" " alt="" coords="674,249,711,287,707,291,670,253"/>
+<area shape="rect" href="../../d0/d7c/castling__type_8h.html" title=" " alt="" coords="529,299,651,324"/>
+<area shape="poly" title=" " alt="" coords="651,253,613,291,609,287,647,249"/>
+<area shape="poly" title=" " alt="" coords="740,323,763,359,758,362,735,326"/>
+<area shape="poly" title=" " alt="" coords="677,327,439,377,438,372,676,321"/>
+<area shape="poly" title=" " alt="" coords="785,319,1140,374,1139,379,784,324"/>
+<area shape="poly" title=" " alt="" coords="1087,326,822,377,821,372,1086,320"/>
+<area shape="poly" title=" " alt="" coords="1149,323,1172,359,1168,362,1145,326"/>
+<area shape="poly" title=" " alt="" coords="48,177,51,207,59,247,77,289,89,307,105,322,139,335,202,346,381,363,578,374,729,379,729,385,578,379,381,368,202,351,138,340,102,326,85,310,72,291,54,249,45,208,42,178"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a83336fbc9fa3ca3e2088103e49b88749" id="r_a83336fbc9fa3ca3e2088103e49b88749"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#a83336fbc9fa3ca3e2088103e49b88749">collect_actions_in_timespan</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history, const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> from, const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> to)</td></tr>
-<tr class="memdesc:a83336fbc9fa3ca3e2088103e49b88749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect all the actions that started in the timespan.  <br /></td></tr>
-<tr class="separator:a83336fbc9fa3ca3e2088103e49b88749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a683f1ff89b3b425e51a8294c6168f998" id="r_a683f1ff89b3b425e51a8294c6168f998"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#a683f1ff89b3b425e51a8294c6168f998">collect_actions_in_timespan</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history, const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a> from, const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a> to)</td></tr>
+<tr class="memdesc:a683f1ff89b3b425e51a8294c6168f998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect all the actions that started in the timespan.  <br /></td></tr>
+<tr class="separator:a683f1ff89b3b425e51a8294c6168f998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6de3563b698ccdf2120f80ae6be5e238" id="r_a6de3563b698ccdf2120f80ae6be5e238"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#a6de3563b698ccdf2120f80ae6be5e238">get_last_action</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history)</td></tr>
 <tr class="separator:a6de3563b698ccdf2120f80ae6be5e238"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad891bf42f5b90ec0d393e69bfc56992e" id="r_ad891bf42f5b90ec0d393e69bfc56992e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#ad891bf42f5b90ec0d393e69bfc56992e">has_actions</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history) noexcept</td></tr>
 <tr class="separator:ad891bf42f5b90ec0d393e69bfc56992e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea10c616081fc429792ac2c393040892" id="r_aea10c616081fc429792ac2c393040892"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#aea10c616081fc429792ac2c393040892">has_just_double_moved</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history, const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a> when)</td></tr>
-<tr class="separator:aea10c616081fc429792ac2c393040892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5044046a09b174c467f449a074e576f7" id="r_a5044046a09b174c467f449a074e576f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#a5044046a09b174c467f449a074e576f7">has_just_double_moved</a> (const <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &amp;history, const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a> when)</td></tr>
+<tr class="separator:a5044046a09b174c467f449a074e576f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf7d69555b38c928eefa9c5179eb0ba2" id="r_abf7d69555b38c928eefa9c5179eb0ba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d92/classaction__history.html">action_history</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da5/action__history_8cpp.html#abf7d69555b38c928eefa9c5179eb0ba2">merge_action_histories</a> (const std::vector&lt; <a class="el" href="../../dc/d92/classaction__history.html">action_history</a> &gt; histories)</td></tr>
 <tr class="memdesc:abf7d69555b38c928eefa9c5179eb0ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine action histories and sort these.  <br /></td></tr>
 <tr class="separator:abf7d69555b38c928eefa9c5179eb0ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,8 +170,8 @@ Functions</h2></td></tr>
 <tr class="separator:ad3779f22f2aed674df1adb304ed506ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a83336fbc9fa3ca3e2088103e49b88749" name="a83336fbc9fa3ca3e2088103e49b88749"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83336fbc9fa3ca3e2088103e49b88749">&#9670;&#160;</a></span>collect_actions_in_timespan()</h2>
+<a id="a683f1ff89b3b425e51a8294c6168f998" name="a683f1ff89b3b425e51a8294c6168f998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a683f1ff89b3b425e51a8294c6168f998">&#9670;&#160;</a></span>collect_actions_in_timespan()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,13 +185,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a>&#160;</td>
           <td class="paramname"><em>from</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a>&#160;</td>
           <td class="paramname"><em>to</em>&#160;</td>
         </tr>
         <tr>
@@ -244,8 +250,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aea10c616081fc429792ac2c393040892" name="aea10c616081fc429792ac2c393040892"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea10c616081fc429792ac2c393040892">&#9670;&#160;</a></span>has_just_double_moved()</h2>
+<a id="a5044046a09b174c467f449a074e576f7" name="a5044046a09b174c467f449a074e576f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5044046a09b174c467f449a074e576f7">&#9670;&#160;</a></span>has_just_double_moved()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -259,7 +265,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="../../dd/df3/classdelta__t.html">delta_t</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a>&#160;</td>
           <td class="paramname"><em>when</em>&#160;</td>
         </tr>
         <tr>

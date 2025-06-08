@@ -2,10 +2,10 @@ var searchData=
 [
   ['about_5fview_0',['about_view',['../d3/d76/classabout__view.html#a12e9f4a4262ac21f2202051b22337bf5',1,'about_view']]],
   ['about_5fview_5flayout_1',['about_view_layout',['../d3/dcb/classabout__view__layout.html#a38647482066bba9bf7e08108ff820d19',1,'about_view_layout']]],
-  ['action_5fhistory_2',['action_history',['../dc/d92/classaction__history.html#abf30a7c418c63cfbe2af1fb2b1175ef2',1,'action_history']]],
+  ['action_5fhistory_2',['action_history',['../dc/d92/classaction__history.html#ae916346690302cb43d1a34a7490eb2bb',1,'action_history']]],
   ['action_5fnumber_3',['action_number',['../d4/d8b/classaction__number.html#a98bba3e3c0af3d06aa63b90b44cb60d8',1,'action_number']]],
   ['add_4',['add',['../d4/d84/user__inputs_8h.html#abc5da0160286fcd24613f05b5beb5853',1,'add(user_inputs &amp;current, const user_inputs &amp;to_be_added):&#160;user_inputs.cpp'],['../d5/d46/user__inputs_8cpp.html#abc5da0160286fcd24613f05b5beb5853',1,'add(user_inputs &amp;current, const user_inputs &amp;to_be_added):&#160;user_inputs.cpp'],['../d4/d4d/classuser__inputs.html#ac50776b41b5554bfb8114db271b3e2b2',1,'user_inputs::add()']]],
-  ['add_5faction_5',['add_action',['../d8/d3c/classpiece.html#a4e08a6f8d84f3767cc815b5042848612',1,'piece::add_action()'],['../dc/d92/classaction__history.html#ae6fb643aa3c0e500658ba24ac468d937',1,'action_history::add_action()']]],
+  ['add_5faction_5',['add_action',['../d8/d3c/classpiece.html#a4e08a6f8d84f3767cc815b5042848612',1,'piece::add_action()'],['../dc/d92/classaction__history.html#a546a63ce317f8362c5c07ae2a87f6a07',1,'action_history::add_action()']]],
   ['add_5fcoordinats_6',['add_coordinats',['../dd/da4/pieces_8h.html#a1ada943827c87f562001ca7f678a40ea',1,'add_coordinats(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp'],['../d5/d21/pieces_8cpp.html#a1ada943827c87f562001ca7f678a40ea',1,'add_coordinats(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp']]],
   ['add_5flegend_7',['add_legend',['../dd/da4/pieces_8h.html#ab4ff3ba234fcd8ca1038e4f699596a8e',1,'add_legend(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp'],['../d5/d21/pieces_8cpp.html#ab4ff3ba234fcd8ca1038e4f699596a8e',1,'add_legend(const std::vector&lt; std::string &gt; &amp;strs):&#160;pieces.cpp']]],
   ['add_5fmessage_8',['add_message',['../d8/dd0/classgame__log.html#a707b67ffa43439c2aa203b94e81c4436',1,'game_log::add_message()'],['../d8/d3c/classpiece.html#abd55e67909643e5d40867912fd12fa2e',1,'piece::add_message()']]],

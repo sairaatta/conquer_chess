@@ -3,7 +3,7 @@ var searchData=
   ['battle_20for_20liberty_0',['battle for liberty',['../d0/d30/md_README.html',1,'Conquer Chess: Battle for Liberty'],['../d0/d0b/md_docs_2faq.html#autotoc_md8',1,'Why the name &apos;Conquer Chess: Battle for Liberty&apos;?']]],
   ['before_5fen_5fpassant_1',['before_en_passant',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5a0472aad756d69513ac586062c6e4c512',1,'starting_position_type.h']]],
   ['before_5fscholars_5fmate_2',['before_scholars_mate',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5ab33482de0311d85dad11db306f5548ae',1,'starting_position_type.h']]],
-  ['being_20ready_3',['Being ready',['../d5/d10/md_resources_2textures_2lobby__menu_2README.html#autotoc_md41',1,'']]],
+  ['being_20ready_3',['Being ready',['../d5/d10/md_resources_2textures_2lobby__menu_2README.html#autotoc_md39',1,'']]],
   ['bishop_4',['bishop',['../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3a5470f9552e0d98a2d8c8b3345a680316',1,'piece_type.h']]],
   ['bishop_5fand_5fknight_5fend_5fgame_5',['bishop_and_knight_end_game',['../d0/da3/starting__position__type_8h.html#ace47c30cedfb1ff33830309e0d76fad5a2666a5b666b6e4cb0e0e55c58a47b3a2',1,'starting_position_type.h']]],
   ['black_6',['black',['../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3a1ffd9e753c8054cc61456ac7fac1ac89',1,'chess_color.h']]],
