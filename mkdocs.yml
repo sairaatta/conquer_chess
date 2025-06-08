@@ -5,7 +5,9 @@ edit_uri: blob/main/docs/
 nav:
   - Start: index.md
   - FAQ: faq.md 
-  - Architecture: architecture.md
+  - Acknowledgements: acknowledgements.md 
+  - Videos: videos.md 
+  - Architecture: architecture/README.md
   - Developer documentation: docs/index.html
 
 theme:
