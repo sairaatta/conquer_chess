@@ -1,5 +1,18 @@
 # Architecture
 
+## Handling time
+
+- `game` holds the main in-game time.
+- At the start:
+    - The game time is zero
+    - Each `piece` its (assumed) in-game time is zero 
+- Upon `game::tick`:
+    - It is checked that `game` and each `piece` assume the same in-game time
+    - The game time is updated
+    - Each `piece` updates its idea of in-game time.
+    - It is checked again that `game` and each `piece`
+      assume the same in-game time. Pieces that are lagging did not update.
+
 ## Handling user input
 
 
