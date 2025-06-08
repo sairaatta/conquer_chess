@@ -1,25 +1,37 @@
-# lobby menu
+# Lobby menu
 
-### General artwork
+## General artwork
 
-Image                    |Filename             |Search terms
--------------------------|---------------------|---------------------------------------------------------------------
-![](protoss_head.jpg)    |`protoss_head.jpg`   |`starcraft 2, protoss, chess, simple, profile`
-![](terran_head.jpg)     |`terran_head.jpg`    |`starcraft 2, terran, chess, face, chess piece, simple`
-![](zerg_head.jpg)       |`zerg_head.jpg`      |`starcraft 2, zerg, chess piece, face, simple, teeth`
-![](classic_head.jpg)    |`classic_head.jpg`   |`chess, classic, head, chesspiece, face, profile, close-up, human, statue`
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-### Chess color
+Image                                   |Filename             |Search terms
+----------------------------------------|---------------------|---------------------------------------------------------------------
+![General artwork](protoss_head.jpg)    |`protoss_head.jpg`   |`starcraft 2, protoss, chess, simple, profile`
+![General artwork](terran_head.jpg)     |`terran_head.jpg`    |`starcraft 2, terran, chess, face, chess piece, simple`
+![General artwork](zerg_head.jpg)       |`zerg_head.jpg`      |`starcraft 2, zerg, chess piece, face, simple, teeth`
+![General artwork](classic_head.jpg)    |`classic_head.jpg`   |`chess, classic, head, chesspiece, face, profile, close-up, human, statue`
 
-Image                     |Filename               |Search terms
---------------------------|-----------------------|---------------------------------------------------------------------
-![](black_chess_color.jpg)|`black_chess_color.jpg`|`starcraft 2, black, landscape, desolate, terrain, cubism, cartoon`
-![](white_chess_color.jpg)|`white_chess_color.jpg`|`starcraft 2, white, landscape, desolate, terrain, cubism, cartoon`
+<!-- markdownlint-enable MD013 -->
+
+## Chess color
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
+
+Image                                |Filename               |Search terms
+-------------------------------------|-----------------------|---------------------------------------------------------------------
+![Chess color](black_chess_color.jpg)|`black_chess_color.jpg`|`starcraft 2, black, landscape, desolate, terrain, cubism, cartoon`
+![Chess color](white_chess_color.jpg)|`white_chess_color.jpg`|`starcraft 2, white, landscape, desolate, terrain, cubism, cartoon`
+
+<!-- markdownlint-enable MD013 -->
 
 
-### Being ready
+## Being ready
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
 Image                          |Filename                   |Search terms
 -------------------------------|---------------------------|---------------------------------------------------------------------
-![](ready_yes.jpg)             |`ready_yes.jpg`            |`starcraft 2, thumb up, hand, simple, close-up, OK, yes, ready, go, symbol`
-![](ready_no.jpg)              |`ready_no.jpg`             |`starcraft 2, thumb down, hand, simple, close-up, no, symbol, red, wait`
+![Being ready](ready_yes.jpg)  |`ready_yes.jpg`            |`starcraft 2, thumb up, hand, simple, close-up, OK, yes, ready, go, symbol`
+![Being ready](ready_no.jpg)   |`ready_no.jpg`             |`starcraft 2, thumb down, hand, simple, close-up, no, symbol, red, wait`
+
+<!-- markdownlint-enable MD013 -->

@@ -5,7 +5,7 @@
 - `game` holds the main in-game time.
 - At the start:
     - The game time is zero
-    - Each `piece` its (assumed) in-game time is zero 
+    - Each `piece` its (assumed) in-game time is zero
 - Upon `game::tick`:
     - It is checked that `game` and each `piece` assume the same in-game time
     - The game time is updated
@@ -49,8 +49,9 @@ Input                   |Class                               |Output
 ------------------------|------------------------------------|---------------------------------------
 keyboard and mouse input|`user_inputs` ![user_inputs](user_inputs.jpg) |Store valid input, ignore invalid input
 
-`game_controller` gets all `user_inputs` and moves the right cursor (there is one cursor
-for each player) to the right spots. It can select a piece to do a chess move.
+`game_controller` gets all `user_inputs` and moves the right cursor
+(there is one cursor for each player) to the right spots.
+It can select a piece to do a chess move.
 
 Input                   |Class                                       |Output
 ------------------------|--------------------------------------------|---------------------------------------
