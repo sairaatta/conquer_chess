@@ -21,8 +21,11 @@ menu_view_layout::menu_view_layout(
   const int panel_width{
     (window_size.get_y() - (2 * margin_width)) / 2
   };
-  const int x1{(window_size.get_x() / 2) - (panel_width / 2)};
+  const int x1{margin_width};
   const int x2{x1 + panel_width};
+  const int x3{x2 + margin_width};
+  const int x4{x3 + margin_width};
+  const int x5{window_size.get_x() - margin_width};
 
   const int y1{margin_width};
   const int y2{y1 + panel_height + margin_width + panel_height};
@@ -48,8 +51,8 @@ menu_view_layout::menu_view_layout(
     screen_coordinate(x2, y4)
   );
   m_image = screen_rect(
-    screen_coordinate(x1, y5),
-    screen_coordinate(x2, y6)
+    screen_coordinate(x4, y1),
+    screen_coordinate(x5, y14)
   );
   m_start = screen_rect(
     screen_coordinate(x1, y7),

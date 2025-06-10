@@ -1,14 +1,28 @@
 # Screenshots
 
-![Title](title.png)
+![Title v0.7](title.png)
 
-![Conquer Chess screenshot](20230109_4.png)
+> The game title
 
-![Conquer Chess screenshot](20230109_3.png)
+![New main menu screen](20250610.jpg)
 
-![Conquer Chess screenshot](20230109_2.png)
+> The new main menu screen
 
-![Conquer Chess screenshot](20230109_1.png)
+![Conquer Chess v0.7 screenshot](20230109_4.png)
+
+> Added symbols for the actions
+
+![Conquer Chess v0.7 screenshot](20230109_3.png)
+
+> Added symbols for the actions
+
+![Conquer Chess v0.7 screenshot](20230109_2.png)
+
+> Portraits are bigger
+
+![Conquer Chess v0.7 screenshot](20230109_1.png)
+
+> Show where pieces can go
 
 ## v0.6
 
