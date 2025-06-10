@@ -149,7 +149,7 @@ void show_text_panel(about_view& v)
   s
     << "Conquer Chess\n"
     << "\n"
-    << "(C) 2022-2023 Richel Bilderbeek\n"
+    << "(C) 2022-2025 Richel Bilderbeek\n"
     << "\n"
     << "https://github.com/\n"
     << "  richelbilderbeek/\n"
