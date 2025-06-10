@@ -4,9 +4,13 @@
 
 > The game title
 
-![New main menu screen](20250610.jpg)
+![New main menu screen](20250610_2.jpg)
 
-> The new main menu screen
+> The main menu's background image fills the entire screen
+
+![New main menu screen](20250610_2.jpg)
+
+> The main menu screen is now full screen
 
 ![Conquer Chess v0.7 screenshot](20230109_4.png)
 

@@ -313,11 +313,13 @@ void menu_view::show()
   // Start drawing the new frame, by clearing the screen
   m_window.clear();
 
+  // Background image
+  show_image_panel(*this);
+
   show_layout_panels(*this);
 
   show_title_panel(*this);
   show_subtitle_panel(*this);
-  show_image_panel(*this);
   show_start_panel(*this);
   show_options_panel(*this);
   show_about_panel(*this);
