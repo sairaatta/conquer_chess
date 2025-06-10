@@ -8,11 +8,13 @@
 #include "lobby_view.h"
 #include "played_game_view.h"
 #include "options_view.h"
-
 #include "sfml_helper.h"
+
 #include <cassert>
 #include <cmath>
 #include <iostream>
+#include <SFML/Window/Window.hpp>
+#include <SFML/Window/ContextSettings.hpp>
 
 menu_view::menu_view(
   const game_options& options,
@@ -40,8 +42,10 @@ void menu_view::exec()
       get_default_main_menu_screen_size().get_x(),
       get_default_main_menu_screen_size().get_y()
     ),
-    "Conquer Chess: main menu"
+    "Conquer Chess: main menu",
+    sf::Style::Fullscreen
   );
+
 
   // Center
   auto desktop = sf::VideoMode::getDesktopMode();

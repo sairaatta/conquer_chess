@@ -129,8 +129,6 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   if (args.size() == 1)
   {
     game_options options{create_default_game_options()};
-    options.set_sound_effects_volume(volume(0)); // 20 == default
-    options.set_volume(volume(0)); // 10 == default
 
     #define USE_TWO_KEYBOARDS
     physical_controllers pcs{
