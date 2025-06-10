@@ -18,8 +18,10 @@ menu_view_layout::menu_view_layout(
         / static_cast<double>(n_vertical_units)
     )
   };
-  const int panel_width{window_size.get_x() - (2 * margin_width)};
-  const int x1{margin_width};
+  const int panel_width{
+    (window_size.get_y() - (2 * margin_width)) / 2
+  };
+  const int x1{(window_size.get_x() / 2) - (panel_width / 2)};
   const int x2{x1 + panel_width};
 
   const int y1{margin_width};
