@@ -20,6 +20,9 @@ menu_view::menu_view(
   const game_options& options,
   const physical_controllers& controllers
 ) :
+    m_background_image_index{
+      create_seedless_random_background_image_index()
+    },
     m_game_options{options},
     m_physical_controllers{controllers},
     m_selected{menu_view_item::start}
@@ -32,6 +35,25 @@ menu_view::menu_view(
   );
   m_resources.get_songs().get_bliss().setLoop(true);
   m_resources.get_songs().get_bliss().play();
+}
+
+int create_random_background_image_index(
+  std::default_random_engine& rng_engine
+) {
+  std::uniform_int_distribution<int> distribution{
+    0,
+    4 - 1 // -1 as inclusive
+  };
+  const auto i{distribution(rng_engine)};
+  assert(i >= 0);
+  assert(i < 4);
+  return i;
+}
+
+int create_seedless_random_background_image_index() {
+  std::random_device device;
+  std::default_random_engine rng_engine(device());
+  return create_random_background_image_index(rng_engine);
 }
 
 void menu_view::exec()
@@ -314,7 +336,9 @@ void menu_view::show()
   m_window.clear();
 
   // Background image
-  show_image_panel(*this);
+  draw_background_image(*this);
+
+  draw_menu_panel(*this);
 
   show_layout_panels(*this);
 
@@ -348,14 +372,28 @@ void show_about_panel(menu_view& v)
   v.get_window().draw(text);
 }
 
-void show_image_panel(menu_view& v)
+void draw_background_image(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_image()};
+  const auto screen_rect{v.get_layout().get_background_image()};
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &v.get_resources().get_textures().get_all_races_1()
+    &v.get_resources().get_textures().get_all_races(v.get_background_image_index())
   );
+  v.get_window().draw(rectangle);
+}
+
+void draw_menu_panel(menu_view& v)
+{
+  const auto screen_rect{v.get_layout().get_menu_panel()};
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, screen_rect);
+  //rectangle.setTexture(
+  //  &v.get_resources().get_textures().get_all_races_2()
+  //);
+  rectangle.setFillColor(sf::Color::Transparent);
+  rectangle.setOutlineColor(sf::Color::Red);
+  rectangle.setOutlineThickness(5);
   v.get_window().draw(rectangle);
 }
 
@@ -385,6 +423,7 @@ void show_layout_panels(menu_view& v)
     rectangle.setFillColor(sf::Color(32, 32, 32));
     v.get_window().draw(rectangle);
   }
+
 }
 
 void show_quit_panel(menu_view& v)

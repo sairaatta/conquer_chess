@@ -23,6 +23,9 @@ public:
   /// Run the menu, until the user quits
   void exec();
 
+  /// Get the index of the background image
+  int get_background_image_index() const noexcept { return m_background_image_index; }
+
   const auto& get_layout() const noexcept { return m_layout; }
 
   auto& get_resources() noexcept { return m_resources; }
@@ -39,6 +42,9 @@ public:
   void set_text_style(sf::Text& t);
 
 private:
+
+  /// Index of the background image
+  int m_background_image_index;
 
   /// The layout of this window
   menu_view_layout m_layout;
@@ -87,8 +93,17 @@ private:
   void show();
 };
 
+/// Create a random background image index
+int create_random_background_image_index(
+  std::default_random_engine& rng_engine
+);
+
+/// Create a random background image index
+int create_seedless_random_background_image_index();
+
 void show_about_panel(menu_view& v);
-void show_image_panel(menu_view& v);
+void draw_background_image(menu_view& v);
+void draw_menu_panel(menu_view& v);
 void show_options_panel(menu_view& v);
 
 /// Show where the panels will be drawn

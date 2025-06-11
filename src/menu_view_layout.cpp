@@ -10,7 +10,7 @@ menu_view_layout::menu_view_layout(
     m_window_size{window_size}
 {
   const int n_vertical_units{10};
-  const int n_margins{n_vertical_units + 1}; // margins are above, below and between panels
+  const int n_margins{n_vertical_units + 3}; // margins are above, below and between panels
   const int panel_height{
     static_cast<int>(
       static_cast<double>(
@@ -22,53 +22,60 @@ menu_view_layout::menu_view_layout(
     (window_size.get_y() - (2 * margin_width)) / 2
   };
   const int x1{margin_width};
-  const int x2{x1 + panel_width};
-  const int x3{x2 + margin_width};
+  const int x2{x1 + margin_width};
+  const int x3{x2 + panel_width};
   const int x4{x3 + margin_width};
-  const int x5{window_size.get_x() - margin_width};
+  const int x5{x4 + margin_width};
+  const int x6{window_size.get_x() - margin_width};
 
   const int y1{margin_width};
-  const int y2{y1 + panel_height + margin_width + panel_height};
-  const int y3{y2 + 0};
-  const int y4{y3 + panel_height};
-  const int y5{y4 + margin_width};
-  const int y6{y5 + panel_height + panel_height + margin_width + panel_height + margin_width};
-  const int y7{y6 + margin_width};
-  const int y8{y7 + panel_height};
-  const int y9{y8 + margin_width};
-  const int y10{y9 + panel_height};
-  const int y11{y10 + margin_width};
-  const int y12{y11 + panel_height};
-  const int y13{y12 + margin_width};
-  const int y14{y13 + panel_height};
+  const int y2{y1 + margin_width};
+  const int y3{y2 + panel_height + margin_width + panel_height};
+  const int y4{y3 + 0};
+  const int y5{y4 + panel_height};
+  const int y6{y5 + margin_width};
+  const int y7{y6 + panel_height + panel_height + margin_width + panel_height + margin_width};
+  const int y8{y7 + margin_width};
+  const int y9{y8 + panel_height};
+  const int y10{y9 + margin_width};
+  const int y11{y10 + panel_height};
+  const int y12{y11 + margin_width};
+  const int y13{y12 + panel_height};
+  const int y14{y13 + margin_width};
+  const int y15{y14 + panel_height};
+  const int y16{y15 + margin_width};
 
-  m_title = screen_rect(
+  m_menu_panel = screen_rect(
     screen_coordinate(x1, y1),
-    screen_coordinate(x2, y2)
+    screen_coordinate(x4, y16)
+  );
+  m_title = screen_rect(
+    screen_coordinate(x2, y2),
+    screen_coordinate(x3, y3)
   );
   m_subtitle = screen_rect(
-    screen_coordinate(x1, y3),
-    screen_coordinate(x2, y4)
+    screen_coordinate(x2, y4),
+    screen_coordinate(x3, y5)
   );
-  m_image = screen_rect(
+  m_background_image = screen_rect(
     screen_coordinate(0, 0),
     screen_coordinate(window_size.get_x(), window_size.get_y())
   );
   m_start = screen_rect(
-    screen_coordinate(x1, y7),
-    screen_coordinate(x2, y8)
+    screen_coordinate(x2, y8),
+    screen_coordinate(x3, y9)
   );
   m_options = screen_rect(
-    screen_coordinate(x1, y9),
-    screen_coordinate(x2, y10)
+    screen_coordinate(x2, y10),
+    screen_coordinate(x3, y11)
   );
   m_about = screen_rect(
-    screen_coordinate(x1, y11),
-    screen_coordinate(x2, y12)
+    screen_coordinate(x2, y12),
+    screen_coordinate(x3, y13)
   );
   m_quit = screen_rect(
-    screen_coordinate(x1, y13),
-    screen_coordinate(x2, y14)
+    screen_coordinate(x2, y14),
+    screen_coordinate(x3, y15)
   );
 
   m_font_size = std::min(

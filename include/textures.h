@@ -16,9 +16,20 @@ public:
   int get_n_textures() const noexcept { return sizeof(*this) / sizeof(m_all_races_1); };
 
 
+
+  /// Get a texture showing all three races
+  sf::Texture& get_all_races(const int index);
+
+  /// Texture showing all three races
   sf::Texture& get_all_races_1() noexcept { return m_all_races_1; }
+
+  /// Texture showing all three races
   sf::Texture& get_all_races_2() noexcept { return m_all_races_2; }
+
+  /// Texture showing all three races
   sf::Texture& get_all_races_3() noexcept { return m_all_races_3; }
+
+  /// Texture showing all three races
   sf::Texture& get_all_races_4() noexcept { return m_all_races_4; }
 
   /// Get an image for a controller type, i.e. mouse or keyboard

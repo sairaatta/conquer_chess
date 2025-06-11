@@ -116,6 +116,20 @@ textures::textures()
 
 }
 
+sf::Texture& textures::get_all_races(const int index) {
+  assert(index >= 0);
+  assert(index < 4);
+  switch (index) {
+    case 0: return get_all_races_1();
+    case 1: return get_all_races_2();
+    case 2: return get_all_races_3();
+    default:
+    case 3:
+      assert(index == 3);
+      return get_all_races_4();
+  }
+}
+
 sf::Texture& textures::get_controller_type(const physical_controller_type t) noexcept
 {
   if (t == physical_controller_type::keyboard)

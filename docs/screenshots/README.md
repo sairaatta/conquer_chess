@@ -4,6 +4,10 @@
 
 > The game title
 
+![New main menu screen](20250611.jpg)
+
+> There are multiple background images in the main menu
+
 ![New main menu screen](20250610_2.jpg)
 
 > The main menu's background image fills the entire screen

@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <iostream>
-#include <sstream>
 
 side create_random_side(
   std::default_random_engine& rng_engine
