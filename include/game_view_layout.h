@@ -81,6 +81,11 @@ public:
   screen_rect get_controls_key_name(const side player, const action_number& key) const noexcept;
 
   const screen_rect& get_debug(const side player) const noexcept;
+
+  /// Get the size of the font that would fit nicely
+  int get_font_size() const noexcept { return m_font_size; }
+
+  const screen_rect& get_fps() const noexcept { return m_fps; }
   const screen_rect& get_log(const side player) const noexcept;
   const screen_rect& get_units(const side player) const noexcept;
 
@@ -102,6 +107,8 @@ private:
   screen_rect m_controls_rhs_key_4;
   screen_rect m_debug_lhs;
   screen_rect m_debug_rhs;
+  const int m_font_size{32};
+  screen_rect m_fps;
   screen_rect m_log_lhs;
   screen_rect m_log_rhs;
   screen_rect m_units_lhs;

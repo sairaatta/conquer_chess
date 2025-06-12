@@ -53,7 +53,7 @@ private:
   /// Index of the background image
   int m_background_image_index;
 
-  /// The FPS clock
+  /// Sleeps to achieve a frame rate of 50-60 frames per second
   sleeper m_sleeper;
 
   /// The layout of this window

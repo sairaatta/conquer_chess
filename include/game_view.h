@@ -11,6 +11,7 @@
 #include "game_controller.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
+#include "sleeper.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -34,7 +35,7 @@ public:
   double get_elapsed_time_secs() const noexcept;
 
   /// Get the number of frames per second
-  int get_fps() const noexcept { return m_fps_clock.get_fps(); }
+  int get_fps() const noexcept { return m_sleeper.get_fps(); }
 
   auto& get_game() noexcept { return m_game; }
 
@@ -55,13 +56,13 @@ public:
 
   auto& get_window() noexcept { return m_window; }
 
+  /// Set the text to a uniform style
+  void set_text_style(sf::Text& text);
+
 private:
 
   /// The game clock, to measure the elapsed time
   sf::Clock m_clock;
-
-  /// The FPS clock
-  fps_clock m_fps_clock;
 
   /// The game logic
   game m_game;
@@ -81,6 +82,9 @@ private:
   /// Show the debug info
   bool m_show_debug;
 
+  /// Sleeps to achieve a frame rate of 50-60 frames per second
+  sleeper m_sleeper;
+
   /// The window to draw to
   sf::RenderWindow m_window;
 
@@ -93,6 +97,7 @@ private:
 
   /// Read the pieces' messages and play their sounds
   void process_piece_messages();
+
 
   /// Show the game on-screen
   void show();
@@ -125,6 +130,9 @@ std::string get_controls_text(
   const game_controller& c,
   const int key
 );
+
+/// Draw the frames per second on the menu
+void draw_fps(game_view& v);
 
 /// Get the frames per second
 int get_fps(const game_view& v) noexcept;
@@ -177,6 +185,7 @@ void process_event(
   const sf::Event& event,
   const game_view_layout& layout
 );
+
 
 /// Show the board: squares, unit paths, pieces, health bars
 void show_board(game_view& view);

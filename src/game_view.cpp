@@ -53,6 +53,28 @@ bool do_show_selected(const game_view& view)
   return do_show_selected(view.get_game());
 }
 
+void draw_fps(game_view& v)
+{
+  const auto& layout = v.get_layout();
+
+  // Background rectangle
+  const auto& screen_rect = layout.get_fps();
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, screen_rect);
+  rectangle.setFillColor(sf::Color::White);
+  v.get_window().draw(rectangle);
+
+  // Text
+  sf::Text text;
+  v.set_text_style(text);
+  text.setString(sf::String(std::to_string(v.get_fps())));
+  set_text_position(text, screen_rect);
+  text.setCharacterSize(text.getCharacterSize() - 2);
+  text.setFillColor(sf::Color::Black);
+  v.get_window().draw(text);
+
+}
+
 void game_view::exec()
 {
   // Open window
@@ -66,7 +88,7 @@ void game_view::exec()
   while (m_window.isOpen())
   {
     // Keep track of the FPS
-    m_fps_clock.tick();
+    m_sleeper.tick();
 
     // Disard old messages
     m_log.tick();
@@ -83,7 +105,7 @@ void game_view::exec()
     // Do a tick, so that one delta_t equals one second under normal game speed
     const delta_t dt{
         get_speed_multiplier(m_game.get_game_options().get_game_speed())
-      / m_fps_clock.get_fps()
+      / m_sleeper.get_fps()
     };
     m_game.tick(dt);
 
@@ -284,6 +306,14 @@ void game_view::process_piece_messages()
   clear_piece_messages(m_game);
 }
 
+void game_view::set_text_style(sf::Text& text)
+{
+  text.setFont(get_arial_font(get_resources()));
+  text.setStyle(sf::Text::Bold);
+  text.setCharacterSize(m_layout.get_font_size());
+  text.setFillColor(sf::Color::Black);
+}
+
 void game_view::show()
 {
   // Start drawing the new frame, by clearing the screen
@@ -304,6 +334,7 @@ void game_view::show()
 
   // Show the mouse cursor
   //show_mouse_cursor();
+  draw_fps(*this);
 
   // Display all shapes
   m_window.display();
