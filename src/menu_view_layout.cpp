@@ -27,6 +27,8 @@ menu_view_layout::menu_view_layout(
   const int x4{x3 + margin_width};
   const int x5{x4 + margin_width};
   const int x6{window_size.get_x() - margin_width};
+  assert(x4 < x5);
+  assert(x5 < x6);
 
   const int y1{margin_width};
   const int y2{y1 + margin_width};
@@ -81,6 +83,10 @@ menu_view_layout::menu_view_layout(
   m_font_size = std::min(
     panel_height / 2,
     panel_width / 6
+  );
+  m_fps = screen_rect(
+    screen_coordinate(32, 32),
+    screen_coordinate(100, 80)
   );
 }
 

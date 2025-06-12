@@ -75,6 +75,8 @@ public:
   /// The rectangle around the buttons
   const auto& get_menu_panel() const noexcept { return m_menu_panel; }
 
+  /// The screen area where the frames per seconds are displayed
+  const auto& get_fps() const noexcept { return m_fps; }
   const auto& get_title() const noexcept { return m_title; }
   const auto& get_subtitle() const noexcept { return m_subtitle; }
   const auto& get_background_image() const noexcept { return m_background_image; }
@@ -93,6 +95,10 @@ private:
 
   /// The panel around the buttons
   screen_rect m_menu_panel;
+
+  /// The frames per second
+  screen_rect m_fps;
+
   screen_rect m_title;
   screen_rect m_subtitle;
   screen_rect m_background_image;

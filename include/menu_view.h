@@ -10,6 +10,7 @@
 #include "menu_view_layout.h"
 #include "menu_view_item.h"
 #include "physical_controllers.h"
+#include "sleeper.h"
 
 /// The main Menu dialog.
 class menu_view
@@ -23,8 +24,14 @@ public:
   /// Run the menu, until the user quits
   void exec();
 
-  /// Get the index of the background image
+  /// Get the index of the background image.
+  ///
+  /// There are multiple possible background images and the one
+  /// displayed is chosen randomly.
   int get_background_image_index() const noexcept { return m_background_image_index; }
+
+  /// Get the number of frames per seconds this class is displayed at
+  int get_fps() const noexcept { return m_sleeper.get_fps(); }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
@@ -46,6 +53,9 @@ private:
   /// Index of the background image
   int m_background_image_index;
 
+  /// The FPS clock
+  sleeper m_sleeper;
+
   /// The layout of this window
   menu_view_layout m_layout;
 
@@ -63,6 +73,9 @@ private:
 
   /// The selected item
   menu_view_item m_selected;
+
+  /// Show the number of frames per second?
+  bool m_show_fps;
 
   /// Run the about screen
   void exec_about();
@@ -101,19 +114,23 @@ int create_random_background_image_index(
 /// Create a random background image index
 int create_seedless_random_background_image_index();
 
-void show_about_panel(menu_view& v);
+void draw_about_panel(menu_view& v);
 void draw_background_image(menu_view& v);
+
+/// Draw the frames per second on the menu
+void draw_fps(menu_view& v);
+
 void draw_menu_panel(menu_view& v);
-void show_options_panel(menu_view& v);
+void draw_options_panel(menu_view& v);
 
 /// Show where the panels will be drawn
-void show_layout_panels(menu_view& v);
+void draw_layout_panels(menu_view& v);
 
-void show_quit_panel(menu_view& v);
-void show_selected_panel(menu_view& v);
-void show_subtitle_panel(menu_view& v);
-void show_start_panel(menu_view& v);
-void show_title_panel(menu_view& v);
+void draw_quit_panel(menu_view& v);
+void draw_selected_panel(menu_view& v);
+void draw_subtitle_panel(menu_view& v);
+void draw_start_panel(menu_view& v);
+void draw_title_panel(menu_view& v);
 
 
 #endif // LOGIC_ONLY

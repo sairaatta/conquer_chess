@@ -11,19 +11,19 @@
 #include "action_history.h"
 #include "board_to_text_options.h"
 #include "chess_move.h"
-#include "controls_view.h"
+//#include "controls_view.h"
 #include "played_game_view_layout.h"
 #include "controls_view_item.h"
 #include "controls_view_layout.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
 #include "fps_clock.h"
-#include "game.h"
+//#include "game.h"
 #include "game_controller.h"
 #include "game_log.h"
 #include "game_rect.h"
-#include "game_resources.h"
-#include "game_view.h"
+//#include "game_resources.h"
+//#include "game_view.h"
 #include "game_view_layout.h"
 #include "helper.h"
 #include "id.h"
@@ -44,18 +44,22 @@
 #include "read_only.h"
 #include "replay.h"
 #include "screen_coordinate.h"
+#include "sleeper.h"
 #include "test_game.h"
 
 #include <SFML/Graphics.hpp>
 
 #include <cassert>
-#include <chrono>
-#include <iostream>
+//#include <chrono>
+//#include <iostream>
 
 /// All tests are called from here, only in debug mode
 void test()
 {
 #ifndef NDEBUG
+  test_sleeper();
+
+
   test_action_number();
   test_asserts();
   test_about_view_layout();
@@ -109,6 +113,7 @@ void test()
   test_screen_rect();
   test_side();
   test_sfml_helper();
+  test_sleeper();
   test_square();
   test_starting_position_type();
   test_volume();

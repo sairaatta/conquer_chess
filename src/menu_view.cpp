@@ -69,6 +69,7 @@ void menu_view::exec()
   );
 
 
+  #ifdef NEED_TO_CENTER_WINDOW
   // Center
   auto desktop = sf::VideoMode::getDesktopMode();
   m_window.setPosition(
@@ -77,6 +78,7 @@ void menu_view::exec()
       (desktop.height/ 2) - (m_window.getSize().y /2)
     )
   );
+  #endif // NEED_TO_CENTER_WINDOW
 
   while (m_window.isOpen())
   {
@@ -276,6 +278,7 @@ bool menu_view::process_events()
       {
         // debug
         std::clog << "Debug";
+        m_show_fps = !m_show_fps;
       }
       else if (key_pressed == sf::Keyboard::Key::F4)
       {
@@ -335,27 +338,31 @@ void menu_view::show()
   // Start drawing the new frame, by clearing the screen
   m_window.clear();
 
-  // Background image
   draw_background_image(*this);
 
   draw_menu_panel(*this);
 
-  show_layout_panels(*this);
+  draw_layout_panels(*this);
 
-  show_title_panel(*this);
-  show_subtitle_panel(*this);
-  show_start_panel(*this);
-  show_options_panel(*this);
-  show_about_panel(*this);
-  show_quit_panel(*this);
-  show_selected_panel(*this);
+  draw_title_panel(*this);
+  draw_subtitle_panel(*this);
+  draw_start_panel(*this);
+  draw_options_panel(*this);
+  draw_about_panel(*this);
+  draw_quit_panel(*this);
+  draw_selected_panel(*this);
+
+  if (m_show_fps) {
+    draw_fps(*this);
+  }
 
   // Display all shapes
   m_window.display();
 
+  m_sleeper.tick();
 }
 
-void show_about_panel(menu_view& v)
+void draw_about_panel(menu_view& v)
 {
   const auto screen_rect{v.get_layout().get_about()};
   sf::RectangleShape rectangle;
@@ -383,6 +390,28 @@ void draw_background_image(menu_view& v)
   v.get_window().draw(rectangle);
 }
 
+void draw_fps(menu_view& v)
+{
+  const auto& layout = v.get_layout();
+
+  // Background rectangle
+  const auto& screen_rect = layout.get_fps();
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, screen_rect);
+  rectangle.setFillColor(sf::Color::White);
+  v.get_window().draw(rectangle);
+
+  // Text
+  sf::Text text;
+  v.set_text_style(text);
+  text.setString(sf::String(std::to_string(v.get_fps())));
+  set_text_position(text, screen_rect);
+  text.setCharacterSize(text.getCharacterSize() - 2);
+  text.setFillColor(sf::Color::Black);
+  v.get_window().draw(text);
+
+}
+
 void draw_menu_panel(menu_view& v)
 {
   const auto screen_rect{v.get_layout().get_menu_panel()};
@@ -397,7 +426,7 @@ void draw_menu_panel(menu_view& v)
   v.get_window().draw(rectangle);
 }
 
-void show_options_panel(menu_view& v)
+void draw_options_panel(menu_view& v)
 {
   const auto screen_rect{v.get_layout().get_options()};
   sf::RectangleShape rectangle;
@@ -414,7 +443,7 @@ void show_options_panel(menu_view& v)
   v.get_window().draw(text);
 }
 
-void show_layout_panels(menu_view& v)
+void draw_layout_panels(menu_view& v)
 {
   for (const auto& screen_rect: get_panels(v.get_layout()))
   {
@@ -426,7 +455,7 @@ void show_layout_panels(menu_view& v)
 
 }
 
-void show_quit_panel(menu_view& v)
+void draw_quit_panel(menu_view& v)
 {
   const auto screen_rect{v.get_layout().get_quit()};
   sf::RectangleShape rectangle;
@@ -444,7 +473,7 @@ void show_quit_panel(menu_view& v)
   v.get_window().draw(text);
 }
 
-void show_selected_panel(menu_view& v)
+void draw_selected_panel(menu_view& v)
 {
 
   const auto select_rect{v.get_layout().get_selectable_rect(v.get_selected())};
@@ -460,7 +489,7 @@ void show_selected_panel(menu_view& v)
   v.get_window().draw(rectangle);
 }
 
-void show_start_panel(menu_view& v)
+void draw_start_panel(menu_view& v)
 {
   const auto screen_rect{v.get_layout().get_start()};
   sf::RectangleShape rectangle;
@@ -477,7 +506,7 @@ void show_start_panel(menu_view& v)
   v.get_window().draw(text);
 }
 
-void show_subtitle_panel(menu_view& v)
+void draw_subtitle_panel(menu_view& v)
 {
   const auto screen_rect{v.get_layout().get_subtitle()};
   sf::RectangleShape rectangle;
@@ -488,7 +517,7 @@ void show_subtitle_panel(menu_view& v)
   v.get_window().draw(rectangle);
 }
 
-void show_title_panel(menu_view& v)
+void draw_title_panel(menu_view& v)
 {
   const auto screen_rect{v.get_layout().get_title()};
   sf::RectangleShape rectangle;
