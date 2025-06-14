@@ -7,6 +7,7 @@
 #include "game_resources.h"
 #include "about_view_layout.h"
 #include "about_view_item.h"
+#include "sleep_scheduler.h"
 
 /// The About screen.
 class about_view
@@ -18,6 +19,8 @@ public:
   void exec();
 
   const auto& get_layout() const noexcept { return m_layout; }
+
+  auto get_fps() const noexcept { return m_sleep_scheduler.get_fps(); }
 
   auto& get_resources() noexcept { return m_resources; }
 
@@ -39,6 +42,9 @@ private:
 
   double m_rotation;
 
+  /// Sleeps to achieve a frame rate of 50-60 frames per second
+  sleep_scheduler m_sleep_scheduler;
+
   /// The window to draw to
   sf::RenderWindow m_window;
 
@@ -52,6 +58,8 @@ private:
   /// Show the menu on-screen
   void show();
 };
+
+void draw_fps(about_view& v);
 
 /// Show where the panels will be drawn
 void show_layout_panels(about_view& v);

@@ -4,7 +4,11 @@
 #include <vector>
 #include <stdexcept>
 
-/// A read-only value.
+/// A copyable read-only value.
+///
+/// Writing a const member variable causes the need
+/// to write a custom copy constructor.
+/// Using this class instead prevents this.
 template <class T>
 class read_only
 {

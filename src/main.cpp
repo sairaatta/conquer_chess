@@ -44,7 +44,7 @@
 #include "read_only.h"
 #include "replay.h"
 #include "screen_coordinate.h"
-#include "sleeper.h"
+#include "sleep_scheduler.h"
 #include "test_game.h"
 
 #include <SFML/Graphics.hpp>

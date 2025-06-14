@@ -359,7 +359,7 @@ void menu_view::show()
   // Display all shapes
   m_window.display();
 
-  m_sleeper.tick();
+  m_sleep_scheduler.tick();
 }
 
 void draw_about_panel(menu_view& v)

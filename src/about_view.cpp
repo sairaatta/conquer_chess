@@ -4,16 +4,38 @@
 
 #include "screen_coordinate.h"
 
-#include "pieces.h"
+//#include "pieces.h"
 #include "sfml_helper.h"
 #include <cassert>
 #include <cmath>
-#include <iostream>
+//#include <iostream>
 #include <sstream>
-#include "textures.h"
+//#include "textures.h"
 
 about_view::about_view()
 {
+
+}
+
+void draw_fps(about_view& v)
+{
+  const auto& layout = v.get_layout();
+
+  // Background rectangle
+  const auto& screen_rect = layout.get_fps();
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, screen_rect);
+  rectangle.setFillColor(sf::Color::White);
+  v.get_window().draw(rectangle);
+
+  // Text
+  sf::Text text;
+  v.set_text_style(text);
+  text.setString(sf::String(std::to_string(v.get_fps())));
+  set_text_position(text, screen_rect);
+  text.setCharacterSize(text.getCharacterSize() - 2);
+  text.setFillColor(sf::Color::Black);
+  v.get_window().draw(text);
 
 }
 
@@ -104,10 +126,12 @@ void about_view::show()
   show_title_panel(*this);
   show_subtitle_panel(*this);
   show_text_panel(*this);
+  draw_fps(*this);
 
   // Display all shapes
   m_window.display();
 
+  m_sleep_scheduler.tick();
 }
 
 void show_layout_panels(about_view& v)

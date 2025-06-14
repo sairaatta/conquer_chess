@@ -11,7 +11,7 @@
 #include "game_controller.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
-#include "sleeper.h"
+#include "sleep_scheduler.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -35,7 +35,7 @@ public:
   double get_elapsed_time_secs() const noexcept;
 
   /// Get the number of frames per second
-  int get_fps() const noexcept { return m_sleeper.get_fps(); }
+  int get_fps() const noexcept { return m_sleep_scheduler.get_fps(); }
 
   auto& get_game() noexcept { return m_game; }
 
@@ -83,7 +83,7 @@ private:
   bool m_show_debug;
 
   /// Sleeps to achieve a frame rate of 50-60 frames per second
-  sleeper m_sleeper;
+  sleep_scheduler m_sleep_scheduler;
 
   /// The window to draw to
   sf::RenderWindow m_window;

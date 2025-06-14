@@ -41,6 +41,10 @@ about_view_layout::about_view_layout(
     panel_height / 4,
     panel_width / 9
   );
+  m_fps = screen_rect(
+    screen_coordinate(32, 32),
+    screen_coordinate(100, 80)
+  );
 }
 
 std::vector<screen_rect> get_panels(const about_view_layout& layout)

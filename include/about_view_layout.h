@@ -52,6 +52,9 @@ public:
     const int margin_width = get_default_margin_width()
   );
 
+  /// The area where the frame rate (in frames per seconds) is dsplayed
+  const screen_rect& get_fps() const noexcept { return m_fps; }
+
   const auto& get_title() const noexcept { return m_title; }
   const auto& get_subtitle() const noexcept { return m_subtitle; }
   const auto& get_text() const noexcept { return m_text; }
@@ -66,6 +69,7 @@ private:
   screen_rect m_title;
   screen_rect m_subtitle;
   screen_rect m_text;
+  screen_rect m_fps;
 
   /// The size of the font that would fit nicely
   int m_font_size;

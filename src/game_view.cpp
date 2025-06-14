@@ -88,7 +88,7 @@ void game_view::exec()
   while (m_window.isOpen())
   {
     // Keep track of the FPS
-    m_sleeper.tick();
+    m_sleep_scheduler.tick();
 
     // Disard old messages
     m_log.tick();
@@ -105,7 +105,7 @@ void game_view::exec()
     // Do a tick, so that one delta_t equals one second under normal game speed
     const delta_t dt{
         get_speed_multiplier(m_game.get_game_options().get_game_speed())
-      / m_sleeper.get_fps()
+      / m_sleep_scheduler.get_fps()
     };
     m_game.tick(dt);
 

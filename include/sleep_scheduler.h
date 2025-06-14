@@ -1,10 +1,10 @@
-#ifndef SLEEPER_H
-#define SLEEPER_H
+#ifndef SLEEP_SCHEDULER_H
+#define SLEEP_SCHEDULER_H
 
 #include "fps_clock.h"
 
 /// Sleeps enough to reach 50-60 frames per second.
-class sleeper
+class sleep_scheduler
 {
 public:
 
@@ -28,4 +28,4 @@ private:
 /// Test this class
 void test_sleeper();
 
-#endif // SLEEPER_H
+#endif // SLEEP_SCHEDULER_H

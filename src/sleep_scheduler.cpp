@@ -1,8 +1,8 @@
-#include "sleeper.h"
+#include "sleep_scheduler.h"
 
 #include <cassert>
 
-void sleeper::tick()
+void sleep_scheduler::tick()
 {
   sf::sleep(sf::microseconds(m_sleep_time_microseconds));
 
@@ -25,7 +25,7 @@ void sleeper::tick()
 
 void test_sleeper()
 {
-  sleeper s;
+  sleep_scheduler s;
   const int fps_0{s.get_fps()};
   assert(fps_0 == 0);
   sf::sleep(sf::microseconds(100));

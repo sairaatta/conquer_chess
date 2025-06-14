@@ -10,7 +10,7 @@
 #include "menu_view_layout.h"
 #include "menu_view_item.h"
 #include "physical_controllers.h"
-#include "sleeper.h"
+#include "sleep_scheduler.h"
 
 /// The main Menu dialog.
 class menu_view
@@ -31,7 +31,7 @@ public:
   int get_background_image_index() const noexcept { return m_background_image_index; }
 
   /// Get the number of frames per seconds this class is displayed at
-  int get_fps() const noexcept { return m_sleeper.get_fps(); }
+  int get_fps() const noexcept { return m_sleep_scheduler.get_fps(); }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
@@ -54,7 +54,7 @@ private:
   int m_background_image_index;
 
   /// Sleeps to achieve a frame rate of 50-60 frames per second
-  sleeper m_sleeper;
+  sleep_scheduler m_sleep_scheduler;
 
   /// The layout of this window
   menu_view_layout m_layout;
@@ -111,7 +111,10 @@ int create_random_background_image_index(
   std::default_random_engine& rng_engine
 );
 
-/// Create a random background image index
+/// Create a random background image index.
+///
+/// Use \link{create_random_background_image_index}
+/// to be able to supply a random seed.
 int create_seedless_random_background_image_index();
 
 void draw_about_panel(menu_view& v);
