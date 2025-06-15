@@ -47,9 +47,11 @@ void about_view::exec()
       get_default_about_screen_size().get_x(),
       get_default_about_screen_size().get_y()
     ),
-    "Conquer Chess: about"
+    "Conquer Chess: about",
+    sf::Style::Fullscreen
   );
 
+  #ifdef DO_CENTER_WINDOW
   // Center
   auto desktop = sf::VideoMode::getDesktopMode();
   m_window.setPosition(
@@ -58,6 +60,7 @@ void about_view::exec()
       (desktop.height/ 2) - (m_window.getSize().y /2)
     )
   );
+  #endif // DO_CENTER_WINDOW
 
   while (m_window.isOpen())
   {

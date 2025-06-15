@@ -11,19 +11,15 @@
 #include "action_history.h"
 #include "board_to_text_options.h"
 #include "chess_move.h"
-//#include "controls_view.h"
 #include "played_game_view_layout.h"
 #include "controls_view_item.h"
 #include "controls_view_layout.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
 #include "fps_clock.h"
-//#include "game.h"
 #include "game_controller.h"
 #include "game_log.h"
 #include "game_rect.h"
-//#include "game_resources.h"
-//#include "game_view.h"
 #include "game_view_layout.h"
 #include "helper.h"
 #include "id.h"
@@ -32,7 +28,6 @@
 #include "lobby_options.h"
 #include "lobby_view_item.h"
 #include "lobby_view_layout.h"
-#include "menu_view.h"
 #include "menu_view_item.h"
 #include "menu_view_layout.h"
 #include "options_view_layout.h"
@@ -46,6 +41,7 @@
 #include "screen_coordinate.h"
 #include "sleep_scheduler.h"
 #include "test_game.h"
+#include "main_window.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -144,6 +140,7 @@ int main(int argc, char **argv) //!OCLINT tests may be long
       #endif
     };
     #ifndef LOGIC_ONLY
+    //main_window v(options, pcs);
     loading_view v(options, pcs);
     v.exec();
     #endif // LOGIC_ONLY
