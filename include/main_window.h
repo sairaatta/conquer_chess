@@ -7,11 +7,11 @@
 #include "ccfwd.h"
 #include "sleep_scheduler.h"
 #include "about_view.h"
-#include "game_options.h"
 #include "physical_controllers.h"
 #include "program_state.h"
 #include "loading_view.h"
 #include "menu_view.h"
+#include "options_view.h"
 
 /// The single main window.
 class main_window
@@ -24,9 +24,6 @@ public:
   /// Run the window, until the user quits
   void exec();
 
-  /// Get the number of frames per seconds this class is displayed at
-  int get_fps() const noexcept { return m_sleep_scheduler.get_fps(); }
-
 private:
 
   about_view m_about_view;
@@ -37,7 +34,7 @@ private:
   /// Sleeps to achieve a frame rate of 50-60 frames per second
   sleep_scheduler m_sleep_scheduler;
 
-  program_state m_active_window_type{program_state::loading};
+  program_state m_program_state{program_state::loading};
 
   /// Show the debug info
   bool m_show_debug_info{true};
@@ -45,8 +42,11 @@ private:
   /// The loading screen
   loading_view m_loading_view;
 
-  /// The loading screen
+  /// The main menu screen
   menu_view m_menu_view;
+
+  /// The options screen
+  options_view m_options_view;
 
   /// Process all events
   /// @return if the user wants to quit
@@ -70,6 +70,23 @@ private:
   /// for example, load textures, move pieces, etc.
   void tick();
 
+  /// The tick method, for the about screen
+  void tick_about();
+
+  /// The tick method, for the game screen
+  void tick_game();
+
+  /// The tick method, for the loading screen
+  void tick_loading();
+
+  /// The tick method, for the main menu screen
+  void tick_main_menu();
+
+  /// The tick method, for the options screen
+  void tick_options();
+
+  /// The tick method, for the replay screen
+  void tick_replay();
 };
 
 #endif // LOGIC_ONLY

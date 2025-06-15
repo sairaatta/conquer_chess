@@ -35,7 +35,6 @@ void main_window::exec()
 
 bool main_window::process_events()
 {
-  // User interaction
   sf::Event event;
   while (get_render_window().pollEvent(event))
   {
@@ -64,17 +63,22 @@ bool main_window::process_event(sf::Event& event)
   }
 
   // Specific
-  switch(m_active_window_type)
+  switch(m_program_state)
   {
     case program_state::about:
       return m_about_view.process_event(event);
+    case program_state::game:
+      assert(!"TODO");
+      // return m_game_view.process_event(event);
     case program_state::loading:
       return m_loading_view.process_event(event);
     case program_state::main_menu:
-    default:
-      // Fails when window is not implemented yet
-      assert(m_active_window_type == program_state::main_menu);
       return m_menu_view.process_event(event);
+    case program_state::options:
+      return m_options_view.process_event(event);
+    case program_state::replay:
+      assert(!"TODO");
+      // return m_replay_view.process_event(event);
   }
   return false; // Do not close the program
 }
@@ -89,6 +93,7 @@ void main_window::process_resize_event(sf::Event& event)
   // Resize all windows
   m_about_view.process_resize_event(event);
   m_loading_view.process_resize_event(event);
+  m_options_view.process_resize_event(event);
   m_menu_view.process_resize_event(event);
 }
 
@@ -98,19 +103,26 @@ void main_window::show()
   // Start drawing the new frame, by clearing the screen
   get_render_window().clear();
 
-  switch(m_active_window_type)
+  switch(m_program_state)
   {
     case program_state::about:
       m_about_view.draw();
+      break;
+    case program_state::game:
+      assert(!"TODO");
       break;
     case program_state::loading:
       m_loading_view.draw();
       break;
     case program_state::main_menu:
-    default:
-      // Fails when window is not implemented yet
-      assert(m_active_window_type == program_state::main_menu);
       m_menu_view.draw();
+      break;
+    case program_state::options:
+      m_options_view.draw();
+      break;
+    case program_state::replay:
+      assert(!"TODO");
+      break;
   }
 
   if (m_show_debug_info) {
@@ -141,7 +153,7 @@ void main_window::show_debug_info()
   text.setCharacterSize(20);
   text.setFillColor(sf::Color::Black);
 
-  text.setString(sf::String(std::to_string(get_fps())));
+  text.setString(sf::String(std::to_string(m_sleep_scheduler.get_fps())));
   set_text_position(text, debug_rect);
   text.setCharacterSize(text.getCharacterSize() - 2);
   text.setFillColor(sf::Color::Black);
@@ -150,64 +162,85 @@ void main_window::show_debug_info()
 
 void main_window::tick()
 {
-  switch (m_active_window_type) {
-    case program_state::about:
-      m_about_view.tick();
-      if (m_about_view.get_next_state().has_value()) {
-        m_active_window_type = m_about_view.get_next_state().value();
-        m_about_view.stop();
-      }
-      break;
-    case program_state::game:
-      assert(!"TODO");
-      break;
-    case program_state::loading:
-    {
-      m_loading_view.tick();
-      if (m_loading_view.is_done()) {
-
-        m_loading_view.stop();
-        m_active_window_type = program_state::main_menu;
-        m_menu_view.start();
-      }
-    }
-    break;
-    case program_state::main_menu:
-      m_menu_view.tick();
-      if (m_menu_view.get_next_state().has_value()) {
-        m_active_window_type = m_menu_view.get_next_state().value();
-        m_menu_view.stop();
-        switch (m_active_window_type)
-        {
-          case program_state::about:
-            assert(m_active_window_type == program_state::about);
-            m_about_view.start();
-            break;
-          case program_state::game:
-            assert(!"TODO");
-            break;
-          case program_state::loading:
-            assert(!"This should never happen");
-            break;
-          case program_state::main_menu:
-            assert(!"This should never happen");
-            break;
-          case program_state::options:
-            assert(!"TODO");
-            break;
-          case program_state::replay:
-            assert(!"TODO");
-            break;
-        }
-      }
-      break;
-    case program_state::options:
-      assert(!"TODO");
-      break;
-    case program_state::replay:
-      assert(!"TODO");
-      break;
+  switch (m_program_state) {
+    case program_state::about: tick_about(); break;
+    case program_state::game: tick_game(); break;
+    case program_state::loading: tick_loading(); break;
+    case program_state::main_menu: tick_main_menu(); break;
+    case program_state::options: tick_options(); break;
+    case program_state::replay: tick_replay(); break;
   }
 }
+
+void main_window::tick_about()
+{
+  m_about_view.tick();
+  if (m_about_view.get_next_state().has_value()) {
+    m_program_state = m_about_view.get_next_state().value();
+    m_about_view.stop();
+  }
+}
+
+void main_window::tick_game()
+{
+  assert(!"TODO");
+}
+
+void main_window::tick_loading()
+{
+  m_loading_view.tick();
+  if (m_loading_view.is_done()) {
+
+    m_loading_view.stop();
+    m_program_state = program_state::main_menu;
+    m_menu_view.start();
+  }
+}
+
+void main_window::tick_main_menu()
+{
+  m_menu_view.tick();
+  if (m_menu_view.get_next_state().has_value()) {
+    m_program_state = m_menu_view.get_next_state().value();
+    m_menu_view.stop();
+    switch (m_program_state)
+    {
+      case program_state::about:
+        m_about_view.start();
+        break;
+      case program_state::game:
+        assert(!"TODO");
+        break;
+      case program_state::loading:
+        assert(!"This should never happen");
+        break;
+      case program_state::main_menu:
+        assert(!"This should never happen");
+        break;
+      case program_state::options:
+        m_options_view.start();
+        break;
+      case program_state::replay:
+        assert(!"TODO");
+        break;
+    }
+  }
+}
+
+void main_window::tick_options()
+{
+  m_options_view.tick();
+  if (m_options_view.get_next_state().has_value()) {
+    m_program_state = m_options_view.get_next_state().value();
+    m_options_view.stop();
+  }
+}
+
+void main_window::tick_replay()
+{
+  assert(!"TODO");
+}
+
+
 
 

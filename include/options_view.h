@@ -3,12 +3,15 @@
 
 #ifndef LOGIC_ONLY
 
-#include "game_options.h"
+#include "ccfwd.h"
+#include "chess_color.h"
 #include "options_view_layout.h"
 #include "options_view_item.h"
-#include "game_resources.h"
 #include "physical_controllers.h"
+#include "program_state.h"
+#include "starting_position_type.h"
 #include <SFML/Graphics.hpp>
+#include <optional>
 
 /// The Options dialog.
 class options_view
@@ -16,11 +19,24 @@ class options_view
 public:
   explicit options_view();
 
+  /// Draw the menu on the main window
+  void draw();
+
   const auto& get_layout() const noexcept { return m_layout; }
 
   const auto& get_physical_controllers() const noexcept { return m_physical_controllers; }
 
+  /// The next state to go to, if any
+  const auto& get_next_state() const noexcept { return m_next_state; }
+
   options_view_item get_selected() const noexcept { return m_selected; }
+
+  /// Process all events
+  /// @return if the user wants to quit
+  bool process_event(sf::Event& event);
+
+  /// Process a resize event
+  void process_resize_event(sf::Event& event);
 
   /// Select an item.
   /// Play a sound when the selected item changes
@@ -29,9 +45,18 @@ public:
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
+  void start();
+
+  void stop();
+
+  void tick();
+
 private:
 
   options_view_layout m_layout;
+
+  /// The next state to go to, if any
+  std::optional<program_state> m_next_state;
 
   physical_controllers m_physical_controllers;
 
@@ -46,12 +71,6 @@ private:
   /// can be done by LMB, space and right arrow key
   void increase_selected();
 
-  /// Process all events
-  /// @return if the user wants to quit
-  bool process_events();
-
-  /// Show the menu on-screen
-  void show();
 };
 
 void draw_panel(

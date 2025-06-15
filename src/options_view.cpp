@@ -149,115 +149,122 @@ starting_position_type get_starting_position(const options_view&) noexcept
   return get_starting_position(game_options::get());
 }
 
-bool options_view::process_events()
+bool options_view::process_event(sf::Event& event)
 {
-  // User interaction
-  sf::Event event;
-  while (get_render_window().pollEvent(event))
+  if (event.type == sf::Event::Resized)
   {
-    if (event.type == sf::Event::Resized)
+    // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
+    const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+    get_render_window().setView(sf::View(visibleArea));
+    m_layout = options_view_layout(
+      screen_coordinate(visibleArea.width, visibleArea.height),
+      get_default_margin_width()
+    );
+  }
+  else if (event.type == sf::Event::Closed)
+  {
+    m_next_state = program_state::main_menu;
+    return false;
+  }
+  else if (event.type == sf::Event::KeyPressed)
+  {
+    sf::Keyboard::Key key_pressed = event.key.code;
+    if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-      const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-      get_render_window().setView(sf::View(visibleArea));
-      m_layout = options_view_layout(
-        screen_coordinate(visibleArea.width, visibleArea.height),
-        get_default_margin_width()
-      );
+      m_next_state = program_state::main_menu;
+      return false;
     }
-    else if (event.type == sf::Event::Closed)
+    if (key_pressed == sf::Keyboard::Key::Q)
     {
-        get_render_window().close();
-        return true; // Game is done
+      m_next_state = program_state::main_menu;
+      return false;
     }
-    else if (event.type == sf::Event::KeyPressed)
+    else if (key_pressed == sf::Keyboard::Key::Up)
     {
-      sf::Keyboard::Key key_pressed = event.key.code;
-      if (key_pressed == sf::Keyboard::Key::Escape)
+      set_selected(get_above(m_selected));
+    }
+    else if (key_pressed == sf::Keyboard::Key::Right)
+    {
+      switch (m_selected)
       {
-        get_render_window().close();
-        return true;
-      }
-      if (key_pressed == sf::Keyboard::Key::Q)
-      {
-        get_render_window().close();
-        return true;
-      }
-      else if (key_pressed == sf::Keyboard::Key::Up)
-      {
-        set_selected(get_above(m_selected));
-      }
-      else if (key_pressed == sf::Keyboard::Key::Right)
-      {
-        switch (m_selected)
-        {
-          case options_view_item::game_speed:
-          default:
-          assert(m_selected == options_view_item::game_speed);
-          case options_view_item::music_volume:
-          case options_view_item::sound_effects_volume:
-          case options_view_item::starting_position:
-            increase_selected();
-          break;
-          case options_view_item::left_controls:
-          case options_view_item::right_controls:
-            set_selected(get_right_of(m_selected));
-          break;
-        }
-      }
-      else if (key_pressed == sf::Keyboard::Key::Down)
-      {
-        set_selected(get_below(m_selected));
-      }
-      else if (key_pressed == sf::Keyboard::Key::Left)
-      {
-        switch (m_selected)
-        {
-          case options_view_item::game_speed:
-          default:
-          assert(m_selected == options_view_item::game_speed);
-          case options_view_item::music_volume:
-          case options_view_item::sound_effects_volume:
-          case options_view_item::starting_position:
-            decrease_selected();
-          break;
-          case options_view_item::left_controls:
-          case options_view_item::right_controls:
-            set_selected(get_left_of(m_selected));
-          break;
-        }
-      }
-      else if (key_pressed == sf::Keyboard::Key::Space)
-      {
-        increase_selected();
-      }
-      else if (key_pressed == sf::Keyboard::Key::F3)
-      {
-        // debug
-        std::clog << "Debug";
+        case options_view_item::game_speed:
+        default:
+        assert(m_selected == options_view_item::game_speed);
+        case options_view_item::music_volume:
+        case options_view_item::sound_effects_volume:
+        case options_view_item::starting_position:
+          increase_selected();
+        break;
+        case options_view_item::left_controls:
+        case options_view_item::right_controls:
+          set_selected(get_right_of(m_selected));
+        break;
       }
     }
-    else if (event.type == sf::Event::MouseMoved)
+    else if (key_pressed == sf::Keyboard::Key::Down)
     {
-      const auto mouse_screen_pos{
-        screen_coordinate(event.mouseMove.x, event.mouseMove.y)
-      };
-      if (is_in(mouse_screen_pos, m_layout.get_chess_board())) set_selected(options_view_item::starting_position);
-      else if (is_in(mouse_screen_pos, m_layout.get_game_speed_value())) set_selected(options_view_item::game_speed);
-      else if (is_in(mouse_screen_pos, m_layout.get_controller_type_value(side::lhs))) set_selected(options_view_item::left_controls);
-      else if (is_in(mouse_screen_pos, m_layout.get_music_volume_value())) set_selected(options_view_item::music_volume);
-      else if (is_in(mouse_screen_pos, m_layout.get_controller_type_value(side::rhs))) set_selected(options_view_item::right_controls);
-      else if (is_in(mouse_screen_pos, m_layout.get_sound_effects_volume_value())) set_selected(options_view_item::sound_effects_volume);
-      else if (is_in(mouse_screen_pos, m_layout.get_starting_pos_value())) set_selected(options_view_item::starting_position);
+      set_selected(get_below(m_selected));
     }
-    else if (event.type == sf::Event::MouseButtonPressed)
+    else if (key_pressed == sf::Keyboard::Key::Left)
+    {
+      switch (m_selected)
+      {
+        case options_view_item::game_speed:
+        default:
+        assert(m_selected == options_view_item::game_speed);
+        case options_view_item::music_volume:
+        case options_view_item::sound_effects_volume:
+        case options_view_item::starting_position:
+          decrease_selected();
+        break;
+        case options_view_item::left_controls:
+        case options_view_item::right_controls:
+          set_selected(get_left_of(m_selected));
+        break;
+      }
+    }
+    else if (key_pressed == sf::Keyboard::Key::Space)
     {
       increase_selected();
     }
+    else if (key_pressed == sf::Keyboard::Key::F3)
+    {
+      // debug
+      std::clog << "Debug";
+    }
+  }
+  else if (event.type == sf::Event::MouseMoved)
+  {
+    const auto mouse_screen_pos{
+      screen_coordinate(event.mouseMove.x, event.mouseMove.y)
+    };
+    if (is_in(mouse_screen_pos, m_layout.get_chess_board())) set_selected(options_view_item::starting_position);
+    else if (is_in(mouse_screen_pos, m_layout.get_game_speed_value())) set_selected(options_view_item::game_speed);
+    else if (is_in(mouse_screen_pos, m_layout.get_controller_type_value(side::lhs))) set_selected(options_view_item::left_controls);
+    else if (is_in(mouse_screen_pos, m_layout.get_music_volume_value())) set_selected(options_view_item::music_volume);
+    else if (is_in(mouse_screen_pos, m_layout.get_controller_type_value(side::rhs))) set_selected(options_view_item::right_controls);
+    else if (is_in(mouse_screen_pos, m_layout.get_sound_effects_volume_value())) set_selected(options_view_item::sound_effects_volume);
+    else if (is_in(mouse_screen_pos, m_layout.get_starting_pos_value())) set_selected(options_view_item::starting_position);
+  }
+  else if (event.type == sf::Event::MouseButtonPressed)
+  {
+    increase_selected();
   }
   return false; // if no events proceed with tick
 }
 
+
+void options_view::process_resize_event(sf::Event& event)
+{
+  assert(event.type == sf::Event::Resized);
+  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
+  const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+  get_render_window().setView(sf::View(visibleArea));
+  m_layout = options_view_layout(
+    screen_coordinate(visibleArea.width, visibleArea.height),
+    get_default_margin_width()
+  );
+}
 void options_view::set_selected(const options_view_item i)
 {
   if (m_selected != i)
@@ -276,7 +283,7 @@ void options_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::Black);
 }
 
-void options_view::show()
+void options_view::draw()
 {
   // Start drawing the new frame, by clearing the screen
   get_render_window().clear();
@@ -664,5 +671,21 @@ void show_sound_effects_volume(options_view& v)
     get_render_window().draw(text);
   }
 }
+
+void options_view::start()
+{
+  m_next_state.reset();
+}
+
+void options_view::stop()
+{
+  m_next_state.reset();
+}
+
+void options_view::tick()
+{
+  // Nothing here yet
+}
+
 
 #endif // LOGIC_ONLY
