@@ -1109,7 +1109,12 @@ std::optional<piece_action_type> get_default_piece_action(
   return std::optional<piece_action_type>();
 }
 
-game get_game_with_starting_position(starting_position_type t) noexcept
+game create_game_with_standard_starting_position() noexcept
+{
+  return create_game_with_starting_position(starting_position_type::standard);
+}
+
+game create_game_with_starting_position(starting_position_type t) noexcept
 {
   game_options::get().set_starting_position(t);
   return game{};
@@ -1136,7 +1141,7 @@ int get_index_of_closest_piece_to(
 
 game get_kings_only_game() noexcept
 {
-  return get_game_with_starting_position(starting_position_type::kings_only);
+  return create_game_with_starting_position(starting_position_type::kings_only);
 }
 
 double get_music_volume_as_percentage(const game&) noexcept

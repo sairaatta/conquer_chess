@@ -56,7 +56,7 @@ void test_replayer()
   {
     replayer r;
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(r.get_last_time() == in_game_time(-1.0));
     r.do_move(c, g);
     assert(r.get_last_time() == in_game_time(0.0));
@@ -65,7 +65,7 @@ void test_replayer()
   {
     replayer r;
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     r.do_move(c, g);
     assert(r.get_last_time() == in_game_time(0.0));
     g.tick(delta_t(0.1));
@@ -76,8 +76,8 @@ void test_replayer()
   {
     replayer r(replay("1. e4"));
     assert(get_n_moves(r) == 1);
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(is_piece_at(g, square("e2")));
     assert(!is_piece_at(g, square("e4")));
     r.do_move(c, g);

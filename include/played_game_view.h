@@ -4,7 +4,7 @@
 #ifndef LOGIC_ONLY
 
 #include <SFML/Graphics.hpp>
-#include "game_resources.h"
+//#include "game_resources.h"
 #include "played_game_view_layout.h"
 #include "game.h"
 

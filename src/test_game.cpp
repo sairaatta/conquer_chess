@@ -221,7 +221,7 @@ void test_game_functions()
   // can_castle_kingside
   {
     const game g{
-      get_game_with_starting_position(
+      create_game_with_starting_position(
         starting_position_type::ready_to_castle
       )
     };
@@ -231,7 +231,7 @@ void test_game_functions()
   // can_castle_queenside
   {
     const game g{
-      get_game_with_starting_position(starting_position_type::ready_to_castle)
+      create_game_with_starting_position(starting_position_type::ready_to_castle)
     };
     assert(can_castle_queenside(get_piece_at(g, "e1"), g));
     assert(can_castle_queenside(get_piece_at(g, "e8"), g));
@@ -318,7 +318,7 @@ void test_game_functions()
     // #28: pawns can attack diagonally
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::pawn_all_out_assault)
+        create_game_with_starting_position(starting_position_type::pawn_all_out_assault)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -342,7 +342,7 @@ void test_game_functions()
     // kings only
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::kings_only)
+        create_game_with_starting_position(starting_position_type::kings_only)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -366,7 +366,7 @@ void test_game_functions()
     // kings and queens only
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::queen_end_game)
+        create_game_with_starting_position(starting_position_type::queen_end_game)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -390,7 +390,7 @@ void test_game_functions()
     // Kasparov versus Topalov
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::kasparov_vs_topalov)
+        create_game_with_starting_position(starting_position_type::kasparov_vs_topalov)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -406,7 +406,7 @@ void test_game_functions()
     // pawn all-out assault
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::pawn_all_out_assault)
+        create_game_with_starting_position(starting_position_type::pawn_all_out_assault)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -430,7 +430,7 @@ void test_game_functions()
     // pawns nearly near promotion
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::pawns_nearly_near_promotion)
+        create_game_with_starting_position(starting_position_type::pawns_nearly_near_promotion)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -454,7 +454,7 @@ void test_game_functions()
     // pawn at promotion
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::pawns_at_promotion)
+        create_game_with_starting_position(starting_position_type::pawns_at_promotion)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -478,7 +478,7 @@ void test_game_functions()
     // ready to castle
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::ready_to_castle)
+        create_game_with_starting_position(starting_position_type::ready_to_castle)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -518,7 +518,7 @@ void test_game_functions()
     // cannot castle through check
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::ready_to_not_castle)
+        create_game_with_starting_position(starting_position_type::ready_to_not_castle)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -558,7 +558,7 @@ void test_game_functions()
     // cannot move into check
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::ready_to_not_castle)
+        create_game_with_starting_position(starting_position_type::ready_to_not_castle)
       };
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -685,7 +685,7 @@ void test_game_functions()
     // can_do: attack
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::queen_end_game)
+        create_game_with_starting_position(starting_position_type::queen_end_game)
       };
       assert(!can_do(g, get_piece_at(g, "d1"), piece_action_type::move, "d8", side::lhs));
       assert(can_do(g, get_piece_at(g, "d1"), piece_action_type::attack, "d8", side::lhs));
@@ -713,7 +713,7 @@ void test_game_functions()
     // can_do: castling
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::ready_to_castle)
+        create_game_with_starting_position(starting_position_type::ready_to_castle)
       };
       assert(can_do(g, get_piece_at(g, "e1"), piece_action_type::castle_kingside, "g1", side::lhs));
       assert(can_do(g, get_piece_at(g, "e8"), piece_action_type::castle_kingside, "g8", side::rhs));
@@ -723,7 +723,7 @@ void test_game_functions()
     // can_do: promote
     {
       const game g{
-        get_game_with_starting_position(starting_position_type::pawns_at_promotion)
+        create_game_with_starting_position(starting_position_type::pawns_at_promotion)
       };
       assert(can_do(g, get_piece_at(g, "a8"), piece_action_type::promote_to_queen, "a8", side::lhs));
       assert(can_do(g, get_piece_at(g, "a8"), piece_action_type::promote_to_rook, "a8", side::lhs));
@@ -865,12 +865,12 @@ void test_game_functions()
   }
   // get_music_volume_as_percentage
   {
-    const game g{get_game_with_starting_position(starting_position_type::standard)};
+    const game g{create_game_with_starting_position(starting_position_type::standard)};
     assert(get_music_volume_as_percentage(g) >= 0.0);
   }
   // get_occupied_squares
   {
-    const game g{get_game_with_starting_position(starting_position_type::standard)};
+    const game g{create_game_with_starting_position(starting_position_type::standard)};
     assert(get_occupied_squares(g).size() == 32);
   }
   // get_piece_at, const

@@ -872,7 +872,7 @@ void test_piece()
     p.add_action(piece_action(chess_color::white, piece_type::queen, piece_action_type::move, square("h5"), square("g5")));
     assert(!p.get_actions().empty());
     int n_ticks{0};
-    game g = get_game_with_starting_position(starting_position_type::before_scholars_mate);
+    game g = create_game_with_starting_position(starting_position_type::before_scholars_mate);
     assert(count_piece_actions(p) == 1);
     p.tick(delta_t(0.1), g);
     assert(count_piece_actions(p) == 1);
@@ -954,7 +954,7 @@ void test_piece()
   }
   // A piece stops attacking when the attacked piece moves away
   {
-    game g{get_game_with_starting_position(starting_position_type::queen_end_game)};
+    game g{create_game_with_starting_position(starting_position_type::queen_end_game)};
     piece& white_queen{get_piece_at(g, square("d1"))};
     piece& black_queen{get_piece_at(g, square("d8"))};
     white_queen.add_action(piece_action(chess_color::white, piece_type::queen, piece_action_type::attack, square("d1"), square("d8")));

@@ -4,11 +4,13 @@
 #ifndef LOGIC_ONLY
 
 #include <SFML/Graphics.hpp>
-#include "physical_controller.h"
-#include "game_resources.h"
+//#include "physical_controller.h"
+//#include "game_resources.h"
 #include "controls_view_layout.h"
 #include "controls_view_item.h"
 #include "program_state.h"
+#include "side.h"
+#include "chess_color.h"
 #include <optional>
 
 /// The Controls dialog.

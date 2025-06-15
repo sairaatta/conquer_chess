@@ -6,6 +6,7 @@
 #include "game_coordinate.h"
 #include "piece.h"
 #include "piece_actions.h"
+#include "physical_controller.h"
 
 #include <cassert>
 #include <iostream>
@@ -617,7 +618,7 @@ void test_user_inputs()
   // Move up does something
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_up_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -627,7 +628,7 @@ void test_user_inputs()
   // Move right does something
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_right_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -637,7 +638,7 @@ void test_user_inputs()
   // Move down does something
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_down_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -647,7 +648,7 @@ void test_user_inputs()
   // Move left does something
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_left_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -674,7 +675,7 @@ void test_user_inputs()
   // 64: move white's cursor to e2
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(square(get_cursor_pos(c, side::lhs)) != square("e2"));
     auto inputs{
       get_user_inputs_to_move_cursor_to(c, square("e2"), side::lhs)
@@ -688,7 +689,7 @@ void test_user_inputs()
   // 64: move white's cursor to e2 and select the pawn
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "e2", side::lhs);
     assert(!get_piece_at(g, "e2").is_selected());
     const user_input input{get_user_input_to_select(c, side::lhs)};

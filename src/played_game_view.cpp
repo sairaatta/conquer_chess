@@ -4,11 +4,12 @@
 
 #include "screen_coordinate.h"
 #include "render_window.h"
-#include "pieces.h"
+#include "game_resources.h"
+//#include "pieces.h"
 #include "sfml_helper.h"
 #include <cassert>
 #include <cmath>
-#include <iostream>
+//#include <iostream>
 #include <fstream>
 #include <sstream>
 

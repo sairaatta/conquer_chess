@@ -96,6 +96,4 @@ bool has_mouse_controller(const physical_controllers& controllers) noexcept;
 /// Test this class and its free functions
 void test_physical_controllers();
 
-bool operator==(const physical_controllers& lhs, const physical_controllers& rhs) noexcept;
-
 #endif // PHYSICAL_CONTROLLERS_H

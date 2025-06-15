@@ -63,6 +63,8 @@ private:
   /// and piece::m_time is the piece's idea of what time it is.
   /// These should be equal at the start and end of a tick
   void check_game_and_pieces_agree_on_the_time() const;
+
+  friend game create_game_with_starting_position(starting_position_type t) noexcept;
 };
 
 /// Can this piece castle kingside?
@@ -298,8 +300,12 @@ std::vector<piece> get_starting_pieces(
 ) noexcept;
 
 /// Create a game with all default settings
+/// and the default starting position
+game create_game_with_standard_starting_position() noexcept;
+
+/// Create a game with all default settings
 /// and a specific starting position
-game get_game_with_starting_position(starting_position_type t) noexcept;
+game create_game_with_starting_position(starting_position_type t) noexcept;
 
 /// Get the ID of a piece at a square
 /// Will throw if there is no piece there

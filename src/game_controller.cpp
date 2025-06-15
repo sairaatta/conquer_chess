@@ -201,6 +201,30 @@ int count_user_inputs(const game_controller& c) noexcept
   return count_user_inputs(c.get_user_inputs());
 }
 
+game_controller create_game_controller_with_default_controllers()
+{
+  use_default_controllers();
+  return game_controller();
+}
+
+game_controller create_game_controller_with_keyboard_mouse()
+{
+  use_keyboard_mouse_controllers();
+  return game_controller();
+}
+
+game_controller create_game_controller_with_mouse_keyboard()
+{
+  use_mouse_keyboard_controllers();
+  return game_controller();
+}
+
+game_controller create_game_controller_with_two_keyboards()
+{
+  use_two_keyboard_controllers();
+  return game_controller();
+}
+
 void do_move_keyboard_player_piece(
   game& g,
   game_controller& c,
@@ -836,7 +860,9 @@ void test_game_controller() //!OCLINT tests may be many
   #ifndef NDEBUG // no tests in release
   // game::add_user_input
   {
-    game_controller c;
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     assert(is_empty(get_user_inputs(c)));
     add_user_input(c, create_press_action_1(side::lhs));
     assert(!is_empty(get_user_inputs(c)));
@@ -844,13 +870,15 @@ void test_game_controller() //!OCLINT tests may be many
   // has_mouse_controller
   {
     const game_controller g(
-      create_two_keyboard_controllers()
+      create_game_controller_with_two_keyboards()
     );
     assert(!has_mouse_controller(g));
   }
   // 55: move_cursor_to
   {
-    game_controller c;
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     move_cursor_to(c, "d1", side::lhs);
     assert(get_cursor_pos(c, side::lhs) == to_coordinat(square("d1")));
     move_cursor_to(c, "f6", side::rhs);
@@ -859,7 +887,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Keyboard: select white king
   {
     game g;
-    game_controller c;
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     const auto white_king{find_pieces(g, piece_type::king, chess_color::white).at(0)};
     set_cursor_pos(c, to_coordinat(white_king.get_current_square()), side::lhs);
     assert(count_selected_units(g, chess_color::white) == 0);
@@ -871,7 +901,9 @@ void test_game_controller() //!OCLINT tests may be many
   // 60: selectedness is transferred, for white
   {
     game g;
-    game_controller c;
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     move_cursor_to(c, "e1", side::lhs);
     assert(count_selected_units(g, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -889,7 +921,7 @@ void test_game_controller() //!OCLINT tests may be many
   {
     game g;
     game_controller c{
-      create_two_keyboard_controllers()
+      create_game_controller_with_two_keyboards()
     };
     move_cursor_to(c, "e8", side::rhs);
     assert(get_cursor_square(c, side::rhs) == square("e8"));
@@ -910,7 +942,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Selecting a unit twice with action 1 selects and unselects it
   {
     game g;
-    game_controller c;
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     assert(count_selected_units(g, chess_color::white) == 0);
     move_cursor_to(c, "e1", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -927,7 +961,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Keyboard: can move pawn forward
   {
     game g;
-    game_controller c;
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     move_cursor_to(c, "e2", side::lhs);
     assert(count_selected_units(g, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -950,8 +986,10 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Keyboard: cannot move pawn backward
   {
-    game g = get_game_with_starting_position(starting_position_type::pawn_all_out_assault);
-    game_controller c;
+    game g = create_game_with_starting_position(starting_position_type::pawn_all_out_assault);
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     move_cursor_to(c, "e4", side::lhs);
     assert(count_selected_units(g, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -969,8 +1007,10 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 3: white castles kingside
   {
-    game g = get_game_with_starting_position(starting_position_type::ready_to_castle);
-    game_controller c;
+    game g = create_game_with_starting_position(starting_position_type::ready_to_castle);
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     move_cursor_to(c, "e1", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -990,7 +1030,9 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 47: set_keyboard_player_pos for RHS player
   {
-    game_controller c;
+    game_controller c{
+      create_game_controller_with_default_controllers()
+    };
     assert(get_keyboard_user_player_side(c) == side::lhs);
     const square s("a1");
     set_keyboard_player_pos(c, s);
@@ -999,7 +1041,7 @@ void test_game_controller() //!OCLINT tests may be many
   // 47: set_keyboard_player_pos for RHS player
   {
     game_controller c{
-      create_mouse_keyboard_controllers()
+      create_game_controller_with_mouse_keyboard()
     };
     assert(get_keyboard_user_player_side(c) == side::rhs);
     const square s("a1");
@@ -1009,28 +1051,28 @@ void test_game_controller() //!OCLINT tests may be many
   // has_mouse_controller
   {
     const game_controller g(
-      create_mouse_keyboard_controllers()
+      create_game_controller_with_mouse_keyboard()
     );
     assert(has_mouse_controller(g));
   }
   // get_mouse_user_player_side, mouse at LHS
   {
     const game_controller g(
-      create_mouse_keyboard_controllers()
+      create_game_controller_with_mouse_keyboard()
     );
     assert(get_mouse_user_player_side(g) == side::lhs);
   }
   // get_mouse_user_player_side, mouse at RHS
   {
     const game_controller g(
-      create_keyboard_mouse_controllers()
+      create_game_controller_with_keyboard_mouse()
     );
     assert(get_mouse_user_player_side(g) == side::rhs);
   }
   // Clicking a unit once with LMB selects it
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(count_selected_units(g, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
@@ -1041,7 +1083,7 @@ void test_game_controller() //!OCLINT tests may be many
   // Clicking a unit twice with LMB selects and unselects it
   {
     game g;
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(count_selected_units(g, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
@@ -1057,8 +1099,8 @@ void test_game_controller() //!OCLINT tests may be many
   // Clicking a unit with LMB,
   // then another unit with LMB, only the last unit is selected
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(count_selected_units(g, chess_color::black) == 0);
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
@@ -1075,7 +1117,7 @@ void test_game_controller() //!OCLINT tests may be many
   // Ke8e7 works by LMB, LMB
   {
     game g{get_kings_only_game()};
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
@@ -1089,8 +1131,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: nothing selected, cursor at empty square -> no action
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "d4", side::lhs);
     move_cursor_to(c, "d5", side::rhs);
     assert(!get_default_piece_action(g, c, side::lhs));
@@ -1098,8 +1140,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: nothing selected, cursor at square with opponent piece -> no action
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "d8", side::lhs);
     move_cursor_to(c, "d1", side::rhs);
     assert(!get_default_piece_action(g, c, side::lhs));
@@ -1107,8 +1149,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: nothing selected, cursor at square of own color -> select
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "d1", side::lhs);
     move_cursor_to(c, "d8", side::rhs);
     assert(get_default_piece_action(g, c, side::lhs));
@@ -1118,8 +1160,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: selected piece, cursor still there -> unselect
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "d1", side::lhs);
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -1131,8 +1173,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: Piece selected, cursor at valid target square -> move
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     do_select(g, c, "d2", side::lhs);
     do_select(g, c, "d7", side::rhs);
     move_cursor_to(c, "d3", side::lhs);
@@ -1143,9 +1185,9 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: Piece selected, opponent at target square -> attack
   {
     game g{
-      get_game_with_starting_position(starting_position_type::queen_end_game)
+      create_game_with_starting_position(starting_position_type::queen_end_game)
     };
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     do_select(g, c, "d1", side::lhs);
     do_select(g, c, "d8", side::rhs);
     move_cursor_to(c, "d8", side::lhs);
@@ -1157,9 +1199,9 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: King selected, cursor at valid king-side castling square -> king-side castle
   {
     game g{
-      get_game_with_starting_position(starting_position_type::ready_to_castle)
+      create_game_with_starting_position(starting_position_type::ready_to_castle)
     };
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     do_select(g, c, "e1", side::lhs);
     do_select(g, c, "e8", side::rhs);
     move_cursor_to(c, "g1", side::lhs);
@@ -1171,9 +1213,9 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: King selected, cursor at valid queen-side castling square -> queen-side castle
   {
     game g{
-      get_game_with_starting_position(starting_position_type::ready_to_castle)
+      create_game_with_starting_position(starting_position_type::ready_to_castle)
     };
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     do_select(g, c, "e1", side::lhs);
     do_select(g, c, "e8", side::rhs);
     move_cursor_to(c, "c1", side::lhs);
@@ -1185,9 +1227,9 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: Pawns move to the square where they are promoted -> move
   {
     game g{
-      get_game_with_starting_position(starting_position_type::pawns_near_promotion)
+      create_game_with_starting_position(starting_position_type::pawns_near_promotion)
     };
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     do_select(g, c, "a7", side::lhs);
     do_select(g, c, "h2", side::rhs);
     move_cursor_to(c, "a8", side::lhs);
@@ -1198,9 +1240,9 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: Pawns are at square where they are promoted -> promote
   {
     game g{
-      get_game_with_starting_position(starting_position_type::pawns_at_promotion)
+      create_game_with_starting_position(starting_position_type::pawns_at_promotion)
     };
-    game_controller c;
+    game_controller c{create_game_controller_with_default_controllers()};
     do_select(g, c, "a8", side::lhs);
     do_select(g, c, "h1", side::rhs);
     move_cursor_to(c, "a8", side::lhs);
@@ -1213,8 +1255,8 @@ void test_game_controller() //!OCLINT tests may be many
   #ifdef FIX_ISSUE_64
   // To do e2-e4, from e1, it takes 5 key presses
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "e1", side::lhs);
     const chess_move m("e4", chess_color::white);
     const user_inputs inputs{
@@ -1237,14 +1279,14 @@ void test_game_controller() //!OCLINT tests may be many
   #endif // FIX_ISSUE_64
   // get_cursor_pos
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    const game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(get_cursor_pos(g, c, chess_color::white) != get_cursor_pos(g, c, chess_color::black));
   }
   // get_keyboard_player_pos, non-const, white == lhs == keyboard
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(get_keyboard_user_player_color(g, c) == chess_color::white);
     const auto pos_before{get_cursor_pos(c, side::lhs)};
     const auto pos{get_cursor_pos(c, side::lhs)};
@@ -1255,8 +1297,8 @@ void test_game_controller() //!OCLINT tests may be many
 
   // get_mouse_player_pos
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     const auto pos_before{get_cursor_pos(c, side::rhs)};
     const auto pos{get_cursor_pos(c, side::rhs)};
     set_cursor_pos(c, pos + game_coordinate(0.1, 0.1), side::rhs);
@@ -1265,8 +1307,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // #27: a2-a4 takes as long as b2-b3
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("b2")));
     assert(!is_piece_at(g, square("a4")));
@@ -1291,8 +1333,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // A piece under attack must have decreasing health
   {
-    game_controller c;
-    game g{get_game_with_starting_position(starting_position_type::bishop_and_knight_end_game)};
+    game_controller c{create_game_controller_with_default_controllers()};
+    game g{create_game_with_starting_position(starting_position_type::bishop_and_knight_end_game)};
     const double health_before{get_piece_at(g, square("d2")).get_health()};
     // Let the white knight at c4 attack the black king at d2
     assert(get_piece_at(g, square("d2")).get_color() == chess_color::black);
@@ -1310,8 +1352,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Cannot attack a piece of one's own color
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     const double health_before{get_piece_at(g, square("e1")).get_health()};
     // Let the white queen at d1 attack the white king at e1
     do_select_and_start_attack_keyboard_player_piece(
@@ -1326,8 +1368,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // When a piece is killed, the queen attacker moves to that square
   {
-    game_controller c;
-    game g{get_game_with_starting_position(starting_position_type::before_scholars_mate)};
+    game_controller c{create_game_controller_with_default_controllers()};
+    game g{create_game_with_starting_position(starting_position_type::before_scholars_mate)};
     do_select_and_start_attack_keyboard_player_piece(
       g,
       c,
@@ -1348,8 +1390,8 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // #20: A queen cannot attack over pieces
   {
-    game g{get_game_with_starting_position(starting_position_type::standard)};
-    game_controller c;
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_default_controllers()};
     assert(is_piece_at(g, square("d1")));
     do_select_and_start_attack_keyboard_player_piece(
       g,

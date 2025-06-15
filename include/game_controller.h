@@ -4,10 +4,10 @@
 #include "ccfwd.h"
 #include "action_number.h"
 
-#include "physical_controllers.h"
 #include "game_coordinate.h"
 #include "side.h"
 #include "user_inputs.h"
+#include "physical_controller_type.h"
 
 #include <iosfwd>
 
@@ -19,7 +19,6 @@
 class game_controller
 {
 public:
-  game_controller();
 
   /// Add a user input. These will be processed in 'game::tick'
   void add_user_input(const user_input& a);
@@ -42,9 +41,6 @@ public:
   /// Get a player's physical controller
   const physical_controller& get_physical_controller(const side player_side) const noexcept;
 
-  /// Get the game users' inputs
-  //auto& get_user_inputs() noexcept { return m_user_inputs; }
-
   /// Set the selected action for the mouse user.
   /// Assumes there is a mouse user
   void set_mouse_user_selector(const action_number& number);
@@ -53,6 +49,8 @@ public:
   void set_cursor_pos(const game_coordinate& pos, const side player_side) noexcept;
 
 private:
+  // Use a friend instead
+  game_controller();
 
   /// The in-game coordinat of the LHS user's cursor
   game_coordinate m_lhs_cursor_pos;
@@ -66,6 +64,13 @@ private:
 
   /// The user inputs that need to be processed
   user_inputs m_user_inputs;
+
+  /// Force to pick a setup of physical_controllers
+  friend game_controller create_game_controller_with_default_controllers();
+  friend game_controller create_game_controller_with_keyboard_mouse();
+  friend game_controller create_game_controller_with_mouse_keyboard();
+  friend game_controller create_game_controller_with_two_keyboards();
+  friend class game_view;
 };
 
 /// Add a user input. These will be processed in 'game::tick'
@@ -101,6 +106,18 @@ user_inputs convert_move_to_user_inputs(
 /// Count the total number of \link{user_input}s
 /// to be done by the \link{game_controller}.
 int count_user_inputs(const game_controller& c) noexcept;
+
+/// Create a game controller when the players use the defaulter controllers
+game_controller create_game_controller_with_default_controllers();
+
+/// Create a game controller when the players use a keyboard and a mouse
+game_controller create_game_controller_with_keyboard_mouse();
+
+/// Create a game controller when the players use a mouse and a keyboard
+game_controller create_game_controller_with_mouse_keyboard();
+
+/// Create a game controller when the players use two keyboards
+game_controller create_game_controller_with_two_keyboards();
 
 /// Let the keyboard player move a piece
 /// from the current selected square to a new target
