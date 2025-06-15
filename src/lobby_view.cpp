@@ -15,11 +15,9 @@
 #include <iostream>
 
 lobby_view::lobby_view(
-  const game_options& go,
   const physical_controllers& pcs
 )
-  : m_game_options{go},
-    m_lhs_cursor{lobby_view_item::color},
+  : m_lhs_cursor{lobby_view_item::color},
     m_lhs_start{false},
     m_lobby_options{create_default_lobby_options()},
     m_physical_controllers{pcs},
@@ -27,10 +25,10 @@ lobby_view::lobby_view(
     m_rhs_start{false}
 {
   game_resources::get().get_songs().get_soothing().setVolume(
-    get_music_volume_as_percentage(m_game_options)
+    get_music_volume_as_percentage(game_options::get())
   );
   game_resources::get().get_sound_effects().set_master_volume(
-    m_game_options.get_sound_effects_volume()
+    game_options::get().get_sound_effects_volume()
   );
   game_resources::get().get_songs().get_soothing().setLoop(true);
   game_resources::get().get_songs().get_soothing().play();
@@ -57,7 +55,7 @@ void lobby_view::exec_game()
   game_resources::get().get_songs().get_soothing().stop();
   get_render_window().setVisible(false);
   game_view view{
-    game(m_game_options, m_lobby_options),
+    game(m_lobby_options),
     game_controller(m_physical_controllers)
   };
   view.tick();

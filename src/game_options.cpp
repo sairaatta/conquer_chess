@@ -10,16 +10,12 @@
 #include <sstream>
 
 game_options::game_options(
-  const screen_coordinate& screen_size,
-  const starting_position_type starting_position,
-  const game_speed speed,
-  const int margin_width
 ) : m_click_distance{0.5},
-    m_game_speed{speed},
-    m_margin_width{margin_width},
+    m_game_speed{get_default_game_speed()},
+    m_margin_width{get_default_margin_width()},
     m_replayer(replay("")),
-    m_screen_size{screen_size},
-    m_starting_position{starting_position},
+    m_screen_size{get_default_screen_size()},
+    m_starting_position{get_default_starting_position()},
     m_music_volume{10},
     m_sound_effects_volume{20} // percent
 {
@@ -27,16 +23,6 @@ game_options::game_options(
   assert(m_margin_width >= 0);
   assert(m_screen_size.get_x() > 0);
   assert(m_screen_size.get_y() > 0);
-}
-
-game_options create_default_game_options() noexcept
-{
-  return game_options(
-    get_default_screen_size(),
-    get_default_starting_position(),
-    get_default_game_speed(),
-    get_default_margin_width()
-  );
 }
 
 bool do_show_selected(const game_options& options) noexcept
@@ -67,43 +53,19 @@ starting_position_type get_starting_position(const game_options& options) noexce
 void test_game_options()
 {
 #ifndef NDEBUG
-  // get_starting_position and game::get_starting_position
-  {
-    const auto options{create_default_game_options()};
-    assert(options.get_starting_position() == get_starting_position(options));
-  }
-  // game_options::get_music_volume
-  {
-    const auto options{create_default_game_options()};
-    assert(options.get_music_volume().get_percentage() >= 0.0);
-  }
-  // game_options::get_music_volume
-  {
-    const auto options{create_default_game_options()};
-    assert(get_music_volume_as_percentage(options) >= 0.0);
-  }
-  // game_options::get_sound_effects_volume
-  {
-    const auto options{create_default_game_options()};
-    assert(options.get_sound_effects_volume().get_percentage() >= 0.0);
-  }
-  // game_options::get_starting_position
-  {
-    const auto options{create_default_game_options()};
-    assert(options.get_starting_position() == get_starting_position(options));
-  }
   // game_options::set_music_volume
   {
-    auto options{create_default_game_options()};
-    const volume v(31);
-    options.set_volume(v);
-    assert(options.get_music_volume() == v);
+    const auto volume_before{game_options::get().get_music_volume()};
+    assert(volume_before == game_options::get().get_music_volume());
+    const volume volume_after(get_next(volume_before));
+    assert(volume_before != volume_after);
+    game_options::get().set_volume(volume_after);
+    assert(game_options::get().get_music_volume() == volume_after);
   }
   // 40: operator<<
   {
-    const auto options{create_default_game_options()};
     std::stringstream s;
-    s << options;
+    s << game_options::get();
     assert(!s.str().empty());
   }
 #endif // NDEBUG

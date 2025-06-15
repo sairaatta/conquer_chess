@@ -21,18 +21,16 @@
 ///  * Model: \link{game}
 ///  * View: \link{game_view}
 ///  * Controller: \link{game_controller}
+///
+/// The \link{game_options} are a singleton
 class game
 {
 public:
   explicit game(
-    const game_options& go = create_default_game_options(),
     const lobby_options& lo = create_default_lobby_options()
   );
 
-  /// Get the game options
-  const auto& get_game_options() const noexcept { return m_game_options; }
-
-  /// Get the game options
+  /// Get the lobby options
   const auto& get_lobby_options() const noexcept { return m_lobby_options; }
 
   /// Get all the pieces
@@ -49,9 +47,6 @@ public:
   void tick(const delta_t& dt = delta_t(1.0));
 
 private:
-
-  /// The game options
-  const game_options m_game_options;
 
   /// The game options
   const lobby_options m_lobby_options;
@@ -269,7 +264,7 @@ game create_randomly_played_game(
 );
 
 /// Are selected squares shown on-screen?
-bool do_show_selected(const game& g) noexcept;
+bool do_show_selected() noexcept;
 
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(
@@ -298,7 +293,7 @@ std::optional<piece_action_type> get_default_piece_action(
 
 /// Get all the pieces in the starting position type
 std::vector<piece> get_starting_pieces(
-  const game_options& go,
+  const starting_position_type spt,
   const lobby_options& lo
 ) noexcept;
 

@@ -18,12 +18,15 @@
 class game_options
 {
 public:
-  explicit game_options(
-    const screen_coordinate& screen_size,
-    const starting_position_type starting_position,
-    const game_speed speed,
-    const int margin_width
-  );
+  /// This class is a Singleton
+  game_options(const game_options&) = delete;
+  game_options& operator=(const game_options&) = delete;
+  game_options(game_options &&) = delete;
+  game_options& operator=(game_options&&) = delete;
+  static auto& get(){
+    static game_options r;
+    return r;
+  }
 
   /// Show the squares that are actually occupied by the piecs?
   auto do_show_occupied() const noexcept { return false; }
@@ -79,6 +82,8 @@ public:
 
 private:
 
+  game_options();
+
   /// Get the distance the mouse must be maximally in
   /// for a click to connect to a piece
   double m_click_distance;
@@ -105,9 +110,6 @@ private:
   volume m_sound_effects_volume;
 
 };
-
-/// Create the default game options
-game_options create_default_game_options() noexcept;
 
 /// Are selected squares shown on-screen?
 bool do_show_selected(const game_options& options) noexcept;

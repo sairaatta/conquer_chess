@@ -27,7 +27,7 @@ void test_game_class()
   // game::get_game_options
   {
     const auto g{get_default_game()};
-    assert(g.get_game_options().get_margin_width() >= 0);
+    assert(game_options::get().get_margin_width() >= 0);
   }
   // game::get_time
   {
@@ -111,9 +111,8 @@ void test_game_class()
     }
     // A piece under attack has decreasing health
     {
-      game_options options{create_default_game_options()};
-      options.set_starting_position(starting_position_type::bishop_and_knight_end_game);
-      game g(options);
+      game_options::get().set_starting_position(starting_position_type::bishop_and_knight_end_game);
+      game g;
       // Let the white knight at c4
       // attack the black king at d2
       const square from{"c4"};
@@ -139,6 +138,7 @@ void test_game_class()
     }
     // Cannot attack a piece of one's own color
     {
+      game_options::get().set_starting_position(starting_position_type::standard);
       game g;
       const square from{"e1"}; // White king
       const square to{"d1"};   // White queen
@@ -159,9 +159,10 @@ void test_game_class()
     }
     // When a piece is killed, the queen attacker moves to that square
     {
-      game_options options{create_default_game_options()};
-      options.set_starting_position(starting_position_type::before_scholars_mate);
-      game g(options);
+      game_options::get().set_starting_position(
+        starting_position_type::before_scholars_mate
+      );
+      game g;
 
       const square from{"h5"}; // White queen
       const square to{"f7"};   // Black pawn
@@ -269,6 +270,7 @@ void test_game_functions()
   {
     // default start
     {
+      game_options::get().set_starting_position(starting_position_type::standard);
       const game g;
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
@@ -665,6 +667,7 @@ void test_game_functions()
     #endif // FIX_ISSUE_78
     // can_do: standard stup
     {
+      game_options::get().set_starting_position(starting_position_type::standard);
       const game g;
       // Pawns move forward
       assert(can_do(g, get_piece_at(g, "d2"), piece_action_type::move, "d4", side::lhs));
@@ -858,22 +861,17 @@ void test_game_functions()
   // do_show_selected
   {
     const auto g{get_kings_only_game()};
-    assert(do_show_selected(g) || !do_show_selected(g));
+    assert(do_show_selected() || !do_show_selected());
   }
   // get_music_volume_as_percentage
   {
-    const game g;
+    const game g{get_game_with_starting_position(starting_position_type::standard)};
     assert(get_music_volume_as_percentage(g) >= 0.0);
   }
   // get_occupied_squares
   {
-    const game g;
+    const game g{get_game_with_starting_position(starting_position_type::standard)};
     assert(get_occupied_squares(g).size() == 32);
-  }
-  // get_options
-  {
-    const game g;
-    assert(get_options(g) == g.get_game_options());
   }
   // get_piece_at, const
   {
@@ -889,17 +887,16 @@ void test_game_functions()
   }
   // get_player_side
   {
-    const game_options go{create_default_game_options()};
     lobby_options lo = create_default_lobby_options();
     // default
     {
-      const game g(go, lo);
+      const game g(lo);
       assert(get_player_side(g, chess_color::white) == side::lhs);
       assert(get_player_side(g, chess_color::black) == side::rhs);
     }
     lo.set_color(chess_color::black, side::lhs);
     {
-      const game g(go, lo);
+      const game g(lo);
       assert(get_player_side(g, chess_color::white) == side::rhs);
       assert(get_player_side(g, chess_color::black) == side::lhs);
     }

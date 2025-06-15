@@ -6,9 +6,10 @@
 #include <SFML/Graphics.hpp>
 #include "ccfwd.h"
 #include "sleep_scheduler.h"
+#include "about_view.h"
 #include "game_options.h"
 #include "physical_controllers.h"
-#include "active_window_type.h"
+#include "program_state.h"
 #include "loading_view.h"
 #include "menu_view.h"
 
@@ -17,7 +18,6 @@ class main_window
 {
 public:
   main_window(
-    const game_options& go,
     const physical_controllers& cs
   );
 
@@ -29,8 +29,7 @@ public:
 
 private:
 
-  /// The initial game options, as can be set in the command-line
-  game_options m_game_options;
+  about_view m_about_view;
 
   /// The initial physical controllers, as can be set in the command-line
   physical_controllers m_physical_controllers;
@@ -38,7 +37,7 @@ private:
   /// Sleeps to achieve a frame rate of 50-60 frames per second
   sleep_scheduler m_sleep_scheduler;
 
-  active_window_type m_active_window_type{active_window_type::loading};
+  program_state m_active_window_type{program_state::loading};
 
   /// Show the debug info
   bool m_show_debug_info{true};

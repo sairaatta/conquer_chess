@@ -23,8 +23,22 @@ void loading_view::tick()
   }
 }
 
-bool loading_view::process_event(sf::Event&)
+bool loading_view::process_event(sf::Event& event)
 {
+  if (event.type == sf::Event::Closed)
+  {
+    get_render_window().close();
+    return true; // Close the program
+  }
+  if (event.type == sf::Event::KeyPressed)
+  {
+    sf::Keyboard::Key key_pressed = event.key.code;
+    if (key_pressed == sf::Keyboard::Key::Escape)
+    {
+      get_render_window().close();
+      return true; // Close the program
+    }
+  }
   return false;
 }
 
@@ -112,6 +126,11 @@ void loading_view::draw()
     rectangle.setFillColor(sf::Color::Black);
     get_render_window().draw(rectangle);
   }
+}
+
+void loading_view::stop()
+{
+  game_resources::get().get_loading_screen_songs().get_heroes().stop();
 }
 
 #endif // LOGIC_ONLY

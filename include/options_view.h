@@ -14,14 +14,9 @@
 class options_view
 {
 public:
-  explicit options_view(const game_options& options);
-
-  /// Run the menu, until the user quits
-  void exec();
+  explicit options_view();
 
   const auto& get_layout() const noexcept { return m_layout; }
-
-  const auto& get_options() const noexcept { return m_options; }
 
   const auto& get_physical_controllers() const noexcept { return m_physical_controllers; }
 
@@ -37,9 +32,6 @@ public:
 private:
 
   options_view_layout m_layout;
-
-  /// The game options
-  game_options m_options;
 
   physical_controllers m_physical_controllers;
 

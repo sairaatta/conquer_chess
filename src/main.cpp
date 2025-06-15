@@ -132,8 +132,6 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   const auto args = collect_args(argc, argv);
   if (args.size() == 1)
   {
-    game_options options{create_default_game_options()};
-
     #define USE_TWO_KEYBOARDS
     physical_controllers pcs{
       #ifdef USE_TWO_KEYBOARDS
@@ -143,8 +141,7 @@ int main(int argc, char **argv) //!OCLINT tests may be long
       #endif
     };
     #ifndef LOGIC_ONLY
-    main_window v(options, pcs);
-    //loading_view v(options, pcs);
+    main_window v(pcs);
     v.exec();
     #endif // LOGIC_ONLY
   }

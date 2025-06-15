@@ -4,10 +4,10 @@
 #ifndef LOGIC_ONLY
 
 #include <SFML/Graphics.hpp>
-#include "game_resources.h"
 #include "about_view_layout.h"
 #include "about_view_item.h"
-#include "sleep_scheduler.h"
+#include "program_state.h"
+#include <optional>
 
 /// The About screen.
 class about_view
@@ -15,16 +15,37 @@ class about_view
 public:
   about_view();
 
-  /// Run the menu, until the user quits
-  void exec();
+  /// Show the menu on-screen
+  void draw();
 
   const auto& get_layout() const noexcept { return m_layout; }
+
+  /// The next state to go to, if any.
+  ///
+  /// Will be empty if the user should remain in this screen
+  const auto& get_next_state() const noexcept { return m_next_state; }
 
   /// The rotation, in degrees
   double get_rotation() const noexcept { return m_rotation; };
 
+  /// Process all events
+  /// @return if the user wants to quit
+  bool process_event(sf::Event& event);
+
+  /// Process a resize event
+  void process_resize_event(sf::Event& event);
+
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
+
+  /// Prepare for showing this dialog
+  void start();
+
+  /// End showing this dialog
+  void stop();
+
+  /// Run the menu, until the user quits
+  void tick();
 
 private:
 
@@ -33,12 +54,12 @@ private:
 
   double m_rotation;
 
-  /// Process all events
-  /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
+  /// The game clock, to measure the elapsed time
+  sf::Clock m_clock;
 
-  /// Show the menu on-screen
-  void show();
+  /// The next state to go to, if any
+  std::optional<program_state> m_next_state;
+
 };
 
 /// Show where the panels will be drawn

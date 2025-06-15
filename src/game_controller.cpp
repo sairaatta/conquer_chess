@@ -133,7 +133,7 @@ bool can_player_select_piece_at_cursor_pos(
     !is_piece_at(
       g,
       cursor_pos,
-      g.get_game_options().get_click_distance()
+      game_options::get().get_click_distance()
     )
   )
   {
@@ -1060,7 +1060,7 @@ void test_game_controller() //!OCLINT tests may be many
   // Clicking a unit with LMB,
   // then another unit with LMB, only the last unit is selected
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     assert(count_selected_units(g, chess_color::black) == 0);
     move_cursor_to(c, "d8", side::rhs);
@@ -1092,7 +1092,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: nothing selected, cursor at empty square -> no action
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     move_cursor_to(c, "d4", side::lhs);
     move_cursor_to(c, "d5", side::rhs);
@@ -1101,7 +1101,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: nothing selected, cursor at square with opponent piece -> no action
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     move_cursor_to(c, "d8", side::lhs);
     move_cursor_to(c, "d1", side::rhs);
@@ -1110,7 +1110,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: nothing selected, cursor at square of own color -> select
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     move_cursor_to(c, "d1", side::lhs);
     move_cursor_to(c, "d8", side::rhs);
@@ -1121,7 +1121,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: selected piece, cursor still there -> unselect
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     move_cursor_to(c, "d1", side::lhs);
     move_cursor_to(c, "d8", side::rhs);
@@ -1134,7 +1134,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 53: Piece selected, cursor at valid target square -> move
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     do_select(g, c, "d2", side::lhs);
     do_select(g, c, "d7", side::rhs);
@@ -1216,7 +1216,7 @@ void test_game_controller() //!OCLINT tests may be many
   #ifdef FIX_ISSUE_64
   // To do e2-e4, from e1, it takes 5 key presses
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     move_cursor_to(c, "e1", side::lhs);
     const chess_move m("e4", chess_color::white);
@@ -1240,13 +1240,13 @@ void test_game_controller() //!OCLINT tests may be many
   #endif // FIX_ISSUE_64
   // get_cursor_pos
   {
-    const game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     const game_controller c;
     assert(get_cursor_pos(g, c, chess_color::white) != get_cursor_pos(g, c, chess_color::black));
   }
   // get_keyboard_player_pos, non-const, white == lhs == keyboard
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     assert(get_keyboard_user_player_color(g, c) == chess_color::white);
     const auto pos_before{get_cursor_pos(c, side::lhs)};
@@ -1258,7 +1258,7 @@ void test_game_controller() //!OCLINT tests may be many
 
   // get_mouse_player_pos
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     const auto pos_before{get_cursor_pos(c, side::rhs)};
     const auto pos{get_cursor_pos(c, side::rhs)};
@@ -1268,7 +1268,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // #27: a2-a4 takes as long as b2-b3
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     assert(is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("b2")));
@@ -1295,9 +1295,7 @@ void test_game_controller() //!OCLINT tests may be many
   // A piece under attack must have decreasing health
   {
     game_controller c;
-    game_options options{create_default_game_options()};
-    options.set_starting_position(starting_position_type::bishop_and_knight_end_game);
-    game g(options);
+    game g{get_game_with_starting_position(starting_position_type::bishop_and_knight_end_game)};
     const double health_before{get_piece_at(g, square("d2")).get_health()};
     // Let the white knight at c4 attack the black king at d2
     assert(get_piece_at(g, square("d2")).get_color() == chess_color::black);
@@ -1315,7 +1313,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Cannot attack a piece of one's own color
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     const double health_before{get_piece_at(g, square("e1")).get_health()};
     // Let the white queen at d1 attack the white king at e1
@@ -1332,9 +1330,7 @@ void test_game_controller() //!OCLINT tests may be many
   // When a piece is killed, the queen attacker moves to that square
   {
     game_controller c;
-    game_options options{create_default_game_options()};
-    options.set_starting_position(starting_position_type::before_scholars_mate);
-    game g(options);
+    game g{get_game_with_starting_position(starting_position_type::before_scholars_mate)};
     do_select_and_start_attack_keyboard_player_piece(
       g,
       c,
@@ -1355,7 +1351,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // #20: A queen cannot attack over pieces
   {
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     assert(is_piece_at(g, square("d1")));
     do_select_and_start_attack_keyboard_player_piece(

@@ -45,44 +45,6 @@ int create_seedless_random_background_image_index() {
   return create_random_background_image_index(rng_engine);
 }
 
-void menu_view::exec()
-{
-  /*
-  // Open window
-  m_window.create(
-    sf::VideoMode(
-      get_default_main_menu_screen_size().get_x(),
-      get_default_main_menu_screen_size().get_y()
-    ),
-    "Conquer Chess: main menu",
-    sf::Style::Fullscreen
-  );
-
-
-  #ifdef NEED_TO_CENTER_WINDOW
-  // Center
-  auto desktop = sf::VideoMode::getDesktopMode();
-  m_window.setPosition(
-    sf::Vector2i(
-      (desktop.width / 2) - (m_window.getSize().x /2),
-      (desktop.height/ 2) - (m_window.getSize().y /2)
-    )
-  );
-  #endif // NEED_TO_CENTER_WINDOW
-
-  while (m_window.isOpen())
-  {
-    // Process user input and play game until instructed to exit
-    const bool must_quit{process_events()};
-    if (must_quit) return;
-
-    // Show the new state
-    show();
-
-  }
-  */
-}
-
 void menu_view::exec_about()
 {
   /*
@@ -93,6 +55,7 @@ void menu_view::exec_about()
   m_window.setVisible(true);
   m_window.setPosition(cur_pos);
   */
+  m_next_state = program_state::about;
 }
 
 void menu_view::exec_game()
@@ -140,6 +103,7 @@ void menu_view::exec_options()
   m_window.setVisible(true);
   m_window.setPosition(cur_pos);
   */
+  m_next_state = program_state::options;
 }
 
 void menu_view::exec_played_game()
@@ -153,6 +117,8 @@ void menu_view::exec_played_game()
 
 void menu_view::exec_replay()
 {
+  m_next_state = program_state::replay;
+
   /*
   const auto cur_pos{m_window.getPosition()};
   m_window.setVisible(false);
@@ -174,9 +140,7 @@ void menu_view::exec_replay()
 
 void menu_view::exec_start()
 {
-  /*
-  exec_lobby();
-  */
+  m_next_state = program_state::game;
 }
 
 sf::Text get_menu_screen_text() noexcept
@@ -188,6 +152,21 @@ sf::Text get_menu_screen_text() noexcept
 
 bool menu_view::process_event(sf::Event& event)
 {
+  if (event.type == sf::Event::Closed)
+  {
+    get_render_window().close();
+    return true; // Close the program
+  }
+  if (event.type == sf::Event::KeyPressed)
+  {
+    sf::Keyboard::Key key_pressed = event.key.code;
+    if (key_pressed == sf::Keyboard::Key::Escape)
+    {
+      get_render_window().close();
+      return true; // Close the program
+    }
+  }
+
   if (event.type == sf::Event::KeyPressed)
   {
     sf::Keyboard::Key key_pressed = event.key.code;
@@ -298,6 +277,16 @@ void menu_view::set_selected(const menu_view_item i)
     game_resources::get().get_sound_effects().play_hide();
   }
   m_selected = i;
+}
+
+void menu_view::stop()
+{
+  m_next_state.reset();
+}
+
+void menu_view::tick()
+{
+  // Nothing to do yet
 }
 
 sf::Text menu_view::get_styled_text()
@@ -463,6 +452,19 @@ void draw_title_panel(menu_view& v)
     &get_title()
   );
   get_render_window().draw(rectangle);
+}
+
+void menu_view::start()
+{
+  get_render_window().setTitle("Conquer Chess: Main Menu");
+  game_resources::get().get_songs().get_bliss().setVolume(
+    get_music_volume_as_percentage(game_options::get())
+  );
+  game_resources::get().get_sound_effects().set_master_volume(
+    game_options::get().get_sound_effects_volume()
+  );
+  game_resources::get().get_songs().get_bliss().setLoop(true);
+  game_resources::get().get_songs().get_bliss().play();
 }
 
 #endif // LOGIC_ONLY

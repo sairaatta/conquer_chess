@@ -31,7 +31,7 @@ game_view::game_view(
   :
     m_game{game},
     m_game_controller{c},
-    m_log{game.get_game_options().get_message_display_time_secs()}
+    m_log{game_options::get().get_message_display_time_secs()}
 {
   game_resources::get().get_songs().get_wonderful_time().setVolume(
     get_music_volume_as_percentage(m_game)
@@ -39,7 +39,7 @@ game_view::game_view(
   game_resources::get().get_songs().get_wonderful_time().setLoop(true);
   game_resources::get().get_songs().get_wonderful_time().play();
   game_resources::get().get_sound_effects().set_master_volume(
-    m_game.get_game_options().get_sound_effects_volume()
+    game_options::get().get_sound_effects_volume()
   );
 }
 
@@ -48,9 +48,9 @@ std::string bool_to_str(const bool b) noexcept
   return b ? "true" : "false";
 }
 
-bool do_show_selected(const game_view& view)
+bool do_show_selected(const game_view&)
 {
-  return do_show_selected(view.get_game());
+  return do_show_selected(game_options::get());
 }
 
 void game_view::tick()

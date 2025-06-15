@@ -16,7 +16,6 @@ class lobby_view
 {
 public:
   lobby_view(
-    const game_options& go,
     const physical_controllers& pcs
   );
 
@@ -48,9 +47,6 @@ private:
 
   /// How long the countdown will take
   const int m_countdown_secs{3};
-
-  /// The options set earlier
-  game_options m_game_options;
 
   /// The layout of this window
   lobby_view_layout m_layout;

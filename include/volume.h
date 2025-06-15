@@ -34,6 +34,7 @@ volume get_previous(const volume& v) noexcept;
 void test_volume();
 
 bool operator==(const volume& lhs, const volume& rhs) noexcept;
+bool operator!=(const volume& lhs, const volume& rhs) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const volume& v) noexcept;
 

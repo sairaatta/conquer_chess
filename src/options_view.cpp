@@ -20,9 +20,8 @@
 #include <iostream>
 #include <sstream>
 
-options_view::options_view(const game_options& options)
-  : m_options{options},
-    m_selected{options_view_item::game_speed}
+options_view::options_view()
+  : m_selected{options_view_item::game_speed}
 {
 
 }
@@ -32,17 +31,17 @@ void options_view::decrease_selected()
   switch (m_selected)
   {
     case options_view_item::game_speed:
-      m_options.set_game_speed(get_previous(m_options.get_game_speed()));
+      game_options::get().set_game_speed(get_previous(game_options::get().get_game_speed()));
     break;
     case options_view_item::music_volume:
-      m_options.set_volume(get_previous(m_options.get_music_volume()));
+      game_options::get().set_volume(get_previous(game_options::get().get_music_volume()));
     break;
     case options_view_item::sound_effects_volume:
-      m_options.set_sound_effects_volume(get_previous(m_options.get_sound_effects_volume()));
+      game_options::get().set_sound_effects_volume(get_previous(game_options::get().get_sound_effects_volume()));
     break;
     case options_view_item::starting_position:
       assert(!to_str(get_starting_position(*this)).empty());
-      m_options.set_starting_position(get_previous(get_starting_position(m_options)));
+      game_options::get().set_starting_position(get_previous(get_starting_position(game_options::get())));
       assert(!to_str(get_starting_position(*this)).empty());
     break;
     case options_view_item::left_controls:
@@ -78,17 +77,17 @@ void options_view::increase_selected()
   switch (m_selected)
   {
     case options_view_item::game_speed:
-      m_options.set_game_speed(get_next(m_options.get_game_speed()));
+      game_options::get().set_game_speed(get_next(game_options::get().get_game_speed()));
     break;
     case options_view_item::music_volume:
-      m_options.set_volume(get_next(m_options.get_music_volume()));
+      game_options::get().set_volume(get_next(game_options::get().get_music_volume()));
     break;
     case options_view_item::sound_effects_volume:
-      m_options.set_sound_effects_volume(get_next(m_options.get_sound_effects_volume()));
+      game_options::get().set_sound_effects_volume(get_next(game_options::get().get_sound_effects_volume()));
     break;
     case options_view_item::starting_position:
       assert(!to_str(get_starting_position(*this)).empty());
-      m_options.set_starting_position(get_next(get_starting_position(m_options)));
+      game_options::get().set_starting_position(get_next(get_starting_position(game_options::get())));
       assert(!to_str(get_starting_position(*this)).empty());
     break;
     case options_view_item::left_controls:
@@ -140,37 +139,14 @@ void draw_panel(
   get_render_window().draw(text);
 }
 
-void options_view::exec()
-{
-  // Open window
-  get_render_window().create(
-    sf::VideoMode(
-      get_default_screen_size().get_x(),
-      get_default_screen_size().get_y()
-    ),
-    "Conquer Chess: options menu"
-  );
-  while (get_render_window().isOpen())
-  {
-    // Process user input and play game until instructed to exit
-    const bool must_quit{process_events()};
-    if (must_quit) return;
-
-    // Show the current options on-screen
-    assert(!to_str(get_starting_position(*this)).empty());
-    show();
-    assert(!to_str(get_starting_position(*this)).empty());
-  }
-}
-
 physical_controller_type get_physical_controller_type(const options_view& v, const side player)
 {
   return get_physical_controller_type(v.get_physical_controllers(), player);
 }
 
-starting_position_type get_starting_position(const options_view& v) noexcept
+starting_position_type get_starting_position(const options_view&) noexcept
 {
-  return get_starting_position(v.get_options());
+  return get_starting_position(game_options::get());
 }
 
 bool options_view::process_events()
@@ -467,7 +443,7 @@ void show_game_speed(options_view& v)
     v.set_text_style(text);
 
 
-    text.setString(to_str(v.get_options().get_game_speed()));
+    text.setString(to_str(game_options::get().get_game_speed()));
     set_text_position(text, screen_rect);
     get_render_window().draw(text);
   }
@@ -477,10 +453,10 @@ void show_game_speed(options_view& v)
 void show_pieces(options_view& view)
 {
   show_pieces(
-    get_starting_pieces(view.get_options().get_starting_position()),
+    get_starting_pieces(game_options::get().get_starting_position()),
     get_render_window(),
     view.get_layout().get_chess_board(),
-    view.get_options().do_show_selected()
+    game_options::get().do_show_selected()
   );
 }
 
@@ -609,7 +585,7 @@ void show_music_volume(options_view& v)
     sf::Text text;
     v.set_text_style(text);
     std::stringstream s;
-    s << get_music_volume(v.get_options()) << " %";
+    s << get_music_volume(game_options::get()) << " %";
     text.setString(s.str());
     set_text_position(text, screen_rect);
     get_render_window().draw(text);
@@ -682,7 +658,7 @@ void show_sound_effects_volume(options_view& v)
     sf::Text text;
     v.set_text_style(text);
     std::stringstream s;
-    s << get_sound_effects_volume(v.get_options()) << " %";
+    s << get_sound_effects_volume(game_options::get()) << " %";
     text.setString(s.str());
     set_text_position(text, screen_rect);
     get_render_window().draw(text);

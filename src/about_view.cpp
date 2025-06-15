@@ -3,70 +3,50 @@
 #ifndef LOGIC_ONLY
 
 #include "screen_coordinate.h"
-
-//#include "pieces.h"
+#include "game_resources.h"
 #include "sfml_helper.h"
+#include "render_window.h"
 #include <cassert>
 #include <cmath>
-//#include <iostream>
 #include <sstream>
-#include "render_window.h"
-//#include "textures.h"
 
 about_view::about_view()
 {
 
 }
 
-void about_view::exec()
+void about_view::tick()
 {
-  /*
-  // Open window
-  m_window.create(
-    sf::VideoMode(
-      get_default_about_screen_size().get_x(),
-      get_default_about_screen_size().get_y()
-    ),
-    "Conquer Chess: about",
-    sf::Style::Fullscreen
-  );
-
-  #ifdef DO_CENTER_WINDOW
-  // Center
-  auto desktop = sf::VideoMode::getDesktopMode();
-  m_window.setPosition(
-    sf::Vector2i(
-      (desktop.width / 2) - (m_window.getSize().x /2),
-      (desktop.height/ 2) - (m_window.getSize().y /2)
-    )
-  );
-  #endif // DO_CENTER_WINDOW
-
-  while (m_window.isOpen())
-  {
-    // Process user input and play game until instructed to exit
-    const bool must_quit{process_events()};
-    if (must_quit) return;
-
-    // Show the new state
-    m_rotation = 5.0 * std::sin(m_clock.getElapsedTime().asMilliseconds() / 1000.0);
-
-    show();
-
-  }
-  */
+  m_rotation = 5.0 * std::sin(m_clock.getElapsedTime().asMilliseconds() / 1000.0);
 }
 
 bool about_view::process_event(sf::Event& event)
 {
-  if (event.type == sf::Event::Resized)
+  if (event.type == sf::Event::Closed)
   {
-    m_layout = about_view_layout(
-      screen_coordinate(event.size.width, event.size.height),
-      get_default_margin_width()
-    );
+    m_next_state = program_state::main_menu;
+    return false;
   }
-  return false; // Do not close the window :-)
+  if (event.type == sf::Event::KeyPressed)
+  {
+    sf::Keyboard::Key key_pressed = event.key.code;
+    if (key_pressed == sf::Keyboard::Key::Escape)
+    {
+      m_next_state = program_state::main_menu;
+      return false;
+    }
+  }
+
+  return false;
+}
+
+void about_view::process_resize_event(sf::Event& event)
+{
+  assert(event.type == sf::Event::Resized);
+  m_layout = about_view_layout(
+    screen_coordinate(event.size.width, event.size.height),
+    get_default_margin_width()
+  );
 }
 
 void about_view::set_text_style(sf::Text& text)
@@ -77,10 +57,9 @@ void about_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::Black);
 }
 
-void about_view::show()
+void about_view::draw()
 {
   show_layout_panels(*this);
-
   show_title_panel(*this);
   show_subtitle_panel(*this);
   show_text_panel(*this);
@@ -152,6 +131,17 @@ void show_title_panel(about_view& v)
     &get_title()
   );
   get_render_window().draw(rectangle);
+}
+
+void about_view::start()
+{
+  m_rotation = 0.0;
+  m_next_state.reset();
+}
+
+void about_view::stop()
+{
+  m_next_state.reset();
 }
 
 #endif // LOGIC_ONLY

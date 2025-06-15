@@ -76,7 +76,7 @@ void test_replayer()
   {
     replayer r(replay("1. e4"));
     assert(get_n_moves(r) == 1);
-    game g;
+    game g{get_game_with_starting_position(starting_position_type::standard)};
     game_controller c;
     assert(is_piece_at(g, square("e2")));
     assert(!is_piece_at(g, square("e4")));

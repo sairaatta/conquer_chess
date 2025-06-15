@@ -17,13 +17,12 @@
 #endif
 
 game::game(
-  const game_options& go,
   const lobby_options& lo
-
 )
-  : m_game_options{go},
-    m_lobby_options{lo},
-    m_pieces{get_starting_pieces(go, lo)},
+  : m_lobby_options{lo},
+    m_pieces{
+      get_starting_pieces(
+        game_options::get().get_starting_position(), lo)},
     m_in_game_time{0.0}
 {
 
@@ -992,9 +991,9 @@ game create_randomly_played_game(
 }
 
 
-bool do_show_selected(const game& g) noexcept
+bool do_show_selected() noexcept
 {
-  return do_show_selected(g.get_game_options());
+  return do_show_selected(game_options::get());
 }
 
 std::vector<piece> find_pieces(
@@ -1035,9 +1034,7 @@ piece& get_closest_piece_to(
 
 game get_default_game() noexcept
 {
-  return game{
-    create_default_game_options()
-  };
+  return game();
 }
 
 std::optional<piece_action_type> get_default_piece_action(
@@ -1114,13 +1111,8 @@ std::optional<piece_action_type> get_default_piece_action(
 
 game get_game_with_starting_position(starting_position_type t) noexcept
 {
-  const game_options options(
-    get_default_screen_size(),
-    t,
-    get_default_game_speed(),
-    get_default_margin_width()
-  );
-  return game(options);
+  game_options::get().set_starting_position(t);
+  return game{};
 }
 
 read_only<id> get_id(const game& g, const square& s)
@@ -1147,9 +1139,9 @@ game get_kings_only_game() noexcept
   return get_game_with_starting_position(starting_position_type::kings_only);
 }
 
-double get_music_volume_as_percentage(const game& g) noexcept
+double get_music_volume_as_percentage(const game&) noexcept
 {
-  return get_music_volume_as_percentage(g.get_game_options());
+  return get_music_volume_as_percentage(game_options::get());
 }
 
 std::vector<square> get_occupied_squares(const game& g) noexcept
@@ -1157,9 +1149,9 @@ std::vector<square> get_occupied_squares(const game& g) noexcept
   return get_occupied_squares(get_pieces(g));
 }
 
-const game_options& get_options(const game& g)
+const game_options& get_options(const game&)
 {
-  return g.get_game_options();
+  return game_options::get();
 }
 
 std::vector<piece>& get_pieces(game& g) noexcept
@@ -1315,12 +1307,12 @@ bool has_selected_pieces(const game& g, const side player)
 }
 
 std::vector<piece> get_starting_pieces(
-  const game_options& go,
+  const starting_position_type spt,
   const lobby_options& lo
 ) noexcept
 {
   return get_starting_pieces(
-    get_starting_position(go),
+    spt,
     get_race_of_color(lo, chess_color::white),
     get_race_of_color(lo, chess_color::black)
   );
@@ -1463,8 +1455,7 @@ std::ostream& operator<<(std::ostream& os, const game& g) noexcept
   os
     << "Time: " << g.get_in_game_time() << " ticks\n"
     << to_board_str(g.get_pieces(), board_to_text_options(true, true)) << '\n'
-    << "Lobby options: " << g.get_lobby_options() << '\n'
-    << "Game options: " << g.get_game_options();
+    << "Lobby options: " << g.get_lobby_options();
   ;
   return os;
 }

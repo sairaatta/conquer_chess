@@ -3,12 +3,11 @@
 #include "screen_rect.h"
 #include "sfml_helper.h"
 #include "render_window.h"
+#include "game_resources.h"
 
 main_window::main_window(
-  const game_options& go,
   const physical_controllers& pcs
-) : m_game_options{go},
-    m_physical_controllers{pcs}
+) : m_physical_controllers{pcs}
 {
   game_resources::get().get_loading_screen_songs().get_heroes().setVolume(
     10
@@ -48,24 +47,15 @@ bool main_window::process_events()
 
 bool main_window::process_event(sf::Event& event)
 {
+  // General events
   if (event.type == sf::Event::Resized)
   {
     process_resize_event(event);
     return false; // Do not close the program
   }
-  if (event.type == sf::Event::Closed)
-  {
-    get_render_window().close();
-    return true; // Close the program
-  }
   if (event.type == sf::Event::KeyPressed)
   {
     sf::Keyboard::Key key_pressed = event.key.code;
-    if (key_pressed == sf::Keyboard::Key::Escape)
-    {
-      get_render_window().close();
-      return true; // Close the program
-    }
     if (key_pressed == sf::Keyboard::Key::F3)
     {
       m_show_debug_info = !m_show_debug_info;
@@ -73,14 +63,17 @@ bool main_window::process_event(sf::Event& event)
     }
   }
 
+  // Specific
   switch(m_active_window_type)
   {
-    case active_window_type::loading:
+    case program_state::about:
+      return m_about_view.process_event(event);
+    case program_state::loading:
       return m_loading_view.process_event(event);
-    case active_window_type::main_menu:
+    case program_state::main_menu:
     default:
       // Fails when window is not implemented yet
-      assert(m_active_window_type == active_window_type::main_menu);
+      assert(m_active_window_type == program_state::main_menu);
       return m_menu_view.process_event(event);
   }
   return false; // Do not close the program
@@ -94,6 +87,7 @@ void main_window::process_resize_event(sf::Event& event)
   get_render_window().setView(sf::View(visible_area));
 
   // Resize all windows
+  m_about_view.process_resize_event(event);
   m_loading_view.process_resize_event(event);
   m_menu_view.process_resize_event(event);
 }
@@ -106,13 +100,16 @@ void main_window::show()
 
   switch(m_active_window_type)
   {
-    case active_window_type::loading:
+    case program_state::about:
+      m_about_view.draw();
+      break;
+    case program_state::loading:
       m_loading_view.draw();
       break;
-    case active_window_type::main_menu:
+    case program_state::main_menu:
     default:
       // Fails when window is not implemented yet
-      assert(m_active_window_type == active_window_type::main_menu);
+      assert(m_active_window_type == program_state::main_menu);
       m_menu_view.draw();
   }
 
@@ -153,28 +150,63 @@ void main_window::show_debug_info()
 
 void main_window::tick()
 {
-  if (m_active_window_type == active_window_type::loading) {
-    m_loading_view.tick();
-    if (m_loading_view.is_done()) {
+  switch (m_active_window_type) {
+    case program_state::about:
+      m_about_view.tick();
+      if (m_about_view.get_next_state().has_value()) {
+        m_active_window_type = m_about_view.get_next_state().value();
+        m_about_view.stop();
+      }
+      break;
+    case program_state::game:
+      assert(!"TODO");
+      break;
+    case program_state::loading:
+    {
+      m_loading_view.tick();
+      if (m_loading_view.is_done()) {
 
-      // Stop loading screen
-      game_resources::get().get_loading_screen_songs().get_heroes().stop();
-
-      m_active_window_type = active_window_type::main_menu;
-      get_render_window().setTitle("Conquer Chess: Main Menu");
-
-      // Start main menu
-      {
-        game_resources::get().get_songs().get_bliss().setVolume(
-          get_music_volume_as_percentage(m_game_options)
-        );
-        game_resources::get().get_sound_effects().set_master_volume(
-          m_game_options.get_sound_effects_volume()
-        );
-        game_resources::get().get_songs().get_bliss().setLoop(true);
-        game_resources::get().get_songs().get_bliss().play();
+        m_loading_view.stop();
+        m_active_window_type = program_state::main_menu;
+        m_menu_view.start();
       }
     }
+    break;
+    case program_state::main_menu:
+      m_menu_view.tick();
+      if (m_menu_view.get_next_state().has_value()) {
+        m_active_window_type = m_menu_view.get_next_state().value();
+        m_menu_view.stop();
+        switch (m_active_window_type)
+        {
+          case program_state::about:
+            assert(m_active_window_type == program_state::about);
+            m_about_view.start();
+            break;
+          case program_state::game:
+            assert(!"TODO");
+            break;
+          case program_state::loading:
+            assert(!"This should never happen");
+            break;
+          case program_state::main_menu:
+            assert(!"This should never happen");
+            break;
+          case program_state::options:
+            assert(!"TODO");
+            break;
+          case program_state::replay:
+            assert(!"TODO");
+            break;
+        }
+      }
+      break;
+    case program_state::options:
+      assert(!"TODO");
+      break;
+    case program_state::replay:
+      assert(!"TODO");
+      break;
   }
 }
 

@@ -3,29 +3,32 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "ccfwd.h"
-#include "game_options.h"
-#include "game_resources.h"
 #include "menu_view_layout.h"
 #include "menu_view_item.h"
-#include "physical_controllers.h"
-#include "sleep_scheduler.h"
+#include "program_state.h"
+#include <optional>
+#include <random>
+#include <SFML/Graphics.hpp>
 
 /// The main Menu dialog.
 class menu_view
 {
 public:
-  menu_view(
-    //const game_options& options,
-    //const physical_controllers& controllers
-  );
+  menu_view();
 
   /// Show the menu on-screen
   void draw();
 
-  /// Run the menu, until the user quits
-  void exec();
+  /// The next state to go to, if any.
+  ///
+  /// Will be empty if the user should remain in this screen
+  const auto& get_next_state() const noexcept { return m_next_state; }
+
+  void stop();
+
+  void tick();
+
 
   /// Get the index of the background image.
   ///
@@ -52,6 +55,10 @@ public:
   /// Set the text to a uniform style
   sf::Text get_styled_text();
 
+  /// Start displaying this window
+  void start();
+
+
 private:
 
   /// Index of the background image
@@ -62,6 +69,9 @@ private:
 
   /// The selected item
   menu_view_item m_selected;
+
+  /// The next state to go to, if any
+  std::optional<program_state> m_next_state;
 
   /// Run the about screen
   void exec_about();

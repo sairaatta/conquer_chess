@@ -15,6 +15,9 @@ class loading_view
 public:
   loading_view();
 
+  /// Displays this window
+  void draw();
+
   /// Go to the next state (if any).
   ///
   /// For this screen, the textures are loaded.
@@ -31,8 +34,8 @@ public:
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
-  /// Displays this window
-  void draw();
+  /// End displaying this class
+  void stop();
 
 private:
 

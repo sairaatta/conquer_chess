@@ -60,6 +60,14 @@ void test_volume()
     assert(a == b);
     assert(!(a == c));
   }
+  // operator!=
+  {
+    const volume a(12);
+    const volume b(12);
+    const volume c(23);
+    assert(!(a != b));
+    assert(a != c);
+  }
   // operator<<
   {
     std::stringstream s;
@@ -73,6 +81,11 @@ void test_volume()
 bool operator==(const volume& lhs, const volume& rhs) noexcept
 {
   return lhs.get_percentage() == rhs.get_percentage();
+}
+
+bool operator!=(const volume& lhs, const volume& rhs) noexcept
+{
+  return !(lhs == rhs);
 }
 
 std::ostream& operator<<(std::ostream& os, const volume& v) noexcept
