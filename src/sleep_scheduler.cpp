@@ -23,7 +23,7 @@ void sleep_scheduler::tick()
   m_fps_clock.tick();
 }
 
-void test_sleeper()
+void test_sleep_scheduler()
 {
   sleep_scheduler s;
   const int fps_0{s.get_fps()};

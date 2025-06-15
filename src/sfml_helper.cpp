@@ -72,7 +72,6 @@ void show_pieces(
   const std::vector<piece>& pieces,
   sf::RenderWindow& window,
   const screen_rect& rect,
-  game_resources& resources,
   const bool show_selected
 )
 {
@@ -84,7 +83,6 @@ void show_pieces(
     sprite.setSize(sf::Vector2f(0.9 * square_width, 0.9 * square_height));
     sprite.setTexture(
       &get_piece(
-        resources,
         piece.get_race(),
         piece.get_color(),
         piece.get_type()

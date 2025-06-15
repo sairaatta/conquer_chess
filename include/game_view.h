@@ -29,13 +29,10 @@ public:
   );
 
   /// Run the game, until the user quits
-  void exec();
+  void tick();
 
   /// The the elapsed time in seconds
   double get_elapsed_time_secs() const noexcept;
-
-  /// Get the number of frames per second
-  int get_fps() const noexcept { return m_sleep_scheduler.get_fps(); }
 
   auto& get_game() noexcept { return m_game; }
 
@@ -45,19 +42,16 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  auto& get_resources() noexcept { return m_game_resources; }
-
-  auto get_show_debug() const noexcept { return m_show_debug; }
-
   bool get_show_squares_semitransparent() const noexcept { return true; }
 
   /// Get the text log, i.e. things pieces have to say
   const auto& get_log() const noexcept { return m_log; }
 
-  auto& get_window() noexcept { return m_window; }
-
   /// Set the text to a uniform style
   void set_text_style(sf::Text& text);
+
+  /// STUB
+  bool get_show_debug() const noexcept { return true; }
 
 private:
 
@@ -73,27 +67,15 @@ private:
   /// The game logic
   game_view_layout m_layout;
 
-  /// The resources (images, sounds, etc.) of the game
-  game_resources m_game_resources;
-
   /// The text log
   game_log m_log;
-
-  /// Show the debug info
-  bool m_show_debug;
-
-  /// Sleeps to achieve a frame rate of 50-60 frames per second
-  sleep_scheduler m_sleep_scheduler;
-
-  /// The window to draw to
-  sf::RenderWindow m_window;
 
   /// Play the new sound effects
   void play_pieces_sound_effects();
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_events();
+  bool process_event(sf::Event& event);
 
   /// Read the pieces' messages and play their sounds
   void process_piece_messages();
@@ -130,12 +112,6 @@ std::string get_controls_text(
   const game_controller& c,
   const int key
 );
-
-/// Draw the frames per second on the menu
-void draw_fps(game_view& v);
-
-/// Get the frames per second
-int get_fps(const game_view& v) noexcept;
 
 /// Get the last log messages for a player
 std::string get_last_log_messages(

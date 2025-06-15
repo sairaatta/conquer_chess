@@ -10,6 +10,7 @@
 #include <cmath>
 //#include <iostream>
 #include <sstream>
+#include "render_window.h"
 //#include "textures.h"
 
 about_view::about_view()
@@ -17,30 +18,9 @@ about_view::about_view()
 
 }
 
-void draw_fps(about_view& v)
-{
-  const auto& layout = v.get_layout();
-
-  // Background rectangle
-  const auto& screen_rect = layout.get_fps();
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setFillColor(sf::Color::White);
-  v.get_window().draw(rectangle);
-
-  // Text
-  sf::Text text;
-  v.set_text_style(text);
-  text.setString(sf::String(std::to_string(v.get_fps())));
-  set_text_position(text, screen_rect);
-  text.setCharacterSize(text.getCharacterSize() - 2);
-  text.setFillColor(sf::Color::Black);
-  v.get_window().draw(text);
-
-}
-
 void about_view::exec()
 {
+  /*
   // Open window
   m_window.create(
     sf::VideoMode(
@@ -74,46 +54,24 @@ void about_view::exec()
     show();
 
   }
+  */
 }
 
-bool about_view::process_events()
+bool about_view::process_event(sf::Event& event)
 {
-  // User interaction
-  sf::Event event;
-  while (m_window.pollEvent(event))
+  if (event.type == sf::Event::Resized)
   {
-    if (event.type == sf::Event::Resized)
-    {
-      // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-      const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
-      m_window.setView(sf::View(visible_area));
-
-      m_layout = about_view_layout(
-        screen_coordinate(event.size.width, event.size.height),
-        get_default_margin_width()
-      );
-    }
-    else if (event.type == sf::Event::Closed)
-    {
-      m_window.close();
-      return true; // Game is done
-    }
-    else if (event.type == sf::Event::KeyPressed)
-    {
-      sf::Keyboard::Key key_pressed = event.key.code;
-      if (key_pressed == sf::Keyboard::Key::Escape)
-      {
-        m_window.close();
-        return true;
-      }
-    }
+    m_layout = about_view_layout(
+      screen_coordinate(event.size.width, event.size.height),
+      get_default_margin_width()
+    );
   }
   return false; // Do not close the window :-)
 }
 
 void about_view::set_text_style(sf::Text& text)
 {
-  text.setFont(get_arial_font(get_resources()));
+  text.setFont(get_arial_font());
   text.setStyle(sf::Text::Bold);
   text.setCharacterSize(m_layout.get_font_size());
   text.setFillColor(sf::Color::Black);
@@ -121,20 +79,11 @@ void about_view::set_text_style(sf::Text& text)
 
 void about_view::show()
 {
-  // Start drawing the new frame, by clearing the screen
-  m_window.clear();
-
   show_layout_panels(*this);
 
   show_title_panel(*this);
   show_subtitle_panel(*this);
   show_text_panel(*this);
-  draw_fps(*this);
-
-  // Display all shapes
-  m_window.display();
-
-  m_sleep_scheduler.tick();
 }
 
 void show_layout_panels(about_view& v)
@@ -144,7 +93,7 @@ void show_layout_panels(about_view& v)
     sf::RectangleShape rectangle;
     set_rect(rectangle, screen_rect);
     rectangle.setFillColor(sf::Color(32, 32, 32));
-    v.get_window().draw(rectangle);
+    get_render_window().draw(rectangle);
   }
 }
 
@@ -154,9 +103,9 @@ void show_subtitle_panel(about_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_subtitle(v.get_resources())
+    &get_subtitle()
   );
-  v.get_window().draw(rectangle);
+  get_render_window().draw(rectangle);
 }
 
 void show_text_panel(about_view& v)
@@ -166,12 +115,11 @@ void show_text_panel(about_view& v)
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
     &get_game_option_icon(
-      v.get_resources(),
       options_view_item::starting_position
     )
   );
   rectangle.setFillColor(sf::Color(255, 255, 255, 128));
-  v.get_window().draw(rectangle);
+  get_render_window().draw(rectangle);
   std::stringstream s;
   s
     << "Conquer Chess\n"
@@ -192,7 +140,7 @@ void show_text_panel(about_view& v)
   v.set_text_style(text);
   set_text_position(text, screen_rect);
   text.setFillColor(sf::Color::White);
-  v.get_window().draw(text);
+  get_render_window().draw(text);
 }
 
 void show_title_panel(about_view& v)
@@ -201,9 +149,9 @@ void show_title_panel(about_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_title(v.get_resources())
+    &get_title()
   );
-  v.get_window().draw(rectangle);
+  get_render_window().draw(rectangle);
 }
 
 #endif // LOGIC_ONLY

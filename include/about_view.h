@@ -20,46 +20,26 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  auto get_fps() const noexcept { return m_sleep_scheduler.get_fps(); }
-
-  auto& get_resources() noexcept { return m_resources; }
-
   /// The rotation, in degrees
   double get_rotation() const noexcept { return m_rotation; };
-
-  auto& get_window() noexcept { return m_window; }
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
 private:
 
-  /// The game clock, to measure the elapsed time
-  sf::Clock m_clock;
-
   /// The layout of this window
   about_view_layout m_layout;
 
   double m_rotation;
 
-  /// Sleeps to achieve a frame rate of 50-60 frames per second
-  sleep_scheduler m_sleep_scheduler;
-
-  /// The window to draw to
-  sf::RenderWindow m_window;
-
-  /// Resources
-  game_resources m_resources;
-
   /// Process all events
   /// @return if the user wants to quit
-  bool process_events();
+  bool process_event(sf::Event& event);
 
   /// Show the menu on-screen
   void show();
 };
-
-void draw_fps(about_view& v);
 
 /// Show where the panels will be drawn
 void show_layout_panels(about_view& v);

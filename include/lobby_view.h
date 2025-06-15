@@ -20,8 +20,8 @@ public:
     const physical_controllers& pcs
   );
 
-  /// Run the menu, until the user quits
-  void exec();
+  /// Does the countdown
+  void tick();
 
   /// Get the selected item of a player
   lobby_view_item get_selected(const side player_side) const noexcept;
@@ -32,10 +32,6 @@ public:
   const auto& get_layout() const noexcept { return m_layout; }
 
   const auto& get_options() const noexcept { return m_lobby_options; }
-
-  auto& get_resources() noexcept { return m_resources; }
-
-  auto& get_window() noexcept { return m_window; }
 
   /// Sets the selected item.
   /// If the selected item changes, play sound
@@ -71,24 +67,18 @@ private:
   /// The physical controllers
   physical_controllers m_physical_controllers;
 
-  /// Resources
-  game_resources m_resources;
-
   /// The selected item for RHS
   lobby_view_item m_rhs_cursor;
 
   /// Is RHS ready to start?
   bool m_rhs_start;
 
-  /// The window to draw to
-  sf::RenderWindow m_window;
-
   /// Run the game
   void exec_game();
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_events();
+  bool process_event(sf::Event& event);
 
   /// Show the menu on-screen
   void show();

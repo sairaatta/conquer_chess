@@ -26,21 +26,20 @@ game_resources::game_resources()
 }
 
 sf::Texture& get_action_icon(
-  game_resources& gr,
   piece_action_type t
 ) noexcept
 {
-  return gr.get_piece_action_textures().get_texture(t);
+  return game_resources::get().get_piece_action_textures().get_texture(t);
 }
 
-sf::Font& get_arial_font(game_resources& r) noexcept
+sf::Font& get_arial_font() noexcept
 {
-  return r.get_fonts().get_arial_font();
+  return game_resources::get().get_fonts().get_arial_font();
 }
 
-sf::Font& get_code_squared_font(game_resources& r) noexcept
+sf::Font& get_code_squared_font() noexcept
 {
-  return r.get_fonts().get_code_squared_font();
+  return game_resources::get().get_fonts().get_code_squared_font();
 }
 
 fonts& game_resources::get_fonts() noexcept
@@ -52,11 +51,10 @@ fonts& game_resources::get_fonts() noexcept
 
 
 sf::Texture& get_game_option_icon(
-  game_resources& gr,
   const options_view_item item
 ) noexcept
 {
-  return gr.get_options_menu_textures().get_texture(item);
+  return game_resources::get().get_options_menu_textures().get_texture(item);
 }
 
 lobby_menu_textures& game_resources::get_lobby_menu_textures() noexcept
@@ -103,11 +101,10 @@ loading_screen_textures& game_resources::get_loading_screen_textures() noexcept
 }
 
 sf::Texture& get_map(
-  game_resources& gr,
   const race r
 ) noexcept
 {
-  return gr.get_map_textures().get_map(r);
+  return game_resources::get().get_map_textures().get_map(r);
 }
 map_textures& game_resources::get_map_textures() noexcept
 {
@@ -177,23 +174,21 @@ int game_resources::get_n_textures() noexcept
 }
 
 sf::Texture& get_piece(
-  game_resources& gr,
   const race r,
   const chess_color color,
   const piece_type type
 )
 {
-  return gr.get_piece_textures().get_piece(r, color, type);
+  return game_resources::get().get_piece_textures().get_piece(r, color, type);
 }
 
 sf::Texture& get_piece_portrait(
-  game_resources& gr,
   const race r,
   const chess_color color,
   const piece_type type
 )
 {
-  return gr.get_piece_portrait_textures().get_portrait(r, color, type);
+  return game_resources::get().get_piece_portrait_textures().get_portrait(r, color, type);
 }
 
 piece_action_textures& game_resources::get_piece_action_textures() noexcept
@@ -241,27 +236,24 @@ textures& game_resources::get_textures() noexcept
   return m_textures.value();
 }
 
-sf::Texture& get_strip(game_resources& r, const chess_color c) noexcept
+sf::Texture& get_strip(const chess_color c) noexcept
 {
-  return r.get_textures().get_strip(c);
+  return game_resources::get().get_textures().get_strip(c);
 }
 
-sf::Texture& get_subtitle(game_resources& r) noexcept
+sf::Texture& get_subtitle() noexcept
 {
-  return r.get_textures().get_subtitle();
+  return game_resources::get().get_textures().get_subtitle();
 }
 
-sf::Texture& get_title(game_resources& r) noexcept
+sf::Texture& get_title() noexcept
 {
-  return r.get_textures().get_title();
+  return game_resources::get().get_textures().get_title();
 }
 
-void play(
-  game_resources& r,
-  const message& effect
-)
+void play(const message& effect)
 {
-  r.get_sound_effects().play(effect);
+  game_resources::get().get_sound_effects().play(effect);
 }
 
 #endif // LOGIC_ONLY

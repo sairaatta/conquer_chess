@@ -14,15 +14,19 @@ class resource_loader
 public:
   resource_loader();
 
-  int get_n_items() const noexcept { return 14; }
+  /// The number of resource groups that need to be loaded
+  int get_n_items() const noexcept { return 15; }
 
+  /// Describe the current progress
   std::string get_current() const noexcept { return m_descriptor; }
 
+  /// Get the index of the current progress
   int get_index() const noexcept { return m_index; }
 
+  /// Are all resources loaded?
   bool is_done() const noexcept;
 
-  void process_next(game_resources& resources);
+  void process_next();
 
 private:
 
@@ -31,7 +35,12 @@ private:
   int m_index;
 };
 
+/// Get the progress of the loader
+/// @return a value from
 double get_progress(const resource_loader& loader) noexcept;
+
+/// Test this class
+void test_resource_loader();
 
 #endif // LOGIC_ONLY
 

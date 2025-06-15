@@ -25,13 +25,7 @@ public:
 
   const auto& get_physical_controllers() const noexcept { return m_physical_controllers; }
 
-  auto& get_resources() noexcept { return m_resources; }
-
   options_view_item get_selected() const noexcept { return m_selected; }
-
-  const auto& get_window() const noexcept { return m_window; }
-
-  auto& get_window() noexcept { return m_window; }
 
   /// Select an item.
   /// Play a sound when the selected item changes
@@ -47,15 +41,10 @@ private:
   /// The game options
   game_options m_options;
 
-  game_resources m_resources;
-
   physical_controllers m_physical_controllers;
 
   /// The selected item
   options_view_item m_selected;
-
-  /// The window to draw to
-  sf::RenderWindow m_window;
 
   /// Increase the value in the selected square,
   /// can be done by leftarrow key

@@ -17,9 +17,12 @@ class menu_view
 {
 public:
   menu_view(
-    const game_options& options,
-    const physical_controllers& controllers
+    //const game_options& options,
+    //const physical_controllers& controllers
   );
+
+  /// Show the menu on-screen
+  void draw();
 
   /// Run the menu, until the user quits
   void exec();
@@ -30,52 +33,35 @@ public:
   /// displayed is chosen randomly.
   int get_background_image_index() const noexcept { return m_background_image_index; }
 
-  /// Get the number of frames per seconds this class is displayed at
-  int get_fps() const noexcept { return m_sleep_scheduler.get_fps(); }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  auto& get_resources() noexcept { return m_resources; }
-
   const auto& get_selected() const noexcept { return m_selected; }
 
-  auto& get_window() noexcept { return m_window; }
+  /// Process an event
+  /// @return true if the user wants to quit the program
+  bool process_event(sf::Event& event);
+
+  /// Process a resize event
+  void process_resize_event(sf::Event& event);
 
   /// Sets the selected item.
   /// If the selected item changes, play sound
   void set_selected(const menu_view_item i);
 
   /// Set the text to a uniform style
-  void set_text_style(sf::Text& t);
+  sf::Text get_styled_text();
 
 private:
 
   /// Index of the background image
   int m_background_image_index;
 
-  /// Sleeps to achieve a frame rate of 50-60 frames per second
-  sleep_scheduler m_sleep_scheduler;
-
   /// The layout of this window
   menu_view_layout m_layout;
 
-  /// The window to draw to
-  sf::RenderWindow m_window;
-
-  /// The game options
-  game_options m_game_options;
-
-  /// The current physical controllers
-  physical_controllers m_physical_controllers;
-
-  /// Resources
-  game_resources m_resources;
-
   /// The selected item
   menu_view_item m_selected;
-
-  /// Show the number of frames per second?
-  bool m_show_fps;
 
   /// Run the about screen
   void exec_about();
@@ -97,13 +83,6 @@ private:
 
   /// Run the dialog under 'Start'
   void exec_start();
-
-  /// Process all events
-  /// @return if the user wants to quit
-  bool process_events();
-
-  /// Show the menu on-screen
-  void show();
 };
 
 /// Create a random background image index
@@ -119,9 +98,6 @@ int create_seedless_random_background_image_index();
 
 void draw_about_panel(menu_view& v);
 void draw_background_image(menu_view& v);
-
-/// Draw the frames per second on the menu
-void draw_fps(menu_view& v);
 
 void draw_menu_panel(menu_view& v);
 void draw_options_panel(menu_view& v);

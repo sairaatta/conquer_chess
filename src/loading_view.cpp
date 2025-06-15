@@ -1,124 +1,59 @@
 #include "loading_view.h"
+#include "game_resources.h"
 
 #ifndef LOGIC_ONLY
 
 #include "screen_coordinate.h"
 #include "sfml_helper.h"
-#include "menu_view.h"
+#include "render_window.h"
 #include <cassert>
 #include <cmath>
-#include <iostream>
 
 loading_view::loading_view(
-  const game_options& go,
-  const physical_controllers& pcs
-) : m_game_options{go},
-    m_physical_controllers{pcs}
+)
 {
-  m_resources.get_loading_screen_songs().get_heroes().setVolume(
-    10
-  );
-  m_resources.get_loading_screen_songs().get_heroes().setLoop(true);
-  m_resources.get_loading_screen_songs().get_heroes().play();
 
 }
 
-void loading_view::exec()
+void loading_view::tick()
 {
-  // Open window
-  m_window.create(
-    sf::VideoMode(
-      get_default_loading_screen_size().get_x(),
-      get_default_loading_screen_size().get_y()
-    ),
-    "Conquer Chess: loading data"
-  );
-
-  // Center
-  auto desktop = sf::VideoMode::getDesktopMode();
-  m_window.setPosition(
-    sf::Vector2i(
-      (desktop.width / 2) - (m_window.getSize().x /2),
-      (desktop.height/ 2) - (m_window.getSize().y /2)
-    )
-  );
-
-  while (m_window.isOpen())
+  if (!m_resource_loader.is_done())
   {
-    // Process user input
-    const bool must_quit{process_events()};
-    if (must_quit) return;
-
-    if (m_resource_loader.is_done())
-    {
-      exec_menu();
-    }
-    else
-    {
-      m_resource_loader.process_next(m_resources);
-    }
-
-    // Show the new state
-    show();
+    m_resource_loader.process_next();
   }
 }
 
-void loading_view::exec_menu()
+bool loading_view::process_event(sf::Event&)
 {
-  m_window.setVisible(false);
-  m_resources.get_loading_screen_songs().get_heroes().stop();
-  menu_view v(
-    m_game_options,
-    m_physical_controllers
-  );
-  v.exec();
-  m_window.close();
+  return false;
 }
 
-bool loading_view::process_events()
+void loading_view::process_resize_event(sf::Event&)
 {
-  // User interaction
-  sf::Event event;
-  while (m_window.pollEvent(event))
-  {
-    if (event.type == sf::Event::Resized)
-    {
-      // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-      const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
-      m_window.setView(sf::View(visible_area));
-    }
-    else if (event.type == sf::Event::Closed)
-    {
-      m_window.close();
-      return true; // Game is done
-    }
-    else if (event.type == sf::Event::KeyPressed)
-    {
-      sf::Keyboard::Key key_pressed = event.key.code;
-      if (key_pressed == sf::Keyboard::Key::Escape)
-      {
-        m_window.close();
-        return true;
-      }
-    }
-  }
-  return false; // Do not close the window :-)
+  // The draw method checks the screen size
 }
 
 void loading_view::set_text_style(sf::Text& text)
 {
-  text.setFont(get_arial_font(get_resources()));
+  text.setFont(get_arial_font());
   text.setStyle(sf::Text::Bold);
   text.setCharacterSize(44);
   text.setFillColor(sf::Color::White);
 }
 
-void loading_view::show()
+sf::Text get_loading_screen_text() noexcept
 {
-  // Start drawing the new frame, by clearing the screen
-  m_window.clear();
+  sf::Text text;
+  text.setFont(get_arial_font());
+  text.setStyle(sf::Text::Bold);
+  text.setCharacterSize(44);
+  text.setFillColor(sf::Color::White);
+  return text;
+}
 
-  const auto window_size{m_window.getSize()};
+void loading_view::draw()
+{
+  const auto window_size{get_render_window().getSize()};
 
   const screen_rect window_rect{
     screen_coordinate(0, 0),
@@ -131,9 +66,9 @@ void loading_view::show()
     sf::RectangleShape rectangle;
     set_rect(rectangle, window_rect);
     rectangle.setTexture(
-      &m_resources.get_loading_screen_textures().get_all_races_1()
+      &game_resources::get().get_loading_screen_textures().get_all_races_1()
     );
-    get_window().draw(rectangle);
+    get_render_window().draw(rectangle);
   }
   // loading text
   {
@@ -144,7 +79,7 @@ void loading_view::show()
     set_text_style(text);
     text.setString(m_resource_loader.get_current());
     set_text_position(text, text_rect);
-    get_window().draw(text);
+    get_render_window().draw(text);
   }
   // progress bar rectangle background
   {
@@ -154,7 +89,7 @@ void loading_view::show()
     };
     set_rect(rectangle, progress_bar_rect);
     rectangle.setFillColor(sf::Color::White);
-    get_window().draw(rectangle);
+    get_render_window().draw(rectangle);
   }
   // progress bar rectangle
   {
@@ -175,12 +110,8 @@ void loading_view::show()
     };
     set_rect(rectangle, progress_bar_rect);
     rectangle.setFillColor(sf::Color::Black);
-    get_window().draw(rectangle);
+    get_render_window().draw(rectangle);
   }
-
-  // Display all shapes
-  m_window.display();
-
 }
 
 #endif // LOGIC_ONLY

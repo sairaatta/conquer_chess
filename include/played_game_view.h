@@ -21,10 +21,6 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  auto& get_resources() noexcept { return m_resources; }
-
-  auto& get_window() noexcept { return m_window; }
-
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
@@ -36,15 +32,9 @@ private:
   /// The played game
   game m_game;
 
-  /// The window to draw to
-  sf::RenderWindow m_window;
-
-  /// Resources
-  game_resources m_resources;
-
   /// Process all events
   /// @return if the user wants to quit
-  bool process_events();
+  bool process_event(sf::Event& event);
 
   /// Show the menu on-screen
   void show();

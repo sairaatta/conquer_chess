@@ -3,7 +3,11 @@
 /// Welcome to Conquer Chess
 ///
 /// - [Conquer Chess homepage](https://richelbilderbeek.github.io/conquer_chess/)
-
+///
+/// This game has some singletons:
+///
+/// - \link{get_render_window}: to get the one-and-only SFML render window
+/// - \link{get_resources}: to get the one-and-only collection of resources
 
 // Use LOGIC_ONLY to be able to run on GHA
 #include "asserts.h"
@@ -46,14 +50,13 @@
 #include <SFML/Graphics.hpp>
 
 #include <cassert>
-//#include <chrono>
-//#include <iostream>
 
 /// All tests are called from here, only in debug mode
 void test()
 {
 #ifndef NDEBUG
-  test_sleeper();
+  test_resource_loader();
+  test_sleep_scheduler();
 
 
   test_action_number();
@@ -109,7 +112,7 @@ void test()
   test_screen_rect();
   test_side();
   test_sfml_helper();
-  test_sleeper();
+  test_sleep_scheduler();
   test_square();
   test_starting_position_type();
   test_volume();
@@ -140,8 +143,8 @@ int main(int argc, char **argv) //!OCLINT tests may be long
       #endif
     };
     #ifndef LOGIC_ONLY
-    //main_window v(options, pcs);
-    loading_view v(options, pcs);
+    main_window v(options, pcs);
+    //loading_view v(options, pcs);
     v.exec();
     #endif // LOGIC_ONLY
   }

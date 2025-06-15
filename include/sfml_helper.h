@@ -29,7 +29,6 @@ void show_pieces(
   const std::vector<piece>& pieces,
   sf::RenderWindow& window,
   const screen_rect& rect,
-  game_resources& resources,
   const bool show_selected
 );
 #endif

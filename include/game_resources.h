@@ -24,11 +24,24 @@
 #include <optional>
 
 /// The raw game resources.
+///
+/// There must be only one game_resources.
+///
+/// Use \link{game_resources::get} to get a handle to this class.
 class game_resources
 {
 public:
 
-  game_resources();
+  /// This class is a Singleton
+  game_resources(const game_resources&) = delete;
+  game_resources& operator=(const game_resources&) = delete;
+  game_resources(game_resources &&) = delete;
+  game_resources& operator=(game_resources&&) = delete;
+  static auto& get(){
+      static game_resources r;
+      return r;
+  }
+
 
   // Lazy loading
   fonts& get_fonts() noexcept;
@@ -85,6 +98,9 @@ public:
 
 private:
 
+  /// This is a Singleton, as there must be only one instance of this.
+  game_resources();
+
   /// Lazy loading
   static std::optional<fonts> m_fonts;
 
@@ -125,23 +141,21 @@ private:
   static std::optional<textures> m_textures;
 };
 
-sf::Texture& get_about(game_resources& r) noexcept;
+sf::Texture& get_about() noexcept;
 
 sf::Texture& get_action_icon(
-  game_resources& r,
   piece_action_type t
 ) noexcept;
 
 /// Get the Arial font
-sf::Font& get_arial_font(game_resources& r) noexcept;
+sf::Font& get_arial_font() noexcept;
 
-/// Get the Arial font
-sf::Font& get_code_squared_font(game_resources& r) noexcept;
+/// Get the Code Squared font
+sf::Font& get_code_squared_font() noexcept;
 
 /// Get an icon that accompanies a game option,
 /// to be used in the Options screen
 sf::Texture& get_game_option_icon(
-  game_resources& r,
   const options_view_item item
 ) noexcept;
 
@@ -150,7 +164,6 @@ sf::Texture& get_options(game_resources& r) noexcept;
 
 /// Get texture of a piece
 sf::Texture& get_piece(
-  game_resources& gr,
   const race r,
   const chess_color color,
   const piece_type type
@@ -158,7 +171,6 @@ sf::Texture& get_piece(
 
 /// Get texture of a portrait of a piece
 sf::Texture& get_piece_portrait(
-  game_resources& gr,
   const race r,
   const chess_color color,
   const piece_type type
@@ -168,20 +180,18 @@ sf::Texture& get_quit(game_resources& r) noexcept;
 
 /// Get the map for a race
 sf::Texture& get_map(
-  game_resources& gr,
   const race r
 ) noexcept;
 
-sf::Texture& get_start(game_resources& r) noexcept;
+sf::Texture& get_start() noexcept;
 
-sf::Texture& get_strip(game_resources& r, const chess_color c) noexcept;
-sf::Texture& get_subtitle(game_resources& r) noexcept;
-sf::Texture& get_title(game_resources& r) noexcept;
+sf::Texture& get_strip(const chess_color c) noexcept;
+sf::Texture& get_subtitle() noexcept;
+sf::Texture& get_title() noexcept;
 
 
 /// Play a sound effect
 void play(
-  game_resources& r,
   const message& effect
 );
 

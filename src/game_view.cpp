@@ -5,6 +5,7 @@
 #include "physical_controller.h"
 #include "physical_controllers.h"
 #include "user_input_type.h"
+#include "render_window.h"
 #include "game.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
@@ -30,15 +31,14 @@ game_view::game_view(
   :
     m_game{game},
     m_game_controller{c},
-    m_log{game.get_game_options().get_message_display_time_secs()},
-    m_show_debug{false}
+    m_log{game.get_game_options().get_message_display_time_secs()}
 {
-  m_game_resources.get_songs().get_wonderful_time().setVolume(
+  game_resources::get().get_songs().get_wonderful_time().setVolume(
     get_music_volume_as_percentage(m_game)
   );
-  m_game_resources.get_songs().get_wonderful_time().setLoop(true);
-  m_game_resources.get_songs().get_wonderful_time().play();
-  m_game_resources.get_sound_effects().set_master_volume(
+  game_resources::get().get_songs().get_wonderful_time().setLoop(true);
+  game_resources::get().get_songs().get_wonderful_time().play();
+  game_resources::get().get_sound_effects().set_master_volume(
     m_game.get_game_options().get_sound_effects_volume()
   );
 }
@@ -53,71 +53,28 @@ bool do_show_selected(const game_view& view)
   return do_show_selected(view.get_game());
 }
 
-void draw_fps(game_view& v)
+void game_view::tick()
 {
-  const auto& layout = v.get_layout();
+  // Disard old messages
+  m_log.tick();
 
-  // Background rectangle
-  const auto& screen_rect = layout.get_fps();
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setFillColor(sf::Color::White);
-  v.get_window().draw(rectangle);
+  // Do a tick, so that one delta_t equals one second under normal game speed
+  /*
+  const delta_t dt{
+      get_speed_multiplier(m_game.get_game_options().get_game_speed())
+    / m_sleep_scheduler.get_fps()
+  };
+  m_game.tick(dt);
+  */
 
-  // Text
-  sf::Text text;
-  v.set_text_style(text);
-  text.setString(sf::String(std::to_string(v.get_fps())));
-  set_text_position(text, screen_rect);
-  text.setCharacterSize(text.getCharacterSize() - 2);
-  text.setFillColor(sf::Color::Black);
-  v.get_window().draw(text);
+  // Read the pieces' messages and play their sounds
+  process_piece_messages();
 
-}
-
-void game_view::exec()
-{
-  // Open window
-  m_window.create(
-    sf::VideoMode(
-      m_layout.get_window_size().get_x(),
-      m_layout.get_window_size().get_y()
-    ),
-    "Conquer Chess"
-  );
-  while (m_window.isOpen())
-  {
-    // Keep track of the FPS
-    m_sleep_scheduler.tick();
-
-    // Disard old messages
-    m_log.tick();
-
-    // Process user input and play game until instructed to exit
-    const bool must_quit{
-      process_events() // main game loop
-    };
-    if (must_quit)
-    {
-      break;
-    }
-
-    // Do a tick, so that one delta_t equals one second under normal game speed
-    const delta_t dt{
-        get_speed_multiplier(m_game.get_game_options().get_game_speed())
-      / m_sleep_scheduler.get_fps()
-    };
-    m_game.tick(dt);
-
-    // Read the pieces' messages and play their sounds
-    process_piece_messages();
-
-    // Show the new state
-    show();
-  }
+  // Show the new state
+  show();
 
   std::clog << collect_action_history(m_game) << '\n';
-  m_game_resources.get_songs().get_wonderful_time().stop();
+  game_resources::get().get_songs().get_wonderful_time().stop();
 }
 
 const physical_controller& get_physical_controller(const game_view& view, const side player_side)
@@ -146,10 +103,6 @@ double game_view::get_elapsed_time_secs() const noexcept
   return m_clock.getElapsedTime().asSeconds();
 }
 
-int get_fps(const game_view& v) noexcept
-{
-  return v.get_fps();
-}
 
 std::string get_last_log_messages(
   const game_view& view,
@@ -181,7 +134,7 @@ void game_view::play_pieces_sound_effects()
 {
   for (const auto& sound_effect: collect_messages(m_game))
   {
-    m_game_resources.get_sound_effects().play(sound_effect);
+    game_resources::get().get_sound_effects().play(sound_effect);
   }
 }
 
@@ -236,43 +189,38 @@ const in_game_time& get_time(const game_view& v) noexcept
   return get_time(v.get_game());
 }
 
-bool game_view::process_events()
+bool game_view::process_event(sf::Event& event)
 {
-  // User interaction
-  sf::Event event;
-  while (m_window.pollEvent(event))
+  if (event.type == sf::Event::Resized)
   {
-    if (event.type == sf::Event::Resized)
-    {
-      // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-      const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-      m_window.setView(sf::View(visibleArea));
-      m_layout = game_view_layout(
-        screen_coordinate(
-          static_cast<int>(event.size.width),
-          static_cast<int>(event.size.height)
-        ),
-        get_default_margin_width()
-      );
-      return false;
-    }
-    else if (event.type == sf::Event::Closed)
-    {
-        m_window.close();
-        return true; // Game is done
-    }
-    else if (event.type == sf::Event::KeyPressed)
-    {
-      sf::Keyboard::Key key_pressed = event.key.code;
-      if (key_pressed == sf::Keyboard::Key::Escape)
-      {
-        m_window.close();
-        return true;
-      }
-    }
-    process_event(m_game_controller, event, m_layout);
-    m_game_controller.apply_user_inputs_to_game(m_game);
+    // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
+    const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+    get_render_window().setView(sf::View(visibleArea));
+    m_layout = game_view_layout(
+      screen_coordinate(
+        static_cast<int>(event.size.width),
+        static_cast<int>(event.size.height)
+      ),
+      get_default_margin_width()
+    );
+    return false;
   }
+  else if (event.type == sf::Event::Closed)
+  {
+      get_render_window().close();
+      return true; // Game is done
+  }
+  else if (event.type == sf::Event::KeyPressed)
+  {
+    sf::Keyboard::Key key_pressed = event.key.code;
+    if (key_pressed == sf::Keyboard::Key::Escape)
+    {
+      get_render_window().close();
+      return true;
+    }
+  }
+  ::process_event(m_game_controller, event, m_layout);
+  m_game_controller.apply_user_inputs_to_game(m_game);
   return false; // if no events proceed with tick
 }
 
@@ -308,7 +256,7 @@ void game_view::process_piece_messages()
 
 void game_view::set_text_style(sf::Text& text)
 {
-  text.setFont(get_arial_font(get_resources()));
+  text.setFont(get_arial_font());
   text.setStyle(sf::Text::Bold);
   text.setCharacterSize(m_layout.get_font_size());
   text.setFillColor(sf::Color::Black);
@@ -316,9 +264,6 @@ void game_view::set_text_style(sf::Text& text)
 
 void game_view::show()
 {
-  // Start drawing the new frame, by clearing the screen
-  m_window.clear();
-
   // Show the layout of the screen: board and sidebars
   show_map(*this);
 
@@ -331,13 +276,6 @@ void game_view::show()
   // Show the sidebars: controls (with log), units, debug
   show_sidebar(*this, side::lhs);
   show_sidebar(*this, side::rhs);
-
-  // Show the mouse cursor
-  //show_mouse_cursor();
-  draw_fps(*this);
-
-  // Display all shapes
-  m_window.display();
 }
 
 void show_board(game_view& view)
@@ -421,7 +359,7 @@ void show_controls(
     background.setFillColor(colors[key - 1]);
     background.setOutlineThickness(1);
     background.setOutlineColor(sf::Color::White);
-    view.get_window().draw(background);
+    get_render_window().draw(background);
 
     // Determine the piece action type
     const auto& maybe_action{maybe_actions[key - 1]};
@@ -436,9 +374,9 @@ void show_controls(
       {
         const piece_action_type action{maybe_action.value()};
         sprite.setTexture(
-          &get_action_icon(view.get_resources(), action)
+          &get_action_icon(action)
         );
-        view.get_window().draw(sprite);
+        get_render_window().draw(sprite);
       }
     }
     const bool show_input{true};
@@ -453,11 +391,11 @@ void show_controls(
       text_background.setFillColor(sf::Color::Black);
       text_background.setOutlineThickness(1);
       text_background.setOutlineColor(sf::Color::White);
-      view.get_window().draw(text_background);
+      get_render_window().draw(text_background);
 
       // The text there
       sf::Text text;
-      text.setFont(view.get_resources().get_fonts().get_arial_font());
+      text.setFont(game_resources::get().get_fonts().get_arial_font());
       text.setFillColor(colors[key - 1]);
       text.setString(key_descriptions[key - 1]);
       text.setCharacterSize(get_height(corner_rect) * 2 / 3);
@@ -465,7 +403,7 @@ void show_controls(
         corner_rect.get_tl().get_x() + 10,
         corner_rect.get_tl().get_y() + 2
       );
-      view.get_window().draw(text);
+      get_render_window().draw(text);
     }
     const bool show_name{true};
     if (show_name)
@@ -479,11 +417,11 @@ void show_controls(
       text_background.setFillColor(sf::Color::Black);
       text_background.setOutlineThickness(1);
       text_background.setOutlineColor(sf::Color::White);
-      view.get_window().draw(text_background);
+      get_render_window().draw(text_background);
 
       // The text there
       sf::Text text;
-      text.setFont(view.get_resources().get_fonts().get_arial_font());
+      text.setFont(game_resources::get().get_fonts().get_arial_font());
       text.setFillColor(colors[key - 1]);
       if (maybe_action)
       {
@@ -499,7 +437,7 @@ void show_controls(
         half_rect.get_tl().get_x() + 10,
         half_rect.get_tl().get_y() + 2
       );
-      view.get_window().draw(text);
+      get_render_window().draw(text);
     }
   }
   // 46: for the mouse player, draw the selected active action
@@ -512,7 +450,7 @@ void show_controls(
     selector_square.setFillColor(sf::Color::Transparent);
     selector_square.setOutlineThickness(5);
     selector_square.setOutlineColor(sf::Color::White);
-    view.get_window().draw(selector_square);
+    get_render_window().draw(selector_square);
   }
 }
 
@@ -522,7 +460,7 @@ void show_debug(game_view& view, const side player_side)
   const auto& c{view.get_game_controller()};
   const auto& layout{view.get_layout()};
   sf::Text text;
-  text.setFont(view.get_resources().get_fonts().get_arial_font());
+  text.setFont(game_resources::get().get_fonts().get_arial_font());
   const piece& closest_piece{
     get_closest_piece_to(g, get_cursor_pos(c, player_side))
   };
@@ -552,7 +490,6 @@ void show_debug(game_view& view, const side player_side)
   s
     << "Wall-clock time: " << view.get_elapsed_time_secs() << " (secs)" << '\n'
     << "Game time: " << get_time(view) << " (moves)" << '\n'
-    << "FPS: " << get_fps(view) << '\n'
   ;
 
   text.setString(s.str());
@@ -561,7 +498,7 @@ void show_debug(game_view& view, const side player_side)
     layout.get_debug(player_side).get_tl().get_x(),
     layout.get_debug(player_side).get_tl().get_y()
   );
-  view.get_window().draw(text);
+  get_render_window().draw(text);
 }
 
 void game_view::show_mouse_cursor()
@@ -585,7 +522,7 @@ void game_view::show_mouse_cursor()
     cursor_pos.get_x(),
     cursor_pos.get_y()
   );
-  m_window.draw(cursor);
+  get_render_window().draw(cursor);
 }
 
 void show_layout(game_view& view)
@@ -598,7 +535,7 @@ void show_layout(game_view& view)
     rectangle.setFillColor(sf::Color(0, 0, 0, 128));
     rectangle.setOutlineThickness(1);
     rectangle.setOutlineColor(sf::Color::White);
-    view.get_window().draw(rectangle);
+    get_render_window().draw(rectangle);
   }
 }
 
@@ -606,7 +543,7 @@ void show_log(game_view& view, const side player)
 {
   const auto& layout = view.get_layout();
   sf::Text text;
-  text.setFont(view.get_resources().get_fonts().get_arial_font());
+  text.setFont(game_resources::get().get_fonts().get_arial_font());
   std::stringstream s;
   s << get_last_log_messages(view, player);
   text.setString(s.str().c_str());
@@ -615,7 +552,7 @@ void show_log(game_view& view, const side player)
     layout.get_log(player).get_tl().get_x(),
     layout.get_log(player).get_tl().get_y()
   );
-  view.get_window().draw(text);
+  get_render_window().draw(text);
 }
 
 void show_map(game_view& view)
@@ -626,9 +563,9 @@ void show_map(game_view& view)
   set_rect(sprite, layout.get_window_size());
   const race r{get_race_of_color(game.get_lobby_options(), chess_color::white)};
   sprite.setTexture(
-    &get_map(view.get_resources(), r)
+    &get_map(r)
   );
-  view.get_window().draw(sprite);
+  get_render_window().draw(sprite);
 }
 
 
@@ -648,12 +585,12 @@ void show_occupied_squares(game_view& view)
     sf::RectangleShape s;
     set_rect(s, square_rect);
     s.setTexture(
-      &view.get_resources().get_textures().get_occupied_square(
+      &game_resources::get().get_textures().get_occupied_square(
         to_color(square),
         piece.get_color()
       )
     );
-    view.get_window().draw(s);
+    get_render_window().draw(s);
   }
 }
 
@@ -669,7 +606,6 @@ void show_pieces(game_view& view)
     sprite.setSize(sf::Vector2f(0.9 * square_width, 0.9 * square_height));
     sprite.setTexture(
       &get_piece(
-        view.get_resources(),
         piece.get_race(),
         piece.get_color(),
         piece.get_type()
@@ -710,7 +646,7 @@ void show_pieces(game_view& view)
       screen_position.get_x(),
       screen_position.get_y()
     );
-    view.get_window().draw(sprite);
+    get_render_window().draw(sprite);
   }
 }
 
@@ -737,7 +673,7 @@ void show_possible_moves(game_view& view)
     rectangle.setFillColor(sf::Color::Transparent);
     rectangle.setScale(0.5, 0.5);
     rectangle.setRotation(action.get_color() == chess_color::white ? 30 : -30);
-    view.get_window().draw(rectangle);
+    get_render_window().draw(rectangle);
   }
 }
 
@@ -752,9 +688,9 @@ void show_sidebar(game_view& view, const side player_side)
 void show_squares(game_view& view)
 {
   show_squares(
-    view.get_window(),
+    get_render_window(),
     view.get_layout().get_board(),
-    view.get_resources(),
+    game_resources::get(),
     view.get_show_squares_semitransparent()
   );
 }
@@ -804,7 +740,7 @@ void show_square_under_cursor(
   {
     s.setOutlineThickness(std::max(2, static_cast<int>(square_height / 20)));
   }
-  view.get_window().draw(s);
+  get_render_window().draw(s);
   s.setFillColor(old_fill_color);
   s.setOutlineColor(old_outline_color);
   s.setOutlineThickness(old_thickness);
@@ -831,7 +767,7 @@ void show_unit_health_bars(game_view& view)
       2.0 + black_box_pos.get_x(),
       2.0 + black_box_pos.get_y()
     );
-    view.get_window().draw(black_box);
+    get_render_window().draw(black_box);
 
     // Health
     sf::RectangleShape health_bar;
@@ -852,7 +788,7 @@ void show_unit_health_bars(game_view& view)
       4.0 + health_bar_pos.get_x(),
       4.0 + health_bar_pos.get_y()
     );
-    view.get_window().draw(health_bar);
+    get_render_window().draw(health_bar);
   }
 }
 
@@ -894,7 +830,7 @@ void show_unit_paths(game_view& view)
       rect.setOutlineColor(to_sfml_color(get_other_color(piece.get_color())));
       rect.setOutlineThickness(2);
       rect.setFillColor(to_sfml_color(piece.get_color()));
-      view.get_window().draw(rect);
+      get_render_window().draw(rect);
     }
 
 
@@ -938,7 +874,7 @@ void show_unit_paths(game_view& view)
       circle.setFillColor(to_sfml_color(piece.get_color()));
       circle.setRadius(radius);
       circle.setOrigin(half_radius, half_radius);
-      view.get_window().draw(circle);
+      get_render_window().draw(circle);
     }
 
     // Draw circle at current in-progress movement
@@ -979,7 +915,7 @@ void show_unit_paths(game_view& view)
       circle.setFillColor(to_sfml_color(piece.get_color()));
       circle.setRadius(radius);
       circle.setOrigin(half_radius, half_radius);
-      view.get_window().draw(circle);
+      get_render_window().draw(circle);
     }
   }
 }
@@ -1003,7 +939,6 @@ void show_unit_sprites(game_view& view, const side player_side)
     sprite.setSize(sf::Vector2f(square_width, square_height));
     sprite.setTexture(
       &get_piece_portrait(
-        view.get_resources(),
         piece.get_race(),
         piece.get_color(),
         piece.get_type()
@@ -1014,10 +949,10 @@ void show_unit_sprites(game_view& view, const side player_side)
       screen_position.get_x(),
       screen_position.get_y()
     );
-    view.get_window().draw(sprite);
+    get_render_window().draw(sprite);
     // text
     sf::Text text;
-    text.setFont(view.get_resources().get_fonts().get_arial_font());
+    text.setFont(get_arial_font());
     std::stringstream s;
 
     s << piece.get_type() << ": "
@@ -1035,7 +970,7 @@ void show_unit_sprites(game_view& view, const side player_side)
       text_position.get_x(),
       text_position.get_y()
     );
-    view.get_window().draw(text);
+    get_render_window().draw(text);
     screen_position += screen_coordinate(0, square_height);
   }
 }

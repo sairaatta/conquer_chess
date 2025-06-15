@@ -26,6 +26,6 @@ private:
 };
 
 /// Test this class
-void test_sleeper();
+void test_sleep_scheduler();
 
 #endif // SLEEP_SCHEDULER_H
