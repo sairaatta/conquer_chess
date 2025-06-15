@@ -8,6 +8,8 @@
 #include "game_resources.h"
 #include "controls_view_layout.h"
 #include "controls_view_item.h"
+#include "program_state.h"
+#include <optional>
 
 /// The Controls dialog.
 ///
@@ -17,28 +19,48 @@
 class controls_view
 {
 public:
-  controls_view(const physical_controller& c);
+  controls_view(const side& player_side);
 
-  /// Run the menu, until the user quits
-  void exec();
+  /// Show the menu on-screen
+  void draw();
 
-  /// Get the controller, as changed by this view
-  const auto& get_controller() const noexcept { return m_controller; }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
+  /// The next state to go to, if any
+  const auto& get_next_state() const noexcept { return m_next_state; }
+
+  /// The player we are setting up the controls of
+  side get_player_side() const { return m_player_side; }
+
   const auto& get_selected() const noexcept { return m_selected; }
+
+  /// Process all events
+  /// @return if the user wants to quit
+  bool process_event(sf::Event& event);
+
+  /// Resize
+  void process_resize_event(sf::Event& event);
 
   /// Set a uniform text style
   void set_text_style(sf::Text& text);
+
+  void start();
+
+  void stop();
+
+  void tick();
 
 private:
 
   /// The layout of this window
   controls_view_layout m_layout;
 
-  /// The controller
-  physical_controller m_controller;
+  /// The next state to go to, if any
+  std::optional<program_state> m_next_state;
+
+  /// The player we are setting up the controls of
+  side m_player_side;
 
   /// The selected item
   controls_view_item m_selected;
@@ -46,13 +68,6 @@ private:
   /// Change the selected item, from spacebar or LMB click
   void change_selected();
 
-  /// Process all events
-  /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
-
-
-  /// Show the menu on-screen
-  void show();
 };
 
 /// @param is_active if the panel is active:

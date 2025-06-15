@@ -5,9 +5,9 @@
 #include "render_window.h"
 #include "game_resources.h"
 
-main_window::main_window(
-  const physical_controllers& pcs
-) : m_physical_controllers{pcs}
+main_window::main_window()
+  : m_left_controls_view(side::lhs),
+    m_right_controls_view(side::rhs)
 {
   game_resources::get().get_loading_screen_songs().get_heroes().setVolume(
     10
@@ -71,7 +71,7 @@ bool main_window::process_event(sf::Event& event)
       assert(!"TODO");
       // return m_game_view.process_event(event);
     case program_state::left_controls:
-      assert(!"TODO");
+      return m_left_controls_view.process_event(event);
     case program_state::loading:
       return m_loading_view.process_event(event);
     case program_state::main_menu:
@@ -82,7 +82,7 @@ bool main_window::process_event(sf::Event& event)
       assert(!"TODO");
       // return m_replay_view.process_event(event);
     case program_state::right_controls:
-      assert(!"TODO");
+      return m_right_controls_view.process_event(event);
   }
   return false; // Do not close the program
 }
@@ -96,9 +96,11 @@ void main_window::process_resize_event(sf::Event& event)
 
   // Resize all windows
   m_about_view.process_resize_event(event);
+  m_left_controls_view.process_resize_event(event);
   m_loading_view.process_resize_event(event);
   m_options_view.process_resize_event(event);
   m_menu_view.process_resize_event(event);
+  m_right_controls_view.process_resize_event(event);
 }
 
 
@@ -116,7 +118,7 @@ void main_window::show()
       assert(!"TODO");
       break;
     case program_state::left_controls:
-      assert(!"TODO");
+      m_left_controls_view.draw();
       break;
     case program_state::loading:
       m_loading_view.draw();
@@ -131,7 +133,7 @@ void main_window::show()
       assert(!"TODO");
       break;
     case program_state::right_controls:
-      assert(!"TODO");
+      m_right_controls_view.draw();
       break;
   }
 
@@ -175,12 +177,12 @@ void main_window::tick()
   switch (m_program_state) {
     case program_state::about: tick_about(); break;
     case program_state::game: tick_game(); break;
-    case program_state::left_controls: assert(!"TODO"); break;
+    case program_state::left_controls: tick_left_controls(); break;
     case program_state::loading: tick_loading(); break;
     case program_state::main_menu: tick_main_menu(); break;
     case program_state::options: tick_options(); break;
     case program_state::replay: tick_replay(); break;
-    case program_state::right_controls: assert(!"TODO"); break;
+    case program_state::right_controls: tick_right_controls(); break;
   }
 }
 
@@ -196,6 +198,38 @@ void main_window::tick_about()
 void main_window::tick_game()
 {
   assert(!"TODO");
+}
+
+void main_window::tick_left_controls()
+{
+  m_left_controls_view.tick();
+  if (m_left_controls_view.get_next_state().has_value()) {
+    m_program_state = m_left_controls_view.get_next_state().value();
+    m_left_controls_view.stop();
+    switch (m_program_state)
+    {
+      case program_state::about:
+        assert(!"This should never happen");
+      case program_state::game:
+        assert(!"This should never happen");
+      case program_state::left_controls:
+        assert(!"This should never happen");
+      case program_state::loading:
+        assert(!"This should never happen");
+      case program_state::main_menu:
+        assert(!"This should never happen");
+      case program_state::options:
+        m_options_view.start();
+        break;
+        assert(!"This should never happen");
+      case program_state::replay:
+        assert(!"This should never happen");
+      case program_state::right_controls:
+        assert(!"This should never happen");
+        break;
+    }
+  }
+
 }
 
 void main_window::tick_loading()
@@ -249,10 +283,67 @@ void main_window::tick_options()
   if (m_options_view.get_next_state().has_value()) {
     m_program_state = m_options_view.get_next_state().value();
     m_options_view.stop();
+    switch (m_program_state)
+    {
+      case program_state::about:
+        assert(!"This should never happen");
+      case program_state::game:
+        assert(!"This should never happen");
+      case program_state::left_controls:
+        m_left_controls_view.start();
+        break;
+      case program_state::loading:
+        assert(!"This should never happen");
+        break;
+      case program_state::main_menu:
+        m_menu_view.start();
+        break;
+      case program_state::options:
+        assert(!"This should never happen");
+        break;
+      case program_state::replay:
+        assert(!"This should never happen");
+        break;
+      case program_state::right_controls:
+        m_right_controls_view.start();
+        break;
+    }
   }
 }
 
 void main_window::tick_replay()
 {
   assert(!"TODO");
+}
+
+void main_window::tick_right_controls()
+{
+  m_right_controls_view.tick();
+  if (m_right_controls_view.get_next_state().has_value()) {
+    m_program_state = m_right_controls_view.get_next_state().value();
+    m_right_controls_view.stop();
+    switch (m_program_state)
+    {
+      case program_state::about:
+        assert(!"This should never happen");
+      case program_state::game:
+        assert(!"This should never happen");
+      case program_state::left_controls:
+        assert(!"This should never happen");
+      case program_state::loading:
+        assert(!"This should never happen");
+      case program_state::main_menu:
+        assert(!"This should never happen");
+      case program_state::options:
+        m_options_view.start();
+        break;
+        assert(!"This should never happen");
+      case program_state::replay:
+        assert(!"This should never happen");
+      case program_state::right_controls:
+        assert(!"This should never happen");
+        break;
+    }
+  }
+
 }

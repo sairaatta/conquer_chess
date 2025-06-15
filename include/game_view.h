@@ -24,8 +24,7 @@ class game_view
 {
 public:
   explicit game_view(
-    const game& game = get_default_game(),
-    const game_controller& c = game_controller()
+    const game& game = get_default_game()
   );
 
   /// Run the game, until the user quits

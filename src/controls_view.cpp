@@ -3,16 +3,16 @@
 #ifndef LOGIC_ONLY
 
 #include "screen_coordinate.h"
-#include "game_view.h"
-#include "options_view.h"
+#include "physical_controllers.h"
 #include "render_window.h"
+#include "action_number.h"
 #include "sfml_helper.h"
 #include <cassert>
 #include <cmath>
 #include <iostream>
 
-controls_view::controls_view(const physical_controller& c)
-  : m_controller(c),
+controls_view::controls_view(const side& player_side)
+  : m_player_side(player_side),
     m_selected{controls_view_item::type}
 {
 
@@ -23,8 +23,8 @@ void controls_view::change_selected()
   switch (m_selected)
   {
     case controls_view_item::type:
-      m_controller.set_type(
-        get_next(m_controller.get_type())
+      physical_controllers::get().get_controller(m_player_side).set_type(
+        get_next(physical_controllers::get().get_controller(m_player_side).get_type())
       );
     break;
     default:
@@ -55,28 +55,31 @@ void draw_panel(
   get_render_window().draw(text);
 }
 
-void controls_view::exec()
+void controls_view::tick()
 {
 }
 
 std::string get_key_str_for_action_1(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_action(action_number(1)));
+  return to_str(
+    physical_controllers::get().get_controller(v.get_player_side())
+      .get_key_bindings().get_key_for_action(action_number(1))
+    );
 }
 
 std::string get_key_str_for_action_2(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_action(action_number(2)));
+  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(2)));
 }
 
 std::string get_key_str_for_action_3(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_action(action_number(3)));
+  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(3)));
 }
 
 std::string get_key_str_for_action_4(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_action(action_number(4)));
+  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(4)));
 }
 
 std::string get_key_str_for_do(const controls_view& /* v */)
@@ -86,20 +89,20 @@ std::string get_key_str_for_do(const controls_view& /* v */)
 
 std::string get_key_str_for_move_down(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_move_down());
+  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_down());
 }
 
 std::string get_key_str_for_move_left(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_move_left());
+  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_left());
 }
 std::string get_key_str_for_move_right(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_move_right());
+  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_right());
 }
 std::string get_key_str_for_move_up(const controls_view& v)
 {
-  return to_str(v.get_controller().get_key_bindings().get_key_for_move_up());
+  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_up());
 }
 
 std::string get_key_str_for_next(const controls_view& /* v */)
@@ -109,28 +112,18 @@ std::string get_key_str_for_next(const controls_view& /* v */)
 
 bool controls_view::process_event(sf::Event& event)
 {
-  if (event.type == sf::Event::Resized)
+  if (event.type == sf::Event::Closed)
   {
-    // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-    const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
-    get_render_window().setView(sf::View(visible_area));
-    m_layout = controls_view_layout(
-      screen_coordinate(event.size.width, event.size.height),
-      get_default_margin_width()
-    );
-  }
-  else if (event.type == sf::Event::Closed)
-  {
-    get_render_window().close();
-    return true; // Menu is done
+    m_next_state = program_state::options;
+    return false;
   }
   else if (event.type == sf::Event::KeyPressed)
   {
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      get_render_window().close();
-      return true;
+      m_next_state = program_state::options;
+      return false;
     }
     else if (key_pressed == sf::Keyboard::Key::Up)
     {
@@ -158,13 +151,8 @@ bool controls_view::process_event(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
-      get_render_window().close();
-      return true;
-    }
-    else if (key_pressed == sf::Keyboard::Key::F3)
-    {
-      // debug
-      std::clog << "Debug";
+      m_next_state = program_state::options;
+      return false;
     }
   }
   else if (event.type == sf::Event::MouseMoved)
@@ -191,6 +179,19 @@ bool controls_view::process_event(sf::Event& event)
   return false; // Do not close the window :-)
 }
 
+void controls_view::process_resize_event(sf::Event& event)
+{
+  assert(event.type == sf::Event::Resized);
+
+  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
+  const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
+  get_render_window().setView(sf::View(visible_area));
+  m_layout = controls_view_layout(
+    screen_coordinate(event.size.width, event.size.height),
+    get_default_margin_width()
+  );
+}
+
 void controls_view::set_text_style(sf::Text& text)
 {
   text.setFont(get_arial_font());
@@ -198,21 +199,14 @@ void controls_view::set_text_style(sf::Text& text)
   text.setCharacterSize(32);
   text.setFillColor(sf::Color::Black);
 }
-void controls_view::show()
+void controls_view::draw()
 {
-  // Start drawing the new frame, by clearing the screen
-  get_render_window().clear();
-
   show_layout_panels(*this);
 
   show_type_panel(*this);
   show_keyboard_panel(*this);
   show_mouse_panel(*this);
   show_selected_panel(*this);
-
-  // Display all shapes
-  get_render_window().display();
-
 }
 
 void show_keyboard_panel(controls_view& v)
@@ -230,7 +224,7 @@ void show_keyboard_panel(controls_view& v)
     std::make_pair(layout.get_action_4_label(), "4")
   };
   const bool is_active{
-    v.get_controller().get_type() == physical_controller_type::keyboard
+    physical_controllers::get().get_controller(v.get_player_side()).get_type() == physical_controller_type::keyboard
   };
   chess_color color{chess_color::black};
   for (const auto& p: labels)
@@ -267,7 +261,7 @@ void show_mouse_panel(controls_view& v)
     std::make_pair(layout.get_next_label(), "next")
   };
   const bool is_active{
-    v.get_controller().get_type() == physical_controller_type::mouse
+    physical_controllers::get().get_controller(v.get_player_side()).get_type() == physical_controller_type::mouse
   };
   chess_color color{chess_color::black};
   for (const auto& p: labels)
@@ -332,10 +326,23 @@ void show_type_panel(controls_view& v)
   draw_panel(
     v,
     v.get_layout().get_controller_type_value(),
-    to_str(v.get_controller().get_type()),
+    to_str(physical_controllers::get().get_controller(v.get_player_side()).get_type()),
     chess_color::black,
     is_active
   );
 }
+
+void controls_view::start()
+{
+
+
+}
+
+void controls_view::stop()
+{
+
+
+}
+
 
 #endif // LOGIC_ONLY

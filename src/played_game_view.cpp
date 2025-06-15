@@ -67,17 +67,10 @@ void played_game_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::White);
 }
 
-void played_game_view::show()
+void played_game_view::draw()
 {
-  // Start drawing the new frame, by clearing the screen
-  get_render_window().clear();
-
   show_layout_panels(*this);
-
   show_text_panel(*this);
-
-  // Display all shapes
-  get_render_window().display();
 
 }
 

@@ -7,15 +7,12 @@
 
 #include <cassert>
 
-game_controller::game_controller(
-  const physical_controllers& physical_controllers
-)
+game_controller::game_controller()
   : m_lhs_cursor_pos{0.5, 4.5},
     m_mouse_user_selector{},
-    m_physical_controllers{physical_controllers},
     m_rhs_cursor_pos{7.5, 4.5}
 {
-  if (has_mouse_controller(m_physical_controllers))
+  if (has_mouse_controller(physical_controllers::get()))
   {
     m_mouse_user_selector = action_number(1);
   }
@@ -576,7 +573,7 @@ side get_mouse_user_player_side(const game_controller& c)
 
 const physical_controller& game_controller::get_physical_controller(const side player_side) const noexcept
 {
-  return m_physical_controllers.get_controller(player_side);
+  return physical_controllers::get().get_controller(player_side);
 }
 
 const physical_controller& get_physical_controller(

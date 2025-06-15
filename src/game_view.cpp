@@ -25,12 +25,10 @@
 #include <sstream>
 
 game_view::game_view(
-  const game& game,
-  const game_controller& c
+  const game& game
 )
   :
     m_game{game},
-    m_game_controller{c},
     m_log{game_options::get().get_message_display_time_secs()}
 {
   game_resources::get().get_songs().get_wonderful_time().setVolume(

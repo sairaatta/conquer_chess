@@ -10,15 +10,21 @@ class physical_controllers
 {
 public:
 
-  physical_controllers(
-    const std::vector<physical_controller> controllers = {
-      create_left_keyboard_controller(),
-      create_default_mouse_controller()
-    }
-  );
+  /// This class is a Singleton
+  physical_controllers(const physical_controllers&) = delete;
+  physical_controllers& operator=(const physical_controllers&) = delete;
+  physical_controllers(physical_controllers &&) = delete;
+  physical_controllers& operator=(physical_controllers&&) = delete;
+  static auto& get(){
+    static physical_controllers r;
+    return r;
+  }
 
   /// Get the controller of a player
   const physical_controller& get_controller(const side player_side) const noexcept;
+
+  /// Get the controller of a player
+  physical_controller& get_controller(const side player_side) noexcept;
 
   /// Get the physical controllers
   const std::vector<physical_controller>& get_controllers() const noexcept;
@@ -34,6 +40,12 @@ public:
   void set(const side player_side, const physical_controller& controller);
 
 private:
+  physical_controllers(
+    const std::vector<physical_controller> controllers = {
+      create_left_keyboard_controller(),
+      create_default_mouse_controller()
+    }
+  );
 
   std::vector<physical_controller> m_physical_controllers;
 };
@@ -50,22 +62,22 @@ int count_n_controllers(const physical_controllers& controllers) noexcept;
 /// Get a keyboard and a mouse controller.
 /// @see use \link{create_two_keyboard_controllers}
 /// to create two keyboard controllers
-physical_controllers create_default_controllers() noexcept;
+void use_default_controllers() noexcept;
 
 /// Get two controllers,
 /// where LHS player uses keyboard,
 /// and RHS player uses mouse
-physical_controllers create_keyboard_mouse_controllers() noexcept;
+void use_keyboard_mouse_controllers() noexcept;
 
 /// Get two controllers,
 /// where LHS player uses mouse,
 /// and RHS player uses keyboard
-physical_controllers create_mouse_keyboard_controllers() noexcept;
+void use_mouse_keyboard_controllers() noexcept;
 
 /// Get two keyboard controllers.
 /// @see use \link{create_default_controllers}
 /// to create the defaults one-keyboard-one-mouse controllers
-physical_controllers create_two_keyboard_controllers() noexcept;
+void use_two_keyboard_controllers() noexcept;
 
 /// Get the side of the controller that uses the keyboard.
 /// Assumes there is one controller that uses the keyboard

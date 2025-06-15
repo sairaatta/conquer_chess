@@ -151,9 +151,10 @@ void draw_panel(
   get_render_window().draw(text);
 }
 
-physical_controller_type get_physical_controller_type(const options_view& v, const side player)
+physical_controller_type get_physical_controller_type(
+  const side player)
 {
-  return get_physical_controller_type(v.get_physical_controllers(), player);
+  return physical_controllers::get().get_controller(player).get_type();
 }
 
 starting_position_type get_starting_position(const options_view&) noexcept
@@ -282,9 +283,6 @@ void options_view::set_text_style(sf::Text& text)
 
 void options_view::draw()
 {
-  // Start drawing the new frame, by clearing the screen
-  get_render_window().clear();
-
   show_layout_panels(*this);
 
   assert(!to_str(get_starting_position(*this)).empty());
@@ -302,9 +300,6 @@ void options_view::draw()
     show_semitransparent
   );
   show_pieces(*this);
-
-  // Display all shapes
-  get_render_window().display();
 
   assert(!to_str(get_starting_position(*this)).empty());
 }
@@ -365,7 +360,7 @@ void show_bottom_row(options_view& v, const side player_side)
       layout.get_controller_type_value(player_side)
     };
     const physical_controller_type t{
-      v.get_physical_controllers().get_controller(player_side).get_type()
+      get_physical_controller_type(player_side)
     };
     sf::RectangleShape rectangle;
     set_rect(rectangle, screen_rect);

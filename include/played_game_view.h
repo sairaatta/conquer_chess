@@ -37,7 +37,7 @@ private:
   bool process_event(sf::Event& event);
 
   /// Show the menu on-screen
-  void show();
+  void draw();
 };
 
 /// Show where the panels will be drawn

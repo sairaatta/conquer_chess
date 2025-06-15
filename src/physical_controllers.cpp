@@ -41,42 +41,60 @@ int count_n_controllers(const physical_controllers& controllers) noexcept
   return controllers.get_controllers().size();
 }
 
-physical_controllers create_default_controllers() noexcept
+void use_default_controllers() noexcept
 {
-  return create_keyboard_mouse_controllers();
+  use_keyboard_mouse_controllers();
 }
 
-physical_controllers create_keyboard_mouse_controllers() noexcept
+void use_keyboard_mouse_controllers() noexcept
 {
-  return physical_controllers(
-    {
-      create_left_keyboard_controller(),
-      create_default_mouse_controller()
-    }
+  physical_controllers::get().set(
+    side::lhs,
+    create_left_keyboard_controller()
+  );
+  physical_controllers::get().set(
+    side::rhs,
+    create_default_mouse_controller()
   );
 }
 
-physical_controllers create_mouse_keyboard_controllers() noexcept
+void use_mouse_keyboard_controllers() noexcept
 {
-  return physical_controllers(
-    {
-      create_default_mouse_controller(),
-      create_right_keyboard_controller()
-    }
+  physical_controllers::get().set(
+    side::lhs,
+    create_default_mouse_controller()
+  );
+  physical_controllers::get().set(
+    side::rhs,
+    create_right_keyboard_controller()
   );
 }
 
-physical_controllers create_two_keyboard_controllers() noexcept
+void use_two_keyboard_controllers() noexcept
 {
-  return physical_controllers(
-    {
-      create_left_keyboard_controller(),
-      create_right_keyboard_controller()
-    }
+  physical_controllers::get().set(
+    side::lhs,
+    create_left_keyboard_controller()
+  );
+  physical_controllers::get().set(
+    side::rhs,
+    create_right_keyboard_controller()
   );
 }
 
 const physical_controller& physical_controllers::get_controller(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    assert(count_n_controllers(m_physical_controllers) >= 1);
+    return m_physical_controllers[0];
+  }
+  assert(player_side == side::rhs);
+  assert(count_n_controllers(m_physical_controllers) >= 2);
+  return m_physical_controllers[1];
+}
+
+physical_controller& physical_controllers::get_controller(const side player_side) noexcept
 {
   if (player_side == side::lhs)
   {

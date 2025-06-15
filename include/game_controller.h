@@ -19,9 +19,7 @@
 class game_controller
 {
 public:
-  game_controller(
-    const physical_controllers& controllers = physical_controllers()
-  );
+  game_controller();
 
   /// Add a user input. These will be processed in 'game::tick'
   void add_user_input(const user_input& a);
@@ -62,9 +60,6 @@ private:
   /// A mouse user selects one of the four actions
   /// (a keyboard user has different keys for that)
   std::optional<action_number> m_mouse_user_selector;
-
-  /// The physical controllers the players use
-  physical_controllers m_physical_controllers;
 
   /// The in-game coordinat of the RHS user's cursor
   game_coordinate m_rhs_cursor_pos;

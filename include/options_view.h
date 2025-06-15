@@ -24,8 +24,6 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  const auto& get_physical_controllers() const noexcept { return m_physical_controllers; }
-
   /// The next state to go to, if any
   const auto& get_next_state() const noexcept { return m_next_state; }
 
@@ -58,8 +56,6 @@ private:
   /// The next state to go to, if any
   std::optional<program_state> m_next_state;
 
-  physical_controllers m_physical_controllers;
-
   /// The selected item
   options_view_item m_selected;
 
@@ -80,7 +76,7 @@ void draw_panel(
   const chess_color color
 );
 
-physical_controller_type get_physical_controller_type(const options_view& v, const side player);
+physical_controller_type get_physical_controller_type(const side player);
 
 /// Get the starting position
 starting_position_type get_starting_position(const options_view& v) noexcept;

@@ -134,15 +134,13 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   if (args.size() == 1)
   {
     #define USE_TWO_KEYBOARDS
-    physical_controllers pcs{
-      #ifdef USE_TWO_KEYBOARDS
-      create_two_keyboard_controllers()
-      #else
-      create_keyboard_mouse_controllers()
-      #endif
-    };
+    #ifdef USE_TWO_KEYBOARDS
+    use_two_keyboard_controllers();
+    #else
+    use_keyboard_mouse_controllers();
+    #endif
     #ifndef LOGIC_ONLY
-    main_window v(pcs);
+    main_window v;
     v.exec();
     #endif // LOGIC_ONLY
   }

@@ -15,9 +15,7 @@
 class lobby_view
 {
 public:
-  lobby_view(
-    const physical_controllers& pcs
-  );
+  lobby_view();
 
   /// Does the countdown
   void tick();
@@ -59,9 +57,6 @@ private:
 
   /// The options set in this lobby
   lobby_options m_lobby_options;
-
-  /// The physical controllers
-  physical_controllers m_physical_controllers;
 
   /// The selected item for RHS
   lobby_view_item m_rhs_cursor;

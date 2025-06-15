@@ -14,13 +14,10 @@
 #include <cmath>
 #include <iostream>
 
-lobby_view::lobby_view(
-  const physical_controllers& pcs
-)
+lobby_view::lobby_view()
   : m_lhs_cursor{lobby_view_item::color},
     m_lhs_start{false},
     m_lobby_options{create_default_lobby_options()},
-    m_physical_controllers{pcs},
     m_rhs_cursor{lobby_view_item::color},
     m_rhs_start{false}
 {
@@ -55,8 +52,7 @@ void lobby_view::exec_game()
   game_resources::get().get_songs().get_soothing().stop();
   get_render_window().setVisible(false);
   game_view view{
-    game(m_lobby_options),
-    game_controller(m_physical_controllers)
+    game(m_lobby_options)
   };
   view.tick();
   get_render_window().setVisible(true);
@@ -217,9 +213,6 @@ void lobby_view::set_text_style(sf::Text& text)
 
 void lobby_view::show()
 {
-  // Start drawing the new frame, by clearing the screen
-  get_render_window().clear();
-
   show_layout_panels(*this);
 
   show_image_panel(*this);
@@ -241,9 +234,6 @@ void lobby_view::show()
     };
     show_countdown(*this, n_left);
   }
-
-  // Display all shapes
-  get_render_window().display();
 
 }
 
