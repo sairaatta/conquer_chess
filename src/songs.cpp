@@ -32,5 +32,6 @@ songs::songs()
       QString msg{"Cannot find song file '" + filename + "'"};
       throw std::runtime_error(msg.toStdString());
     }
+    p.first.get().setLoop(true);
   }
 }

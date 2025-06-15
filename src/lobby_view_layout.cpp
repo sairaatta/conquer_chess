@@ -18,6 +18,7 @@ lobby_view_layout::lobby_view_layout(
         / static_cast<double>(n_vertical_units)
     )
   };
+  /*
   const int n_horizontal_units{2};
   const int n_horizontal_margins{n_horizontal_units + 1}; // margins are above, below and between panels
   const int panel_width{
@@ -27,8 +28,12 @@ lobby_view_layout::lobby_view_layout(
         / static_cast<double>(n_horizontal_units)
     )
   };
+  */
+  const int panel_width{
+    window_size.get_x() / 3
+  };
 
-  const int x1{margin_width};
+  const int x1{(window_size.get_x() / 2) - panel_width - margin_width};
   const int x2{x1 + panel_width};
   const int x3{x2 + margin_width};
   const int x4{x3 + panel_width};
@@ -43,8 +48,8 @@ lobby_view_layout::lobby_view_layout(
   const int y8{y7 + panel_height};
 
   m_image = screen_rect(
-    screen_coordinate(x1, y1),
-    screen_coordinate(x4, y2)
+    screen_coordinate(0, 0),
+    screen_coordinate(m_window_size.get_x(), m_window_size.get_y())
   );
 
   m_lhs_color = screen_rect(

@@ -92,17 +92,6 @@ void menu_view::exec_lobby()
 
 void menu_view::exec_options()
 {
-  /*
-  const auto cur_pos{m_window.getPosition()};
-  m_window.setVisible(false);
-  options_view view(m_game_options);
-  assert(!to_str(get_starting_position(view)).empty());
-  view.exec();
-  assert(!to_str(get_starting_position(view)).empty());
-  m_game_options = view.get_options();
-  m_window.setVisible(true);
-  m_window.setPosition(cur_pos);
-  */
   m_next_state = program_state::options;
 }
 
@@ -463,7 +452,6 @@ void menu_view::start()
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
   );
-  game_resources::get().get_songs().get_bliss().setLoop(true);
   game_resources::get().get_songs().get_bliss().play();
 }
 

@@ -3,7 +3,9 @@
 
 #include <SFML/Audio/Music.hpp>
 
-/// All songs
+/// All songs.
+///
+/// All songs loop.
 class songs
 {
 public:

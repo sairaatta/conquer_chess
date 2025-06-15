@@ -12,7 +12,6 @@ main_window::main_window()
   game_resources::get().get_loading_screen_songs().get_heroes().setVolume(
     10
   );
-  game_resources::get().get_loading_screen_songs().get_heroes().setLoop(true);
   game_resources::get().get_loading_screen_songs().get_heroes().play();
 
 }

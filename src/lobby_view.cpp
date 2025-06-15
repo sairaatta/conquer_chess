@@ -3,16 +3,18 @@
 #ifndef LOGIC_ONLY
 
 #include "render_window.h"
-#include "about_view.h"
+//#include "about_view.h"
 #include "screen_coordinate.h"
-#include "game_view.h"
-#include "played_game_view.h"
-#include "options_view.h"
+//#include "game_view.h"
+//#include "played_game_view.h"
+//#include "options_view.h"
+#include "game_options.h"
+#include "game_resources.h"
 #include "render_window.h"
 #include "sfml_helper.h"
 #include <cassert>
 #include <cmath>
-#include <iostream>
+//#include <iostream>
 
 lobby_view::lobby_view()
   : m_lhs_cursor{lobby_view_item::color},
@@ -21,15 +23,6 @@ lobby_view::lobby_view()
     m_rhs_cursor{lobby_view_item::color},
     m_rhs_start{false}
 {
-  game_resources::get().get_songs().get_soothing().setVolume(
-    get_music_volume_as_percentage(game_options::get())
-  );
-  game_resources::get().get_sound_effects().set_master_volume(
-    game_options::get().get_sound_effects_volume()
-  );
-  game_resources::get().get_songs().get_soothing().setLoop(true);
-  game_resources::get().get_songs().get_soothing().play();
-
 }
 
 void lobby_view::tick()
@@ -38,28 +31,11 @@ void lobby_view::tick()
   {
     if (m_clock.value().getElapsedTime().asSeconds() > m_countdown_secs)
     {
-      m_clock = {};
-      exec_game();
-      m_lhs_start = false;
-      m_rhs_start = false;
+      assert(!"TODO");
+      //m_next_state = program_state::game;
     }
   }
 }
-
-void lobby_view::exec_game()
-{
-  const auto cur_pos{get_render_window().getPosition()};
-  game_resources::get().get_songs().get_soothing().stop();
-  get_render_window().setVisible(false);
-  game_view view{
-    game(m_lobby_options)
-  };
-  view.tick();
-  get_render_window().setVisible(true);
-  get_render_window().setPosition(cur_pos);
-  game_resources::get().get_songs().get_soothing().play();
-}
-
 
 lobby_view_item lobby_view::get_selected(const side player_side) const noexcept
 {
@@ -85,16 +61,16 @@ bool lobby_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-    get_render_window().close();
-    return true; // Close lobby
+      m_next_state = program_state::main_menu;
+    return false;
   }
   else if (event.type == sf::Event::KeyPressed)
   {
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      get_render_window().close();
-      return true;
+      m_next_state = program_state::main_menu;
+      return false;
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
@@ -174,8 +150,8 @@ bool lobby_view::process_event(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
-      get_render_window().close();
-      return true;
+      m_next_state = program_state::main_menu;
+      return false;
     }
   }
   if (m_lhs_start && m_rhs_start && !m_clock.has_value())
@@ -405,12 +381,24 @@ void show_start_panel(lobby_view& v, const side player_side)
 
 void lobby_view::start()
 {
-
+  game_resources::get().get_songs().get_soothing().setVolume(
+    get_music_volume_as_percentage(game_options::get())
+  );
+  game_resources::get().get_sound_effects().set_master_volume(
+    game_options::get().get_sound_effects_volume()
+  );
+  game_resources::get().get_songs().get_soothing().play();
+  m_clock = {};
+  m_lhs_start = false;
+  m_rhs_start = false;
 }
 
 void lobby_view::stop()
 {
-
+  game_resources::get().get_songs().get_soothing().stop();
+  m_clock = {};
+  m_lhs_start = false;
+  m_rhs_start = false;
 }
 
 #endif // LOGIC_ONLY

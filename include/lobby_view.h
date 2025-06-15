@@ -23,9 +23,6 @@ public:
   /// Show the menu on-screen
   void draw();
 
-  /// Does the countdown
-  void tick();
-
   /// Get the selected item of a player
   lobby_view_item get_selected(const side player_side) const noexcept;
 
@@ -57,6 +54,9 @@ public:
   void stop();
 
   void start();
+
+  /// Does the countdown
+  void tick();
 
 private:
 

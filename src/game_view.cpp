@@ -34,7 +34,6 @@ game_view::game_view(
   game_resources::get().get_songs().get_wonderful_time().setVolume(
     get_music_volume_as_percentage(m_game)
   );
-  game_resources::get().get_songs().get_wonderful_time().setLoop(true);
   game_resources::get().get_songs().get_wonderful_time().play();
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
