@@ -117,7 +117,7 @@ void menu_view::exec_played_game()
 
 void menu_view::exec_replay()
 {
-  m_next_state = program_state::replay;
+  //m_next_state = program_state::replay;
 
   /*
   const auto cur_pos{m_window.getPosition()};
@@ -140,7 +140,7 @@ void menu_view::exec_replay()
 
 void menu_view::exec_start()
 {
-  m_next_state = program_state::game;
+  m_next_state = program_state::lobby;
 }
 
 sf::Text get_menu_screen_text() noexcept

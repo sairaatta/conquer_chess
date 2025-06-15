@@ -83,18 +83,7 @@ bool lobby_view::get_start(const side player_side) const noexcept
 
 bool lobby_view::process_event(sf::Event& event)
 {
-  if (event.type == sf::Event::Resized)
-  {
-    // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-    const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
-    get_render_window().setView(sf::View(visible_area));
-
-    m_layout = lobby_view_layout(
-      screen_coordinate(event.size.width, event.size.height),
-      get_default_margin_width()
-    );
-  }
-  else if (event.type == sf::Event::Closed)
+  if (event.type == sf::Event::Closed)
   {
     get_render_window().close();
     return true; // Close lobby
@@ -203,6 +192,20 @@ bool lobby_view::process_event(sf::Event& event)
   return false; // Do not close the lobby :-)
 }
 
+void lobby_view::process_resize_event(sf::Event& event)
+{
+  assert(event.type == sf::Event::Resized);
+  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
+  const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
+  get_render_window().setView(sf::View(visible_area));
+
+  m_layout = lobby_view_layout(
+    screen_coordinate(event.size.width, event.size.height),
+    get_default_margin_width()
+  );
+}
+
+
 void lobby_view::set_text_style(sf::Text& text)
 {
   text.setFont(get_arial_font());
@@ -211,10 +214,9 @@ void lobby_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::Black);
 }
 
-void lobby_view::show()
+void lobby_view::draw()
 {
   show_layout_panels(*this);
-
   show_image_panel(*this);
   show_color_panel(*this, side::lhs);
   show_race_panel(*this, side::lhs);
@@ -399,6 +401,16 @@ void show_start_panel(lobby_view& v, const side player_side)
   set_text_position(text, text_rect);
   text.setFillColor(sf::Color::White);
   get_render_window().draw(text);
+}
+
+void lobby_view::start()
+{
+
+}
+
+void lobby_view::stop()
+{
+
 }
 
 #endif // LOGIC_ONLY

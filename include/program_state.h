@@ -3,12 +3,13 @@
 
 enum class program_state {
   about,
-  game,
+  //game,
   left_controls,
   loading,
+  lobby,
   main_menu,
   options,
-  replay,
+  //replay,
   right_controls
 };
 

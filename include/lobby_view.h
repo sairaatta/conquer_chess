@@ -3,19 +3,25 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
-#include "game_options.h"
-#include "game_resources.h"
+#include "program_state.h"
+//#include "game_options.h"
+//#include "game_resources.h"
 #include "lobby_view_layout.h"
 #include "lobby_view_item.h"
 #include "lobby_options.h"
-#include "physical_controllers.h"
+//#include "physical_controllers.h"
 
-/// The Lobby screen.
+#include <SFML/Graphics.hpp>
+#include <optional>
+
+/// The lobby screen.
 class lobby_view
 {
 public:
   lobby_view();
+
+  /// Show the menu on-screen
+  void draw();
 
   /// Does the countdown
   void tick();
@@ -28,7 +34,18 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
+  /// The next state to go to, if any.
+  ///
+  /// Will be empty if the user should remain in this screen
+  const auto& get_next_state() const noexcept { return m_next_state; }
+
   const auto& get_options() const noexcept { return m_lobby_options; }
+
+  /// Process all events
+  /// @return if the user wants to quit
+  bool process_event(sf::Event& event);
+
+  void process_resize_event(sf::Event& event);
 
   /// Sets the selected item.
   /// If the selected item changes, play sound
@@ -36,6 +53,10 @@ public:
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
+
+  void stop();
+
+  void start();
 
 private:
 
@@ -58,6 +79,9 @@ private:
   /// The options set in this lobby
   lobby_options m_lobby_options;
 
+  /// The next state to go to, if any
+  std::optional<program_state> m_next_state;
+
   /// The selected item for RHS
   lobby_view_item m_rhs_cursor;
 
@@ -67,12 +91,6 @@ private:
   /// Run the game
   void exec_game();
 
-  /// Process all events
-  /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
-
-  /// Show the menu on-screen
-  void show();
 };
 
 /// Show the color a player has picked

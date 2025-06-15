@@ -9,8 +9,7 @@
 #include <cassert>
 #include <cmath>
 
-loading_view::loading_view(
-)
+loading_view::loading_view()
 {
 
 }
@@ -20,6 +19,10 @@ void loading_view::tick()
   if (!m_resource_loader.is_done())
   {
     m_resource_loader.process_next();
+    if (m_resource_loader.is_done()) {
+      m_next_state = program_state::main_menu;
+
+    }
   }
 }
 
@@ -126,6 +129,11 @@ void loading_view::draw()
     rectangle.setFillColor(sf::Color::Black);
     get_render_window().draw(rectangle);
   }
+}
+
+void loading_view::start()
+{
+  // Nothing here ...
 }
 
 void loading_view::stop()
