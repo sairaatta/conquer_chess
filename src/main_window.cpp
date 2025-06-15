@@ -70,6 +70,8 @@ bool main_window::process_event(sf::Event& event)
     case program_state::game:
       assert(!"TODO");
       // return m_game_view.process_event(event);
+    case program_state::left_controls:
+      assert(!"TODO");
     case program_state::loading:
       return m_loading_view.process_event(event);
     case program_state::main_menu:
@@ -79,6 +81,8 @@ bool main_window::process_event(sf::Event& event)
     case program_state::replay:
       assert(!"TODO");
       // return m_replay_view.process_event(event);
+    case program_state::right_controls:
+      assert(!"TODO");
   }
   return false; // Do not close the program
 }
@@ -111,6 +115,9 @@ void main_window::show()
     case program_state::game:
       assert(!"TODO");
       break;
+    case program_state::left_controls:
+      assert(!"TODO");
+      break;
     case program_state::loading:
       m_loading_view.draw();
       break;
@@ -121,6 +128,9 @@ void main_window::show()
       m_options_view.draw();
       break;
     case program_state::replay:
+      assert(!"TODO");
+      break;
+    case program_state::right_controls:
       assert(!"TODO");
       break;
   }
@@ -165,10 +175,12 @@ void main_window::tick()
   switch (m_program_state) {
     case program_state::about: tick_about(); break;
     case program_state::game: tick_game(); break;
+    case program_state::left_controls: assert(!"TODO"); break;
     case program_state::loading: tick_loading(); break;
     case program_state::main_menu: tick_main_menu(); break;
     case program_state::options: tick_options(); break;
     case program_state::replay: tick_replay(); break;
+    case program_state::right_controls: assert(!"TODO"); break;
   }
 }
 
@@ -211,6 +223,7 @@ void main_window::tick_main_menu()
       case program_state::game:
         assert(!"TODO");
         break;
+      case program_state::left_controls:
       case program_state::loading:
         assert(!"This should never happen");
         break;
@@ -222,6 +235,9 @@ void main_window::tick_main_menu()
         break;
       case program_state::replay:
         assert(!"TODO");
+        break;
+      case program_state::right_controls:
+        assert(!"This should never happen");
         break;
     }
   }
@@ -240,7 +256,3 @@ void main_window::tick_replay()
 {
   assert(!"TODO");
 }
-
-
-
-

@@ -4,10 +4,12 @@
 enum class program_state {
   about,
   game,
+  left_controls,
   loading,
   main_menu,
   options,
-  replay
+  replay,
+  right_controls
 };
 
 #endif // PROGRAM_STATE_H

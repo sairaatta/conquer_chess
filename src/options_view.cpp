@@ -46,6 +46,8 @@ void options_view::decrease_selected()
     break;
     case options_view_item::left_controls:
     {
+      m_next_state = program_state::left_controls;
+      /*
       const auto cur_pos{get_render_window().getPosition()};
       const side player{side::lhs};
       controls_view v(m_physical_controllers.get_controller(player));
@@ -54,10 +56,13 @@ void options_view::decrease_selected()
       m_physical_controllers.set(player, v.get_controller());
       get_render_window().setVisible(true);
       get_render_window().setPosition(cur_pos);
+      */
     }
     break;
     case options_view_item::right_controls:
     {
+      m_next_state = program_state::right_controls;
+      /*
       const auto cur_pos{get_render_window().getPosition()};
       const side player{side::rhs};
       controls_view v(m_physical_controllers.get_controller(player));
@@ -66,6 +71,7 @@ void options_view::decrease_selected()
       m_physical_controllers.set(player, v.get_controller());
       get_render_window().setVisible(true);
       get_render_window().setPosition(cur_pos);
+      */
     }
     break;
   }
@@ -92,6 +98,8 @@ void options_view::increase_selected()
     break;
     case options_view_item::left_controls:
     {
+      m_next_state = program_state::left_controls;
+      /*
       const auto cur_pos{get_render_window().getPosition()};
       const side player{side::lhs};
       controls_view v(m_physical_controllers.get_controller(player));
@@ -100,10 +108,13 @@ void options_view::increase_selected()
       m_physical_controllers.set(player, v.get_controller());
       get_render_window().setVisible(true);
       get_render_window().setPosition(cur_pos);
+      */
     }
     break;
     case options_view_item::right_controls:
     {
+      m_next_state = program_state::right_controls;
+      /*
       const auto cur_pos{get_render_window().getPosition()};
       const side player{side::rhs};
       controls_view v(m_physical_controllers.get_controller(player));
@@ -112,6 +123,7 @@ void options_view::increase_selected()
       m_physical_controllers.set(player, v.get_controller());
       get_render_window().setVisible(true);
       get_render_window().setPosition(cur_pos);
+      */
     }
     break;
   }
@@ -151,17 +163,7 @@ starting_position_type get_starting_position(const options_view&) noexcept
 
 bool options_view::process_event(sf::Event& event)
 {
-  if (event.type == sf::Event::Resized)
-  {
-    // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-    const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-    get_render_window().setView(sf::View(visibleArea));
-    m_layout = options_view_layout(
-      screen_coordinate(visibleArea.width, visibleArea.height),
-      get_default_margin_width()
-    );
-  }
-  else if (event.type == sf::Event::Closed)
+  if (event.type == sf::Event::Closed)
   {
     m_next_state = program_state::main_menu;
     return false;
@@ -226,11 +228,6 @@ bool options_view::process_event(sf::Event& event)
     else if (key_pressed == sf::Keyboard::Key::Space)
     {
       increase_selected();
-    }
-    else if (key_pressed == sf::Keyboard::Key::F3)
-    {
-      // debug
-      std::clog << "Debug";
     }
   }
   else if (event.type == sf::Event::MouseMoved)

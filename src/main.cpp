@@ -23,6 +23,7 @@
 #include "fps_clock.h"
 #include "game_controller.h"
 #include "game_log.h"
+#include "game_options.h"
 #include "game_rect.h"
 #include "game_view_layout.h"
 #include "helper.h"
