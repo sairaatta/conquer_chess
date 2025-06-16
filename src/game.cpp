@@ -1138,12 +1138,6 @@ game get_kings_only_game() noexcept
   return create_game_with_starting_position(starting_position_type::kings_only);
 }
 
-// Duplicate?
-//double get_music_volume_as_percentage() noexcept
-//{
-//  return game_options::get().get_music_volume().get_percentage();
-//}
-
 std::vector<square> get_occupied_squares(const game& g) noexcept
 {
   return get_occupied_squares(get_pieces(g));

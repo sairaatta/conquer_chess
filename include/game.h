@@ -319,10 +319,6 @@ int get_index_of_closest_piece_to(
 /// to be used in debugging
 game get_kings_only_game() noexcept;
 
-// Duplicate?
-// Get the music volume as a percentage
-// double get_music_volume_as_percentage() noexcept;
-
 /// Get all the squares that are occupied
 std::vector<square> get_occupied_squares(const game& g) noexcept;
 

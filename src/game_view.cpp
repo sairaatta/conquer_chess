@@ -43,12 +43,6 @@ std::string bool_to_str(const bool b) noexcept
   return b ? "true" : "false";
 }
 
-// Duplicate
-//bool do_show_selected(const game_view&)
-//{
-//  return do_show_selected(game_options::get());
-//}
-
 void game_view::tick()
 {
   // Disard old messages
