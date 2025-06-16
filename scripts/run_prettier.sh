@@ -18,4 +18,4 @@ if [[ "$PWD" =~ scripts$ ]]; then
 	exit 42
 fi
 
-npx prettier . --write --ignore-path docs/docs
+npx prettier . --write --ignore-path "./docs/docs/"
