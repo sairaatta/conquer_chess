@@ -1,5 +1,10 @@
 # Screenshots
 
+
+![About screen v0.7](20250616.jpg)
+
+> The About screen shows names that are spelled correctly
+
 ## v0.7
 
 ![Title v0.7](title.png)
