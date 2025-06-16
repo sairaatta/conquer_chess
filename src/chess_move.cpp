@@ -276,11 +276,41 @@ void test_chess_move()
     assert(pgn_str == m.get_pgn_str());
   }
   // Individual functions
-  // get_from: e2-e3
+  // get_from, pawn, e2-e3
   {
-    const game g;
+    const game g{create_game_with_standard_starting_position()};
     const chess_move m("e3", chess_color::white);
     assert(get_from(g, m) == square("e2"));
+  }
+  // get_from, knight, Nc3
+  {
+    const game g{create_game_with_standard_starting_position()};
+    const chess_move m("Nc3", chess_color::white);
+    assert(get_from(g, m) == square("b1"));
+  }
+  // get_from, bishop, Bb1
+  {
+    const game g{create_game_with_starting_position(starting_position_type::bishop_and_knight_end_game)};
+    const chess_move m("Bh5", chess_color::white);
+    assert(get_from(g, m) == square("g4"));
+  }
+  // get_from, rook, Rb1
+  {
+    const game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
+    const chess_move m("Rb1", chess_color::white);
+    assert(get_from(g, m) == square("a1"));
+  }
+  // get_from, queen, Qd1
+  {
+    const game g{create_game_with_starting_position(starting_position_type::queen_end_game)};
+    const chess_move m("Qc1", chess_color::white);
+    assert(get_from(g, m) == square("d1"));
+  }
+  // get_from, king, Kf1
+  {
+    const game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
+    const chess_move m("Kf1", chess_color::white);
+    assert(get_from(g, m) == square("e1"));
   }
   // get_winner
   {
