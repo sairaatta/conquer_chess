@@ -13,7 +13,7 @@ physical_controller_type_textures::physical_controller_type_textures()
   {
     const std::string filename_str{get_filename(r)};
     const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/piece_actions/" + filename);
+    QFile f(":/resources/textures/physical_controller_types/" + filename);
     f.copy(filename);
     if (!m_types[r].loadFromFile(filename.toStdString()))
     {

@@ -82,6 +82,8 @@
         <file>resources/textures/options_menu/right_controls.jpg</file>
         <file>resources/textures/options_menu/sound_effects_volume.jpg</file>
         <file>resources/textures/options_menu/starting_position.jpg</file>
+        <file>resources/textures/physical_controller_types/keyboard.png</file>
+        <file>resources/textures/physical_controller_types/mouse.png</file>
         <file>resources/textures/piece_actions/attack.png</file>
         <file>resources/textures/piece_actions/attack_en_passant.png</file>
         <file>resources/textures/piece_actions/castle_kingside.png</file>

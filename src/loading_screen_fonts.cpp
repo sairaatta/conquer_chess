@@ -7,7 +7,7 @@ loading_screen_fonts::loading_screen_fonts()
   // Load font file
   {
     const QString filename{"arial.ttf"};
-    QFile f(":/resources/" + filename);
+    QFile f(":/resources/fonts/" + filename);
     f.copy(filename);
     if (!m_arial_font.loadFromFile(filename.toStdString()))
     {
