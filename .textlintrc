@@ -1,0 +1,9 @@
+{
+    "filters": {
+        "whitelist": {
+            "allow": [
+                "Dom"
+            ]
+        }
+    }
+}
