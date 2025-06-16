@@ -170,6 +170,28 @@ void test_screen_rect()
     );
     assert(created == expected);
   }
+  // get_lower_fourth
+  {
+    const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 4));
+    const screen_rect created{get_lower_fourth(r)};
+    assert(r != created);
+    const screen_rect expected(
+      screen_coordinate(0, 3),
+      screen_coordinate(2, 4)
+    );
+    assert(created == expected);
+  }
+  // get_lower_eighth
+  {
+    const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 8));
+    const screen_rect created{get_lower_eighth(r)};
+    assert(r != created);
+    const screen_rect expected(
+      screen_coordinate(0, 7),
+      screen_coordinate(2, 8)
+    );
+    assert(created == expected);
+  }
   // get_top_left_corner
   {
     const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 2));
