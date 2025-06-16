@@ -1,4 +1,7 @@
 #include "main_window.h"
+
+#ifndef LOGIC_ONLY
+
 #include "screen_rect.h"
 #include "sfml_helper.h"
 #include "render_window.h"
@@ -267,3 +270,6 @@ void main_window::tick_right_controls()
     set_new_state(m_right_controls_view.get_next_state().value());
   }
 }
+
+#endif // LOGIC_ONLY
+

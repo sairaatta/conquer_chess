@@ -56,7 +56,7 @@
 void test()
 {
 #ifndef NDEBUG
-  test_resource_loader();
+
   test_sleep_scheduler();
 
 
@@ -87,7 +87,6 @@ void test()
   test_helper();
   test_id();
   test_key_bindings();
-  test_loading_view();
   test_lobby_options();
   test_lobby_view_item();
   test_lobby_view_layout();
@@ -118,7 +117,13 @@ void test()
   test_square();
   test_starting_position_type();
   test_volume();
-#endif
+
+#ifndef LOGIC_ONLY
+  test_loading_view();
+  test_resource_loader();
+#endif // LOGIC_ONLY
+
+#endif // NDEBUG
 }
 
 std::vector<std::string> collect_args(int argc, char **argv) {
