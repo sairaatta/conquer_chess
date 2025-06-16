@@ -2,13 +2,16 @@
 
 #ifndef LOGIC_ONLY
 
+#include "action_number.h"
 #include "render_window.h"
 #include "screen_coordinate.h"
+#include "helper.h"
 #include "game_options.h"
 #include "game_resources.h"
 #include "render_window.h"
 #include "sfml_helper.h"
 #include "physical_controllers.h"
+
 #include <cassert>
 #include <cmath>
 
@@ -267,10 +270,19 @@ void draw_controls_panel(lobby_view& v, const side player_side)
     get_lower_half(screen_rect)
   };
 
+  const auto& c{physical_controllers::get().get_controller(player_side)};
   const std::string s{
-    to_str(
-      physical_controllers::get().get_controller(player_side).get_type()
-    )
+    to_str(c.get_type())
+    + std::string("\n")
+    + std::string("Up: ")
+    + to_str(c.get_key_bindings().get_key_for_move_up())
+    + std::string("\n")
+    + std::string("Down: ")
+    + to_str(c.get_key_bindings().get_key_for_move_down())
+    + std::string("\n")
+    + std::string("Select: ")
+    + to_str(c.get_key_bindings().get_key_for_action(action_number(1)))
+    + std::string("\n")
   };
   text.setString(s);
   v.set_text_style(text);

@@ -10,7 +10,6 @@
 /// - \link{get_resources}: to get the one-and-only collection of resources
 
 // Use LOGIC_ONLY to be able to run on GHA
-#include "asserts.h"
 #include "about_view_layout.h"
 #include "action_history.h"
 #include "board_to_text_options.h"
@@ -61,7 +60,6 @@ void test()
 
 
   test_action_number();
-  test_asserts();
   test_about_view_layout();
   test_action_history();
   test_board_to_text_options();

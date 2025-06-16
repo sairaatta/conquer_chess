@@ -1,6 +1,5 @@
 #include "game_controller.h"
 
-#include "asserts.h"
 #include "game.h"
 #include "physical_controllers.h"
 #include "piece.h"
@@ -85,8 +84,8 @@ void game_controller::apply_user_inputs_to_game(
       {
         assert(action.get_coordinat());
         set_cursor_pos(action.get_coordinat().value(), action.get_player());
-        assert_eq(get_cursor_pos(action.get_player()), action.get_coordinat().value());
-        assert_eq(square(get_cursor_pos(action.get_player())), square(action.get_coordinat().value()));
+        assert(get_cursor_pos(action.get_player()) == action.get_coordinat().value());
+        assert(square(get_cursor_pos(action.get_player())) == square(action.get_coordinat().value()));
       }
     }
     #ifdef FIX_ISSUE_46
@@ -851,7 +850,6 @@ void set_mouse_player_pos(
   assert(has_mouse_controller(c));
   const side player_side{get_mouse_user_player_side(c)};
   set_cursor_pos(c, s, player_side);
-  assert_eq(square(get_cursor_square(c, get_mouse_user_player_side(c))), s);
   assert(square(get_cursor_square(c, get_mouse_user_player_side(c))) == s);
 }
 

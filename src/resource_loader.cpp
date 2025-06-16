@@ -88,27 +88,32 @@ void resource_loader::process_next()
       break;
     case 10:
       m_descriptor = "Loaded "
+        + std::to_string(resources.get_n_physical_controller_type_textures())
+        + " physical controller textures";
+      break;
+    case 11:
+      m_descriptor = "Loaded "
         + std::to_string(resources.get_n_piece_textures())
         + " piece textures";
       break;
-    case 11:
+    case 12:
       m_descriptor = "Loaded "
         + std::to_string(resources.get_n_piece_action_textures())
         + " piece actions";
       break;
-    case 12:
+    case 13:
       m_descriptor = "Loaded "
         + std::to_string(resources.get_n_piece_portrait_textures())
         + " piece portraits";
       break;
-    case 13:
+    case 14:
       m_descriptor = "Loaded "
         + std::to_string(resources.get_n_lobby_menu_textures())
         + " lobby menu textures";
       break;
     default:
-    case 14:
-      assert(m_index == 14);
+    case 15:
+      assert(m_index == 15);
       assert(m_index + 1 == get_n_items()); // If not, update get_m_items
       m_descriptor = "Loaded "
         + std::to_string(resources.get_n_textures())

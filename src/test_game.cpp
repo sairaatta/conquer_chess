@@ -1,7 +1,6 @@
 #include "test_game.h"
 
 #include "game.h"
-#include "asserts.h"
 #include "test_game.h"
 #include "piece.h"
 #include "piece_actions.h"
@@ -103,8 +102,8 @@ void test_game_class()
         const bool at_start_2{second_pawn.get_current_square() == square("b2")};
         const bool at_goal_1{first_pawn.get_current_square() == square("a4")};
         const bool at_goal_2{second_pawn.get_current_square() == square("b3")};
-        assert_eq(at_start_1, at_start_2);
-        assert_eq(at_goal_1, at_goal_2);
+        assert(at_start_1 == at_start_2);
+        assert(at_goal_1== at_goal_2);
       }
       assert(is_piece_at(g, square("a4")));
       assert(is_piece_at(g, square("b3")));
@@ -917,7 +916,6 @@ void test_game_functions()
       auto& piece{get_piece_at(g, square("b1"))};
       assert(piece.get_type() == piece_type::knight);
       piece.set_selected(true);
-      std::clog << get_possible_moves(g, side::lhs) << '\n';
       assert(get_possible_moves(g, side::lhs).size() == 4);
     }
     // Pawn at e2 has four moves when selected

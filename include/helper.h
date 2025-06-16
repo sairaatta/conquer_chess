@@ -93,4 +93,7 @@ std::vector<std::string> split_str(
 /// Test the help functions.
 void test_helper();
 
+/// Convert a string to a wide string
+std::wstring to_wstring(const std::string s);
+
 #endif // HELPER_H

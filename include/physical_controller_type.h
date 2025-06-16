@@ -3,6 +3,7 @@
 
 #include <iosfwd>
 #include <string>
+#include <vector>
 
 /// The type of controller.
 ///
@@ -12,6 +13,10 @@ enum class physical_controller_type
   keyboard,
   mouse
 };
+
+
+/// Get all the possible values of \link{physical_controller_type}
+std::vector<physical_controller_type> get_all_physical_controller_types() noexcept;
 
 /// Get the next controller type,
 /// i.e. when the player presses right

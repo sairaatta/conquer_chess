@@ -12,6 +12,7 @@
 #include "loading_screen_textures.h"
 #include "map_textures.h"
 #include "message.h"
+#include "physical_controller_type_textures.h"
 #include "piece_portrait_textures.h"
 #include "piece_action_textures.h"
 #include "piece_textures.h"
@@ -23,11 +24,14 @@
 
 #include <optional>
 
+
+
 /// The raw game resources.
 ///
 /// There must be only one game_resources.
 ///
 /// Use \link{game_resources::get} to get a handle to this class.
+/// The resources are loaded by \class{resource_loader}
 class game_resources
 {
 public:
@@ -68,6 +72,7 @@ public:
   int get_n_loading_screen_songs() noexcept;
   int get_n_loading_screen_textures() noexcept;
   int get_n_map_textures() noexcept;
+  int get_n_physical_controller_type_textures() noexcept;
   int get_n_piece_action_textures() noexcept;
   int get_n_piece_portrait_textures() noexcept;
   int get_n_piece_textures() noexcept;
@@ -77,6 +82,9 @@ public:
 
   // Lazy loading
   map_textures& get_map_textures() noexcept;
+
+  // Lazy loading
+  physical_controller_type_textures& get_physical_controller_type_textures() noexcept;
 
   // Lazy loading
   piece_action_textures& get_piece_action_textures() noexcept;
@@ -121,6 +129,9 @@ private:
 
   /// Lazy loading
   static std::optional<map_textures> m_map_textures;
+
+  /// Lazy loading
+  static std::optional<physical_controller_type_textures> m_physical_controller_type_textures;
 
   /// Lazy loading
   static std::optional<piece_action_textures> m_piece_action_textures;

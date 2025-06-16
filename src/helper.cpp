@@ -146,5 +146,18 @@ void test_helper()
     assert(v[1] == 313);
     assert(v.back() == 271);
   }
+  {
+    const std::string s("A");
+    const std::wstring expected(L"A");
+    const std::wstring result{to_wstring(s)};
+    assert(expected == result);
+  }
 #endif
 }
+
+std::wstring to_wstring(const std::string s)
+{
+  std::wstring ws(std::begin(s), std::end(s));
+  return ws;
+}
+
