@@ -16,23 +16,42 @@ std::vector<physical_controller_type> get_all_physical_controller_types() noexce
   return v;
 }
 
-physical_controller_type get_next(const physical_controller_type t) noexcept
+physical_controller_type get_next(const physical_controller_type item) noexcept
 {
-  if (t == physical_controller_type::mouse) return physical_controller_type::keyboard;
-  assert(t == physical_controller_type::keyboard);
-  return physical_controller_type::mouse;
+  const auto v{get_all_physical_controller_types()};
+  auto there{std::find(std::begin(v), std::end(v), item)};
+  assert(there != std::end(v));
+  if (there == std::end(v) - 1)
+  {
+    assert(!v.empty());
+    const auto t{v.front()};
+    return t;
+  }
+  return *(++there);
 }
 
-physical_controller_type get_previous(const physical_controller_type t) noexcept
+physical_controller_type get_previous(const physical_controller_type item) noexcept
 {
-  if (t == physical_controller_type::mouse) return physical_controller_type::keyboard;
-  assert(t == physical_controller_type::keyboard);
-  return physical_controller_type::mouse;
+  const auto v{get_all_physical_controller_types()};
+  auto there{std::find(std::begin(v), std::end(v), item)};
+  assert(there != std::end(v));
+  if (there == std::begin(v))
+  {
+    assert(!v.empty());
+    const auto t{v.back()};
+    return t;
+  }
+  return *(--there);
 }
 
 void test_physical_controller_type()
 {
 #ifndef NDEBUG
+  // get_all_physical_controller_types
+  {
+    auto v{get_all_physical_controller_types()};
+    assert(std::unique(std::begin(v), std::end(v)) == std::end(v));
+  }
   // to_human_str
   {
     assert(to_human_str(physical_controller_type::mouse) == "Mouse");
@@ -45,15 +64,17 @@ void test_physical_controller_type()
   }
   // get_next
   {
-    assert(get_next(physical_controller_type::mouse) == physical_controller_type::keyboard);
-    assert(get_next(physical_controller_type::keyboard) == physical_controller_type::mouse);
-
+    for (const auto t: get_all_physical_controller_types())
+    {
+      assert(get_previous(get_next(t)) == t);
+    }
   }
   // get_previous
   {
-    assert(get_previous(get_next(physical_controller_type::mouse)) == physical_controller_type::mouse);
-    assert(get_previous(get_next(physical_controller_type::keyboard)) == physical_controller_type::keyboard);
-
+    for (const auto t: get_all_physical_controller_types())
+    {
+      assert(get_next(get_previous(t)) == t);
+    }
   }
   // operator<<
   {
@@ -71,23 +92,9 @@ std::string to_human_str(const physical_controller_type t) noexcept
   return s;
 }
 
-/*
-std::u32string to_symbol(const physical_controller_type t) noexcept
-{
-  if (t == physical_controller_type::mouse) return std::u32string(U"\U0001F5B0");
-  assert(t == physical_controller_type::keyboard);
-  return std::u32string(U"\U00002328");
-}
-*/
-
 std::string to_str(const physical_controller_type t) noexcept
 {
   return std::string(magic_enum::enum_name(t));
-  /*
-  if (t == physical_controller_type::mouse) return "mouse";
-  assert(t == physical_controller_type::keyboard);
-  return "keyboard";
-  */
 }
 
 std::ostream& operator<<(std::ostream& os, const physical_controller_type t) noexcept
