@@ -2,6 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
+#include "about.h"
 #include "screen_coordinate.h"
 #include "game_resources.h"
 #include "sfml_helper.h"
@@ -99,23 +100,19 @@ void show_text_panel(about_view& v)
   );
   rectangle.setFillColor(sf::Color(255, 255, 255, 128));
   get_render_window().draw(rectangle);
-  std::stringstream s;
-  s
-    << "Conquer Chess\n"
-    << "\n"
-    << "(C) 2022-2025 Richel Bilderbeek\n"
-    << "\n"
-    << "https://github.com/\n"
-    << "  richelbilderbeek/\n"
-    << "  conquer_chess\n"
-    << "\n"
-    << "Contributors:\n"
-    << "\n"
-    << " * Johanna Soederstroem\n"
-    << " * Leonid Rutkowski\n"
-  ;
+  const sf::String s{
+    sf::String("Conquer Chess") + sf::String("\n")
+    + sf::String("\n")
+    + sf::String("(C) 2022-2025 ") + sf::String(get_author_name()) + sf::String("\n")
+    + sf::String("\n")
+    + sf::String(get_homepage_url()) + sf::String("\n")
+    + sf::String("\n")
+    + sf::String("Contributors: ") + sf::String("\n")
+    + sf::String("- ") + get_contributor_names()[0]+ sf::String("\n")
+    + sf::String("- ") + get_contributor_names()[1]
+  };
   sf::Text text;
-  text.setString(s.str().c_str());
+  text.setString(s);
   v.set_text_style(text);
   set_text_position(text, screen_rect);
   text.setFillColor(sf::Color::White);
