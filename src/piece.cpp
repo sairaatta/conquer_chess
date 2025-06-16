@@ -477,6 +477,17 @@ void test_piece()
       assert(p.has_moved());
     }
   }
+  // piece::get_action_history, const
+  {
+    const auto piece{get_test_white_knight()};
+    assert(piece.get_action_history().get_timed_actions().empty());
+  }
+  // piece::get_action_history, non-const
+  {
+    auto piece{get_test_white_knight()};
+    auto& history{piece.get_action_history()};
+    assert(history.get_timed_actions().empty());
+  }
   // piece::get_messages
   {
     auto piece{get_test_white_knight()};
