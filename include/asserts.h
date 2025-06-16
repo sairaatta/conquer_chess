@@ -18,7 +18,8 @@ void assert_eq(const T& lhs, const T& rhs)
       << "rhs: " << rhs
     ;
     std::cerr << s.str();
-    throw std::logic_error(s.str());
+    std::abort();
+    //throw std::logic_error(s.str());
   }
 }
 
