@@ -965,6 +965,14 @@ void test_pieces()
       assert(count_dead_pieces(pieces) == 1);
     }
   }
+  // count_selected_units
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    const auto n_total{count_selected_units(pieces)};
+    const auto n_black{count_selected_units(pieces, chess_color::black)};
+    const auto n_white{count_selected_units(pieces, chess_color::white)};
+    assert(n_total == n_black + n_white);
+  }
   // get_piece_at, const
   {
     const auto pieces{get_standard_starting_pieces()};
