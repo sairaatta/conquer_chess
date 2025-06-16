@@ -24,6 +24,10 @@ physical_controller_type get_previous(const physical_controller_type t) noexcept
 /// Test this class and its free functions
 void test_physical_controller_type();
 
+/// Convert to string to be read by a human
+std::string to_human_str(const physical_controller_type t) noexcept;
+
+/// Convert to string of the same name as the enum
 std::string to_str(const physical_controller_type t) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const physical_controller_type t) noexcept;

@@ -8,7 +8,7 @@
 #include "game_resources.h"
 #include "render_window.h"
 #include "sfml_helper.h"
-
+#include "physical_controllers.h"
 #include <cassert>
 #include <cmath>
 
@@ -192,9 +192,11 @@ void lobby_view::draw()
   draw_layout_panels(*this);
   draw_title(*this);
   draw_color_panel(*this, side::lhs);
+  draw_controls_panel(*this, side::lhs);
   draw_race_panel(*this, side::lhs);
   draw_ready_panel(*this, side::lhs);
   draw_color_panel(*this, side::rhs);
+  draw_controls_panel(*this, side::rhs);
   draw_race_panel(*this, side::rhs);
   draw_ready_panel(*this, side::rhs);
   draw_selected_panel(*this, side::lhs);
@@ -231,6 +233,45 @@ void draw_color_panel(lobby_view& v, const side player_side)
   };
   std::string s{to_str(v.get_options().get_color(player_side))};
   s[0] = std::toupper(s[0]);
+  text.setString(s);
+  v.set_text_style(text);
+  set_text_position(text, text_rect);
+  get_render_window().draw(text);
+
+  // Smaller
+  text.setCharacterSize(text.getCharacterSize() - 2);
+  set_text_position(text, text_rect);
+  text.setFillColor(sf::Color::White);
+  get_render_window().draw(text);
+}
+
+void draw_controls_panel(lobby_view& v, const side player_side)
+{
+  const auto screen_rect{v.get_layout().get_controls(player_side)};
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, screen_rect);
+  const auto player_color{v.get_options().get_color(player_side)};
+  const auto player_race{v.get_options().get_race(player_side)};
+  rectangle.setTexture(
+    &game_resources::get().get_piece_portrait_textures().get_portrait(
+      player_race,
+      player_color,
+      piece_type::king
+    )
+  );
+  get_render_window().draw(rectangle);
+
+  // Text
+  sf::Text text;
+  const auto text_rect{
+    get_lower_half(screen_rect)
+  };
+
+  const std::string s{
+    to_str(
+      physical_controllers::get().get_controller(player_side).get_type()
+    )
+  };
   text.setString(s);
   v.set_text_style(text);
   set_text_position(text, text_rect);

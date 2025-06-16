@@ -65,11 +65,11 @@ private:
 };
 
 /// Show where the panels will be drawn
-void show_layout_panels(about_view& v);
+void draw_layout_panels(about_view& v);
 
-void show_subtitle_panel(about_view& v);
-void show_text_panel(about_view& v);
-void show_title_panel(about_view& v);
+void draw_subtitle_panel(about_view& v);
+void draw_text_panel(about_view& v);
+void draw_title_panel(about_view& v);
 
 
 #endif // LOGIC_ONLY

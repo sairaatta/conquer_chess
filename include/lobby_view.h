@@ -93,6 +93,9 @@ void draw_background(lobby_view& v);
 /// Show the side/color the players have picked
 void draw_color_panel(lobby_view& v, const side player_side);
 
+/// Show the controllers the players use
+void draw_controls_panel(lobby_view& v, const side player_side);
+
 /// Show the countdown
 void draw_countdown(lobby_view& v, const int n_left_secs);
 

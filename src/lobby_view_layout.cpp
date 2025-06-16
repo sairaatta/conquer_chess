@@ -18,25 +18,17 @@ lobby_view_layout::lobby_view_layout(
         / static_cast<double>(n_vertical_units)
     )
   };
-  /*
-  const int n_horizontal_units{2};
-  const int n_horizontal_margins{n_horizontal_units + 1}; // margins are above, below and between panels
   const int panel_width{
-    static_cast<int>(
-      static_cast<double>(
-        window_size.get_x() - (n_horizontal_margins * margin_width))
-        / static_cast<double>(n_horizontal_units)
-    )
+    window_size.get_x() / 6
   };
-  */
-  const int panel_width{
-    window_size.get_x() / 4
-  };
-
-  const int x1{(window_size.get_x() / 2) - panel_width - margin_width};
-  const int x2{x1 + panel_width};
+  const int x1{margin_width};
+  const int x2{(window_size.get_x() / 2) - panel_width - margin_width - margin_width};
   const int x3{x2 + margin_width};
   const int x4{x3 + panel_width};
+  const int x5{x4 + margin_width};
+  const int x6{x5 + panel_width};
+  const int x7{x6 + margin_width};
+  const int x8{window_size.get_x() - margin_width};
 
   const int y1{margin_width};
   const int y2{y1 + panel_height + margin_width + panel_height};
@@ -52,32 +44,40 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(m_window_size.get_x(), m_window_size.get_y())
   );
   m_title = screen_rect(
-    screen_coordinate(x1, y1),
-    screen_coordinate(x4, y2)
+    screen_coordinate(x3, y1),
+    screen_coordinate(x6, y2)
   );
   m_lhs_color = screen_rect(
-    screen_coordinate(x1, y3),
-    screen_coordinate(x2, y4)
-  );
-  m_lhs_race = screen_rect(
-    screen_coordinate(x1, y5),
-    screen_coordinate(x2, y6)
-  );
-  m_lhs_start = screen_rect(
-    screen_coordinate(x1, y7),
-    screen_coordinate(x2, y8)
-  );
-  m_rhs_color = screen_rect(
     screen_coordinate(x3, y3),
     screen_coordinate(x4, y4)
   );
-  m_rhs_race = screen_rect(
+  m_lhs_controls = screen_rect(
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y8)
+  );
+  m_lhs_race = screen_rect(
     screen_coordinate(x3, y5),
     screen_coordinate(x4, y6)
   );
-  m_rhs_start = screen_rect(
+  m_lhs_start = screen_rect(
     screen_coordinate(x3, y7),
     screen_coordinate(x4, y8)
+  );
+  m_rhs_color = screen_rect(
+    screen_coordinate(x5, y3),
+    screen_coordinate(x6, y4)
+  );
+  m_rhs_controls = screen_rect(
+    screen_coordinate(x7, y1),
+    screen_coordinate(x8, y8)
+  );
+  m_rhs_race = screen_rect(
+    screen_coordinate(x5, y5),
+    screen_coordinate(x6, y6)
+  );
+  m_rhs_start = screen_rect(
+    screen_coordinate(x5, y7),
+    screen_coordinate(x6, y8)
   );
   m_font_size = std::min(
     panel_height / 2,
@@ -96,15 +96,27 @@ const screen_rect& lobby_view_layout::get_color(const side player_side) const no
   return m_rhs_color;
 }
 
+const screen_rect& lobby_view_layout::get_controls(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_controls;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_controls;
+}
+
 std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
 {
   return
   {
     layout.get_title(),
     layout.get_color(side::lhs),
+    layout.get_controls(side::lhs),
     layout.get_race(side::lhs),
     layout.get_start(side::lhs),
     layout.get_color(side::rhs),
+    layout.get_controls(side::rhs),
     layout.get_race(side::rhs),
     layout.get_start(side::rhs),
   };

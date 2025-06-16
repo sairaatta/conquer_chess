@@ -59,13 +59,13 @@ void about_view::set_text_style(sf::Text& text)
 
 void about_view::draw()
 {
-  show_layout_panels(*this);
-  show_title_panel(*this);
-  show_subtitle_panel(*this);
-  show_text_panel(*this);
+  draw_layout_panels(*this);
+  draw_title_panel(*this);
+  draw_subtitle_panel(*this);
+  draw_text_panel(*this);
 }
 
-void show_layout_panels(about_view& v)
+void draw_layout_panels(about_view& v)
 {
   for (const auto& screen_rect: get_panels(v.get_layout()))
   {
@@ -76,7 +76,7 @@ void show_layout_panels(about_view& v)
   }
 }
 
-void show_subtitle_panel(about_view& v)
+void draw_subtitle_panel(about_view& v)
 {
   const auto screen_rect{v.get_layout().get_subtitle()};
   sf::RectangleShape rectangle;
@@ -87,7 +87,7 @@ void show_subtitle_panel(about_view& v)
   get_render_window().draw(rectangle);
 }
 
-void show_text_panel(about_view& v)
+void draw_text_panel(about_view& v)
 {
   const auto screen_rect{v.get_layout().get_text()};
   sf::RectangleShape rectangle;
@@ -118,7 +118,7 @@ void show_text_panel(about_view& v)
   get_render_window().draw(text);
 }
 
-void show_title_panel(about_view& v)
+void draw_title_panel(about_view& v)
 {
   const auto screen_rect{v.get_layout().get_title()};
   sf::RectangleShape rectangle;
