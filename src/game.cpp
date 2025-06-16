@@ -990,11 +990,6 @@ game create_randomly_played_game(
   return g;
 }
 
-bool do_show_selected() noexcept
-{
-  return game_options::get().do_show_selected();
-}
-
 std::vector<piece> find_pieces(
   const game& g,
   const piece_type type,

@@ -266,9 +266,6 @@ game create_randomly_played_game(
   const int seed = 42
 );
 
-/// Are selected squares shown on-screen?
-bool do_show_selected() noexcept;
-
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(
   const game& g,
