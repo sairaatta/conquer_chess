@@ -50,6 +50,14 @@ starting_position_type get_starting_position(const game_options& options) noexce
 void test_game_options()
 {
 #ifndef NDEBUG
+  // game_options::do_show_occupied
+  {
+    assert(!game_options::get().do_show_occupied());
+  }
+  // game_options::do_show_selected
+  {
+    assert(!game_options::get().do_show_selected());
+  }
   // game_options::set_music_volume
   {
     const auto volume_before{game_options::get().get_music_volume()};
