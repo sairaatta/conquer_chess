@@ -30,6 +30,10 @@ jobs:
           # list of files that changed across commits
           fetch-depth: 0
 
+      - name: Remove generated docs
+        run: rm -rf docs/docs
+
+
       - name: Super-linter
         uses: super-linter/super-linter@v7.4.0 # x-release-please-version
         env:
