@@ -1,5 +1,7 @@
 #include "about.h"
 
+#include <cassert>
+
 std::wstring get_author_name() noexcept
 {
   return L"Richèl Bilderbeek";
@@ -17,3 +19,22 @@ std::vector<sf::String> get_contributor_names() noexcept
     sf::String(L"Leonid Rutkowski")
   };
 }
+
+void test_about()
+{
+#ifndef NDEBUG
+  // get_author_name
+  {
+    assert(get_author_name().length() > 10);
+  }
+  // get_homepage_url
+  {
+    assert(get_homepage_url().length() > 10);
+  }
+  // get_contributor_names
+  {
+    assert(get_contributor_names().size() == 2);
+  }
+#endif // NDEBUG
+}
+
