@@ -100,7 +100,7 @@ loading_screen_textures& game_resources::get_loading_screen_textures() noexcept
   return m_loading_screen_textures.value();
 }
 
-sf::Texture& get_map(
+sf::Texture& get_map_texture(
   const race r
 ) noexcept
 {
@@ -173,7 +173,7 @@ int game_resources::get_n_textures() noexcept
   return get_textures().get_n_textures();
 }
 
-sf::Texture& get_piece(
+sf::Texture& get_piece_texture(
   const race r,
   const chess_color color,
   const piece_type type
@@ -182,7 +182,7 @@ sf::Texture& get_piece(
   return game_resources::get().get_piece_textures().get_piece(r, color, type);
 }
 
-sf::Texture& get_piece_portrait(
+sf::Texture& get_piece_portrait_texture(
   const race r,
   const chess_color color,
   const piece_type type
@@ -236,22 +236,22 @@ textures& game_resources::get_textures() noexcept
   return m_textures.value();
 }
 
-sf::Texture& get_strip(const chess_color c) noexcept
+sf::Texture& get_strip_texture(const chess_color c) noexcept
 {
   return game_resources::get().get_textures().get_strip(c);
 }
 
-sf::Texture& get_subtitle() noexcept
+sf::Texture& get_subtitle_texture() noexcept
 {
   return game_resources::get().get_textures().get_subtitle();
 }
 
-sf::Texture& get_title() noexcept
+sf::Texture& get_title_texture() noexcept
 {
   return game_resources::get().get_textures().get_title();
 }
 
-void play(const message& effect)
+void play_sound_effect(const message& effect)
 {
   game_resources::get().get_sound_effects().play(effect);
 }

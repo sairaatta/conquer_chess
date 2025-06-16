@@ -54,7 +54,7 @@ bool played_game_view::process_event(sf::Event& event)
     {
       std::ofstream file("replay.pgn");
       file << to_pgn(m_game) << '\n';
-      play(message(message_type::done, chess_color::white, piece_type::king));
+      play_sound_effect(message(message_type::done, chess_color::white, piece_type::king));
     }
   }
   return false; // Do not close the window :-)

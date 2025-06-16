@@ -82,7 +82,7 @@ void show_pieces(
     sf::RectangleShape sprite;
     sprite.setSize(sf::Vector2f(0.9 * square_width, 0.9 * square_height));
     sprite.setTexture(
-      &get_piece(
+      &get_piece_texture(
         piece.get_race(),
         piece.get_color(),
         piece.get_type()

@@ -83,7 +83,7 @@ void show_subtitle_panel(about_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_subtitle()
+    &get_subtitle_texture()
   );
   get_render_window().draw(rectangle);
 }
@@ -125,7 +125,7 @@ void show_title_panel(about_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_title()
+    &get_title_texture()
   );
   get_render_window().draw(rectangle);
 }

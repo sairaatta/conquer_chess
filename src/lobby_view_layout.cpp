@@ -30,7 +30,7 @@ lobby_view_layout::lobby_view_layout(
   };
   */
   const int panel_width{
-    window_size.get_x() / 3
+    window_size.get_x() / 4
   };
 
   const int x1{(window_size.get_x() / 2) - panel_width - margin_width};
@@ -47,11 +47,14 @@ lobby_view_layout::lobby_view_layout(
   const int y7{y6 + margin_width};
   const int y8{y7 + panel_height};
 
-  m_image = screen_rect(
+  m_background = screen_rect(
     screen_coordinate(0, 0),
     screen_coordinate(m_window_size.get_x(), m_window_size.get_y())
   );
-
+  m_title = screen_rect(
+    screen_coordinate(x1, y1),
+    screen_coordinate(x4, y2)
+  );
   m_lhs_color = screen_rect(
     screen_coordinate(x1, y3),
     screen_coordinate(x2, y4)
@@ -97,7 +100,7 @@ std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
 {
   return
   {
-    layout.get_image(),
+    layout.get_title(),
     layout.get_color(side::lhs),
     layout.get_race(side::lhs),
     layout.get_start(side::lhs),

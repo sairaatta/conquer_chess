@@ -141,7 +141,7 @@ private:
   static std::optional<textures> m_textures;
 };
 
-sf::Texture& get_about() noexcept;
+sf::Texture& get_about_texture() noexcept;
 
 sf::Texture& get_action_icon(
   piece_action_type t
@@ -160,40 +160,37 @@ sf::Texture& get_game_option_icon(
 ) noexcept;
 
 
-sf::Texture& get_options(game_resources& r) noexcept;
+sf::Texture& get_options_texture(game_resources& r) noexcept;
 
 /// Get texture of a piece
-sf::Texture& get_piece(
+sf::Texture& get_piece_texture(
   const race r,
   const chess_color color,
   const piece_type type
 );
 
 /// Get texture of a portrait of a piece
-sf::Texture& get_piece_portrait(
+sf::Texture& get_piece_portrait_texture(
   const race r,
   const chess_color color,
   const piece_type type
 );
 
-sf::Texture& get_quit(game_resources& r) noexcept;
+sf::Texture& get_quit_texture(game_resources& r) noexcept;
 
 /// Get the map for a race
-sf::Texture& get_map(
+sf::Texture& get_map_texture(
   const race r
 ) noexcept;
 
-sf::Texture& get_start() noexcept;
+sf::Texture& get_start_texture() noexcept;
 
-sf::Texture& get_strip(const chess_color c) noexcept;
-sf::Texture& get_subtitle() noexcept;
-sf::Texture& get_title() noexcept;
-
+sf::Texture& get_strip_texture(const chess_color c) noexcept;
+sf::Texture& get_subtitle_texture() noexcept;
+sf::Texture& get_title_texture() noexcept;
 
 /// Play a sound effect
-void play(
-  const message& effect
-);
+void play_sound_effect(const message& effect);
 
 #endif // LOGIC_ONLY
 

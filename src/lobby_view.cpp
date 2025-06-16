@@ -192,8 +192,9 @@ void lobby_view::set_text_style(sf::Text& text)
 
 void lobby_view::draw()
 {
-  show_layout_panels(*this);
-  show_image_panel(*this);
+  draw_background(*this);
+  draw_layout_panels(*this);
+  draw_title(*this);
   show_color_panel(*this, side::lhs);
   show_race_panel(*this, side::lhs);
   show_start_panel(*this, side::lhs);
@@ -300,9 +301,9 @@ void show_race_panel(lobby_view& v, const side player_side)
   get_render_window().draw(text);
 }
 
-void show_image_panel(lobby_view& v)
+void draw_background(lobby_view& v)
 {
-  const auto screen_rect{v.get_layout().get_image()};
+  const auto screen_rect{v.get_layout().get_background()};
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
@@ -311,7 +312,7 @@ void show_image_panel(lobby_view& v)
   get_render_window().draw(rectangle);
 }
 
-void show_layout_panels(lobby_view& v)
+void draw_layout_panels(lobby_view& v)
 {
   for (const auto& screen_rect: get_panels(v.get_layout()))
   {
@@ -377,6 +378,34 @@ void show_start_panel(lobby_view& v, const side player_side)
   set_text_position(text, text_rect);
   text.setFillColor(sf::Color::White);
   get_render_window().draw(text);
+}
+
+void draw_title(lobby_view& v)
+{
+  const auto screen_rect{v.get_layout().get_title()};
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, screen_rect);
+  rectangle.setTexture(
+    &game_resources::get().get_map_textures().get_map(race::classic)
+  );
+  //rectangle.setFillColor(sf::Color::Black);
+  get_render_window().draw(rectangle);
+
+  // Text
+  sf::Text text;
+  text.setString("Lobby");
+  v.set_text_style(text);
+  text.setCharacterSize(text.getCharacterSize() * 3);
+
+  set_text_position(text, screen_rect);
+  get_render_window().draw(text);
+
+  // Smaller
+  text.setCharacterSize(text.getCharacterSize() - 4);
+  set_text_position(text, screen_rect);
+  text.setFillColor(sf::Color::White);
+  get_render_window().draw(text);
+
 }
 
 void lobby_view::start()

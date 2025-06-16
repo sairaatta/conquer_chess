@@ -311,7 +311,7 @@ void draw_about_panel(menu_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_strip(chess_color::white)
+    &get_strip_texture(chess_color::white)
   );
   get_render_window().draw(rectangle);
 
@@ -350,7 +350,7 @@ void draw_options_panel(menu_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_strip(chess_color::black)
+    &get_strip_texture(chess_color::black)
   );
   get_render_window().draw(rectangle);
 
@@ -378,7 +378,7 @@ void draw_quit_panel(menu_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_strip(chess_color::black)
+    &get_strip_texture(chess_color::black)
   );
   get_render_window().draw(rectangle);
 
@@ -411,7 +411,7 @@ void draw_start_panel(menu_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_strip(chess_color::white)
+    &get_strip_texture(chess_color::white)
   );
   get_render_window().draw(rectangle);
 
@@ -427,7 +427,7 @@ void draw_subtitle_panel(menu_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_subtitle()
+    &get_subtitle_texture()
   );
   get_render_window().draw(rectangle);
 }
@@ -438,7 +438,7 @@ void draw_title_panel(menu_view& v)
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
-    &get_title()
+    &get_title_texture()
   );
   get_render_window().draw(rectangle);
 }

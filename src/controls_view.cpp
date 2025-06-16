@@ -44,7 +44,7 @@ void draw_panel(
   sf::RectangleShape rectangle;
   set_rect(rectangle, panel_position);
   rectangle.setTexture(
-    &get_strip(color)
+    &get_strip_texture(color)
   );
   if (!is_active) rectangle.setFillColor(sf::Color(128, 128, 128, 128));
   get_render_window().draw(rectangle);

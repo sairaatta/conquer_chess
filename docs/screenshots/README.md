@@ -12,7 +12,7 @@
 
     > The game title
 
-    ![New main menu screen](20250611.jpg)
+    ![Main menu v0.7](20250611.jpg)
 
     > There are multiple background images in the main menu
 
@@ -64,7 +64,7 @@
 
     ![Conquer Chess screenshot](20230105_2.png)
 
-    ![Conquer Chess screenshot](20230105_1.png)
+    ![Lobby countdown v0.5](20230105_1.png)
 
     ![Conquer Chess screenshot](20230104_1.png)
 
@@ -72,7 +72,7 @@
 
 ???- question "Version v0.4"
 
-    ![Conquer Chess screenshot](20230103_4.png)
+    ![Lobby v0.4](20230103_4.png)
 
     ![Conquer Chess screenshot](20230103_3.png)
 

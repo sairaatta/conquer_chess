@@ -20,7 +20,7 @@
 /// |            |                       |            |
 /// |            |                       |            |
 /// |            |                       |            |
-/// |            | unused                |            |
+/// |            | title                 |            |
 /// |            |                       |            |
 /// |            |                       |            |
 /// |            |                       |            |
@@ -59,10 +59,11 @@ public:
     const int margin_width = get_default_margin_width()
   );
 
-  const auto& get_image() const noexcept { return m_image; }
+  const auto& get_background() const noexcept { return m_background; }
   const screen_rect& get_color(const side player_side) const noexcept;
   const screen_rect& get_race(const side player_side) const noexcept;
   const screen_rect& get_start(const side player_side) const noexcept;
+  const auto& get_title() const noexcept { return m_title; }
 
   /// Get the size of the font that would fit nicely
   int get_font_size() const noexcept { return m_font_size; }
@@ -71,13 +72,14 @@ public:
 
 private:
 
-  screen_rect m_image;
+  screen_rect m_background;
   screen_rect m_lhs_color;
   screen_rect m_lhs_race;
   screen_rect m_lhs_start;
   screen_rect m_rhs_color;
   screen_rect m_rhs_race;
   screen_rect m_rhs_start;
+  screen_rect m_title;
 
   lobby_view_item m_lhs_cursor;
   lobby_view_item m_rhs_cursor;

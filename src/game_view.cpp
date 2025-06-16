@@ -560,7 +560,7 @@ void show_map(game_view& view)
   set_rect(sprite, layout.get_window_size());
   const race r{get_race_of_color(game.get_lobby_options(), chess_color::white)};
   sprite.setTexture(
-    &get_map(r)
+    &get_map_texture(r)
   );
   get_render_window().draw(sprite);
 }
@@ -602,7 +602,7 @@ void show_pieces(game_view& view)
     sf::RectangleShape sprite;
     sprite.setSize(sf::Vector2f(0.9 * square_width, 0.9 * square_height));
     sprite.setTexture(
-      &get_piece(
+      &get_piece_texture(
         piece.get_race(),
         piece.get_color(),
         piece.get_type()
@@ -935,7 +935,7 @@ void show_unit_sprites(game_view& view, const side player_side)
     sf::RectangleShape sprite;
     sprite.setSize(sf::Vector2f(square_width, square_height));
     sprite.setTexture(
-      &get_piece_portrait(
+      &get_piece_portrait_texture(
         piece.get_race(),
         piece.get_color(),
         piece.get_type()

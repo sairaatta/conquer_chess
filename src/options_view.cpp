@@ -142,7 +142,7 @@ void draw_panel(
   sf::RectangleShape rectangle;
   set_rect(rectangle, panel_position);
   rectangle.setTexture(
-    &get_strip(color)
+    &get_strip_texture(color)
   );
   get_render_window().draw(rectangle);
 
@@ -435,7 +435,7 @@ void show_game_speed(options_view& v)
     const auto& screen_rect = layout.get_game_speed_value();
     sf::RectangleShape rectangle;
     rectangle.setTexture(
-      &get_strip(chess_color::black)
+      &get_strip_texture(chess_color::black)
     );
     set_rect(rectangle, screen_rect);
     get_render_window().draw(rectangle);
@@ -500,7 +500,7 @@ void show_starting_position(options_view& v)
     const auto& screen_rect = layout.get_starting_pos_value();
     sf::RectangleShape rectangle;
     rectangle.setTexture(
-      &get_strip(chess_color::white)
+      &get_strip_texture(chess_color::white)
     );
     set_rect(rectangle, screen_rect);
     get_render_window().draw(rectangle);
@@ -578,7 +578,7 @@ void show_music_volume(options_view& v)
     const auto& screen_rect = layout.get_music_volume_value();
     sf::RectangleShape rectangle;
     rectangle.setTexture(
-      &get_strip(chess_color::white)
+      &get_strip_texture(chess_color::white)
     );
     set_rect(rectangle, screen_rect);
     get_render_window().draw(rectangle);
@@ -651,7 +651,7 @@ void show_sound_effects_volume(options_view& v)
     const auto& screen_rect = layout.get_sound_effects_volume_value();
     sf::RectangleShape rectangle;
     rectangle.setTexture(
-      &get_strip(chess_color::black)
+      &get_strip_texture(chess_color::black)
     );
     set_rect(rectangle, screen_rect);
     get_render_window().draw(rectangle);

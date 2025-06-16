@@ -99,14 +99,18 @@ void show_color_panel(lobby_view& v, const side player_side);
 /// Show the countdown
 void show_countdown(lobby_view& v, const int n_left_secs);
 
-/// The pretty image at the top
-void show_image_panel(lobby_view& v);
+/// The background image
+void draw_background(lobby_view& v);
 
 /// Show where the panels will be drawn
-void show_layout_panels(lobby_view& v);
+void draw_layout_panels(lobby_view& v);
 
 /// Draw the cursor on the selected panel
 void show_selected_panel(lobby_view& v, const side player_side);
+
+/// The image at the top
+void draw_title(lobby_view& v);
+
 void show_race_panel(lobby_view& v, const side player_side);
 void show_start_panel(lobby_view& v, const side player_side);
 
