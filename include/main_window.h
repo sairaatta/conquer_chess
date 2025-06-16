@@ -9,6 +9,7 @@
 #include "program_state.h"
 #include "loading_view.h"
 #include "lobby_view.h"
+#include "game_view.h"
 #include "menu_view.h"
 #include "controls_view.h"
 #include "options_view.h"
@@ -36,6 +37,9 @@ private:
 
   /// Show the debug info
   bool m_show_debug_info{true};
+
+  /// The game screen
+  game_view m_game_view;
 
   /// The left controls dialog
   controls_view m_left_controls_view;

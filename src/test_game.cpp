@@ -705,7 +705,7 @@ void test_game_functions()
       assert(get_default_piece_action(g, c, side::lhs));
       assert(get_default_piece_action(g, c, side::lhs).value() != piece_action_type::move);
       assert(get_default_piece_action(g, c, side::lhs).value() != piece_action_type::attack);
-      std::clog << g << '\n';
+      // std::clog << g << '\n';
       assert(get_default_piece_action(g, c, side::lhs).value() == piece_action_type::en_passant);
     }
     #endif // FIX_ISSUE_21

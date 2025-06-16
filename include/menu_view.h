@@ -74,24 +74,6 @@ private:
 
   /// The next state to go to, if any
   std::optional<program_state> m_next_state;
-
-  /// Run the about screen
-  void exec_about();
-
-  /// Run the lobby
-  void exec_lobby();
-
-  /// Run the options screen
-  void exec_options();
-
-  /// View the played game
-  void exec_played_game();
-
-  /// Run the game with a replay
-  void exec_replay();
-
-  /// Run the dialog under 'Start'
-  void exec_start();
 };
 
 /// Create a random background image index

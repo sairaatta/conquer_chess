@@ -46,31 +46,11 @@ void options_view::decrease_selected()
     case options_view_item::left_controls:
     {
       m_next_state = program_state::left_controls;
-      /*
-      const auto cur_pos{get_render_window().getPosition()};
-      const side player{side::lhs};
-      controls_view v(m_physical_controllers.get_controller(player));
-      get_render_window().setVisible(false);
-      v.exec();
-      m_physical_controllers.set(player, v.get_controller());
-      get_render_window().setVisible(true);
-      get_render_window().setPosition(cur_pos);
-      */
     }
     break;
     case options_view_item::right_controls:
     {
       m_next_state = program_state::right_controls;
-      /*
-      const auto cur_pos{get_render_window().getPosition()};
-      const side player{side::rhs};
-      controls_view v(m_physical_controllers.get_controller(player));
-      get_render_window().setVisible(false);
-      v.exec();
-      m_physical_controllers.set(player, v.get_controller());
-      get_render_window().setVisible(true);
-      get_render_window().setPosition(cur_pos);
-      */
     }
     break;
   }
@@ -98,31 +78,11 @@ void options_view::increase_selected()
     case options_view_item::left_controls:
     {
       m_next_state = program_state::left_controls;
-      /*
-      const auto cur_pos{get_render_window().getPosition()};
-      const side player{side::lhs};
-      controls_view v(m_physical_controllers.get_controller(player));
-      get_render_window().setVisible(false);
-      v.exec();
-      m_physical_controllers.set(player, v.get_controller());
-      get_render_window().setVisible(true);
-      get_render_window().setPosition(cur_pos);
-      */
     }
     break;
     case options_view_item::right_controls:
     {
       m_next_state = program_state::right_controls;
-      /*
-      const auto cur_pos{get_render_window().getPosition()};
-      const side player{side::rhs};
-      controls_view v(m_physical_controllers.get_controller(player));
-      get_render_window().setVisible(false);
-      v.exec();
-      m_physical_controllers.set(player, v.get_controller());
-      get_render_window().setVisible(true);
-      get_render_window().setPosition(cur_pos);
-      */
     }
     break;
   }

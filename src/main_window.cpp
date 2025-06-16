@@ -71,7 +71,7 @@ bool main_window::process_event(sf::Event& event)
   switch(m_program_state)
   {
     case program_state::about: return m_about_view.process_event(event);
-    //case program_state::game: return m_game_view.process_event(event);
+    case program_state::game: return m_game_view.process_event(event);
     case program_state::left_controls: return m_left_controls_view.process_event(event);
     case program_state::lobby: return m_lobby_view.process_event(event);
     case program_state::loading: return m_loading_view.process_event(event);
@@ -92,6 +92,7 @@ void main_window::process_resize_event(sf::Event& event)
 
   // Resize all windows
   m_about_view.process_resize_event(event);
+  m_game_view.process_resize_event(event);
   m_left_controls_view.process_resize_event(event);
   m_loading_view.process_resize_event(event);
   m_lobby_view.process_resize_event(event);
@@ -106,7 +107,7 @@ void main_window::set_new_state(const program_state s)
   switch (m_program_state)
   {
     case program_state::about: m_about_view.stop(); break;
-    //case program_state::game: m_game_view.stop(); break;
+    case program_state::game: m_game_view.stop(); break;
     case program_state::left_controls: m_left_controls_view.stop(); break;
     case program_state::loading: m_loading_view.stop(); break;
     case program_state::lobby: m_lobby_view.stop(); break;
@@ -122,7 +123,7 @@ void main_window::set_new_state(const program_state s)
   switch (m_program_state)
   {
     case program_state::about: m_about_view.start(); break;
-    //case program_state::game: m_game_view.start(); break;
+    case program_state::game: m_game_view.start(); break;
     case program_state::left_controls: m_left_controls_view.start(); break;
     case program_state::loading: m_loading_view.start(); break;
     case program_state::lobby: m_lobby_view.start(); break;
@@ -142,7 +143,7 @@ void main_window::show()
   switch(m_program_state)
   {
     case program_state::about: m_about_view.draw(); break;
-    //case program_state::game: m_game_view.draw(); break;
+    case program_state::game: m_game_view.draw(); break;
     case program_state::left_controls: m_left_controls_view.draw(); break;
     case program_state::loading: m_loading_view.draw(); break;
     case program_state::lobby: m_lobby_view.draw(); break;
@@ -194,7 +195,7 @@ void main_window::tick()
 {
   switch (m_program_state) {
     case program_state::about: tick_about(); break;
-    //case program_state::game: tick_game(); break;
+    case program_state::game: tick_game(); break;
     case program_state::lobby: tick_lobby(); break;
     case program_state::left_controls: tick_left_controls(); break;
     case program_state::loading: tick_loading(); break;
@@ -215,7 +216,15 @@ void main_window::tick_about()
 
 void main_window::tick_game()
 {
-  assert(!"TODO");
+  const delta_t dt{
+      get_speed_multiplier(game_options::get().get_game_speed())
+    / m_sleep_scheduler.get_fps()
+  };
+
+  m_game_view.tick(dt);
+  if (m_game_view.get_next_state().has_value()) {
+    set_new_state(m_game_view.get_next_state().value());
+  }
 }
 
 void main_window::tick_left_controls()

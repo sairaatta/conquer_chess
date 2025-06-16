@@ -43,70 +43,6 @@ int create_seedless_random_background_image_index() {
   return create_random_background_image_index(rng_engine);
 }
 
-void menu_view::exec_about()
-{
-  m_next_state = program_state::about;
-}
-
-void menu_view::exec_lobby()
-{
-  /*
-  m_resources.get_songs().get_bliss().stop();
-  const auto cur_pos{m_window.getPosition()};
-  m_window.setVisible(false);
-  lobby_view view(
-    m_game_options,
-    m_physical_controllers
-  );
-  view.exec();
-  m_window.setVisible(true);
-  m_window.setPosition(cur_pos);
-  m_resources.get_songs().get_bliss().play();
-  */
-}
-
-void menu_view::exec_options()
-{
-  m_next_state = program_state::options;
-}
-
-void menu_view::exec_played_game()
-{
-  /*
-  // Approx 1 in 500 is a valid move
-  played_game_view view(create_randomly_played_game(2000));
-  view.exec();
-  */
-}
-
-void menu_view::exec_replay()
-{
-  //m_next_state = program_state::replay;
-
-  /*
-  const auto cur_pos{m_window.getPosition()};
-  m_window.setVisible(false);
-  game_options options{m_game_options};
-  options.set_game_speed(game_speed::slowest);
-  options.set_replayer(
-    replayer(
-      replay(
-        get_scholars_mate_as_pgn_str()
-      )
-    )
-  );
-  game_view view{game(options)};
-  view.exec();
-  m_window.setVisible(true);
-  m_window.setPosition(cur_pos);
-  */
-}
-
-void menu_view::exec_start()
-{
-  m_next_state = program_state::lobby;
-}
-
 sf::Text get_menu_screen_text() noexcept
 {
   sf::Text text;
@@ -156,9 +92,18 @@ bool menu_view::process_event(sf::Event& event)
       || key_pressed == sf::Keyboard::Key::Return
     )
     {
-      if (m_selected == menu_view_item::start) exec_start();
-      else if (m_selected == menu_view_item::options) exec_options();
-      else if (m_selected == menu_view_item::about) exec_about();
+      if (m_selected == menu_view_item::start)
+      {
+        m_next_state = program_state::lobby;
+      }
+      else if (m_selected == menu_view_item::options)
+      {
+        m_next_state = program_state::options;
+      }
+      else if (m_selected == menu_view_item::about)
+      {
+        m_next_state = program_state::about;
+      }
       else if (m_selected == menu_view_item::quit)
       {
         return true;
@@ -166,15 +111,15 @@ bool menu_view::process_event(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::A)
     {
-      exec_about();
+      m_next_state = program_state::about;
     }
     else if (key_pressed == sf::Keyboard::Key::O)
     {
-      exec_options();
+      m_next_state = program_state::options;
     }
     else if (key_pressed == sf::Keyboard::Key::S)
     {
-      exec_start();
+      m_next_state = program_state::lobby;
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
@@ -187,11 +132,6 @@ bool menu_view::process_event(sf::Event& event)
         << "= NOW                                       =\n"
         << "=============================================\n"
       ;
-      exec_replay();
-    }
-    else if (key_pressed == sf::Keyboard::Key::F2)
-    {
-      exec_played_game();
     }
   }
   if (event.type == sf::Event::MouseMoved)
@@ -211,9 +151,19 @@ bool menu_view::process_event(sf::Event& event)
       const auto mouse_screen_pos{
         screen_coordinate(event.mouseButton.x, event.mouseButton.y)
       };
-      if (is_in(mouse_screen_pos, m_layout.get_start())) exec_start();
-      else if (is_in(mouse_screen_pos, m_layout.get_options())) exec_options();
-      else if (is_in(mouse_screen_pos, m_layout.get_about())) exec_about();
+      if (is_in(mouse_screen_pos, m_layout.get_start()))
+      {
+        m_next_state = program_state::lobby;
+      }
+      else if (is_in(mouse_screen_pos, m_layout.get_options()))
+      {
+        m_next_state = program_state::options;
+      }
+      else if (is_in(mouse_screen_pos, m_layout.get_about()))
+      {
+        m_next_state = program_state::about;
+
+      }
       else if (is_in(mouse_screen_pos, m_layout.get_quit()))
       {
         return true;

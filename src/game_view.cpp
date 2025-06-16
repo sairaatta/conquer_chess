@@ -18,7 +18,7 @@
 
 #include <cassert>
 #include <cmath>
-#include <iostream>
+//#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -29,13 +29,7 @@ game_view::game_view(
     m_game{game},
     m_log{game_options::get().get_message_display_time_secs()}
 {
-  game_resources::get().get_songs().get_wonderful_time().setVolume(
-    get_music_volume_as_percentage()
-  );
-  game_resources::get().get_songs().get_wonderful_time().play();
-  game_resources::get().get_sound_effects().set_master_volume(
-    game_options::get().get_sound_effects_volume()
-  );
+
 }
 
 std::string bool_to_str(const bool b) noexcept
@@ -43,27 +37,21 @@ std::string bool_to_str(const bool b) noexcept
   return b ? "true" : "false";
 }
 
-void game_view::tick()
+void game_view::tick(delta_t dt)
 {
   // Disard old messages
   m_log.tick();
 
   // Do a tick, so that one delta_t equals one second under normal game speed
-  /*
-  const delta_t dt{
-      get_speed_multiplier(m_game.get_game_options().get_game_speed())
-    / m_sleep_scheduler.get_fps()
-  };
   m_game.tick(dt);
-  */
 
   // Read the pieces' messages and play their sounds
   process_piece_messages();
 
   // Show the new state
-  show();
+  draw();
 
-  std::clog << collect_action_history(m_game) << '\n';
+  //std::clog << collect_action_history(m_game) << '\n';
   game_resources::get().get_songs().get_wonderful_time().stop();
 }
 
@@ -173,21 +161,7 @@ const in_game_time& get_time(const game_view& v) noexcept
 
 bool game_view::process_event(sf::Event& event)
 {
-  if (event.type == sf::Event::Resized)
-  {
-    // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-    const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-    get_render_window().setView(sf::View(visibleArea));
-    m_layout = game_view_layout(
-      screen_coordinate(
-        static_cast<int>(event.size.width),
-        static_cast<int>(event.size.height)
-      ),
-      get_default_margin_width()
-    );
-    return false;
-  }
-  else if (event.type == sf::Event::Closed)
+  if (event.type == sf::Event::Closed)
   {
       m_next_state = program_state::lobby;
       return false;
@@ -203,7 +177,22 @@ bool game_view::process_event(sf::Event& event)
   }
   ::process_event(m_game_controller, event, m_layout);
   m_game_controller.apply_user_inputs_to_game(m_game);
-  return false; // if no events proceed with tick
+  return false;
+}
+
+void game_view::process_resize_event(sf::Event& event)
+{
+  assert(event.type == sf::Event::Resized);
+  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
+  const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+  get_render_window().setView(sf::View(visibleArea));
+  m_layout = game_view_layout(
+    screen_coordinate(
+      static_cast<int>(event.size.width),
+      static_cast<int>(event.size.height)
+    ),
+    get_default_margin_width()
+  );
 }
 
 void process_event(
@@ -244,7 +233,7 @@ void game_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::Black);
 }
 
-void game_view::show()
+void game_view::draw()
 {
   // Show the layout of the screen: board and sidebars
   show_map(*this);
@@ -953,6 +942,24 @@ void show_unit_sprites(game_view& view, const side player_side)
     get_render_window().draw(text);
     screen_position += screen_coordinate(0, square_height);
   }
+}
+
+void game_view::start()
+{
+  m_clock.restart();
+  game_resources::get().get_songs().get_wonderful_time().setVolume(
+    get_music_volume_as_percentage()
+  );
+  game_resources::get().get_songs().get_wonderful_time().play();
+  game_resources::get().get_sound_effects().set_master_volume(
+    game_options::get().get_sound_effects_volume()
+  );
+}
+
+void game_view::stop()
+{
+  m_clock.restart();
+  game_resources::get().get_songs().get_wonderful_time().stop();
 }
 
 void test_game_view() //!OCLINT tests may be many

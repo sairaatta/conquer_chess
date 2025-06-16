@@ -5,7 +5,7 @@
 #include "game_controller.h"
 
 #include <cassert>
-#include <iostream>
+//#include <iostream>
 #include <sstream>
 
 replayer::replayer(const replay& r)
@@ -32,9 +32,9 @@ void replayer::do_move(
 
   // Do the move
   const auto& move{m_replay.get_moves().at(move_index)};
-  std::clog << g.get_in_game_time() << ": replayer doing " << move << '\n';
+  //std::clog << g.get_in_game_time() << ": replayer doing " << move << '\n';
   const auto inputs{convert_move_to_user_inputs(g, c, move)};
-  std::clog << g.get_in_game_time() << ": replayer doing inputs:\n" << user_inputs(inputs) << '\n';
+  //std::clog << g.get_in_game_time() << ": replayer doing inputs:\n" << user_inputs(inputs) << '\n';
   add_user_inputs(c, inputs);
 }
 

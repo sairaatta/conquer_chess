@@ -30,8 +30,7 @@ void lobby_view::tick()
   {
     if (m_clock.value().getElapsedTime().asSeconds() > m_countdown_secs)
     {
-      assert(!"TODO");
-      //m_next_state = program_state::game;
+      m_next_state = program_state::game;
     }
   }
 }
@@ -466,7 +465,13 @@ void lobby_view::start()
     game_options::get().get_sound_effects_volume()
   );
   game_resources::get().get_songs().get_soothing().play();
+  if (m_clock.has_value())
+  {
+    m_clock.value().restart();
+  }
   m_clock = {};
+  m_lhs_cursor = lobby_view_item::color;
+  m_rhs_cursor = lobby_view_item::color;
   m_lhs_start = false;
   m_rhs_start = false;
 }
@@ -474,6 +479,10 @@ void lobby_view::start()
 void lobby_view::stop()
 {
   game_resources::get().get_songs().get_soothing().stop();
+  if (m_clock.has_value())
+  {
+    m_clock.value().restart();
+  }
   m_clock = {};
   m_lhs_start = false;
   m_rhs_start = false;

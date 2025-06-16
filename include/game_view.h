@@ -27,13 +27,21 @@ public:
     const game& game = get_default_game()
   );
 
+  /// Show the game on-screen
+  void draw();
+
   /// Run the game, until the user quits
-  void tick();
+  void tick(delta_t dt);
 
   /// The the elapsed time in seconds
   double get_elapsed_time_secs() const noexcept;
 
   auto& get_game() noexcept { return m_game; }
+
+  /// The next state to go to, if any.
+  ///
+  /// Will be empty if the user should remain in this screen
+  const auto& get_next_state() const noexcept { return m_next_state; }
 
   const auto& get_game() const noexcept { return m_game; }
 
@@ -41,16 +49,27 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
+  /// STUB
+  bool get_show_debug() const noexcept { return true; }
+
   bool get_show_squares_semitransparent() const noexcept { return true; }
 
   /// Get the text log, i.e. things pieces have to say
   const auto& get_log() const noexcept { return m_log; }
 
+  /// Process all events
+  /// @return if the user wants to quit
+  bool process_event(sf::Event& event);
+
+  /// Process a resize events
+  void process_resize_event(sf::Event& event);
+
   /// Set the text to a uniform style
   void set_text_style(sf::Text& text);
 
-  /// STUB
-  bool get_show_debug() const noexcept { return true; }
+  void start();
+
+  void stop();
 
 private:
 
@@ -75,16 +94,8 @@ private:
   /// Play the new sound effects
   void play_pieces_sound_effects();
 
-  /// Process all events
-  /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
-
   /// Read the pieces' messages and play their sounds
   void process_piece_messages();
-
-
-  /// Show the game on-screen
-  void show();
 
   /// Show the mouse cursor on-screen
   void show_mouse_cursor();

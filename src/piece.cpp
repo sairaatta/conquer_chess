@@ -8,7 +8,7 @@
 
 #include <algorithm>
 #include <cassert>
-#include <iostream>
+//#include <iostream>
 #include <iterator>
 #include <sstream>
 
@@ -1021,7 +1021,7 @@ void piece::tick(
     return;
   }
   const auto action_type{m_actions[0].get_action_type()};
-  std::clog << get_color() << " " << get_type() << " going to " << action_type << '\n';
+  //std::clog << get_color() << " " << get_type() << " going to " << action_type << '\n';
   if (!has_actions(m_action_history)
     || get_last_action(m_action_history) != m_actions[0]
   )
@@ -1173,7 +1173,7 @@ void tick_move(
     {
       // Moving the last half
       assert(f > 0.5);
-      std::clog << "Piece over halfway (" << f << "), already occupies " << p.get_current_square() << '\n';
+      //std::clog << "Piece over halfway (" << f << "), already occupies " << p.get_current_square() << '\n';
     }
     else
     {
@@ -1190,20 +1190,20 @@ void tick_move(
       );
       p.set_current_action_progress(delta_t(1.0) - p.get_current_action_progress()); // Keep progress
       p.add_message(message_type::cannot);
-      std::clog << "I cannot" << '\n';
+      //std::clog << "I cannot" << '\n';
       return;
     }
   }
   else
   {
-    std::clog << "Piece not yet halfway (" << f << "), still occupied " << p.get_current_square() << '\n';
+    //std::clog << "Piece not yet halfway (" << f << "), still occupied " << p.get_current_square() << '\n';
     assert(!is_target_occupied);
     if (f >= 0.5)
     {
       // If over halfway, occupy target
       assert(!is_occupied(first_action.get_to(), get_occupied_squares(g)));
       p.set_current_square(first_action.get_to());
-      std::clog << "Piece over halfway (" << f << "), now occupies " << p.get_current_square() << '\n';
+      //std::clog << "Piece over halfway (" << f << "), now occupies " << p.get_current_square() << '\n';
       // Maybe cannot check, as p is not fully updated in game?
       // assert(is_occupied(first_action.get_to(), get_occupied_squares(g)));
     }

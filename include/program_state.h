@@ -3,7 +3,7 @@
 
 enum class program_state {
   about,
-  //game,
+  game,
   left_controls,
   loading,
   lobby,
