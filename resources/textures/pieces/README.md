@@ -1,4 +1,6 @@
-# Oieces
+# Pieces
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
 | Image                              | Filename                   | Search terms                                                                                                       |
 | ---------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -36,3 +38,6 @@
 | ![Piece](zerg_white_pawn.jpg)      | `zerg_white_pawn.jpg`      | `starcraft 2, zerg, a white pawn, symbol, symbolic, full view, single piece, one chesspiece`                       |
 | ![Piece](zerg_white_queen.jpg)     | `zerg_white_queen.jpg`     | `starcraft 2, zerg, a white queen, symbol, symbolic, full view, one chesspiece, simple, sharp`                     |
 | ![Piece](zerg_white_rook.jpg)      | `zerg_white_rook.jpg`      | `white rook, chess, symbol, zerg, starcraft 2, simple, biology`                                                    |
+
+<!-- markdownlint-enable MD013 -->
+

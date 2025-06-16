@@ -39,26 +39,42 @@ sequenceDiagram
     chess_piece->>chess_piece: process all piece_actions until all are done
 ```
 
-The key and mouse talk to `user_inputs`, or: `user_inputs` handles all the `sf::Event`s.
-However, not all events are valid. For example, an LMB can be ignored if all players
+The key and mouse talk to `user_inputs`,
+or: `user_inputs` handles all the `sf::Event`s.
+However, not all events are valid.
+For example, an LMB can be ignored if all players
 use the keyboard. `user_inputs` only keeps the keys that are setup in the
 'Key Settings'/'Controls' dialog.
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
 | Input                    | Class                                         | Output                                  |
 | ------------------------ | --------------------------------------------- | --------------------------------------- |
 | keyboard and mouse input | `user_inputs` ![user_inputs](user_inputs.jpg) | Store valid input, ignore invalid input |
 
+<!-- markdownlint-enable MD013 -->
+
 `game_controller` gets all `user_inputs` and moves the right cursor
 (there is one cursor for each player) to the right spots.
 It can select a piece to do a chess move.
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
 | Input       | Class                                                     | Output                             |
 | ----------- | --------------------------------------------------------- | ---------------------------------- |
 | Valid input | `game_controller` ![game_controller](game_controller.jpg) | Moves the cursor, does chess moves |
 
-The chess moves that `game_controller` suggests may not be valid and do not
-move pieces. `game` checks if the chess move is valid and if yes, does the move.
+<!-- markdownlint-enable MD013 -->
+
+The chess moves that `game_controller` suggests
+may not be valid and do not move pieces.
+`game` checks if the chess move is valid and if yes,
+does the move.
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
 | Input       | Class                    | Output                                                      |
 | ----------- | ------------------------ | ----------------------------------------------------------- |
 | Chess moves | `game` ![game](game.jpg) | Performs the valid chess moves, ignores invalid chess moves |
+
+<!-- markdownlint-enable MD013 -->
