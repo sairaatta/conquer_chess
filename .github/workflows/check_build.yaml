@@ -60,4 +60,3 @@ jobs:
 
       - name: make
         run: make release --silent
-

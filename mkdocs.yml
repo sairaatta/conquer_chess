@@ -4,11 +4,11 @@ edit_uri: blob/main/docs/
 
 nav:
   - Start: README.md
-  - Screenshots: screenshots.md 
-  - Gameplay: gameplay.md 
-  - FAQ: faq.md 
-  - Acknowledgements: acknowledgements.md 
-  - Videos: videos.md 
+  - Screenshots: screenshots.md
+  - Gameplay: gameplay.md
+  - FAQ: faq.md
+  - Acknowledgements: acknowledgements.md
+  - Videos: videos.md
   - Architecture: architecture/README.md
   - Developer documentation: docs/index.html
 

@@ -45,7 +45,7 @@ these are the differences:
 - Goal is to mate the opponent's king
 - All pieces have health
 - All pieces have an equal amount of health, except the king, which has
-   infinite health
+  infinite health
 - All pieces move in the same directions as regular chess.
   For example, pawns move forward, bishops move diagonally
   and rooks move horizontally
@@ -60,15 +60,15 @@ these are the differences:
   and bishops attack diagonally for any amount of squares
 - A piece is destroyed if its health reaches zero
 - When a piece starts moving, it can be attacked at its departure square
-   until it reaches halfway to the next square
+  until it reaches halfway to the next square
 - When a piece is moving and halfway to its target square,
-   it can be attacked at its target square
+  it can be attacked at its target square
 - Multiple pieces can attack the same opponents piece
 - When a piece is destroyed,
-   the piece that killed it will instantaneous go to that square
+  the piece that killed it will instantaneous go to that square
 - Castling can only be done when (1) the king has not moved,
-   (2) the desired rook has not moved, (3) there are no pieces
-   in the way. Castling cannnot take place through check and into check
+  (2) the desired rook has not moved, (3) there are no pieces
+  in the way. Castling cannnot take place through check and into check
 - A pawn can attack by en-passant, for a limited amount of time
 
 ### Where did you get you example games from?
@@ -99,18 +99,17 @@ If there are multiple actions, using another action key triggers the other actio
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-When                                              |Action key 1    |Action key 2   |Action key 3     |Action key 4
---------------------------------------------------|----------------|---------------|-----------------|-----------------
-Nothing selected                                  |.               |.              |.                |.
-Nothing selected, cursor at square with own piece |Select          |.              |.                |.
-Piece selected, cursor at the selected piece      |Unselect        |.              |.                |.
-Piece selected, cursor at valid target square     |Move            |.              |.                |.
-Piece selected, cursor at valid target opponent   |Attack          |.              |.                |.
-King selected, cursor at valid castling square    |Castle          |.              |.                |.
-Pawn in promotion selected                        |Promote to queen|Promote to rook|Promote to bishop|Promote to knight
+| When                                              | Action key 1     | Action key 2    | Action key 3      | Action key 4      |
+| ------------------------------------------------- | ---------------- | --------------- | ----------------- | ----------------- |
+| Nothing selected                                  | .                | .               | .                 | .                 |
+| Nothing selected, cursor at square with own piece | Select           | .               | .                 | .                 |
+| Piece selected, cursor at the selected piece      | Unselect         | .               | .                 | .                 |
+| Piece selected, cursor at valid target square     | Move             | .               | .                 | .                 |
+| Piece selected, cursor at valid target opponent   | Attack           | .               | .                 | .                 |
+| King selected, cursor at valid castling square    | Castle           | .               | .                 | .                 |
+| Pawn in promotion selected                        | Promote to queen | Promote to rook | Promote to bishop | Promote to knight |
 
 <!-- markdownlint-enable MD013 -->
-
 
 ### Mouse controls
 
@@ -120,15 +119,15 @@ changes to another action.
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-When                                              |LMB default     |Other options, if any
---------------------------------------------------|----------------|-----------------------------------------------------
-Nothing selected                                  |.               |.
-Nothing selected, cursor at square with own piece |Select          |.
-Piece selected, cursor at the selected piece      |Unselect        |.
-Piece selected, cursor at valid target square     |Move            |.
-Piece selected, cursor at valid target opponent   |Attack          |.
-King selected, cursor at valid castling square    |Castle          |.
-Pawn in promotion selected                        |Promote to queen|Promote to rook, promote to bishop, promote to knight
+| When                                              | LMB default      | Other options, if any                                 |
+| ------------------------------------------------- | ---------------- | ----------------------------------------------------- |
+| Nothing selected                                  | .                | .                                                     |
+| Nothing selected, cursor at square with own piece | Select           | .                                                     |
+| Piece selected, cursor at the selected piece      | Unselect         | .                                                     |
+| Piece selected, cursor at valid target square     | Move             | .                                                     |
+| Piece selected, cursor at valid target opponent   | Attack           | .                                                     |
+| King selected, cursor at valid castling square    | Castle           | .                                                     |
+| Pawn in promotion selected                        | Promote to queen | Promote to rook, promote to bishop, promote to knight |
 
 <!-- markdownlint-enable MD013 -->
 
@@ -137,4 +136,3 @@ Pawn in promotion selected                        |Promote to queen|Promote to r
 ### How is the user input handled?
 
 See [architecture](architecture/README.md)
-

@@ -195,4 +195,3 @@
     ![Conquer Chess screenshot](20220711_2.png)
 
     ![Conquer Chess screenshot](20220711_1.png)
-
