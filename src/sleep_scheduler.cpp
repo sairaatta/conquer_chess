@@ -2,7 +2,6 @@
 
 #include <cassert>
 
-/// Sets the target frame rate
 void sleep_scheduler::set_target_fps(double fps)
 {
   assert(fps > 0.0);
@@ -28,11 +27,13 @@ void sleep_scheduler::tick()
 void test_sleep_scheduler()
 {
   sleep_scheduler s;
+  const double target_fps{69.0};
+  s.set_target_fps(target_fps);
   const double fps_0{s.get_fps()};
   assert(fps_0 == 0);
   sf::sleep(sf::microseconds(100));
   s.tick();
-  for (int i = 0; i < 100; ++i)
+  for (int i = 0; i < 20; ++i)
   {
     const double fps_1{s.get_fps()};
     assert(fps_1 > 0);
@@ -40,10 +41,7 @@ void test_sleep_scheduler()
     s.tick();
   }
   const double fps_2{s.get_fps()};
-  sf::sleep(sf::microseconds(100));
-  s.tick();
-  const double fps_3{s.get_fps()};
-  assert(fps_2 > 0);
-  assert(fps_3 > 0);
+  assert(fps_2 > target_fps * 0.9);
+  assert(fps_2 < target_fps * 1.1);
 }
 

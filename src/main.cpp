@@ -7,7 +7,10 @@
 /// This game has some singletons:
 ///
 /// - \link{get_render_window}: to get the one-and-only SFML render window
-/// - \link{get_resources}: to get the one-and-only collection of resources
+/// - \link{game_resources::get}: to get the one-and-only \link{game_resources}
+/// - \link{game_options::get}: to get the one-and-only \link{game options}
+/// - \link{physical_controllers::get}: to get the one-and-only \link{physical_controllers}
+/// - \link{lobby_options::get}: to get the one-and-only \link{lobby_options}
 
 // Use LOGIC_ONLY to be able to run on GHA
 #include "about.h"
