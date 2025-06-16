@@ -39,9 +39,9 @@ void options_view::decrease_selected()
       game_options::get().set_sound_effects_volume(get_previous(game_options::get().get_sound_effects_volume()));
     break;
     case options_view_item::starting_position:
-      assert(!to_str(get_starting_position(*this)).empty());
-      game_options::get().set_starting_position(get_previous(get_starting_position(game_options::get())));
-      assert(!to_str(get_starting_position(*this)).empty());
+      assert(!to_str(get_starting_position()).empty());
+      game_options::get().set_starting_position(get_previous(get_starting_position()));
+      assert(!to_str(get_starting_position()).empty());
     break;
     case options_view_item::left_controls:
     {
@@ -91,9 +91,9 @@ void options_view::increase_selected()
       game_options::get().set_sound_effects_volume(get_next(game_options::get().get_sound_effects_volume()));
     break;
     case options_view_item::starting_position:
-      assert(!to_str(get_starting_position(*this)).empty());
-      game_options::get().set_starting_position(get_next(get_starting_position(game_options::get())));
-      assert(!to_str(get_starting_position(*this)).empty());
+      assert(!to_str(get_starting_position()).empty());
+      game_options::get().set_starting_position(get_next(get_starting_position()));
+      assert(!to_str(get_starting_position()).empty());
     break;
     case options_view_item::left_controls:
     {
@@ -156,10 +156,10 @@ physical_controller_type get_physical_controller_type(
   return physical_controllers::get().get_controller(player).get_type();
 }
 
-starting_position_type get_starting_position(const options_view&) noexcept
-{
-  return get_starting_position(game_options::get());
-}
+//starting_position_type get_starting_position(const options_view&) noexcept
+//{
+//  return get_starting_position();
+//}
 
 bool options_view::process_event(sf::Event& event)
 {
@@ -284,9 +284,9 @@ void options_view::draw()
 {
   show_layout_panels(*this);
 
-  assert(!to_str(get_starting_position(*this)).empty());
+  assert(!to_str(get_starting_position()).empty());
   show_top(*this);
-  assert(!to_str(get_starting_position(*this)).empty());
+  assert(!to_str(get_starting_position()).empty());
 
   show_bottom(*this);
   show_selected_panel(*this);
@@ -300,7 +300,7 @@ void options_view::draw()
   );
   show_pieces(*this);
 
-  assert(!to_str(get_starting_position(*this)).empty());
+  assert(!to_str(get_starting_position()).empty());
 }
 
 void show_bottom(options_view& v)
@@ -504,7 +504,7 @@ void show_starting_position(options_view& v)
 
     sf::Text text;
     v.set_text_style(text);
-    text.setString(to_str(get_starting_position(v)));
+    text.setString(to_str(get_starting_position()));
     set_text_position(text, screen_rect);
     get_render_window().draw(text);
   }
@@ -514,14 +514,14 @@ void show_starting_position(options_view& v)
 
 void show_top(options_view& v)
 {
-  assert(!to_str(get_starting_position(v)).empty());
+  assert(!to_str(get_starting_position()).empty());
 
   show_game_speed(v);
   show_music_volume(v);
   show_sound_effects_volume(v);
   show_starting_position(v);
 
-  assert(!to_str(get_starting_position(v)).empty());
+  assert(!to_str(get_starting_position()).empty());
 }
 
 
@@ -583,7 +583,7 @@ void show_music_volume(options_view& v)
     sf::Text text;
     v.set_text_style(text);
     std::stringstream s;
-    s << get_music_volume(game_options::get()) << " %";
+    s << get_music_volume() << " %";
     text.setString(s.str());
     set_text_position(text, screen_rect);
     get_render_window().draw(text);
@@ -656,7 +656,7 @@ void show_sound_effects_volume(options_view& v)
     sf::Text text;
     v.set_text_style(text);
     std::stringstream s;
-    s << get_sound_effects_volume(game_options::get()) << " %";
+    s << get_sound_effects_volume() << " %";
     text.setString(s.str());
     set_text_position(text, screen_rect);
     get_render_window().draw(text);

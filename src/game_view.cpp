@@ -30,7 +30,7 @@ game_view::game_view(
     m_log{game_options::get().get_message_display_time_secs()}
 {
   game_resources::get().get_songs().get_wonderful_time().setVolume(
-    get_music_volume_as_percentage(m_game)
+    get_music_volume_as_percentage()
   );
   game_resources::get().get_songs().get_wonderful_time().play();
   game_resources::get().get_sound_effects().set_master_volume(
@@ -43,10 +43,11 @@ std::string bool_to_str(const bool b) noexcept
   return b ? "true" : "false";
 }
 
-bool do_show_selected(const game_view&)
-{
-  return do_show_selected(game_options::get());
-}
+// Duplicate
+//bool do_show_selected(const game_view&)
+//{
+//  return do_show_selected(game_options::get());
+//}
 
 void game_view::tick()
 {
@@ -627,7 +628,7 @@ void show_pieces(game_view& view)
     {
       //sprite.setFillColor(sf::Color(0, 0, 0, 255));
     }
-    if (do_show_selected(view) && piece.is_selected())
+    if (do_show_selected() && piece.is_selected())
     {
       sprite.setOutlineColor(sf::Color(255, 0, 0));
       sprite.setOutlineThickness(2);

@@ -112,24 +112,22 @@ private:
 };
 
 /// Are selected squares shown on-screen?
-bool do_show_selected(const game_options& options) noexcept;
+bool do_show_selected() noexcept;
 
 /// Get the music volume
-const volume& get_music_volume(const game_options& options) noexcept;
+const volume& get_music_volume() noexcept;
 
 /// Get the music volume as a percentage
-double get_music_volume_as_percentage(const game_options& options) noexcept;
+double get_music_volume_as_percentage() noexcept;
 
 /// Get the sound effects volume
-const volume& get_sound_effects_volume(const game_options& options) noexcept;
+const volume& get_sound_effects_volume() noexcept;
 
 /// Get the starting position
-starting_position_type get_starting_position(const game_options& options) noexcept;
+starting_position_type get_starting_position() noexcept;
 
 /// Test this class and its free functions
 void test_game_options();
-
-bool operator==(const game_options& lhs, const game_options& rhs) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const game_options& options) noexcept;
 

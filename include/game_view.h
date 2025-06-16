@@ -99,8 +99,9 @@ sf::RectangleShape create_black_square(game_view& view);
 /// Create a white/ligt square at the right size
 sf::RectangleShape create_white_square(game_view& view);
 
-/// Are selected squares shown on-screen?
-bool do_show_selected(const game_view& view);
+// Duplicate
+// Are selected squares shown on-screen?
+//bool do_show_selected(const game_view& view);
 
 /// Get the controller for a certain side
 const physical_controller& get_physical_controller(const game_view& view, const side player);

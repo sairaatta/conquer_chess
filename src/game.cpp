@@ -990,10 +990,9 @@ game create_randomly_played_game(
   return g;
 }
 
-
 bool do_show_selected() noexcept
 {
-  return do_show_selected(game_options::get());
+  return game_options::get().do_show_selected();
 }
 
 std::vector<piece> find_pieces(
@@ -1144,10 +1143,11 @@ game get_kings_only_game() noexcept
   return create_game_with_starting_position(starting_position_type::kings_only);
 }
 
-double get_music_volume_as_percentage(const game&) noexcept
-{
-  return get_music_volume_as_percentage(game_options::get());
-}
+// Duplicate?
+//double get_music_volume_as_percentage() noexcept
+//{
+//  return game_options::get().get_music_volume().get_percentage();
+//}
 
 std::vector<square> get_occupied_squares(const game& g) noexcept
 {

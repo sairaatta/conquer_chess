@@ -459,7 +459,7 @@ void draw_title(lobby_view& v)
 void lobby_view::start()
 {
   game_resources::get().get_songs().get_soothing().setVolume(
-    get_music_volume_as_percentage(game_options::get())
+    get_music_volume_as_percentage()
   );
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()

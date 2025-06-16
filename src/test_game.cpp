@@ -862,11 +862,6 @@ void test_game_functions()
     const auto g{get_kings_only_game()};
     assert(do_show_selected() || !do_show_selected());
   }
-  // get_music_volume_as_percentage
-  {
-    const game g{create_game_with_starting_position(starting_position_type::standard)};
-    assert(get_music_volume_as_percentage(g) >= 0.0);
-  }
   // get_occupied_squares
   {
     const game g{create_game_with_starting_position(starting_position_type::standard)};

@@ -80,8 +80,9 @@ void draw_panel(
 
 physical_controller_type get_physical_controller_type(const side player);
 
-/// Get the starting position
-starting_position_type get_starting_position(const options_view& v) noexcept;
+// Duplicate?
+// Get the starting position
+//starting_position_type get_starting_position(const options_view& v) noexcept;
 
 /// Show the bottom part
 void show_bottom(options_view& v);
