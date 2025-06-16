@@ -1067,6 +1067,19 @@ void test_game_controller() //!OCLINT tests may be many
     );
     assert(get_mouse_user_player_side(g) == side::rhs);
   }
+  // set_mouse_user_selector
+  {
+    game_controller g(
+      create_game_controller_with_keyboard_mouse()
+    );
+    const action_number n1(1);
+    g.set_mouse_user_selector(n1);
+    assert(g.get_mouse_user_selector() == n1);
+
+    const action_number n2(3);
+    g.set_mouse_user_selector(n2);
+    assert(g.get_mouse_user_selector() == n2);
+  }
   // Clicking a unit once with LMB selects it
   {
     game g;
