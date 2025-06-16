@@ -1,3 +1,6 @@
+codecov: 
+  token: 219d6b99-4761-48dc-a165-a8cf64640356
+
 ignore:
 - ./include/about_view.h
 - ./include/controls_view.h
