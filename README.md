@@ -2,10 +2,10 @@
 
 <!-- markdownlint-disable MD013 --><!-- Badges cannot be split up over lines, hence will break 80 characters per line -->
 
-Branch     |[![GitHub Actions logo](images/GitHubActions.png)](https://github.com/richelbilderbeek/conquer_chess/actions) |[![Codecov logo](images/Codecov.png)](https://www.codecov.io)
------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-`main`     |![check](https://github.com/richelbilderbeek/conquer_chess/workflows/check_build/badge.svg?branch=main)             |[![codecov.io](https://codecov.io/github/richelbilderbeek/conquer_chess/coverage.svg?branch=main)](https://codecov.io/github/richelbilderbeek/conquer_chess/branch/main)
-`develop`  |![check](https://github.com/richelbilderbeek/conquer_chess/workflows/check_build/badge.svg?branch=develop)          |[![codecov.io](https://codecov.io/github/richelbilderbeek/conquer_chess/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/conquer_chess/branch/develop)
+Branch   |[![GitHub Actions logo](images/GitHubActions.png)](https://github.com/richelbilderbeek/conquer_chess/actions)                                                                                                         |[![Codecov logo](images/Codecov.png)](https://www.codecov.io)
+---------|---------|---------
+`main`   |[![Check build](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml/badge.svg?branch=main)](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml)    |[![codecov.io](https://codecov.io/github/richelbilderbeek/conquer_chess/coverage.svg?branch=main)](https://codecov.io/github/richelbilderbeek/conquer_chess/branch/main)
+`develop`|[![Check build](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml/badge.svg?branch=develop)](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml) |[![codecov.io](https://codecov.io/github/richelbilderbeek/conquer_chess/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/conquer_chess/branch/develop)
 
 <!-- markdownlint-enable MD013 -->
 
