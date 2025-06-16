@@ -18,6 +18,7 @@ ignore:
 - ./include/menu_view.h
 - ./include/options_view.h
 - ./include/played_game_view.h
+- ./include/render_window.h
 - ./include/songs.h
 - ./include/textures.h
 - ./src/about_view.cpp
@@ -35,6 +36,7 @@ ignore:
 - ./src/menu_view.cpp
 - ./src/options_view.cpp
 - ./src/played_game_view.cpp
+- ./src/render_window.cpp
 - ./src/songs.cpp
 - ./src/textures.cpp
 

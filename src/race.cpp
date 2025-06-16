@@ -49,6 +49,14 @@ race get_previous(const race r) noexcept
 void test_race()
 {
 #ifndef NDEBUG
+  // get_next and get_prev
+  {
+    for (const auto c: get_all_races())
+    {
+      assert(get_previous(get_next(c)) == c);
+      assert(get_next(get_previous(c)) == c);
+    }
+  }
   // to_str, manual
   {
     assert(to_str(race::zerg) == "zerg");

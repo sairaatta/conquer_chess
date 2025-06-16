@@ -28,6 +28,7 @@
 #include "game_view_layout.h"
 #include "helper.h"
 #include "id.h"
+#include "in_game_time.h"
 #include "key_bindings.h"
 #include "loading_view.h"
 #include "lobby_options.h"
@@ -86,6 +87,7 @@ void test()
   test_game_view_layout();
   test_helper();
   test_id();
+  test_in_game_time();
   test_key_bindings();
   test_lobby_options();
   test_lobby_view_item();
