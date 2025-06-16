@@ -40,4 +40,3 @@
 | ![Piece](zerg_white_rook.jpg)      | `zerg_white_rook.jpg`      | `white rook, chess, symbol, zerg, starcraft 2, simple, biology`                                                    |
 
 <!-- markdownlint-enable MD013 -->
-
