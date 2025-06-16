@@ -9,7 +9,10 @@ class sleep_scheduler
 public:
 
   /// Get the number of frames per second
-  int get_fps() const noexcept { return m_fps_clock.get_fps(); }
+  double get_fps() const noexcept { return m_fps_clock.get_fps(); }
+
+  /// Sets the target frame rate
+  void set_target_fps(double fps);
 
   /// Indicate a frame has passed.
   /// This class will sleep here and will tune itself
@@ -22,7 +25,10 @@ private:
   fps_clock m_fps_clock;
 
   /// The time this class sleeps in a tick
-  int m_sleep_time_microseconds{1};
+  double m_sleep_time_microseconds{1.0};
+
+  /// The target frame rate
+  double m_target_fps{60.0};
 };
 
 /// Test this class

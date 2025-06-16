@@ -1,9 +1,11 @@
 #include "main_window.h"
-#include <cassert>
 #include "screen_rect.h"
 #include "sfml_helper.h"
 #include "render_window.h"
 #include "game_resources.h"
+
+#include <cassert>
+#include <cmath>
 
 main_window::main_window()
   : m_left_controls_view(side::lhs),
@@ -174,7 +176,10 @@ void main_window::show_debug_info()
   text.setCharacterSize(20);
   text.setFillColor(sf::Color::Black);
 
-  text.setString(sf::String(std::to_string(m_sleep_scheduler.get_fps())));
+  const int fps{
+    static_cast<int>(std::round(m_sleep_scheduler.get_fps()))
+  };
+  text.setString(sf::String(std::to_string(fps)));
   set_text_position(text, debug_rect);
   text.setCharacterSize(text.getCharacterSize() - 2);
   text.setFillColor(sf::Color::Black);

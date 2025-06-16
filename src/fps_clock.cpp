@@ -3,7 +3,7 @@
 #include <cassert>
 
 fps_clock::fps_clock()
-  : m_fps{0}
+  : m_fps{0.0}
 {
 
 }
@@ -25,7 +25,7 @@ void test_fps_clock()
 void fps_clock::tick() noexcept
 {
   const double dt{m_clock.getElapsedTime().asSeconds()};
-  if (dt == 0.0) m_fps = 0;
+  if (dt == 0.0) m_fps = 0.0;
   else m_fps = 1.0 / dt;
   m_clock.restart();
 }

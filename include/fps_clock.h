@@ -11,7 +11,7 @@ public:
   fps_clock();
 
   /// Get the frames per seconds
-  int get_fps() const noexcept { return m_fps; }
+  double get_fps() const noexcept { return m_fps; }
 
   /// Indicate a frame has processed
   void tick() noexcept;
@@ -20,7 +20,7 @@ private:
 
   sf::Clock m_clock;
 
-  int m_fps;
+  double m_fps;
 };
 
 /// Test this class and its free functions
