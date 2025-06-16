@@ -1,39 +1,38 @@
-codecov: 
+codecov:
   token: 219d6b99-4761-48dc-a165-a8cf64640356
 
 ignore:
-- ./include/about_view.h
-- ./include/controls_view.h
-- ./include/fonts.h 
-- ./include/game_view.h 
-- ./include/game_resources.h 
-- ./include/loading_screen.h 
-- ./include/loading_screen_fonts.h 
-- ./include/loading_screen_songs.h 
-- ./include/loading_screen_textures.h 
-- ./include/loading_view.h 
-- ./include/lobby_view.h 
-- ./include/main.h 
-- ./include/menu_view.h 
-- ./include/options_view.h 
-- ./include/played_game_view.h 
-- ./include/songs.h 
-- ./include/textures.h 
-- ./src/about_view.cpp
-- ./src/controls_view.cpp
-- ./src/fonts.cpp 
-- ./src/game_view.cpp 
-- ./src/game_resources.cpp 
-- ./src/loading_screen.cpp 
-- ./src/loading_screen_fonts.cpp 
-- ./src/loading_screen_songs.cpp 
-- ./src/loading_screen_textures.cpp 
-- ./src/loading_view.cpp 
-- ./src/lobby_view.cpp 
-- ./src/main.cpp 
-- ./src/menu_view.cpp 
-- ./src/options_view.cpp 
-- ./src/played_game_view.cpp 
-- ./src/songs.cpp 
-- ./src/textures.cpp 
-
+  - ./include/about_view.h
+  - ./include/controls_view.h
+  - ./include/fonts.h
+  - ./include/game_view.h
+  - ./include/game_resources.h
+  - ./include/loading_screen.h
+  - ./include/loading_screen_fonts.h
+  - ./include/loading_screen_songs.h
+  - ./include/loading_screen_textures.h
+  - ./include/loading_view.h
+  - ./include/lobby_view.h
+  - ./include/main.h
+  - ./include/menu_view.h
+  - ./include/options_view.h
+  - ./include/played_game_view.h
+  - ./include/songs.h
+  - ./include/textures.h
+  - ./src/about_view.cpp
+  - ./src/controls_view.cpp
+  - ./src/fonts.cpp
+  - ./src/game_view.cpp
+  - ./src/game_resources.cpp
+  - ./src/loading_screen.cpp
+  - ./src/loading_screen_fonts.cpp
+  - ./src/loading_screen_songs.cpp
+  - ./src/loading_screen_textures.cpp
+  - ./src/loading_view.cpp
+  - ./src/lobby_view.cpp
+  - ./src/main.cpp
+  - ./src/menu_view.cpp
+  - ./src/options_view.cpp
+  - ./src/played_game_view.cpp
+  - ./src/songs.cpp
+  - ./src/textures.cpp
