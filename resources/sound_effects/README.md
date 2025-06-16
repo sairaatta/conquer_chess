@@ -1,4 +1,4 @@
-# Sound effects
+# Sound effectshttps://github.com/tresinformal/drakkar/blob/master/resources/hide.ogg
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 

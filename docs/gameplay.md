@@ -4,7 +4,7 @@ This page describes how to play Conquer Chess.
 
 ## Main menu
 
-![Main menu v0.7](../screenshots/20250611.jpg)
+![Main menu v0.7](screenshots/20250611.jpg)
 
 The main menu is where you start. Here you can go to the game lobby,
 change the settings of the game or view information about the game.
@@ -19,7 +19,7 @@ To go to the lobby:
 
 ## Lobby
 
-![Lobby v0.4](../screenshots/20230103_4.png)
+![Lobby v0.4](screenshots/20230103_4.png)
 
 The lobby is where the match is set up.
 Here the two players pick who plays which side
