@@ -272,9 +272,14 @@ std::vector<piece> get_pieces_ready_to_not_castle(
 
 /// Get all the pieces in the starting position type
 std::vector<piece> get_starting_pieces(
+  const starting_position_type spt
+) noexcept;
+
+/// Get all the pieces in the starting position type
+std::vector<piece> get_starting_pieces(
   const starting_position_type t,
-  const race white_race = race::classic,
-  const race black_race = race::classic
+  const race white_race,
+  const race black_race
 ) noexcept;
 
 /// Is there a piece with the ID among the pieces?

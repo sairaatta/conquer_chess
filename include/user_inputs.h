@@ -171,7 +171,6 @@ void test_user_inputs();
 /// Convert a 'piece_action' to a 'control_actions'
 user_inputs to_user_inputs(
   const piece_action& pa,
-  const game& g,
   const game_controller& c
 );
 

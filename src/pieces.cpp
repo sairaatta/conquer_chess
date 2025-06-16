@@ -6,6 +6,7 @@
 #include <sstream>
 
 #include "game_coordinate.h"
+#include "lobby_options.h"
 
 std::vector<std::string> add_coordinats(
   const std::vector<std::string>& strs
@@ -848,6 +849,17 @@ std::vector<piece> get_standard_starting_pieces(
     piece(chess_color::black, piece_type::pawn,   square("g7"), black_race),
     piece(chess_color::black, piece_type::pawn,   square("h7"), black_race)
   };
+}
+
+std::vector<piece> get_starting_pieces(
+  const starting_position_type spt
+) noexcept
+{
+  return get_starting_pieces(
+    spt,
+    get_race_of_color(chess_color::white),
+    get_race_of_color(chess_color::black)
+  );
 }
 
 std::vector<piece> get_starting_pieces(

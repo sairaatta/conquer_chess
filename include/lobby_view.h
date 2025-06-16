@@ -6,7 +6,6 @@
 #include "program_state.h"
 #include "lobby_view_layout.h"
 #include "lobby_view_item.h"
-#include "lobby_options.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -34,7 +33,6 @@ public:
   /// Will be empty if the user should remain in this screen
   const auto& get_next_state() const noexcept { return m_next_state; }
 
-  const auto& get_options() const noexcept { return m_lobby_options; }
 
   /// Process all events
   /// @return if the user wants to quit
@@ -73,9 +71,6 @@ private:
 
   /// Is LHS ready to start?
   bool m_lhs_start;
-
-  /// The options set in this lobby
-  lobby_options m_lobby_options;
 
   /// The next state to go to, if any
   std::optional<program_state> m_next_state;

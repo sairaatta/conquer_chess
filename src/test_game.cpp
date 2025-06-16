@@ -899,21 +899,20 @@ void test_game_functions()
   }
   // get_player_side
   {
-    #ifdef LOBBY_OPTIONS_IS_SINGLETON
-    lobby_options lo = create_default_lobby_options();
+    use_default_lobby_options();
     // default
     {
       const game g{create_game_with_standard_starting_position()};
-      assert(get_player_side(g, chess_color::white) == side::lhs);
-      assert(get_player_side(g, chess_color::black) == side::rhs);
+      assert(get_player_side(chess_color::white) == side::lhs);
+      assert(get_player_side(chess_color::black) == side::rhs);
     }
-    lo.set_color(chess_color::black, side::lhs);
+    lobby_options::get().set_color(chess_color::black, side::lhs);
     {
       const game g{create_game_with_standard_starting_position()};
-      assert(get_player_side(g, chess_color::white) == side::rhs);
-      assert(get_player_side(g, chess_color::black) == side::lhs);
+      assert(get_player_side(chess_color::white) == side::rhs);
+      assert(get_player_side(chess_color::black) == side::lhs);
     }
-    #endif // LOBBY_OPTIONS_IS_SINGLETON
+    use_default_lobby_options();
   }
   // get_possible_moves
   {

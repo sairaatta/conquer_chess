@@ -16,13 +16,14 @@
 #error 'game' must know nothing about 'game_controller'
 #endif
 
-game::game(
-  const lobby_options& lo
-)
-  : m_lobby_options{lo},
-    m_pieces{
+game::game()
+  : m_pieces{
       get_starting_pieces(
-        game_options::get().get_starting_position(), lo)},
+        get_starting_position(),
+        race::classic,
+        race::classic
+      )
+    },
     m_in_game_time{0.0}
 {
 
@@ -108,7 +109,7 @@ bool can_do(
     || action == piece_action_type::promote_to_rook
   )
   {
-    return can_do_promote(g, selected_piece, cursor_square, player_side);
+    return can_do_promote(selected_piece, cursor_square, player_side);
   }
   return false;
 }
@@ -136,7 +137,7 @@ bool can_do_attack(
   const side player_side
 )
 {
-  const auto player_color{get_player_color(g, player_side)};
+  const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   // Is it theoretically possible, e.g. on an empty board?
   if (
@@ -172,7 +173,7 @@ bool can_do_castle_kingside(
   const side player_side
 )
 {
-  const auto player_color{get_player_color(g, player_side)};
+  const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_default_king_square(player_color)};
   if (!is_piece_at(g, king_square)) return false;
@@ -188,7 +189,7 @@ bool can_do_castle_queenside(
   const side player_side
 )
 {
-  const auto player_color{get_player_color(g, player_side)};
+  const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_default_king_square(player_color)};
   if (!is_piece_at(g, king_square)) return false;
@@ -204,7 +205,7 @@ bool can_do_en_passant(
   const side player_side
 )
 {
-  const auto player_color{get_player_color(g, player_side)};
+  const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   assert(is_piece_at(g, selected_piece.get_current_square()));
   assert(get_piece_at(g, selected_piece.get_current_square()).get_color()
@@ -224,7 +225,7 @@ bool can_do_move(
   const side player_side
 )
 {
-  const auto player_color{get_player_color(g, player_side)};
+  const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   // Is it theoretically possible, e.g. on an empty board?
   if (
@@ -250,13 +251,12 @@ bool can_do_move(
 }
 
 bool can_do_promote(
-  const game& g,
   const piece& selected_piece,
   const square& cursor_square,
   const side player_side
 )
 {
-  const auto player_color{get_player_color(g, player_side)};
+  const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   if (selected_piece.get_current_square() != cursor_square)
   {
@@ -966,7 +966,7 @@ int count_selected_units(
   const side player_side
 )
 {
-  return count_selected_units(g, get_player_color(g, player_side));
+  return count_selected_units(g, get_player_color(player_side));
 }
 
 game create_randomly_played_game(
@@ -1041,7 +1041,7 @@ std::optional<piece_action_type> get_default_piece_action(
   if (has_selected_pieces(g, player_side))
   {
     // Has selected pieces
-    const chess_color player_color{get_player_color(g, player_side)};
+    const chess_color player_color{get_player_color(player_side)};
 
     if (
       is_piece_at(g, cursor_square)
@@ -1093,7 +1093,7 @@ std::optional<piece_action_type> get_default_piece_action(
     if (is_piece_at(g, cursor_square))
     {
       const piece& p{get_piece_at(g, cursor_square)};
-      const auto player_color{get_player_color(g, player_side)};
+      const auto player_color{get_player_color(player_side)};
       if (p.get_color() == player_color)
       {
         if (!p.is_selected()) return piece_action_type::select;
@@ -1195,17 +1195,16 @@ piece get_piece_with_id(
 
 
 chess_color get_player_color(
-  const game& g,
   const side player_side
 ) noexcept
 {
-  return get_color(g.get_lobby_options(), player_side);
+  return get_color(player_side);
 }
 
-side get_player_side(const game& g, const chess_color& color) noexcept
+side get_player_side(const chess_color& color) noexcept
 {
-  if (get_player_color(g, side::lhs) == color) return side::lhs;
-  assert(get_player_color(g, side::rhs) == color);
+  if (get_player_color(side::lhs) == color) return side::lhs;
+  assert(get_player_color(side::rhs) == color);
   return side::rhs;
 }
 
@@ -1237,7 +1236,7 @@ std::vector<piece> get_selected_pieces(
   const side player
 )
 {
-  return get_selected_pieces(g.get_pieces(), get_player_color(g, player));
+  return get_selected_pieces(g.get_pieces(), get_player_color(player));
 }
 
 std::vector<message> collect_messages(const game& g) noexcept
@@ -1298,18 +1297,6 @@ bool has_selected_pieces(const game& g, const chess_color player)
 bool has_selected_pieces(const game& g, const side player)
 {
   return !get_selected_pieces(g, player).empty();
-}
-
-std::vector<piece> get_starting_pieces(
-  const starting_position_type spt,
-  const lobby_options& lo
-) noexcept
-{
-  return get_starting_pieces(
-    spt,
-    get_race_of_color(lo, chess_color::white),
-    get_race_of_color(lo, chess_color::black)
-  );
 }
 
 bool is_empty(const game& g, const square& s) noexcept
@@ -1448,8 +1435,7 @@ std::ostream& operator<<(std::ostream& os, const game& g) noexcept
 {
   os
     << "Time: " << g.get_in_game_time() << " ticks\n"
-    << to_board_str(g.get_pieces(), board_to_text_options(true, true)) << '\n'
-    << "Lobby options: " << g.get_lobby_options();
+    << to_board_str(g.get_pieces(), board_to_text_options(true, true))
   ;
   return os;
 }

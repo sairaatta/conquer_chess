@@ -201,7 +201,7 @@ void do_select(
   const side player_side
 )
 {
-  do_select(g, c, square_str, get_player_color(g, player_side));
+  do_select(g, c, square_str, get_player_color(player_side));
 }
 
 void do_select_and_move_piece(
@@ -265,7 +265,7 @@ void process_press_action_1_or_lmb_down(
   //                 |
 
   const side player_side{action.get_player()};
-  const chess_color player_color{get_player_color(g, player_side)};
+  const chess_color player_color{get_player_color(player_side)};
   const game_coordinate cursor_pos{get_cursor_pos(c, player_side)};
   if (!is_coordinat_on_board(cursor_pos))
   {
@@ -376,7 +376,7 @@ void process_press_action_1_or_lmb_down(
     g,
     c,
     get_cursor_pos(c, action.get_player()),
-    get_player_color(g, action.get_player())
+    get_player_color(action.get_player())
   );
 }
 
@@ -392,7 +392,7 @@ void process_press_action_2(
   //  3. promote to rook (for a selected pawn at the final file)
 
   const side player_side{action.get_player()};
-  const chess_color player_color{get_player_color(g, player_side)};
+  const chess_color player_color{get_player_color(player_side)};
   const square to{square(get_cursor_pos(c, player_side))};
 
   if (is_piece_at(g, to) && get_piece_at(g, to).get_color() == player_color)
@@ -421,7 +421,7 @@ void process_press_action_2(
     g,
     c,
     get_cursor_pos(c, action.get_player()),
-    get_player_color(g, action.get_player())
+    get_player_color(action.get_player())
   );
 }
 
@@ -437,7 +437,7 @@ void process_press_action_3(
   //  2. castle kingside (for a selected king)
 
   const side player_side{action.get_player()};
-  const chess_color player_color{get_player_color(g, player_side)};
+  const chess_color player_color{get_player_color(player_side)};
   const square to{square(get_cursor_pos(c, player_side))};
 
   if (is_piece_at(g, to) && get_piece_at(g, to).get_color() == player_color)
@@ -491,7 +491,7 @@ void process_press_action_4(
   //  2. castle kingside (for a selected king)
 
   const side player_side{action.get_player()};
-  const chess_color player_color{get_player_color(g, player_side)};
+  const chess_color player_color{get_player_color(player_side)};
   const square to{square(get_cursor_pos(c, player_side))};
 
   if (is_piece_at(g, to) && get_piece_at(g, to).get_color() == player_color)
@@ -704,12 +704,11 @@ void test_user_inputs()
 
 user_inputs to_user_inputs(
   const piece_action& pa,
-  const game& g,
   const game_controller& c
 )
 {
   const auto player_color{pa.get_color()};
-  const side player_side{get_player_side(g, player_color)};
+  const side player_side{get_player_side(player_color)};
   const physical_controller pc{get_physical_controller(c, player_side)};
   const user_input_type select_action_type{
     pc.get_type() == physical_controller_type::mouse ?

@@ -122,7 +122,7 @@ bool can_player_select_piece_at_cursor_pos(
   const auto& cursor_pos{
     get_cursor_pos(
       c,
-      get_player_side(g, cursor_color)
+      get_player_side(cursor_color)
     )
   };
   if (
@@ -149,7 +149,7 @@ std::vector<user_inputs> collect_all_user_inputses(
   const auto piece_actions{collect_all_piece_actions(g)};
   user_inputs.reserve(piece_actions.size());
   for (const auto& piece_action: piece_actions) {
-    user_inputs.push_back(to_user_inputs(piece_action, g, c));
+    user_inputs.push_back(to_user_inputs(piece_action, c));
   }
   return user_inputs;
 }
@@ -160,7 +160,7 @@ user_inputs convert_move_to_user_inputs(
   const chess_move& m
 )
 {
-  const auto player_side{get_player_side(g, m.get_color())};
+  const auto player_side{get_player_side(m.get_color())};
   const square from{get_from(g, m)};
 
   user_inputs inputs;
@@ -231,7 +231,7 @@ void do_move_keyboard_player_piece(
 )
 {
   assert(has_keyboard_controller(c));
-  assert(count_selected_units(g, get_keyboard_user_player_color(g, c)) == 1);
+  assert(count_selected_units(g, get_keyboard_user_player_color(c)) == 1);
   set_keyboard_player_pos(c, s);
 
   assert(s
@@ -258,7 +258,7 @@ void do_move_mouse_player_piece(
 )
 {
   assert(has_mouse_controller(c));
-  assert(count_selected_units(g, get_mouse_user_player_color(g, c)) == 1);
+  assert(count_selected_units(g, get_mouse_user_player_color(c)) == 1);
   set_mouse_player_pos(c, s);
   assert(square(get_cursor_pos(c, get_mouse_user_player_side(c))) == s);
 
@@ -281,7 +281,7 @@ void do_promote_keyboard_player_piece(
 )
 {
   assert(has_keyboard_controller(c));
-  assert(count_selected_units(g, get_keyboard_user_player_color(g, c)) == 1);
+  assert(count_selected_units(g, get_keyboard_user_player_color(c)) == 1);
   set_keyboard_player_pos(c, pawn_location);
   assert(square(get_cursor_pos(c, side::lhs)) == pawn_location);
   assert(get_piece_at(g, pawn_location).get_type() == piece_type::pawn);
@@ -320,7 +320,7 @@ void do_start_attack_keyboard_player_piece(
 )
 {
   assert(has_keyboard_controller(c));
-  assert(count_selected_units(g, get_keyboard_user_player_color(g, c)) == 1);
+  assert(count_selected_units(g, get_keyboard_user_player_color(c)) == 1);
   set_keyboard_player_pos(c, s);
   assert(square(get_cursor_pos(c, side::lhs)) == s);
   add_user_input(c, create_press_action_2(get_keyboard_user_player_side(c)));
@@ -416,7 +416,7 @@ void do_select_for_keyboard_player(
   const square& s
 )
 {
-  return do_select(g, c, s, get_keyboard_user_player_color(g, c));
+  return do_select(g, c, s, get_keyboard_user_player_color(c));
 }
 
 void do_select_for_mouse_player(
@@ -457,12 +457,11 @@ const game_coordinate& get_cursor_pos(
 }
 
 const game_coordinate& get_cursor_pos(
-  const game& g,
   const game_controller& c,
   const chess_color cursor_color
 )
 {
-  return get_cursor_pos(c, get_player_side(g, cursor_color));
+  return get_cursor_pos(c, get_player_side(cursor_color));
 }
 
 square get_cursor_square(
@@ -491,7 +490,7 @@ std::optional<piece_action_type> get_default_piece_action(
       return {};
     }
     const auto cursor_square{square(cursor_pos)};
-    const chess_color player_color{get_player_color(g, player_side)};
+    const chess_color player_color{get_player_color(player_side)};
 
     if (
       is_piece_at(g, cursor_square)
@@ -545,7 +544,7 @@ std::optional<piece_action_type> get_default_piece_action(
     if (is_coordinat_on_board(cursor_pos) && is_piece_at(g, square(cursor_pos)))
     {
       const auto p{get_piece_at(g, square(cursor_pos))};
-      const auto player_color{get_player_color(g, player_side)};
+      const auto player_color{get_player_color(player_side)};
       if (p.get_color() == player_color)
       {
         if (!p.is_selected()) return piece_action_type::select;
@@ -556,11 +555,10 @@ std::optional<piece_action_type> get_default_piece_action(
 }
 
 chess_color get_keyboard_user_player_color(
-  const game& g,
   const game_controller& c
 )
 {
-  return get_player_color(g, get_keyboard_user_player_side(c));
+  return get_player_color(get_keyboard_user_player_side(c));
 }
 
 side get_keyboard_user_player_side(const game_controller& c)
@@ -576,11 +574,10 @@ side get_keyboard_user_player_side(const game_controller& c)
 }
 
 chess_color get_mouse_user_player_color(
-  const game& g,
   const game_controller& c
 )
 {
-  return get_player_color(g, get_mouse_user_player_side(c));
+  return get_player_color(get_mouse_user_player_side(c));
 }
 
 side get_mouse_user_player_side(const game_controller& c)
@@ -1292,13 +1289,13 @@ void test_game_controller() //!OCLINT tests may be many
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_default_controllers()};
-    assert(get_cursor_pos(g, c, chess_color::white) != get_cursor_pos(g, c, chess_color::black));
+    assert(get_cursor_pos(c, chess_color::white) != get_cursor_pos(c, chess_color::black));
   }
   // get_keyboard_player_pos, non-const, white == lhs == keyboard
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_default_controllers()};
-    assert(get_keyboard_user_player_color(g, c) == chess_color::white);
+    assert(get_keyboard_user_player_color(c) == chess_color::white);
     const auto pos_before{get_cursor_pos(c, side::lhs)};
     const auto pos{get_cursor_pos(c, side::lhs)};
     set_cursor_pos(c, pos + game_coordinate(0.1, 0.1), side::lhs);

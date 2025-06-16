@@ -27,12 +27,7 @@
 class game
 {
 public:
-  explicit game(
-    const lobby_options& lo = create_default_lobby_options()
-  );
-
-  /// Get the lobby options
-  const auto& get_lobby_options() const noexcept { return m_lobby_options; }
+  explicit game();
 
   /// Get all the pieces
   auto& get_pieces() noexcept { return m_pieces; }
@@ -48,9 +43,6 @@ public:
   void tick(const delta_t& dt = delta_t(1.0));
 
 private:
-
-  /// The game options
-  const lobby_options m_lobby_options;
 
   /// All pieces in the game
   std::vector<piece> m_pieces;
@@ -136,7 +128,6 @@ bool can_do_move(
 
 /// Can a piece_action_type::promote_to_bishop action be done?
 bool can_do_promote(
-  const game& g,
   const piece& selected_piece,
   const square& cursor_square,
   const side player_side
@@ -291,11 +282,6 @@ std::optional<piece_action_type> get_default_piece_action(
   const side player_side
 ) noexcept;
 
-/// Get all the pieces in the starting position type
-std::vector<piece> get_starting_pieces(
-  const starting_position_type spt,
-  const lobby_options& lo
-) noexcept;
 
 /// Create a game with all default settings
 /// and the default starting position
@@ -353,12 +339,11 @@ piece get_piece_with_id(
 
 /// Get the color of a player
 chess_color get_player_color(
-  const game& g,
   const side player
 ) noexcept;
 
 /// Get the side of a player
-side get_player_side(const game& g, const chess_color& color) noexcept;
+side get_player_side(const chess_color& color) noexcept;
 
 /// Get the possible moves for a player's selected pieces
 /// Will be empty if no pieces are selected

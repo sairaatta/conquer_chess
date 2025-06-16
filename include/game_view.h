@@ -127,12 +127,6 @@ const game_options& get_options(const game_view& v) noexcept;
 /// Get the pieces
 const std::vector<piece>& get_pieces(const game_view& v) noexcept;
 
-/// Get the color of the player
-chess_color get_player_color(
-  const game_view& v,
-  const side player
-) noexcept;
-
 /// Get the player position
 const game_coordinate& get_cursor_pos(
   const game_view& view,

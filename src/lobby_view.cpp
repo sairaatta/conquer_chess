@@ -6,6 +6,7 @@
 #include "render_window.h"
 #include "screen_coordinate.h"
 #include "helper.h"
+#include "lobby_options.h"
 #include "game_options.h"
 #include "game_resources.h"
 #include "render_window.h"
@@ -18,7 +19,6 @@
 lobby_view::lobby_view()
   : m_lhs_cursor{lobby_view_item::color},
     m_lhs_start{false},
-    m_lobby_options{create_default_lobby_options()},
     m_rhs_cursor{lobby_view_item::color},
     m_rhs_start{false}
 {
@@ -73,19 +73,20 @@ bool lobby_view::process_event(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
+      auto& lo{lobby_options::get()};
       switch (m_lhs_cursor)
       {
         case lobby_view_item::color:
-          m_lobby_options.set_color(
-            get_next(m_lobby_options.get_color(side::lhs)),
+          lo.set_color(
+            get_next(lo.get_color(side::lhs)),
             side::lhs
           );
           m_lhs_start = false;
           m_rhs_start = false;
           break;
         case lobby_view_item::race:
-          m_lobby_options.set_race(
-            get_next(m_lobby_options.get_race(side::lhs)),
+          lo.set_race(
+            get_next(lo.get_race(side::lhs)),
             side::lhs
           );
           m_lhs_start = false;
@@ -124,16 +125,16 @@ bool lobby_view::process_event(sf::Event& event)
       switch (m_rhs_cursor)
       {
         case lobby_view_item::color:
-          m_lobby_options.set_color(
-            get_next(m_lobby_options.get_color(side::rhs)),
+          lobby_options::get().set_color(
+            get_next(lobby_options::get().get_color(side::rhs)),
             side::rhs
           );
           m_lhs_start = false;
           m_rhs_start = false;
           break;
         case lobby_view_item::race:
-          m_lobby_options.set_race(
-            get_next(m_lobby_options.get_race(side::rhs)),
+          lobby_options::get().set_race(
+            get_next(lobby_options::get().get_race(side::rhs)),
             side::rhs
           );
           m_lhs_start = false;
@@ -224,7 +225,7 @@ void draw_color_panel(lobby_view& v, const side player_side)
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
     &game_resources::get().get_lobby_menu_textures().get_color(
-      v.get_options().get_color(player_side)
+      get_color(player_side)
     )
   );
   get_render_window().draw(rectangle);
@@ -234,7 +235,7 @@ void draw_color_panel(lobby_view& v, const side player_side)
   const auto text_rect{
     get_lower_half(screen_rect)
   };
-  std::string s{to_str(v.get_options().get_color(player_side))};
+  std::string s{to_str(get_color(player_side))};
   s[0] = std::toupper(s[0]);
   text.setString(s);
   v.set_text_style(text);
@@ -253,8 +254,8 @@ void draw_controls_panel(lobby_view& v, const side player_side)
   const auto screen_rect{v.get_layout().get_controls(player_side)};
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
-  const auto player_color{v.get_options().get_color(player_side)};
-  const auto player_race{v.get_options().get_race(player_side)};
+  const auto player_color{get_color(player_side)};
+  const auto player_race{get_race_of_side(player_side)};
   rectangle.setTexture(
     &game_resources::get().get_piece_portrait_textures().get_portrait(
       player_race,
@@ -326,7 +327,7 @@ void draw_race_panel(lobby_view& v, const side player_side)
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
     &game_resources::get().get_lobby_menu_textures().get_head(
-      v.get_options().get_race(player_side)
+      get_race_of_side(player_side)
     )
   );
   get_render_window().draw(rectangle);
@@ -336,7 +337,7 @@ void draw_race_panel(lobby_view& v, const side player_side)
   const auto text_rect{
     get_lower_half(screen_rect)
   };
-  std::string s{to_str(v.get_options().get_race(player_side))};
+  std::string s{to_str(get_race_of_side(player_side))};
   s[0] = std::toupper(s[0]);
   text.setString(s);
   v.set_text_style(text);

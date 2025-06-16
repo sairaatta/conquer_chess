@@ -244,7 +244,6 @@ const game_coordinate& get_cursor_pos(
 
 /// Get the cursor position for a chess color
 const game_coordinate& get_cursor_pos(
-  const game& g,
   const game_controller& c,
   const chess_color cursor_color
 );
@@ -267,7 +266,6 @@ std::optional<piece_action_type> get_default_piece_action(
 /// Get the color of the keyboard using player
 /// Will throw if no user uses a keyboard
 chess_color get_keyboard_user_player_color(
-  const game& g,
   const game_controller& c
 );
 
@@ -278,7 +276,6 @@ side get_keyboard_user_player_side(const game_controller& c);
 /// Get the color of the mouse using player
 /// Will throw if no user uses a mouse
 chess_color get_mouse_user_player_color(
-  const game& g,
   const game_controller& c
 );
 

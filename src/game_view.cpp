@@ -101,7 +101,7 @@ std::string get_last_log_messages(
 {
   return get_last_log_messages(
     view.get_log(),
-    get_player_color(view.get_game(), player)
+    get_player_color(player)
   );
 }
 
@@ -126,14 +126,6 @@ void game_view::play_pieces_sound_effects()
   {
     game_resources::get().get_sound_effects().play(sound_effect);
   }
-}
-
-chess_color get_player_color(
-  const game_view& v,
-  const side player
-) noexcept
-{
-  return get_player_color(v.get_game(), player);
 }
 
 const game_coordinate& get_cursor_pos(const game_view& view, const side player) noexcept
@@ -455,7 +447,7 @@ void show_debug(game_view& view, const side player_side)
     get_closest_piece_to(g, get_cursor_pos(c, player_side))
   };
 
-  const auto color{get_player_color(view, player_side)};
+  const auto color{get_player_color(player_side)};
   std::stringstream s;
   s << "Color: " << color << '\n'
     << "Controller type: " << get_physical_controller_type(view, player_side) << '\n'
@@ -547,11 +539,10 @@ void show_log(game_view& view, const side player)
 
 void show_map(game_view& view)
 {
-  const auto& game{view.get_game()};
   const auto& layout{view.get_layout()};
   sf::RectangleShape sprite;
   set_rect(sprite, layout.get_window_size());
-  const race r{get_race_of_color(game.get_lobby_options(), chess_color::white)};
+  const race r{get_race_of_color(chess_color::white)};
   sprite.setTexture(
     &get_map_texture(r)
   );
@@ -690,7 +681,6 @@ void show_square_under_cursor(
   const side player
 )
 {
-  const auto& g{view.get_game()};
   const auto& c{view.get_game_controller()};
   const auto& layout{view.get_layout()};
   const int x{
@@ -718,7 +708,7 @@ void show_square_under_cursor(
   const auto old_fill_color = s.getFillColor();
   const auto old_outline_color = s.getOutlineColor();
   const auto old_thickness = s.getOutlineThickness();
-  const auto player_color{get_color(g.get_lobby_options(), player)};
+  const auto player_color{get_color(player)};
   s.setOutlineColor(to_sfml_color(player_color));
   s.setFillColor(sf::Color::Transparent);
   const bool valid{would_be_valid(view, player_color)};
@@ -916,7 +906,7 @@ void show_unit_sprites(game_view& view, const side player_side)
 
   const double square_width = get_width(layout.get_units(player_side));
   const double square_height = square_width;
-  const auto player_color{get_player_color(view, player_side)};
+  const auto player_color{get_player_color(player_side)};
   screen_coordinate screen_position{
     layout.get_units(player_side).get_tl()
     + screen_coordinate(10, 0) // margin
