@@ -733,6 +733,24 @@ void test_game_functions()
       assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_bishop, "h1", side::rhs));
       assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_knight, "h1", side::rhs));
     }
+    // clear_piece_messages
+    {
+      game g{create_game_with_standard_starting_position()};
+      assert(collect_messages(g).empty());
+      clear_piece_messages(g);
+      assert(collect_messages(g).empty());
+    }
+    // collect_action_history
+    {
+      const game g{create_game_with_standard_starting_position()};
+      assert(collect_action_history(g).get_timed_actions().empty());
+    }
+    // collect_all_piece_actions, for a color
+    {
+      const game g{create_game_with_standard_starting_position()};
+      assert(!collect_all_piece_actions(g, chess_color::white).empty());
+      assert(!collect_all_piece_actions(g, chess_color::black).empty());
+    }
     //#define FIX_ISSUE_21
     #ifdef FIX_ISSUE_21
     // 53: Piece selected, opponent at target square -> en_passant
@@ -835,7 +853,7 @@ void test_game_functions()
   }
   // count_piece_actions: actions in pieces accumulate
   {
-    game g = get_kings_only_game();
+    game g{create_game_with_starting_position(starting_position_type::kings_only)};
     get_pieces(g).at(0).add_action(
       piece_action(
         chess_color::white,
@@ -859,53 +877,55 @@ void test_game_functions()
   }
   // do_show_selected
   {
-    const auto g{get_kings_only_game()};
+    const game g{create_game_with_starting_position(starting_position_type::kings_only)};
     assert(do_show_selected() || !do_show_selected());
   }
   // get_occupied_squares
   {
-    const game g{create_game_with_starting_position(starting_position_type::standard)};
+    const game g{create_game_with_standard_starting_position()};
     assert(get_occupied_squares(g).size() == 32);
   }
   // get_piece_at, const
   {
-    const game g;
+    const game g{create_game_with_standard_starting_position()};
     assert(get_piece_at(g, square("e1")).get_type() == piece_type::king);
   }
   // get_piece_at, non-const
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     auto& piece{get_piece_at(g, square("e1"))};
     assert(piece.get_type() == piece_type::king);
     piece.set_selected(true); // Just needs to compile
   }
   // get_player_side
   {
+    #ifdef LOBBY_OPTIONS_IS_SINGLETON
     lobby_options lo = create_default_lobby_options();
     // default
     {
-      const game g(lo);
+      const game g{create_game_with_standard_starting_position()};
       assert(get_player_side(g, chess_color::white) == side::lhs);
       assert(get_player_side(g, chess_color::black) == side::rhs);
     }
     lo.set_color(chess_color::black, side::lhs);
     {
-      const game g(lo);
+      const game g{create_game_with_standard_starting_position()};
       assert(get_player_side(g, chess_color::white) == side::rhs);
       assert(get_player_side(g, chess_color::black) == side::lhs);
     }
+    #endif // LOBBY_OPTIONS_IS_SINGLETON
   }
   // get_possible_moves
   {
     // No moves when nothing selected
     {
-      const game g;
+      const game g{create_game_with_standard_starting_position()};
       assert(get_possible_moves(g, side::lhs).empty());
       assert(get_possible_moves(g, side::rhs).empty());
     }
     // Knight at b1 has four moves when selected (two regular, and two moves beyond)
     {
-      game g;
+      game g{create_game_with_standard_starting_position()};
       const std::vector<square> moves{get_possible_moves(g, side::lhs)};
       assert(moves.empty());
       auto& piece{get_piece_at(g, square("b1"))};
@@ -915,7 +935,7 @@ void test_game_functions()
     }
     // Pawn at e2 has four moves when selected
     {
-      game g;
+      game g{create_game_with_standard_starting_position()};
       const std::vector<square> moves{get_possible_moves(g, side::lhs)};
       assert(moves.empty());
       auto& piece{get_piece_at(g, square("e2"))};
@@ -925,33 +945,40 @@ void test_game_functions()
   }
   // is_empty
   {
-    const game g;
+    const game g{create_game_with_standard_starting_position()};
     assert(is_empty(g, square("e4")));
     assert(!is_empty(g, square("d1")));
   }
   // is_idle
   {
-    game g;
+    const game g{create_game_with_standard_starting_position()};
     assert(is_idle(g));
   }
   // is_piece_at
   {
-    const game g;
+    const game g{create_game_with_standard_starting_position()};
     assert(is_piece_at(g, square("e1")));
     assert(!is_piece_at(g, square("e4")));
   }
   // get_pieces
   {
-    const game g;
+    const game g{create_game_with_standard_starting_position()};
     const auto pieces{get_pieces(g)};
     const auto pieces_again{g.get_pieces()};
     assert(pieces == pieces_again);
   }
   // get_time
   {
-    const game g;
+    const game g{create_game_with_standard_starting_position()};
     const auto t{get_time(g)};
     assert(t.get() == 0.0);
+  }
+  // tick_until_idle
+  {
+    game g{create_game_with_standard_starting_position()};
+    tick_until_idle(g);
+    assert(is_idle(g));
+
   }
   // operator<<
   {
