@@ -3,9 +3,10 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "chess_color.h"
 #include "physical_controller_type.h"
+
+#include <SFML/Graphics.hpp>
 
 /// The games' textures.
 class textures

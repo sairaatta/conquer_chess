@@ -1,7 +1,5 @@
 #include "read_only.h"
 #include <cassert>
-#include <vector>
-#include <exception>
 
 template <typename T>
 bool operator==(const read_only<T>& lhs, const read_only<T>& rhs) noexcept

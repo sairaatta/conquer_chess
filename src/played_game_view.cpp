@@ -5,11 +5,9 @@
 #include "screen_coordinate.h"
 #include "render_window.h"
 #include "game_resources.h"
-//#include "pieces.h"
 #include "sfml_helper.h"
 #include <cassert>
 #include <cmath>
-//#include <iostream>
 #include <fstream>
 #include <sstream>
 
@@ -39,16 +37,16 @@ bool played_game_view::process_event(sf::Event& event)
   }
   else if (event.type == sf::Event::Closed)
   {
-    get_render_window().close();
-    return true; // Game is done
+    m_next_state = program_state::main_menu;
+    return false;
   }
   else if (event.type == sf::Event::KeyPressed)
   {
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      get_render_window().close();
-      return true;
+      m_next_state = program_state::main_menu;
+      return false;
     }
     else if (key_pressed == sf::Keyboard::Key::F2)
     {

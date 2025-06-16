@@ -3,8 +3,9 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "race.h"
+
+#include <SFML/Graphics.hpp>
 
 /// The textures for the game maps.
 class map_textures

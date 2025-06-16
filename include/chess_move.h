@@ -1,14 +1,15 @@
 #ifndef CHESS_MOVE_H
 #define CHESS_MOVE_H
 
-#include <string>
-#include <vector>
-#include <optional>
-#include <iosfwd>
 
 #include "castling_type.h"
 #include "piece_type.h"
 #include "square.h"
+
+#include <string>
+#include <vector>
+#include <optional>
+#include <iosfwd>
 
 /// A chess move.
 ///

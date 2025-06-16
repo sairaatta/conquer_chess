@@ -1,5 +1,5 @@
-#ifndef ACTIONS_H
-#define ACTIONS_H
+#ifndef USER_INPUTS_H
+#define USER_INPUTS_H
 
 #include "ccfwd.h"
 
@@ -178,4 +178,4 @@ user_inputs to_user_inputs(
 std::ostream& operator<<(std::ostream& os, const user_inputs& actions) noexcept;
 bool operator==(const user_inputs& lhs, const user_inputs& rhs) noexcept;
 
-#endif // ACTIONS_H
+#endif // USER_INPUTS_H

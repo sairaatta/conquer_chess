@@ -1,13 +1,13 @@
 #ifndef PIECE_ACTION_H
 #define PIECE_ACTION_H
 
-#include <iosfwd>
-#include <string>
-#include <vector>
-
 #include "piece_action_type.h"
 #include "square.h"
 #include "piece_type.h"
+
+#include <iosfwd>
+#include <string>
+#include <vector>
 
 /// An action to be done by a piece.
 ///

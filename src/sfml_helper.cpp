@@ -6,12 +6,13 @@
 #include "game_resources.h"
 #endif
 
+#include "game_coordinate.h"
+
 #include <SFML/Graphics/RectangleShape.hpp>
 
 #include <cassert>
 #include <cmath>
 
-#include "game_coordinate.h"
 
 sf::Color f_health_to_color(const double f)
 {

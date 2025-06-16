@@ -3,16 +3,15 @@
 #ifndef LOGIC_ONLY
 
 #include "physical_controller.h"
-#include "physical_controllers.h"
-#include "user_input_type.h"
 #include "render_window.h"
 #include "game.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
-#include "game_rect.h"
 #include "screen_coordinate.h"
 #include "screen_rect.h"
 #include "sfml_helper.h"
+#include "screen_rect.h"
+#include "game_rect.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -20,7 +19,6 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
-#include <numeric>
 #include <string>
 #include <sstream>
 
@@ -204,16 +202,16 @@ bool game_view::process_event(sf::Event& event)
   }
   else if (event.type == sf::Event::Closed)
   {
-      get_render_window().close();
-      return true; // Game is done
+      m_next_state = program_state::lobby;
+      return false;
   }
   else if (event.type == sf::Event::KeyPressed)
   {
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      get_render_window().close();
-      return true;
+      m_next_state = program_state::lobby;
+      return false;
     }
   }
   ::process_event(m_game_controller, event, m_layout);
@@ -575,7 +573,7 @@ void show_occupied_squares(game_view& view)
     const auto& square{get_occupied_square(piece)};
     const screen_rect square_rect{
       convert_to_screen_rect(
-        to_game_rect(square),
+        game_rect{to_game_rect(square)},
         get_layout(view)
       )
     };

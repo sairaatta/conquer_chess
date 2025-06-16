@@ -2,20 +2,18 @@
 
 #ifndef LOGIC_ONLY
 
+#include "game_resources.h"
+#include "game_options.h"
 #include "render_window.h"
-#include "about_view.h"
 #include "screen_coordinate.h"
-#include "game_view.h"
-#include "lobby_view.h"
-#include "played_game_view.h"
-#include "options_view.h"
 #include "sfml_helper.h"
+
+#include <SFML/Window/Window.hpp>
+#include <SFML/Window/ContextSettings.hpp>
 
 #include <cassert>
 #include <cmath>
 #include <iostream>
-#include <SFML/Window/Window.hpp>
-#include <SFML/Window/ContextSettings.hpp>
 
 menu_view::menu_view(
 ) :
@@ -47,30 +45,7 @@ int create_seedless_random_background_image_index() {
 
 void menu_view::exec_about()
 {
-  /*
-  const auto cur_pos{m_window.getPosition()};
-  m_window.setVisible(false);
-  about_view view;
-  view.exec();
-  m_window.setVisible(true);
-  m_window.setPosition(cur_pos);
-  */
   m_next_state = program_state::about;
-}
-
-void menu_view::exec_game()
-{
-  /*
-  const auto cur_pos{m_window.getPosition()};
-  m_window.setVisible(false);
-  game_view view{
-    game(m_game_options),
-    game_controller(m_physical_controllers)
-  };
-  view.exec();
-  m_window.setVisible(true);
-  m_window.setPosition(cur_pos);
-  */
 }
 
 void menu_view::exec_lobby()
@@ -143,7 +118,6 @@ bool menu_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-    get_render_window().close();
     return true; // Close the program
   }
   if (event.type == sf::Event::KeyPressed)
@@ -151,7 +125,10 @@ bool menu_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      get_render_window().close();
+      return true; // Close the program
+    }
+    else if (key_pressed == sf::Keyboard::Key::F4)
+    {
       return true; // Close the program
     }
   }
@@ -215,10 +192,6 @@ bool menu_view::process_event(sf::Event& event)
     else if (key_pressed == sf::Keyboard::Key::F2)
     {
       exec_played_game();
-    }
-    else if (key_pressed == sf::Keyboard::Key::F4)
-    {
-      exec_game();
     }
   }
   if (event.type == sf::Event::MouseMoved)

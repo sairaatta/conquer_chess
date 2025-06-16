@@ -32,6 +32,7 @@ void main_window::exec()
     // Show the new state
     show();
   }
+  get_render_window().close();
 }
 
 bool main_window::process_events()

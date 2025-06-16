@@ -6,14 +6,14 @@
 #include "ccfwd.h"
 #include "physical_controller.h"
 #include "game.h"
-#include "fps_clock.h"
 #include "game_log.h"
 #include "game_controller.h"
-#include "game_resources.h"
 #include "game_view_layout.h"
-#include "sleep_scheduler.h"
+#include "program_state.h"
 
 #include <SFML/Graphics.hpp>
+
+#include <optional>
 
 /// The Game dialog.
 ///
@@ -68,6 +68,9 @@ private:
 
   /// The text log
   game_log m_log;
+
+  /// The next state to go to, if any
+  std::optional<program_state> m_next_state;
 
   /// Play the new sound effects
   void play_pieces_sound_effects();

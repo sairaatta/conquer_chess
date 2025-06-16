@@ -1,7 +1,6 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include <iosfwd>
 
 #include "action_history.h"
 #include "delta_t.h"
@@ -13,6 +12,7 @@
 #include "race.h"
 #include "read_only.h"
 
+#include <iosfwd>
 #include <string>
 #include <vector>
 

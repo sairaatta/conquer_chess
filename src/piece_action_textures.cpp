@@ -2,9 +2,8 @@
 
 #ifndef LOGIC_ONLY
 
-#include "game_resources.h"
-
 #include <QFile>
+
 #include <cassert>
 #include <sstream>
 

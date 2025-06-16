@@ -7,10 +7,11 @@
 #include "game_coordinate.h"
 #include "side.h"
 
+#include <SFML/Window/Event.hpp>
+
 #include <iosfwd>
 #include <random>
 #include <optional>
-#include <SFML/Window/Event.hpp>
 
 /// A user input.
 class user_input

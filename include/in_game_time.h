@@ -2,6 +2,7 @@
 #define IN_GAME_TIME_H
 
 #include "ccfwd.h"
+
 #include <iosfwd>
 
 /// The in-game time, in chess moves.

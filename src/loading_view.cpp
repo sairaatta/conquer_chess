@@ -6,6 +6,7 @@
 #include "screen_coordinate.h"
 #include "sfml_helper.h"
 #include "render_window.h"
+
 #include <cassert>
 #include <cmath>
 
@@ -30,7 +31,6 @@ bool loading_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-    get_render_window().close();
     return true; // Close the program
   }
   if (event.type == sf::Event::KeyPressed)
@@ -38,7 +38,6 @@ bool loading_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      get_render_window().close();
       return true; // Close the program
     }
   }
@@ -139,6 +138,12 @@ void loading_view::start()
 void loading_view::stop()
 {
   game_resources::get().get_loading_screen_songs().get_heroes().stop();
+}
+
+void test_loading_view()
+{
+  loading_view v;
+  assert(!v.get_next_state().has_value());
 }
 
 #endif // LOGIC_ONLY

@@ -7,6 +7,7 @@
 #include "resource_loader.h"
 
 #include <SFML/Graphics.hpp>
+
 #include <optional>
 
 /// The Loading screen.
@@ -56,6 +57,9 @@ private:
 };
 
 sf::Text get_loading_screen_text() noexcept;
+
+/// Test this class
+void test_loading_view();
 
 #endif // LOGIC_ONLY
 

@@ -3,10 +3,12 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "about_view_layout.h"
 #include "about_view_item.h"
 #include "program_state.h"
+
+#include <SFML/Graphics.hpp>
+
 #include <optional>
 
 /// The About screen.

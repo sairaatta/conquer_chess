@@ -3,10 +3,10 @@
 
 /// @file Work on collections of \link{piece_action}
 
+#include "piece_action.h"
+
 #include <iosfwd>
 #include <vector>
-
-#include "piece_action.h"
 
 /// Collect all the squares that are attacked by each color.
 std::vector<std::pair<square, chess_color>>

@@ -3,8 +3,9 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "options_view_item.h"
+
+#include <SFML/Graphics.hpp>
 
 /// Textures in the Options menu.
 class options_menu_textures

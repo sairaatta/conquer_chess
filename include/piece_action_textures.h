@@ -3,8 +3,9 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "piece_action_type.h"
+
+#include <SFML/Graphics.hpp>
 
 /// The textures for piece actions.
 class piece_action_textures

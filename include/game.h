@@ -9,6 +9,7 @@
 #include "piece_action_type.h"
 #include "action_history.h"
 #include "read_only.h"
+
 #include <iosfwd>
 #include <optional>
 #include <vector>

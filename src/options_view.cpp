@@ -7,10 +7,7 @@
 #include "physical_controller_type.h"
 #include "options_view.h"
 #include "physical_controllers.h"
-
 #include "game_resources.h"
-#include "game_controller.h"
-#include "controls_view.h"
 #include "screen_coordinate.h"
 #include "game_options.h"
 #include "pieces.h"
@@ -18,8 +15,8 @@
 #include "sfml_helper.h"
 #include "options_view.h"
 #include "render_window.h"
+
 #include <cassert>
-#include <iostream>
 #include <sstream>
 
 options_view::options_view()

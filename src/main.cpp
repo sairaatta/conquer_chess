@@ -87,6 +87,7 @@ void test()
   test_helper();
   test_id();
   test_key_bindings();
+  test_loading_view();
   test_lobby_options();
   test_lobby_view_item();
   test_lobby_view_layout();

@@ -1,8 +1,10 @@
 #include "sound_effects.h"
 
-#include <functional>
-#include <QFile>
 #include "volume.h"
+
+#include <QFile>
+
+#include <functional>
 
 #ifndef LOGIC_ONLY
 

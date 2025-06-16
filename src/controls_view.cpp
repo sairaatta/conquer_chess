@@ -8,6 +8,7 @@
 #include "action_number.h"
 #include "game_resources.h"
 #include "sfml_helper.h"
+
 #include <cassert>
 #include <cmath>
 #include <iostream>

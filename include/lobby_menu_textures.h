@@ -3,10 +3,12 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
-#include <map>
 #include "race.h"
 #include "chess_color.h"
+
+#include <SFML/Graphics.hpp>
+
+#include <map>
 
 /// The textures used in the Lobby dialog.
 class lobby_menu_textures

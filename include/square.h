@@ -1,13 +1,14 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
+#include "ccfwd.h"
+#include "chess_color.h"
+#include "castling_type.h"
+
 #include <iosfwd>
 #include <random>
 #include <string>
 #include <vector>
-#include "ccfwd.h"
-#include "chess_color.h"
-#include "castling_type.h"
 
 /// A chess square.
 ///

@@ -1,11 +1,11 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <vector>
+#include "message.h"
 
 #include <SFML/System.hpp>
 
-#include "message.h"
+#include <vector>
 
 /// The text log in the game.
 /// @note This class cannot be called `log`,

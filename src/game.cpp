@@ -3,9 +3,9 @@
 #include "game_options.h"
 #include "piece_actions.h"
 #include "id.h"
-#include "layout.h"
 #include "square.h"
 #include "pieces.h"
+
 #include <cassert>
 #include <cmath>
 #include <algorithm>

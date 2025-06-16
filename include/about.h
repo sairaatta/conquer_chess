@@ -3,8 +3,9 @@
 
 /// @file The information about the game
 
-#include <vector>
 #include <SFML/System/String.hpp>
+
+#include <vector>
 
 /// Get the URL of the homepage.
 std::string get_homepage_url() noexcept;

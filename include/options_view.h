@@ -7,11 +7,12 @@
 #include "chess_color.h"
 #include "options_view_layout.h"
 #include "options_view_item.h"
-//#include "physical_controllers.h"
 #include "physical_controller_type.h"
 #include "program_state.h"
 #include "starting_position_type.h"
+
 #include <SFML/Graphics.hpp>
+
 #include <optional>
 
 /// The Options dialog.

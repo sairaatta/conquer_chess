@@ -3,6 +3,7 @@
 
 #include "ccfwd.h"
 #include "physical_controller.h"
+
 #include <vector>
 
 /// The physical controllers used by all players.

@@ -7,9 +7,11 @@
 #include "menu_view_layout.h"
 #include "menu_view_item.h"
 #include "program_state.h"
+
+#include <SFML/Graphics.hpp>
+
 #include <optional>
 #include <random>
-#include <SFML/Graphics.hpp>
 
 /// The main Menu dialog.
 class menu_view
@@ -75,9 +77,6 @@ private:
 
   /// Run the about screen
   void exec_about();
-
-  /// Run the game
-  void exec_game();
 
   /// Run the lobby
   void exec_lobby();

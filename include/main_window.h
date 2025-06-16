@@ -3,7 +3,6 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "ccfwd.h"
 #include "sleep_scheduler.h"
 #include "about_view.h"
@@ -14,6 +13,8 @@
 #include "controls_view.h"
 #include "options_view.h"
 #include "loading_view.h"
+
+#include <SFML/Graphics.hpp>
 
 /// The single main window.
 class main_window

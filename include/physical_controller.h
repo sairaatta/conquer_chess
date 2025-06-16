@@ -5,6 +5,7 @@
 #include "key_bindings.h"
 #include "physical_controller_type.h"
 #include "side.h"
+
 #include <iosfwd>
 
 /// A physical controller.

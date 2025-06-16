@@ -3,10 +3,13 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
-//#include "game_resources.h"
 #include "played_game_view_layout.h"
 #include "game.h"
+#include "program_state.h"
+
+#include <SFML/Graphics.hpp>
+
+#include <optional>
 
 /// Dialog to view a played Conquer Chess game
 class played_game_view
@@ -26,11 +29,14 @@ public:
 
 private:
 
+  /// The played game
+  game m_game;
+
   /// The layout of this window
   played_game_view_layout m_layout;
 
-  /// The played game
-  game m_game;
+  /// The next state to go to, if any
+  std::optional<program_state> m_next_state;
 
   /// Process all events
   /// @return if the user wants to quit

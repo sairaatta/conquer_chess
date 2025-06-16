@@ -1,12 +1,12 @@
-#include "game.h"
+#include "test_game.h"
 
+#include "game.h"
 #include "asserts.h"
 #include "test_game.h"
 #include "piece.h"
 #include "piece_actions.h"
 
 #include <cassert>
-#include <iostream>
 #include <sstream>
 
 #ifdef GAME_CONTROLLER_H

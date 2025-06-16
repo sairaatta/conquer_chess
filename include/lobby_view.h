@@ -4,14 +4,12 @@
 #ifndef LOGIC_ONLY
 
 #include "program_state.h"
-//#include "game_options.h"
-//#include "game_resources.h"
 #include "lobby_view_layout.h"
 #include "lobby_view_item.h"
 #include "lobby_options.h"
-//#include "physical_controllers.h"
 
 #include <SFML/Graphics.hpp>
+
 #include <optional>
 
 /// The lobby screen.
@@ -87,32 +85,32 @@ private:
 
   /// Is RHS ready to start?
   bool m_rhs_start;
-
-  /// Run the game
-  void exec_game();
-
 };
-
-/// Show the color a player has picked
-void show_color_panel(lobby_view& v, const side player_side);
-
-/// Show the countdown
-void show_countdown(lobby_view& v, const int n_left_secs);
 
 /// The background image
 void draw_background(lobby_view& v);
 
+/// Show the side/color the players have picked
+void draw_color_panel(lobby_view& v, const side player_side);
+
+/// Show the countdown
+void draw_countdown(lobby_view& v, const int n_left_secs);
+
 /// Show where the panels will be drawn
 void draw_layout_panels(lobby_view& v);
 
+/// Show the races the players have picked
+void draw_race_panel(lobby_view& v, const side player_side);
+
+/// Show if the players are ready
+void draw_ready_panel(lobby_view& v, const side player_side);
+
 /// Draw the cursor on the selected panel
-void show_selected_panel(lobby_view& v, const side player_side);
+void draw_selected_panel(lobby_view& v, const side player_side);
 
 /// The image at the top
 void draw_title(lobby_view& v);
 
-void show_race_panel(lobby_view& v, const side player_side);
-void show_start_panel(lobby_view& v, const side player_side);
 
 #endif // LOGIC_ONLY
 

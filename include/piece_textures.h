@@ -3,10 +3,11 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Graphics.hpp>
 #include "chess_color.h"
 #include "piece_type.h"
 #include "race.h"
+
+#include <SFML/Graphics.hpp>
 
 /// Textures of the chess pieces
 class piece_textures

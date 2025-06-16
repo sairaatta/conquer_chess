@@ -3,10 +3,11 @@
 
 #ifndef LOGIC_ONLY
 
-#include <SFML/Audio.hpp>
 
 #include "ccfwd.h"
 #include "message.h"
+
+#include <SFML/Audio.hpp>
 
 /// The sound effects
 class sound_effects

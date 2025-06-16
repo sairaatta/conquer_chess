@@ -3,7 +3,6 @@
 
 #include "ccfwd.h"
 #include "action_number.h"
-
 #include "game_coordinate.h"
 #include "side.h"
 #include "user_inputs.h"

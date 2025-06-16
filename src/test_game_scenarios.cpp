@@ -1,4 +1,4 @@
-#include "game.h"
+#include "test_game.h"
 
 #include <algorithm>
 #include <cassert>

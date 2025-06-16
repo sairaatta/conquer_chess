@@ -9,7 +9,6 @@
 #include "render_window.h"
 #include <cassert>
 #include <cmath>
-#include <sstream>
 
 about_view::about_view()
 {

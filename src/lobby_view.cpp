@@ -3,18 +3,14 @@
 #ifndef LOGIC_ONLY
 
 #include "render_window.h"
-//#include "about_view.h"
 #include "screen_coordinate.h"
-//#include "game_view.h"
-//#include "played_game_view.h"
-//#include "options_view.h"
 #include "game_options.h"
 #include "game_resources.h"
 #include "render_window.h"
 #include "sfml_helper.h"
+
 #include <cassert>
 #include <cmath>
-//#include <iostream>
 
 lobby_view::lobby_view()
   : m_lhs_cursor{lobby_view_item::color},
@@ -195,14 +191,14 @@ void lobby_view::draw()
   draw_background(*this);
   draw_layout_panels(*this);
   draw_title(*this);
-  show_color_panel(*this, side::lhs);
-  show_race_panel(*this, side::lhs);
-  show_start_panel(*this, side::lhs);
-  show_color_panel(*this, side::rhs);
-  show_race_panel(*this, side::rhs);
-  show_start_panel(*this, side::rhs);
-  show_selected_panel(*this, side::lhs);
-  show_selected_panel(*this, side::rhs);
+  draw_color_panel(*this, side::lhs);
+  draw_race_panel(*this, side::lhs);
+  draw_ready_panel(*this, side::lhs);
+  draw_color_panel(*this, side::rhs);
+  draw_race_panel(*this, side::rhs);
+  draw_ready_panel(*this, side::rhs);
+  draw_selected_panel(*this, side::lhs);
+  draw_selected_panel(*this, side::rhs);
   if (m_clock)
   {
     const int n_left{
@@ -211,12 +207,12 @@ void lobby_view::draw()
         m_clock.value().getElapsedTime().asSeconds()
       )
     };
-    show_countdown(*this, n_left);
+    draw_countdown(*this, n_left);
   }
 
 }
 
-void show_color_panel(lobby_view& v, const side player_side)
+void draw_color_panel(lobby_view& v, const side player_side)
 {
   const auto screen_rect{v.get_layout().get_color(player_side)};
   sf::RectangleShape rectangle;
@@ -247,7 +243,7 @@ void show_color_panel(lobby_view& v, const side player_side)
   get_render_window().draw(text);
 }
 
-void show_countdown(lobby_view& v, const int n_left_secs)
+void draw_countdown(lobby_view& v, const int n_left_secs)
 {
   // Text
   const screen_rect window_rect{
@@ -270,7 +266,7 @@ void show_countdown(lobby_view& v, const int n_left_secs)
 
 }
 
-void show_race_panel(lobby_view& v, const side player_side)
+void draw_race_panel(lobby_view& v, const side player_side)
 {
   const auto screen_rect{v.get_layout().get_race(player_side)};
   sf::RectangleShape rectangle;
@@ -323,7 +319,7 @@ void draw_layout_panels(lobby_view& v)
   }
 }
 
-void show_selected_panel(lobby_view& v, const side player_side)
+void draw_selected_panel(lobby_view& v, const side player_side)
 {
   const auto select_rect{
     get_cursor_rect(
@@ -344,7 +340,7 @@ void show_selected_panel(lobby_view& v, const side player_side)
   get_render_window().draw(rectangle);
 }
 
-void show_start_panel(lobby_view& v, const side player_side)
+void draw_ready_panel(lobby_view& v, const side player_side)
 {
   const auto screen_rect{v.get_layout().get_start(player_side)};
   sf::RectangleShape rectangle;
@@ -388,7 +384,6 @@ void draw_title(lobby_view& v)
   rectangle.setTexture(
     &game_resources::get().get_map_textures().get_map(race::classic)
   );
-  //rectangle.setFillColor(sf::Color::Black);
   get_render_window().draw(rectangle);
 
   // Text

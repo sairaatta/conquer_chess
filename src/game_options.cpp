@@ -1,9 +1,6 @@
 #include "game_options.h"
 
-#include "physical_controllers.h"
-#include "game_view_layout.h"
-#include "pieces.h"
-#include "lobby_options.h"
+#include "layout.h"
 
 #include <cassert>
 #include <iostream>
