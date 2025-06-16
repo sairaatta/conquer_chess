@@ -105,6 +105,27 @@ void test_action_history()
     const action_history h;
     assert(h.get_timed_actions().empty());
   }
+  // merge_action_histories
+  {
+    const action_history a{
+      {
+        std::make_pair(in_game_time(0.1), get_test_piece_action()),
+        std::make_pair(in_game_time(0.3), get_test_piece_action())
+      }
+    };
+
+    const action_history b{
+      {
+        std::make_pair(in_game_time(0.2), get_test_piece_action()),
+        std::make_pair(in_game_time(0.4), get_test_piece_action())
+      }
+    };
+    const auto c{merge_action_histories( { a, b } ) };
+    assert(
+      a.get_timed_actions().size() + b.get_timed_actions().size()
+      == c.get_timed_actions().size()
+    );
+  }
   // operator<<
   {
     std::stringstream s;
