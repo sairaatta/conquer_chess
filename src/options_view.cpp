@@ -230,10 +230,11 @@ void options_view::set_text_style(sf::Text& text)
 
 void options_view::draw()
 {
-  show_layout_panels(*this);
+  draw_background(*this);
+  draw_layout_panels(*this);
 
   assert(!to_str(get_starting_position()).empty());
-  show_top(*this);
+  draw_top(*this);
   assert(!to_str(get_starting_position()).empty());
 
   draw_bottom(*this);
@@ -244,9 +245,22 @@ void options_view::draw()
     m_layout.get_chess_board(),
     show_semitransparent
   );
-  show_pieces(*this);
+  draw_pieces(*this);
 
   assert(!to_str(get_starting_position()).empty());
+}
+
+void draw_background(options_view& v)
+{
+  const screen_rect sr(
+    screen_coordinate(0,0),
+    v.get_layout().get_window_size()
+  );
+  draw_texture(
+    game_resources::get().get_options_menu_textures().get_texture(options_view_item::game_speed),
+    sr
+  );
+
 }
 
 void draw_bottom(options_view& v)
@@ -279,7 +293,7 @@ void draw_game_speed(options_view& v)
 }
 
 
-void show_pieces(options_view& view)
+void draw_pieces(options_view& view)
 {
   draw_pieces(
     get_starting_pieces(game_options::get().get_starting_position()),
@@ -288,27 +302,27 @@ void show_pieces(options_view& view)
   );
 }
 
-void show_starting_position(options_view& v)
+void draw_starting_position(options_view& v)
 {
   const auto& layout = v.get_layout();
   draw_starting_position_label(layout.get_starting_pos_label());
   draw_starting_position_value(layout.get_starting_pos_value());
 }
 
-void show_top(options_view& v)
+void draw_top(options_view& v)
 {
   assert(!to_str(get_starting_position()).empty());
 
   draw_game_speed(v);
   draw_music_volume(v);
-  show_sound_effects_volume(v);
-  show_starting_position(v);
+  draw_sound_effects_volume(v);
+  draw_starting_position(v);
 
   assert(!to_str(get_starting_position()).empty());
 }
 
 
-void show_layout_panels(options_view& v)
+void draw_layout_panels(options_view& v)
 {
   for (const auto& screen_rect: get_panels(v.get_layout()))
   {
@@ -331,7 +345,7 @@ void draw_selected_panel(options_view& v)
   draw_outline(v.get_layout().get_selectable_rect(v.get_selected()));
 }
 
-void show_sound_effects_volume(options_view& v)
+void draw_sound_effects_volume(options_view& v)
 {
   const auto& layout = v.get_layout();
   draw_sound_effects_volume_label(layout.get_sound_effects_volume_label());

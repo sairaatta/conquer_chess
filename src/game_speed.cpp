@@ -79,6 +79,10 @@ void test_game_speed()
     assert(to_str(game_speed::fast) == "fast");
     assert(to_str(game_speed::fastest) == "fastest");
   }
+  // to_human_str
+  {
+    assert(to_human_str(game_speed::slowest) == "Slowest");
+  }
   // 42: operator<<
   {
     const auto speed{game_speed::fastest};
@@ -102,6 +106,14 @@ double get_speed_multiplier(const game_speed speed) noexcept
     case game_speed::slowest: return 0.125;
   }
   assert(!"Should never get here");
+}
+
+std::string to_human_str(const game_speed speed) noexcept
+{
+  std::string s{to_str(speed)};
+  assert(s.size() >= 1);
+  s[0] = std::toupper(s[0]);
+  return s;
 }
 
 std::string to_str(const game_speed speed) noexcept

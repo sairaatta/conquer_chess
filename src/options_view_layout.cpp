@@ -8,103 +8,36 @@ options_view_layout::options_view_layout(
   const int margin_size
 ) : m_window_size{window_size}
 {
-  const int n_vertical_margins{4};
-  const int n_vus_top{4}; // vus: vertical units
-  const int n_vus_chessboard{2};
-  const int n_vus_controls{2};
-  const int n_vus{
-    n_vus_top
-    + n_vus_chessboard
-    + n_vus_controls
-  };
-  const int width{window_size.get_x()};
-  const int height{window_size.get_y()};
-  const int panel_height{
-    static_cast<int>(
-      static_cast<double>(height - (n_vertical_margins * margin_size))
-      / static_cast<double>(n_vus)
-    )
-  };
-  // Total panel width
-  const int top_panel_width{
-    width - (2 * margin_size)
-  };
-  const int max_chess_board_height{
-    height
-    - ((n_vus_top + n_vus_controls) * panel_height)
-    - (n_vertical_margins * margin_size)
-  };
-  const int max_chess_board_width{
-    width - (2 * margin_size)
-  };
-  const int chess_board_width{
-    std::min(max_chess_board_height, max_chess_board_width)
-  };
-  const int chess_board_height{
-    chess_board_width
-  };
-
-  const int max_controller_height{
-    height
-    - ((n_vus_top + n_vus_chessboard + 1) * panel_height)
-    - (n_vertical_margins * margin_size)
-  };
-  const int max_controller_width{
-    (width - (2 * margin_size)) / 2
-  };
-  const int controller_height{
-    max_controller_height
-  };
-  const int controller_width{
-    max_controller_width
-  };
-  /*
-  const int bottom_panel_height{
-    controller_height + panel_height
-  };
-  */
-  const int bottom_panel_width{
-    controller_width * 2
-  };
-
-  // General
-  //const int x_left{margin_size};
-  const int x_mid{width / 2};
-  //const int x_right{width - margin_size};
+  const int panel_height{64};
+  const int top_panel_width{900};
+  const int chess_board_width{400};
+  const int chess_board_height{chess_board_width};
+  const int bottom_panel_width{top_panel_width};
 
   // Top panel
-
-  const int x1{x_mid - (top_panel_width / 2)};
-  const int x3{x_mid};
-  const int x5{x_mid + (top_panel_width / 2)};
+  const int x1{128};
+  const int x3{x1 + (top_panel_width / 2)};
+  const int x5{x3 + (top_panel_width / 2)};
 
 
   // Center panel
   const int chess_board_tl_x{
-    (window_size.get_x() / 2) - (chess_board_width / 2)
+    x3 - (chess_board_width / 2)
   };
   const int chess_board_br_x{
-    (window_size.get_x() / 2) + (chess_board_width / 2)
+    chess_board_tl_x + chess_board_width
   };
 
-  // Bottom panel
-  const int x2{
-    (window_size.get_x() / 2) - (bottom_panel_width / 2)
-  };
-  const int x4{
-    (window_size.get_x() / 2) + (bottom_panel_width / 2)
-  };
-
-  const int y1{margin_size};
+  const int y1{128 + margin_size};
   const int y2{y1 + panel_height};
   const int y3{y2 + panel_height};
   const int y4{y3 + panel_height};
   const int y5{y4 + panel_height};
-  const int y6{y5 + margin_size};
+  const int y6{y5 + margin_size + margin_size};
   const int y7{y6 + chess_board_height};
-  const int y8{y7 + margin_size};
+  const int y8{y7 + margin_size + margin_size};
   const int y9{y8 + panel_height};
-  const int y10{y9 + controller_height};
+  const int y10{y9 + panel_height};
 
   m_game_speed_label = screen_rect(
     screen_coordinate(x1, y1),
@@ -149,16 +82,16 @@ options_view_layout::options_view_layout(
   );
 
   m_controls_label = screen_rect(
-    screen_coordinate(x2, y8),
-    screen_coordinate(x4, y9)
+    screen_coordinate(x1, y8),
+    screen_coordinate(x5, y9)
   );
   m_left_controls_value = screen_rect(
-    screen_coordinate(x2, y9),
-    screen_coordinate(x_mid, y10)
+    screen_coordinate(x1, y9),
+    screen_coordinate(x3, y10)
   );
   m_right_controls_value = screen_rect(
-    screen_coordinate(x_mid, y9),
-    screen_coordinate(x4, y10)
+    screen_coordinate(x3, y9),
+    screen_coordinate(x5, y10)
   );
 
   m_font_size = std::min(

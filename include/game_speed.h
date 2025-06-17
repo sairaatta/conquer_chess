@@ -34,6 +34,8 @@ void test_game_speed();
 /// speed of 1 chess move per second
 double get_speed_multiplier(const game_speed speed) noexcept;
 
+std::string to_human_str(const game_speed speed) noexcept;
+
 std::string to_str(const game_speed speed) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const game_speed speed) noexcept;

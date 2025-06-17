@@ -68,12 +68,12 @@ void played_game_view::set_text_style(sf::Text& text)
 
 void played_game_view::draw()
 {
-  show_layout_panels(*this);
+  draw_layout_panels(*this);
   show_text_panel(*this);
 
 }
 
-void show_layout_panels(played_game_view& v)
+void draw_layout_panels(played_game_view& v)
 {
   for (const auto& screen_rect: get_panels(v.get_layout()))
   {

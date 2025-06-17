@@ -203,7 +203,7 @@ void controls_view::set_text_style(sf::Text& text)
 }
 void controls_view::draw()
 {
-  show_layout_panels(*this);
+  draw_layout_panels(*this);
 
   show_type_panel(*this);
   show_keyboard_panel(*this);
@@ -285,7 +285,7 @@ void show_mouse_panel(controls_view& v)
   }
 }
 
-void show_layout_panels(controls_view& v)
+void draw_layout_panels(controls_view& v)
 {
   for (const auto& screen_rect: get_panels(v.get_layout()))
   {

@@ -105,7 +105,7 @@ void draw_game_speed_value(const screen_rect& sr)
   );
   set_rect(rectangle, sr);
   get_render_window().draw(rectangle);
-  draw_normal_text(to_str(game_options::get().get_game_speed()), sr);
+  draw_normal_text(to_human_str(game_options::get().get_game_speed()), sr);
 
 }
 

@@ -1,6 +1,10 @@
 # Screenshots
 
-![About screen v0.7](20250617.jpg)
+![About screen v0.7](20250617_2.jpg)
+
+> The Options screen looks prettier
+
+![About screen v0.7](20250617_1.jpg)
 
 > The About screen looks prettier
 

@@ -80,6 +80,9 @@ void draw_panel(
 physical_controller_type get_physical_controller_type(const side player);
 
 /// Show the bottom part
+void draw_background(options_view& v);
+
+/// Show the bottom part
 void draw_bottom(options_view& v);
 
 /// Show the header of the bottom part,
@@ -97,22 +100,22 @@ void draw_game_speed(options_view& v);
 void draw_music_volume(options_view& v);
 
 /// Show all the layout panels
-void show_layout_panels(options_view& v);
+void draw_layout_panels(options_view& v);
 
 /// Show all the pieces in the initial position
-void show_pieces(options_view& view);
+void draw_pieces(options_view& view);
 
 /// Show the sound effects volume label and value
-void show_sound_effects_volume(options_view& v);
+void draw_sound_effects_volume(options_view& v);
 
 /// Show the starting position label and value
-void show_starting_position(options_view& v);
+void draw_starting_position(options_view& v);
 
 /// Show the selected panel
 void draw_selected_panel(options_view& v);
 
 /// Show the top part
-void show_top(options_view& v);
+void draw_top(options_view& v);
 
 #endif // LOGIC_ONLY
 

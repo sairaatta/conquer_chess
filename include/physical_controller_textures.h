@@ -21,6 +21,7 @@ public:
   /// Get a symbol for a controller type
   sf::Texture& get_symbol(const physical_controller_type t) noexcept;
 
+  std::string get_fancy_filename(const physical_controller_type t)  const noexcept;
 
   std::string get_filename(const physical_controller_type t)  const noexcept;
 

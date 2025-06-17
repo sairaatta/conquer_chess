@@ -100,7 +100,7 @@ void show_keyboard_panel(controls_view& v);
 void show_mouse_panel(controls_view& v);
 
 /// Show where the panels will be drawn
-void show_layout_panels(controls_view& v);
+void draw_layout_panels(controls_view& v);
 
 void show_selected_panel(controls_view& v);
 
