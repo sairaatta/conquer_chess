@@ -4,8 +4,8 @@ repo_url: https://github.com/richelbilderbeek/conquer_chess
 edit_uri: blob/main/docs/
 
 nav:
-  - Start: README.md
-  - Screenshots: screenshots.md
+  - Start: index.md
+  - Screenshots: screenshots/README.md
   - Gameplay: gameplay.md
   - FAQ: faq.md
   - Acknowledgements: acknowledgements.md
