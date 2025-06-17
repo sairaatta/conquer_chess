@@ -319,6 +319,11 @@ void test_controller()
     const auto d{create_right_keyboard_controller()};
     assert(d.get_type() == physical_controller_type::keyboard);
   }
+  // get_key_for_action
+  {
+    const auto c{create_left_keyboard_controller()};
+    assert(get_key_for_action(c, action_number(1)) == sf::Keyboard::Key::Q);
+  }
   // get_text_for_action
   {
     assert(get_text_for_action(create_left_keyboard_controller(), false, false, false, false, action_number(1)) == "Q\nSelect");

@@ -1193,6 +1193,12 @@ void test_pieces()
     const auto str_with_coordinats{to_board_str(pieces, with_legend)};
     assert(str_with_coordinats.size() >= str_without_coordinats.size());
   }
+  // to_pgn
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    const auto s{to_pgn(pieces)};
+    assert(s.empty());
+  }
 #endif
 }
 
