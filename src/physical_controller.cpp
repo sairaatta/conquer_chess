@@ -302,6 +302,11 @@ void test_controller()
     );
     assert(!is_empty(inputs));
   }
+  // create_default_keyboard_controller
+  {
+    const auto c{create_default_keyboard_controller()};
+    assert(c.get_type() == physical_controller_type::keyboard);
+  }
   // create_left_keyboard_controller
   {
     const auto c{create_left_keyboard_controller()};
