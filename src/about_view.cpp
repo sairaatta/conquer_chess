@@ -3,6 +3,7 @@
 #ifndef LOGIC_ONLY
 
 #include "about.h"
+#include "draw.h"
 #include "screen_coordinate.h"
 #include "game_resources.h"
 #include "sfml_helper.h"
@@ -78,6 +79,12 @@ void draw_layout_panels(about_view& v)
 
 void draw_subtitle_panel(about_view& v)
 {
+  draw_texture(
+    get_subtitle_texture(),
+    v.get_layout().get_subtitle()
+  );
+  /*
+
   const auto screen_rect{v.get_layout().get_subtitle()};
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
@@ -85,6 +92,7 @@ void draw_subtitle_panel(about_view& v)
     &get_subtitle_texture()
   );
   get_render_window().draw(rectangle);
+  */
 }
 
 void draw_text_panel(about_view& v)
@@ -120,6 +128,11 @@ void draw_text_panel(about_view& v)
 
 void draw_title_panel(about_view& v)
 {
+  draw_texture(
+    get_title_texture(),
+    v.get_layout().get_title()
+  );
+  /*
   const auto screen_rect{v.get_layout().get_title()};
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
@@ -127,6 +140,7 @@ void draw_title_panel(about_view& v)
     &get_title_texture()
   );
   get_render_window().draw(rectangle);
+  */
 }
 
 void about_view::start()
