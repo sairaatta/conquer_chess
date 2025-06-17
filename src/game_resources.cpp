@@ -13,7 +13,7 @@ std::optional<loading_screen_fonts> game_resources::m_loading_screen_fonts = {};
 loading_screen_songs * game_resources::m_loading_screen_songs{nullptr};
 std::optional<loading_screen_textures> game_resources::m_loading_screen_textures = {};
 std::optional<map_textures> game_resources::m_map_textures = {};
-std::optional<physical_controller_type_textures> game_resources::m_physical_controller_type_textures = {};
+std::optional<physical_controller_textures> game_resources::m_physical_controller_type_textures = {};
 std::optional<piece_action_textures> game_resources::m_piece_action_textures = {};
 std::optional<piece_textures> game_resources::m_piece_textures = {};
 std::optional<piece_portrait_textures> game_resources::m_piece_portrait_textures = {};
@@ -146,7 +146,7 @@ int game_resources::get_n_map_textures() noexcept
 
 int game_resources::get_n_physical_controller_type_textures() noexcept
 {
-  return get_physical_controller_type_textures().get_n_textures();
+  return get_physical_controller_textures().get_n_textures();
 }
 
 int game_resources::get_n_piece_action_textures() noexcept
@@ -198,9 +198,9 @@ sf::Texture& get_piece_portrait_texture(
 }
 
 // Lazy loading
-physical_controller_type_textures& game_resources::get_physical_controller_type_textures() noexcept
+physical_controller_textures& game_resources::get_physical_controller_textures() noexcept
 {
-  if (!m_physical_controller_type_textures) m_physical_controller_type_textures = physical_controller_type_textures();
+  if (!m_physical_controller_type_textures) m_physical_controller_type_textures = physical_controller_textures();
   assert(m_physical_controller_type_textures);
   return m_physical_controller_type_textures.value();
 

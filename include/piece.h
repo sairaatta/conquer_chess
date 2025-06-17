@@ -5,7 +5,7 @@
 #include "action_history.h"
 #include "delta_t.h"
 #include "chess_color.h"
-#include "id.h"
+#include "piece_id.h"
 #include "piece_type.h"
 #include "piece_action.h"
 #include "message_type.h"
@@ -149,7 +149,7 @@ private:
   double m_health;
 
   /// The unique ID of this piece
-  read_only<id> m_id;
+  read_only<piece_id> m_id;
 
   /// Is this piece selected?
   bool m_is_selected;

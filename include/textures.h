@@ -4,7 +4,6 @@
 #ifndef LOGIC_ONLY
 
 #include "chess_color.h"
-#include "physical_controller_type.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -15,8 +14,6 @@ public:
   textures();
 
   int get_n_textures() const noexcept { return sizeof(*this) / sizeof(m_all_races_1); };
-
-
 
   /// Get a texture showing all three races
   sf::Texture& get_all_races(const int index);
@@ -32,10 +29,6 @@ public:
 
   /// Texture showing all three races
   sf::Texture& get_all_races_4() noexcept { return m_all_races_4; }
-
-  /// Get an image for a controller type, i.e. mouse or keyboard
-  sf::Texture& get_controller_type(const physical_controller_type t) noexcept;
-
 
   /// Get a strip of chess board squares
   sf::Texture& get_strip(const chess_color color) noexcept;
@@ -76,9 +69,6 @@ private:
   std::map<chess_color, sf::Texture> m_squares;
   std::map<chess_color, sf::Texture> m_semitransparent_squares;
   std::map<chess_color, sf::Texture> m_strips;
-
-  sf::Texture m_mouse;
-  sf::Texture m_keyboard;
 
   sf::Texture m_subtitle;
   sf::Texture m_title;

@@ -1,7 +1,5 @@
 #include "options_view_layout.h"
 
-#include "options_view_layout.h"
-
 #include <cassert>
 #include <cmath>
 

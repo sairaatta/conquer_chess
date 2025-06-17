@@ -27,6 +27,26 @@ void draw_big_text(const sf::String& s, const screen_rect& sr)
   draw_text(s, sr, 48);
 }
 
+
+void draw_fancy_physical_controller_type(const physical_controller_type& t, const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, sr);
+  rectangle.setTexture(
+    &game_resources::get().get_physical_controller_textures().get_fancy(t)
+  );
+  // Zoom in
+  rectangle.setTextureRect(
+   sf::IntRect(
+     0,
+     rectangle.getTexture()->getSize().y / 4,
+     rectangle.getTexture()->getSize().x,
+     rectangle.getTexture()->getSize().y / 2
+   )
+  );
+  get_render_window().draw(rectangle);
+}
+
 void draw_normal_text(const sf::String& s, const screen_rect& sr)
 {
   draw_text(s, sr, 32);

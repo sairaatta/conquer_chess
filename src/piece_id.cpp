@@ -1,20 +1,21 @@
-#include "id.h"
+#include "piece_id.h"
 
 #include <cassert>
 #include <iostream>
 #include <sstream>
 
-int id::sm_next_value{0};
+int piece_id::sm_next_value{0};
 
-id::id()
+piece_id::piece_id()
   : m_value{sm_next_value++}
 {
-
+  // I assume less then two billion IDs :-)
+  assert(m_value >= 0);
 }
 
-id create_new_id() noexcept
+piece_id create_new_id() noexcept
 {
-  return id();
+  return piece_id();
 }
 
 void test_id()
@@ -29,7 +30,7 @@ void test_id()
   }
   // operator<<
   {
-    const id i = create_new_id();
+    const piece_id i = create_new_id();
     std::stringstream s;
     s << i;
     assert(!s.str().empty());
@@ -37,17 +38,17 @@ void test_id()
 #endif // NDEBUG
 }
 
-bool operator==(const id& lhs, const id& rhs) noexcept
+bool operator==(const piece_id& lhs, const piece_id& rhs) noexcept
 {
   return lhs.get() == rhs.get();
 }
 
-bool operator!=(const id& lhs, const id& rhs) noexcept
+bool operator!=(const piece_id& lhs, const piece_id& rhs) noexcept
 {
   return !(lhs == rhs);
 }
 
-std::ostream& operator<<(std::ostream& os, const id& i) noexcept
+std::ostream& operator<<(std::ostream& os, const piece_id& i) noexcept
 {
   os << i.get();
   return os;

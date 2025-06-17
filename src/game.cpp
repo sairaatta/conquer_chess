@@ -2,7 +2,7 @@
 
 #include "game_options.h"
 #include "piece_actions.h"
-#include "id.h"
+#include "piece_id.h"
 #include "square.h"
 #include "pieces.h"
 
@@ -1114,7 +1114,7 @@ game create_game_with_starting_position(starting_position_type t) noexcept
   return game{};
 }
 
-read_only<id> get_id(const game& g, const square& s)
+read_only<piece_id> get_id(const game& g, const square& s)
 {
   assert(is_piece_at(g, s));
   return get_piece_at(g, s).get_id();
@@ -1187,7 +1187,7 @@ piece& get_piece_that_moves(game& g, const chess_move& move)
 
 piece get_piece_with_id(
   const game& g,
-  const id& i
+  const piece_id& i
 )
 {
   return get_piece_with_id(g.get_pieces(), i);
@@ -1362,7 +1362,7 @@ bool is_piece_at(
 
 bool piece_with_id_is_at(
   game& g,
-  const id& i,
+  const piece_id& i,
   const square& s
 )
 {

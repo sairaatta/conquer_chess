@@ -15,8 +15,6 @@ textures::textures()
     std::make_pair(std::ref(m_all_races_2), "all_races_2.jpg"),
     std::make_pair(std::ref(m_all_races_3), "all_races_3.jpg"),
     std::make_pair(std::ref(m_all_races_4), "all_races_4.jpg"),
-    std::make_pair(std::ref(m_keyboard), "fancy_keyboard.png"),
-    std::make_pair(std::ref(m_mouse), "fancy_mouse.png"),
     std::make_pair(std::ref(m_subtitle), "subtitle.png"),
     std::make_pair(std::ref(m_title), "title.png")
   };
@@ -127,16 +125,6 @@ sf::Texture& textures::get_all_races(const int index) {
       assert(index == 3);
       return get_all_races_4();
   }
-}
-
-sf::Texture& textures::get_controller_type(const physical_controller_type t) noexcept
-{
-  if (t == physical_controller_type::keyboard)
-  {
-    return m_keyboard;
-  }
-  assert(t == physical_controller_type::mouse);
-  return m_mouse;
 }
 
 sf::Texture& textures::get_occupied_square(

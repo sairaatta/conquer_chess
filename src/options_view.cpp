@@ -257,7 +257,7 @@ void options_view::draw()
   show_top(*this);
   assert(!to_str(get_starting_position()).empty());
 
-  show_bottom(*this);
+  draw_bottom(*this);
   show_selected_panel(*this);
 
   const bool show_semitransparent{true};
@@ -272,14 +272,14 @@ void options_view::draw()
   assert(!to_str(get_starting_position()).empty());
 }
 
-void show_bottom(options_view& v)
+void draw_bottom(options_view& v)
 {
-  show_bottom_header(v);
-  show_bottom_row(v, side::lhs);
-  show_bottom_row(v, side::rhs);
+  draw_bottom_header(v);
+  draw_bottom_row(v, side::lhs);
+  draw_bottom_row(v, side::rhs);
 }
 
-void show_bottom_header(options_view& v)
+void draw_bottom_header(options_view& v)
 {
   const auto& layout{v.get_layout()};
   {
@@ -318,7 +318,7 @@ void show_bottom_header(options_view& v)
   }
 }
 
-void show_bottom_row(options_view& v, const side player_side)
+void draw_bottom_row(options_view& v, const side player_side)
 {
   const auto& layout{v.get_layout()};
   // The icon
@@ -330,10 +330,13 @@ void show_bottom_row(options_view& v, const side player_side)
     const physical_controller_type t{
       get_physical_controller_type(player_side)
     };
+    draw_fancy_physical_controller_type(t, screen_rect);
+
+    /*
     sf::RectangleShape rectangle;
     set_rect(rectangle, screen_rect);
     rectangle.setTexture(
-      &game_resources::get().get_textures().get_controller_type(t)
+      &game_resources::get().get_physical_controller_textures().get_fancy(t)
     );
     // Zoom in
     rectangle.setTextureRect(
@@ -345,7 +348,7 @@ void show_bottom_row(options_view& v, const side player_side)
       )
     );
     get_render_window().draw(rectangle);
-
+    */
     // Text
     sf::Text text;
     const auto text_rect{screen_rect};

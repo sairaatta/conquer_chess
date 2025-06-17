@@ -110,7 +110,7 @@ piece& get_piece_at(
 /// Will throw if there is no piece with that ID
 piece get_piece_with_id(
   const std::vector<piece>& pieces,
-  const id& i
+  const piece_id& i
 );
 
 /// Get the possible moves for a focal piece that is a bishop.
@@ -285,7 +285,7 @@ std::vector<piece> get_starting_pieces(
 /// Is there a piece with the ID among the pieces?
 bool has_piece_with_id(
   const std::vector<piece>& pieces,
-  const id& i
+  const piece_id& i
 );
 
 /// Determine if there is a piece at the coordinat

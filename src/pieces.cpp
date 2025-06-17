@@ -232,7 +232,7 @@ piece& get_piece_at(
 
 piece get_piece_with_id(
   const std::vector<piece>& pieces,
-  const id& i
+  const piece_id& i
 )
 {
   const auto there{
@@ -903,7 +903,7 @@ std::vector<piece> get_starting_pieces(
 
 bool has_piece_with_id(
   const std::vector<piece>& pieces,
-  const id& i
+  const piece_id& i
 )
 {
   assert(!pieces.empty());

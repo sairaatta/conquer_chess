@@ -9,7 +9,6 @@
 #include "options_view_item.h"
 #include "physical_controller_type.h"
 #include "program_state.h"
-#include "starting_position_type.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -81,15 +80,15 @@ void draw_panel(
 physical_controller_type get_physical_controller_type(const side player);
 
 /// Show the bottom part
-void show_bottom(options_view& v);
+void draw_bottom(options_view& v);
 
 /// Show the header of the bottom part,
 /// i.e. 'Side' and 'Controller'
-void show_bottom_header(options_view& v);
+void draw_bottom_header(options_view& v);
 
 /// Show the left player's settings of the bottom part,
 /// i.e. 'Left' and the LHS controller
-void show_bottom_row(options_view& v, const side player_side);
+void draw_bottom_row(options_view& v, const side player_side);
 
 /// Show the game speed label and value
 void draw_game_speed(options_view& v);

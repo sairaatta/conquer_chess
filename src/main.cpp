@@ -34,7 +34,7 @@
 #include "game_rect.h"
 #include "game_view_layout.h"
 #include "helper.h"
-#include "id.h"
+#include "piece_id.h"
 #include "in_game_time.h"
 #include "key_bindings.h"
 #include "loading_view.h"

@@ -293,7 +293,7 @@ game create_game_with_starting_position(starting_position_type t) noexcept;
 
 /// Get the ID of a piece at a square
 /// Will throw if there is no piece there
-read_only<id> get_id(const game& g, const square& s);
+read_only<piece_id> get_id(const game& g, const square& s);
 
 /// Get the index of the piece that is closest to the coordinat
 int get_index_of_closest_piece_to(
@@ -334,7 +334,7 @@ piece& get_piece_that_moves(game& g, const chess_move& move);
 /// Will throw if there is no piece with that ID
 piece get_piece_with_id(
   const game& g,
-  const id& i
+  const piece_id& i
 );
 
 /// Get the color of a player
@@ -432,7 +432,7 @@ bool is_piece_at(
 /// See if there is a piece with a certain ID at a certain square
 bool piece_with_id_is_at(
   game& g,
-  const id& i,
+  const piece_id& i,
   const square& s
 );
 

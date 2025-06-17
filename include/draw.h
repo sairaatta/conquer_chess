@@ -7,6 +7,7 @@
 /// the rest are convenience functions
 
 #include "ccfwd.h"
+#include "physical_controller_type.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
 
@@ -18,13 +19,9 @@ void draw_about_button(const screen_rect& sr);
 /// Use Ariel font, 48 pixels, black letters and bold face
 void draw_big_text(const sf::String& s, const screen_rect& r);
 
-/// Draw the texts on the main window,
-/// using one row per element.
-///
-/// Use Ariel font, 48 pixels, black letters and bold face
-//void draw_big_texts(
-//  const std::vector<sf::String>& s, const screen_rect& r
-//);
+
+/// Draw the fancy physical controller texture
+void draw_fancy_physical_controller_type(const physical_controller_type& t, const screen_rect& sr);
 
 /// Draw the text on the main window.
 ///

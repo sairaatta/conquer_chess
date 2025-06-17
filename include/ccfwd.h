@@ -13,7 +13,7 @@ class game_rect;
 class game_resources;
 class game_view;
 class game_view_layout;
-class id;
+class piece_id;
 class in_game_time;
 class key_bindings;
 class layout;

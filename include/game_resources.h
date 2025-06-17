@@ -12,7 +12,7 @@
 #include "loading_screen_textures.h"
 #include "map_textures.h"
 #include "message.h"
-#include "physical_controller_type_textures.h"
+#include "physical_controller_textures.h"
 #include "piece_portrait_textures.h"
 #include "piece_action_textures.h"
 #include "piece_textures.h"
@@ -84,7 +84,7 @@ public:
   map_textures& get_map_textures() noexcept;
 
   // Lazy loading
-  physical_controller_type_textures& get_physical_controller_type_textures() noexcept;
+  physical_controller_textures& get_physical_controller_textures() noexcept;
 
   // Lazy loading
   piece_action_textures& get_piece_action_textures() noexcept;
@@ -131,7 +131,7 @@ private:
   static std::optional<map_textures> m_map_textures;
 
   /// Lazy loading
-  static std::optional<physical_controller_type_textures> m_physical_controller_type_textures;
+  static std::optional<physical_controller_textures> m_physical_controller_type_textures;
 
   /// Lazy loading
   static std::optional<piece_action_textures> m_piece_action_textures;
