@@ -55,7 +55,7 @@
         <file>resources/textures/black_black_semitransparent.png</file>
         <file>resources/textures/black_white_semitransparent.png</file>
         <file>resources/textures/black_strip.png</file>
-        <file>resources/textures/keyboard.png</file>
+        <file>resources/textures/fancy_keyboard.png</file>
         <file>resources/textures/white_square.png</file>
         <file>resources/textures/white_square_semitransparent.png</file>
         <file>resources/textures/white_black.png</file>
@@ -75,7 +75,7 @@
         <file>resources/textures/maps/protoss_map.jpg</file>
         <file>resources/textures/maps/terran_map.jpg</file>
         <file>resources/textures/maps/zerg_map.jpg</file>
-        <file>resources/textures/mouse.png</file>
+        <file>resources/textures/fancy_mouse.png</file>
         <file>resources/textures/options_menu/game_speed.jpg</file>
         <file>resources/textures/options_menu/left_controls.jpg</file>
         <file>resources/textures/options_menu/music_volume.jpg</file>

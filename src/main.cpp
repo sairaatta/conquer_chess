@@ -4,6 +4,10 @@
 ///
 /// - [Conquer Chess homepage](https://richelbilderbeek.github.io/conquer_chess/)
 ///
+/// The main window is called \link{main_window}.
+///
+/// The class for the game logic is called \link{game}.
+///
 /// This game has some singletons:
 ///
 /// - \link{get_render_window}: to get the one-and-only SFML render window

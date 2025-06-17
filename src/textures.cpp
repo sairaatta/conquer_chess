@@ -15,8 +15,8 @@ textures::textures()
     std::make_pair(std::ref(m_all_races_2), "all_races_2.jpg"),
     std::make_pair(std::ref(m_all_races_3), "all_races_3.jpg"),
     std::make_pair(std::ref(m_all_races_4), "all_races_4.jpg"),
-    std::make_pair(std::ref(m_keyboard), "keyboard.png"),
-    std::make_pair(std::ref(m_mouse), "mouse.png"),
+    std::make_pair(std::ref(m_keyboard), "fancy_keyboard.png"),
+    std::make_pair(std::ref(m_mouse), "fancy_mouse.png"),
     std::make_pair(std::ref(m_subtitle), "subtitle.png"),
     std::make_pair(std::ref(m_title), "title.png")
   };
