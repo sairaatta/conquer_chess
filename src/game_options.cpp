@@ -67,6 +67,12 @@ void test_game_options()
     game_options::get().set_volume(volume_after);
     assert(get_music_volume() == volume_after);
   }
+  // get_music_volume_as_percentage
+  {
+    const auto volume_as_percentage{get_music_volume_as_percentage()};
+    assert(volume_as_percentage >= 0.0);
+    assert(volume_as_percentage <= 100.001);
+  }
   // 40: operator<<
   {
     std::stringstream s;
