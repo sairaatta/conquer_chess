@@ -5,6 +5,7 @@ codecov:
 ignore:
 - ./include/about_view.h
 - ./include/controls_view.h
+- ./include/draw.h
 - ./include/fonts.h
 - ./include/game_view.h
 - ./include/game_resources.h
@@ -17,12 +18,14 @@ ignore:
 - ./include/main.h
 - ./include/menu_view.h
 - ./include/options_view.h
+- ./include/physical_controller_textures.h
 - ./include/played_game_view.h
 - ./include/render_window.h
 - ./include/songs.h
 - ./include/textures.h
 - ./src/about_view.cpp
 - ./src/controls_view.cpp
+- ./src/draw.cpp
 - ./src/fonts.cpp
 - ./src/game_view.cpp
 - ./src/game_resources.cpp
@@ -35,6 +38,7 @@ ignore:
 - ./src/main.cpp
 - ./src/menu_view.cpp
 - ./src/options_view.cpp
+- ./src/physical_controller_textures.cpp
 - ./src/played_game_view.cpp
 - ./src/render_window.cpp
 - ./src/songs.cpp

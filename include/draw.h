@@ -1,6 +1,8 @@
 #ifndef DRAW_H
 #define DRAW_H
 
+#ifndef LOGIC_ONLY
+
 ///@file Functions to draw things on the main screen
 ///
 /// The main function is \link{draw_texture},
@@ -68,5 +70,7 @@ void draw_text(
 void draw_texts(
   const std::vector<sf::String>& s, const screen_rect& r, const int character_size
 );
+
+#endif // LOGIC_ONLY
 
 #endif // DRAW_H

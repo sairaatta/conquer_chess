@@ -1,5 +1,7 @@
 #include "draw.h"
 
+#ifndef LOGIC_ONLY
+
 #include "game_resources.h"
 #include "render_window.h"
 #include "sfml_helper.h"
@@ -131,3 +133,6 @@ void draw_texts(const std::vector<sf::String>& s, const screen_rect& r, const in
   }
 
 }
+
+#endif // LOGIC_ONLY
+
