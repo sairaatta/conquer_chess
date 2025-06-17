@@ -270,7 +270,7 @@ void test_screen_rect()
   }
   // get_default_controls_screen_size
   {
-    const auto r{get_default_controls_screen_size()};
+    const auto r{get_default_screen_size()};
     assert(r.get_x() > 0);
   }
   // is_in

@@ -54,7 +54,7 @@ class about_view_layout
 {
 public:
   explicit about_view_layout(
-    const screen_coordinate& window_size = get_default_about_screen_size(),
+    const screen_coordinate& window_size = get_default_screen_size(),
     const int margin_width = get_default_margin_width()
   );
 

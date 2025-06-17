@@ -30,39 +30,9 @@ double calc_distance(const screen_coordinate& a, const screen_coordinate& b) noe
   return calc_distance(delta.get_x(), delta.get_y());
 }
 
-screen_coordinate get_default_about_screen_size() noexcept
-{
-  return screen_coordinate(600, 900);
-}
-
-screen_coordinate get_default_controls_screen_size() noexcept
-{
-  return screen_coordinate(700, 900);
-}
-
-screen_coordinate get_default_played_game_screen_size() noexcept
-{
-  return get_default_screen_size();
-}
-
 screen_coordinate get_default_screen_size() noexcept
 {
   return screen_coordinate(1024 + 400, 576 + 400);
-}
-
-screen_coordinate get_default_loading_screen_size() noexcept
-{
-  return screen_coordinate(1024 + 400, 576 + 400);
-}
-
-screen_coordinate get_default_lobby_screen_size() noexcept
-{
-  return screen_coordinate(600, 900);
-}
-
-screen_coordinate get_default_main_menu_screen_size() noexcept
-{
-  return screen_coordinate(600, 900);
 }
 
 std::ostream& operator<<(std::ostream& os, const screen_coordinate& coordinat)
@@ -137,19 +107,10 @@ void test_screen_coordinate()
     const screen_coordinate d(3, 4);
     assert(calc_distance(c, d) == 5.0);
   }
-  // get_default_main_menu_screen_size
-  {
-    assert(get_default_main_menu_screen_size().get_x() > 0);
-    assert(get_default_main_menu_screen_size().get_y() > 0);
-  }
   // get_default_screen_size
   {
     assert(get_default_screen_size().get_x() > 0);
     assert(get_default_screen_size().get_y() > 0);
-  }
-  // 50: get_default_controls_screen_size
-  {
-    assert(get_default_screen_size().get_x() > 650);
   }
   // operator+
   {

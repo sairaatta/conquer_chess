@@ -36,7 +36,7 @@ class played_game_view_layout
 {
 public:
   explicit played_game_view_layout(
-    const screen_coordinate& window_size = get_default_played_game_screen_size(),
+    const screen_coordinate& window_size = get_default_screen_size(),
     const int margin_width = get_default_margin_width()
   );
 
