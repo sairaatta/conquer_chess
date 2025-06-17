@@ -159,6 +159,18 @@ void test_screen_rect()
     );
     assert(created == expected);
   }
+  // get_center
+  {
+    const screen_rect r(
+      screen_coordinate(100, 200),
+      screen_coordinate(300, 400)
+    );
+    const screen_coordinate expected(
+      200, 300
+    );
+    const auto result{get_center(r)};
+    assert(result == expected);
+  }
   // get_lower_half
   {
     const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 2));

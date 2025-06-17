@@ -176,6 +176,13 @@ void test_physical_controllers()
     use_two_keyboard_controllers();
     assert(count_mouse_controllers(physical_controllers::get()) == 0);
   }
+  // get_controller
+  {
+    use_default_controllers();
+    const auto& lhs{physical_controllers::get().get_controller(side::lhs)};
+    const auto& rhs{physical_controllers::get().get_controller(side::rhs)};
+    assert(lhs != rhs);
+  }
   // get_default_controllers
   {
     use_default_controllers();

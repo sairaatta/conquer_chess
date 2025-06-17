@@ -62,10 +62,17 @@ void set_text_position(sf::Text& text, const screen_rect& screen_rect)
     get_center(screen_rect).get_y()
   );
   // https://en.sfml-dev.org/forums/index.php?topic=15875.msg113439#msg113439
+  const double text_center_y{0.5 * static_cast<double>(text.getLocalBounds().height)};
+
+  // Text always seems to appear to low, move it somewhat up
+  const double corrected_text_center_y{
+    text_center_y + (0.2 * get_height(screen_rect))
+  };
   text.setOrigin(
-    std::round(text.getLocalBounds().width / 2.0),
-    std::round(text.getLocalBounds().height / 2.0)
+    0.5 * text.getLocalBounds().width,
+    corrected_text_center_y
   );
+
 }
 
 #ifndef LOGIC_ONLY

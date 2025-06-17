@@ -152,6 +152,7 @@ private:
   static std::optional<textures> m_textures;
 };
 
+
 sf::Texture& get_about_texture() noexcept;
 
 sf::Texture& get_action_icon(

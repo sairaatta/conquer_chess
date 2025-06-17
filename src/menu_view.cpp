@@ -2,6 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
+#include "draw.h"
 #include "game_resources.h"
 #include "game_options.h"
 #include "render_window.h"
@@ -230,29 +231,15 @@ void menu_view::draw()
 
 void draw_about_panel(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_about()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_strip_texture(chess_color::white)
-  );
-  get_render_window().draw(rectangle);
-
-  sf::Text text{v.get_styled_text()};
-  text.setString("About");
-  set_text_position(text, screen_rect);
-  get_render_window().draw(text);
+  draw_about_button(v.get_layout().get_about());
 }
 
 void draw_background_image(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_background_image()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &game_resources::get().get_textures().get_all_races(v.get_background_image_index())
+  draw_texture(
+    game_resources::get().get_textures().get_all_races(v.get_background_image_index()),
+    v.get_layout().get_background_image()
   );
-  get_render_window().draw(rectangle);
 }
 
 
@@ -269,6 +256,7 @@ void draw_menu_panel(menu_view& v)
 
 void draw_options_panel(menu_view& v)
 {
+
   const auto screen_rect{v.get_layout().get_options()};
   sf::RectangleShape rectangle;
   set_rect(rectangle, screen_rect);
@@ -346,24 +334,18 @@ void draw_start_panel(menu_view& v)
 
 void draw_subtitle_panel(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_subtitle()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_subtitle_texture()
+  draw_texture(
+    get_subtitle_texture(),
+    v.get_layout().get_subtitle()
   );
-  get_render_window().draw(rectangle);
 }
 
 void draw_title_panel(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_title()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_title_texture()
+  draw_texture(
+    get_title_texture(),
+    v.get_layout().get_title()
   );
-  get_render_window().draw(rectangle);
 }
 
 void menu_view::start()
