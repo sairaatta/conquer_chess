@@ -23,6 +23,8 @@ void draw_big_text(const sf::String& s, const screen_rect& r);
 /// Draw the fancy physical controller texture
 void draw_fancy_physical_controller_type(const physical_controller_type& t, const screen_rect& sr);
 
+void draw_normal_fancy_text(const sf::String& s, const screen_rect& sr);
+
 /// Draw the text on the main window.
 ///
 /// Use Ariel font, 32 pixels, black letters and bold face
@@ -54,7 +56,12 @@ void draw_texture(sf::Texture& t, const screen_rect& r);
 /// Draw the text on the main window.
 ///
 /// Use Ariel font, black letters and bold face
-void draw_text(const sf::String& s, const screen_rect& r, const int character_size);
+void draw_text(
+  const sf::String& s,
+  const screen_rect& r,
+  const int character_size,
+  const sf::Color fill_color = sf::Color::Black
+);
 
 /// Draw the texts on the main window,
 /// using one row per element.

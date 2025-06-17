@@ -52,6 +52,12 @@ void draw_normal_text(const sf::String& s, const screen_rect& sr)
   draw_text(s, sr, 32);
 }
 
+void draw_normal_fancy_text(const sf::String& s, const screen_rect& sr)
+{
+  draw_text(s, sr, 32, sf::Color::Black);
+  draw_text(s, sr, 30, sf::Color::White);
+}
+
 void draw_normal_texts(const std::vector<sf::String>& s, const screen_rect& r)
 {
   draw_texts(s, r, 32);
@@ -85,7 +91,12 @@ void draw_start_button(const screen_rect& sr)
   draw_big_text(sf::String("Start"), sr);
 }
 
-void draw_text(const sf::String& s, const screen_rect& sr, const int character_size)
+void draw_text(
+  const sf::String& s,
+  const screen_rect& sr,
+  const int character_size,
+  const sf::Color fill_color
+)
 {
   assert(character_size > 7);
   sf::Text text;
@@ -93,7 +104,7 @@ void draw_text(const sf::String& s, const screen_rect& sr, const int character_s
   text.setStyle(sf::Text::Bold);
   text.setString(s);
   text.setCharacterSize(character_size);
-  text.setFillColor(sf::Color::Black);
+  text.setFillColor(fill_color);
   set_text_position(text, sr);
   get_render_window().draw(text);
 }

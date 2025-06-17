@@ -303,6 +303,8 @@ void draw_bottom_header(options_view& v)
     );
     get_render_window().draw(rectangle);
 
+    draw_normal_fancy_text("Controls", screen_rect);
+    /*
     sf::Text text;
     v.set_text_style(text);
     text.setString("Controls");
@@ -314,6 +316,7 @@ void draw_bottom_header(options_view& v)
     set_text_position(text, screen_rect);
     text.setFillColor(sf::Color::White);
     get_render_window().draw(text);
+    */
 
   }
 }
@@ -350,6 +353,8 @@ void draw_bottom_row(options_view& v, const side player_side)
     get_render_window().draw(rectangle);
     */
     // Text
+    draw_normal_fancy_text(to_str(t), screen_rect);
+    /*
     sf::Text text;
     const auto text_rect{screen_rect};
     text.setString(to_str(t));
@@ -362,6 +367,7 @@ void draw_bottom_row(options_view& v, const side player_side)
     set_text_position(text, text_rect);
     text.setFillColor(sf::Color::White);
     get_render_window().draw(text);
+    */
   }
 }
 
@@ -389,6 +395,8 @@ void draw_game_speed(options_view& v)
     );
     get_render_window().draw(rectangle);
 
+    draw_normal_fancy_text("Game speed", screen_rect);
+    /*
     sf::Text text;
     v.set_text_style(text);
     text.setString("Game speed");
@@ -398,6 +406,7 @@ void draw_game_speed(options_view& v)
     text.setCharacterSize(text.getCharacterSize() - 2);
     text.setFillColor(sf::Color::White);
     get_render_window().draw(text);
+    */
   }
   // game speed value
   {
@@ -457,6 +466,8 @@ void show_starting_position(options_view& v)
     );
     get_render_window().draw(rectangle);
 
+    draw_normal_fancy_text("Starting position", screen_rect);
+    /*
     sf::Text text;
     v.set_text_style(text);
     text.setString("Starting position");
@@ -466,6 +477,7 @@ void show_starting_position(options_view& v)
     text.setCharacterSize(text.getCharacterSize() - 2);
     text.setFillColor(sf::Color::White);
     get_render_window().draw(text);
+    */
   }
   // starting pos value
   {
@@ -535,6 +547,8 @@ void show_music_volume(options_view& v)
     );
     get_render_window().draw(rectangle);
 
+    draw_normal_fancy_text("Music volume", screen_rect);
+    /*
     sf::Text text;
     v.set_text_style(text);
     text.setString("Music volume");
@@ -544,6 +558,7 @@ void show_music_volume(options_view& v)
     text.setCharacterSize(text.getCharacterSize() - 2);
     text.setFillColor(sf::Color::White);
     get_render_window().draw(text);
+    */
   }
   // music volume value
   {
@@ -611,6 +626,9 @@ void show_sound_effects_volume(options_view& v)
     set_rect(rectangle, screen_rect);
     get_render_window().draw(rectangle);
 
+    draw_normal_fancy_text("Sound effects volume", screen_rect);
+
+    /*
     sf::Text text;
     v.set_text_style(text);
     text.setString("Sound effects volume");
@@ -620,6 +638,7 @@ void show_sound_effects_volume(options_view& v)
     text.setCharacterSize(text.getCharacterSize() - 2);
     text.setFillColor(sf::Color::White);
     get_render_window().draw(text);
+    */
   }
   // sound effects volume value
   {
