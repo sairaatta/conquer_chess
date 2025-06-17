@@ -50,20 +50,72 @@ void about_view::process_resize_event(sf::Event& event)
   );
 }
 
-void about_view::set_text_style(sf::Text& text)
-{
-  text.setFont(get_arial_font());
-  text.setStyle(sf::Text::Bold);
-  text.setCharacterSize(m_layout.get_font_size());
-  text.setFillColor(sf::Color::Black);
-}
-
 void about_view::draw()
 {
+  draw_background(*this);
+  draw_panel(*this);
   draw_layout_panels(*this);
-  draw_title_panel(*this);
-  draw_subtitle_panel(*this);
-  draw_text_panel(*this);
+  draw_title(*this);
+  draw_subtitle(*this);
+  draw_copyright(*this);
+  draw_url(*this);
+  draw_contributors(*this);
+}
+
+void draw_background(about_view& v)
+{
+  draw_texture(
+    get_game_option_icon(options_view_item::starting_position),
+    v.get_layout().get_background()
+  );
+
+}
+
+
+void draw_contributors(about_view& v)
+{
+  const auto screen_rect{v.get_layout().get_contributors()};
+  draw_texture(
+    get_strip_texture(chess_color::white),
+    screen_rect
+  );
+
+  std::vector<sf::String> texts;
+  texts.push_back(sf::String("Contributors:"));
+  const auto names = get_contributor_names();
+  std::transform(
+    std::begin(names),
+    std::end(names),
+    std::back_inserter(texts),
+    [](const auto& n) { return sf::String("- ") + n; }
+  );
+  draw_normal_texts(texts, screen_rect);
+
+}
+
+void draw_copyright(about_view& v)
+{
+  draw_texture(
+    get_strip_texture(chess_color::white),
+    v.get_layout().get_copyright()
+  );
+  draw_normal_text(
+    sf::String("(C) 2022-2025 ") + sf::String(get_author_name()),
+    v.get_layout().get_copyright()
+  );
+}
+
+void draw_url(about_view& v)
+{
+  draw_texture(
+    get_strip_texture(chess_color::black),
+    v.get_layout().get_url()
+  );
+
+  draw_normal_text(
+    sf::String(get_homepage_url()),
+    v.get_layout().get_url()
+  );
 }
 
 void draw_layout_panels(about_view& v)
@@ -77,70 +129,28 @@ void draw_layout_panels(about_view& v)
   }
 }
 
-void draw_subtitle_panel(about_view& v)
+void draw_panel(about_view& v)
+{
+  draw_outline(
+    v.get_layout().get_panel_outline()
+  );
+
+}
+
+void draw_subtitle(about_view& v)
 {
   draw_texture(
     get_subtitle_texture(),
     v.get_layout().get_subtitle()
   );
-  /*
-
-  const auto screen_rect{v.get_layout().get_subtitle()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_subtitle_texture()
-  );
-  get_render_window().draw(rectangle);
-  */
 }
 
-void draw_text_panel(about_view& v)
-{
-  const auto screen_rect{v.get_layout().get_text()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_game_option_icon(
-      options_view_item::starting_position
-    )
-  );
-  rectangle.setFillColor(sf::Color(255, 255, 255, 128));
-  get_render_window().draw(rectangle);
-  const sf::String s{
-    sf::String("Conquer Chess") + sf::String("\n")
-    + sf::String("\n")
-    + sf::String("(C) 2022-2025 ") + sf::String(get_author_name()) + sf::String("\n")
-    + sf::String("\n")
-    + sf::String(get_homepage_url()) + sf::String("\n")
-    + sf::String("\n")
-    + sf::String("Contributors: ") + sf::String("\n")
-    + sf::String("- ") + get_contributor_names()[0]+ sf::String("\n")
-    + sf::String("- ") + get_contributor_names()[1]
-  };
-  sf::Text text;
-  text.setString(s);
-  v.set_text_style(text);
-  set_text_position(text, screen_rect);
-  text.setFillColor(sf::Color::White);
-  get_render_window().draw(text);
-}
-
-void draw_title_panel(about_view& v)
+void draw_title(about_view& v)
 {
   draw_texture(
     get_title_texture(),
     v.get_layout().get_title()
   );
-  /*
-  const auto screen_rect{v.get_layout().get_title()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_title_texture()
-  );
-  get_render_window().draw(rectangle);
-  */
 }
 
 void about_view::start()

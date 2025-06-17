@@ -1,5 +1,9 @@
 # Screenshots
 
+![About screen v0.7](20250617.jpg)
+
+> The About screen looks prettier
+
 ![About screen v0.7](20250616.jpg)
 
 > The About screen shows names that are spelled correctly

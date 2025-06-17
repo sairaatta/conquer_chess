@@ -67,9 +67,13 @@ private:
 /// Show where the panels will be drawn
 void draw_layout_panels(about_view& v);
 
-void draw_subtitle_panel(about_view& v);
-void draw_text_panel(about_view& v);
-void draw_title_panel(about_view& v);
+void draw_background(about_view& v);
+void draw_copyright(about_view& v);
+void draw_panel(about_view& v);
+void draw_subtitle(about_view& v);
+void draw_contributors(about_view& v);
+void draw_title(about_view& v);
+void draw_url(about_view& v);
 
 
 #endif // LOGIC_ONLY

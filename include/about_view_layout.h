@@ -10,38 +10,44 @@
 /// The layout of the menu view.
 ///
 /// ```text
-///   x          x
-///   1          2
-///
-/// +--------------+
-/// |              |
-/// | +----------+ | y1
-/// | |          | |
-/// | | title    | |
-/// | | 2 panels | |
-/// | +----------+ | y2
-/// |              |
-/// | +----------+ | y3
-/// | | subtitle | |
-/// | +----------+ | y4
-/// |              |
-/// | +----------+ | y5
-/// | | text     | |
-/// | | 4 panels | |
-/// | | high     | |
-/// | |          | |
-/// | |          | |
-/// | |          | |
-/// | |          | |
-/// | |          | |
-/// | +----------+ | y6
-/// |              |
-/// +--------------+
-///
-///   ^          ^
-///   |          |
-///   +----------+
-///    panel_width
+///                    x x          x x
+///                    1 2          3 4
+/// +----------------------------------------------------+
+/// |                                                    |
+/// |                  +--------------+                  |   y1
+/// |                  |              |                  |
+/// |                  | +----------+ |                  |   y2
+/// |                  | |          | |                  |
+/// |                  | | title    | |                  |
+/// |                  | | 2 panels | |                  |
+/// |                  | +----------+ |                  |   y3
+/// |                  |              |                  |
+/// |                  | +----------+ |                  |   y4
+/// |                  | | subtitle | |                  |
+/// |                  | +----------+ |                  |   y5
+/// |                  |              |                  |
+/// |                  | +----------+ |                  |   y6
+/// |                  | | copyright| |                  |
+/// |                  | +----------+ |                  |   y7
+/// |                  |              |                  |
+/// |                  | +----------+ |                  |   y8
+/// |                  | | url      | |                  |
+/// |                  | +----------+ |                  |   y9
+/// |                  |              |                  |
+/// |                  | +----------+ |                  |   y10
+/// |                  | | contri-  | |                  |
+/// |                  | | butors   | |                  |
+/// |                  | |          | |                  |
+/// |                  | |          | |                  |
+/// |                  | +----------+ |                  |   y11
+/// |                  |              |                  |
+/// |                  +--------------+                  |   y12
+/// |                                                    |
+/// +----------------------------------------------------+
+///                      ^          ^
+///                      |          |
+///                      +----------+
+///                      panel_width
 /// ```
 ///
 class about_view_layout
@@ -52,27 +58,25 @@ public:
     const int margin_width = get_default_margin_width()
   );
 
-  /// The area where the frame rate (in frames per seconds) is dsplayed
-  const screen_rect& get_fps() const noexcept { return m_fps; }
-
-  const auto& get_title() const noexcept { return m_title; }
+  const auto& get_background() const noexcept { return m_background; }
+  const auto& get_copyright() const noexcept { return m_copyright; }
+  const auto& get_panel_outline() const noexcept { return m_panel_outline; }
   const auto& get_subtitle() const noexcept { return m_subtitle; }
-  const auto& get_text() const noexcept { return m_text; }
-
-  /// Get the size of the font that would fit nicely
-  int get_font_size() const noexcept { return m_font_size; }
+  const auto& get_contributors() const noexcept { return m_contributors; }
+  const auto& get_title() const noexcept { return m_title; }
+  const auto& get_url() const noexcept { return m_url; }
 
   screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
 private:
 
-  screen_rect m_title;
+  screen_rect m_background;
+  screen_rect m_contributors;
+  screen_rect m_copyright;
+  screen_rect m_panel_outline;
   screen_rect m_subtitle;
-  screen_rect m_text;
-  screen_rect m_fps;
-
-  /// The size of the font that would fit nicely
-  int m_font_size;
+  screen_rect m_title;
+  screen_rect m_url;
 
   /// The size of the window
   screen_coordinate m_window_size;

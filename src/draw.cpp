@@ -6,6 +6,8 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
+#include <cassert>
+
 void draw_texture(sf::Texture& t, const screen_rect& sr)
 {
   sf::RectangleShape rectangle;
@@ -17,13 +19,28 @@ void draw_texture(sf::Texture& t, const screen_rect& sr)
 void draw_about_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::white), sr);
-  draw_text("About", sr);
+  draw_big_text(sf::String("About"), sr);
+}
+
+void draw_big_text(const sf::String& s, const screen_rect& sr)
+{
+  draw_text(s, sr, 48);
+}
+
+void draw_normal_text(const sf::String& s, const screen_rect& sr)
+{
+  draw_text(s, sr, 32);
+}
+
+void draw_normal_texts(const std::vector<sf::String>& s, const screen_rect& r)
+{
+  draw_texts(s, r, 32);
 }
 
 void draw_options_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::black), sr);
-  draw_text("Options", sr);
+  draw_big_text(sf::String("Options"), sr);
 }
 
 void draw_outline(const screen_rect& sr)
@@ -39,35 +56,47 @@ void draw_outline(const screen_rect& sr)
 void draw_quit_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::black), sr);
-  draw_text("Quit", sr);
+  draw_big_text(sf::String("Quit"), sr);
 }
 
 void draw_start_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::white), sr);
-  draw_text("Start", sr);
+  draw_big_text(sf::String("Start"), sr);
 }
 
-void draw_text(const std::string& s, const screen_rect& sr)
+void draw_text(const sf::String& s, const screen_rect& sr, const int character_size)
 {
-  /*
-  const int vertical_font_size = 0.7
-    * static_cast<double>(get_height(sr));
-  const int horizonal_font_size = 0.7
-    * static_cast<double>(get_width(sr))
-    / static_cast<double>(s.size())
-  ;
-  const int font_size{std::min(horizonal_font_size, vertical_font_size)};
-  */
-  const int font_size{48};
-
+  assert(character_size > 7);
   sf::Text text;
   text.setFont(get_arial_font());
   text.setStyle(sf::Text::Bold);
   text.setString(s);
-  text.setCharacterSize(font_size);
+  text.setCharacterSize(character_size);
   text.setFillColor(sf::Color::Black);
   set_text_position(text, sr);
   get_render_window().draw(text);
 }
 
+void draw_texts(const std::vector<sf::String>& s, const screen_rect& r, const int character_size)
+{
+  const int n_lines = s.size();
+  const double row_height{
+    static_cast<double>(get_height(r))
+    / static_cast<double>(s.size())
+  };
+
+  for (int i{0}; i!=n_lines; ++i)
+  {
+    const int x1{r.get_tl().get_x()};
+    const int x2{r.get_br().get_x()};
+    const int y1 = r.get_tl().get_y() + (row_height * i);
+    const int y2 = r.get_tl().get_y() + (row_height * (i + 1));
+    const screen_rect row_rect(
+      screen_coordinate(x1, y1),
+      screen_coordinate(x2, y2)
+    );
+    draw_text(s[i], row_rect, character_size);
+  }
+
+}

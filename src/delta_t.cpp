@@ -33,6 +33,16 @@ void test_delta_t()
     const delta_t a(0.1);
     const delta_t b(0.2);
     assert(a < b);
+    assert(!(b < a));
+  }
+  // operator<=
+  {
+    const delta_t a(0.1);
+    const delta_t b(0.2);
+    const delta_t c(0.2);
+    assert(a <= c);
+    assert(b <= c);
+    assert(!(c <= a));
   }
   // operator+
   {
@@ -66,12 +76,15 @@ void test_delta_t()
     const delta_t low{0.0001};
     const delta_t high{0.11};
     assert(high > low);
+    assert(!(low > high));
   }
   // operator>=
   {
     const delta_t low{0.0001};
     const delta_t high{0.11};
     assert(high >= low);
+    assert(high >= high);
+    assert(!(low >= high));
   }
   // operator<<
   {

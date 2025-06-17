@@ -8,9 +8,36 @@
 
 #include "ccfwd.h"
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/String.hpp>
 
 /// Draw an About menu button on the main window
 void draw_about_button(const screen_rect& sr);
+
+/// Draw the text on the main window.
+///
+/// Use Ariel font, 48 pixels, black letters and bold face
+void draw_big_text(const sf::String& s, const screen_rect& r);
+
+/// Draw the texts on the main window,
+/// using one row per element.
+///
+/// Use Ariel font, 48 pixels, black letters and bold face
+//void draw_big_texts(
+//  const std::vector<sf::String>& s, const screen_rect& r
+//);
+
+/// Draw the text on the main window.
+///
+/// Use Ariel font, 32 pixels, black letters and bold face
+void draw_normal_text(const sf::String& s, const screen_rect& r);
+
+/// Draw the texts on the main window,
+/// using one row per element.
+///
+/// Use Ariel font, 32 pixels, black letters and bold face
+void draw_normal_texts(
+  const std::vector<sf::String>& s, const screen_rect& r
+);
 
 /// Draw an Options menu button on the main window
 void draw_options_button(const screen_rect& sr);
@@ -29,7 +56,13 @@ void draw_texture(sf::Texture& t, const screen_rect& r);
 
 /// Draw the text on the main window.
 ///
-/// Use Ariel font, black letters and bold face.
-void draw_text(const std::string& s, const screen_rect& r);
+/// Use Ariel font, black letters and bold face
+void draw_text(const sf::String& s, const screen_rect& r, const int character_size);
+
+/// Draw the texts on the main window,
+/// using one row per element.
+void draw_texts(
+  const std::vector<sf::String>& s, const screen_rect& r, const int character_size
+);
 
 #endif // DRAW_H
