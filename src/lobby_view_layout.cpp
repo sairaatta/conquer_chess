@@ -9,6 +9,12 @@ lobby_view_layout::lobby_view_layout(
 ) : m_font_size{64},
     m_window_size{window_size}
 {
+  m_background = screen_rect(
+    screen_coordinate(0, 0),
+    screen_coordinate(m_window_size.get_x(), m_window_size.get_y())
+  );
+
+  // Central panel
   const int n_vertical_units{5};
   const int n_vertical_margins{n_vertical_units + 1}; // margins are above, below and between panels
   const int panel_height{
@@ -19,30 +25,27 @@ lobby_view_layout::lobby_view_layout(
     )
   };
   const int panel_width{
-    window_size.get_x() / 6
+    300
   };
   const int x1{margin_width};
-  const int x2{(window_size.get_x() / 2) - panel_width - margin_width - margin_width};
-  const int x3{x2 + margin_width};
+  const int x2{(window_size.get_x() / 2) - panel_width - (6 * margin_width)};
+  const int x3{x2 + margin_width + margin_width};
   const int x4{x3 + panel_width};
-  const int x5{x4 + margin_width};
+  const int x5{x4 + margin_width + margin_width};
   const int x6{x5 + panel_width};
-  const int x7{x6 + margin_width};
+  const int x7{x6 + margin_width + margin_width};
   const int x8{window_size.get_x() - margin_width};
 
+  const int title_height{200};
   const int y1{margin_width};
-  const int y2{y1 + panel_height + margin_width + panel_height};
-  const int y3{y2 + margin_width};
+  const int y2{y1 + title_height};
+  const int y3{y2 + margin_width + margin_width + margin_width};
   const int y4{y3 + panel_height};
   const int y5{y4 + margin_width};
   const int y6{y5 + panel_height};
   const int y7{y6 + margin_width};
   const int y8{y7 + panel_height};
 
-  m_background = screen_rect(
-    screen_coordinate(0, 0),
-    screen_coordinate(m_window_size.get_x(), m_window_size.get_y())
-  );
   m_title = screen_rect(
     screen_coordinate(x3, y1),
     screen_coordinate(x6, y2)
@@ -50,10 +53,6 @@ lobby_view_layout::lobby_view_layout(
   m_lhs_color = screen_rect(
     screen_coordinate(x3, y3),
     screen_coordinate(x4, y4)
-  );
-  m_lhs_controls = screen_rect(
-    screen_coordinate(x1, y1),
-    screen_coordinate(x2, y8)
   );
   m_lhs_race = screen_rect(
     screen_coordinate(x3, y5),
@@ -67,10 +66,6 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(x5, y3),
     screen_coordinate(x6, y4)
   );
-  m_rhs_controls = screen_rect(
-    screen_coordinate(x7, y1),
-    screen_coordinate(x8, y8)
-  );
   m_rhs_race = screen_rect(
     screen_coordinate(x5, y5),
     screen_coordinate(x6, y6)
@@ -79,9 +74,63 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(x5, y7),
     screen_coordinate(x6, y8)
   );
-  m_font_size = std::min(
-    panel_height / 2,
-    panel_width / 6
+
+  // Side panel
+  const int control_panel_width{200};
+  const int control_panel_height{80};
+  const int sx1{((x1 + x2) / 2) - (control_panel_width / 2)};
+  const int sx2{sx1 + control_panel_width};
+
+  const int sx7{((x7 + x8) / 2) - (control_panel_width / 2)};
+  const int sx8{sx7 + control_panel_width};
+
+  const int sy1{y1};
+  const int sy99{window_size.get_y() - margin_width};
+  const int sy98{sy99 - control_panel_height};
+  const int sy97{sy98 - control_panel_height};
+  const int sy96{sy97 - control_panel_height};
+  const int sy95{sy96 - control_panel_height};
+  const int sy94{sy95 - control_panel_height};
+  m_lhs_king_portrait = screen_rect(
+    screen_coordinate(x1, sy1),
+    screen_coordinate(x2, sy94)
+  );
+  m_lhs_control_symbol = screen_rect(
+    screen_coordinate(sx1, sy95),
+    screen_coordinate(sx2, sy96)
+  );
+  m_lhs_control_up = screen_rect(
+    screen_coordinate(sx1, sy96),
+    screen_coordinate(sx2, sy97)
+  );
+  m_lhs_control_down = screen_rect(
+    screen_coordinate(sx1, sy97),
+    screen_coordinate(sx2, sy98)
+  );
+  m_lhs_control_select = screen_rect(
+    screen_coordinate(sx1, sy98),
+    screen_coordinate(sx2, sy99)
+  );
+
+  m_rhs_king_portrait = screen_rect(
+    screen_coordinate(x7, sy1),
+    screen_coordinate(x8, sy94)
+  );
+  m_rhs_control_symbol = screen_rect(
+    screen_coordinate(sx7, sy95),
+    screen_coordinate(sx8, sy96)
+  );
+  m_rhs_control_up = screen_rect(
+    screen_coordinate(sx7, sy96),
+    screen_coordinate(sx8, sy97)
+  );
+  m_rhs_control_down = screen_rect(
+    screen_coordinate(sx7, sy97),
+    screen_coordinate(sx8, sy98)
+  );
+  m_rhs_control_select = screen_rect(
+    screen_coordinate(sx7, sy98),
+    screen_coordinate(sx8, sy99)
   );
 }
 
@@ -96,27 +145,73 @@ const screen_rect& lobby_view_layout::get_color(const side player_side) const no
   return m_rhs_color;
 }
 
-const screen_rect& lobby_view_layout::get_controls(const side player_side) const noexcept
+const screen_rect& lobby_view_layout::get_control_down(const side player_side) const noexcept
 {
   if (player_side == side::lhs)
   {
-    return m_lhs_controls;
+    return m_lhs_control_down;
   }
   assert(player_side == side::rhs);
-  return m_rhs_controls;
+  return m_rhs_control_down;
+}
+
+const screen_rect& lobby_view_layout::get_control_select(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_select;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_select;
+}
+
+const screen_rect& lobby_view_layout::get_control_symbol(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_symbol;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_symbol;
+}
+
+const screen_rect& lobby_view_layout::get_control_up(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_up;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_up;
+}
+
+const screen_rect& lobby_view_layout::get_king_portrait(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_king_portrait;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_king_portrait;
 }
 
 std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
 {
   return
   {
-    layout.get_title(),
+    // layout.get_title(), // Needs to show the background
     layout.get_color(side::lhs),
-    layout.get_controls(side::lhs),
+    layout.get_control_down(side::lhs),
+    layout.get_control_select(side::lhs),
+    layout.get_control_symbol(side::lhs),
+    layout.get_control_up(side::lhs),
     layout.get_race(side::lhs),
     layout.get_start(side::lhs),
     layout.get_color(side::rhs),
-    layout.get_controls(side::rhs),
+    layout.get_control_down(side::rhs),
+    layout.get_control_select(side::rhs),
+    layout.get_control_symbol(side::rhs),
+    layout.get_control_up(side::rhs),
     layout.get_race(side::rhs),
     layout.get_start(side::rhs),
   };

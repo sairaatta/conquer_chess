@@ -94,6 +94,9 @@ void draw_controls_panel(lobby_view& v, const side player_side);
 /// Show the countdown
 void draw_countdown(lobby_view& v, const int n_left_secs);
 
+/// Show the portraits of the kings of the race the players use
+void draw_king_portrait(lobby_view& v, const side player_side);
+
 /// Show where the panels will be drawn
 void draw_layout_panels(lobby_view& v);
 
@@ -107,7 +110,7 @@ void draw_ready_panel(lobby_view& v, const side player_side);
 void draw_selected_panel(lobby_view& v, const side player_side);
 
 /// The image at the top
-void draw_title(lobby_view& v);
+void draw_lobby_title(lobby_view& v);
 
 
 #endif // LOGIC_ONLY

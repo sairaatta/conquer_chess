@@ -57,13 +57,21 @@ void test_race()
       assert(get_next(get_previous(c)) == c);
     }
   }
-  // to_str, manual
+  // to_human_str
   {
+    assert(to_human_str(race::classic) == "Classic");
+    assert(to_human_str(race::zerg) == "Zerg");
+    assert(to_human_str(race::protoss) == "Protoss");
+    assert(to_human_str(race::terran) == "Terran");
+  }
+  // to_str
+  {
+    assert(to_str(race::classic) == "classic");
     assert(to_str(race::zerg) == "zerg");
     assert(to_str(race::protoss) == "protoss");
     assert(to_str(race::terran) == "terran");
   }
-  // to_str, all
+  // to_str
   {
     for (const auto c: get_all_races())
     {
@@ -77,6 +85,14 @@ void test_race()
     assert(!s.str().empty());
   }
 #endif // DEBUG
+}
+
+std::string to_human_str(const race c) noexcept
+{
+  std::string s{to_str(c)};
+  assert(!s.empty());
+  s[0] = std::toupper(s[0]);
+  return s;
 }
 
 std::string to_str(const race c) noexcept

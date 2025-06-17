@@ -22,6 +22,8 @@ race get_previous(const race r) noexcept;
 /// Test the race functions
 void test_race();
 
+std::string to_human_str(const race c) noexcept;
+
 std::string to_str(const race c) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const race c) noexcept;

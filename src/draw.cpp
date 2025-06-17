@@ -25,6 +25,14 @@ void draw_big_text(const sf::String& s, const screen_rect& sr)
   draw_text(s, sr, 48);
 }
 
+void draw_chessboard_strip_texture(const chess_color c, const screen_rect& sr)
+{
+  draw_texture(
+    get_strip_texture(c),
+    sr
+  );
+}
+
 void draw_controls_label(const screen_rect& sr)
 {
   sf::RectangleShape rectangle;
@@ -74,6 +82,18 @@ void draw_fancy_physical_controller_type(const physical_controller_type& t, cons
   get_render_window().draw(rectangle);
 }
 
+void draw_fancy_text(
+  const sf::String& s,
+  const screen_rect& sr,
+  const int outer_character_size,
+  const int inner_character_size
+)
+{
+  assert(inner_character_size < outer_character_size);
+  draw_text(s, sr, outer_character_size, sf::Color::Black);
+  draw_text(s, sr, inner_character_size, sf::Color::White);
+}
+
 void draw_game_speed_icon(const screen_rect& sr)
 {
   sf::RectangleShape rectangle;
@@ -99,14 +119,15 @@ void draw_game_speed_icon(const screen_rect& sr)
 
 void draw_game_speed_value(const screen_rect& sr)
 {
-  sf::RectangleShape rectangle;
-  rectangle.setTexture(
-    &get_strip_texture(chess_color::black)
-  );
-  set_rect(rectangle, sr);
-  get_render_window().draw(rectangle);
+  draw_chessboard_strip_texture(chess_color::black, sr);
   draw_normal_text(to_human_str(game_options::get().get_game_speed()), sr);
 
+}
+
+void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr)
+{
+  draw_text(s, sr, 512, sf::Color::Black);
+  draw_text(s, sr, 500, sf::Color::White);
 }
 
 void draw_music_volume_label(const screen_rect& sr)
@@ -162,14 +183,23 @@ void draw_options_button(const screen_rect& sr)
   draw_big_text(sf::String("Options"), sr);
 }
 
-void draw_outline(const screen_rect& sr)
+void draw_outline(const screen_rect& sr, const sf::Color& outline_color)
 {
   sf::RectangleShape rectangle;
   set_rect(rectangle, sr);
   rectangle.setFillColor(sf::Color::Transparent);
-  rectangle.setOutlineColor(sf::Color::Red);
+  rectangle.setOutlineColor(outline_color);
   rectangle.setOutlineThickness(5);
   get_render_window().draw(rectangle);
+}
+
+/// Draw the fancy physical controller symbol
+void draw_physical_controller_symbol(const physical_controller_type& t, const screen_rect& sr)
+{
+  draw_texture(
+    game_resources::get().get_physical_controller_textures().get_symbol(t),
+    sr
+  );
 }
 
 void draw_pieces(
@@ -265,12 +295,7 @@ void draw_sound_effects_volume_label(const screen_rect& sr)
 
 void draw_sound_effects_volume_value(const screen_rect& sr)
 {
-  sf::RectangleShape rectangle;
-  rectangle.setTexture(
-    &get_strip_texture(chess_color::black)
-  );
-  set_rect(rectangle, sr);
-  get_render_window().draw(rectangle);
+  draw_chessboard_strip_texture(chess_color::black, sr);
 
   std::stringstream s;
   s << get_sound_effects_volume() << " %";
@@ -352,13 +377,10 @@ void draw_starting_position_label(const screen_rect& sr)
 
 void draw_starting_position_value(const screen_rect& sr)
 {
-  sf::RectangleShape rectangle;
-  rectangle.setTexture(
-    &get_strip_texture(chess_color::white)
+  draw_texture(
+    get_strip_texture(chess_color::white),
+    sr
   );
-  set_rect(rectangle, sr);
-  get_render_window().draw(rectangle);
-
   draw_normal_text(to_human_str(get_starting_position()), sr);
 }
 

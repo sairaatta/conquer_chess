@@ -24,6 +24,8 @@ chess_color get_other_color(const chess_color c) noexcept;
 /// Test the chess_color functions
 void test_chess_color();
 
+std::string to_human_str(const chess_color c) noexcept;
+
 std::string to_str(const chess_color c) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const chess_color c) noexcept;

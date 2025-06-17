@@ -19,7 +19,7 @@ To go to the lobby:
 
 ## Lobby
 
-![Lobby v0.4](screenshots/20230103_4.png)
+![Lobby v0.7](screenshots/20250617_3.jpg)
 
 The lobby is where the match is set up.
 Here the two players pick who plays which side

@@ -5,7 +5,8 @@
 #include "action_number.h"
 #include "render_window.h"
 #include "screen_coordinate.h"
-#include "helper.h"
+//#include "helper.h"
+#include "draw.h"
 #include "lobby_options.h"
 #include "game_options.h"
 #include "game_resources.h"
@@ -189,13 +190,15 @@ void lobby_view::draw()
 {
   draw_background(*this);
   draw_layout_panels(*this);
-  draw_title(*this);
+  draw_lobby_title(*this);
   draw_color_panel(*this, side::lhs);
   draw_controls_panel(*this, side::lhs);
+  draw_king_portrait(*this, side::lhs);
   draw_race_panel(*this, side::lhs);
   draw_ready_panel(*this, side::lhs);
   draw_color_panel(*this, side::rhs);
   draw_controls_panel(*this, side::rhs);
+  draw_king_portrait(*this, side::rhs);
   draw_race_panel(*this, side::rhs);
   draw_ready_panel(*this, side::rhs);
   draw_selected_panel(*this, side::lhs);
@@ -225,94 +228,57 @@ void draw_color_panel(lobby_view& v, const side player_side)
   );
   get_render_window().draw(rectangle);
 
-  // Text
-  sf::Text text;
-  const auto text_rect{
-    get_lower_half(screen_rect)
-  };
-  std::string s{to_str(get_color(player_side))};
-  s[0] = std::toupper(s[0]);
-  text.setString(s);
-  v.set_text_style(text);
-  set_text_position(text, text_rect);
-  get_render_window().draw(text);
-
-  // Smaller
-  text.setCharacterSize(text.getCharacterSize() - 2);
-  set_text_position(text, text_rect);
-  text.setFillColor(sf::Color::White);
-  get_render_window().draw(text);
+  draw_normal_fancy_text(to_human_str(get_color(player_side)), screen_rect);
 }
 
 void draw_controls_panel(lobby_view& v, const side player_side)
 {
-  const auto screen_rect{v.get_layout().get_controls(player_side)};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  const auto player_color{get_color(player_side)};
-  const auto player_race{get_race_of_side(player_side)};
-  rectangle.setTexture(
-    &game_resources::get().get_piece_portrait_textures().get_portrait(
-      player_race,
-      player_color,
-      piece_type::king
-    )
-  );
-  get_render_window().draw(rectangle);
-
-  // Text
-  sf::Text text;
-  const auto text_rect{
-    get_lower_half(screen_rect)
-  };
-
+  const auto &layout{v.get_layout()};
   const auto& c{physical_controllers::get().get_controller(player_side)};
-  const std::string s{
-    to_str(c.get_type())
-    + std::string("\n")
-    + std::string("Up: ")
-    + to_str(c.get_key_bindings().get_key_for_move_up())
-    + std::string("\n")
-    + std::string("Down: ")
-    + to_str(c.get_key_bindings().get_key_for_move_down())
-    + std::string("\n")
-    + std::string("Select: ")
-    + to_str(c.get_key_bindings().get_key_for_action(action_number(1)))
-    + std::string("\n")
-  };
-  text.setString(s);
-  v.set_text_style(text);
-  set_text_position(text, text_rect);
-  get_render_window().draw(text);
 
-  // Smaller
-  text.setCharacterSize(text.getCharacterSize() - 2);
-  set_text_position(text, text_rect);
-  text.setFillColor(sf::Color::White);
-  get_render_window().draw(text);
+  draw_physical_controller_symbol(
+    c.get_type(),
+    layout.get_control_symbol(player_side)
+  );
+  draw_text(
+    sf::String("Up: ") + sf::String(to_str(c.get_key_bindings().get_key_for_move_up())),
+    layout.get_control_up(player_side),
+    get_normal_character_size(),
+    sf::Color::White
+  );
+  draw_text(
+    sf::String("Down: ") + sf::String(to_str(c.get_key_bindings().get_key_for_move_down())),
+    layout.get_control_down(player_side),
+    get_normal_character_size(),
+    sf::Color::White
+  );
+  draw_text(
+    sf::String("Select: ") + sf::String(to_str(c.get_key_bindings().get_key_for_action(action_number(1)))),
+    layout.get_control_select(player_side),
+    get_normal_character_size(),
+    sf::Color::White
+  );
+  screen_rect panel{
+    screen_coordinate(layout.get_control_symbol(player_side).get_tl()),
+    screen_coordinate(layout.get_control_select(player_side).get_br())
+  };
+  sf::Color outline_color;
+  switch (player_side)
+  {
+    case side::lhs: outline_color = sf::Color::Red; break;
+    case side::rhs: outline_color = sf::Color::Blue; break;
+  }
+  draw_outline(panel, outline_color);
+
 }
 
 void draw_countdown(lobby_view& v, const int n_left_secs)
 {
-  // Text
   const screen_rect window_rect{
     screen_coordinate(0, 0),
     v.get_layout().get_window_size()
   };
-  sf::Text text;
-  std::string s{std::to_string(n_left_secs)};
-  text.setString(s);
-  v.set_text_style(text);
-  text.setCharacterSize(512);
-  set_text_position(text, window_rect);
-  get_render_window().draw(text);
-
-  // Smaller
-  text.setCharacterSize(512 - 2);
-  set_text_position(text, window_rect);
-  text.setFillColor(sf::Color::White);
-  get_render_window().draw(text);
-
+  draw_huge_fancy_text(std::to_string(n_left_secs), window_rect);
 }
 
 void draw_race_panel(lobby_view& v, const side player_side)
@@ -332,29 +298,42 @@ void draw_race_panel(lobby_view& v, const side player_side)
   const auto text_rect{
     get_lower_half(screen_rect)
   };
-  std::string s{to_str(get_race_of_side(player_side))};
-  s[0] = std::toupper(s[0]);
-  text.setString(s);
-  v.set_text_style(text);
-  set_text_position(text, text_rect);
-  get_render_window().draw(text);
-
-  // Smaller
-  text.setCharacterSize(text.getCharacterSize() - 2);
-  set_text_position(text, text_rect);
-  text.setFillColor(sf::Color::White);
-  get_render_window().draw(text);
+  const std::string s{to_human_str(get_race_of_side(player_side))};
+  draw_normal_fancy_text(s, text_rect);
 }
 
 void draw_background(lobby_view& v)
 {
   const auto screen_rect{v.get_layout().get_background()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &game_resources::get().get_textures().get_all_races_1()
+  draw_texture(
+    game_resources::get().get_map_textures().get_map(race::classic),
+    //game_resources::get().get_textures().get_all_races_1(),
+    screen_rect
   );
-  get_render_window().draw(rectangle);
+}
+
+void draw_king_portrait(lobby_view& v, const side player_side)
+{
+  const auto player_color{get_color(player_side)};
+  const auto player_race{get_race_of_side(player_side)};
+  draw_texture(
+    game_resources::get().get_piece_portrait_textures().get_portrait(
+      player_race,
+      player_color,
+      piece_type::king
+    ),
+    v.get_layout().get_king_portrait(player_side)
+  );
+  sf::Color outline_color;
+  switch (player_side)
+  {
+    case side::lhs: outline_color = sf::Color::Red; break;
+    case side::rhs: outline_color = sf::Color::Blue; break;
+  }
+  draw_outline(
+    v.get_layout().get_king_portrait(player_side),
+    outline_color
+  );
 }
 
 void draw_layout_panels(lobby_view& v)
@@ -377,78 +356,41 @@ void draw_selected_panel(lobby_view& v, const side player_side)
       player_side
     )
   };
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, select_rect);
-  rectangle.setOrigin(
-    get_width(select_rect) / 2,
-    get_height(select_rect) / 2
-  );
-  rectangle.setFillColor(sf::Color::Transparent);
-  rectangle.setOutlineColor(sf::Color::Red);
-  rectangle.setOutlineThickness(5);
-  get_render_window().draw(rectangle);
+  sf::Color c;
+  switch (player_side)
+  {
+    case side::lhs: c = sf::Color::Red; break;
+    case side::rhs: c = sf::Color::Blue; break;
+  }
+  draw_outline(select_rect, c);
 }
 
 void draw_ready_panel(lobby_view& v, const side player_side)
 {
   const auto screen_rect{v.get_layout().get_start(player_side)};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &game_resources::get().get_lobby_menu_textures().get_ready(
-      v.get_start(player_side)
-    )
+  draw_texture(
+    game_resources::get().get_lobby_menu_textures().get_ready(v.get_start(player_side)),
+    screen_rect
   );
-  get_render_window().draw(rectangle);
 
   // Text
-  sf::Text text;
   const auto text_rect{
     get_lower_half(screen_rect)
   };
-  if (v.get_start(player_side))
-  {
-    text.setString("Ready");
-  }
-  else
-  {
-    text.setString("Not ready");
-  }
-  v.set_text_style(text);
-  set_text_position(text, text_rect);
-  get_render_window().draw(text);
-
-  // Smaller
-  text.setCharacterSize(text.getCharacterSize() - 2);
-  set_text_position(text, text_rect);
-  text.setFillColor(sf::Color::White);
-  get_render_window().draw(text);
+  const bool is_ready{v.get_start(player_side)};
+  const std::string s{is_ready ? "Ready" : "Not ready"};
+  draw_normal_fancy_text(s, text_rect);
 }
 
-void draw_title(lobby_view& v)
+void draw_lobby_title(lobby_view& v)
 {
   const auto screen_rect{v.get_layout().get_title()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &game_resources::get().get_map_textures().get_map(race::classic)
-  );
-  get_render_window().draw(rectangle);
-
-  // Text
-  sf::Text text;
-  text.setString("Lobby");
-  v.set_text_style(text);
-  text.setCharacterSize(text.getCharacterSize() * 3);
-
-  set_text_position(text, screen_rect);
-  get_render_window().draw(text);
-
-  // Smaller
-  text.setCharacterSize(text.getCharacterSize() - 4);
-  set_text_position(text, screen_rect);
-  text.setFillColor(sf::Color::White);
-  get_render_window().draw(text);
+  draw_squares(screen_rect, true);
+  //draw_texture(
+  //  game_resources::get().get_map_textures().get_map(race::classic),
+  //  screen_rect
+  //);
+  draw_fancy_text("Lobby", screen_rect, 120, 116);
 
 }
 

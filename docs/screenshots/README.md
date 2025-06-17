@@ -1,5 +1,9 @@
 # Screenshots
 
+![Lobby screen v0.7](20250617_3.jpg)
+
+> The Lobby screen looks prettier
+
 ![About screen v0.7](20250617_2.jpg)
 
 > The Options screen looks prettier

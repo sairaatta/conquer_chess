@@ -18,12 +18,8 @@
 /// |                                                     |
 /// | +----------+ +-----------------------+ +----------+ | y1
 /// | |          | |                       | |          | |
-/// | | lhs_     | |                       | | rhs_     | |
-/// | | controls | |                       | | controls | |
-/// | |          | |        title          | |          | |
-/// | |          | |                       | |          | |
-/// | |          | |                       | |          | |
-/// | |          | |                       | |          | |
+/// | | lhs king | | title                 | | rhs king | |
+/// | | portrait | |                       | | portrait | |
 /// | |          | +-----------------------+ |          | | y2
 /// | |          |                           |          | |
 /// | |          | +----------+ +----------+ |          | | y3
@@ -32,17 +28,17 @@
 /// | |          | |          | |          | |          | |
 /// | |          | +----------+ +----------+ |          | | y4
 /// | |          |                           |          | |
-/// | |          | +----------+ +----------+ |          | | y5
-/// | |          | |          | |          | |          | |
-/// | |          | | racee    | | race     | |          | |
-/// | |          | |          | |          | |          | |
-/// | |          | +----------+ +----------+ |          | | y6
-/// | |          |                           |          | |
-/// | |          | +----------+ +----------+ |          | | y7 <-+
-/// | |          | |          | |          | |          | |      |
-/// | |          | | ready    | | read     | |          | |      +- panel_height
-/// | |          | |          | |          | |          | |      |
-/// | +----------+ +----------+ +----------+ +----------+ | y8 <-+
+/// | +----------+ +----------+ +----------+ |          | | y5
+/// |              |          | |          | |          | |
+/// |  +--------+  | race     | | race     | |          | |
+/// |  |Symbol  |  |          | |          | |          | |
+/// |  +--------+  +----------+ +----------+ |          | | y6
+/// |  |Up      |                            |          | |
+/// |  +--------+  +----------+ +----------+ |          | | y7 <-+
+/// |  |Down    |  |          | |          | |          | |      |
+/// |  +--------+  | ready    | | read     | |          | |      +- panel_height
+/// |  |Select  |  |          | |          | |          | |      |
+/// |  +--------+  +----------+ +----------+ +----------+ | y8 <-+
 /// |                                                     |
 /// +-----------------------------------------------------+
 ///
@@ -61,7 +57,11 @@ public:
 
   const auto& get_background() const noexcept { return m_background; }
   const screen_rect& get_color(const side player_side) const noexcept;
-  const screen_rect& get_controls(const side player_side) const noexcept;
+  const screen_rect& get_control_down(const side player_side) const noexcept;
+  const screen_rect& get_control_select(const side player_side) const noexcept;
+  const screen_rect& get_control_symbol(const side player_side) const noexcept;
+  const screen_rect& get_control_up(const side player_side) const noexcept;
+  const screen_rect& get_king_portrait(const side player_side) const noexcept;
   const screen_rect& get_race(const side player_side) const noexcept;
   const screen_rect& get_start(const side player_side) const noexcept;
   const auto& get_title() const noexcept { return m_title; }
@@ -75,11 +75,19 @@ private:
 
   screen_rect m_background;
   screen_rect m_lhs_color;
-  screen_rect m_lhs_controls;
+  screen_rect m_lhs_control_down;
+  screen_rect m_lhs_control_select;
+  screen_rect m_lhs_control_symbol;
+  screen_rect m_lhs_control_up;
+  screen_rect m_lhs_king_portrait;
   screen_rect m_lhs_race;
   screen_rect m_lhs_start;
   screen_rect m_rhs_color;
-  screen_rect m_rhs_controls;
+  screen_rect m_rhs_control_down;
+  screen_rect m_rhs_control_select;
+  screen_rect m_rhs_control_symbol;
+  screen_rect m_rhs_control_up;
+  screen_rect m_rhs_king_portrait;
   screen_rect m_rhs_race;
   screen_rect m_rhs_start;
   screen_rect m_title;
