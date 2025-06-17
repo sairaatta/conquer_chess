@@ -54,9 +54,6 @@ public:
   /// If the selected item changes, play sound
   void set_selected(const menu_view_item i);
 
-  /// Set the text to a uniform style
-  sf::Text get_styled_text();
-
   /// Start displaying this window
   void start();
 
@@ -90,7 +87,7 @@ int create_seedless_random_background_image_index();
 void draw_about_panel(menu_view& v);
 void draw_background_image(menu_view& v);
 
-void draw_menu_panel(menu_view& v);
+void draw_menu_outline(menu_view& v);
 void draw_options_panel(menu_view& v);
 
 /// Show where the panels will be drawn

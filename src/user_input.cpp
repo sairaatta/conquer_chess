@@ -127,6 +127,14 @@ void test_user_input()
     std::default_random_engine rng_engine(seed);
     create_random_user_input(rng_engine);
   }
+  // operator==
+  {
+    const user_input a{create_press_action_1(side::lhs)};
+    const user_input b{create_press_action_1(side::lhs)};
+    const user_input c{create_press_action_2(side::lhs)};
+    assert(a == b);
+    assert(!(a == c));
+  }
 #endif // DEBUG
 }
 

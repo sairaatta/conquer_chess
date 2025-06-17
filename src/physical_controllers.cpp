@@ -197,6 +197,10 @@ void test_physical_controllers()
   {
     use_default_controllers();
     assert(get_mouse_user_player_side(physical_controllers::get()) == side::rhs);
+    use_keyboard_mouse_controllers();
+    assert(get_mouse_user_player_side(physical_controllers::get()) == side::rhs);
+    use_mouse_keyboard_controllers();
+    assert(get_mouse_user_player_side(physical_controllers::get()) == side::lhs);
   }
   // get_two_keyboard_controllers
   {

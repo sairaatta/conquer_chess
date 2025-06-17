@@ -9,8 +9,20 @@
 #include "ccfwd.h"
 #include <SFML/Graphics/Texture.hpp>
 
-/// Draw an About menu butto non the main window
+/// Draw an About menu button on the main window
 void draw_about_button(const screen_rect& sr);
+
+/// Draw an Options menu button on the main window
+void draw_options_button(const screen_rect& sr);
+
+/// Draw a thick, red outline at the edges of this rectengle
+void draw_outline(const screen_rect& sr);
+
+/// Draw a Quit menu button on the main window
+void draw_quit_button(const screen_rect& sr);
+
+/// Draw a Start menu button on the main window
+void draw_start_button(const screen_rect& sr);
 
 /// Draw the texture on the main window
 void draw_texture(sf::Texture& t, const screen_rect& r);

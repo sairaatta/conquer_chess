@@ -44,13 +44,6 @@ int create_seedless_random_background_image_index() {
   return create_random_background_image_index(rng_engine);
 }
 
-sf::Text get_menu_screen_text() noexcept
-{
-  sf::Text text;
-
-  return text;
-}
-
 bool menu_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
@@ -202,21 +195,11 @@ void menu_view::tick()
   // Nothing to do yet
 }
 
-sf::Text menu_view::get_styled_text()
-{
-  sf::Text text;
-  text.setFont(get_arial_font());
-  text.setStyle(sf::Text::Bold);
-  text.setCharacterSize(m_layout.get_font_size());
-  text.setFillColor(sf::Color::Black);
-  return text;
-}
-
 void menu_view::draw()
 {
   draw_background_image(*this);
 
-  draw_menu_panel(*this);
+  draw_menu_outline(*this);
 
   draw_layout_panels(*this);
 
@@ -243,32 +226,14 @@ void draw_background_image(menu_view& v)
 }
 
 
-void draw_menu_panel(menu_view& v)
+void draw_menu_outline(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_menu_panel()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setFillColor(sf::Color::Transparent);
-  rectangle.setOutlineColor(sf::Color::Red);
-  rectangle.setOutlineThickness(5);
-  get_render_window().draw(rectangle);
+  draw_outline(v.get_layout().get_menu_panel());
 }
 
 void draw_options_panel(menu_view& v)
 {
-
-  const auto screen_rect{v.get_layout().get_options()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_strip_texture(chess_color::black)
-  );
-  get_render_window().draw(rectangle);
-
-  sf::Text text{v.get_styled_text()};
-  text.setString("Options");
-  set_text_position(text, screen_rect);
-  get_render_window().draw(text);
+  draw_options_button(v.get_layout().get_options());
 }
 
 void draw_layout_panels(menu_view& v)
@@ -285,51 +250,17 @@ void draw_layout_panels(menu_view& v)
 
 void draw_quit_panel(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_quit()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_strip_texture(chess_color::black)
-  );
-  get_render_window().draw(rectangle);
-
-  sf::Text text{v.get_styled_text()};
-  text.setString("Quit");
-  text.setFillColor(sf::Color::Black);
-  set_text_position(text, screen_rect);
-  get_render_window().draw(text);
+  draw_quit_button(v.get_layout().get_quit());
 }
 
 void draw_selected_panel(menu_view& v)
 {
-
-  const auto select_rect{v.get_layout().get_selectable_rect(v.get_selected())};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, select_rect);
-  rectangle.setOrigin(
-    get_width(select_rect) / 2,
-    get_height(select_rect) / 2
-  );
-  rectangle.setFillColor(sf::Color::Transparent);
-  rectangle.setOutlineColor(sf::Color::Red);
-  rectangle.setOutlineThickness(5);
-  get_render_window().draw(rectangle);
+  draw_outline(v.get_layout().get_selectable_rect(v.get_selected()));
 }
 
 void draw_start_panel(menu_view& v)
 {
-  const auto screen_rect{v.get_layout().get_start()};
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, screen_rect);
-  rectangle.setTexture(
-    &get_strip_texture(chess_color::white)
-  );
-  get_render_window().draw(rectangle);
-
-  sf::Text text{v.get_styled_text()};
-  text.setString("Start");
-  set_text_position(text, screen_rect);
-  get_render_window().draw(text);
+  draw_start_button(v.get_layout().get_start());
 }
 
 void draw_subtitle_panel(menu_view& v)
