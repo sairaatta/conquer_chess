@@ -91,6 +91,13 @@ void test_piece_action()
     const piece_action a(chess_color::white, piece_type::rook, piece_action_type::attack, square("d1"), square("d8"));
     assert(!describe_action(piece_action(a)).empty());
   }
+  // has_action_of_type
+  {
+    const piece_action a(chess_color::white, piece_type::rook, piece_action_type::attack, square("d1"), square("d8"));
+    const std::vector<piece_action> actions = { a };
+    assert(has_action_of_type(actions, piece_action_type::attack));
+    assert(has_action_of_type(actions, piece_action_type::promote_to_rook));
+  }
   // is_atomic
   {
     const auto d1{game_coordinate(to_coordinat(square("d1")))};

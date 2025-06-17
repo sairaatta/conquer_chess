@@ -117,6 +117,19 @@ void test_lobby_options()
     options.set_race(race::zerg, side::rhs);
     assert(options.get_race(side::rhs) == race::zerg);
   }
+  // get_race_of_side
+  {
+    use_default_lobby_options();
+    auto& options{lobby_options::get()};
+    options.set_race(race::protoss, side::lhs);
+    assert(get_race_of_side(side::lhs) == race::protoss);
+    options.set_race(race::zerg, side::lhs);
+    assert(get_race_of_side(side::lhs) == race::zerg);
+    options.set_race(race::protoss, side::rhs);
+    assert(get_race_of_side(side::rhs) == race::protoss);
+    options.set_race(race::zerg, side::rhs);
+    assert(get_race_of_side(side::rhs) == race::zerg);
+  }
   // 76: set_color ensures the other player has the other color
   {
     use_default_lobby_options();

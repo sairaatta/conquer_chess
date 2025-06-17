@@ -126,11 +126,6 @@ delta_t operator-(const in_game_time& lhs, const in_game_time& dt) noexcept
   return delta_t(lhs.get() - dt.get());
 }
 
-in_game_time operator*(const in_game_time& lhs, const in_game_time& rhs) noexcept
-{
-  return in_game_time(lhs.get() * rhs.get());
-}
-
 bool operator>(const in_game_time& lhs, const in_game_time& rhs) noexcept
 {
   return lhs.get() > rhs.get();

@@ -1111,6 +1111,12 @@ void test_pieces()
     const auto pieces{get_standard_starting_pieces()};
     assert(is_piece_at(pieces, square("d1")));
   }
+  // is_piece_at, with distance, const
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    assert(is_piece_at(pieces, to_coordinat(square("d1")), 1.0));
+    assert(!is_piece_at(pieces, to_coordinat(square("e4")), 1.0));
+  }
   // to_board_strs
   {
     const auto pieces{get_standard_starting_pieces()};

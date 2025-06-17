@@ -426,12 +426,8 @@ std::string to_one_char_str(const sf::Keyboard::Key k)
     case sf::Keyboard::Numpad9: return "9";
     default:
       std::string s{to_str(k)};
-      if (s.length() == 1)
-      {
-        return s;
-      }
-      assert(!s.empty());
-      return s.substr(0, 1);
+      assert(s.length() == 1);
+      return s;
   }
 }
 
