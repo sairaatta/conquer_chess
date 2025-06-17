@@ -24,6 +24,7 @@ sf::Color f_health_to_color(const double f)
   return sf::Color::Green;
 }
 
+
 void set_rect(sf::RectangleShape& rectangle, const screen_coordinate& screen_size)
 {
   set_rect(
@@ -201,13 +202,21 @@ void test_sfml_helper()
     assert(low != high);
     assert(mid != high);
   }
-  // set_rect
+  // set_rect, on screen_rect
   {
     sf::RectangleShape r;
     const screen_rect screen_size{get_default_screen_size()};
     set_rect(r, screen_size);
     assert(r.getSize().x == get_width(screen_size));
     assert(r.getSize().y == get_height(screen_size));
+  }
+  // set_rect, on screen_coordinate
+  {
+    sf::RectangleShape r;
+    const screen_coordinate screen_size(320, 200);
+    set_rect(r, screen_size);
+    assert(r.getSize().x == screen_size.get_x());
+    assert(r.getSize().y == screen_size.get_y());
   }
   // set_text_position
   {
