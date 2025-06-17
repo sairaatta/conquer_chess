@@ -57,7 +57,6 @@ square get_from(const game& g, const chess_move& m)
       case piece_type::knight: return get_from_for_knight(g, m);
       case piece_type::pawn: return get_from_for_pawn(g, m);
       case piece_type::queen: return get_from_for_queen(g, m);
-      default:
       case piece_type::rook:
         assert(pt == piece_type::rook);
         return get_from_for_rook(g, m);

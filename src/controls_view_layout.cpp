@@ -176,11 +176,9 @@ const screen_rect& controls_view_layout::get_selectable_rect(const controls_view
     case controls_view_item::action_3: return m_action_3_value;
     case controls_view_item::action_4: return m_action_4_value;
     case controls_view_item::do_action: return m_do_value;
-    case controls_view_item::next_action:
-    default:
-      assert(item == controls_view_item::next_action);
-      return m_next_value;
+    case controls_view_item::next_action: return m_next_value;
   }
+  assert(!"Should never get here");
 }
 
 void test_controls_view_layout()

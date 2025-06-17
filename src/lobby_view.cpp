@@ -91,9 +91,7 @@ bool lobby_view::process_event(sf::Event& event)
           m_lhs_start = false;
           m_rhs_start = false;
           break;
-        default:
         case lobby_view_item::start:
-          assert(m_lhs_cursor == lobby_view_item::start);
           m_lhs_start = !m_lhs_start;
           break;
       }
@@ -139,9 +137,7 @@ bool lobby_view::process_event(sf::Event& event)
           m_lhs_start = false;
           m_rhs_start = false;
           break;
-        default:
         case lobby_view_item::start:
-          assert(m_rhs_cursor == lobby_view_item::start);
           m_rhs_start = !m_rhs_start;
           break;
       }

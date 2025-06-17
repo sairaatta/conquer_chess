@@ -91,6 +91,14 @@ void test_replay()
     s << r;
     assert(!s.str().empty());
   }
+  // operator==
+  {
+    const replay r(get_replay_1_as_pgn_str());
+    const replay s(get_replay_1_as_pgn_str());
+    const replay t(get_scholars_mate_as_pgn_str());
+    assert(r == s);
+    assert(!(r == t));
+  }
 #endif // NDEBUG
 }
 

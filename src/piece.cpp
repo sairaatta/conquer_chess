@@ -827,12 +827,7 @@ void test_piece()
       ++n_ticks;
       assert(n_ticks < 1000);
     }
-    while (p.get_current_square() == square("e3"))
-    {
-      p.tick(delta_t(0.1), g);
-      ++n_ticks;
-      assert(n_ticks < 1000);
-    }
+    assert(p.get_current_square() != square("e3"));
     assert(p.get_current_square() == square("e4"));
   }
   // A pawn for the rhs player cannot move right

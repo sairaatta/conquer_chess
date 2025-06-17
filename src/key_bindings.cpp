@@ -128,6 +128,33 @@ void test_key_bindings()
     assert(a == b);
     assert(!(a == c));
   }
+  // create_actions
+  {
+    const key_bindings k{create_left_keyboard_key_bindings()};
+    assert(!k.create_actions(k.get_key_for_move_up()).empty());
+    assert(!k.create_actions(k.get_key_for_move_right()).empty());
+    assert(!k.create_actions(k.get_key_for_move_down()).empty());
+    assert(!k.create_actions(k.get_key_for_move_left()).empty());
+    assert(!k.create_actions(k.get_key_for_action(action_number(1))).empty());
+    assert(!k.create_actions(k.get_key_for_action(action_number(2))).empty());
+    assert(!k.create_actions(k.get_key_for_action(action_number(3))).empty());
+    assert(!k.create_actions(k.get_key_for_action(action_number(4))).empty());
+    const key_bindings l{create_right_keyboard_key_bindings()};
+    assert(k.create_actions(l.get_key_for_move_up()).empty());
+    assert(k.create_actions(l.get_key_for_move_right()).empty());
+    assert(k.create_actions(l.get_key_for_move_down()).empty());
+    assert(k.create_actions(l.get_key_for_move_left()).empty());
+    assert(k.create_actions(l.get_key_for_action(action_number(1))).empty());
+    assert(k.create_actions(l.get_key_for_action(action_number(2))).empty());
+    assert(k.create_actions(l.get_key_for_action(action_number(3))).empty());
+    assert(k.create_actions(l.get_key_for_action(action_number(4))).empty());
+
+  }
+  // get_key_for_action
+  {
+    const key_bindings k{create_left_keyboard_key_bindings()};
+    assert(k.get_key_for_action(action_number(1)) == get_key_for_action(k, action_number(1)));
+  }
   // 44: operator<<
   {
     const auto keys{create_left_keyboard_key_bindings()};

@@ -99,11 +99,9 @@ double get_speed_multiplier(const game_speed speed) noexcept
     case game_speed::normal: return 1.0;
     case game_speed::slow: return 0.5;
     case game_speed::slower: return 0.25;
-    default:
-    case game_speed::slowest:
-      assert(speed == game_speed::slowest);
-      return 0.125;
+    case game_speed::slowest: return 0.125;
   }
+  assert(!"Should never get here");
 }
 
 std::string to_str(const game_speed speed) noexcept
