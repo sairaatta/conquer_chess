@@ -162,6 +162,21 @@ const screen_rect& get_cursor_rect(
 void test_lobby_view_layout()
 {
   #ifndef NDEBUG
+  // get_cursor_rect
+  {
+    const lobby_view_layout layout;
+    const auto r1{get_cursor_rect(layout, lobby_view_item::color, side::lhs)};
+    const auto r2{get_cursor_rect(layout, lobby_view_item::race, side::lhs)};
+    const auto r3{get_cursor_rect(layout, lobby_view_item::start, side::lhs)};
+    const auto r4{get_cursor_rect(layout, lobby_view_item::color, side::rhs)};
+    const auto r5{get_cursor_rect(layout, lobby_view_item::race, side::rhs)};
+    const auto r6{get_cursor_rect(layout, lobby_view_item::start, side::rhs)};
+    assert(r1 != r2);
+    assert(r1 != r3);
+    assert(r1 != r4);
+    assert(r1 != r5);
+    assert(r1 != r6);
+  }
   // get_panels
   {
     const lobby_view_layout layout;

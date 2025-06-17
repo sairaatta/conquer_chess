@@ -19,27 +19,9 @@ void set_rect(sf::RectangleShape& rectangle, const screen_coordinate& screen_siz
 /// Make 'rectangle' have the same size and position as the 'screen_rect'
 void set_rect(sf::RectangleShape& rectangle, const screen_rect& screen_rect);
 
-#ifndef LOGIC_ONLY
 /// Make 'text' have the same size and position as the 'screen_rect'
 /// Assumes the text already has a font and has text
 void set_text_position(sf::Text& text, const screen_rect& screen_rect);
-
-/// Show the pieces
-void show_pieces(
-  const std::vector<piece>& pieces,
-  sf::RenderWindow& window,
-  const screen_rect& rect,
-  const bool show_selected
-);
-#endif
-
-/// Draw the squares of a chessboard at the window target rectangle's location
-void show_squares(
-  sf::RenderWindow& window,
-  const screen_rect& rect,
-  game_resources& resources,
-  const bool semi_transparent
-);
 
 /// Tes these function
 void test_sfml_helper();

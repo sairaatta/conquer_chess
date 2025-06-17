@@ -94,7 +94,7 @@ private:
   screen_coordinate m_window_size;
 };
 
-/// Get the rectangangle of the item
+/// Get the rectangle of the item
 const screen_rect& get_cursor_rect(
   const lobby_view_layout& layout,
   const lobby_view_item item,

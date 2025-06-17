@@ -5,6 +5,7 @@
 #include "physical_controller.h"
 #include "render_window.h"
 #include "game.h"
+#include "draw.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
 #include "screen_coordinate.h"
@@ -18,7 +19,6 @@
 
 #include <cassert>
 #include <cmath>
-//#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -251,7 +251,7 @@ void game_view::draw()
 
 void show_board(game_view& view)
 {
-  show_squares(view);
+  draw_squares(view);
   if (get_options(view).do_show_occupied())
   {
     show_occupied_squares(view);
@@ -655,12 +655,10 @@ void show_sidebar(game_view& view, const side player_side)
   if (view.get_show_debug()) show_debug(view, player_side);
 }
 
-void show_squares(game_view& view)
+void draw_squares(game_view& view)
 {
-  show_squares(
-    get_render_window(),
+  draw_squares(
     view.get_layout().get_board(),
-    game_resources::get(),
     view.get_show_squares_semitransparent()
   );
 }

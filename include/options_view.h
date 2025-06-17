@@ -94,7 +94,7 @@ void draw_bottom_row(options_view& v, const side player_side);
 void draw_game_speed(options_view& v);
 
 /// Show the music volume label and value
-void show_music_volume(options_view& v);
+void draw_music_volume(options_view& v);
 
 /// Show all the layout panels
 void show_layout_panels(options_view& v);
@@ -109,7 +109,7 @@ void show_sound_effects_volume(options_view& v);
 void show_starting_position(options_view& v);
 
 /// Show the selected panel
-void show_selected_panel(options_view& v);
+void draw_selected_panel(options_view& v);
 
 /// Show the top part
 void show_top(options_view& v);

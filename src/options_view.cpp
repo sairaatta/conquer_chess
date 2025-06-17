@@ -18,7 +18,6 @@
 #include "render_window.h"
 
 #include <cassert>
-#include <sstream>
 
 options_view::options_view()
   : m_selected{options_view_item::game_speed}
@@ -238,13 +237,11 @@ void options_view::draw()
   assert(!to_str(get_starting_position()).empty());
 
   draw_bottom(*this);
-  show_selected_panel(*this);
+  draw_selected_panel(*this);
 
   const bool show_semitransparent{true};
-  show_squares(
-    get_render_window(),
+  draw_squares(
     m_layout.get_chess_board(),
-    game_resources::get(),
     show_semitransparent
   );
   show_pieces(*this);
@@ -269,20 +266,9 @@ void draw_bottom_header(options_view& v)
 void draw_bottom_row(options_view& v, const side player_side)
 {
   const auto& layout{v.get_layout()};
-  // The icon
-  {
-
-    const auto screen_rect{
-      layout.get_controller_type_value(player_side)
-    };
-    const physical_controller_type t{
-      get_physical_controller_type(player_side)
-    };
-    draw_fancy_physical_controller_type(t, screen_rect);
-
-    // Text
-    draw_normal_fancy_text(to_str(t), screen_rect);
-  }
+  const auto screen_rect{layout.get_controller_type_value(player_side)};
+  const physical_controller_type t{get_physical_controller_type(player_side)};
+  draw_fancy_physical_controller_label(t, screen_rect);
 }
 
 void draw_game_speed(options_view& v)
@@ -295,9 +281,8 @@ void draw_game_speed(options_view& v)
 
 void show_pieces(options_view& view)
 {
-  show_pieces(
+  draw_pieces(
     get_starting_pieces(game_options::get().get_starting_position()),
-    get_render_window(),
     view.get_layout().get_chess_board(),
     game_options::get().do_show_selected()
   );
@@ -306,16 +291,8 @@ void show_pieces(options_view& view)
 void show_starting_position(options_view& v)
 {
   const auto& layout = v.get_layout();
-  // starting pos label
-  {
-    draw_starting_position_label(layout.get_starting_pos_label());
-  }
-  // starting pos value
-  {
-    draw_starting_position_value(layout.get_starting_pos_value());
-  }
-
-
+  draw_starting_position_label(layout.get_starting_pos_label());
+  draw_starting_position_value(layout.get_starting_pos_value());
 }
 
 void show_top(options_view& v)
@@ -323,7 +300,7 @@ void show_top(options_view& v)
   assert(!to_str(get_starting_position()).empty());
 
   draw_game_speed(v);
-  show_music_volume(v);
+  draw_music_volume(v);
   show_sound_effects_volume(v);
   show_starting_position(v);
 
@@ -342,144 +319,23 @@ void show_layout_panels(options_view& v)
   }
 }
 
-void show_music_volume(options_view& v)
+void draw_music_volume(options_view& v)
 {
   const auto& layout = v.get_layout();
-  // music volume label
-  {
-    const auto& screen_rect = layout.get_music_volume_label();
-    sf::RectangleShape rectangle;
-    rectangle.setTexture(
-      &get_game_option_icon(
-        options_view_item::music_volume
-      )
-    );
-    set_rect(rectangle, screen_rect);
-    // Zoom in
-    rectangle.setTextureRect(
-      sf::IntRect(
-        0,
-        rectangle.getTexture()->getSize().y / 4,
-        rectangle.getTexture()->getSize().x,
-        rectangle.getTexture()->getSize().y / 2
-      )
-    );
-    get_render_window().draw(rectangle);
-
-    draw_normal_fancy_text("Music volume", screen_rect);
-    /*
-    sf::Text text;
-    v.set_text_style(text);
-    text.setString("Music volume");
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-
-    text.setCharacterSize(text.getCharacterSize() - 2);
-    text.setFillColor(sf::Color::White);
-    get_render_window().draw(text);
-    */
-  }
-  // music volume value
-  {
-    const auto& screen_rect = layout.get_music_volume_value();
-    sf::RectangleShape rectangle;
-    rectangle.setTexture(
-      &get_strip_texture(chess_color::white)
-    );
-    set_rect(rectangle, screen_rect);
-    get_render_window().draw(rectangle);
-
-    sf::Text text;
-    v.set_text_style(text);
-    std::stringstream s;
-    s << get_music_volume() << " %";
-    text.setString(s.str());
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-  }
+  draw_music_volume_label(layout.get_music_volume_label());
+  draw_music_volume_value(layout.get_music_volume_value());
 }
 
-void show_selected_panel(options_view& v)
+void draw_selected_panel(options_view& v)
 {
-  const auto select_rect{
-    v.get_layout().get_selectable_rect(
-      v.get_selected()
-    )
-  };
-  draw_outline(select_rect);
-  /*
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, select_rect);
-  rectangle.setOrigin(
-    get_width(select_rect) / 2,
-    get_height(select_rect) / 2
-  );
-  rectangle.setFillColor(sf::Color::Transparent);
-  rectangle.setOutlineColor(sf::Color::Red);
-  rectangle.setOutlineThickness(5);
-  get_render_window().draw(rectangle);
-  */
+  draw_outline(v.get_layout().get_selectable_rect(v.get_selected()));
 }
 
 void show_sound_effects_volume(options_view& v)
 {
   const auto& layout = v.get_layout();
-  // sound effects volume label
-  {
-    const auto& screen_rect = layout.get_sound_effects_volume_label();
-    sf::RectangleShape rectangle;
-    rectangle.setTexture(
-      &get_game_option_icon(
-        options_view_item::sound_effects_volume
-      )
-    );
-    // Zoom in
-    rectangle.setTextureRect(
-      sf::IntRect(
-        0,
-        rectangle.getTexture()->getSize().y / 4,
-        rectangle.getTexture()->getSize().x,
-        rectangle.getTexture()->getSize().y / 2
-      )
-    );
-    set_rect(rectangle, screen_rect);
-    get_render_window().draw(rectangle);
-
-    draw_normal_fancy_text("Sound effects volume", screen_rect);
-
-    /*
-    sf::Text text;
-    v.set_text_style(text);
-    text.setString("Sound effects volume");
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-
-    text.setCharacterSize(text.getCharacterSize() - 2);
-    text.setFillColor(sf::Color::White);
-    get_render_window().draw(text);
-    */
-  }
-  // sound effects volume value
-  {
-    const auto& screen_rect = layout.get_sound_effects_volume_value();
-    sf::RectangleShape rectangle;
-    rectangle.setTexture(
-      &get_strip_texture(chess_color::black)
-    );
-    set_rect(rectangle, screen_rect);
-    get_render_window().draw(rectangle);
-
-    std::stringstream s;
-    s << get_sound_effects_volume() << " %";
-    draw_normal_text(s.str(), screen_rect);
-    /*
-    sf::Text text;
-    v.set_text_style(text);
-    text.setString(s.str());
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-    */
-  }
+  draw_sound_effects_volume_label(layout.get_sound_effects_volume_label());
+  draw_sound_effects_volume_value(layout.get_sound_effects_volume_value());
 }
 
 void options_view::start()

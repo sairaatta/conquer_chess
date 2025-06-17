@@ -24,6 +24,9 @@ void draw_big_text(const sf::String& s, const screen_rect& r);
 /// A fancy label that shows the text 'Controls'
 void draw_controls_label(const screen_rect& sr);
 
+/// Draw the fancy physical controller texture with a text on it
+void draw_fancy_physical_controller_label(const physical_controller_type& t, const screen_rect& sr);
+
 /// Draw the fancy physical controller texture
 void draw_fancy_physical_controller_type(const physical_controller_type& t, const screen_rect& sr);
 
@@ -32,6 +35,13 @@ void draw_game_speed_icon(const screen_rect& sr);
 
 /// The button that shows the value for the game speed
 void draw_game_speed_value(const screen_rect& sr);
+
+
+/// The button that shows the text 'Music volume'
+void draw_music_volume_label(const screen_rect& sr);
+
+/// The button that shows the value of the music
+void draw_music_volume_value(const screen_rect& sr);
 
 void draw_normal_fancy_text(const sf::String& s, const screen_rect& sr);
 
@@ -54,8 +64,27 @@ void draw_options_button(const screen_rect& sr);
 /// Draw a thick, red outline at the edges of this rectengle
 void draw_outline(const screen_rect& sr);
 
+/// Draw the pieces
+void draw_pieces(
+  const std::vector<piece>& pieces,
+  const screen_rect& rect,
+  const bool show_selected
+);
+
 /// Draw a Quit menu button on the main window
 void draw_quit_button(const screen_rect& sr);
+
+/// The button that shows the text 'Sound effects volume'
+void draw_sound_effects_volume_label(const screen_rect& sr);
+
+/// The button that shows the value of the music
+void draw_sound_effects_volume_value(const screen_rect& sr);
+
+/// Draw the squares of a chessboard at the window target rectangle's location
+void draw_squares(
+  const screen_rect& rect,
+  const bool semi_transparent
+);
 
 /// Draw a Start menu button on the main window
 void draw_start_button(const screen_rect& sr);
