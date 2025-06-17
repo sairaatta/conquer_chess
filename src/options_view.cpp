@@ -2,6 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
+#include "draw.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
 #include "physical_controller_type.h"
@@ -90,24 +91,32 @@ void options_view::increase_selected()
 }
 
 void draw_panel(
-  options_view& v,
+  options_view& ,
   const screen_rect& panel_position,
   const std::string panel_text,
   const chess_color color
 )
 {
+  draw_texture(
+    get_strip_texture(color),
+    panel_position
+  );
+  /*
   sf::RectangleShape rectangle;
   set_rect(rectangle, panel_position);
   rectangle.setTexture(
     &get_strip_texture(color)
   );
   get_render_window().draw(rectangle);
-
+  */
+  draw_normal_text(panel_text, panel_position);
+  /*
   sf::Text text;
   v.set_text_style(text);
   text.setString(panel_text);
   set_text_position(text, panel_position);
   get_render_window().draw(text);
+  */
 }
 
 physical_controller_type get_physical_controller_type(
@@ -353,7 +362,7 @@ void show_bottom_row(options_view& v, const side player_side)
   }
 }
 
-void show_game_speed(options_view& v)
+void draw_game_speed(options_view& v)
 {
   const auto& layout = v.get_layout();
   // game speed label
@@ -397,6 +406,8 @@ void show_game_speed(options_view& v)
     set_rect(rectangle, screen_rect);
     get_render_window().draw(rectangle);
 
+    draw_big_text(to_str(game_options::get().get_game_speed()), screen_rect);
+    /*
     sf::Text text;
     v.set_text_style(text);
 
@@ -404,6 +415,7 @@ void show_game_speed(options_view& v)
     text.setString(to_str(game_options::get().get_game_speed()));
     set_text_position(text, screen_rect);
     get_render_window().draw(text);
+    */
   }
 }
 
@@ -476,7 +488,7 @@ void show_top(options_view& v)
 {
   assert(!to_str(get_starting_position()).empty());
 
-  show_game_speed(v);
+  draw_game_speed(v);
   show_music_volume(v);
   show_sound_effects_volume(v);
   show_starting_position(v);
@@ -557,6 +569,8 @@ void show_selected_panel(options_view& v)
       v.get_selected()
     )
   };
+  draw_outline(select_rect);
+  /*
   sf::RectangleShape rectangle;
   set_rect(rectangle, select_rect);
   rectangle.setOrigin(
@@ -567,6 +581,7 @@ void show_selected_panel(options_view& v)
   rectangle.setOutlineColor(sf::Color::Red);
   rectangle.setOutlineThickness(5);
   get_render_window().draw(rectangle);
+  */
 }
 
 void show_sound_effects_volume(options_view& v)

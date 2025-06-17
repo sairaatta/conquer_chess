@@ -92,7 +92,7 @@ void show_bottom_header(options_view& v);
 void show_bottom_row(options_view& v, const side player_side);
 
 /// Show the game speed label and value
-void show_game_speed(options_view& v);
+void draw_game_speed(options_view& v);
 
 /// Show the music volume label and value
 void show_music_volume(options_view& v);
