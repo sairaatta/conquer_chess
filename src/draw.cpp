@@ -4,19 +4,13 @@
 
 #include "game_resources.h"
 #include "render_window.h"
+#include "game_options.h"
 #include "sfml_helper.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
 #include <cassert>
 
-void draw_texture(sf::Texture& t, const screen_rect& sr)
-{
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, sr);
-  rectangle.setTexture(&t);
-  get_render_window().draw(rectangle);
-}
 
 void draw_about_button(const screen_rect& sr)
 {
@@ -29,6 +23,29 @@ void draw_big_text(const sf::String& s, const screen_rect& sr)
   draw_text(s, sr, 48);
 }
 
+void draw_controls_label(const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+
+  set_rect(rectangle, sr);
+  rectangle.setTexture(
+    &get_game_option_icon(
+      options_view_item::left_controls
+    )
+  );
+  // Zoom in
+  rectangle.setTextureRect(
+    sf::IntRect(
+      0,
+      rectangle.getTexture()->getSize().y / 4,
+      rectangle.getTexture()->getSize().x,
+      rectangle.getTexture()->getSize().y / 2
+    )
+  );
+  get_render_window().draw(rectangle);
+
+  draw_normal_fancy_text("Controls", sr);
+}
 
 void draw_fancy_physical_controller_type(const physical_controller_type& t, const screen_rect& sr)
 {
@@ -47,6 +64,42 @@ void draw_fancy_physical_controller_type(const physical_controller_type& t, cons
    )
   );
   get_render_window().draw(rectangle);
+}
+
+void draw_game_speed_icon(const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, sr);
+  rectangle.setTexture(
+    &get_game_option_icon(
+      options_view_item::game_speed
+      )
+    );
+  // Zoom in
+  rectangle.setTextureRect(
+    sf::IntRect(
+      0,
+      rectangle.getTexture()->getSize().y / 4,
+      rectangle.getTexture()->getSize().x,
+      rectangle.getTexture()->getSize().y / 2
+      )
+    );
+  get_render_window().draw(rectangle);
+
+  draw_normal_fancy_text("Game speed", sr);
+}
+
+void draw_game_speed_value(const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+  rectangle.setTexture(
+    &get_strip_texture(chess_color::black)
+  );
+  set_rect(rectangle, sr);
+  get_render_window().draw(rectangle);
+
+  draw_big_text(to_str(game_options::get().get_game_speed()), sr);
+
 }
 
 void draw_normal_text(const sf::String& s, const screen_rect& sr)
@@ -93,6 +146,41 @@ void draw_start_button(const screen_rect& sr)
   draw_big_text(sf::String("Start"), sr);
 }
 
+void draw_starting_position_label(const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+  rectangle.setTexture(
+    &get_game_option_icon(
+      options_view_item::starting_position
+    )
+  );
+  set_rect(rectangle, sr);
+  // Zoom in
+  rectangle.setTextureRect(
+    sf::IntRect(
+      0,
+      rectangle.getTexture()->getSize().y / 4,
+      rectangle.getTexture()->getSize().x,
+      rectangle.getTexture()->getSize().y / 2
+    )
+  );
+  get_render_window().draw(rectangle);
+
+  draw_normal_fancy_text("Starting position", sr);
+}
+
+void draw_starting_position_value(const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+  rectangle.setTexture(
+    &get_strip_texture(chess_color::white)
+  );
+  set_rect(rectangle, sr);
+  get_render_window().draw(rectangle);
+
+  draw_normal_text(to_human_str(get_starting_position()), sr);
+}
+
 void draw_text(
   const sf::String& s,
   const screen_rect& sr,
@@ -132,6 +220,14 @@ void draw_texts(const std::vector<sf::String>& s, const screen_rect& r, const in
     draw_text(s[i], row_rect, character_size);
   }
 
+}
+
+void draw_texture(sf::Texture& t, const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, sr);
+  rectangle.setTexture(&t);
+  get_render_window().draw(rectangle);
 }
 
 #endif // LOGIC_ONLY

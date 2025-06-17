@@ -21,9 +21,17 @@ void draw_about_button(const screen_rect& sr);
 /// Use Ariel font, 48 pixels, black letters and bold face
 void draw_big_text(const sf::String& s, const screen_rect& r);
 
+/// A fancy label that shows the text 'Controls'
+void draw_controls_label(const screen_rect& sr);
 
 /// Draw the fancy physical controller texture
 void draw_fancy_physical_controller_type(const physical_controller_type& t, const screen_rect& sr);
+
+/// The button that shows the text 'Game Speed'
+void draw_game_speed_icon(const screen_rect& sr);
+
+/// The button that shows the value for the game speed
+void draw_game_speed_value(const screen_rect& sr);
 
 void draw_normal_fancy_text(const sf::String& s, const screen_rect& sr);
 
@@ -52,8 +60,11 @@ void draw_quit_button(const screen_rect& sr);
 /// Draw a Start menu button on the main window
 void draw_start_button(const screen_rect& sr);
 
-/// Draw the texture on the main window
-void draw_texture(sf::Texture& t, const screen_rect& r);
+/// A fancy label that shows the text 'Starting position'
+void draw_starting_position_label(const screen_rect& sr);
+
+/// A fancy label that shows the value of the starting position
+void draw_starting_position_value(const screen_rect& sr);
 
 /// Draw the text on the main window.
 ///
@@ -70,6 +81,9 @@ void draw_text(
 void draw_texts(
   const std::vector<sf::String>& s, const screen_rect& r, const int character_size
 );
+
+/// Draw the texture on the main window
+void draw_texture(sf::Texture& t, const screen_rect& r);
 
 #endif // LOGIC_ONLY
 

@@ -101,22 +101,7 @@ void draw_panel(
     get_strip_texture(color),
     panel_position
   );
-  /*
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, panel_position);
-  rectangle.setTexture(
-    &get_strip_texture(color)
-  );
-  get_render_window().draw(rectangle);
-  */
   draw_normal_text(panel_text, panel_position);
-  /*
-  sf::Text text;
-  v.set_text_style(text);
-  text.setString(panel_text);
-  set_text_position(text, panel_position);
-  get_render_window().draw(text);
-  */
 }
 
 physical_controller_type get_physical_controller_type(
@@ -124,11 +109,6 @@ physical_controller_type get_physical_controller_type(
 {
   return physical_controllers::get().get_controller(player).get_type();
 }
-
-//starting_position_type get_starting_position(const options_view&) noexcept
-//{
-//  return get_starting_position();
-//}
 
 bool options_view::process_event(sf::Event& event)
 {
@@ -282,43 +262,8 @@ void draw_bottom(options_view& v)
 void draw_bottom_header(options_view& v)
 {
   const auto& layout{v.get_layout()};
-  {
-    const auto& screen_rect = layout.get_controls_label();
-    sf::RectangleShape rectangle;
-
-    set_rect(rectangle, screen_rect);
-    rectangle.setTexture(
-      &get_game_option_icon(
-        options_view_item::left_controls
-      )
-    );
-    // Zoom in
-    rectangle.setTextureRect(
-      sf::IntRect(
-        0,
-        rectangle.getTexture()->getSize().y / 4,
-        rectangle.getTexture()->getSize().x,
-        rectangle.getTexture()->getSize().y / 2
-      )
-    );
-    get_render_window().draw(rectangle);
-
-    draw_normal_fancy_text("Controls", screen_rect);
-    /*
-    sf::Text text;
-    v.set_text_style(text);
-    text.setString("Controls");
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-
-    // Smaller
-    text.setCharacterSize(text.getCharacterSize() - 2);
-    set_text_position(text, screen_rect);
-    text.setFillColor(sf::Color::White);
-    get_render_window().draw(text);
-    */
-
-  }
+  const auto& screen_rect = layout.get_controls_label();
+  draw_controls_label(screen_rect);
 }
 
 void draw_bottom_row(options_view& v, const side player_side)
@@ -335,100 +280,16 @@ void draw_bottom_row(options_view& v, const side player_side)
     };
     draw_fancy_physical_controller_type(t, screen_rect);
 
-    /*
-    sf::RectangleShape rectangle;
-    set_rect(rectangle, screen_rect);
-    rectangle.setTexture(
-      &game_resources::get().get_physical_controller_textures().get_fancy(t)
-    );
-    // Zoom in
-    rectangle.setTextureRect(
-      sf::IntRect(
-        0,
-        rectangle.getTexture()->getSize().y / 4,
-        rectangle.getTexture()->getSize().x,
-        rectangle.getTexture()->getSize().y / 2
-      )
-    );
-    get_render_window().draw(rectangle);
-    */
     // Text
     draw_normal_fancy_text(to_str(t), screen_rect);
-    /*
-    sf::Text text;
-    const auto text_rect{screen_rect};
-    text.setString(to_str(t));
-    v.set_text_style(text);
-    set_text_position(text, text_rect);
-    get_render_window().draw(text);
-
-    // Smaller
-    text.setCharacterSize(text.getCharacterSize() - 2);
-    set_text_position(text, text_rect);
-    text.setFillColor(sf::Color::White);
-    get_render_window().draw(text);
-    */
   }
 }
 
 void draw_game_speed(options_view& v)
 {
   const auto& layout = v.get_layout();
-  // game speed label
-  {
-    const auto& screen_rect = layout.get_game_speed_label();
-    sf::RectangleShape rectangle;
-    set_rect(rectangle, screen_rect);
-    rectangle.setTexture(
-      &get_game_option_icon(
-        options_view_item::game_speed
-      )
-    );
-    // Zoom in
-    rectangle.setTextureRect(
-      sf::IntRect(
-        0,
-        rectangle.getTexture()->getSize().y / 4,
-        rectangle.getTexture()->getSize().x,
-        rectangle.getTexture()->getSize().y / 2
-      )
-    );
-    get_render_window().draw(rectangle);
-
-    draw_normal_fancy_text("Game speed", screen_rect);
-    /*
-    sf::Text text;
-    v.set_text_style(text);
-    text.setString("Game speed");
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-
-    text.setCharacterSize(text.getCharacterSize() - 2);
-    text.setFillColor(sf::Color::White);
-    get_render_window().draw(text);
-    */
-  }
-  // game speed value
-  {
-    const auto& screen_rect = layout.get_game_speed_value();
-    sf::RectangleShape rectangle;
-    rectangle.setTexture(
-      &get_strip_texture(chess_color::black)
-    );
-    set_rect(rectangle, screen_rect);
-    get_render_window().draw(rectangle);
-
-    draw_big_text(to_str(game_options::get().get_game_speed()), screen_rect);
-    /*
-    sf::Text text;
-    v.set_text_style(text);
-
-
-    text.setString(to_str(game_options::get().get_game_speed()));
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-    */
-  }
+  draw_game_speed_icon(layout.get_game_speed_label());
+  draw_game_speed_value(layout.get_game_speed_value());
 }
 
 
@@ -447,53 +308,11 @@ void show_starting_position(options_view& v)
   const auto& layout = v.get_layout();
   // starting pos label
   {
-    const auto& screen_rect = layout.get_starting_pos_label();
-    sf::RectangleShape rectangle;
-    rectangle.setTexture(
-      &get_game_option_icon(
-        options_view_item::starting_position
-      )
-    );
-    set_rect(rectangle, screen_rect);
-    // Zoom in
-    rectangle.setTextureRect(
-      sf::IntRect(
-        0,
-        rectangle.getTexture()->getSize().y / 4,
-        rectangle.getTexture()->getSize().x,
-        rectangle.getTexture()->getSize().y / 2
-      )
-    );
-    get_render_window().draw(rectangle);
-
-    draw_normal_fancy_text("Starting position", screen_rect);
-    /*
-    sf::Text text;
-    v.set_text_style(text);
-    text.setString("Starting position");
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
-
-    text.setCharacterSize(text.getCharacterSize() - 2);
-    text.setFillColor(sf::Color::White);
-    get_render_window().draw(text);
-    */
+    draw_starting_position_label(layout.get_starting_pos_label());
   }
   // starting pos value
   {
-    const auto& screen_rect = layout.get_starting_pos_value();
-    sf::RectangleShape rectangle;
-    rectangle.setTexture(
-      &get_strip_texture(chess_color::white)
-    );
-    set_rect(rectangle, screen_rect);
-    get_render_window().draw(rectangle);
-
-    sf::Text text;
-    v.set_text_style(text);
-    text.setString(to_str(get_starting_position()));
-    set_text_position(text, screen_rect);
-    get_render_window().draw(text);
+    draw_starting_position_value(layout.get_starting_pos_value());
   }
 
 
@@ -650,13 +469,16 @@ void show_sound_effects_volume(options_view& v)
     set_rect(rectangle, screen_rect);
     get_render_window().draw(rectangle);
 
-    sf::Text text;
-    v.set_text_style(text);
     std::stringstream s;
     s << get_sound_effects_volume() << " %";
+    draw_normal_text(s.str(), screen_rect);
+    /*
+    sf::Text text;
+    v.set_text_style(text);
     text.setString(s.str());
     set_text_position(text, screen_rect);
     get_render_window().draw(text);
+    */
   }
 }
 

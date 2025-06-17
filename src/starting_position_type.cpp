@@ -80,6 +80,16 @@ void test_starting_position_type()
       assert(previous == spt);
     }
   }
+  // to_human_str
+  {
+    assert(to_human_str(starting_position_type::kings_only) == "Kings only");
+    assert(to_human_str(starting_position_type::kasparov_vs_topalov) == "Kasparov vs Topalov");
+  }
+  // to_str
+  {
+    assert(to_str(starting_position_type::kings_only) == "kings_only");
+    assert(to_str(starting_position_type::kasparov_vs_topalov) == "kasparov_vs_topalov");
+  }
   // 43: operator<<
   {
     std::stringstream s;
@@ -88,6 +98,16 @@ void test_starting_position_type()
     assert(!s.str().empty());
   }
 #endif // DEBUG
+}
+
+std::string to_human_str(const starting_position_type t) noexcept
+{
+  std::string s{to_str(t)};
+  assert(!s.empty());
+  s[0] = std::toupper(s[0]);
+  std::replace(s.begin(), s.end(), '_', ' ');
+  if (t == starting_position_type::kasparov_vs_topalov) s[12] = std::toupper(s[12]);
+  return s;
 }
 
 std::string to_str(const starting_position_type t) noexcept

@@ -39,6 +39,8 @@ starting_position_type get_previous(const starting_position_type starting_positi
 /// Test this class and its free functions
 void test_starting_position_type();
 
+std::string to_human_str(const starting_position_type t) noexcept;
+
 std::string to_str(const starting_position_type t) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const starting_position_type t) noexcept;
