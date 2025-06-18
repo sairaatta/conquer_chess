@@ -116,9 +116,14 @@ void resource_loader::process_next()
         + std::to_string(resources.get_n_input_prompt_textures())
         + " input prompt textures";
       break;
-    default:
     case 16:
-      assert(m_index == 16);
+      m_descriptor = "Loaded "
+        + std::to_string(resources.get_n_themba_textures())
+        + " Themba textures";
+      break;
+    default:
+    case 17:
+      assert(m_index == 17);
       assert(m_index + 1 == get_n_items()); // If not, update get_m_items
       m_descriptor = "Loaded "
         + std::to_string(resources.get_n_textures())

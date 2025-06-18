@@ -15,7 +15,7 @@ public:
   resource_loader();
 
   /// The number of resource groups that need to be loaded
-  int get_n_items() const noexcept { return 17; }
+  int get_n_items() const noexcept { return 18; }
 
   /// Describe the current progress
   std::string get_current() const noexcept { return m_descriptor; }

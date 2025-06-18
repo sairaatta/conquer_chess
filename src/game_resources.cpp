@@ -21,6 +21,7 @@ std::optional<piece_portrait_textures> game_resources::m_piece_portrait_textures
 songs * game_resources::m_songs{nullptr};
 sound_effects * game_resources::m_sound_effects{nullptr};
 std::optional<textures> game_resources::m_textures = {};
+std::optional<themba_textures> game_resources::m_themba_textures = {};
 
 game_resources::game_resources()
 {
@@ -192,6 +193,11 @@ int game_resources::get_n_textures() noexcept
   return get_textures().get_n_textures();
 }
 
+int game_resources::get_n_themba_textures() noexcept
+{
+  return get_themba_textures().get_n_textures();
+}
+
 sf::Texture& get_piece_texture(
   const race r,
   const chess_color color,
@@ -262,6 +268,13 @@ textures& game_resources::get_textures() noexcept
   if (!m_textures) m_textures = textures();
   assert(m_textures);
   return m_textures.value();
+}
+
+themba_textures& game_resources::get_themba_textures() noexcept
+{
+  if (!m_textures) m_themba_textures = themba_textures();
+  assert(m_themba_textures);
+  return m_themba_textures.value();
 }
 
 sf::Texture& get_strip_texture(const chess_color c) noexcept

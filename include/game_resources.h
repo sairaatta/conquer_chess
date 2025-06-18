@@ -21,6 +21,7 @@
 #include "songs.h"
 #include "sound_effects.h"
 #include "textures.h"
+#include "themba_textures.h"
 #include "input_prompt_textures.h"
 #include <optional>
 
@@ -64,6 +65,7 @@ public:
   int get_n_piece_textures() noexcept;
   int get_n_songs() noexcept;
   int get_n_sound_effects() noexcept;
+  int get_n_themba_textures() noexcept;
   int get_n_textures() noexcept;
 
   loading_screen_fonts& get_loading_screen_fonts() noexcept;
@@ -92,6 +94,8 @@ public:
 
   textures& get_textures() noexcept;
 
+  themba_textures& get_themba_textures() noexcept;
+
 private:
 
   /// This is a Singleton, as there must be only one instance of this.
@@ -112,6 +116,7 @@ private:
   static songs * m_songs;
   static sound_effects * m_sound_effects;
   static std::optional<textures> m_textures;
+  static std::optional<themba_textures> m_themba_textures;
 };
 
 
