@@ -326,6 +326,7 @@ void draw_pieces(
 
 void draw_quit_button(const screen_rect& sr)
 {
+  assert(get_height(sr) == 100);
   draw_texture(get_strip_texture(chess_color::black), sr);
   draw_big_text(sf::String("Quit"), sr);
   const int y1{sr.get_tl().get_y() + 16};

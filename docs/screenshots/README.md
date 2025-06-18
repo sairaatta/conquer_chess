@@ -1,5 +1,9 @@
 # Screenshots
 
+![Main menu screen v0.7](20250618_4.jpg)
+
+> The Main menu screen shows the controls
+
 ![Controls screen v0.7](20250618_3.jpg)
 
 > The Controls screen shows the mouse buttons too

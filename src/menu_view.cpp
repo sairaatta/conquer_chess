@@ -209,6 +209,7 @@ void menu_view::draw()
   draw_options_panel(*this);
   draw_about_panel(*this);
   draw_quit_panel(*this);
+  draw_controls_panel(*this);
   draw_selected_panel(*this);
 }
 
@@ -223,6 +224,31 @@ void draw_background_image(menu_view& v)
     game_resources::get().get_textures().get_all_races(v.get_background_image_index()),
     v.get_layout().get_background_image()
   );
+}
+
+void draw_controls_panel(menu_view& v)
+{
+  const auto r{v.get_layout().get_controls()};
+  const int y1{r.get_tl().get_y()};
+  const int y2{r.get_br().get_y()};
+
+  const int x1{r.get_tl().get_x()};
+  const int x2{x1 + 64};
+  const screen_rect r1{screen_coordinate(x1, y1), screen_coordinate(x2, y2)};
+  draw_rectangle(r1, sf::Color(128, 128, 128, 128));
+  draw_input_prompt_symbol(sf::Keyboard::Key::Space, r1);
+
+  const int x3{x2};
+  const int x4{x3 + 64};
+  const screen_rect r2{screen_coordinate(x3, y1), screen_coordinate(x4, y2)};
+  draw_rectangle(r2, sf::Color(128, 128, 128, 128));
+  draw_input_prompt_symbol(sf::Keyboard::Key::Enter, r2);
+
+  const int x5{x4};
+  const int x6{x5 + 110};
+  const screen_rect r3{screen_coordinate(x5, y1), screen_coordinate(x6, y2)};
+  draw_rectangle(r3, sf::Color(128, 128, 128, 128));
+  draw_text("Select", r3, 32, sf::Color::White);
 }
 
 

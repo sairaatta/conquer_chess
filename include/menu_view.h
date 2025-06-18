@@ -86,7 +86,7 @@ int create_seedless_random_background_image_index();
 
 void draw_about_panel(menu_view& v);
 void draw_background_image(menu_view& v);
-
+void draw_controls_panel(menu_view& v);
 void draw_menu_outline(menu_view& v);
 void draw_options_panel(menu_view& v);
 

@@ -16,43 +16,41 @@
 /// ..........
 /// ..........+-----------------------------------------+
 /// ..........|                                         |
-/// ..........| +--------------+----------------------+ | y1
-/// ..........| |              |                      | |
-/// ..........| | +----------+ | +------------------+ | | y2
-/// ..........| | |          | | |                  | | |
-/// ..........| | | title    | | |                  | | |
-/// ..........| | |          | | |                  | | |
-/// ..........| | +----------+ | |                  | | | y3
-/// ..........| |              | |                  | | |
-/// ..........| | +----------+ | |                  | | | y4
-/// ..........| | | subtitle | | |                  | | |
-/// ..........| | +----------+ | |                  | | | y5
-/// ..........| |              | |                  | | |
-/// ..........| | +----------+ | |                  | | | y6
-/// ..........| | |          | | |                  | | |
-/// ..........| | |          | | |                  | | |
-/// ..........| | | spacer   | | | background       | | |
-/// ..........| | |          | | | image            | | |
-/// ..........| | |          | | |                  | | |
-/// ..........| | +----------+ | |                  | | | y7
-/// ..........| |              | |                  | | |
-/// ..........| | +----------+ | |                  | | | y8
-/// ..........| | | start    | | |                  | | |
-/// ..........| | +----------+ | |                  | | | y9
-/// ..........| |              | |                  | | |
-/// ..........| | +----------+ | |                  | | | y10
-/// ..........| | | options  | | |                  | | |
-/// ..........| | +----------+ | |                  | | | y11
-/// ..........| |              | |                  | | |
-/// ..........| | +----------+ | |                  | | | y12
-/// ..........| | | about    | | |                  | | |
-/// ..........| | +----------+ | |                  | | | y13
-/// ..........| |              | |                  | | |
-/// ..........| | +----------+ | |                  | | | y14
-/// ..........| | | quit     | | |                  | | |
-/// ..........| | +----------+ | +------------------+ | | y15
-/// ..........| |              |                      | |
-/// ..........| +--------------+----------------------+ | y16
+/// ..........| +--------------+                        | y1
+/// ..........| |              |                        |
+/// ..........| | +----------+ |                        | y2
+/// ..........| | |          | |                        |
+/// ..........| | | title    | |                        |
+/// ..........| | |          | |                        |
+/// ..........| | +----------+ |                        | y3, y4
+/// ..........| | | subtitle | |                        |
+/// ..........| | +----------+ |                        | y5
+/// ..........| |              |                        |
+/// ..........| | +----------+ |                        | y6
+/// ..........| | |spaces    | |                        |
+/// ..........| | +----------+ |                        | y7
+/// ..........| |              |                        |
+/// ..........| | +----------+ |                        | y8
+/// ..........| | | start    | |                        |
+/// ..........| | +----------+ |                        | y9
+/// ..........| |              |                        |
+/// ..........| | +----------+ |                        | y10
+/// ..........| | | options  | |                        |
+/// ..........| | +----------+ |                        | y11
+/// ..........| |              |                        |
+/// ..........| | +----------+ |                        | y12
+/// ..........| | | about    | |                        |
+/// ..........| | +----------+ |                        | y13
+/// ..........| |              |                        |
+/// ..........| | +----------+ |                        | y14
+/// ..........| | | quit     | |                        |
+/// ..........| | +----------+ |                        | y15
+/// ..........| |              |                        |
+/// ..........| +--------------+                        | y16
+/// ..........|                                         |
+/// ..........| +-------------------------------------+ | y17
+/// ..........| | Controls                            | |
+/// ..........| +-------------------------------------+ | y18
 /// ..........|                                         |
 /// ..........+-----------------------------------------+
 /// ..........
@@ -76,7 +74,6 @@ public:
   const auto& get_menu_panel() const noexcept { return m_menu_panel; }
 
   /// The screen area where the frames per seconds are displayed
-  const auto& get_fps() const noexcept { return m_fps; }
   const auto& get_title() const noexcept { return m_title; }
   const auto& get_subtitle() const noexcept { return m_subtitle; }
   const auto& get_background_image() const noexcept { return m_background_image; }
@@ -84,9 +81,7 @@ public:
   const auto& get_about() const noexcept { return m_about; }
   const auto& get_options() const noexcept { return m_options; }
   const auto& get_quit() const noexcept { return m_quit; }
-
-  /// Get the size of the font that would fit nicely
-  int get_font_size() const noexcept { return m_font_size; }
+  const auto& get_controls() const noexcept { return m_controls; }
 
   screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
@@ -96,9 +91,6 @@ private:
   /// The panel around the buttons
   screen_rect m_menu_panel;
 
-  /// The frames per second
-  screen_rect m_fps;
-
   screen_rect m_title;
   screen_rect m_subtitle;
   screen_rect m_background_image;
@@ -106,9 +98,7 @@ private:
   screen_rect m_options;
   screen_rect m_about;
   screen_rect m_quit;
-
-  /// The size of the font that would fit nicely
-  int m_font_size;
+  screen_rect m_controls;
 
   /// The size of the window
   screen_coordinate m_window_size;
