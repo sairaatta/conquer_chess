@@ -130,6 +130,16 @@ void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr)
   draw_text(s, sr, 500, sf::Color::White);
 }
 
+void draw_input_prompt_symbol(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r
+)
+{
+  draw_texture(
+    game_resources::get().get_input_prompt_textures().get_texture(k),
+    r
+  );
+}
 void draw_music_volume_label(const screen_rect& sr)
 {
   sf::RectangleShape rectangle;

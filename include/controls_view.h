@@ -83,15 +83,15 @@ void draw_panel(
 );
 
 
-std::string get_key_str_for_action_1(const controls_view& v);
-std::string get_key_str_for_action_2(const controls_view& v);
-std::string get_key_str_for_action_3(const controls_view& v);
-std::string get_key_str_for_action_4(const controls_view& v);
+sf::Keyboard::Key get_key_for_action_1(const controls_view& v);
+sf::Keyboard::Key get_key_for_action_2(const controls_view& v);
+sf::Keyboard::Key get_key_for_action_3(const controls_view& v);
+sf::Keyboard::Key get_key_for_action_4(const controls_view& v);
 std::string get_key_str_for_do(const controls_view& v);
-std::string get_key_str_for_move_down(const controls_view& v);
-std::string get_key_str_for_move_left(const controls_view& v);
-std::string get_key_str_for_move_right(const controls_view& v);
-std::string get_key_str_for_move_up(const controls_view& v);
+sf::Keyboard::Key get_key_for_move_down(const controls_view& v);
+sf::Keyboard::Key get_key_for_move_left(const controls_view& v);
+sf::Keyboard::Key get_key_for_move_right(const controls_view& v);
+sf::Keyboard::Key get_key_for_move_up(const controls_view& v);
 std::string get_key_str_for_next(const controls_view& v);
 
 void draw_background(controls_view& v);

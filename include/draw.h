@@ -13,6 +13,7 @@
 #include "physical_controller_type.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
 /// Draw an About menu button on the main window
 void draw_about_button(const screen_rect& sr);
@@ -50,6 +51,14 @@ void draw_game_speed_value(const screen_rect& sr);
 
 /// Draw fancy text at a huge size
 void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr);
+
+/// Draw a symbol for a keyboard input prompt.
+///
+/// For example, a symbol for the key A
+void draw_input_prompt_symbol(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r
+);
 
 /// The button that shows the text 'Music volume'
 void draw_music_volume_label(const screen_rect& sr);

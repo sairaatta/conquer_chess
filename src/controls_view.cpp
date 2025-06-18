@@ -57,27 +57,26 @@ void controls_view::tick()
 {
 }
 
-std::string get_key_str_for_action_1(const controls_view& v)
+sf::Keyboard::Key  get_key_for_action_1(const controls_view& v)
 {
-  return to_str(
-    physical_controllers::get().get_controller(v.get_player_side())
-      .get_key_bindings().get_key_for_action(action_number(1))
-    );
+  return physical_controllers::get().get_controller(v.get_player_side())
+    .get_key_bindings().get_key_for_action(action_number(1))
+  ;
 }
 
-std::string get_key_str_for_action_2(const controls_view& v)
+sf::Keyboard::Key get_key_for_action_2(const controls_view& v)
 {
-  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(2)));
+  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(2));
 }
 
-std::string get_key_str_for_action_3(const controls_view& v)
+sf::Keyboard::Key get_key_for_action_3(const controls_view& v)
 {
-  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(3)));
+  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(3));
 }
 
-std::string get_key_str_for_action_4(const controls_view& v)
+sf::Keyboard::Key  get_key_for_action_4(const controls_view& v)
 {
-  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(4)));
+  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(4));
 }
 
 std::string get_key_str_for_do(const controls_view& /* v */)
@@ -85,22 +84,22 @@ std::string get_key_str_for_do(const controls_view& /* v */)
   return "LMB";
 }
 
-std::string get_key_str_for_move_down(const controls_view& v)
+sf::Keyboard::Key get_key_for_move_down(const controls_view& v)
 {
-  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_down());
+  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_down();
 }
 
-std::string get_key_str_for_move_left(const controls_view& v)
+sf::Keyboard::Key get_key_for_move_left(const controls_view& v)
 {
-  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_left());
+  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_left();
 }
-std::string get_key_str_for_move_right(const controls_view& v)
+sf::Keyboard::Key get_key_for_move_right(const controls_view& v)
 {
-  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_right());
+  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_right();
 }
-std::string get_key_str_for_move_up(const controls_view& v)
+sf::Keyboard::Key get_key_for_move_up(const controls_view& v)
 {
-  return to_str(physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_up());
+  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_up();
 }
 
 std::string get_key_str_for_next(const controls_view& /* v */)
@@ -240,27 +239,25 @@ void draw_keyboard_panel(controls_view& v)
     color = get_other_color(color);
   }
 
-  std::vector<std::pair<screen_rect, std::string>> values =
+  std::vector<std::pair<screen_rect, sf::Keyboard::Key>> values =
   {
-    std::make_pair(layout.get_up_value(), get_key_str_for_move_up(v)),
-    std::make_pair(layout.get_right_value(), get_key_str_for_move_right(v)),
-    std::make_pair(layout.get_down_value(), get_key_str_for_move_down(v)),
-    std::make_pair(layout.get_left_value(), get_key_str_for_move_left(v)),
-    std::make_pair(layout.get_action_1_value(), get_key_str_for_action_1(v)),
-    std::make_pair(layout.get_action_2_value(), get_key_str_for_action_2(v)),
-    std::make_pair(layout.get_action_3_value(), get_key_str_for_action_3(v)),
-    std::make_pair(layout.get_action_4_value(), get_key_str_for_action_4(v))
+    std::make_pair(layout.get_up_value(), get_key_for_move_up(v)),
+    std::make_pair(layout.get_right_value(), get_key_for_move_right(v)),
+    std::make_pair(layout.get_down_value(), get_key_for_move_down(v)),
+    std::make_pair(layout.get_left_value(), get_key_for_move_left(v)),
+    std::make_pair(layout.get_action_1_value(), get_key_for_action_1(v)),
+    std::make_pair(layout.get_action_2_value(), get_key_for_action_2(v)),
+    std::make_pair(layout.get_action_3_value(), get_key_for_action_3(v)),
+    std::make_pair(layout.get_action_4_value(), get_key_for_action_4(v))
   };
   color = get_other_color(color);
   for (const auto& p: values)
   {
-    //draw_panel(p.first, p.second, color, is_active);
-    //draw_chessboard_strip_texture(color, p.first);
-    const std::string texture_name{key_str_to_resource_name(p.second)};
-    draw_texture(
-      game_resources::get().get_input_prompt_textures().get_texture(texture_name),
+    draw_input_prompt_symbol(
+      p.second,
       create_centered_rect(get_center(p.first), 64, 64)
     );
+
     color = get_other_color(color);
   }
 }

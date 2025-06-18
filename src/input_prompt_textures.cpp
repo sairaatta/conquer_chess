@@ -50,6 +50,11 @@ bool input_prompt_textures::has_texture(const std::string& s) const noexcept
   return m_textures.find(s) != std::end(m_textures);
 }
 
+sf::Texture& input_prompt_textures::get_texture(const sf::Keyboard::Key& s)
+{
+  return get_texture(to_resource_name(s));
+}
+
 sf::Texture& input_prompt_textures::get_texture(const std::string& s)
 {
   assert(has_texture(s));

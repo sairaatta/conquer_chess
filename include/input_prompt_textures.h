@@ -16,8 +16,14 @@ public:
   /// Determine if a texture is present
   bool has_texture(const std::string& s) const noexcept;
 
-  /// Get a texture
+  /// Get a texture from an SFML key
+  sf::Texture& get_texture(const sf::Keyboard::Key& k);
+
+  /// Get a texture from a std::string.
+  ///
+  /// Prefer to use `get_texture` with a SFML key
   sf::Texture& get_texture(const std::string& s);
+
 
   int get_n_textures() const noexcept
   {
