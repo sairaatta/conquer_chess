@@ -19,10 +19,6 @@ public:
   /// Get a texture from an SFML key
   sf::Texture& get_texture(const sf::Keyboard::Key& k);
 
-  /// Get a texture from a std::string.
-  ///
-  /// Prefer to use `get_texture` with a SFML key
-  sf::Texture& get_texture(const std::string& s);
 
 
   int get_n_textures() const noexcept
@@ -31,6 +27,11 @@ public:
   }
 
 private:
+
+  /// Get a texture from a std::string.
+  ///
+  /// Prefer to use `get_texture` with a SFML key
+  sf::Texture& get_texture(const std::string& s);
 
   std::map<std::string, sf::Texture> m_textures;
 

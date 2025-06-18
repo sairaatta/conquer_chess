@@ -248,9 +248,8 @@ void draw_controls_panel(lobby_view& v, const side player_side)
     get_normal_character_size(),
     sf::Color::White
   );
-  const std::string up_key_str{to_resource_name(c.get_key_bindings().get_key_for_move_up())};
-  draw_texture(
-    game_resources::get().get_input_prompt_textures().get_texture(up_key_str),
+  draw_input_prompt_symbol(
+    c.get_key_bindings().get_key_for_move_up(),
     create_centered_rect(get_center(layout.get_control_up_symbol(player_side)), 64, 64)
   );
 
@@ -261,11 +260,11 @@ void draw_controls_panel(lobby_view& v, const side player_side)
     get_normal_character_size(),
     sf::Color::White
   );
-  const std::string down_key_str{to_resource_name(c.get_key_bindings().get_key_for_move_down())};
-  draw_texture(
-    game_resources::get().get_input_prompt_textures().get_texture(down_key_str),
+  draw_input_prompt_symbol(
+    c.get_key_bindings().get_key_for_move_down(),
     create_centered_rect(get_center(layout.get_control_down_symbol(player_side)), 64, 64)
   );
+
 
   // Select
   draw_text(
@@ -274,9 +273,8 @@ void draw_controls_panel(lobby_view& v, const side player_side)
     get_normal_character_size(),
     sf::Color::White
   );
-  const std::string select_key_str{to_resource_name(c.get_key_bindings().get_key_for_action(action_number(1)))};
-  draw_texture(
-    game_resources::get().get_input_prompt_textures().get_texture(select_key_str),
+  draw_input_prompt_symbol(
+    c.get_key_bindings().get_key_for_action(action_number(1)),
     create_centered_rect(get_center(layout.get_control_select_symbol(player_side)), 64, 64)
   );
 
