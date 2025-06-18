@@ -1,5 +1,8 @@
 # Screenshots
 
+![Controls screen v0.7](20250618_3.jpg)
+
+> The Controls screen shows the mouse buttons too
 
 ![Controls screen v0.7](20250618_2.jpg)
 
