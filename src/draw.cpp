@@ -18,6 +18,21 @@ void draw_about_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::white), sr);
   draw_big_text(sf::String("About"), sr);
+  const screen_rect key_rect{
+    screen_coordinate(
+      sr.get_tl().get_x() + 16,
+      sr.get_tl().get_y() + 16
+    ),
+    screen_coordinate(
+      sr.get_tl().get_x() + 16 + 64,
+      sr.get_tl().get_y() + 16 + 64
+    )
+  };
+  draw_input_prompt_symbol_on_background(
+    sf::Keyboard::Key::A,
+    key_rect
+  );
+
 }
 
 void draw_big_text(const sf::String& s, const screen_rect& sr)
@@ -152,6 +167,15 @@ void draw_input_prompt_symbol(
   );
 }
 
+void draw_input_prompt_symbol_on_background(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r,
+  const sf::Color background_color
+)
+{
+  draw_rectangle(r, background_color);
+  draw_input_prompt_symbol(k, r);
+}
 
 void draw_music_volume_label(const screen_rect& sr)
 {
@@ -204,6 +228,20 @@ void draw_options_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::black), sr);
   draw_big_text(sf::String("Options"), sr);
+  const screen_rect key_rect{
+    screen_coordinate(
+      sr.get_tl().get_x() + 16,
+      sr.get_tl().get_y() + 16
+    ),
+    screen_coordinate(
+      sr.get_tl().get_x() + 16 + 64,
+      sr.get_tl().get_y() + 16 + 64
+    )
+  };
+  draw_input_prompt_symbol_on_background(
+    sf::Keyboard::Key::O,
+    key_rect
+  );
 }
 
 void draw_outline(const screen_rect& sr, const sf::Color& outline_color)
@@ -290,6 +328,37 @@ void draw_quit_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::black), sr);
   draw_big_text(sf::String("Quit"), sr);
+  const int y1{sr.get_tl().get_y() + 16};
+  const int y2{y1 + 64};
+  const int x1{sr.get_tl().get_x() + 16};
+  const int x2{x1 + 64};
+  const int x3{x2 + 0};
+  const int x4{x3 + 64};
+  const screen_rect key_rect_1{
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
+  };
+  const screen_rect key_rect_2{
+    screen_coordinate(x3, y1),
+    screen_coordinate(x4, y2)
+  };
+  draw_input_prompt_symbol_on_background(
+    sf::Keyboard::Key::Q,
+    key_rect_1
+  );
+  draw_input_prompt_symbol_on_background(
+    sf::Keyboard::Key::Escape,
+    key_rect_2
+  );
+
+}
+
+void draw_rectangle(const screen_rect& sr, const sf::Color& fill_color)
+{
+  sf::RectangleShape rectangle;
+  set_rect(rectangle, sr);
+  rectangle.setFillColor(fill_color);
+  get_render_window().draw(rectangle);
 }
 
 void draw_sound_effects_volume_label(const screen_rect& sr)
@@ -372,6 +441,20 @@ void draw_start_button(const screen_rect& sr)
 {
   draw_texture(get_strip_texture(chess_color::white), sr);
   draw_big_text(sf::String("Start"), sr);
+  const screen_rect key_rect{
+    screen_coordinate(
+      sr.get_tl().get_x() + 16,
+      sr.get_tl().get_y() + 16
+    ),
+    screen_coordinate(
+      sr.get_tl().get_x() + 16 + 64,
+      sr.get_tl().get_y() + 16 + 64
+    )
+  };
+  draw_input_prompt_symbol_on_background(
+    sf::Keyboard::Key::S,
+    key_rect
+  );
 }
 
 void draw_starting_position_label(const screen_rect& sr)

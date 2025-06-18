@@ -61,6 +61,15 @@ void draw_input_prompt_symbol(
   const screen_rect& r
 );
 
+/// Draw a symbol for a keyboard input prompt on a background
+///
+/// For example, a symbol for the key A on a black background
+void draw_input_prompt_symbol_on_background(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r,
+  const sf::Color background_color = sf::Color::Black
+);
+
 /// Draw a symbol for a mouse input prompt.
 ///
 /// For example, a symbol for the key A
@@ -109,6 +118,9 @@ void draw_pieces(
 
 /// Draw a Quit menu button on the main window
 void draw_quit_button(const screen_rect& sr);
+
+/// Draw a rectangle
+void draw_rectangle(const screen_rect& sr, const sf::Color& fill_color = sf::Color::Black);
 
 /// The button that shows the text 'Sound effects volume'
 void draw_sound_effects_volume_label(const screen_rect& sr);
