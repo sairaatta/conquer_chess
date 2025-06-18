@@ -1,6 +1,11 @@
 # Screenshots
 
-![Lobby screen v0.7](20250618.jpg)
+
+![Controls screen v0.7](20250618_2.jpg)
+
+> The Controls screen looks prettier
+
+![Lobby screen v0.7](20250618_1.jpg)
 
 > The Lobby screen uses symbols to indicate the controls
 
@@ -120,7 +125,7 @@
 
     ![Conquer Chess screenshot](20220804_1.png)
 
-    ![Conquer Chess screenshot](20220802_1.png)
+    ![Controls screen v0.4](20220802_1.png)
 
     ![Conquer Chess screenshot](20220801_4.png)
 

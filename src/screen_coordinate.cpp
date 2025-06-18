@@ -32,7 +32,7 @@ double calc_distance(const screen_coordinate& a, const screen_coordinate& b) noe
 
 screen_coordinate get_default_screen_size() noexcept
 {
-  return screen_coordinate(1024 + 400, 576 + 400);
+  return screen_coordinate(1080, 1920);
 }
 
 std::ostream& operator<<(std::ostream& os, const screen_coordinate& coordinat)
