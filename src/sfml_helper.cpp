@@ -1,13 +1,5 @@
 #include "sfml_helper.h"
 
-#include "piece.h"
-
-#ifndef LOGIC_ONLY
-#include "game_resources.h"
-#endif
-
-#include "game_coordinate.h"
-
 #include "../magic_enum/include/magic_enum/magic_enum.hpp" // https://github.com/Neargye/magic_enum
 
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -26,10 +18,63 @@ sf::Color f_health_to_color(const double f)
   return sf::Color::Green;
 }
 
-std::string key_str_to_filename(std::string key_str)
+std::vector<sf::Keyboard::Key> get_all_sfml_keys() noexcept
 {
+  const auto a{magic_enum::enum_values<sf::Keyboard::Key>()};
+  std::vector<sf::Keyboard::Key> v;
+  v.reserve(a.size());
+  std::copy(std::begin(a), std::end(a), std::back_inserter(v));
+  assert(a.size() == v.size());
+  return v;
+}
+
+std::string key_str_to_resource_name(std::string key_str)
+{
+  // This can be made constant-time, by using a LUT
   assert(!key_str.empty());
+  if (key_str == "Unknown"
+    || key_str == "F13"
+    || key_str == "F14"
+    || key_str == "F15"
+    || key_str == "Pause"
+    || key_str == "KeyCount"
+  )
+  {
+    // Keys without a symbol
+    return "keyboard_question_outline";
+  }
+  if (key_str == "LAlt" || key_str == "RAlt") return "keyboard_alt";
+  if (key_str == "LControl" || key_str == "RControl") return "keyboard_ctrl";
+  if (key_str == "LShift" || key_str == "RShift") return "keyboard_shift";
+  if (key_str == "LSystem" || key_str == "RSystem") return "keyboard_win";
+  if (key_str == "Menu") return "keyboard_function";
+  if (key_str == "LBracket") return "keyboard_bracket_open";
+  if (key_str == "RBracket") return "keyboard_bracket_close";
+  if (key_str == "Slash" || key_str == "Divide") return "keyboard_slash_forward";
+  if (key_str == "BackSlash" || key_str == "Backslash") return "keyboard_slash_back";
+  if (key_str == "Grave" || key_str == "Hyphen") return "keyboard_apostrophe";
+  if (key_str == "Equal") return "keyboard_equals";
+  if (key_str == "PageUp") return "keyboard_page_up";
+  if (key_str == "PageDown") return "keyboard_page_down";
+  if (key_str == "Add") return "keyboard_plus";
+  if (key_str == "Subtract") return "keyboard_minus";
+  if (key_str == "Multiply") return "keyboard_asterisk";
+  if (key_str == "Up") return "keyboard_arrow_up";
+  if (key_str == "Right") return "keyboard_arrow_right";
+  if (key_str == "Down") return "keyboard_arrow_down";
+  if (key_str == "Left") return "keyboard_arrow_left";
+  if (key_str.size() > 6 && key_str.substr(0, 6) == std::string("Numpad"))
+  {
+     key_str = key_str.substr(6, key_str.size() - 6);
+  }
+  else if (key_str.size() > 3 && key_str.substr(0, 3) == std::string("Num"))
+  {
+     key_str = key_str.substr(3, key_str.size() - 3);
+  }
+
   key_str[0] = std::tolower(key_str[0]);
+
+
   return std::string("keyboard_") + key_str;
 }
 
@@ -101,9 +146,25 @@ void test_sfml_helper()
     assert(low != high);
     assert(mid != high);
   }
-  // key_str_to_filename
+  // get_all_sfml_keys
   {
-    assert(key_str_to_filename("A") == "keyboard_a");
+    const auto v{get_all_sfml_keys()};
+    assert(!v.empty());
+  }
+
+  // key_str_to_resource_name
+  {
+    assert(key_str_to_resource_name("A") == "keyboard_a");
+    assert(key_str_to_resource_name("Unknown") == "keyboard_question_outline");
+    assert(key_str_to_resource_name("Num0") == "keyboard_0");
+    assert(key_str_to_resource_name("LAlt") == "keyboard_alt");
+    assert(key_str_to_resource_name("RAlt") == "keyboard_alt");
+    assert(key_str_to_resource_name("LControl") == "keyboard_ctrl");
+    assert(key_str_to_resource_name("RControl") == "keyboard_ctrl");
+    assert(key_str_to_resource_name("LShift") == "keyboard_shift");
+    assert(key_str_to_resource_name("RShift") == "keyboard_shift");
+    assert(key_str_to_resource_name("LSystem") == "keyboard_win");
+    assert(key_str_to_resource_name("RSystem") == "keyboard_win");
   }
   // set_rect, on screen_rect
   {
@@ -129,9 +190,48 @@ void test_sfml_helper()
     set_text_position(t, screen_size);
     assert(!t.getString().isEmpty()); // Does not test set_text_poistion at all
   }
-  // to_filename
+  // to_resource_name
   {
-    assert(to_filename(sf::Keyboard::Key::A) == "keyboard_a");
+    assert(to_resource_name(sf::Keyboard::Key::A) == "keyboard_a");
+    assert(to_resource_name(sf::Keyboard::Key::Unknown) == "keyboard_question_outline");
+    assert(to_resource_name(sf::Keyboard::Key::Num0) == "keyboard_0");
+    assert(to_resource_name(sf::Keyboard::Key::Numpad0) == "keyboard_0");
+    assert(to_resource_name(sf::Keyboard::Key::LAlt) == "keyboard_alt");
+    assert(to_resource_name(sf::Keyboard::Key::RAlt) == "keyboard_alt");
+    assert(to_resource_name(sf::Keyboard::Key::LControl) == "keyboard_ctrl");
+    assert(to_resource_name(sf::Keyboard::Key::RControl) == "keyboard_ctrl");
+    assert(to_resource_name(sf::Keyboard::Key::LShift) == "keyboard_shift");
+    assert(to_resource_name(sf::Keyboard::Key::RShift) == "keyboard_shift");
+    assert(to_resource_name(sf::Keyboard::Key::LSystem) == "keyboard_win");
+    assert(to_resource_name(sf::Keyboard::Key::RSystem) == "keyboard_win");
+    assert(to_resource_name(sf::Keyboard::Key::Menu) == "keyboard_function");
+    assert(to_resource_name(sf::Keyboard::Key::LBracket) == "keyboard_bracket_open");
+    assert(to_resource_name(sf::Keyboard::Key::RBracket) == "keyboard_bracket_close");
+    assert(to_resource_name(sf::Keyboard::Key::Slash) == "keyboard_slash_forward");
+    assert(to_resource_name(sf::Keyboard::Key::Grave) == "keyboard_apostrophe");
+    assert(to_resource_name(sf::Keyboard::Key::Hyphen) == "keyboard_apostrophe");
+    assert(to_resource_name(sf::Keyboard::Key::Equal) == "keyboard_equals");
+    assert(to_resource_name(sf::Keyboard::Key::PageUp) == "keyboard_page_up");
+    assert(to_resource_name(sf::Keyboard::Key::PageDown) == "keyboard_page_down");
+    assert(to_resource_name(sf::Keyboard::Key::Add) == "keyboard_plus");
+    assert(to_resource_name(sf::Keyboard::Key::Subtract) == "keyboard_minus");
+    assert(to_resource_name(sf::Keyboard::Key::Multiply) == "keyboard_asterisk");
+    assert(to_resource_name(sf::Keyboard::Key::Divide) == "keyboard_slash_forward");
+    assert(to_resource_name(sf::Keyboard::Key::Up) == "keyboard_arrow_up");
+    assert(to_resource_name(sf::Keyboard::Key::Right) == "keyboard_arrow_right");
+    assert(to_resource_name(sf::Keyboard::Key::Down) == "keyboard_arrow_down");
+    assert(to_resource_name(sf::Keyboard::Key::Left) == "keyboard_arrow_left");
+    assert(to_resource_name(sf::Keyboard::Key::F13) == "keyboard_question_outline");
+    assert(to_resource_name(sf::Keyboard::Key::F14) == "keyboard_question_outline");
+    assert(to_resource_name(sf::Keyboard::Key::F15) == "keyboard_question_outline");
+    assert(to_resource_name(sf::Keyboard::Key::Pause) == "keyboard_question_outline");
+    assert(to_resource_name(sf::Keyboard::Key::KeyCount) == "keyboard_question_outline");
+    {
+      const auto x{"keyboard_slash_back"};
+      const auto r{to_resource_name(sf::Keyboard::Key::BackSlash)};
+      assert(x == r);
+    }
+    assert(to_resource_name(sf::Keyboard::Key::BackSlash) == "keyboard_slash_back");
   }
   // to_str
   {
@@ -406,9 +506,9 @@ sf::Color to_sfml_color(
 }
 
 
-std::string to_filename(const sf::Keyboard::Key k)
+std::string to_resource_name(const sf::Keyboard::Key k)
 {
-  return key_str_to_filename(to_str(k));
+  return key_str_to_resource_name(to_str(k));
 }
 
 std::string to_str(const sf::Keyboard::Key k)

@@ -3,6 +3,7 @@
 #ifndef LOGIC_ONLY
 
 #include "helper.h"
+#include "sfml_helper.h"
 
 #include <QFile>
 
@@ -35,6 +36,13 @@ input_prompt_textures::input_prompt_textures()
     }
   }
   assert(has_texture("keyboard"));
+
+  // Test if all the SFML keys are mapped to a resource
+  for (const auto k: get_all_sfml_keys())
+  {
+    const std::string resource_name{to_resource_name(k)};
+    assert(has_texture(resource_name));
+  }
 }
 
 bool input_prompt_textures::has_texture(const std::string& s) const noexcept

@@ -256,7 +256,7 @@ void draw_keyboard_panel(controls_view& v)
   {
     //draw_panel(p.first, p.second, color, is_active);
     //draw_chessboard_strip_texture(color, p.first);
-    const std::string texture_name{key_str_to_filename(p.second)};
+    const std::string texture_name{key_str_to_resource_name(p.second)};
     draw_texture(
       game_resources::get().get_input_prompt_textures().get_texture(texture_name),
       create_centered_rect(get_center(p.first), 64, 64)
