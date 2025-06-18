@@ -20,6 +20,8 @@ public:
   /// Show the menu on-screen
   void draw();
 
+  bool get_dog_mode() const noexcept { return m_dog_mode; }
+
   /// Get the selected item of a player
   lobby_view_item get_selected(const side player_side) const noexcept;
 
@@ -62,6 +64,9 @@ private:
 
   /// How long the countdown will take
   const int m_countdown_secs{3};
+
+  /// Yes, dog mode
+  bool m_dog_mode{false};
 
   /// The layout of this window
   lobby_view_layout m_layout;

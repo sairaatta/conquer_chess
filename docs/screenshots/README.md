@@ -1,5 +1,9 @@
 # Screenshots
 
+![Lobby screen v0.7](20250618_5.jpg)
+
+> The Lobby screen in dog mode
+
 ![Main menu screen v0.7](20250618_4.jpg)
 
 > The Main menu screen shows the controls

@@ -108,6 +108,10 @@ bool lobby_view::process_event(sf::Event& event)
       m_lhs_cursor = get_next(m_lhs_cursor);
       game_resources::get().get_sound_effects().play_hide();
     }
+    else if (key_pressed == sf::Keyboard::Key::T)
+    {
+      m_dog_mode = !m_dog_mode;
+    }
     else if (key_pressed == sf::Keyboard::Key::O)
     {
       m_rhs_cursor = get_previous(m_rhs_cursor);
@@ -335,15 +339,26 @@ void draw_background(lobby_view& v)
 void draw_king_portrait(lobby_view& v, const side player_side)
 {
   const auto player_color{get_color(player_side)};
-  const auto player_race{get_race_of_side(player_side)};
-  draw_texture(
-    game_resources::get().get_piece_portrait_textures().get_portrait(
-      player_race,
-      player_color,
-      piece_type::king
-    ),
-    v.get_layout().get_king_portrait(player_side)
-  );
+  if (!v.get_dog_mode())
+  {
+    const auto player_race{get_race_of_side(player_side)};
+    draw_texture(
+      game_resources::get().get_piece_portrait_textures().get_portrait(
+        player_race,
+        player_color,
+        piece_type::king
+      ),
+      v.get_layout().get_king_portrait(player_side)
+    );
+  }
+  else
+  {
+    const int index{player_color == chess_color::white ? 1 : 2};
+    draw_texture(
+      game_resources::get().get_themba_textures().get_texture(index),
+      v.get_layout().get_king_portrait(player_side)
+    );
+  }
   sf::Color outline_color;
   switch (player_side)
   {
