@@ -4,6 +4,7 @@
 
 #include "screen_coordinate.h"
 #include "physical_controllers.h"
+#include "draw.h"
 #include "render_window.h"
 #include "action_number.h"
 #include "game_resources.h"
@@ -35,7 +36,6 @@ void controls_view::change_selected()
 }
 
 void draw_panel(
-  controls_view& v,
   const screen_rect& panel_position,
   const std::string panel_text,
   const chess_color color,
@@ -50,11 +50,7 @@ void draw_panel(
   if (!is_active) rectangle.setFillColor(sf::Color(128, 128, 128, 128));
   get_render_window().draw(rectangle);
 
-  sf::Text text;
-  v.set_text_style(text);
-  text.setString(panel_text);
-  set_text_position(text, panel_position);
-  get_render_window().draw(text);
+  draw_normal_text(panel_text, panel_position);
 }
 
 void controls_view::tick()
@@ -203,15 +199,24 @@ void controls_view::set_text_style(sf::Text& text)
 }
 void controls_view::draw()
 {
+  draw_background(*this);
   draw_layout_panels(*this);
-
-  show_type_panel(*this);
-  show_keyboard_panel(*this);
-  show_mouse_panel(*this);
-  show_selected_panel(*this);
+  draw_type_panel(*this);
+  draw_keyboard_panel(*this);
+  draw_mouse_panel(*this);
+  draw_selected_panel(*this);
 }
 
-void show_keyboard_panel(controls_view& v)
+void draw_background(controls_view& v)
+{
+  const auto& layout = v.get_layout();
+  draw_texture(
+    game_resources::get().get_options_menu_textures().get_texture(options_view_item::left_controls),
+    screen_rect(screen_coordinate(0,0), layout.get_window_size())
+  );
+}
+
+void draw_keyboard_panel(controls_view& v)
 {
   const auto& layout = v.get_layout();
   std::vector<std::pair<screen_rect, std::string>> labels =
@@ -231,7 +236,7 @@ void show_keyboard_panel(controls_view& v)
   chess_color color{chess_color::black};
   for (const auto& p: labels)
   {
-    draw_panel(v, p.first, p.second, color, is_active);
+    draw_panel(p.first, p.second, color, is_active);
     color = get_other_color(color);
   }
 
@@ -249,12 +254,18 @@ void show_keyboard_panel(controls_view& v)
   color = get_other_color(color);
   for (const auto& p: values)
   {
-    draw_panel(v, p.first, p.second, color, is_active);
+    //draw_panel(p.first, p.second, color, is_active);
+    //draw_chessboard_strip_texture(color, p.first);
+    const std::string texture_name{key_str_to_filename(p.second)};
+    draw_texture(
+      game_resources::get().get_input_prompt_textures().get_texture(texture_name),
+      create_centered_rect(get_center(p.first), 64, 64)
+    );
     color = get_other_color(color);
   }
 }
 
-void show_mouse_panel(controls_view& v)
+void draw_mouse_panel(controls_view& v)
 {
   const auto& layout = v.get_layout();
   std::vector<std::pair<screen_rect, std::string>> labels =
@@ -268,7 +279,7 @@ void show_mouse_panel(controls_view& v)
   chess_color color{chess_color::black};
   for (const auto& p: labels)
   {
-    draw_panel(v, p.first, p.second, color, is_active);
+    draw_panel(p.first, p.second, color, is_active);
     color = get_other_color(color);
   }
 
@@ -280,7 +291,7 @@ void show_mouse_panel(controls_view& v)
   color = get_other_color(color);
   for (const auto& p: values)
   {
-    draw_panel(v, p.first, p.second, color, is_active);
+    draw_panel(p.first, p.second, color, is_active);
     color = get_other_color(color);
   }
 }
@@ -296,41 +307,31 @@ void draw_layout_panels(controls_view& v)
   }
 }
 
-void show_selected_panel(controls_view& v)
+void draw_selected_panel(controls_view& v)
 {
   const auto select_rect{
     v.get_layout().get_selectable_rect(
       v.get_selected()
     )
   };
-  sf::RectangleShape rectangle;
-  set_rect(rectangle, select_rect);
-  rectangle.setOrigin(
-    get_width(select_rect) / 2,
-    get_height(select_rect) / 2
-  );
-  rectangle.setFillColor(sf::Color::Transparent);
-  rectangle.setOutlineColor(sf::Color::Red);
-  rectangle.setOutlineThickness(5);
-  get_render_window().draw(rectangle);
+  draw_outline(select_rect);
 }
 
-void show_type_panel(controls_view& v)
+void draw_type_panel(controls_view& v)
 {
   const bool is_active{true};
   draw_panel(
-    v,
     v.get_layout().get_controller_type_label(),
     "Controller",
     chess_color::white,
     is_active
   );
-  draw_panel(
-    v,
-    v.get_layout().get_controller_type_value(),
-    to_str(physical_controllers::get().get_controller(v.get_player_side()).get_type()),
-    chess_color::black,
-    is_active
+  const auto type{
+    physical_controllers::get().get_controller(v.get_player_side()).get_type()
+  };
+  draw_texture(
+    game_resources::get().get_physical_controller_textures().get_symbol(type),
+    create_centered_rect(get_center(v.get_layout().get_controller_type_value()), 64, 64)
   );
 }
 

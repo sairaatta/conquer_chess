@@ -24,6 +24,12 @@ sf::Color f_health_to_color(const double f)
   return sf::Color::Green;
 }
 
+std::string key_str_to_filename(std::string key_str)
+{
+  assert(!key_str.empty());
+  key_str[0] = std::tolower(key_str[0]);
+  return std::string("keyboard_") + key_str;
+}
 
 void set_rect(sf::RectangleShape& rectangle, const screen_coordinate& screen_size)
 {
@@ -93,6 +99,10 @@ void test_sfml_helper()
     assert(low != high);
     assert(mid != high);
   }
+  // key_str_to_filename
+  {
+    assert(key_str_to_filename("A") == "keyboard_a");
+  }
   // set_rect, on screen_rect
   {
     sf::RectangleShape r;
@@ -117,7 +127,7 @@ void test_sfml_helper()
     set_text_position(t, screen_size);
     assert(!t.getString().isEmpty()); // Does not test set_text_poistion at all
   }
-  // to_str
+  // to_filename
   {
     assert(to_filename(sf::Keyboard::Key::A) == "keyboard_a");
   }
@@ -381,12 +391,10 @@ sf::Color to_sfml_color(
   return sf::Color(128 - 0, 128 - 64, 128 - 64);
 }
 
+
 std::string to_filename(const sf::Keyboard::Key k)
 {
-  std::string s{to_str(k)};
-  assert(!s.empty());
-  s[0] = std::tolower(s[0]);
-  return std::string("keyboard_") + s;
+  return key_str_to_filename(to_str(k));
 }
 
 std::string to_str(const sf::Keyboard::Key k)

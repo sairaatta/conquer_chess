@@ -8,25 +8,18 @@ controls_view_layout::controls_view_layout(
   const int margin_width
 ) : m_window_size{window_size}
 {
-  const int panel_height{
-    static_cast<int>(
-      static_cast<double>(window_size.get_y() - (3 * margin_width)) / 9.0
-    )
-  };
-  const int panel_width{
-    static_cast<int>(
-      static_cast<double>(window_size.get_x() - (3 * margin_width)) / 4.0
-    )
-  };
+  const int panel_height{80};
+  const int text_panel_width{200};
+  const int symbol_panel_width{panel_height};
 
-  const int x1{margin_width};
-  const int x2{x1 + panel_width};
-  const int x3{x2 + panel_width};
+  const int x1{128 + margin_width};
+  const int x2{x1 + text_panel_width};
+  const int x3{x2 + symbol_panel_width};
   const int x4{x3 + margin_width};
-  const int x5{x4 + panel_width};
-  const int x6{x5 + panel_width};
+  const int x5{x4 + text_panel_width};
+  const int x6{x5 + symbol_panel_width};
 
-  const int y1{margin_width};
+  const int y1{128 + margin_width};
   const int y2{y1 + panel_height};
   const int y3{y2 + margin_width};
   const int y4{y3 + panel_height};

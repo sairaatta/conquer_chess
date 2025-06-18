@@ -13,6 +13,10 @@
 /// Convert a fraction of health (i.e. a value e [0.0, 1.0] to a color
 sf::Color f_health_to_color(const double f);
 
+/// Convert an SFML key that has already been converted
+/// to a filename to a filename, as used by \link{input_prompt_textures}
+std::string key_str_to_filename(std::string key_str);
+
 /// Make 'rectangle' have the same size as the \link{screen_coordinat}
 void set_rect(sf::RectangleShape& rectangle, const screen_coordinate& screen_size);
 
