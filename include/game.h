@@ -270,9 +270,6 @@ const piece& get_closest_piece_to(const game& g, const game_coordinate& coordina
 /// Get the piece that is closest to the coordinat
 piece& get_closest_piece_to(game& g, const game_coordinate& coordinat);
 
-game get_default_game() noexcept;
-
-
 /// Get the default, primary, most likely piece action
 /// Returns an empty optional if the current setup
 /// cannot result in an action

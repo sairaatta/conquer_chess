@@ -25,19 +25,19 @@ void test_game_class()
   ////////////////////////////////////////////////////////////////////////////
   // game::get_game_options
   {
-    const auto g{get_default_game()};
+    const game g{create_game_with_standard_starting_position()};
     assert(game_options::get().get_margin_width() >= 0);
   }
   // game::get_time
   {
-    const game g;
+    game g{create_game_with_standard_starting_position()};
     assert(g.get_in_game_time() == in_game_time(0.0));
   }
   // game::tick
   {
     // Pieces have the same clock
     {
-      game g;
+      game g{create_game_with_standard_starting_position()};
       assert(g.get_in_game_time() == in_game_time(0.0));
       for (const piece& p: g.get_pieces())
       {
@@ -74,7 +74,7 @@ void test_game_class()
 
     // #27: a2-a4 takes as long as b2-b3
     {
-      game g;
+      game g{create_game_with_standard_starting_position()};
       piece& first_pawn{get_piece_at(g, "a2")};
       piece& second_pawn{get_piece_at(g, "b2")};
       first_pawn.add_action(

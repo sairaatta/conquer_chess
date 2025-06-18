@@ -1026,11 +1026,6 @@ piece& get_closest_piece_to(
   return g.get_pieces()[get_index_of_closest_piece_to(g, coordinat)];
 }
 
-game get_default_game() noexcept
-{
-  return game();
-}
-
 std::optional<piece_action_type> get_default_piece_action(
   const game& g,
   const square& cursor_square,

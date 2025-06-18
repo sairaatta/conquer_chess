@@ -272,17 +272,28 @@ void process_press_action_1_or_lmb_down(
     return;
   }
   const square cursor{square(cursor_pos)};
+
+  // true for promotions, false for castling
+  const bool is_cursor_on_piece{is_piece_at(g, cursor)};
+  const bool is_cursor_on_piece_of_own_color{
+    is_cursor_on_piece && get_piece_at(g, cursor).get_color() == player_color
+  };
+  const bool is_cursor_on_selected_piece_of_own_color{
+    is_cursor_on_piece_of_own_color && get_piece_at(g, cursor).is_selected()
+  };
+
+  const bool can_selected_piece_promote{
+    is_cursor_on_selected_piece_of_own_color
+      && can_promote(get_piece_at(g, cursor))
+  };
   const bool is_promotion_to_queen{
-       is_piece_at(g, cursor)
-    && get_piece_at(g, cursor).get_color() == player_color
-    && get_piece_at(g, cursor).is_selected()
-    && can_promote(get_piece_at(g, cursor))
+    is_cursor_on_selected_piece_of_own_color && can_selected_piece_promote
   };
   #define FIX_ISSUE_3
   #ifdef FIX_ISSUE_3
   const square king_square{get_default_king_square(player_color)};
   const bool is_castle_kingside{
-       !is_piece_at(g, cursor)
+       !is_cursor_on_piece
     && is_piece_at(g, king_square)
     && get_piece_at(g, king_square).get_color() == player_color
     && get_piece_at(g, king_square).is_selected()
@@ -312,7 +323,7 @@ void process_press_action_1_or_lmb_down(
     return;
   }
   #endif // FIX_ISSUE_3
-  if (is_piece_at(g, cursor) && get_piece_at(g, cursor).get_color() == player_color)
+  if (is_cursor_on_piece_of_own_color)
   {
     const auto& p{get_piece_at(g, cursor)};
     if (p.is_selected())
@@ -617,7 +628,7 @@ void test_user_inputs()
   }
   // Move up does something
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_up_action(side::lhs));
@@ -627,7 +638,7 @@ void test_user_inputs()
   }
   // Move right does something
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_right_action(side::lhs));
@@ -637,7 +648,7 @@ void test_user_inputs()
   }
   // Move down does something
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_down_action(side::lhs));
@@ -647,7 +658,7 @@ void test_user_inputs()
   }
   // Move left does something
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_left_action(side::lhs));
@@ -670,11 +681,9 @@ void test_user_inputs()
     s << actions;
     assert(!s.str().empty());
   }
-  #define FIX_ISSUE_64
-  #ifdef FIX_ISSUE_64
   // 64: move white's cursor to e2
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     assert(square(get_cursor_pos(c, side::lhs)) != square("e2"));
     auto inputs{
@@ -688,7 +697,7 @@ void test_user_inputs()
   }
   // 64: move white's cursor to e2 and select the pawn
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     move_cursor_to(c, "e2", side::lhs);
     assert(!get_piece_at(g, "e2").is_selected());
@@ -698,7 +707,98 @@ void test_user_inputs()
     g.tick(delta_t(0.0));
     assert(get_piece_at(g, "e2").is_selected());
   }
-  #endif
+  // do_select
+  {
+    game g{create_game_with_standard_starting_position()};
+    game_controller c{create_game_controller_with_default_controllers()};
+    do_select(g, c, "e2", side::lhs);
+    assert(get_piece_at(g, "e2").is_selected());
+  }
+  // do_select_and_move_piece
+  {
+    game g{create_game_with_standard_starting_position()};
+    game_controller c{create_game_controller_with_default_controllers()};
+    assert(is_piece_at(g, "e2"));
+    do_select_and_move_piece(g, c, "e2", "e4", side::lhs);
+    assert(!is_piece_at(g, "e2"));
+    assert(is_piece_at(g, "e4"));
+  }
+  // process_press_action_1_or_lmb_down, white promotion to queen
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_default_controllers()};
+    assert(is_piece_at(g, "a8"));
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    do_select(g, c, "a8", side::lhs);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    move_cursor_to(c, "a8", side::lhs);
+    assert(can_promote(get_piece_at(g, "a8")));
+    const user_input input(
+      user_input_type::press_action_1,
+      side::lhs
+    );
+    process_press_action_1_or_lmb_down(g, c, input);
+    g.tick(delta_t(0.0)); // Promotion is instantaneous
+    assert(get_piece_at(g, "a8").get_type() != piece_type::pawn);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::queen);
+  }
+  // process_press_action_2_or_lmb_down, white promotion to rook
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_default_controllers()};
+    assert(is_piece_at(g, "a8"));
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    do_select(g, c, "a8", side::lhs);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    move_cursor_to(c, "a8", side::lhs);
+    assert(can_promote(get_piece_at(g, "a8")));
+    const user_input input(
+      user_input_type::press_action_2,
+      side::lhs
+    );
+    process_press_action_2(g, c, input);
+    g.tick(delta_t(0.0)); // Promotion is instantaneous
+    assert(get_piece_at(g, "a8").get_type() != piece_type::pawn);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::rook);
+  }
+  // process_press_action_3, white promotion to bishop
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_default_controllers()};
+    assert(is_piece_at(g, "a8"));
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    do_select(g, c, "a8", side::lhs);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    move_cursor_to(c, "a8", side::lhs);
+    assert(can_promote(get_piece_at(g, "a8")));
+    const user_input input(
+      user_input_type::press_action_3,
+      side::lhs
+    );
+    process_press_action_3(g, c, input);
+    g.tick(delta_t(0.0)); // Promotion is instantaneous
+    assert(get_piece_at(g, "a8").get_type() != piece_type::pawn);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::bishop);
+  }
+  // process_press_action_4, white promotion to knight
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_default_controllers()};
+    assert(is_piece_at(g, "a8"));
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    do_select(g, c, "a8", side::lhs);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    move_cursor_to(c, "a8", side::lhs);
+    assert(can_promote(get_piece_at(g, "a8")));
+    const user_input input(
+      user_input_type::press_action_4,
+      side::lhs
+    );
+    process_press_action_4(g, c, input);
+    g.tick(delta_t(0.0)); // Promotion is instantaneous
+    assert(get_piece_at(g, "a8").get_type() != piece_type::pawn);
+    assert(get_piece_at(g, "a8").get_type() == piece_type::knight);
+  }
 #endif // NDEBUG
 }
 

@@ -23,9 +23,7 @@
 class game_view
 {
 public:
-  explicit game_view(
-    const game& game = get_default_game()
-  );
+  explicit game_view();
 
   /// Show the game on-screen
   void draw();

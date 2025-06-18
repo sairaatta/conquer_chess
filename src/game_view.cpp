@@ -23,11 +23,7 @@
 #include <sstream>
 
 game_view::game_view(
-  const game& game
-)
-  :
-    m_game{game},
-    m_log{game_options::get().get_message_display_time_secs()}
+) : m_log{game_options::get().get_message_display_time_secs()}
 {
 
 }
