@@ -103,20 +103,20 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(sx1, sy96),
     screen_coordinate(sx2, sy97)
   );
-  m_lhs_control_up_label = get_lhs_half(m_lhs_control_up);
-  m_lhs_control_up_symbol = get_rhs_half(m_lhs_control_up);
+  m_lhs_control_up_symbol = get_lhs_half(m_lhs_control_up);
+  m_lhs_control_up_label = get_rhs_half(m_lhs_control_up);
   m_lhs_control_down = screen_rect(
     screen_coordinate(sx1, sy97),
     screen_coordinate(sx2, sy98)
   );
-  m_lhs_control_down_label = get_lhs_half(m_lhs_control_down);
-  m_lhs_control_down_symbol = get_rhs_half(m_lhs_control_down);
+  m_lhs_control_down_symbol = get_lhs_half(m_lhs_control_down);
+  m_lhs_control_down_label = get_rhs_half(m_lhs_control_down);
   m_lhs_control_select = screen_rect(
     screen_coordinate(sx1, sy98),
     screen_coordinate(sx2, sy99)
   );
-  m_lhs_control_select_label = get_lhs_half(m_lhs_control_select);
-  m_lhs_control_select_symbol = get_rhs_half(m_lhs_control_select);
+  m_lhs_control_select_symbol = get_lhs_half(m_lhs_control_select);
+  m_lhs_control_select_label = get_rhs_half(m_lhs_control_select);
 
 
   m_rhs_king_portrait = screen_rect(
@@ -131,20 +131,20 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(sx7, sy96),
     screen_coordinate(sx8, sy97)
   );
-  m_rhs_control_up_label = get_lhs_half(m_rhs_control_up);
-  m_rhs_control_up_symbol = get_rhs_half(m_rhs_control_up);
+  m_rhs_control_up_symbol = get_lhs_half(m_rhs_control_up);
+  m_rhs_control_up_label = get_rhs_half(m_rhs_control_up);
   m_rhs_control_down = screen_rect(
     screen_coordinate(sx7, sy97),
     screen_coordinate(sx8, sy98)
   );
-  m_rhs_control_down_label = get_lhs_half(m_rhs_control_down);
-  m_rhs_control_down_symbol = get_rhs_half(m_rhs_control_down);
+  m_rhs_control_down_symbol = get_lhs_half(m_rhs_control_down);
+  m_rhs_control_down_label = get_rhs_half(m_rhs_control_down);
   m_rhs_control_select = screen_rect(
     screen_coordinate(sx7, sy98),
     screen_coordinate(sx8, sy99)
   );
-  m_rhs_control_select_label = get_lhs_half(m_rhs_control_select);
-  m_rhs_control_select_symbol = get_rhs_half(m_rhs_control_select);
+  m_rhs_control_select_symbol = get_lhs_half(m_rhs_control_select);
+  m_rhs_control_select_label = get_rhs_half(m_rhs_control_select);
 
 }
 

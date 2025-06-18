@@ -243,7 +243,7 @@ void draw_controls_panel(lobby_view& v, const side player_side)
 
   // Up
   draw_text(
-    sf::String("Up: "),
+    sf::String("Up"),
     layout.get_control_up_label(player_side),
     get_normal_character_size(),
     sf::Color::White
@@ -256,7 +256,7 @@ void draw_controls_panel(lobby_view& v, const side player_side)
 
   // Down
   draw_text(
-    sf::String("Down: "),
+    sf::String("Down"),
     layout.get_control_down_label(player_side),
     get_normal_character_size(),
     sf::Color::White
@@ -269,7 +269,7 @@ void draw_controls_panel(lobby_view& v, const side player_side)
 
   // Select
   draw_text(
-    sf::String("Select: "),
+    sf::String("Select"),
     layout.get_control_select_label(player_side),
     get_normal_character_size(),
     sf::Color::White
