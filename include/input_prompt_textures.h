@@ -19,7 +19,8 @@ public:
   /// Get a texture from an SFML key
   sf::Texture& get_texture(const sf::Keyboard::Key& k);
 
-
+  /// Get a texture from an SFML mouse button
+  sf::Texture& get_texture(const sf::Mouse::Button& b);
 
   int get_n_textures() const noexcept
   {

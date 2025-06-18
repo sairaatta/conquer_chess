@@ -14,6 +14,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 /// Draw an About menu button on the main window
 void draw_about_button(const screen_rect& sr);
@@ -57,6 +58,14 @@ void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr);
 /// For example, a symbol for the key A
 void draw_input_prompt_symbol(
   const sf::Keyboard::Key& k,
+  const screen_rect& r
+);
+
+/// Draw a symbol for a mouse input prompt.
+///
+/// For example, a symbol for the key A
+void draw_input_prompt_symbol(
+  const sf::Mouse::Button& k,
   const screen_rect& r
 );
 

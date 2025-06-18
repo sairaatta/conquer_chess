@@ -79,9 +79,9 @@ sf::Keyboard::Key  get_key_for_action_4(const controls_view& v)
   return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(4));
 }
 
-std::string get_key_str_for_do(const controls_view& /* v */)
+sf::Mouse::Button get_button_for_do(const controls_view& /* v */)
 {
-  return "LMB";
+  return sf::Mouse::Button::Left;
 }
 
 sf::Keyboard::Key get_key_for_move_down(const controls_view& v)
@@ -102,9 +102,9 @@ sf::Keyboard::Key get_key_for_move_up(const controls_view& v)
   return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_up();
 }
 
-std::string get_key_str_for_next(const controls_view& /* v */)
+sf::Mouse::Button get_button_for_next(const controls_view& /* v */)
 {
-  return "RMB";
+  return sf::Mouse::Button::Right;
 }
 
 bool controls_view::process_event(sf::Event& event)
@@ -280,15 +280,20 @@ void draw_mouse_panel(controls_view& v)
     color = get_other_color(color);
   }
 
-  std::vector<std::pair<screen_rect, std::string>> values =
+  std::vector<std::pair<screen_rect, sf::Mouse::Button>> values =
   {
-    std::make_pair(layout.get_do_value(), get_key_str_for_do(v)),
-    std::make_pair(layout.get_next_value(), get_key_str_for_next(v)),
+    std::make_pair(layout.get_do_value(), get_button_for_do(v)),
+    std::make_pair(layout.get_next_value(), get_button_for_next(v)),
   };
   color = get_other_color(color);
   for (const auto& p: values)
   {
-    draw_panel(p.first, p.second, color, is_active);
+    draw_input_prompt_symbol(
+      p.second,
+      create_centered_rect(get_center(p.first), 64, 64)
+    );
+
+    //draw_panel(p.first, p.second, color, is_active);
     color = get_other_color(color);
   }
 }

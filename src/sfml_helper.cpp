@@ -7,6 +7,20 @@
 #include <cassert>
 #include <cmath>
 
+std::string button_str_to_resource_name(std::string button_str)
+{
+  // This can be made constant-time, by using a LUT
+  assert(!button_str.empty());
+
+  if (button_str == "ButtonCount" || button_str == "XButton1" || button_str == "XButton2")
+  {
+    return "keyboard_question_outline";
+  }
+  if (button_str == "Middle") return "mouse_scroll";
+
+  button_str[0] = std::tolower(button_str[0]);
+  return std::string("mouse_") + button_str;
+}
 
 sf::Color f_health_to_color(const double f)
 {
@@ -16,6 +30,16 @@ sf::Color f_health_to_color(const double f)
   if (f < 0.50) return sf::Color(255, 128, 0);
   if (f < 0.75) return sf::Color::Yellow;
   return sf::Color::Green;
+}
+
+std::vector<sf::Mouse::Button> get_all_sfml_buttons() noexcept
+{
+  const auto a{magic_enum::enum_values<sf::Mouse::Button>()};
+  std::vector<sf::Mouse::Button> v;
+  v.reserve(a.size());
+  std::copy(std::begin(a), std::end(a), std::back_inserter(v));
+  assert(a.size() == v.size());
+  return v;
 }
 
 std::vector<sf::Keyboard::Key> get_all_sfml_keys() noexcept
@@ -190,7 +214,7 @@ void test_sfml_helper()
     set_text_position(t, screen_size);
     assert(!t.getString().isEmpty()); // Does not test set_text_poistion at all
   }
-  // to_resource_name
+  // to_resource_name, for keys
   {
     assert(to_resource_name(sf::Keyboard::Key::A) == "keyboard_a");
     assert(to_resource_name(sf::Keyboard::Key::Unknown) == "keyboard_question_outline");
@@ -233,7 +257,16 @@ void test_sfml_helper()
     }
     assert(to_resource_name(sf::Keyboard::Key::BackSlash) == "keyboard_slash_back");
   }
-  // to_str
+  // to_resource_name, for mouse buttons
+  {
+    assert(to_resource_name(sf::Mouse::Button::Left) == "mouse_left");
+    assert(to_resource_name(sf::Mouse::Button::Right) == "mouse_right");
+    assert(to_resource_name(sf::Mouse::Button::Middle) == "mouse_scroll");
+    assert(to_resource_name(sf::Mouse::Button::ButtonCount) == "keyboard_question_outline");
+    assert(to_resource_name(sf::Mouse::Button::XButton1) == "keyboard_question_outline");
+    assert(to_resource_name(sf::Mouse::Button::XButton2) == "keyboard_question_outline");
+  }
+  // to_str, for keys
   {
     assert(to_str(sf::Keyboard::Key::A) == "A");
     assert(to_str(sf::Keyboard::Key::Add) == "Add");
@@ -511,7 +544,17 @@ std::string to_resource_name(const sf::Keyboard::Key k)
   return key_str_to_resource_name(to_str(k));
 }
 
+std::string to_resource_name(const sf::Mouse::Button k)
+{
+  return button_str_to_resource_name(to_str(k));
+}
+
 std::string to_str(const sf::Keyboard::Key k)
+{
+  return std::string(magic_enum::enum_name(k));
+}
+
+std::string to_str(const sf::Mouse::Button k)
 {
   return std::string(magic_enum::enum_name(k));
 }

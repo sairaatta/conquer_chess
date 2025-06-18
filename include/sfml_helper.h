@@ -13,6 +13,9 @@
 /// Convert a fraction of health (i.e. a value e [0.0, 1.0] to a color
 sf::Color f_health_to_color(const double f);
 
+/// Get all the SFML mouse buttons
+std::vector<sf::Mouse::Button> get_all_sfml_buttons() noexcept;
+
 /// Get all the SFML keys
 std::vector<sf::Keyboard::Key> get_all_sfml_keys() noexcept;
 
@@ -36,8 +39,14 @@ void test_sfml_helper();
 /// Convert an SFML key to a filename, as used by \link{input_prompt_textures}
 std::string to_resource_name(const sf::Keyboard::Key k);
 
+/// Convert an SFML mouse button to a filename, as used by \link{input_prompt_textures}
+std::string to_resource_name(const sf::Mouse::Button k);
+
 /// Convert an SFML key to a string
 std::string to_str(const sf::Keyboard::Key k);
+
+/// Convert an SFML mouse button to a string
+std::string to_str(const sf::Mouse::Button k);
 
 /// Convert a key to its one-character description
 std::string to_one_char_str(const sf::Keyboard::Key);
