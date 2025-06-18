@@ -193,7 +193,6 @@ void draw_outline(const screen_rect& sr, const sf::Color& outline_color)
   get_render_window().draw(rectangle);
 }
 
-/// Draw the fancy physical controller symbol
 void draw_physical_controller_symbol(const physical_controller_type& t, const screen_rect& sr)
 {
   draw_texture(
@@ -431,6 +430,17 @@ void draw_texture(sf::Texture& t, const screen_rect& sr)
   set_rect(rectangle, sr);
   rectangle.setTexture(&t);
   get_render_window().draw(rectangle);
+}
+
+void draw_texture(sf::Texture& t, const screen_coordinate& c, const screen_coordinate& size)
+{
+  const int w = size.get_x();
+  const int h = size.get_y();
+  const screen_rect sr{
+    screen_coordinate(c.get_x() - (w / 2), c.get_y() - (h / 2)),
+    screen_coordinate(c.get_x() + (w / 2), c.get_y() + (h / 2))
+  };
+  draw_texture(t, sr);
 }
 
 #endif // LOGIC_ONLY

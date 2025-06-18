@@ -130,7 +130,7 @@ void draw_texts(
   const std::vector<sf::String>& s, const screen_rect& r, const int character_size
 );
 
-/// Draw the texture on the main window
+/// Draw the texture on the main window scaled to that size
 void draw_texture(sf::Texture& t, const screen_rect& r);
 
 constexpr int get_normal_character_size() noexcept { return 32; }

@@ -26,6 +26,9 @@ void set_text_position(sf::Text& text, const screen_rect& screen_rect);
 /// Tes these function
 void test_sfml_helper();
 
+/// Convert an SFML key to a filename, as used by \link{input_prompt_textures}
+std::string to_filename(const sf::Keyboard::Key k);
+
 /// Convert an SFML key to a string
 std::string to_str(const sf::Keyboard::Key k);
 

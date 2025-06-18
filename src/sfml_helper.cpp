@@ -119,6 +119,10 @@ void test_sfml_helper()
   }
   // to_str
   {
+    assert(to_filename(sf::Keyboard::Key::A) == "keyboard_a");
+  }
+  // to_str
+  {
     assert(to_str(sf::Keyboard::Key::A) == "A");
     assert(to_str(sf::Keyboard::Key::Add) == "Add");
     assert(to_str(sf::Keyboard::Key::B) == "B");
@@ -375,6 +379,14 @@ sf::Color to_sfml_color(
     || t == piece_action_type::castle_queenside
   );
   return sf::Color(128 - 0, 128 - 64, 128 - 64);
+}
+
+std::string to_filename(const sf::Keyboard::Key k)
+{
+  std::string s{to_str(k)};
+  assert(!s.empty());
+  s[0] = std::tolower(s[0]);
+  return std::string("keyboard_") + s;
 }
 
 std::string to_str(const sf::Keyboard::Key k)

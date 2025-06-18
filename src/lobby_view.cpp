@@ -5,7 +5,7 @@
 #include "action_number.h"
 #include "render_window.h"
 #include "screen_coordinate.h"
-//#include "helper.h"
+
 #include "draw.h"
 #include "lobby_options.h"
 #include "game_options.h"
@@ -228,7 +228,7 @@ void draw_color_panel(lobby_view& v, const side player_side)
   );
   get_render_window().draw(rectangle);
 
-  draw_normal_fancy_text(to_human_str(get_color(player_side)), screen_rect);
+  draw_fancy_text(to_human_str(get_color(player_side)), screen_rect, 64, 60);
 }
 
 void draw_controls_panel(lobby_view& v, const side player_side)
@@ -238,26 +238,48 @@ void draw_controls_panel(lobby_view& v, const side player_side)
 
   draw_physical_controller_symbol(
     c.get_type(),
-    layout.get_control_symbol(player_side)
+    create_centered_rect(get_center(layout.get_control_symbol(player_side)), 64, 64)
   );
+
+  // Up
   draw_text(
-    sf::String("Up: ") + sf::String(to_str(c.get_key_bindings().get_key_for_move_up())),
-    layout.get_control_up(player_side),
+    sf::String("Up: "),
+    layout.get_control_up_label(player_side),
     get_normal_character_size(),
     sf::Color::White
   );
+  const std::string up_key_str{to_filename(c.get_key_bindings().get_key_for_move_up())};
+  draw_texture(
+    game_resources::get().get_input_prompt_textures().get_texture(up_key_str),
+    create_centered_rect(get_center(layout.get_control_up_symbol(player_side)), 64, 64)
+  );
+
+  // Down
   draw_text(
-    sf::String("Down: ") + sf::String(to_str(c.get_key_bindings().get_key_for_move_down())),
-    layout.get_control_down(player_side),
+    sf::String("Down: "),
+    layout.get_control_down_label(player_side),
     get_normal_character_size(),
     sf::Color::White
   );
+  const std::string down_key_str{to_filename(c.get_key_bindings().get_key_for_move_down())};
+  draw_texture(
+    game_resources::get().get_input_prompt_textures().get_texture(down_key_str),
+    create_centered_rect(get_center(layout.get_control_down_symbol(player_side)), 64, 64)
+  );
+
+  // Select
   draw_text(
-    sf::String("Select: ") + sf::String(to_str(c.get_key_bindings().get_key_for_action(action_number(1)))),
-    layout.get_control_select(player_side),
+    sf::String("Select: "),
+    layout.get_control_select_label(player_side),
     get_normal_character_size(),
     sf::Color::White
   );
+  const std::string select_key_str{to_filename(c.get_key_bindings().get_key_for_action(action_number(1)))};
+  draw_texture(
+    game_resources::get().get_input_prompt_textures().get_texture(select_key_str),
+    create_centered_rect(get_center(layout.get_control_select_symbol(player_side)), 64, 64)
+  );
+
   screen_rect panel{
     screen_coordinate(layout.get_control_symbol(player_side).get_tl()),
     screen_coordinate(layout.get_control_select(player_side).get_br())
@@ -299,7 +321,7 @@ void draw_race_panel(lobby_view& v, const side player_side)
     get_lower_half(screen_rect)
   };
   const std::string s{to_human_str(get_race_of_side(player_side))};
-  draw_normal_fancy_text(s, text_rect);
+  draw_fancy_text(s, text_rect, 64, 60);
 }
 
 void draw_background(lobby_view& v)
@@ -379,7 +401,7 @@ void draw_ready_panel(lobby_view& v, const side player_side)
   };
   const bool is_ready{v.get_start(player_side)};
   const std::string s{is_ready ? "Ready" : "Not ready"};
-  draw_normal_fancy_text(s, text_rect);
+  draw_fancy_text(s, text_rect, 64, 60);
 }
 
 void draw_lobby_title(lobby_view& v)

@@ -1,5 +1,9 @@
 # Screenshots
 
+![Lobby screen v0.7](20250618.jpg)
+
+> The Lobby screen uses symbols to indicate the controls
+
 ![Lobby screen v0.7](20250617_3.jpg)
 
 > The Lobby screen looks prettier

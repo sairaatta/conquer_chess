@@ -13,6 +13,16 @@ screen_rect::screen_rect(
 
 }
 
+screen_rect create_centered_rect(const screen_coordinate c, const int w, const int h) noexcept
+{
+  assert(w > 0);
+  assert(h > 0);
+  return screen_rect{
+    screen_coordinate(c.get_x() - (w / 2), c.get_y() - (w / 2)),
+    screen_coordinate(c.get_x() + (w / 2), c.get_y() + (w / 2))
+  };
+}
+
 screen_coordinate get_center(const screen_rect& r) noexcept
 {
   return screen_coordinate(
@@ -54,6 +64,20 @@ int get_height(const screen_rect& r) noexcept
   return r.get_br().get_y() - r.get_tl().get_y();
 }
 
+screen_rect get_lhs_half(const screen_rect& r) noexcept
+{
+  const screen_coordinate top_left(
+    r.get_tl().get_x(),
+    r.get_tl().get_y()
+  );
+  const screen_coordinate bottom_right(
+    (r.get_tl().get_x() + r.get_br().get_x()) / 2,
+    r.get_br().get_y()
+  );
+  const screen_rect half(top_left, bottom_right);
+  return half;
+}
+
 screen_rect get_lower_eighth(const screen_rect& r) noexcept
 {
   return get_lower_half(get_lower_fourth(r));
@@ -78,6 +102,19 @@ screen_rect get_lower_half(const screen_rect& r) noexcept
   return half;
 }
 
+screen_rect get_rhs_half(const screen_rect& r) noexcept
+{
+  const screen_coordinate top_left(
+    (r.get_tl().get_x() + r.get_br().get_x()) / 2,
+    r.get_tl().get_y()
+  );
+  const screen_coordinate bottom_right(
+    r.get_br().get_x(),
+    r.get_br().get_y()
+  );
+  const screen_rect half(top_left, bottom_right);
+  return half;
+}
 screen_rect get_top_left_corner(const screen_rect& r) noexcept
 {
   const screen_coordinate top_left(
@@ -171,6 +208,17 @@ void test_screen_rect()
     const auto result{get_center(r)};
     assert(result == expected);
   }
+  // get_lhs_half
+  {
+    const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 2));
+    const screen_rect created{get_lhs_half(r)};
+    assert(r != created);
+    const screen_rect expected(
+      screen_coordinate(0, 0),
+      screen_coordinate(1, 2)
+    );
+    assert(created == expected);
+  }
   // get_lower_half
   {
     const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 2));
@@ -201,6 +249,17 @@ void test_screen_rect()
     const screen_rect expected(
       screen_coordinate(0, 7),
       screen_coordinate(2, 8)
+    );
+    assert(created == expected);
+  }
+  // get_rhs_half
+  {
+    const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 2));
+    const screen_rect created{get_rhs_half(r)};
+    assert(r != created);
+    const screen_rect expected(
+      screen_coordinate(1, 0),
+      screen_coordinate(2, 2)
     );
     assert(created == expected);
   }

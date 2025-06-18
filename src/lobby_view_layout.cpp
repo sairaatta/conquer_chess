@@ -76,7 +76,7 @@ lobby_view_layout::lobby_view_layout(
   );
 
   // Side panel
-  const int control_panel_width{200};
+  const int control_panel_width{250};
   const int control_panel_height{80};
   const int sx1{((x1 + x2) / 2) - (control_panel_width / 2)};
   const int sx2{sx1 + control_panel_width};
@@ -103,14 +103,21 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(sx1, sy96),
     screen_coordinate(sx2, sy97)
   );
+  m_lhs_control_up_label = get_lhs_half(m_lhs_control_up);
+  m_lhs_control_up_symbol = get_rhs_half(m_lhs_control_up);
   m_lhs_control_down = screen_rect(
     screen_coordinate(sx1, sy97),
     screen_coordinate(sx2, sy98)
   );
+  m_lhs_control_down_label = get_lhs_half(m_lhs_control_down);
+  m_lhs_control_down_symbol = get_rhs_half(m_lhs_control_down);
   m_lhs_control_select = screen_rect(
     screen_coordinate(sx1, sy98),
     screen_coordinate(sx2, sy99)
   );
+  m_lhs_control_select_label = get_lhs_half(m_lhs_control_select);
+  m_lhs_control_select_symbol = get_rhs_half(m_lhs_control_select);
+
 
   m_rhs_king_portrait = screen_rect(
     screen_coordinate(x7, sy1),
@@ -124,14 +131,21 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(sx7, sy96),
     screen_coordinate(sx8, sy97)
   );
+  m_rhs_control_up_label = get_lhs_half(m_rhs_control_up);
+  m_rhs_control_up_symbol = get_rhs_half(m_rhs_control_up);
   m_rhs_control_down = screen_rect(
     screen_coordinate(sx7, sy97),
     screen_coordinate(sx8, sy98)
   );
+  m_rhs_control_down_label = get_lhs_half(m_rhs_control_down);
+  m_rhs_control_down_symbol = get_rhs_half(m_rhs_control_down);
   m_rhs_control_select = screen_rect(
     screen_coordinate(sx7, sy98),
     screen_coordinate(sx8, sy99)
   );
+  m_rhs_control_select_label = get_lhs_half(m_rhs_control_select);
+  m_rhs_control_select_symbol = get_rhs_half(m_rhs_control_select);
+
 }
 
 
@@ -155,6 +169,26 @@ const screen_rect& lobby_view_layout::get_control_down(const side player_side) c
   return m_rhs_control_down;
 }
 
+const screen_rect& lobby_view_layout::get_control_down_label(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_down_label;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_down_label;
+}
+
+const screen_rect& lobby_view_layout::get_control_down_symbol(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_down_symbol;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_down_symbol;
+}
+
 const screen_rect& lobby_view_layout::get_control_select(const side player_side) const noexcept
 {
   if (player_side == side::lhs)
@@ -163,6 +197,26 @@ const screen_rect& lobby_view_layout::get_control_select(const side player_side)
   }
   assert(player_side == side::rhs);
   return m_rhs_control_select;
+}
+
+const screen_rect& lobby_view_layout::get_control_select_label(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_select_label;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_select_label;
+}
+
+const screen_rect& lobby_view_layout::get_control_select_symbol(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_select_symbol;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_select_symbol;
 }
 
 const screen_rect& lobby_view_layout::get_control_symbol(const side player_side) const noexcept
@@ -183,6 +237,26 @@ const screen_rect& lobby_view_layout::get_control_up(const side player_side) con
   }
   assert(player_side == side::rhs);
   return m_rhs_control_up;
+}
+
+const screen_rect& lobby_view_layout::get_control_up_label(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_up_label;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_up_label;
+}
+
+const screen_rect& lobby_view_layout::get_control_up_symbol(const side player_side) const noexcept
+{
+  if (player_side == side::lhs)
+  {
+    return m_lhs_control_up_symbol;
+  }
+  assert(player_side == side::rhs);
+  return m_rhs_control_up_symbol;
 }
 
 const screen_rect& lobby_view_layout::get_king_portrait(const side player_side) const noexcept
