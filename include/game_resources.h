@@ -21,7 +21,7 @@
 #include "songs.h"
 #include "sound_effects.h"
 #include "textures.h"
-
+#include "input_prompt_textures.h"
 #include <optional>
 
 
@@ -46,32 +46,18 @@ public:
       return r;
   }
 
-
-  // Lazy loading
   fonts& get_fonts() noexcept;
 
-  // Lazy loading
-  lobby_menu_textures& get_lobby_menu_textures() noexcept;
-
-  // Lazy loading
-  options_menu_textures& get_options_menu_textures() noexcept;
-
-  // Lazy loading
-  loading_screen_fonts& get_loading_screen_fonts() noexcept;
-
-  // Lazy loading
-  loading_screen_textures& get_loading_screen_textures() noexcept;
-
-  // Lazy loading
-  loading_screen_songs& get_loading_screen_songs() noexcept;
+  input_prompt_textures& get_input_prompt_textures() noexcept;
 
   int get_n_fonts() noexcept;
-  int get_n_lobby_menu_textures() noexcept;
-  int get_n_options_menu_textures() noexcept;
+  int get_n_input_prompt_textures() noexcept;
   int get_n_loading_screen_fonts() noexcept;
   int get_n_loading_screen_songs() noexcept;
   int get_n_loading_screen_textures() noexcept;
+  int get_n_lobby_menu_textures() noexcept;
   int get_n_map_textures() noexcept;
+  int get_n_options_menu_textures() noexcept;
   int get_n_physical_controller_type_textures() noexcept;
   int get_n_piece_action_textures() noexcept;
   int get_n_piece_portrait_textures() noexcept;
@@ -80,28 +66,30 @@ public:
   int get_n_sound_effects() noexcept;
   int get_n_textures() noexcept;
 
-  // Lazy loading
+  loading_screen_fonts& get_loading_screen_fonts() noexcept;
+
+  loading_screen_songs& get_loading_screen_songs() noexcept;
+
+  loading_screen_textures& get_loading_screen_textures() noexcept;
+
+  lobby_menu_textures& get_lobby_menu_textures() noexcept;
+
   map_textures& get_map_textures() noexcept;
 
-  // Lazy loading
+  options_menu_textures& get_options_menu_textures() noexcept;
+
   physical_controller_textures& get_physical_controller_textures() noexcept;
 
-  // Lazy loading
   piece_action_textures& get_piece_action_textures() noexcept;
 
-  // Lazy loading
   piece_portrait_textures& get_piece_portrait_textures() noexcept;
 
-  // Lazy loading
   piece_textures& get_piece_textures() noexcept;
 
-  // Lazy loading
   songs& get_songs() noexcept;
 
-  // Lazy loading
   sound_effects& get_sound_effects() noexcept;
 
-  // Lazy loading
   textures& get_textures() noexcept;
 
 private:
@@ -109,46 +97,20 @@ private:
   /// This is a Singleton, as there must be only one instance of this.
   game_resources();
 
-  /// Lazy loading
   static std::optional<fonts> m_fonts;
-
-  /// Lazy loading
-  static std::optional<lobby_menu_textures> m_lobby_menu_textures;
-
-  /// Lazy loading
-  static std::optional<options_menu_textures> m_options_menu_textures;
-
-  /// Lazy loading
   static std::optional<loading_screen_fonts> m_loading_screen_fonts;
-
-  /// Lazy loading
+  static std::optional<input_prompt_textures> m_input_prompt_textures;
   static loading_screen_songs * m_loading_screen_songs;
-
-  /// Lazy loading
   static std::optional<loading_screen_textures> m_loading_screen_textures;
-
-  /// Lazy loading
+  static std::optional<lobby_menu_textures> m_lobby_menu_textures;
   static std::optional<map_textures> m_map_textures;
-
-  /// Lazy loading
+  static std::optional<options_menu_textures> m_options_menu_textures;
   static std::optional<physical_controller_textures> m_physical_controller_type_textures;
-
-  /// Lazy loading
   static std::optional<piece_action_textures> m_piece_action_textures;
-
-  /// Lazy loading
-  static std::optional<piece_textures> m_piece_textures;
-
-  /// Lazy loading
   static std::optional<piece_portrait_textures> m_piece_portrait_textures;
-
-  /// Lazy loading
+  static std::optional<piece_textures> m_piece_textures;
   static songs * m_songs;
-
-  /// Lazy loading
   static sound_effects * m_sound_effects;
-
-  /// Lazy loading
   static std::optional<textures> m_textures;
 };
 

@@ -41,9 +41,6 @@ public:
   /// Play a sound when the selected item changes
   void set_selected(const options_view_item i);
 
-  /// Set the text to a uniform style
-  void set_text_style(sf::Text& t);
-
   void start();
 
   void stop();

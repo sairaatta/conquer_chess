@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <fstream>
 #include <sstream>
 #include <vector>
 
@@ -19,6 +20,7 @@ double calc_distance(const double dx, const double dy) noexcept
 {
   return std::sqrt((dx * dx) + (dy * dy));
 }
+
 
 std::vector<int> make_sequence(
   const int from,
@@ -45,6 +47,20 @@ std::vector<int> make_sequence(
     }
   }
   v.push_back(to);
+  return v;
+}
+
+// https://github.com/richelbilderbeek/cpp/blob/master/content/CppFileToVector.md
+std::vector<std::string> read_lines(const std::string& filename)
+{
+  std::vector<std::string> v;
+  std::ifstream in(filename.c_str());
+  while(!in.eof())
+  {
+    std::string s;
+    std::getline(in, s);
+    v.push_back(s);
+  }
   return v;
 }
 

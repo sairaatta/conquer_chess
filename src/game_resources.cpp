@@ -7,6 +7,7 @@
 #include <optional>
 
 std::optional<fonts> game_resources::m_fonts;
+std::optional<input_prompt_textures> game_resources::m_input_prompt_textures;
 std::optional<lobby_menu_textures> game_resources::m_lobby_menu_textures = {};
 std::optional<options_menu_textures> game_resources::m_options_menu_textures = {};
 std::optional<loading_screen_fonts> game_resources::m_loading_screen_fonts = {};
@@ -56,6 +57,13 @@ sf::Texture& get_game_option_icon(
 ) noexcept
 {
   return game_resources::get().get_options_menu_textures().get_texture(item);
+}
+
+input_prompt_textures& game_resources::get_input_prompt_textures() noexcept
+{
+  if (!m_input_prompt_textures) m_input_prompt_textures = input_prompt_textures();
+  assert(m_input_prompt_textures);
+  return m_input_prompt_textures.value();
 }
 
 lobby_menu_textures& game_resources::get_lobby_menu_textures() noexcept
@@ -112,6 +120,11 @@ map_textures& game_resources::get_map_textures() noexcept
   if (!m_map_textures) m_map_textures = map_textures();
   assert(m_map_textures);
   return m_map_textures.value();
+}
+
+int game_resources::get_n_input_prompt_textures() noexcept
+{
+  return get_input_prompt_textures().get_n_textures();
 }
 
 int game_resources::get_n_lobby_menu_textures() noexcept

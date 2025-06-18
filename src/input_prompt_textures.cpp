@@ -1,0 +1,76 @@
+#include "input_prompt_textures.h"
+
+#ifndef LOGIC_ONLY
+
+#include "helper.h"
+
+#include <QFile>
+
+#include <cassert>
+#include <regex>
+
+input_prompt_textures::input_prompt_textures()
+{
+  // The description of what is in the files
+  std::vector<std::string> texture_names;
+  {
+    const std::string filename_str{"input_prompt_textures.xml"};
+    const QString filename{filename_str.c_str()};
+    QFile f(":/resources/textures/input_prompts/" + filename);
+    f.copy(filename);
+    texture_names = read_texture_names(filename_str);
+  }
+  assert(!texture_names.empty());
+
+  for (const std::string& texture_name: texture_names)
+  {
+    const std::string filename_str{texture_name + ".png"};
+    const QString filename{filename_str.c_str()};
+    QFile f(":/resources/textures/input_prompts/" + filename);
+    f.copy(filename);
+    if (!m_textures[texture_name].loadFromFile(filename.toStdString()))
+    {
+      QString msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg.toStdString());
+    }
+  }
+  assert(has_texture("keyboard"));
+}
+
+bool input_prompt_textures::has_texture(const std::string& s) const noexcept
+{
+  return m_textures.find(s) != std::end(m_textures);
+}
+
+sf::Texture& input_prompt_textures::get_texture(const std::string& s)
+{
+  assert(has_texture(s));
+  return m_textures[s];
+}
+
+std::vector<std::string> read_texture_names(const std::string& filename)
+{
+  const auto lines{read_lines(filename)};
+  //   <SubTexture name="keyboard" x="0" y="0" width="64" height="64" />
+  const std::regex re{"name=\"([a-z0-9_]+)\" x="};
+
+  std::vector<std::string> texture_names;
+  for (const auto& sentence: lines)
+  {
+    std::smatch match;
+    std::regex_search(sentence, match, re);
+    if (match.empty()) continue;
+    const std::string t{match[1]};
+    assert(!t.empty());
+    assert(t[0] != '\'');
+    assert(t[0] != '\"');
+    assert(t.back() != '\'');
+    assert(t.back() != '\"');
+    texture_names.push_back(t);
+  }
+  assert(!texture_names.empty());
+  return texture_names;
+}
+
+
+#endif // LOGIC_ONLY

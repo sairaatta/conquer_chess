@@ -129,6 +129,16 @@ bool options_view::process_event(sf::Event& event)
       m_next_state = program_state::main_menu;
       return false;
     }
+    if (key_pressed == sf::Keyboard::Key::Num1)
+    {
+      m_next_state = program_state::left_controls;
+      return false;
+    }
+    if (key_pressed == sf::Keyboard::Key::Num2)
+    {
+      m_next_state = program_state::right_controls;
+      return false;
+    }
     else if (key_pressed == sf::Keyboard::Key::Up)
     {
       set_selected(get_above(m_selected));
@@ -217,15 +227,6 @@ void options_view::set_selected(const options_view_item i)
     game_resources::get().get_sound_effects().play_hide();
   }
   m_selected = i;
-}
-
-void options_view::set_text_style(sf::Text& text)
-{
-  text.setFont(get_arial_font());
-  text.setStyle(sf::Text::Bold);
-  text.setCharacterSize(24);
-  text.setCharacterSize(m_layout.get_font_size());
-  text.setFillColor(sf::Color::Black);
 }
 
 void options_view::draw()

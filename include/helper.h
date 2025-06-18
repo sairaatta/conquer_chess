@@ -70,6 +70,10 @@ std::vector<int> make_sequence(
   const int increment = 1
 );
 
+/// Convert a file's content to a collection of strings.
+/// @note Adapted from \url{https://github.com/richelbilderbeek/cpp/blob/master/content/CppFileToVector.md}
+std::vector<std::string> read_lines(const std::string& filename);
+
 /// Remove the first element from a collection.
 ///
 /// Remove the first element from a collection.
