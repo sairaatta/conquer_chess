@@ -881,7 +881,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Keyboard: select white king
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{
       create_game_controller_with_default_controllers()
     };
@@ -895,7 +895,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 60: selectedness is transferred, for white
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{
       create_game_controller_with_default_controllers()
     };
@@ -914,7 +914,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // 60: selectedness is transferred, for black
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{
       create_game_controller_with_two_keyboards()
     };
@@ -936,7 +936,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Selecting a unit twice with action 1 selects and unselects it
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{
       create_game_controller_with_default_controllers()
     };
@@ -955,7 +955,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Keyboard: can move pawn forward
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{
       create_game_controller_with_default_controllers()
     };
@@ -1079,7 +1079,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Clicking a unit once with LMB selects it
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     assert(count_selected_units(g, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
@@ -1090,7 +1090,7 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // Clicking a unit twice with LMB selects and unselects it
   {
-    game g;
+    game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_default_controllers()};
     assert(count_selected_units(g, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);

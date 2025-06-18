@@ -83,35 +83,31 @@ bool can_do(
   const side player_side
 )
 {
-  if (action == piece_action_type::attack_en_passant)
+  switch (action)
   {
-    return can_do_en_passant(g, selected_piece, cursor_square, player_side);
+    case piece_action_type::attack_en_passant:
+      return can_do_en_passant(g, selected_piece, cursor_square, player_side);
+    case piece_action_type::attack:
+      return can_do_attack(g, selected_piece, cursor_square, player_side);
+    case piece_action_type::castle_kingside:
+      return can_do_castle_kingside(g, selected_piece, cursor_square, player_side);
+    case piece_action_type::castle_queenside:
+      return can_do_castle_queenside(g, selected_piece, cursor_square, player_side);
+    case piece_action_type::move:
+      return can_do_move(g, selected_piece, cursor_square, player_side);
+    case piece_action_type::promote_to_bishop:
+    case piece_action_type::promote_to_knight:
+    case piece_action_type::promote_to_queen:
+    case piece_action_type::promote_to_rook:
+      return can_do_promote(selected_piece, cursor_square, player_side);
+    case piece_action_type::select:
+      assert(!"No idea yet");
+      return false;
+    case piece_action_type::unselect:
+      assert(!"No idea yet");
+      return true;
   }
-  if (action == piece_action_type::attack)
-  {
-    return can_do_attack(g, selected_piece, cursor_square, player_side);
-  }
-  if (action == piece_action_type::castle_kingside)
-  {
-    return can_do_castle_kingside(g, selected_piece, cursor_square, player_side);
-  }
-  if (action == piece_action_type::castle_queenside)
-  {
-    return can_do_castle_queenside(g, selected_piece, cursor_square, player_side);
-  }
-  if (action == piece_action_type::move)
-  {
-    return can_do_move(g, selected_piece, cursor_square, player_side);
-  }
-  if (action == piece_action_type::promote_to_bishop
-    || action == piece_action_type::promote_to_knight
-    || action == piece_action_type::promote_to_queen
-    || action == piece_action_type::promote_to_rook
-  )
-  {
-    return can_do_promote(selected_piece, cursor_square, player_side);
-  }
-  return false;
+  assert(!"Should not get here");
 }
 
 bool can_do(const game& g,
