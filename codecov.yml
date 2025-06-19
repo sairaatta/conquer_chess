@@ -4,6 +4,7 @@ codecov:
 
 ignore:
   - ./include/about_view.h
+  - ./include/controls_bar.h
   - ./include/controls_view.h
   - ./include/draw.h
   - ./include/fonts.h
@@ -24,6 +25,7 @@ ignore:
   - ./include/songs.h
   - ./include/textures.h
   - ./src/about_view.cpp
+  - ./src/controls_bar.cpp
   - ./src/controls_view.cpp
   - ./src/draw.cpp
   - ./src/fonts.cpp

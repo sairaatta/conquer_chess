@@ -1,8 +1,12 @@
 #include "controls_bar.h"
 
+#ifndef LOGIC_ONLY
+
 #include "physical_controllers.h"
 #include "draw.h"
 #include "action_number.h"
+
+#include <SFML/Graphics/Color.hpp>
 
 controls_bar::controls_bar() : m_window_size{get_default_screen_size()}
 {
@@ -207,3 +211,5 @@ screen_rect create_controls_bar_area(const screen_coordinate& window_size) noexc
   const int y1{y2 - controls_bar_height};
   return screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2));
 }
+
+#endif // LOGIC_ONLY

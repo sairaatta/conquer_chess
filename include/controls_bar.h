@@ -1,6 +1,8 @@
 #ifndef CONTROLS_BAR_H
 #define CONTROLS_BAR_H
 
+#ifndef LOGIC_ONLY
+
 #include "screen_rect.h"
 
 // The bar at the bottom of the screen
@@ -28,5 +30,7 @@ private:
 /// At the bottom of each window, there is a bar for the controls.
 /// Create it in a uniform way
 screen_rect create_controls_bar_area(const screen_coordinate& window_size) noexcept;
+
+#endif // LOGIC_ONLY
 
 #endif // CONTROLS_BAR_H
