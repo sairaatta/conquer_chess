@@ -30,7 +30,8 @@ void draw_about_button(const screen_rect& sr)
   };
   draw_input_prompt_symbol_on_background(
     sf::Keyboard::Key::A,
-    key_rect
+    key_rect,
+    sf::Color(128, 128, 128, 128)
   );
 
 }
@@ -262,7 +263,8 @@ void draw_options_button(const screen_rect& sr)
   };
   draw_input_prompt_symbol_on_background(
     sf::Keyboard::Key::O,
-    key_rect
+    key_rect,
+    sf::Color(128, 128, 128, 128)
   );
 }
 
@@ -367,11 +369,13 @@ void draw_quit_button(const screen_rect& sr)
   };
   draw_input_prompt_symbol_on_background(
     sf::Keyboard::Key::Q,
-    key_rect_1
+    key_rect_1,
+    sf::Color(128, 128, 128, 128)
   );
   draw_input_prompt_symbol_on_background(
     sf::Keyboard::Key::Escape,
-    key_rect_2
+    key_rect_2,
+    sf::Color(128, 128, 128, 128)
   );
 
 }
@@ -486,7 +490,8 @@ void draw_start_button(const screen_rect& sr)
   };
   draw_input_prompt_symbol_on_background(
     sf::Keyboard::Key::S,
-    key_rect
+    key_rect,
+    sf::Color(128, 128, 128, 128)
   );
 }
 

@@ -27,7 +27,7 @@ options_view_layout::options_view_layout(
     chess_board_tl_x + chess_board_width
   };
 
-  const int y1{128 + margin_size};
+  const int y1{16 + margin_size};
   const int y2{y1 + panel_height};
   const int y3{y2 + panel_height};
   const int y4{y3 + panel_height};

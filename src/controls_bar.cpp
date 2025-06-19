@@ -14,9 +14,9 @@ void controls_bar::draw()
   const auto controls_bar_rect{create_controls_bar_area(m_window_size)};
   const int y1{controls_bar_rect.get_tl().get_y() + 16};
   const int y2{controls_bar_rect.get_br().get_y() - 16};
-  const int font_size{32};
+  const int font_size{26};
   const int label_up_width{50};
-  const int label_down_width{80};
+  const int label_down_width{90};
   const int label_select_width{100};
   const int label_quit_width{80};
   const sf::Color semi_transparent(128, 128, 128, 128);
@@ -200,7 +200,7 @@ void controls_bar::draw()
 screen_rect create_controls_bar_area(const screen_coordinate& window_size) noexcept
 {
 
-  const int controls_bar_height{80};
+  const int controls_bar_height{64};
   const int x1{0 + 16};
   const int x2{window_size.get_x() - 16};
   const int y2{window_size.get_y() - 16};

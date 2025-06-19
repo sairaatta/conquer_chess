@@ -32,15 +32,15 @@
 /// | |          |                           |          | |
 /// | +----------+ +----------+ +----------+ |          | | y5
 /// |              |          | |          | |          | |
-/// |  +--------+  | race     | | race     | |          | |
-/// |  |Symbol  |  |          | |          | |          | |
-/// |  +--------+  +----------+ +----------+ |          | | y6
-/// |  |Up      |                            |          | |
-/// |  +--------+  +----------+ +----------+ |          | | y7 <-+
-/// |  |Down    |  |          | |          | |          | |      |
-/// |  +--------+  | ready    | | read     | |          | |      +- panel_height
-/// |  |Select  |  |          | |          | |          | |      |
-/// |  +--------+  +----------+ +----------+ +----------+ | y8 <-+
+/// |              | race     | | race     | |          | |
+/// |              |          | |          | |          | |
+/// |              +----------+ +----------+ |          | | y6
+/// |                                        |          | |
+/// |              +----------+ +----------+ |          | | y7 <-+
+/// |              |          | |          | |          | |      |
+/// |              | ready    | | read     | |          | |      +- panel_height
+/// |              |          | |          | |          | |      |
+/// |              +----------+ +----------+ +----------+ | y8 <-+
 /// |                                                     |
 /// +-----------------------------------------------------+
 ///
@@ -59,13 +59,6 @@ public:
 
   const auto& get_background() const noexcept { return m_background; }
   const screen_rect& get_color(const side player_side) const noexcept;
-  const screen_rect& get_control_down_label(const side player_side) const noexcept;
-  const screen_rect& get_control_down_symbol(const side player_side) const noexcept;
-  const screen_rect& get_control_select_label(const side player_side) const noexcept;
-  const screen_rect& get_control_select_symbol(const side player_side) const noexcept;
-  const screen_rect& get_control_type_symbol(const side player_side) const noexcept;
-  const screen_rect& get_control_up_label(const side player_side) const noexcept;
-  const screen_rect& get_control_up_symbol(const side player_side) const noexcept;
   const screen_rect& get_king_portrait(const side player_side) const noexcept;
   const screen_rect& get_race(const side player_side) const noexcept;
   const screen_rect& get_start(const side player_side) const noexcept;
@@ -79,36 +72,16 @@ public:
 private:
 
 
+
   screen_rect m_background;
-  screen_rect m_lhs_color;
-  std::map<side, screen_rect> m_control_down_label;
-  std::map<side, screen_rect> m_control_down_symbol;
-  std::map<side, screen_rect> m_control_select_label;
-  std::map<side, screen_rect> m_control_select_symbol;
-  std::map<side, screen_rect> m_control_type_symbol;
-  std::map<side, screen_rect> m_control_up_label;
-  std::map<side, screen_rect> m_control_up_symbol;
-  screen_rect m_lhs_king_portrait;
-  screen_rect m_lhs_race;
-  screen_rect m_lhs_start;
-  screen_rect m_rhs_color;
-  screen_rect m_rhs_control_down;
-  screen_rect m_rhs_control_down_label;
-  screen_rect m_rhs_control_down_symbol;
-  screen_rect m_rhs_control_select;
-  screen_rect m_rhs_control_select_label;
-  screen_rect m_rhs_control_select_symbol;
-  screen_rect m_rhs_control_symbol;
-  screen_rect m_rhs_control_up;
-  screen_rect m_rhs_control_up_label;
-  screen_rect m_rhs_control_up_symbol;
-  screen_rect m_rhs_king_portrait;
-  screen_rect m_rhs_race;
-  screen_rect m_rhs_start;
+
+  std::map<side, screen_rect> m_color;
+  std::map<side, screen_rect> m_king_portrait;
+  std::map<side, screen_rect> m_race;
+  std::map<side, screen_rect> m_ready;
   screen_rect m_title;
 
-  lobby_view_item m_lhs_cursor;
-  lobby_view_item m_rhs_cursor;
+  std::map<side, screen_rect> m_cursor;
 
   /// The size of the font that would fit nicely
   int m_font_size;

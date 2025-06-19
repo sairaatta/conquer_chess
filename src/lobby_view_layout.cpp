@@ -51,159 +51,52 @@ lobby_view_layout::lobby_view_layout(
     screen_coordinate(x3, y1),
     screen_coordinate(x6, y2)
   );
-  m_lhs_color = screen_rect(
+  m_color[side::lhs] = screen_rect(
     screen_coordinate(x3, y3),
     screen_coordinate(x4, y4)
   );
-  m_lhs_race = screen_rect(
+  m_race[side::lhs] = screen_rect(
     screen_coordinate(x3, y5),
     screen_coordinate(x4, y6)
   );
-  m_lhs_start = screen_rect(
+  m_ready[side::lhs] = screen_rect(
     screen_coordinate(x3, y7),
     screen_coordinate(x4, y8)
   );
-  m_rhs_color = screen_rect(
+  m_color[side::rhs] = screen_rect(
     screen_coordinate(x5, y3),
     screen_coordinate(x6, y4)
   );
-  m_rhs_race = screen_rect(
+  m_race[side::rhs] = screen_rect(
     screen_coordinate(x5, y5),
     screen_coordinate(x6, y6)
   );
-  m_rhs_start = screen_rect(
+  m_ready[side::rhs] = screen_rect(
     screen_coordinate(x5, y7),
     screen_coordinate(x6, y8)
   );
 
-  // Side panel
-  {
-    const int py{y1 + 400};
-    // Portraits
-    m_lhs_king_portrait = screen_rect(
-      screen_coordinate(x1, y1),
-      screen_coordinate(x2, py)
-    );
-    m_rhs_king_portrait = screen_rect(
-      screen_coordinate(x7, y1),
-      screen_coordinate(x8, py)
-    );
-  }
-
-
-  // Controls bar
-  for (const auto s: get_all_sides())
-  {
-    const screen_rect controls_bar_area{create_controls_bar_area(window_size)};
-
-    const int cy1{controls_bar_area.get_tl().get_y() + 16};
-    const int cy2{cy1 + 64};
-
-
-    int cx1{controls_bar_area.get_tl().get_x() + 16};
-    if (s == side::rhs) cx1 += (get_width(controls_bar_area) / 2);
-    const int cx2{cx1 + 64};
-
-    // Control type
-    m_control_type_symbol[s] = screen_rect(
-      screen_coordinate(cx1, cy1),
-      screen_coordinate(cx2, cy2)
-    );
-
-    // Up
-    const int cx3{cx2 + 64};
-    m_control_up_symbol[s] = screen_rect(
-      screen_coordinate(cx2, cy1),
-      screen_coordinate(cx3, cy2)
-    );
-
-    const int cx4{cx3 + 100};
-    m_control_up_label[s] = screen_rect(
-      screen_coordinate(cx3, cy1),
-      screen_coordinate(cx4, cy2)
-    );
-
-    // Down
-    const int cx5{cx4 + 64};
-    m_control_down_symbol[s] = screen_rect(
-      screen_coordinate(cx4, cy1),
-      screen_coordinate(cx5, cy2)
-    );
-
-    const int cx6{cx5 + 100};
-    m_control_down_label[s] = screen_rect(
-      screen_coordinate(cx5, cy1),
-      screen_coordinate(cx6, cy2)
-    );
-
-    const int cx7{cx6 + 64};
-    m_control_select_symbol[s] = screen_rect(
-      screen_coordinate(cx6, cy1),
-      screen_coordinate(cx7, cy2)
-    );
-
-    const int cx8{cx7 + 100};
-    m_control_select_label[s] = screen_rect(
-      screen_coordinate(cx7, cy1),
-      screen_coordinate(cx8, cy2)
-    );
-  }
+  // Portraits
+  const int portrait_height{y1 + 400};
+  m_king_portrait[side::lhs] = screen_rect(
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, portrait_height)
+  );
+  m_king_portrait[side::rhs] = screen_rect(
+    screen_coordinate(x7, y1),
+    screen_coordinate(x8, portrait_height)
+  );
 }
 
 
 const screen_rect& lobby_view_layout::get_color(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_color;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_color;
-}
-
-const screen_rect& lobby_view_layout::get_control_down_label(const side player_side) const noexcept
-{
-  return m_control_down_label.at(player_side);
-}
-
-const screen_rect& lobby_view_layout::get_control_down_symbol(const side player_side) const noexcept
-{
-  return m_control_down_symbol.at(player_side);
-}
-
-const screen_rect& lobby_view_layout::get_control_select_label(const side player_side) const noexcept
-{
-  return m_control_select_label.at(player_side);
-}
-
-const screen_rect& lobby_view_layout::get_control_select_symbol(const side player_side) const noexcept
-{
-  return m_control_select_symbol.at(player_side);
-}
-
-const screen_rect& lobby_view_layout::get_control_type_symbol(const side player_side) const noexcept
-{
-  return m_control_type_symbol.at(player_side);
-}
-
-const screen_rect& lobby_view_layout::get_control_up_label(const side player_side) const noexcept
-{
-  return m_control_up_label.at(player_side);
-}
-
-const screen_rect& lobby_view_layout::get_control_up_symbol(const side player_side) const noexcept
-{
-  return m_control_up_symbol.at(player_side);
+  return m_color.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_king_portrait(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_king_portrait;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_king_portrait;
+  return m_king_portrait.at(player_side);
 }
 
 std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
@@ -212,11 +105,9 @@ std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
   {
     // layout.get_title(), // Needs to show the background
     layout.get_color(side::lhs),
-    layout.get_control_type_symbol(side::lhs),
     layout.get_race(side::lhs),
     layout.get_start(side::lhs),
     layout.get_color(side::rhs),
-    layout.get_control_type_symbol(side::rhs),
     layout.get_race(side::rhs),
     layout.get_start(side::rhs),
   };
@@ -224,22 +115,12 @@ std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
 
 const screen_rect& lobby_view_layout::get_race(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_race;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_race;
+  return m_race.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_start(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_start;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_start;
+  return m_ready.at(player_side);
 }
 
 const screen_rect& get_cursor_rect(
