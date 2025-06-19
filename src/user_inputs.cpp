@@ -1,5 +1,6 @@
 #include "user_inputs.h"
 
+#include "chess_move.h"
 #include "game.h"
 #include "game_controller.h"
 #include "square.h"

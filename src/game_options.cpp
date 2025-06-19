@@ -7,14 +7,13 @@
 #include <sstream>
 
 game_options::game_options(
-) : m_click_distance{0.5},
+) : m_click_distance{get_default_click_distance()},
     m_game_speed{get_default_game_speed()},
     m_margin_width{get_default_margin_width()},
-    m_replayer(replay("")),
     m_screen_size{get_default_screen_size()},
     m_starting_position{get_default_starting_position()},
-    m_music_volume{10},
-    m_sound_effects_volume{20} // percent
+    m_music_volume{get_default_music_volume()},
+    m_sound_effects_volume{get_default_sound_effects_volume()}
 {
   assert(m_click_distance > 0.0);
   assert(m_margin_width >= 0);
@@ -25,6 +24,16 @@ game_options::game_options(
 bool do_show_selected() noexcept
 {
   return game_options::get().get_show_selected();
+}
+
+volume get_default_music_volume() noexcept
+{
+  return volume(10);
+}
+
+volume get_default_sound_effects_volume() noexcept
+{
+  return volume(20);
 }
 
 const volume& get_music_volume() noexcept
@@ -45,6 +54,17 @@ const volume& get_sound_effects_volume() noexcept
 starting_position_type get_starting_position() noexcept
 {
   return game_options::get().get_starting_position();
+}
+
+void game_options::reset()
+{
+  m_click_distance = get_default_click_distance();
+  m_game_speed = get_default_game_speed();
+  m_margin_width = get_default_margin_width();
+  m_screen_size = get_default_screen_size();
+  m_starting_position = get_default_starting_position();
+  m_music_volume = get_default_music_volume();
+  m_sound_effects_volume = get_default_sound_effects_volume();
 }
 
 void test_game_options()
@@ -90,7 +110,6 @@ std::ostream& operator<<(std::ostream& os, const game_options& options) noexcept
     << "game speed: " << options.get_game_speed() << '\n'
     << "Margin width: " << options.get_margin_width() << '\n'
     << "Message display time (sec): " << options.get_message_display_time_secs() << '\n'
-    << "Replayer: " << options.get_replayer() << '\n'
     << "Screen size: " << options.get_screen_size() << '\n'
     << "Starting position: " << options.get_starting_position() << '\n'
     << "Music volume: " << options.get_music_volume() << '\n'

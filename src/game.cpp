@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include "chess_move.h"
 #include "game_options.h"
 #include "piece_actions.h"
 #include "piece_id.h"

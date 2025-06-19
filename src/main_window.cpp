@@ -3,7 +3,6 @@
 #ifndef LOGIC_ONLY
 
 #include "screen_rect.h"
-#include "sfml_helper.h"
 #include "render_window.h"
 #include "game_resources.h"
 #include "draw.h"
@@ -48,6 +47,9 @@ main_window::main_window()
     m_views[s]->stop();
     assert(!m_views[s]->is_active());
   }
+
+  // Use all defaults
+  game_options::get().reset();
 }
 
 void main_window::exec()

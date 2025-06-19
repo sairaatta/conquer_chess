@@ -14,11 +14,9 @@
 
 #include <cassert>
 #include <cmath>
-#include <iostream>
 
 menu_view::menu_view(
-) :
-    m_background_image_index{
+) : m_background_image_index{
       create_seedless_random_background_image_index()
     },
     m_selected{menu_view_item::start}
@@ -210,11 +208,8 @@ bool menu_view::process_event_impl(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::F1)
     {
-      std::clog
-        << "=============================================\n"
-        << "= NOW                                       =\n"
-        << "=============================================\n"
-      ;
+      // Developer shortcut
+      set_next_state(program_state::game);
     }
   }
   if (event.type == sf::Event::MouseMoved)

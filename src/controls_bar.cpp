@@ -8,6 +8,8 @@
 
 #include <SFML/Graphics/Color.hpp>
 
+#include <cassert>
+
 controls_bar::controls_bar() : m_window_size{get_default_screen_size()}
 {
 
@@ -16,8 +18,9 @@ controls_bar::controls_bar() : m_window_size{get_default_screen_size()}
 void controls_bar::draw()
 {
   const auto controls_bar_rect{create_controls_bar_area(m_window_size)};
-  const int y1{controls_bar_rect.get_tl().get_y() + 16};
-  const int y2{controls_bar_rect.get_br().get_y() - 16};
+  assert(get_height(controls_bar_rect) == 64);
+  const int y1{controls_bar_rect.get_tl().get_y()};
+  const int y2{controls_bar_rect.get_br().get_y()};
   const int font_size{26};
   const int label_up_width{50};
   const int label_down_width{90};

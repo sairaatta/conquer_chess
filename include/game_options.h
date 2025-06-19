@@ -5,7 +5,6 @@
 #include "screen_coordinate.h"
 #include "starting_position_type.h"
 #include "volume.h"
-#include "replayer.h"
 #include "game_speed.h"
 
 #include <iosfwd>
@@ -23,11 +22,10 @@ public:
   game_options& operator=(const game_options&) = delete;
   game_options(game_options &&) = delete;
   game_options& operator=(game_options&&) = delete;
-  static auto& get(){
+  static auto& get() {
     static game_options r;
     return r;
   }
-
 
   /// Get the distance the mouse must be maximally in
   /// for a click to connect to a piece
@@ -46,7 +44,7 @@ public:
   double get_message_display_time_secs() const noexcept { return 5.0; }
 
   /// Get the replay of a match
-  const auto& get_replayer() const noexcept { return m_replayer; }
+  //const auto& get_replayer() const noexcept { return m_replayer; }
 
   /// Get the size of the screen in pixels
   const auto& get_screen_size() const noexcept { return m_screen_size; }
@@ -69,11 +67,11 @@ public:
   /// Get the sound effects volume
   const volume& get_sound_effects_volume() const noexcept { return m_sound_effects_volume; }
 
+  /// Reset all values to defaults
+  void reset();
+
   /// Set the game speed
   void set_game_speed(const game_speed speed) noexcept { m_game_speed = speed; }
-
-  /// Set the replayer
-  void set_replayer(const replayer& r) noexcept { m_replayer = r; }
 
   /// Set showing the debug info
   void set_show_debug_info(const bool b) noexcept { m_show_debug_info = b; }
@@ -86,6 +84,7 @@ public:
 
   /// Set the volume, as a percentage
   void set_volume(const volume& v) noexcept { m_music_volume = v; }
+
 
 private:
 
@@ -100,9 +99,6 @@ private:
 
   /// The width of the margin in pixels
   int m_margin_width;
-
-  /// Replay a match
-  replayer m_replayer;
 
   /// The size of the screen in pixels
   screen_coordinate m_screen_size;
@@ -125,8 +121,23 @@ private:
 
 };
 
+
 /// Are selected squares shown on-screen?
 bool do_show_selected() noexcept;
+
+/// The default pixels distance for the mouse
+/// for a click to connect to a piece.
+constexpr double get_default_click_distance() noexcept { return 0.5; }
+
+/// The default music volume.
+///
+/// In percent, i.e. 20 denotes 20% of the maximum.
+volume get_default_music_volume() noexcept;
+
+/// The default sound effects volume.
+///
+/// In percent, i.e. 20 denotes 20% of the maximum.
+volume get_default_sound_effects_volume() noexcept;
 
 /// Get the music volume
 const volume& get_music_volume() noexcept;
