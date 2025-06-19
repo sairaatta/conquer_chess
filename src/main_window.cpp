@@ -161,13 +161,17 @@ void main_window::show_debug_info()
 {
   const auto debug_rect = screen_rect(
     screen_coordinate(4, 4),
-    screen_coordinate(200, 30)
+    screen_coordinate(300, 30)
   );
   const int fps{
     static_cast<int>(std::round(m_sleep_scheduler.get_fps()))
   };
   draw_rectangle(debug_rect, sf::Color(128, 128, 128, 128));
-  draw_text(std::to_string(fps) + std::string(" FPS, ") + to_str(m_program_state), debug_rect, 16);
+  draw_text(
+    std::to_string(fps) + std::string(" FPS, ")
+    + to_str(m_program_state) + ", "
+    + to_str(game_options::get().get_starting_position())
+    , debug_rect, 16);
 }
 
 void main_window::tick()

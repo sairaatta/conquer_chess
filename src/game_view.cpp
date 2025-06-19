@@ -949,6 +949,7 @@ void game_view::start_impl()
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
   );
+  m_game = game();
   assert(!is_active());
   set_is_active(true);
 }

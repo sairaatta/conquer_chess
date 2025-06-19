@@ -10,12 +10,12 @@
 #include "game_log.h"
 #include "game_controller.h"
 #include "game_view_layout.h"
-#include "program_state.h"
+//#include "program_state.h"
 #include "view.h"
 
 #include <SFML/Graphics.hpp>
 
-#include <optional>
+//#include <optional>
 
 /// The Game dialog.
 ///
