@@ -61,6 +61,13 @@ void test_game_speed()
     assert(get_previous(get_next(game_speed::fast)) == game_speed::fast);
     assert(get_previous(get_next(game_speed::fastest)) == game_speed::fastest);
   }
+  // get_speed_multiplier
+  {
+    for (const auto s: get_all_game_speeds())
+    {
+      assert(get_speed_multiplier(s) > 0.0);
+    }
+  }
   // to_delta_t
   {
     double last_game_speed{0.0};
@@ -103,9 +110,12 @@ double get_speed_multiplier(const game_speed speed) noexcept
     case game_speed::normal: return 1.0;
     case game_speed::slow: return 0.5;
     case game_speed::slower: return 0.25;
-    case game_speed::slowest: return 0.125;
+    default:
+    case game_speed::slowest:
+      assert(speed == game_speed::slowest);
+      return 0.125;
+
   }
-  assert(!"Should never get here");
 }
 
 std::string to_human_str(const game_speed speed) noexcept
