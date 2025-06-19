@@ -38,7 +38,6 @@
 #include "piece_id.h"
 #include "in_game_time.h"
 #include "key_bindings.h"
-#include "loading_view.h"
 #include "lobby_options.h"
 #include "lobby_view_item.h"
 #include "lobby_view_layout.h"
@@ -47,6 +46,7 @@
 #include "options_view_layout.h"
 #include "pgn_string.h"
 #include "piece_actions.h"
+#include "program_state.h"
 #include "pieces.h"
 #include "race.h"
 #include "sfml_helper.h"
@@ -55,7 +55,11 @@
 #include "screen_coordinate.h"
 #include "sleep_scheduler.h"
 #include "test_game.h"
+
+#ifndef LOGIC_ONLY
+#include "loading_view.h"
 #include "main_window.h"
+#endif // LOGIC_ONLY
 
 #include <SFML/Graphics.hpp>
 
