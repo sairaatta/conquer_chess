@@ -13,24 +13,6 @@ screen_rect::screen_rect(
 
 }
 
-screen_rect create_centered_rect(const screen_coordinate c, const int w, const int h) noexcept
-{
-  assert(w > 0);
-  assert(h > 0);
-  return screen_rect{
-    screen_coordinate(c.get_x() - (w / 2), c.get_y() - (w / 2)),
-    screen_coordinate(c.get_x() + (w / 2), c.get_y() + (w / 2))
-  };
-}
-
-screen_coordinate get_center(const screen_rect& r) noexcept
-{
-  return screen_coordinate(
-    (r.get_tl().get_x() + r.get_br().get_x()) / 2,
-    (r.get_tl().get_y() + r.get_br().get_y()) / 2
-  );
-}
-
 screen_rect get_bottom_left_corner(const screen_rect& r) noexcept
 {
   const screen_coordinate top_left(
@@ -57,6 +39,25 @@ screen_rect get_bottom_right_corner(const screen_rect& r) noexcept
   );
   const screen_rect corner(top_left, bottom_right);
   return corner;
+}
+
+
+screen_rect create_centered_rect(const screen_coordinate c, const int w, const int h) noexcept
+{
+  assert(w > 0);
+  assert(h > 0);
+  return screen_rect{
+    screen_coordinate(c.get_x() - (w / 2), c.get_y() - (w / 2)),
+    screen_coordinate(c.get_x() + (w / 2), c.get_y() + (w / 2))
+  };
+}
+
+screen_coordinate get_center(const screen_rect& r) noexcept
+{
+  return screen_coordinate(
+    (r.get_tl().get_x() + r.get_br().get_x()) / 2,
+    (r.get_tl().get_y() + r.get_br().get_y()) / 2
+  );
 }
 
 int get_height(const screen_rect& r) noexcept

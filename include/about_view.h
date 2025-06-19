@@ -5,6 +5,7 @@
 
 #include "about_view_layout.h"
 #include "about_view_item.h"
+#include "controls_bar.h"
 #include "program_state.h"
 
 #include <SFML/Graphics.hpp>
@@ -51,13 +52,17 @@ public:
 
 private:
 
+  /// The game clock, to measure the elapsed time
+  sf::Clock m_clock;
+
+
+  controls_bar m_controls_bar;
+
   /// The layout of this window
   about_view_layout m_layout;
 
   double m_rotation;
 
-  /// The game clock, to measure the elapsed time
-  sf::Clock m_clock;
 
   /// The next state to go to, if any
   std::optional<program_state> m_next_state;

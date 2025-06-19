@@ -7,6 +7,7 @@
 #include "controls_view_item.h"
 #include "program_state.h"
 #include "side.h"
+#include "controls_bar.h"
 #include "chess_color.h"
 
 #include <SFML/Graphics.hpp>
@@ -54,6 +55,8 @@ public:
   void tick();
 
 private:
+
+  controls_bar m_controls_bar;
 
   /// The layout of this window
   controls_view_layout m_layout;

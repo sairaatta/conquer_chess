@@ -13,7 +13,8 @@
 
 about_view::about_view()
 {
-
+  m_controls_bar.set_draw_up_down_select(false);
+  m_controls_bar.set_draw_player_controls(false);
 }
 
 void about_view::tick()
@@ -44,10 +45,14 @@ bool about_view::process_event(sf::Event& event)
 void about_view::process_resize_event(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
+  const screen_coordinate window_size(
+    event.size.width, event.size.height
+  );
   m_layout = about_view_layout(
-    screen_coordinate(event.size.width, event.size.height),
+    window_size,
     get_default_margin_width()
   );
+  m_controls_bar.set_window_size(window_size);
 }
 
 void about_view::draw()
@@ -60,6 +65,7 @@ void about_view::draw()
   draw_copyright(*this);
   draw_url(*this);
   draw_contributors(*this);
+  m_controls_bar.draw();
 }
 
 void draw_background(about_view& v)

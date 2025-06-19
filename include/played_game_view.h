@@ -6,7 +6,7 @@
 #include "played_game_view_layout.h"
 #include "game.h"
 #include "program_state.h"
-
+#include "controls_bar.h"
 #include <SFML/Graphics.hpp>
 
 #include <optional>
@@ -28,6 +28,8 @@ public:
   void set_text_style(sf::Text& t);
 
 private:
+
+  controls_bar m_controls_bar;
 
   /// The played game
   game m_game;

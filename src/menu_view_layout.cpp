@@ -35,8 +35,6 @@ menu_view_layout::menu_view_layout(
   const int y14{y13 + margin_width};
   const int y15{y14 + panel_height};
   const int y16{y15 + margin_width};
-  const int y17{y16 + margin_width + margin_width};
-  const int y18{y17 + 64};
 
   m_menu_panel = screen_rect(
     screen_coordinate(x1, y1),
@@ -69,10 +67,6 @@ menu_view_layout::menu_view_layout(
   m_quit = screen_rect(
     screen_coordinate(x2, y14),
     screen_coordinate(x3, y15)
-  );
-  m_controls = screen_rect(
-    screen_coordinate(x2, y17),
-    screen_coordinate(x3, y18)
   );
 }
 

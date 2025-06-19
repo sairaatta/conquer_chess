@@ -6,6 +6,7 @@
 #include "render_window.h"
 #include "game_resources.h"
 #include "sfml_helper.h"
+//#include "draw.h"
 #include <cassert>
 #include <cmath>
 #include <fstream>
@@ -14,7 +15,7 @@
 played_game_view::played_game_view(const game& g)
   : m_game{g}
 {
-
+  m_controls_bar.set_draw_player_controls(false);
 }
 
 void played_game_view::exec()
@@ -70,7 +71,7 @@ void played_game_view::draw()
 {
   draw_layout_panels(*this);
   show_text_panel(*this);
-
+  m_controls_bar.draw();
 }
 
 void draw_layout_panels(played_game_view& v)

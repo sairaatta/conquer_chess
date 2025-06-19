@@ -33,6 +33,8 @@ private:
 /// @param h the height of the rectangle
 screen_rect create_centered_rect(const screen_coordinate c, const int w, const int h) noexcept;
 
+
+
 screen_coordinate get_center(const screen_rect& r) noexcept;
 
 /// Get the bottom-left corner (i.e. 25% of the rect)

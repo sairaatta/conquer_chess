@@ -87,7 +87,6 @@ public:
   int get_font_size() const noexcept { return m_font_size.get_value(); }
 
   /// The area where the frame rate (in frames per seconds) is dsplayed
-  const screen_rect& get_fps() const noexcept { return m_fps; }
   const screen_rect& get_log(const side player) const noexcept;
   const screen_rect& get_units(const side player) const noexcept;
 
@@ -110,7 +109,6 @@ private:
   screen_rect m_debug_lhs;
   screen_rect m_debug_rhs;
   read_only<int> m_font_size{32};
-  screen_rect m_fps;
   screen_rect m_log_lhs;
   screen_rect m_log_rhs;
   screen_rect m_units_lhs;

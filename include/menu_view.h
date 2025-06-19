@@ -7,7 +7,7 @@
 #include "menu_view_layout.h"
 #include "menu_view_item.h"
 #include "program_state.h"
-
+#include "controls_bar.h"
 #include <SFML/Graphics.hpp>
 
 #include <optional>
@@ -63,6 +63,8 @@ private:
   /// Index of the background image
   int m_background_image_index;
 
+  controls_bar m_controls_bar;
+
   /// The layout of this window
   menu_view_layout m_layout;
 
@@ -86,7 +88,6 @@ int create_seedless_random_background_image_index();
 
 void draw_about_panel(menu_view& v);
 void draw_background_image(menu_view& v);
-void draw_controls_panel(menu_view& v);
 void draw_menu_outline(menu_view& v);
 void draw_options_panel(menu_view& v);
 

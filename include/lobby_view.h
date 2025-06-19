@@ -3,12 +3,11 @@
 
 #ifndef LOGIC_ONLY
 
+#include "controls_bar.h"
 #include "program_state.h"
 #include "lobby_view_layout.h"
 #include "lobby_view_item.h"
-
 #include <SFML/Graphics.hpp>
-
 #include <optional>
 
 /// The lobby screen.
@@ -62,6 +61,8 @@ private:
   /// When both are ready, the countdown will start
   std::optional<sf::Clock> m_clock;
 
+  controls_bar m_controls_bar;
+
   /// How long the countdown will take
   const int m_countdown_secs{3};
 
@@ -92,9 +93,6 @@ void draw_background(lobby_view& v);
 
 /// Show the side/color the players have picked
 void draw_color_panel(lobby_view& v, const side player_side);
-
-/// Show the controllers the players use
-void draw_controls_panel(lobby_view& v, const side player_side);
 
 /// Show the countdown
 void draw_countdown(lobby_view& v, const int n_left_secs);

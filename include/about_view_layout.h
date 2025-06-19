@@ -59,10 +59,10 @@ public:
   );
 
   const auto& get_background() const noexcept { return m_background; }
+  const auto& get_contributors() const noexcept { return m_contributors; }
   const auto& get_copyright() const noexcept { return m_copyright; }
   const auto& get_panel_outline() const noexcept { return m_panel_outline; }
   const auto& get_subtitle() const noexcept { return m_subtitle; }
-  const auto& get_contributors() const noexcept { return m_contributors; }
   const auto& get_title() const noexcept { return m_title; }
   const auto& get_url() const noexcept { return m_url; }
 

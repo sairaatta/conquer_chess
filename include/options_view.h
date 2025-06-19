@@ -9,6 +9,7 @@
 #include "options_view_item.h"
 #include "physical_controller_type.h"
 #include "program_state.h"
+#include "controls_bar.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -48,6 +49,8 @@ public:
   void tick();
 
 private:
+
+  controls_bar m_controls_bar;
 
   options_view_layout m_layout;
 

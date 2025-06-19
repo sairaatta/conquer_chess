@@ -18,7 +18,7 @@ controls_view::controls_view(const side& player_side)
   : m_player_side(player_side),
     m_selected{controls_view_item::type}
 {
-
+  m_controls_bar.set_draw_player_controls(false);
 }
 void controls_view::change_selected()
 {
@@ -179,14 +179,14 @@ bool controls_view::process_event(sf::Event& event)
 void controls_view::process_resize_event(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-
-  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-  const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
-  get_render_window().setView(sf::View(visible_area));
+  const screen_coordinate window_size(
+    event.size.width, event.size.height
+  );
   m_layout = controls_view_layout(
-    screen_coordinate(event.size.width, event.size.height),
+    window_size,
     get_default_margin_width()
   );
+  m_controls_bar.set_window_size(window_size);
 }
 
 void controls_view::set_text_style(sf::Text& text)
@@ -204,6 +204,7 @@ void controls_view::draw()
   draw_keyboard_panel(*this);
   draw_mouse_panel(*this);
   draw_selected_panel(*this);
+  m_controls_bar.draw();
 }
 
 void draw_background(controls_view& v)

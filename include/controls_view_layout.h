@@ -4,7 +4,7 @@
 #include "controls_view_item.h"
 #include "screen_rect.h"
 #include "layout.h"
-
+#include "read_only.h"
 #include <vector>
 
 /// The layout of the Controls dialog.
@@ -50,7 +50,7 @@ public:
   /// Get a screen rect
   const screen_rect& get_selectable_rect(const controls_view_item item) const noexcept;
 
-  screen_coordinate get_window_size() const noexcept { return m_window_size; }
+  screen_coordinate get_window_size() const noexcept { return m_window_size.get_value(); }
 
   const screen_rect& get_action_1_label() const noexcept { return m_action_1_label; }
   const screen_rect& get_action_1_value() const noexcept { return m_action_1_value; }
@@ -101,7 +101,7 @@ private:
   screen_rect m_up_value;
 
   /// The size of the window
-  screen_coordinate m_window_size;
+  read_only<screen_coordinate> m_window_size;
 };
 
 /// Get the panels in the layout

@@ -44,8 +44,9 @@ bool loading_view::process_event(sf::Event& event)
   return false;
 }
 
-void loading_view::process_resize_event(sf::Event&)
+void loading_view::process_resize_event(sf::Event& event)
 {
+  assert(event.type == sf::Event::Resized);
   // The draw method checks the screen size
 }
 

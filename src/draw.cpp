@@ -130,6 +130,16 @@ void draw_game_speed_icon(const screen_rect& sr)
   get_render_window().draw(rectangle);
 
   draw_normal_fancy_text("Game speed", sr);
+  const sf::Keyboard::Key k{sf::Keyboard::Key::G};
+  const int x1{sr.get_tl().get_x() + 16};
+  const int x2{x1 + 64};
+  const int y1{sr.get_tl().get_y() + 16};
+  const int y2{y1 + 64};
+  const screen_rect r{
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
+  };
+  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
 }
 
 void draw_game_speed_value(const screen_rect& sr)
@@ -198,6 +208,16 @@ void draw_music_volume_label(const screen_rect& sr)
   get_render_window().draw(rectangle);
 
   draw_normal_fancy_text("Music volume", sr);
+  const sf::Keyboard::Key k{sf::Keyboard::Key::M};
+  const int x1{sr.get_tl().get_x() + 16};
+  const int x2{x1 + 64};
+  const int y1{sr.get_tl().get_y() + 16};
+  const int y2{y1 + 64};
+  const screen_rect r{
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
+  };
+  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
 }
 
 void draw_music_volume_value(const screen_rect& sr)
@@ -207,6 +227,8 @@ void draw_music_volume_value(const screen_rect& sr)
   s << get_music_volume() << " %";
   draw_normal_text(s.str(), sr);
 }
+
+
 
 void draw_normal_text(const sf::String& s, const screen_rect& sr)
 {
@@ -383,6 +405,16 @@ void draw_sound_effects_volume_label(const screen_rect& sr)
   get_render_window().draw(rectangle);
 
   draw_normal_fancy_text("Sound effects volume", sr);
+  const sf::Keyboard::Key k{sf::Keyboard::Key::S};
+  const int x1{sr.get_tl().get_x() + 16};
+  const int x2{x1 + 64};
+  const int y1{sr.get_tl().get_y() + 16};
+  const int y2{y1 + 64};
+  const screen_rect r{
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
+  };
+  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
 }
 
 void draw_sound_effects_volume_value(const screen_rect& sr)
@@ -479,6 +511,16 @@ void draw_starting_position_label(const screen_rect& sr)
   get_render_window().draw(rectangle);
 
   draw_normal_fancy_text("Starting position", sr);
+  const sf::Keyboard::Key k{sf::Keyboard::Key::T};
+  const int x1{sr.get_tl().get_x() + 16};
+  const int x2{x1 + 64};
+  const int y1{sr.get_tl().get_y() + 16};
+  const int y2{y1 + 64};
+  const screen_rect r{
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
+  };
+  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
 }
 
 void draw_starting_position_value(const screen_rect& sr)

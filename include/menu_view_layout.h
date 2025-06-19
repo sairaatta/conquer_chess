@@ -81,7 +81,6 @@ public:
   const auto& get_about() const noexcept { return m_about; }
   const auto& get_options() const noexcept { return m_options; }
   const auto& get_quit() const noexcept { return m_quit; }
-  const auto& get_controls() const noexcept { return m_controls; }
 
   screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
@@ -98,7 +97,6 @@ private:
   screen_rect m_options;
   screen_rect m_about;
   screen_rect m_quit;
-  screen_rect m_controls;
 
   /// The size of the window
   screen_coordinate m_window_size;

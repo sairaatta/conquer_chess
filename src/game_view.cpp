@@ -25,6 +25,8 @@
 game_view::game_view(
 ) : m_log{game_options::get().get_message_display_time_secs()}
 {
+  m_controls_bar.set_draw_up_down_select(false);
+  m_controls_bar.set_draw_player_controls(false);
 
 }
 
@@ -179,16 +181,14 @@ bool game_view::process_event(sf::Event& event)
 void game_view::process_resize_event(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-  const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-  get_render_window().setView(sf::View(visibleArea));
+  const screen_coordinate window_size(
+    event.size.width, event.size.height
+  );
   m_layout = game_view_layout(
-    screen_coordinate(
-      static_cast<int>(event.size.width),
-      static_cast<int>(event.size.height)
-    ),
+    window_size,
     get_default_margin_width()
   );
+  m_controls_bar.set_window_size(window_size);
 }
 
 void process_event(
@@ -238,14 +238,16 @@ void game_view::draw()
   show_layout(*this);
 
   // Show the board: squares, unit paths, pieces, health bars
-  show_board(*this);
+  draw_board(*this);
 
   // Show the sidebars: controls (with log), units, debug
   show_sidebar(*this, side::lhs);
   show_sidebar(*this, side::rhs);
+
+  m_controls_bar.draw();
 }
 
-void show_board(game_view& view)
+void draw_board(game_view& view)
 {
   draw_squares(view);
   if (get_options(view).do_show_occupied())
@@ -260,7 +262,7 @@ void show_board(game_view& view)
   show_unit_health_bars(view);
 }
 
-void show_controls(
+void draw_controls(
   game_view& view,
   const side player
 )
@@ -646,7 +648,7 @@ void show_possible_moves(game_view& view)
 void show_sidebar(game_view& view, const side player_side)
 {
   show_unit_sprites(view, player_side);
-  show_controls(view, player_side);
+  draw_controls(view, player_side);
   show_log(view, player_side);
   if (view.get_show_debug()) show_debug(view, player_side);
 }

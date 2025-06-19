@@ -8,11 +8,10 @@ options_view_layout::options_view_layout(
   const int margin_size
 ) : m_window_size{window_size}
 {
-  const int panel_height{64};
+  const int panel_height{100};
   const int top_panel_width{900};
-  const int chess_board_width{400};
+  const int chess_board_width{200};
   const int chess_board_height{chess_board_width};
-  const int bottom_panel_width{top_panel_width};
 
   // Top panel
   const int x1{128};
@@ -92,11 +91,6 @@ options_view_layout::options_view_layout(
   m_right_controls_value = screen_rect(
     screen_coordinate(x3, y9),
     screen_coordinate(x5, y10)
-  );
-
-  m_font_size = std::min(
-    panel_height / 2,
-    bottom_panel_width / 6
   );
 }
 

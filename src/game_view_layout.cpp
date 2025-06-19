@@ -180,10 +180,6 @@ game_view_layout::game_view_layout(
       m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 4 * sz)
     );
   }
-  m_fps = screen_rect(
-    screen_coordinate(32, 32),
-    screen_coordinate(100, 80)
-  );
 }
 
 game_coordinate convert_to_game_coordinate(

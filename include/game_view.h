@@ -4,6 +4,7 @@
 #ifndef LOGIC_ONLY
 
 #include "ccfwd.h"
+#include "controls_bar.h"
 #include "physical_controller.h"
 #include "game.h"
 #include "game_log.h"
@@ -73,6 +74,8 @@ private:
 
   /// The game clock, to measure the elapsed time
   sf::Clock m_clock;
+
+  controls_bar m_controls_bar;
 
   /// The game logic
   game m_game;
@@ -166,10 +169,10 @@ void process_event(
 
 
 /// Show the board: squares, unit paths, pieces, health bars
-void show_board(game_view& view);
+void draw_board(game_view& view);
 
 /// Show the controls (e.g. for a unit) on-screen for a player
-void show_controls(game_view& view, const side player);
+void draw_controls(game_view& view, const side player);
 
 /// Show debug info on-screen for a player
 void show_debug(game_view& view, const side player_side);

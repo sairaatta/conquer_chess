@@ -5,6 +5,7 @@
 #include "layout.h"
 #include "options_view_item.h"
 #include "side.h"
+#include "read_only.h"
 
 #include <vector>
 
@@ -81,36 +82,25 @@ public:
   /// The chosen type of controller for the LHS or RHS player
   const screen_rect& get_controller_type_value(const side player_side) const noexcept;
 
-  /// Get the size of the font that would fit nicely
-  int get_font_size() const noexcept { return m_font_size; }
-
-  const screen_coordinate& get_window_size() const noexcept { return m_window_size; }
+  const screen_coordinate& get_window_size() const noexcept { return m_window_size.get_value(); }
 
 private:
 
+  screen_rect m_chess_board;
+  screen_rect m_controls_label;
   screen_rect m_game_speed_label;
   screen_rect m_game_speed_value;
-
+  screen_rect m_left_controls_value;
   screen_rect m_music_volume_label;
   screen_rect m_music_volume_value;
-
+  screen_rect m_right_controls_value;
   screen_rect m_sound_effects_volume_label;
   screen_rect m_sound_effects_volume_value;
-
   screen_rect m_starting_pos_label;
   screen_rect m_starting_pos_value;
 
-  screen_rect m_chess_board;
-
-  screen_rect m_controls_label;
-  screen_rect m_left_controls_value;
-  screen_rect m_right_controls_value;
-
-  /// The size of the font that would fit nicely
-  int m_font_size;
-
   /// The size of the window
-  screen_coordinate m_window_size;
+  read_only<screen_coordinate> m_window_size;
 };
 
 /// Get the panels in the layout

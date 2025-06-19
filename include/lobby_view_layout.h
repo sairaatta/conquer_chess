@@ -3,9 +3,11 @@
 
 #include "side.h"
 #include "lobby_view_item.h"
+#include "read_only.h"
 #include "screen_rect.h"
 #include "layout.h"
 
+#include <map>
 #include <vector>
 
 /// The layout of the Lobby dialog.
@@ -57,14 +59,11 @@ public:
 
   const auto& get_background() const noexcept { return m_background; }
   const screen_rect& get_color(const side player_side) const noexcept;
-  const screen_rect& get_control_down(const side player_side) const noexcept;
   const screen_rect& get_control_down_label(const side player_side) const noexcept;
   const screen_rect& get_control_down_symbol(const side player_side) const noexcept;
-  const screen_rect& get_control_select(const side player_side) const noexcept;
   const screen_rect& get_control_select_label(const side player_side) const noexcept;
   const screen_rect& get_control_select_symbol(const side player_side) const noexcept;
-  const screen_rect& get_control_symbol(const side player_side) const noexcept;
-  const screen_rect& get_control_up(const side player_side) const noexcept;
+  const screen_rect& get_control_type_symbol(const side player_side) const noexcept;
   const screen_rect& get_control_up_label(const side player_side) const noexcept;
   const screen_rect& get_control_up_symbol(const side player_side) const noexcept;
   const screen_rect& get_king_portrait(const side player_side) const noexcept;
@@ -75,22 +74,20 @@ public:
   /// Get the size of the font that would fit nicely
   int get_font_size() const noexcept { return m_font_size; }
 
-  screen_coordinate get_window_size() const noexcept { return m_window_size; }
+  screen_coordinate get_window_size() const noexcept { return m_window_size.get_value(); }
 
 private:
 
+
   screen_rect m_background;
   screen_rect m_lhs_color;
-  screen_rect m_lhs_control_down;
-  screen_rect m_lhs_control_down_label;
-  screen_rect m_lhs_control_down_symbol;
-  screen_rect m_lhs_control_select;
-  screen_rect m_lhs_control_select_label;
-  screen_rect m_lhs_control_select_symbol;
-  screen_rect m_lhs_control_symbol;
-  screen_rect m_lhs_control_up;
-  screen_rect m_lhs_control_up_label;
-  screen_rect m_lhs_control_up_symbol;
+  std::map<side, screen_rect> m_control_down_label;
+  std::map<side, screen_rect> m_control_down_symbol;
+  std::map<side, screen_rect> m_control_select_label;
+  std::map<side, screen_rect> m_control_select_symbol;
+  std::map<side, screen_rect> m_control_type_symbol;
+  std::map<side, screen_rect> m_control_up_label;
+  std::map<side, screen_rect> m_control_up_symbol;
   screen_rect m_lhs_king_portrait;
   screen_rect m_lhs_race;
   screen_rect m_lhs_start;
@@ -117,7 +114,7 @@ private:
   int m_font_size;
 
   /// The size of the window
-  screen_coordinate m_window_size;
+  read_only<screen_coordinate> m_window_size;
 };
 
 /// Get the rectangle of the item

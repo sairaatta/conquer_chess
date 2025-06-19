@@ -2,7 +2,6 @@
 
 #ifndef LOGIC_ONLY
 
-#include "action_number.h"
 #include "render_window.h"
 #include "screen_coordinate.h"
 
@@ -12,7 +11,6 @@
 #include "game_resources.h"
 #include "render_window.h"
 #include "sfml_helper.h"
-#include "physical_controllers.h"
 
 #include <cassert>
 #include <cmath>
@@ -23,6 +21,7 @@ lobby_view::lobby_view()
     m_rhs_cursor{lobby_view_item::color},
     m_rhs_start{false}
 {
+  m_controls_bar.set_draw_up_down_select(false);
 }
 
 void lobby_view::tick()
@@ -171,14 +170,14 @@ bool lobby_view::process_event(sf::Event& event)
 void lobby_view::process_resize_event(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-  const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
-  get_render_window().setView(sf::View(visible_area));
-
+  const screen_coordinate window_size(
+    event.size.width, event.size.height
+  );
   m_layout = lobby_view_layout(
-    screen_coordinate(event.size.width, event.size.height),
+    window_size,
     get_default_margin_width()
   );
+  m_controls_bar.set_window_size(window_size);
 }
 
 
@@ -196,17 +195,18 @@ void lobby_view::draw()
   draw_layout_panels(*this);
   draw_lobby_title(*this);
   draw_color_panel(*this, side::lhs);
-  draw_controls_panel(*this, side::lhs);
   draw_king_portrait(*this, side::lhs);
   draw_race_panel(*this, side::lhs);
   draw_ready_panel(*this, side::lhs);
   draw_color_panel(*this, side::rhs);
-  draw_controls_panel(*this, side::rhs);
   draw_king_portrait(*this, side::rhs);
   draw_race_panel(*this, side::rhs);
   draw_ready_panel(*this, side::rhs);
   draw_selected_panel(*this, side::lhs);
   draw_selected_panel(*this, side::rhs);
+
+  m_controls_bar.draw();
+
   if (m_clock)
   {
     const int n_left{
@@ -233,67 +233,6 @@ void draw_color_panel(lobby_view& v, const side player_side)
   get_render_window().draw(rectangle);
 
   draw_fancy_text(to_human_str(get_color(player_side)), screen_rect, 64, 60);
-}
-
-void draw_controls_panel(lobby_view& v, const side player_side)
-{
-  const auto &layout{v.get_layout()};
-  const auto& c{physical_controllers::get().get_controller(player_side)};
-
-  draw_physical_controller_symbol(
-    c.get_type(),
-    create_centered_rect(get_center(layout.get_control_symbol(player_side)), 64, 64)
-  );
-
-  // Up
-  draw_text(
-    sf::String("Up"),
-    layout.get_control_up_label(player_side),
-    get_normal_character_size(),
-    sf::Color::White
-  );
-  draw_input_prompt_symbol(
-    c.get_key_bindings().get_key_for_move_up(),
-    create_centered_rect(get_center(layout.get_control_up_symbol(player_side)), 64, 64)
-  );
-
-  // Down
-  draw_text(
-    sf::String("Down"),
-    layout.get_control_down_label(player_side),
-    get_normal_character_size(),
-    sf::Color::White
-  );
-  draw_input_prompt_symbol(
-    c.get_key_bindings().get_key_for_move_down(),
-    create_centered_rect(get_center(layout.get_control_down_symbol(player_side)), 64, 64)
-  );
-
-
-  // Select
-  draw_text(
-    sf::String("Select"),
-    layout.get_control_select_label(player_side),
-    get_normal_character_size(),
-    sf::Color::White
-  );
-  draw_input_prompt_symbol(
-    c.get_key_bindings().get_key_for_action(action_number(1)),
-    create_centered_rect(get_center(layout.get_control_select_symbol(player_side)), 64, 64)
-  );
-
-  screen_rect panel{
-    screen_coordinate(layout.get_control_symbol(player_side).get_tl()),
-    screen_coordinate(layout.get_control_select(player_side).get_br())
-  };
-  sf::Color outline_color;
-  switch (player_side)
-  {
-    case side::lhs: outline_color = sf::Color::Red; break;
-    case side::rhs: outline_color = sf::Color::Blue; break;
-  }
-  draw_outline(panel, outline_color);
-
 }
 
 void draw_countdown(lobby_view& v, const int n_left_secs)

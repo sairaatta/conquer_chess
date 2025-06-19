@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cmath>
+#include "controls_bar.h"
 
 lobby_view_layout::lobby_view_layout(
   const screen_coordinate& window_size,
@@ -11,7 +12,7 @@ lobby_view_layout::lobby_view_layout(
 {
   m_background = screen_rect(
     screen_coordinate(0, 0),
-    screen_coordinate(m_window_size.get_x(), m_window_size.get_y())
+    screen_coordinate(window_size.get_x(), window_size.get_y())
   );
 
   // Central panel
@@ -76,76 +77,77 @@ lobby_view_layout::lobby_view_layout(
   );
 
   // Side panel
-  const int control_panel_width{250};
-  const int control_panel_height{80};
-  const int sx1{((x1 + x2) / 2) - (control_panel_width / 2)};
-  const int sx2{sx1 + control_panel_width};
-
-  const int sx7{((x7 + x8) / 2) - (control_panel_width / 2)};
-  const int sx8{sx7 + control_panel_width};
-
-  const int sy1{y1};
-  const int sy99{window_size.get_y() - margin_width};
-  const int sy98{sy99 - control_panel_height};
-  const int sy97{sy98 - control_panel_height};
-  const int sy96{sy97 - control_panel_height};
-  const int sy95{sy96 - control_panel_height};
-  const int sy94{sy95 - control_panel_height};
-  m_lhs_king_portrait = screen_rect(
-    screen_coordinate(x1, sy1),
-    screen_coordinate(x2, sy94)
-  );
-  m_lhs_control_symbol = screen_rect(
-    screen_coordinate(sx1, sy95),
-    screen_coordinate(sx2, sy96)
-  );
-  m_lhs_control_up = screen_rect(
-    screen_coordinate(sx1, sy96),
-    screen_coordinate(sx2, sy97)
-  );
-  m_lhs_control_up_symbol = get_lhs_half(m_lhs_control_up);
-  m_lhs_control_up_label = get_rhs_half(m_lhs_control_up);
-  m_lhs_control_down = screen_rect(
-    screen_coordinate(sx1, sy97),
-    screen_coordinate(sx2, sy98)
-  );
-  m_lhs_control_down_symbol = get_lhs_half(m_lhs_control_down);
-  m_lhs_control_down_label = get_rhs_half(m_lhs_control_down);
-  m_lhs_control_select = screen_rect(
-    screen_coordinate(sx1, sy98),
-    screen_coordinate(sx2, sy99)
-  );
-  m_lhs_control_select_symbol = get_lhs_half(m_lhs_control_select);
-  m_lhs_control_select_label = get_rhs_half(m_lhs_control_select);
+  {
+    const int py{y1 + 400};
+    // Portraits
+    m_lhs_king_portrait = screen_rect(
+      screen_coordinate(x1, y1),
+      screen_coordinate(x2, py)
+    );
+    m_rhs_king_portrait = screen_rect(
+      screen_coordinate(x7, y1),
+      screen_coordinate(x8, py)
+    );
+  }
 
 
-  m_rhs_king_portrait = screen_rect(
-    screen_coordinate(x7, sy1),
-    screen_coordinate(x8, sy94)
-  );
-  m_rhs_control_symbol = screen_rect(
-    screen_coordinate(sx7, sy95),
-    screen_coordinate(sx8, sy96)
-  );
-  m_rhs_control_up = screen_rect(
-    screen_coordinate(sx7, sy96),
-    screen_coordinate(sx8, sy97)
-  );
-  m_rhs_control_up_symbol = get_lhs_half(m_rhs_control_up);
-  m_rhs_control_up_label = get_rhs_half(m_rhs_control_up);
-  m_rhs_control_down = screen_rect(
-    screen_coordinate(sx7, sy97),
-    screen_coordinate(sx8, sy98)
-  );
-  m_rhs_control_down_symbol = get_lhs_half(m_rhs_control_down);
-  m_rhs_control_down_label = get_rhs_half(m_rhs_control_down);
-  m_rhs_control_select = screen_rect(
-    screen_coordinate(sx7, sy98),
-    screen_coordinate(sx8, sy99)
-  );
-  m_rhs_control_select_symbol = get_lhs_half(m_rhs_control_select);
-  m_rhs_control_select_label = get_rhs_half(m_rhs_control_select);
+  // Controls bar
+  for (const auto s: get_all_sides())
+  {
+    const screen_rect controls_bar_area{create_controls_bar_area(window_size)};
 
+    const int cy1{controls_bar_area.get_tl().get_y() + 16};
+    const int cy2{cy1 + 64};
+
+
+    int cx1{controls_bar_area.get_tl().get_x() + 16};
+    if (s == side::rhs) cx1 += (get_width(controls_bar_area) / 2);
+    const int cx2{cx1 + 64};
+
+    // Control type
+    m_control_type_symbol[s] = screen_rect(
+      screen_coordinate(cx1, cy1),
+      screen_coordinate(cx2, cy2)
+    );
+
+    // Up
+    const int cx3{cx2 + 64};
+    m_control_up_symbol[s] = screen_rect(
+      screen_coordinate(cx2, cy1),
+      screen_coordinate(cx3, cy2)
+    );
+
+    const int cx4{cx3 + 100};
+    m_control_up_label[s] = screen_rect(
+      screen_coordinate(cx3, cy1),
+      screen_coordinate(cx4, cy2)
+    );
+
+    // Down
+    const int cx5{cx4 + 64};
+    m_control_down_symbol[s] = screen_rect(
+      screen_coordinate(cx4, cy1),
+      screen_coordinate(cx5, cy2)
+    );
+
+    const int cx6{cx5 + 100};
+    m_control_down_label[s] = screen_rect(
+      screen_coordinate(cx5, cy1),
+      screen_coordinate(cx6, cy2)
+    );
+
+    const int cx7{cx6 + 64};
+    m_control_select_symbol[s] = screen_rect(
+      screen_coordinate(cx6, cy1),
+      screen_coordinate(cx7, cy2)
+    );
+
+    const int cx8{cx7 + 100};
+    m_control_select_label[s] = screen_rect(
+      screen_coordinate(cx7, cy1),
+      screen_coordinate(cx8, cy2)
+    );
+  }
 }
 
 
@@ -159,104 +161,39 @@ const screen_rect& lobby_view_layout::get_color(const side player_side) const no
   return m_rhs_color;
 }
 
-const screen_rect& lobby_view_layout::get_control_down(const side player_side) const noexcept
-{
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_down;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_down;
-}
-
 const screen_rect& lobby_view_layout::get_control_down_label(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_down_label;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_down_label;
+  return m_control_down_label.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_control_down_symbol(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_down_symbol;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_down_symbol;
-}
-
-const screen_rect& lobby_view_layout::get_control_select(const side player_side) const noexcept
-{
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_select;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_select;
+  return m_control_down_symbol.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_control_select_label(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_select_label;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_select_label;
+  return m_control_select_label.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_control_select_symbol(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_select_symbol;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_select_symbol;
+  return m_control_select_symbol.at(player_side);
 }
 
-const screen_rect& lobby_view_layout::get_control_symbol(const side player_side) const noexcept
+const screen_rect& lobby_view_layout::get_control_type_symbol(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_symbol;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_symbol;
-}
-
-const screen_rect& lobby_view_layout::get_control_up(const side player_side) const noexcept
-{
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_up;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_up;
+  return m_control_type_symbol.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_control_up_label(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_up_label;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_up_label;
+  return m_control_up_label.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_control_up_symbol(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_control_up_symbol;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_control_up_symbol;
+  return m_control_up_symbol.at(player_side);
 }
 
 const screen_rect& lobby_view_layout::get_king_portrait(const side player_side) const noexcept
@@ -275,17 +212,11 @@ std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
   {
     // layout.get_title(), // Needs to show the background
     layout.get_color(side::lhs),
-    layout.get_control_down(side::lhs),
-    layout.get_control_select(side::lhs),
-    layout.get_control_symbol(side::lhs),
-    layout.get_control_up(side::lhs),
+    layout.get_control_type_symbol(side::lhs),
     layout.get_race(side::lhs),
     layout.get_start(side::lhs),
     layout.get_color(side::rhs),
-    layout.get_control_down(side::rhs),
-    layout.get_control_select(side::rhs),
-    layout.get_control_symbol(side::rhs),
-    layout.get_control_up(side::rhs),
+    layout.get_control_type_symbol(side::rhs),
     layout.get_race(side::rhs),
     layout.get_start(side::rhs),
   };

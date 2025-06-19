@@ -84,6 +84,11 @@ void draw_music_volume_label(const screen_rect& sr);
 /// The button that shows the value of the music
 void draw_music_volume_value(const screen_rect& sr);
 
+/// Draw a controls bar for a menu where there is navigation required.
+///
+/// Keys are: up, down, select, quit
+void draw_controls_bar(const screen_rect& r);
+
 /// Draw fancy text at a normal size
 void draw_normal_fancy_text(const sf::String& s, const screen_rect& sr);
 

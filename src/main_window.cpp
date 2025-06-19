@@ -96,8 +96,8 @@ void main_window::process_resize_event(sf::Event& event)
   m_left_controls_view.process_resize_event(event);
   m_loading_view.process_resize_event(event);
   m_lobby_view.process_resize_event(event);
-  m_options_view.process_resize_event(event);
   m_menu_view.process_resize_event(event);
+  m_options_view.process_resize_event(event);
   m_right_controls_view.process_resize_event(event);
 }
 

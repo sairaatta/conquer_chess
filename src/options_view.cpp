@@ -22,6 +22,7 @@
 options_view::options_view()
   : m_selected{options_view_item::game_speed}
 {
+  m_controls_bar.set_draw_player_controls(false);
 
 }
 
@@ -212,14 +213,16 @@ bool options_view::process_event(sf::Event& event)
 void options_view::process_resize_event(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-  const sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-  get_render_window().setView(sf::View(visibleArea));
+  const screen_coordinate window_size(
+    event.size.width, event.size.height
+  );
   m_layout = options_view_layout(
-    screen_coordinate(visibleArea.width, visibleArea.height),
+    window_size,
     get_default_margin_width()
   );
+  m_controls_bar.set_window_size(window_size);
 }
+
 void options_view::set_selected(const options_view_item i)
 {
   if (m_selected != i)
@@ -249,6 +252,8 @@ void options_view::draw()
   draw_pieces(*this);
 
   assert(!to_str(get_starting_position()).empty());
+  m_controls_bar.draw();
+
 }
 
 void draw_background(options_view& v)
@@ -281,9 +286,21 @@ void draw_bottom_header(options_view& v)
 void draw_bottom_row(options_view& v, const side player_side)
 {
   const auto& layout{v.get_layout()};
-  const auto screen_rect{layout.get_controller_type_value(player_side)};
+  const auto sr{layout.get_controller_type_value(player_side)};
   const physical_controller_type t{get_physical_controller_type(player_side)};
-  draw_fancy_physical_controller_label(t, screen_rect);
+  draw_fancy_physical_controller_label(t, sr);
+  const sf::Keyboard::Key k{
+    player_side == side::lhs ? sf::Keyboard::Key::Num1 : sf::Keyboard::Key::Num2
+  };
+  const int x1{sr.get_tl().get_x() + 16};
+  const int x2{x1 + 64};
+  const int y1{sr.get_tl().get_y() + 16};
+  const int y2{y1 + 64};
+  const screen_rect r{
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
+  };
+  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
 }
 
 void draw_game_speed(options_view& v)
