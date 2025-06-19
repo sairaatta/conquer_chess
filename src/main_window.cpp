@@ -5,6 +5,7 @@
 #include "screen_rect.h"
 #include "render_window.h"
 #include "game_resources.h"
+#include "lobby_options.h"
 #include "draw.h"
 
 #include <cassert>
@@ -170,8 +171,12 @@ void main_window::show_debug_info()
   draw_text(
     std::to_string(fps) + std::string(" FPS, ")
     + to_str(m_program_state) + ", "
-    + to_str(game_options::get().get_starting_position())
-    , debug_rect, 16);
+    + to_str(lobby_options::get().get_race(side::lhs))
+    + std::string(" vs ")
+    + to_str(lobby_options::get().get_race(side::rhs)),
+    debug_rect,
+    16
+  );
 }
 
 void main_window::tick()

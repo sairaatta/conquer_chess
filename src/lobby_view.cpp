@@ -31,6 +31,9 @@ void lobby_view::tick_impl(const delta_t)
   {
     if (m_clock.value().getElapsedTime().asSeconds() > m_countdown_secs)
     {
+      // Store to the lobby options, as these settings are accepted
+
+      // Move on
       set_next_state(program_state::game);
     }
   }

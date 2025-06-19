@@ -2,11 +2,21 @@
 
 ## v0.8
 
+![Game screen v0.8](20250619_4.jpg)
+
+> The game screen, now for protoss (left) versus terran (right)
+
 ![Game screen v0.8](20250619_3.jpg)
+
+> The game screen for the classic pieces
 
 ![Main menu screen v0.8](20250619_1.jpg)
 
+> The menu screen
+
 ![Lobby screen v0.8](20250619_2.jpg)
+
+> The lobby screen
 
 ## v0.7
 

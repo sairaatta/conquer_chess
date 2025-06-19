@@ -23,8 +23,8 @@ game::game()
   : m_pieces{
       get_starting_pieces(
         get_starting_position(),
-        race::classic,
-        race::classic
+        get_race_of_side(side::lhs),
+        get_race_of_side(side::rhs)
       )
     },
     m_in_game_time{0.0}
