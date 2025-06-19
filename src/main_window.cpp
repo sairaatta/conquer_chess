@@ -127,6 +127,14 @@ void main_window::set_new_state(const program_state s)
   assert(!m_options_view.is_active());
   assert(!m_right_controls_view.is_active());
 
+  assert(!m_about_view.get_next_state().has_value());
+  assert(!m_game_view.get_next_state().has_value());
+  assert(!m_left_controls_view.get_next_state().has_value());
+  assert(!m_lobby_view.get_next_state().has_value());
+  assert(!m_menu_view.get_next_state().has_value());
+  assert(!m_options_view.get_next_state().has_value());
+  assert(!m_right_controls_view.get_next_state().has_value());
+
   // Start the new state
   m_program_state = s;
 

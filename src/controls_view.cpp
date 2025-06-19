@@ -341,11 +341,13 @@ void draw_type_panel(controls_view& v)
 
 void controls_view::start()
 {
+  m_next_state.reset();
   m_is_active = true;
 }
 
 void controls_view::stop()
 {
+  m_next_state.reset();
   m_is_active = false;
 }
 

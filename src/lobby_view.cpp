@@ -390,6 +390,7 @@ void lobby_view::start()
   m_rhs_cursor = lobby_view_item::color;
   m_lhs_start = false;
   m_rhs_start = false;
+  m_next_state.reset();
   m_is_active = true;
 }
 
@@ -403,6 +404,7 @@ void lobby_view::stop()
   m_clock = {};
   m_lhs_start = false;
   m_rhs_start = false;
+  m_next_state.reset();
   m_is_active = false;
 }
 
