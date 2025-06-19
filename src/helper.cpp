@@ -168,6 +168,14 @@ void test_helper()
     const std::wstring result{to_wstring(s)};
     assert(expected == result);
   }
+  // read_lines
+  {
+    const std::string filename{"tmp_read_lines_test.txt"};
+    std::ofstream f(filename);
+    f << std::string("test text");
+    f.close();
+    assert(read_lines(filename).size() == 1);
+  }
 #endif
 }
 
