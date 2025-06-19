@@ -26,6 +26,7 @@ lobby_view::lobby_view()
 
 void lobby_view::tick()
 {
+  assert(m_is_active);
   if (m_clock)
   {
     if (m_clock.value().getElapsedTime().asSeconds() > m_countdown_secs)
@@ -389,6 +390,7 @@ void lobby_view::start()
   m_rhs_cursor = lobby_view_item::color;
   m_lhs_start = false;
   m_rhs_start = false;
+  m_is_active = true;
 }
 
 void lobby_view::stop()
@@ -401,6 +403,7 @@ void lobby_view::stop()
   m_clock = {};
   m_lhs_start = false;
   m_rhs_start = false;
+  m_is_active = false;
 }
 
 #endif // LOGIC_ONLY

@@ -27,17 +27,16 @@ public:
   /// Will be empty if the user should remain in this screen
   const auto& get_next_state() const noexcept { return m_next_state; }
 
-  void stop();
-
-  void tick();
-
+  /// Is this window active?
+  ///
+  /// It can be activated by 'start' and deactivated by 'stop'
+  bool is_active() const noexcept { return m_is_active; }
 
   /// Get the index of the background image.
   ///
   /// There are multiple possible background images and the one
   /// displayed is chosen randomly.
   int get_background_image_index() const noexcept { return m_background_image_index; }
-
 
   const auto& get_layout() const noexcept { return m_layout; }
 
@@ -57,6 +56,10 @@ public:
   /// Start displaying this window
   void start();
 
+  void stop();
+
+  void tick();
+
 
 private:
 
@@ -64,6 +67,8 @@ private:
   int m_background_image_index;
 
   controls_bar m_controls_bar;
+
+  bool m_is_active{false};
 
   /// The layout of this window
   menu_view_layout m_layout;

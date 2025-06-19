@@ -19,7 +19,7 @@ about_view::about_view()
 
 void about_view::tick()
 {
-  m_rotation = 5.0 * std::sin(m_clock.getElapsedTime().asMilliseconds() / 1000.0);
+  assert(m_is_active);
 }
 
 bool about_view::process_event(sf::Event& event)
@@ -161,13 +161,14 @@ void draw_title(about_view& v)
 
 void about_view::start()
 {
-  m_rotation = 0.0;
   m_next_state.reset();
+  m_is_active = true;
 }
 
 void about_view::stop()
 {
   m_next_state.reset();
+  m_is_active = false;
 }
 
 #endif // LOGIC_ONLY

@@ -27,6 +27,11 @@ public:
   /// Will be empty if the user should remain in this screen
   const auto& get_next_state() const noexcept { return m_next_state; }
 
+  /// Is this window active?
+  ///
+  /// It can be activated by 'start' and deactivated by 'stop'
+  bool is_active() const noexcept { return m_is_active; }
+
   /// Go to the next state (if any).
   ///
   /// For this screen, the textures are loaded.
@@ -47,6 +52,8 @@ public:
   void stop();
 
 private:
+
+  bool m_is_active{false};
 
   /// The next state to go to, if any
   std::optional<program_state> m_next_state;

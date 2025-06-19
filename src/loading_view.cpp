@@ -17,6 +17,7 @@ loading_view::loading_view()
 
 void loading_view::tick()
 {
+  assert(m_is_active);
   if (!m_resource_loader.is_done())
   {
     m_resource_loader.process_next();
@@ -134,11 +135,13 @@ void loading_view::draw()
 void loading_view::start()
 {
   // Nothing here ...
+  m_is_active = true;
 }
 
 void loading_view::stop()
 {
   game_resources::get().get_loading_screen_songs().get_heroes().stop();
+  m_is_active = false;
 }
 
 void test_loading_view()

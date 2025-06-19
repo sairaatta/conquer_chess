@@ -18,7 +18,7 @@ main_window::main_window()
     10
   );
   game_resources::get().get_loading_screen_songs().get_heroes().play();
-
+  m_loading_view.start();
 }
 
 void main_window::exec()
@@ -62,7 +62,9 @@ bool main_window::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::F3)
     {
-      m_show_debug_info = !m_show_debug_info;
+      game_options::get().set_show_debug_info(
+        !game_options::get().get_show_debug_info()
+      );
       return false; // Done. Do not close the program
     }
   }
@@ -117,20 +119,28 @@ void main_window::set_new_state(const program_state s)
     case program_state::right_controls: m_right_controls_view.stop(); break;
   }
 
+  assert(!m_about_view.is_active());
+  assert(!m_game_view.is_active());
+  assert(!m_left_controls_view.is_active());
+  assert(!m_lobby_view.is_active());
+  assert(!m_menu_view.is_active());
+  assert(!m_options_view.is_active());
+  assert(!m_right_controls_view.is_active());
+
   // Start the new state
   m_program_state = s;
 
   switch (m_program_state)
   {
-    case program_state::about: m_about_view.start(); break;
-    case program_state::game: m_game_view.start(); break;
-    case program_state::left_controls: m_left_controls_view.start(); break;
+    case program_state::about: m_about_view.start(); assert(m_about_view.is_active()); break;
+    case program_state::game: m_game_view.start(); assert(m_game_view.is_active()); break;
+    case program_state::left_controls: m_left_controls_view.start(); assert(m_left_controls_view.is_active()); break;
     case program_state::loading: m_loading_view.start(); break;
-    case program_state::lobby: m_lobby_view.start(); break;
-    case program_state::main_menu: m_menu_view.start(); break;
-    case program_state::options: m_options_view.start(); break;
+    case program_state::lobby: m_lobby_view.start(); assert(m_lobby_view.is_active()); break;
+    case program_state::main_menu: m_menu_view.start(); assert(m_menu_view.is_active()); break;
+    case program_state::options: m_options_view.start(); assert(m_options_view.is_active()); break;
     //case program_state::replay: m_replay_view.start(); break;
-    case program_state::right_controls: m_right_controls_view.start(); break;
+    case program_state::right_controls: m_right_controls_view.start(); assert(m_right_controls_view.is_active()); break;
   }
 
 }
@@ -153,7 +163,7 @@ void main_window::show()
     case program_state::right_controls: m_right_controls_view.draw(); break;
   }
 
-  if (m_show_debug_info) {
+  if (game_options::get().get_show_debug_info()) {
     show_debug_info();
   }
 

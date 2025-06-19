@@ -37,6 +37,8 @@ std::string bool_to_str(const bool b) noexcept
 
 void game_view::tick(delta_t dt)
 {
+  assert(m_is_active);
+
   // Disard old messages
   m_log.tick();
 
@@ -250,7 +252,7 @@ void game_view::draw()
 void draw_board(game_view& view)
 {
   draw_squares(view);
-  if (get_options(view).do_show_occupied())
+  if (get_options(view).get_show_occupied())
   {
     show_occupied_squares(view);
   }
@@ -497,7 +499,7 @@ void game_view::show_mouse_cursor()
 void show_layout(game_view& view)
 {
   const auto& layout{view.get_layout()};
-  for (const auto& panel: get_panels(layout, view.get_show_debug()))
+  for (const auto& panel: get_panels(layout))
   {
     sf::RectangleShape rectangle;
     set_rect(rectangle, panel);
@@ -539,7 +541,7 @@ void show_map(game_view& view)
 
 void show_occupied_squares(game_view& view)
 {
-  assert(get_options(view).do_show_occupied());
+  assert(get_options(view).get_show_occupied());
   const auto& pieces{get_pieces(view)};
   for (const auto& piece: pieces)
   {
@@ -650,7 +652,7 @@ void show_sidebar(game_view& view, const side player_side)
   show_unit_sprites(view, player_side);
   draw_controls(view, player_side);
   show_log(view, player_side);
-  if (view.get_show_debug()) show_debug(view, player_side);
+  if (game_options::get().get_show_debug_info()) show_debug(view, player_side);
 }
 
 void draw_squares(game_view& view)
@@ -950,12 +952,16 @@ void game_view::start()
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
   );
+  m_next_state.reset();
+  m_is_active = true;
 }
 
 void game_view::stop()
 {
   m_clock.restart();
   game_resources::get().get_songs().get_wonderful_time().stop();
+  m_next_state.reset();
+  m_is_active = false;
 }
 
 void test_game_view() //!OCLINT tests may be many

@@ -38,6 +38,11 @@ public:
 
   const auto& get_selected() const noexcept { return m_selected; }
 
+  /// Is this window active?
+  ///
+  /// It can be activated by 'start' and deactivated by 'stop'
+  bool is_active() const noexcept { return m_is_active; }
+
   /// Process all events
   /// @return if the user wants to quit
   bool process_event(sf::Event& event);
@@ -57,6 +62,8 @@ public:
 private:
 
   controls_bar m_controls_bar;
+
+  bool m_is_active{false};
 
   /// The layout of this window
   controls_view_layout m_layout;

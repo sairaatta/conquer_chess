@@ -55,6 +55,7 @@ void draw_panel(
 
 void controls_view::tick()
 {
+  assert(m_is_active);
 }
 
 sf::Keyboard::Key  get_key_for_action_1(const controls_view& v)
@@ -340,14 +341,12 @@ void draw_type_panel(controls_view& v)
 
 void controls_view::start()
 {
-
-
+  m_is_active = true;
 }
 
 void controls_view::stop()
 {
-
-
+  m_is_active = false;
 }
 
 

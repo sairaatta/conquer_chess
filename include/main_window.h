@@ -35,9 +35,6 @@ private:
 
   program_state m_program_state{program_state::loading};
 
-  /// Show the debug info
-  bool m_show_debug_info{true};
-
   /// The game screen
   game_view m_game_view;
 

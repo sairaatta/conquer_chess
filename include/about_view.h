@@ -28,8 +28,10 @@ public:
   /// Will be empty if the user should remain in this screen
   const auto& get_next_state() const noexcept { return m_next_state; }
 
-  /// The rotation, in degrees
-  double get_rotation() const noexcept { return m_rotation; };
+  /// Is this window active?
+  ///
+  /// It can be activated by 'start' and deactivated by 'stop'
+  bool is_active() const noexcept { return m_is_active; }
 
   /// Process all events
   /// @return if the user wants to quit
@@ -52,17 +54,12 @@ public:
 
 private:
 
-  /// The game clock, to measure the elapsed time
-  sf::Clock m_clock;
-
+  bool m_is_active{false};
 
   controls_bar m_controls_bar;
 
   /// The layout of this window
   about_view_layout m_layout;
-
-  double m_rotation;
-
 
   /// The next state to go to, if any
   std::optional<program_state> m_next_state;

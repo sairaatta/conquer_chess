@@ -34,6 +34,10 @@ public:
   /// Will be empty if the user should remain in this screen
   const auto& get_next_state() const noexcept { return m_next_state; }
 
+  /// Is this window active?
+  ///
+  /// It can be activated by 'start' and deactivated by 'stop'
+  bool is_active() const noexcept { return m_is_active; }
 
   /// Process all events
   /// @return if the user wants to quit
@@ -68,6 +72,8 @@ private:
 
   /// Yes, dog mode
   bool m_dog_mode{false};
+
+  bool m_is_active{false};
 
   /// The layout of this window
   lobby_view_layout m_layout;

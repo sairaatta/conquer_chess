@@ -5,6 +5,7 @@
 #include "game_rect.h"
 #include "game_coordinate.h"
 #include "square.h"
+#include "game_options.h"
 
 #include <cassert>
 #include <cmath>
@@ -366,10 +367,10 @@ const screen_rect& game_view_layout::get_log(const side player) const noexcept
 }
 
 std::vector<screen_rect> get_panels(
-  const game_view_layout& layout,
-  const bool show_debug_panel
+  const game_view_layout& layout
 )
 {
+  const bool show_debug_panel{game_options::get().get_show_debug_info()};
   std::vector<screen_rect> v{
     layout.get_board(),
     layout.get_controls(side::lhs),

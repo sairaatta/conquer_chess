@@ -45,6 +45,94 @@ int create_seedless_random_background_image_index() {
   return create_random_background_image_index(rng_engine);
 }
 
+
+void menu_view::draw()
+{
+  draw_background_image(*this);
+
+  draw_menu_outline(*this);
+
+  draw_layout_panels(*this);
+
+  draw_title_panel(*this);
+  draw_subtitle_panel(*this);
+  draw_start_panel(*this);
+  draw_options_panel(*this);
+  draw_about_panel(*this);
+  draw_quit_panel(*this);
+  m_controls_bar.draw();
+
+  draw_selected_panel(*this);
+
+}
+
+void draw_about_panel(menu_view& v)
+{
+  draw_about_button(v.get_layout().get_about());
+}
+
+void draw_background_image(menu_view& v)
+{
+  draw_texture(
+    game_resources::get().get_textures().get_all_races(v.get_background_image_index()),
+    v.get_layout().get_background_image()
+  );
+}
+
+
+void draw_menu_outline(menu_view& v)
+{
+  draw_outline(v.get_layout().get_menu_panel());
+}
+
+void draw_options_panel(menu_view& v)
+{
+  draw_options_button(v.get_layout().get_options());
+}
+
+void draw_layout_panels(menu_view& v)
+{
+  for (const auto& screen_rect: get_panels(v.get_layout()))
+  {
+    sf::RectangleShape rectangle;
+    set_rect(rectangle, screen_rect);
+    rectangle.setFillColor(sf::Color(32, 32, 32));
+    get_render_window().draw(rectangle);
+  }
+
+}
+
+void draw_quit_panel(menu_view& v)
+{
+  draw_quit_button(v.get_layout().get_quit());
+}
+
+void draw_selected_panel(menu_view& v)
+{
+  draw_outline(v.get_layout().get_selectable_rect(v.get_selected()));
+}
+
+void draw_start_panel(menu_view& v)
+{
+  draw_start_button(v.get_layout().get_start());
+}
+
+void draw_subtitle_panel(menu_view& v)
+{
+  draw_texture(
+    get_subtitle_texture(),
+    v.get_layout().get_subtitle()
+  );
+}
+
+void draw_title_panel(menu_view& v)
+{
+  draw_texture(
+    get_title_texture(),
+    v.get_layout().get_title()
+  );
+}
+
 bool menu_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
@@ -190,103 +278,6 @@ void menu_view::set_selected(const menu_view_item i)
   m_selected = i;
 }
 
-void menu_view::stop()
-{
-  m_next_state.reset();
-}
-
-void menu_view::tick()
-{
-  // Nothing to do yet
-}
-
-void menu_view::draw()
-{
-  draw_background_image(*this);
-
-  draw_menu_outline(*this);
-
-  draw_layout_panels(*this);
-
-  draw_title_panel(*this);
-  draw_subtitle_panel(*this);
-  draw_start_panel(*this);
-  draw_options_panel(*this);
-  draw_about_panel(*this);
-  draw_quit_panel(*this);
-  m_controls_bar.draw();
-
-  draw_selected_panel(*this);
-
-}
-
-void draw_about_panel(menu_view& v)
-{
-  draw_about_button(v.get_layout().get_about());
-}
-
-void draw_background_image(menu_view& v)
-{
-  draw_texture(
-    game_resources::get().get_textures().get_all_races(v.get_background_image_index()),
-    v.get_layout().get_background_image()
-  );
-}
-
-
-void draw_menu_outline(menu_view& v)
-{
-  draw_outline(v.get_layout().get_menu_panel());
-}
-
-void draw_options_panel(menu_view& v)
-{
-  draw_options_button(v.get_layout().get_options());
-}
-
-void draw_layout_panels(menu_view& v)
-{
-  for (const auto& screen_rect: get_panels(v.get_layout()))
-  {
-    sf::RectangleShape rectangle;
-    set_rect(rectangle, screen_rect);
-    rectangle.setFillColor(sf::Color(32, 32, 32));
-    get_render_window().draw(rectangle);
-  }
-
-}
-
-void draw_quit_panel(menu_view& v)
-{
-  draw_quit_button(v.get_layout().get_quit());
-}
-
-void draw_selected_panel(menu_view& v)
-{
-  draw_outline(v.get_layout().get_selectable_rect(v.get_selected()));
-}
-
-void draw_start_panel(menu_view& v)
-{
-  draw_start_button(v.get_layout().get_start());
-}
-
-void draw_subtitle_panel(menu_view& v)
-{
-  draw_texture(
-    get_subtitle_texture(),
-    v.get_layout().get_subtitle()
-  );
-}
-
-void draw_title_panel(menu_view& v)
-{
-  draw_texture(
-    get_title_texture(),
-    v.get_layout().get_title()
-  );
-}
-
 void menu_view::start()
 {
   get_render_window().setTitle("Conquer Chess: Main Menu");
@@ -297,6 +288,19 @@ void menu_view::start()
     game_options::get().get_sound_effects_volume()
   );
   game_resources::get().get_songs().get_bliss().play();
+  m_is_active = true;
+}
+
+void menu_view::stop()
+{
+  m_next_state.reset();
+  m_is_active = false;
+}
+
+void menu_view::tick()
+{
+  assert(m_is_active);
+  // Nothing to do yet
 }
 
 #endif // LOGIC_ONLY

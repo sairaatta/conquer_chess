@@ -316,7 +316,7 @@ void draw_pieces(options_view& view)
   draw_pieces(
     get_starting_pieces(game_options::get().get_starting_position()),
     view.get_layout().get_chess_board(),
-    game_options::get().do_show_selected()
+    game_options::get().get_show_selected()
   );
 }
 
@@ -373,15 +373,18 @@ void draw_sound_effects_volume(options_view& v)
 void options_view::start()
 {
   m_next_state.reset();
+  m_is_active = true;
 }
 
 void options_view::stop()
 {
   m_next_state.reset();
+  m_is_active = false;
 }
 
 void options_view::tick()
 {
+  assert(m_is_active);
   // Nothing here yet
 }
 

@@ -48,13 +48,15 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  /// STUB
-  bool get_show_debug() const noexcept { return true; }
-
   bool get_show_squares_semitransparent() const noexcept { return true; }
 
   /// Get the text log, i.e. things pieces have to say
   const auto& get_log() const noexcept { return m_log; }
+
+  /// Is this window active?
+  ///
+  /// It can be activated by 'start' and deactivated by 'stop'
+  bool is_active() const noexcept { return m_is_active; }
 
   /// Process all events
   /// @return if the user wants to quit
@@ -82,6 +84,8 @@ private:
 
   /// The game controller, interacts with game
   game_controller m_game_controller;
+
+  bool m_is_active{false};
 
   /// The game logic
   game_view_layout m_layout;

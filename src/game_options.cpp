@@ -24,7 +24,7 @@ game_options::game_options(
 
 bool do_show_selected() noexcept
 {
-  return game_options::get().do_show_selected();
+  return game_options::get().get_show_selected();
 }
 
 const volume& get_music_volume() noexcept
@@ -52,7 +52,7 @@ void test_game_options()
 #ifndef NDEBUG
   // game_options::do_show_occupied
   {
-    assert(!game_options::get().do_show_occupied());
+    assert(!game_options::get().get_show_occupied());
   }
   // game_options::do_show_selected
   {

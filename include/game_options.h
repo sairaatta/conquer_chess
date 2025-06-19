@@ -28,11 +28,6 @@ public:
     return r;
   }
 
-  /// Show the squares that are actually occupied by the piecs?
-  auto do_show_occupied() const noexcept { return false; }
-
-  /// Are selected units highlighted?
-  auto do_show_selected() const noexcept { return false; }
 
   /// Get the distance the mouse must be maximally in
   /// for a click to connect to a piece
@@ -56,6 +51,15 @@ public:
   /// Get the size of the screen in pixels
   const auto& get_screen_size() const noexcept { return m_screen_size; }
 
+  /// Show the debug info
+  auto get_show_debug_info() const noexcept { return m_show_debug_info; }
+
+  /// Show the squares that are actually occupied by the piecs?
+  auto get_show_occupied() const noexcept { return false; }
+
+  /// Are selected units highlighted?
+  auto get_show_selected() const noexcept { return false; }
+
   /// Get the starting position
   starting_position_type get_starting_position() const noexcept { return m_starting_position; }
 
@@ -70,6 +74,9 @@ public:
 
   /// Set the replayer
   void set_replayer(const replayer& r) noexcept { m_replayer = r; }
+
+  /// Set showing the debug info
+  void set_show_debug_info(const bool b) noexcept { m_show_debug_info = b; }
 
   /// Set the starting position
   void set_starting_position(const starting_position_type starting_position) noexcept { m_starting_position = starting_position; }
@@ -105,6 +112,13 @@ private:
 
   /// Music volume
   volume m_music_volume;
+
+  /// Show debug info
+  #ifndef NDEBUG
+  bool m_show_debug_info{true};
+  #else
+  bool m_show_debug_info{false};
+  #endif
 
   /// Sound effects volume
   volume m_sound_effects_volume;
