@@ -1,44 +1,50 @@
 # Screenshots
 
-![Lobby screen v0.7](20250618_5.jpg)
+## v0.8
 
-> The Lobby screen in dog mode
+![Main menu screen v0.8](20250619_1.jpg)
 
-![Main menu screen v0.7](20250618_4.jpg)
-
-> The Main menu screen shows the controls
-
-![Controls screen v0.7](20250618_3.jpg)
-
-> The Controls screen shows the mouse buttons too
-
-![Controls screen v0.7](20250618_2.jpg)
-
-> The Controls screen looks prettier
-
-![Lobby screen v0.7](20250618_1.jpg)
-
-> The Lobby screen uses symbols to indicate the controls
-
-![Lobby screen v0.7](20250617_3.jpg)
-
-> The Lobby screen looks prettier
-
-![About screen v0.7](20250617_2.jpg)
-
-> The Options screen looks prettier
-
-![About screen v0.7](20250617_1.jpg)
-
-> The About screen looks prettier
-
-![About screen v0.7](20250616.jpg)
-
-> The About screen shows names that are spelled correctly
+![Lobby screen v0.8](20250619_2.jpg)
 
 ## v0.7
 
 ???- question "Version v0.7"
+
+    ![Lobby screen v0.7](20250618_5.jpg)
+
+    > The Lobby screen in dog mode
+
+    ![Main menu screen v0.7](20250618_4.jpg)
+
+    > The Main menu screen shows the controls
+
+    ![Controls screen v0.7](20250618_3.jpg)
+
+    > The Controls screen shows the mouse buttons too
+
+    ![Controls screen v0.7](20250618_2.jpg)
+
+    > The Controls screen looks prettier
+
+    ![Lobby screen v0.7](20250618_1.jpg)
+
+    > The Lobby screen uses symbols to indicate the controls
+
+    ![Lobby screen v0.7](20250617_3.jpg)
+
+    > The Lobby screen looks prettier
+
+    ![About screen v0.7](20250617_2.jpg)
+
+    > The Options screen looks prettier
+
+    ![About screen v0.7](20250617_1.jpg)
+
+    > The About screen looks prettier
+
+    ![About screen v0.7](20250616.jpg)
+
+    > The About screen shows names that are spelled correctly
 
     ![Title v0.7](title.png)
 
