@@ -4,8 +4,9 @@
 #include "ccfwd.h"
 #include "game_options.h"
 #include "message.h"
-#include "lobby_options.h"
+//#include "lobby_options.h"
 #include "piece.h"
+#include "side.h"
 #include "piece_action_type.h"
 #include "action_history.h"
 #include "read_only.h"
@@ -436,8 +437,12 @@ bool piece_with_id_is_at(
 /// Call game::tick until all pieces are idle
 void tick_until_idle(game& g);
 
-/// Convert the played game to pseudo-PGN notation
-/// Returns one string with newlines
+/// Convert the played game to pseudo-PGN notation.
+///
+/// Returns one string with newlines.
+/// An example string can be: '0: white pawn move from e2 to e4',
+/// where the '0' denotes the starting time of the move
+
 std::string to_pgn(const game& g);
 
 /// Unselect all pieces of a certain color

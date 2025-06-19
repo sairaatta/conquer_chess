@@ -14,6 +14,7 @@
 #include "sfml_helper.h"
 #include "screen_rect.h"
 #include "game_rect.h"
+#include "lobby_options.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Text.hpp>

@@ -4,7 +4,7 @@
 #include "test_game.h"
 #include "piece.h"
 #include "piece_actions.h"
-
+#include "lobby_options.h"
 #include <cassert>
 #include <sstream>
 
@@ -235,21 +235,6 @@ void test_game_functions()
     assert(can_castle_queenside(get_piece_at(g, "e1"), g));
     assert(can_castle_queenside(get_piece_at(g, "e8"), g));
   }
-  #ifdef FIX_ISSUE_78
-  // Rewrite to game test, without using the game_controller
-  // collect_action_history
-  {
-    game g;
-    game_controller c;
-    assert(!has_actions(collect_action_history(g)));
-    do_select_and_move_keyboard_player_piece(g, c, "e2", "e4");
-    assert(has_actions(collect_action_history(g)));
-    g.tick(delta_t(0.25));
-    g.tick(delta_t(0.25));
-    g.tick(delta_t(0.25));
-    do_select_and_move_keyboard_player_piece(g, c, "d2", "d4");
-  }
-  #endif // FIX_ISSUE_78
   // collect_all_piece_actions
   {
     // default start
@@ -967,6 +952,9 @@ void test_game_functions()
   {
     game g{create_game_with_standard_starting_position()};
     assert(to_pgn(g).empty());
+    // Only a game cannot do much,
+    // see 'test_game_controller' for a test where this does create
+    // a proper history
   }
   // operator<<
   {

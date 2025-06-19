@@ -1427,6 +1427,25 @@ void test_game_controller() //!OCLINT tests may be many
     s << c;
     assert(!s.str().empty());
   }
+  // to_pgn
+  {
+    game g{create_game_with_standard_starting_position()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(to_pgn(g).empty());
+    const piece_action e2e4(
+      chess_color::white,
+      piece_type::pawn,
+      piece_action_type::move,
+      square("e2"),
+      square("e4")
+    );
+    do_select_and_move_keyboard_player_piece(g, c, "e2", "e4");
+    tick_until_idle(g);
+    const std::string pgn{to_pgn(g)};
+    assert(!pgn.empty());
+    assert(pgn == "0: white pawn move from e2 to e4");
+
+  }
   #endif // NDEBUG // no tests in release
 }
 

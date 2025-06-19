@@ -5,6 +5,8 @@
 #include "piece_id.h"
 #include "square.h"
 #include "pieces.h"
+#include "chess_color.h"
+#include "lobby_options.h"
 
 #include <cassert>
 #include <cmath>
