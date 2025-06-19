@@ -20,7 +20,7 @@ public:
   explicit options_view();
 
   /// Draw the menu on the main window
-  void draw() override;
+  void draw_impl() override;
 
   const auto& get_layout() const noexcept { return m_layout; }
 
@@ -28,20 +28,20 @@ public:
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
   /// Process a resize event
-  void process_resize_event(sf::Event& event) override;
+  void process_resize_event_impl(sf::Event& event) override;
 
   /// Select an item.
   /// Play a sound when the selected item changes
   void set_selected(const options_view_item i);
 
-  void start() override;
+  void start_impl() override;
 
-  void stop() override;
+  void stop_impl() override;
 
-  void tick(const delta_t dt) override;
+  void tick_impl(const delta_t dt) override;
 
 private:
 

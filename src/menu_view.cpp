@@ -46,7 +46,7 @@ int create_seedless_random_background_image_index() {
 }
 
 
-void menu_view::draw()
+void menu_view::draw_impl()
 {
   draw_background_image(*this);
 
@@ -133,7 +133,7 @@ void draw_title_panel(menu_view& v)
   );
 }
 
-bool menu_view::process_event(sf::Event& event)
+bool menu_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -256,7 +256,7 @@ bool menu_view::process_event(sf::Event& event)
   return false;
 }
 
-void menu_view::process_resize_event(sf::Event& event)
+void menu_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   const screen_coordinate window_size(
@@ -278,7 +278,7 @@ void menu_view::set_selected(const menu_view_item i)
   m_selected = i;
 }
 
-void menu_view::start()
+void menu_view::start_impl()
 {
   get_render_window().setTitle("Conquer Chess: Main Menu");
   game_resources::get().get_songs().get_bliss().setVolume(
@@ -292,14 +292,14 @@ void menu_view::start()
   set_is_active(true);
 }
 
-void menu_view::stop()
+void menu_view::stop_impl()
 {
   assert(is_active());
   clear_next_state();
   set_is_active(false);
 }
 
-void menu_view::tick(const delta_t)
+void menu_view::tick_impl(const delta_t)
 {
   assert(is_active());
   // Nothing to do yet

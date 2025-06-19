@@ -41,10 +41,10 @@ private:
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
   /// Show the menu on-screen
-  void draw() override;
+  void draw_impl() override;
 };
 
 /// Show where the panels will be drawn

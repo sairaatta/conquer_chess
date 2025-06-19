@@ -27,6 +27,22 @@ void view::clear_next_state()
   assert(!m_next_state.has_value());
 }
 
+void view::draw()
+{
+  draw_impl();
+}
+
+bool view::process_event(sf::Event& e)
+{
+  return process_event_impl(e);
+}
+
+void view::process_resize_event(sf::Event& event)
+{
+  assert(event.type == sf::Event::Resized);
+  process_resize_event_impl(event);
+}
+
 void view::set_is_active(const bool is_active)
 {
   #ifndef NDEBUG
@@ -55,4 +71,22 @@ void view::set_next_state(const program_state next_state)
   #endif // NDEBUG
   assert(!m_next_state.has_value());
   m_next_state = next_state;
+}
+
+void view::start()
+{
+  assert(!m_is_active);
+  start_impl();
+}
+
+void view::stop()
+{
+  assert(m_is_active);
+  stop_impl();
+}
+
+void view::tick(const delta_t dt)
+{
+  assert(m_is_active);
+  tick_impl(dt);
 }

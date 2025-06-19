@@ -19,7 +19,7 @@ public:
   void clear_next_state();
 
   /// Draw the menu on the main window
-  virtual void draw() = 0;
+  void draw();
 
   /// The next state to go to, if any
   const auto& get_next_state() const noexcept { return m_next_state; }
@@ -30,10 +30,10 @@ public:
   bool is_active() const noexcept { return m_is_active; }
 
   /// Process an event
-  virtual bool process_event(sf::Event& e) = 0;
+  bool process_event(sf::Event& e);
 
   /// Process a resize event
-  virtual void process_resize_event(sf::Event& event) = 0;
+  void process_resize_event(sf::Event& event);
 
   /// Set if this window is active.
   void set_is_active(const bool is_active);
@@ -43,12 +43,14 @@ public:
   /// Use \link{clear_next_state} to clear the next state
   void set_next_state(const program_state next_state);
 
-  virtual void start() = 0;
+  /// Prepare this window for being shown
+  void start();
 
-  virtual void stop() = 0;
+  /// Clean up after this window has been shown
+  void stop();
 
   /// Run the game, until the user quits
-  virtual void tick(const delta_t dt) = 0;
+  void tick(const delta_t dt);
 
 private:
 
@@ -56,6 +58,24 @@ private:
 
   /// The next state to go to, if any
   std::optional<program_state> m_next_state;
+
+  /// Draw the menu on the main window
+  virtual void draw_impl() = 0;
+
+  /// Process an event
+  virtual bool process_event_impl(sf::Event& e) = 0;
+
+  /// Process a resize event
+  virtual void process_resize_event_impl(sf::Event& event) = 0;
+
+  /// Prepare this window for being shown
+  virtual void start_impl() = 0;
+
+  /// Clean up after this window has been shown
+  virtual void stop_impl() = 0;
+
+  /// Run the game, until the user quits
+  virtual void tick_impl(const delta_t dt) = 0;
 
 };
 

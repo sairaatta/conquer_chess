@@ -23,7 +23,7 @@ void played_game_view::exec()
 
 }
 
-bool played_game_view::process_event(sf::Event& event)
+bool played_game_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Resized)
   {
@@ -67,7 +67,7 @@ void played_game_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::White);
 }
 
-void played_game_view::draw()
+void played_game_view::draw_impl()
 {
   draw_layout_panels(*this);
   show_text_panel(*this);

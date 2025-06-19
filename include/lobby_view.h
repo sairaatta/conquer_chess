@@ -19,7 +19,7 @@ public:
   lobby_view();
 
   /// Show the menu on-screen
-  void draw() override;
+  void draw_impl() override;
 
   bool get_dog_mode() const noexcept { return m_dog_mode; }
 
@@ -34,9 +34,9 @@ public:
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
-  void process_resize_event(sf::Event& event) override;
+  void process_resize_event_impl(sf::Event& event) override;
 
   /// Sets the selected item.
   /// If the selected item changes, play sound
@@ -45,12 +45,12 @@ public:
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
-  void stop() override;
+  void stop_impl() override;
 
-  void start() override;
+  void start_impl() override;
 
   /// Does the countdown
-  void tick(const delta_t dt) override;
+  void tick_impl(const delta_t dt) override;
 
 private:
 

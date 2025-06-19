@@ -20,7 +20,7 @@ public:
   menu_view();
 
   /// Show the menu on-screen
-  void draw() override;
+  void draw_impl() override;
 
   /// Get the index of the background image.
   ///
@@ -34,21 +34,21 @@ public:
 
   /// Process an event
   /// @return true if the user wants to quit the program
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
   /// Process a resize event
-  void process_resize_event(sf::Event& event) override;
+  void process_resize_event_impl(sf::Event& event) override;
 
   /// Sets the selected item.
   /// If the selected item changes, play sound
   void set_selected(const menu_view_item i);
 
   /// Start displaying this window
-  void start() override;
+  void start_impl() override;
 
-  void stop() override;
+  void stop_impl() override;
 
-  void tick(const delta_t dt) override;
+  void tick_impl(const delta_t dt) override;
 
 
 private:

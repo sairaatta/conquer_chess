@@ -21,26 +21,26 @@ public:
   loading_view();
 
   /// Displays this window
-  void draw() override;
+  void draw_impl() override;
 
   /// Go to the next state (if any).
   ///
   /// For this screen, the textures are loaded.
-  void tick(const delta_t dt) override;
+  void tick_impl(const delta_t dt) override;
 
   /// Process an event
   /// @return true if the user wants to quit the program
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
-  void process_resize_event(sf::Event& event) override;
+  void process_resize_event_impl(sf::Event& event) override;
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
-  void start() override;
+  void start_impl() override;
 
   /// End displaying this class
-  void stop() override;
+  void stop_impl() override;
 
 private:
 

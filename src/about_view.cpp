@@ -18,12 +18,12 @@ about_view::about_view()
   m_controls_bar.set_draw_player_controls(false);
 }
 
-void about_view::tick(const delta_t)
+void about_view::tick_impl(const delta_t)
 {
   assert(is_active());
 }
 
-bool about_view::process_event(sf::Event& event)
+bool about_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -43,7 +43,7 @@ bool about_view::process_event(sf::Event& event)
   return false;
 }
 
-void about_view::process_resize_event(sf::Event& event)
+void about_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   const screen_coordinate window_size(
@@ -56,7 +56,7 @@ void about_view::process_resize_event(sf::Event& event)
   m_controls_bar.set_window_size(window_size);
 }
 
-void about_view::draw()
+void about_view::draw_impl()
 {
   draw_background(*this);
   draw_panel(*this);
@@ -160,13 +160,13 @@ void draw_title(about_view& v)
   );
 }
 
-void about_view::start()
+void about_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
 }
 
-void about_view::stop()
+void about_view::stop_impl()
 {
   assert(is_active());
   clear_next_state();

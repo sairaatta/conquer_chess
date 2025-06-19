@@ -18,28 +18,28 @@ public:
   about_view();
 
   /// Show the menu on-screen
-  void draw() override;
+  void draw_impl() override;
 
   const auto& get_layout() const noexcept { return m_layout; }
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
   /// Process a resize event
-  void process_resize_event(sf::Event& event) override;
+  void process_resize_event_impl(sf::Event& event) override;
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
   /// Prepare for showing this dialog
-  void start() override;
+  void start_impl() override;
 
   /// End showing this dialog
-  void stop() override;
+  void stop_impl() override;
 
   /// Run the menu, until the user quits
-  void tick(const delta_t dt) override;
+  void tick_impl(const delta_t dt) override;
 
 private:
 

@@ -32,7 +32,7 @@ game_view::game_view(
 }
 
 
-void game_view::tick(delta_t dt)
+void game_view::tick_impl(delta_t dt)
 {
   assert(is_active());
 
@@ -46,7 +46,7 @@ void game_view::tick(delta_t dt)
   process_piece_messages();
 
   // Show the new state
-  draw();
+  draw_impl();
 
   game_resources::get().get_songs().get_wonderful_time().stop();
 }
@@ -155,7 +155,7 @@ const in_game_time& get_time(const game_view& v) noexcept
   return get_time(v.get_game());
 }
 
-bool game_view::process_event(sf::Event& event)
+bool game_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -176,7 +176,7 @@ bool game_view::process_event(sf::Event& event)
   return false;
 }
 
-void game_view::process_resize_event(sf::Event& event)
+void game_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   const screen_coordinate window_size(
@@ -227,7 +227,7 @@ void game_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::Black);
 }
 
-void game_view::draw()
+void game_view::draw_impl()
 {
   // Show the layout of the screen: board and sidebars
   show_map(*this);
@@ -938,7 +938,7 @@ void show_unit_sprites(game_view& view, const side player_side)
   }
 }
 
-void game_view::start()
+void game_view::start_impl()
 {
   m_clock.restart();
   game_resources::get().get_songs().get_wonderful_time().setVolume(
@@ -952,7 +952,7 @@ void game_view::start()
   set_is_active(true);
 }
 
-void game_view::stop()
+void game_view::stop_impl()
 {
   assert(is_active());
   m_clock.restart();

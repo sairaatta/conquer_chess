@@ -15,7 +15,7 @@ loading_view::loading_view()
 
 }
 
-void loading_view::tick(const delta_t)
+void loading_view::tick_impl(const delta_t)
 {
   assert(is_active());
   if (!m_resource_loader.is_done())
@@ -28,7 +28,7 @@ void loading_view::tick(const delta_t)
   }
 }
 
-bool loading_view::process_event(sf::Event& event)
+bool loading_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -45,7 +45,7 @@ bool loading_view::process_event(sf::Event& event)
   return false;
 }
 
-void loading_view::process_resize_event(sf::Event& event)
+void loading_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   // The draw method checks the screen size
@@ -69,7 +69,7 @@ sf::Text get_loading_screen_text() noexcept
   return text;
 }
 
-void loading_view::draw()
+void loading_view::draw_impl()
 {
   const auto window_size{get_render_window().getSize()};
 
@@ -132,13 +132,13 @@ void loading_view::draw()
   }
 }
 
-void loading_view::start()
+void loading_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
 }
 
-void loading_view::stop()
+void loading_view::stop_impl()
 {
   assert(is_active());
   game_resources::get().get_loading_screen_songs().get_heroes().stop();

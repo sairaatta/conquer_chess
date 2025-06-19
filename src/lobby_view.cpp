@@ -24,7 +24,7 @@ lobby_view::lobby_view()
   m_controls_bar.set_draw_up_down_select(false);
 }
 
-void lobby_view::tick(const delta_t)
+void lobby_view::tick_impl(const delta_t)
 {
   assert(is_active());
   if (m_clock)
@@ -56,7 +56,7 @@ bool lobby_view::get_start(const side player_side) const noexcept
   return m_rhs_start;
 }
 
-bool lobby_view::process_event(sf::Event& event)
+bool lobby_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -168,7 +168,7 @@ bool lobby_view::process_event(sf::Event& event)
   return false; // Do not close the lobby :-)
 }
 
-void lobby_view::process_resize_event(sf::Event& event)
+void lobby_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   const screen_coordinate window_size(
@@ -190,7 +190,7 @@ void lobby_view::set_text_style(sf::Text& text)
   text.setFillColor(sf::Color::Black);
 }
 
-void lobby_view::draw()
+void lobby_view::draw_impl()
 {
   draw_background(*this);
   draw_layout_panels(*this);
@@ -372,7 +372,7 @@ void draw_lobby_title(lobby_view& v)
 
 }
 
-void lobby_view::start()
+void lobby_view::start_impl()
 {
   game_resources::get().get_songs().get_soothing().setVolume(
     get_music_volume_as_percentage()
@@ -394,7 +394,7 @@ void lobby_view::start()
   set_is_active(true);
 }
 
-void lobby_view::stop()
+void lobby_view::stop_impl()
 {
   assert(is_active());
   game_resources::get().get_songs().get_soothing().stop();

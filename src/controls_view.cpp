@@ -53,7 +53,7 @@ void draw_panel(
   draw_normal_text(panel_text, panel_position);
 }
 
-void controls_view::tick(const delta_t)
+void controls_view::tick_impl(const delta_t)
 {
   assert(is_active());
 }
@@ -108,7 +108,7 @@ sf::Mouse::Button get_button_for_next(const controls_view& /* v */)
   return sf::Mouse::Button::Right;
 }
 
-bool controls_view::process_event(sf::Event& event)
+bool controls_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -177,7 +177,7 @@ bool controls_view::process_event(sf::Event& event)
   return false; // Do not close the window :-)
 }
 
-void controls_view::process_resize_event(sf::Event& event)
+void controls_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   const screen_coordinate window_size(
@@ -197,7 +197,7 @@ void controls_view::set_text_style(sf::Text& text)
   text.setCharacterSize(32);
   text.setFillColor(sf::Color::Black);
 }
-void controls_view::draw()
+void controls_view::draw_impl()
 {
   draw_background(*this);
   draw_layout_panels(*this);
@@ -339,13 +339,13 @@ void draw_type_panel(controls_view& v)
   );
 }
 
-void controls_view::start()
+void controls_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
 }
 
-void controls_view::stop()
+void controls_view::stop_impl()
 {
   assert(is_active());
   clear_next_state();

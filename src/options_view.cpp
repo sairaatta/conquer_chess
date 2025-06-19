@@ -110,7 +110,7 @@ physical_controller_type get_physical_controller_type(
   return physical_controllers::get().get_controller(player).get_type();
 }
 
-bool options_view::process_event(sf::Event& event)
+bool options_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -210,7 +210,7 @@ bool options_view::process_event(sf::Event& event)
 }
 
 
-void options_view::process_resize_event(sf::Event& event)
+void options_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   const screen_coordinate window_size(
@@ -232,7 +232,7 @@ void options_view::set_selected(const options_view_item i)
   m_selected = i;
 }
 
-void options_view::draw()
+void options_view::draw_impl()
 {
   draw_background(*this);
   draw_layout_panels(*this);
@@ -370,20 +370,20 @@ void draw_sound_effects_volume(options_view& v)
   draw_sound_effects_volume_value(layout.get_sound_effects_volume_value());
 }
 
-void options_view::start()
+void options_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
 }
 
-void options_view::stop()
+void options_view::stop_impl()
 {
   assert(is_active());
   clear_next_state();
   set_is_active(false);
 }
 
-void options_view::tick(const delta_t)
+void options_view::tick_impl(const delta_t)
 {
   assert(is_active());
   // Nothing here yet

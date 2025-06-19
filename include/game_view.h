@@ -28,10 +28,10 @@ public:
   explicit game_view();
 
   /// Show the game on-screen
-  void draw() override;
+  void draw_impl() override;
 
   /// Run the game, until the user quits
-  void tick(delta_t dt) override;
+  void tick_impl(delta_t dt) override;
 
   /// The the elapsed time in seconds
   double get_elapsed_time_secs() const noexcept;
@@ -51,17 +51,17 @@ public:
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
   /// Process a resize events
-  void process_resize_event(sf::Event& event) override;
+  void process_resize_event_impl(sf::Event& event) override;
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& text);
 
-  void start() override;
+  void start_impl() override;
 
-  void stop() override;
+  void stop_impl() override;
 
 private:
 

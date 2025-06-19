@@ -26,7 +26,7 @@ public:
   controls_view(const side& player_side);
 
   /// Show the menu on-screen
-  void draw() override;
+  void draw_impl() override;
 
 
   const auto& get_layout() const noexcept { return m_layout; }
@@ -38,19 +38,19 @@ public:
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event) override;
+  bool process_event_impl(sf::Event& event) override;
 
   /// Resize
-  void process_resize_event(sf::Event& event) override;
+  void process_resize_event_impl(sf::Event& event) override;
 
   /// Set a uniform text style
   void set_text_style(sf::Text& text);
 
-  void start() override;
+  void start_impl() override;
 
-  void stop() override;
+  void stop_impl() override;
 
-  void tick(const delta_t dt) override;
+  void tick_impl(const delta_t dt) override;
 
 private:
 
