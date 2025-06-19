@@ -5,6 +5,7 @@
 #include "piece.h"
 
 #include <cassert>
+#include <sstream>
 
 game_controller::game_controller()
   : m_lhs_cursor_pos{0.5, 4.5},
@@ -1419,7 +1420,13 @@ void test_game_controller() //!OCLINT tests may be many
     const auto messages{get_piece_at(g, square("d1")).get_messages()};
     assert(messages.back() == message_type::cannot);
   }
-
+  // operator<<
+  {
+    std::stringstream s;
+    game_controller c{create_game_controller_with_default_controllers()};
+    s << c;
+    assert(!s.str().empty());
+  }
   #endif // NDEBUG // no tests in release
 }
 

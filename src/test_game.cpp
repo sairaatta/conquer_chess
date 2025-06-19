@@ -235,21 +235,6 @@ void test_game_functions()
     assert(can_castle_queenside(get_piece_at(g, "e1"), g));
     assert(can_castle_queenside(get_piece_at(g, "e8"), g));
   }
-  // clear_sound_effects
-  /*
-  {
-    game g;
-    game_controller c;
-    move_cursor_to(c, "e8", side::rhs);
-    add_user_input(c, create_press_action_1(side::rhs));
-    assert(collect_messages(g).empty());
-    c.get_user_inputs().apply_user_inputs_to_game(c, g); // TODO: fix
-    g.tick();
-    assert(!collect_messages(g).empty());
-    clear_piece_messages(g);
-    assert(collect_messages(g).empty());
-  }
-  */
   #ifdef FIX_ISSUE_78
   // Rewrite to game test, without using the game_controller
   // collect_action_history
@@ -977,7 +962,11 @@ void test_game_functions()
     game g{create_game_with_standard_starting_position()};
     tick_until_idle(g);
     assert(is_idle(g));
-
+  }
+  // to_pgn
+  {
+    game g{create_game_with_standard_starting_position()};
+    assert(to_pgn(g).empty());
   }
   // operator<<
   {
