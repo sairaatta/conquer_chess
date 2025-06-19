@@ -10,6 +10,7 @@
 
 #include "ccfwd.h"
 #include "chess_color.h"
+#include "side.h"
 #include "physical_controller_type.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
@@ -88,6 +89,27 @@ void draw_music_volume_value(const screen_rect& sr);
 ///
 /// Keys are: up, down, select, quit
 void draw_controls_bar(const screen_rect& r);
+
+
+/// Draw the navigation controls for a player.
+///
+/// Must be 3x64 pixels wide and 2x64 pixels high
+/// For a keyboard:
+///
+/// ```console
+///     +---+
+///     | W |
+/// +---+---+---+
+/// | A | S | D |
+/// +---+---+---+
+/// ```
+///
+/// For a mouse
+///
+/// ```console
+/// [Picture of a mouse with all four arrows]
+/// ```
+void draw_navigation_controls(const screen_rect& r, const side p);
 
 /// Draw fancy text at a normal size
 void draw_normal_fancy_text(const sf::String& s, const screen_rect& sr);

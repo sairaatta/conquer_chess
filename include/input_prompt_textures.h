@@ -16,6 +16,15 @@ public:
   /// Determine if a texture is present
   bool has_texture(const std::string& s) const noexcept;
 
+  /// Get a texture from a std::string.
+  ///
+  /// Prefer to use `get_texture` with a SFML key,
+  /// if there is a key available, as these are tested.
+  /// However, some textures, e.g. 'mouse_move'
+  /// have no key associated with it and can only
+  /// be obtained with this method.
+  sf::Texture& get_texture(const std::string& s);
+
   /// Get a texture from an SFML key
   sf::Texture& get_texture(const sf::Keyboard::Key& k);
 
@@ -29,10 +38,6 @@ public:
 
 private:
 
-  /// Get a texture from a std::string.
-  ///
-  /// Prefer to use `get_texture` with a SFML key
-  sf::Texture& get_texture(const std::string& s);
 
   std::map<std::string, sf::Texture> m_textures;
 

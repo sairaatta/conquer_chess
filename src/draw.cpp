@@ -8,6 +8,7 @@
 #include "sfml_helper.h"
 #include "piece.h"
 #include "game_coordinate.h"
+#include "physical_controllers.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
@@ -227,6 +228,48 @@ void draw_music_volume_value(const screen_rect& sr)
   std::stringstream s;
   s << get_music_volume() << " %";
   draw_normal_text(s.str(), sr);
+}
+
+void draw_navigation_controls(const screen_rect& r, const side p)
+{
+  const int symbol_width{64};
+  const int symbol_height{64};
+  assert(get_height(r) == 2 * symbol_height);
+  assert(get_width(r) == 3 * symbol_width);
+  const auto& c{physical_controllers::get().get_controller(p)};
+  switch (c.get_type())
+  {
+    case physical_controller_type::keyboard:
+    {
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + symbol_width};
+      const int x3{x2 + symbol_width};
+      const int x4{x3 + symbol_width};
+      const int y1{r.get_tl().get_y()};
+      const int y2{y1 + symbol_height};
+      const int y3{y2 + symbol_height};
+      const auto r_up{screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2))};
+      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_up(), r_up);
+      const auto r_right{screen_rect(screen_coordinate(x1, y2), screen_coordinate(x2, y3))};
+      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_right(), r_right);
+      const auto r_down{screen_rect(screen_coordinate(x2, y2), screen_coordinate(x3, y3))};
+      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_down(), r_down);
+      const auto r_left{screen_rect(screen_coordinate(x3, y2), screen_coordinate(x4, y3))};
+      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_left(), r_left);
+    }
+    break;
+    case physical_controller_type::mouse:
+    {
+      const std::string texture_name{"mouse_move"};
+      auto& t{game_resources::get().get_input_prompt_textures()};
+      assert(t.has_texture(texture_name));
+      draw_texture(
+        t.get_texture(texture_name),
+        create_centered_rect(get_center(r), 64, 64)
+      );
+    }
+    break;
+  }
 }
 
 

@@ -108,7 +108,7 @@ physical_controller_type get_physical_controller_type(const game_view& view, con
 std::string get_controls_text(
   const game_view& view,
   const game_controller& c,
-  const int key
+  const action_number& key
 );
 
 /// Get the last log messages for a player
@@ -139,7 +139,7 @@ const game_coordinate& get_cursor_pos(
 std::string get_text_for_action(
   const game_view& view,
   const game_controller& c,
-  const int key
+  const action_number& key
 );
 
 /// Get the time in the game
@@ -155,11 +155,17 @@ void process_event(
 );
 
 
+/// Show the map of the window
+void draw_background(game_view& view);
+
 /// Show the board: squares, unit paths, pieces, health bars
 void draw_board(game_view& view);
 
 /// Show the controls (e.g. for a unit) on-screen for a player
 void draw_controls(game_view& view, const side player);
+
+/// Show the controls (e.g. for a unit) on-screen for a player
+void draw_navigation_controls(game_view& view);
 
 /// Show debug info on-screen for a player
 void show_debug(game_view& view, const side player_side);
@@ -168,10 +174,8 @@ void show_debug(game_view& view, const side player_side);
 void show_layout(game_view& view);
 
 /// Show the log on-screen, i.e. things the pieces say
-void show_log(game_view& view, const side player);
+void draw_log(game_view& view, const side player);
 
-/// Show the map of the window
-void show_map(game_view& view);
 
 /// Show the squares that are occupied on-screen
 /// Throws if this option is turned off
@@ -204,7 +208,7 @@ void show_unit_health_bars(game_view& view);
 void show_unit_paths(game_view& view);
 
 /// Show the selected unit(s) on-screen for a player
-void show_unit_sprites(game_view& view, const side player_side);
+void draw_unit_info(game_view& view, const side player_side);
 
 void test_game_view();
 

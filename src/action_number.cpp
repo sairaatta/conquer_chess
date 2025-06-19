@@ -80,6 +80,15 @@ void test_action_number()
     assert(a == b);
     assert(!(a == c));
   }
+  // operator<
+  {
+    const action_number a(1);
+    const action_number b(1);
+    const action_number c(2);
+    assert(!(a < b));
+    assert(!(c < a));
+    assert(a < c);
+  }
   // operator<<
   {
     std::stringstream s;
@@ -93,6 +102,11 @@ void test_action_number()
 bool operator==(const action_number& lhs, const action_number& rhs) noexcept
 {
   return lhs.get_number() == rhs.get_number();
+}
+
+bool operator<(const action_number& lhs, const action_number& rhs) noexcept
+{
+  return lhs.get_number() < rhs.get_number();
 }
 
 std::ostream& operator<<(std::ostream& os, const action_number& number) noexcept

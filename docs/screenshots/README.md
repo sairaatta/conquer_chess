@@ -2,6 +2,8 @@
 
 ## v0.8
 
+![Game screen v0.8](20250619_3.jpg)
+
 ![Main menu screen v0.8](20250619_1.jpg)
 
 ![Lobby screen v0.8](20250619_2.jpg)

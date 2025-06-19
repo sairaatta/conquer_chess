@@ -10,8 +10,8 @@
 #include "read_only.h"
 
 #include <iosfwd>
+#include <map>
 #include <vector>
-
 
 /// The layout of the Game dialog.
 ///
@@ -68,6 +68,7 @@ public:
   ///      for this section
   const screen_rect& get_controls_key(const side player, const action_number& key) const noexcept;
 
+  /*
   /// The square that show the icon of the user input, e.g. an arrow
   /// as is part of \link{get_controls_key}
   screen_rect get_controls_key_icon(const side player, const action_number& key) const noexcept;
@@ -80,6 +81,7 @@ public:
   /// e.g. 'attack',
   /// as is part of \link{get_controls_key}
   screen_rect get_controls_key_name(const side player, const action_number& key) const noexcept;
+  */
 
   const screen_rect& get_debug(const side player) const noexcept;
 
@@ -88,7 +90,11 @@ public:
 
   /// The area where the frame rate (in frames per seconds) is dsplayed
   const screen_rect& get_log(const side player) const noexcept;
-  const screen_rect& get_units(const side player) const noexcept;
+
+  const screen_rect& get_navigation_controls(const side player) const noexcept;
+
+  /// Information about a unit
+  const screen_rect& get_unit_info(const side player) const noexcept;
 
   screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
@@ -96,23 +102,13 @@ private:
 
 
   screen_rect m_board;
-  screen_rect m_controls_lhs;
-  screen_rect m_controls_lhs_key_1;
-  screen_rect m_controls_lhs_key_2;
-  screen_rect m_controls_lhs_key_3;
-  screen_rect m_controls_lhs_key_4;
-  screen_rect m_controls_rhs;
-  screen_rect m_controls_rhs_key_1;
-  screen_rect m_controls_rhs_key_2;
-  screen_rect m_controls_rhs_key_3;
-  screen_rect m_controls_rhs_key_4;
-  screen_rect m_debug_lhs;
-  screen_rect m_debug_rhs;
+  std::map<side, screen_rect> m_controls;
+  std::map<action_number, std::map<side, screen_rect>> m_controls_key;
+  std::map<side, screen_rect> m_debug;
   read_only<int> m_font_size{32};
-  screen_rect m_log_lhs;
-  screen_rect m_log_rhs;
-  screen_rect m_units_lhs;
-  screen_rect m_units_rhs;
+  std::map<side, screen_rect> m_log;
+  std::map<side, screen_rect> m_navigation_controls;
+  std::map<side, screen_rect> m_unit_info;
 
   /// The size of the window
   screen_coordinate m_window_size;

@@ -21,6 +21,19 @@ void test_piece_action_type()
 #ifndef NDEBUG
   // to_human_str
   {
+    assert(to_human_str(piece_action_type::attack) == "Attack");
+    assert(to_human_str(piece_action_type::attack_en_passant) == "Capture en-passant");
+    assert(to_human_str(piece_action_type::castle_kingside) == "Castle kingside");
+    assert(to_human_str(piece_action_type::castle_queenside) == "Castle queenside");
+    assert(to_human_str(piece_action_type::move) == "Move");
+    assert(to_human_str(piece_action_type::promote_to_bishop) == "Promote to bishop");
+    assert(to_human_str(piece_action_type::promote_to_knight) == "Promote to knight");
+    assert(to_human_str(piece_action_type::promote_to_queen) == "Promote to queen");
+    assert(to_human_str(piece_action_type::promote_to_rook) == "Promote to rook");
+    assert(to_human_str(piece_action_type::select) == "Select");
+    assert(to_human_str(piece_action_type::unselect) == "Unselect");
+
+    // Check if there are new values
     for (const auto t: get_all_piece_action_types())
     {
       assert(!to_human_str(t).empty());

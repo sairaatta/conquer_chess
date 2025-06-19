@@ -37,6 +37,7 @@ action_number get_previous(const action_number& n) noexcept;
 void test_action_number();
 
 bool operator==(const action_number& lhs, const action_number& rhs) noexcept;
+bool operator<(const action_number& lhs, const action_number& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const action_number& number) noexcept;
 
 #endif // ACTION_NUMBER_H

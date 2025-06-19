@@ -13,6 +13,7 @@
 #include "screen_rect.h"
 #include "sfml_helper.h"
 #include "screen_rect.h"
+#include "physical_controllers.h"
 #include "game_rect.h"
 #include "lobby_options.h"
 
@@ -65,11 +66,9 @@ physical_controller_type get_physical_controller_type(const game_view& view, con
 std::string get_controls_text(
   const game_view& view,
   const game_controller& c,
-  const int key
+  const action_number& key
 )
 {
-  assert(key >= 1); // Human based counting
-  assert(key <= 4); // Human based counting
   return get_text_for_action(view, c, key);
 }
 
@@ -121,7 +120,7 @@ const game_coordinate& get_cursor_pos(const game_view& view, const side player) 
 std::string get_text_for_action(
   const game_view& view,
   const game_controller& c,
-  const int key
+  const action_number& key
 )
 {
   const auto& g{view.get_game()};
@@ -129,22 +128,22 @@ std::string get_text_for_action(
     get_default_piece_action(g, c, side::lhs)
   };
   if (!default_action) return "";
-  if (key == 1)
+  if (key == action_number(1))
   {
-    return to_str(default_action.value());
+    return to_human_str(default_action.value());
   }
   else
   {
     if (default_action.value() == piece_action_type::promote_to_queen)
     {
-      switch (key)
+      switch (key.get_number())
       {
-        case 2: return "Promote to Rook";
-        case 3: return "Promote to bishop";
+        case 2: return to_human_str(piece_action_type::promote_to_rook);
+        case 3: return to_human_str(piece_action_type::promote_to_bishop);
         case 4:
         default:
-          assert(key == 4);
-          return "Promote to knight";
+          assert(key.get_number() == 4);
+          return to_human_str(piece_action_type::promote_to_knight);
       }
     }
     return "";
@@ -231,10 +230,11 @@ void game_view::set_text_style(sf::Text& text)
 void game_view::draw_impl()
 {
   // Show the layout of the screen: board and sidebars
-  show_map(*this);
+  draw_background(*this);
 
   // Show the layout of the screen: board and sidebars
   show_layout(*this);
+
 
   // Show the board: squares, unit paths, pieces, health bars
   draw_board(*this);
@@ -242,6 +242,8 @@ void game_view::draw_impl()
   // Show the sidebars: controls (with log), units, debug
   show_sidebar(*this, side::lhs);
   show_sidebar(*this, side::rhs);
+
+  draw_navigation_controls(*this);
 
   m_controls_bar.draw();
 }
@@ -266,6 +268,45 @@ void draw_controls(
   const side player
 )
 {
+  // Stub for keyboard only
+  const auto& c{physical_controllers::get().get_controller(player)};
+  assert(c.get_type() == physical_controller_type::keyboard);
+
+  const auto& layout{view.get_layout()};
+
+  // Blur the entire background here
+  draw_rectangle(layout.get_controls(player), sf::Color(128, 128, 128, 128));
+
+  draw_navigation_controls(layout.get_navigation_controls(player), player);
+
+
+  for (const auto n: get_all_action_numbers())
+  {
+    const screen_rect row_rect{
+      layout.get_controls_key(player, n)
+    };
+    const screen_rect symbol_rect{
+      row_rect.get_tl(),
+      row_rect.get_tl() + screen_coordinate(64, 64)
+    };
+    draw_input_prompt_symbol(
+      physical_controllers::get().get_controller(player).get_key_bindings().get_key_for_action(n),
+      symbol_rect
+    );
+    const screen_rect text_rect{
+      symbol_rect.get_tl() + screen_coordinate(64, 0),
+      screen_coordinate(row_rect.get_br().get_x(), symbol_rect.get_br().get_y())
+    };
+    const std::string text{
+      get_controls_text(view, view.get_game_controller(), n)
+    };
+    if (!text.empty())
+    {
+      draw_text(text, text_rect, 26);
+    }
+  }
+
+  #ifdef CARE_ABOUT_OLD_CODE
   const auto& layout{view.get_layout()};
   const std::vector<sf::Color> colors{
     sf::Color(255,  0,  0),
@@ -420,6 +461,19 @@ void draw_controls(
     selector_square.setOutlineColor(sf::Color::White);
     get_render_window().draw(selector_square);
   }
+  #endif // CARE_ABOUT_OLD_CODE
+}
+
+void draw_navigation_controls(game_view& view)
+{
+  for (const auto s: get_all_sides())
+  {
+    draw_navigation_controls(
+      view.get_layout().get_navigation_controls(s),
+      s
+    );
+  }
+
 }
 
 void show_debug(game_view& view, const side player_side)
@@ -507,7 +561,7 @@ void show_layout(game_view& view)
   }
 }
 
-void show_log(game_view& view, const side player)
+void draw_log(game_view& view, const side player)
 {
   const auto& layout = view.get_layout();
   sf::Text text;
@@ -523,16 +577,13 @@ void show_log(game_view& view, const side player)
   get_render_window().draw(text);
 }
 
-void show_map(game_view& view)
+void draw_background(game_view& view)
 {
   const auto& layout{view.get_layout()};
-  sf::RectangleShape sprite;
-  set_rect(sprite, layout.get_window_size());
-  const race r{get_race_of_color(chess_color::white)};
-  sprite.setTexture(
-    &get_map_texture(r)
+  draw_texture(
+    get_map_texture(get_race_of_color(chess_color::white)),
+    screen_rect(screen_coordinate(0, 0), layout.get_window_size())
   );
-  get_render_window().draw(sprite);
 }
 
 
@@ -646,9 +697,9 @@ void show_possible_moves(game_view& view)
 
 void show_sidebar(game_view& view, const side player_side)
 {
-  show_unit_sprites(view, player_side);
+  draw_unit_info(view, player_side);
   draw_controls(view, player_side);
-  show_log(view, player_side);
+  draw_log(view, player_side);
   if (game_options::get().get_show_debug_info()) show_debug(view, player_side);
 }
 
@@ -884,59 +935,41 @@ void show_unit_paths(game_view& view)
   }
 }
 
-void show_unit_sprites(game_view& view, const side player_side)
+void draw_unit_info(game_view& view, const side player_side)
 {
   const auto& layout{view.get_layout()};
-
-  const double square_width = get_width(layout.get_units(player_side));
-  const double square_height = square_width;
+  const auto& r{layout.get_unit_info(player_side)};
   const auto player_color{get_player_color(player_side)};
-  screen_coordinate screen_position{
-    layout.get_units(player_side).get_tl()
-    + screen_coordinate(10, 0) // margin
+
+  const auto selected_pieces{get_selected_pieces(view.get_game(), player_color)};
+  if (selected_pieces.empty()) return;
+  assert(selected_pieces.size() == 1);
+  const auto& piece{selected_pieces[0]};
+
+  // sprite of the piece
+  draw_texture(get_piece_portrait_texture(
+      piece.get_race(),
+      piece.get_color(),
+      piece.get_type()
+    ),
+    r
+  );
+  // text
+  std::stringstream s;
+  s << piece.get_type() << ": "
+    << piece.get_health() << "/"
+    << piece.get_max_health() << ", "
+    << piece.get_current_square() << ", "
+    << describe_actions(piece)
+  ;
+  const auto text_rect{
+    screen_rect(
+      screen_coordinate(r.get_tl().get_x(), r.get_br().get_y() - 32),
+      screen_coordinate(r.get_br())
+    )
   };
-
-  for (const auto& piece: get_selected_pieces(view.get_game(), player_color))
-  {
-    // sprite of the piece
-    sf::RectangleShape sprite;
-    sprite.setSize(sf::Vector2f(square_width, square_height));
-    sprite.setTexture(
-      &get_piece_portrait_texture(
-        piece.get_race(),
-        piece.get_color(),
-        piece.get_type()
-      )
-    );
-    sprite.setOrigin(0.0, 0.0);
-    sprite.setPosition(
-      screen_position.get_x(),
-      screen_position.get_y()
-    );
-    get_render_window().draw(sprite);
-    // text
-    sf::Text text;
-    text.setFont(get_arial_font());
-    std::stringstream s;
-
-    s << piece.get_type() << ": "
-      << piece.get_health() << "/"
-      << piece.get_max_health() << '\n'
-      << piece.get_current_square() << '\n'
-      << describe_actions(piece)
-    ;
-    text.setString(s.str());
-    text.setCharacterSize(20);
-    const auto text_position{
-      screen_position + screen_coordinate(0, square_height + 10)
-    };
-    text.setPosition(
-      text_position.get_x(),
-      text_position.get_y()
-    );
-    get_render_window().draw(text);
-    screen_position += screen_coordinate(0, square_height);
-  }
+  draw_rectangle(text_rect, sf::Color(128, 128, 128, 128));
+  draw_text(s.str(), text_rect, 20);
 }
 
 void game_view::start_impl()

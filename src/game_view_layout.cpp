@@ -17,19 +17,22 @@ game_view_layout::game_view_layout(
   const int margin_width
 ) : m_window_size{window_size}
 {
-  const int unit_panel_height{400};
-  const int control_panel_height{300};
+  const int unit_info_height{300};
+
+  /// 2 for the ASDW, then 1 per action key
+  const int controls_height{(2 + 4) * 64};
+
   const int log_panel_height{
     (
       window_size.get_y()
       - (4 * margin_width)
-      - unit_panel_height
-      - control_panel_height
+      - unit_info_height
+      - controls_height
     )
     / 2
   };
   const int debug_panel_height{log_panel_height};
-  const int panel_width = 300;
+  const int panel_width{300};
 
   const int max_board_width = m_window_size.get_x() - (2 * panel_width) - (4 * margin_width);
   const int max_board_height = m_window_size.get_y() - (2 * margin_width);
@@ -45,8 +48,8 @@ game_view_layout::game_view_layout(
   const int x6{x5 + panel_width};
 
   const int y1{margin_width};
-  const int y2{y1 + unit_panel_height};
-  const int y3{y2 + control_panel_height};
+  const int y2{y1 + unit_info_height};
+  const int y3{y2 + controls_height};
   const int y4{y3 + margin_width};
   const int y5{y4 + log_panel_height};
   const int y6{y5 + margin_width};
@@ -54,19 +57,19 @@ game_view_layout::game_view_layout(
 
 
   // Panel 1
-  m_units_lhs = screen_rect(
+  m_unit_info[side::lhs] = screen_rect(
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
   );
-  m_controls_lhs = screen_rect(
+  m_controls[side::lhs] = screen_rect(
     screen_coordinate(x1, y2),
     screen_coordinate(x2, y3)
   );
-  m_log_lhs = screen_rect(
+  m_log[side::lhs] = screen_rect(
     screen_coordinate(x1, y4),
     screen_coordinate(x2, y5)
   );
-  m_debug_lhs = screen_rect(
+  m_debug[side::lhs] = screen_rect(
     screen_coordinate(x1, y6),
     screen_coordinate(x2, y7)
   );
@@ -86,19 +89,19 @@ game_view_layout::game_view_layout(
   assert(get_width(m_board) == get_height(m_board));
 
   // Panel 2
-  m_units_rhs = screen_rect(
+  m_unit_info[side::rhs] = screen_rect(
     screen_coordinate(x5, y1),
     screen_coordinate(x6, y2)
   );
-  m_controls_rhs = screen_rect(
+  m_controls[side::rhs] = screen_rect(
     screen_coordinate(x5, y2),
     screen_coordinate(x6, y3)
   );
-  m_log_rhs = screen_rect(
+  m_log[side::rhs] = screen_rect(
     screen_coordinate(x5, y4),
     screen_coordinate(x6, y5)
   );
-  m_debug_rhs = screen_rect(
+  m_debug[side::rhs] = screen_rect(
     screen_coordinate(x5, y6),
     screen_coordinate(x6, y7)
   );
@@ -106,80 +109,27 @@ game_view_layout::game_view_layout(
   assert(get_board_width(*this) == get_board_height(*this));
   assert(get_square_width(*this) == get_square_height(*this));
 
-  const bool arrange_horizontally{false};
-  if (arrange_horizontally)
+  for (const auto s: get_all_sides())
   {
-    const int sz{75};
-    m_controls_lhs_key_1 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(1 * sz, 1 * sz)
-    );
-    m_controls_lhs_key_2 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(1 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(2 * sz, 1 * sz)
-    );
-    m_controls_lhs_key_3 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(2 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(3 * sz, 1 * sz)
-    );
-    m_controls_lhs_key_4 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(3 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
-    );
-
-    m_controls_rhs_key_1 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(1 * sz, 1 * sz)
-    );
-    m_controls_rhs_key_2 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(1 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(2 * sz, 1 * sz)
-    );
-    m_controls_rhs_key_3 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(2 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(3 * sz, 1 * sz)
-    );
-    m_controls_rhs_key_4 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(3 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
+    const int x_mid{(m_controls[s].get_tl().get_x() + m_controls[s].get_br().get_x()) / 2};
+    const int cx1{x_mid - ((3 * 64) / 2)};
+    const int cx2{cx1 + (3 * 64)};
+    const int cy1{m_controls[s].get_tl().get_y()};
+    const int cy2{cy1 + (2 * 64)};
+    m_navigation_controls[s] = screen_rect(
+      screen_coordinate(cx1, cy1),
+      screen_coordinate(cx2, cy2)
     );
   }
-  else
+  for (const auto n: get_all_action_numbers())
   {
-    const int sz{75};
-    m_controls_lhs_key_1 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
-    );
-    m_controls_lhs_key_2 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 1 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 2 * sz)
-    );
-    m_controls_lhs_key_3 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 2 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 3 * sz)
-    );
-    m_controls_lhs_key_4 = screen_rect(
-      m_controls_lhs.get_tl() + screen_coordinate(0 * sz, 3 * sz),
-      m_controls_lhs.get_tl() + screen_coordinate(4 * sz, 4 * sz)
-    );
-
-    m_controls_rhs_key_1 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 0 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 1 * sz)
-    );
-    m_controls_rhs_key_2 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 1 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 2 * sz)
-    );
-    m_controls_rhs_key_3 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 2 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 3 * sz)
-    );
-    m_controls_rhs_key_4 = screen_rect(
-      m_controls_rhs.get_tl() + screen_coordinate(0 * sz, 3 * sz),
-      m_controls_rhs.get_tl() + screen_coordinate(4 * sz, 4 * sz)
-    );
+    for (const auto s: get_all_sides())
+    {
+      m_controls_key[n][s] = screen_rect(
+        m_controls[s].get_tl() + screen_coordinate(0 * 64, (1 + n.get_number()) * 64),
+        screen_coordinate(m_controls[s].get_br().get_x(), m_controls[s].get_tl().get_y() + (2 + n.get_number()) * 64)
+      );
+    }
   }
 }
 
@@ -262,9 +212,7 @@ int get_board_width(const game_view_layout& layout) noexcept
 
 const screen_rect& game_view_layout::get_controls(const side player) const noexcept
 {
-  if (player == side::lhs) return m_controls_lhs;
-  assert(player == side::rhs);
-  return m_controls_rhs;
+  return m_controls.at(player);
 }
 
 const screen_rect& game_view_layout::get_controls_key(
@@ -272,32 +220,10 @@ const screen_rect& game_view_layout::get_controls_key(
   const action_number& key
 ) const noexcept
 {
-  if (player == side::lhs)
-  {
-    switch (key.get_number())
-    {
-      case 1: return m_controls_lhs_key_1;
-      case 2: return m_controls_lhs_key_2;
-      case 3: return m_controls_lhs_key_3;
-      case 4:
-        default:
-        assert(key.get_number() == 4);
-        return m_controls_lhs_key_4;
-    }
-  }
-  assert(player == side::rhs);
-  switch (key.get_number())
-  {
-    case 1: return m_controls_rhs_key_1;
-    case 2: return m_controls_rhs_key_2;
-    case 3: return m_controls_rhs_key_3;
-    case 4:
-      default:
-      assert(key.get_number() == 4);
-      return m_controls_rhs_key_4;
-  }
+  return m_controls_key.at(key).at(player);
 }
 
+/*
 screen_rect game_view_layout::get_controls_key_icon(
   const side player,
   const action_number& key
@@ -350,20 +276,22 @@ screen_rect game_view_layout::get_controls_key_name(
   };
   return half;
 }
+*/
 
 const screen_rect& game_view_layout::get_debug(const side player) const noexcept
 {
-  if (player == side::lhs) return m_debug_lhs;
-  assert(player == side::rhs);
-  return m_debug_rhs;
+  return m_debug.at(player);
 }
 
 
 const screen_rect& game_view_layout::get_log(const side player) const noexcept
 {
-  if (player == side::lhs) return m_log_lhs;
-  assert(player == side::rhs);
-  return m_log_rhs;
+  return m_log.at(player);
+}
+
+const screen_rect& game_view_layout::get_navigation_controls(const side player) const noexcept
+{
+  return m_navigation_controls.at(player);
 }
 
 std::vector<screen_rect> get_panels(
@@ -377,8 +305,8 @@ std::vector<screen_rect> get_panels(
     layout.get_controls(side::rhs),
     layout.get_log(side::lhs),
     layout.get_log(side::rhs),
-    layout.get_units(side::lhs),
-    layout.get_units(side::rhs)
+    layout.get_unit_info(side::lhs),
+    layout.get_unit_info(side::rhs)
   };
   if (show_debug_panel)
   {
@@ -398,11 +326,9 @@ double get_square_width(const game_view_layout& layout) noexcept
   return static_cast<double>(get_board_width(layout)) / 8.0;
 }
 
-const screen_rect& game_view_layout::get_units(const side player) const noexcept
+const screen_rect& game_view_layout::get_unit_info(const side player) const noexcept
 {
-  if (player == side::lhs) return m_units_lhs;
-  assert(player == side::rhs);
-  return m_units_rhs;
+  return m_unit_info.at(player);
 }
 
 void test_game_view_layout()
@@ -421,8 +347,8 @@ void test_game_view_layout()
 
     assert(layout.get_debug(side::lhs).get_br().get_x() > 0.0);
     assert(layout.get_debug(side::lhs).get_br().get_y() > 0.0);
-    assert(layout.get_units(side::lhs).get_tl().get_x() > 0.0);
-    assert(layout.get_units(side::lhs).get_tl().get_y() > 0.0);
+    assert(layout.get_unit_info(side::lhs).get_tl().get_x() > 0.0);
+    assert(layout.get_unit_info(side::lhs).get_tl().get_y() > 0.0);
     assert(get_board_width(layout) > 0.0);
     assert(get_board_height(layout) > 0.0);
     assert(get_square_width(layout) > 0.0);
@@ -543,7 +469,7 @@ std::ostream& operator<<(std::ostream& os, const game_view_layout& layout) noexc
   for (const auto side: get_all_sides())
   {
     s
-      << side << " units: " << layout.get_units(side) << '\n'
+      << side << " units: " << layout.get_unit_info(side) << '\n'
       << side << " controls: " << layout.get_controls(side) << '\n'
       << side << " controls key 1: " << layout.get_controls_key(side, action_number(1)) << '\n'
       << side << " controls key 2: " << layout.get_controls_key(side, action_number(2)) << '\n'

@@ -49,6 +49,7 @@ input_prompt_textures::input_prompt_textures()
     const std::string resource_name{to_resource_name(k)};
     assert(has_texture(resource_name));
   }
+  assert(has_texture("mouse_move"));
 }
 
 bool input_prompt_textures::has_texture(const std::string& s) const noexcept
