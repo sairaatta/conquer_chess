@@ -61,7 +61,7 @@ public:
   const screen_rect& get_color(const side player_side) const noexcept;
   const screen_rect& get_king_portrait(const side player_side) const noexcept;
   const screen_rect& get_race(const side player_side) const noexcept;
-  const screen_rect& get_start(const side player_side) const noexcept;
+  const screen_rect& get_ready(const side player_side) const noexcept;
   const auto& get_title() const noexcept { return m_title; }
 
   /// Get the size of the font that would fit nicely

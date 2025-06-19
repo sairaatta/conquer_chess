@@ -345,7 +345,7 @@ void draw_selected_panel(lobby_view& v, const side player_side)
 
 void draw_ready_panel(lobby_view& v, const side player_side)
 {
-  const auto screen_rect{v.get_layout().get_start(player_side)};
+  const auto screen_rect{v.get_layout().get_ready(player_side)};
   draw_texture(
     game_resources::get().get_lobby_menu_textures().get_ready(v.get_start(player_side)),
     screen_rect

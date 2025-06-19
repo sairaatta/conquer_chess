@@ -106,10 +106,10 @@ std::vector<screen_rect> get_panels(const lobby_view_layout& layout)
     // layout.get_title(), // Needs to show the background
     layout.get_color(side::lhs),
     layout.get_race(side::lhs),
-    layout.get_start(side::lhs),
+    layout.get_ready(side::lhs),
     layout.get_color(side::rhs),
     layout.get_race(side::rhs),
-    layout.get_start(side::rhs),
+    layout.get_ready(side::rhs),
   };
 }
 
@@ -118,7 +118,7 @@ const screen_rect& lobby_view_layout::get_race(const side player_side) const noe
   return m_race.at(player_side);
 }
 
-const screen_rect& lobby_view_layout::get_start(const side player_side) const noexcept
+const screen_rect& lobby_view_layout::get_ready(const side player_side) const noexcept
 {
   return m_ready.at(player_side);
 }
@@ -136,7 +136,7 @@ const screen_rect& get_cursor_rect(
     default:
     case lobby_view_item::start:
       assert(item == lobby_view_item::start);
-      return layout.get_start(player_side);
+      return layout.get_ready(player_side);
   }
 }
 
@@ -158,10 +158,30 @@ void test_lobby_view_layout()
     assert(r1 != r5);
     assert(r1 != r6);
   }
+  // get_color
+  {
+    const lobby_view_layout layout;
+    assert(layout.get_color(side::lhs) != layout.get_color(side::rhs));
+  }
+  // get_king_portrait
+  {
+    const lobby_view_layout layout;
+    assert(layout.get_king_portrait(side::lhs) != layout.get_king_portrait(side::rhs));
+  }
   // get_panels
   {
     const lobby_view_layout layout;
     assert(!get_panels(layout).empty());
+  }
+  // get_race
+  {
+    const lobby_view_layout layout;
+    assert(layout.get_race(side::lhs) != layout.get_race(side::rhs));
+  }
+  // get_ready
+  {
+    const lobby_view_layout layout;
+    assert(layout.get_ready(side::lhs) != layout.get_ready(side::rhs));
   }
   #endif
 }
