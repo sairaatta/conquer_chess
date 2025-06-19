@@ -24,6 +24,7 @@ ignore:
   - ./include/render_window.h
   - ./include/songs.h
   - ./include/textures.h
+  - ./include/view.h
   - ./src/about_view.cpp
   - ./src/controls_bar.cpp
   - ./src/controls_view.cpp
@@ -45,3 +46,4 @@ ignore:
   - ./src/render_window.cpp
   - ./src/songs.cpp
   - ./src/textures.cpp
+  - ./src/view.cpp

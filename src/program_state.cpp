@@ -16,6 +16,10 @@ std::vector<program_state> get_all_program_states() noexcept
 void test_program_state()
 {
 #ifndef NDEBUG
+  // get_all_program_states
+  {
+    assert(!get_all_program_states().empty());
+  }
   // to_str
   {
     assert(to_str(program_state::about) == "about");

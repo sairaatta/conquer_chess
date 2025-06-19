@@ -1,5 +1,7 @@
 #include "view.h"
 
+#ifndef LOGIC_ONLY
+
 #include "helper.h"
 
 #include <cassert>
@@ -90,3 +92,5 @@ void view::tick(const delta_t dt)
   assert(m_is_active);
   tick_impl(dt);
 }
+
+#endif // LOGIC_ONLY

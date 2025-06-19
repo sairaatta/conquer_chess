@@ -15,6 +15,10 @@ std::vector<castling_type> get_all_castling_types() noexcept
 void test_castling_type()
 {
 #ifndef NDEBUG
+  // get_all_castling_types
+  {
+    assert(!get_all_castling_types().empty());
+  }
   // to_str
   {
     assert(to_str(castling_type::king_side) == "king_side");

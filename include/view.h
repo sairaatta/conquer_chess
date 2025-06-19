@@ -1,6 +1,8 @@
 #ifndef VIEW_H
 #define VIEW_H
 
+#ifndef LOGIC_ONLY
+
 #include "delta_t.h"
 #include "program_state.h"
 
@@ -78,5 +80,7 @@ private:
   virtual void tick_impl(const delta_t dt) = 0;
 
 };
+
+#endif // LOGIC_ONLY
 
 #endif // VIEW_H
