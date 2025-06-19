@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 
+/// Convert 'true' to 'true' and 'false' to 'false'
+std::string bool_to_str(const bool b) noexcept;
+
 /// Calculate the angle in degrees.
 ///
 /// Calculate the angle in degrees.

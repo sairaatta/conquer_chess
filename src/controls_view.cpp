@@ -53,9 +53,9 @@ void draw_panel(
   draw_normal_text(panel_text, panel_position);
 }
 
-void controls_view::tick()
+void controls_view::tick(const delta_t)
 {
-  assert(m_is_active);
+  assert(is_active());
 }
 
 sf::Keyboard::Key  get_key_for_action_1(const controls_view& v)
@@ -112,7 +112,7 @@ bool controls_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-    m_next_state = program_state::options;
+    set_next_state(program_state::options);
     return false;
   }
   else if (event.type == sf::Event::KeyPressed)
@@ -120,7 +120,7 @@ bool controls_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      m_next_state = program_state::options;
+      set_next_state(program_state::options);
       return false;
     }
     else if (key_pressed == sf::Keyboard::Key::Up)
@@ -149,7 +149,7 @@ bool controls_view::process_event(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
-      m_next_state = program_state::options;
+      set_next_state(program_state::options);
       return false;
     }
   }
@@ -341,14 +341,15 @@ void draw_type_panel(controls_view& v)
 
 void controls_view::start()
 {
-  m_next_state.reset();
-  m_is_active = true;
+  assert(!is_active());
+  set_is_active(true);
 }
 
 void controls_view::stop()
 {
-  m_next_state.reset();
-  m_is_active = false;
+  assert(is_active());
+  clear_next_state();
+  set_is_active(false);
 }
 
 

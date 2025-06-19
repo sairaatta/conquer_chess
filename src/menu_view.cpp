@@ -177,15 +177,15 @@ bool menu_view::process_event(sf::Event& event)
     {
       if (m_selected == menu_view_item::start)
       {
-        m_next_state = program_state::lobby;
+        set_next_state(program_state::lobby);
       }
       else if (m_selected == menu_view_item::options)
       {
-        m_next_state = program_state::options;
+        set_next_state(program_state::options);
       }
       else if (m_selected == menu_view_item::about)
       {
-        m_next_state = program_state::about;
+        set_next_state(program_state::about);
       }
       else if (m_selected == menu_view_item::quit)
       {
@@ -194,15 +194,15 @@ bool menu_view::process_event(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::A)
     {
-      m_next_state = program_state::about;
+      set_next_state(program_state::about);
     }
     else if (key_pressed == sf::Keyboard::Key::O)
     {
-      m_next_state = program_state::options;
+      set_next_state(program_state::options);
     }
     else if (key_pressed == sf::Keyboard::Key::S)
     {
-      m_next_state = program_state::lobby;
+      set_next_state(program_state::lobby);
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
@@ -236,15 +236,15 @@ bool menu_view::process_event(sf::Event& event)
       };
       if (is_in(mouse_screen_pos, m_layout.get_start()))
       {
-        m_next_state = program_state::lobby;
+        set_next_state(program_state::lobby);
       }
       else if (is_in(mouse_screen_pos, m_layout.get_options()))
       {
-        m_next_state = program_state::options;
+        set_next_state(program_state::options);
       }
       else if (is_in(mouse_screen_pos, m_layout.get_about()))
       {
-        m_next_state = program_state::about;
+        set_next_state(program_state::about);
 
       }
       else if (is_in(mouse_screen_pos, m_layout.get_quit()))
@@ -288,18 +288,20 @@ void menu_view::start()
     game_options::get().get_sound_effects_volume()
   );
   game_resources::get().get_songs().get_bliss().play();
-  m_is_active = true;
+  assert(!is_active());
+  set_is_active(true);
 }
 
 void menu_view::stop()
 {
-  m_next_state.reset();
-  m_is_active = false;
+  assert(is_active());
+  clear_next_state();
+  set_is_active(false);
 }
 
-void menu_view::tick()
+void menu_view::tick(const delta_t)
 {
-  assert(m_is_active);
+  assert(is_active());
   // Nothing to do yet
 }
 

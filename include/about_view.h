@@ -3,67 +3,50 @@
 
 #ifndef LOGIC_ONLY
 
+#include "view.h"
 #include "about_view_layout.h"
 #include "about_view_item.h"
 #include "controls_bar.h"
-#include "program_state.h"
+#include "view.h"
 
 #include <SFML/Graphics.hpp>
 
-#include <optional>
-
 /// The About screen.
-class about_view
+class about_view : public view
 {
 public:
   about_view();
 
   /// Show the menu on-screen
-  void draw();
+  void draw() override;
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  /// The next state to go to, if any.
-  ///
-  /// Will be empty if the user should remain in this screen
-  const auto& get_next_state() const noexcept { return m_next_state; }
-
-  /// Is this window active?
-  ///
-  /// It can be activated by 'start' and deactivated by 'stop'
-  bool is_active() const noexcept { return m_is_active; }
-
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
+  bool process_event(sf::Event& event) override;
 
   /// Process a resize event
-  void process_resize_event(sf::Event& event);
+  void process_resize_event(sf::Event& event) override;
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
   /// Prepare for showing this dialog
-  void start();
+  void start() override;
 
   /// End showing this dialog
-  void stop();
+  void stop() override;
 
   /// Run the menu, until the user quits
-  void tick();
+  void tick(const delta_t dt) override;
 
 private:
-
-  bool m_is_active{false};
 
   controls_bar m_controls_bar;
 
   /// The layout of this window
   about_view_layout m_layout;
-
-  /// The next state to go to, if any
-  std::optional<program_state> m_next_state;
-
 };
 
 /// Show where the panels will be drawn

@@ -9,6 +9,7 @@
 #include "side.h"
 #include "controls_bar.h"
 #include "chess_color.h"
+#include "view.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -19,57 +20,44 @@
 /// The Controls dialog is where the user
 /// determines which controllers (e.g. keyboard
 /// or mouse) are used.
-class controls_view
+class controls_view : public view
 {
 public:
   controls_view(const side& player_side);
 
   /// Show the menu on-screen
-  void draw();
+  void draw() override;
 
 
   const auto& get_layout() const noexcept { return m_layout; }
-
-  /// The next state to go to, if any
-  const auto& get_next_state() const noexcept { return m_next_state; }
 
   /// The player we are setting up the controls of
   side get_player_side() const { return m_player_side; }
 
   const auto& get_selected() const noexcept { return m_selected; }
 
-  /// Is this window active?
-  ///
-  /// It can be activated by 'start' and deactivated by 'stop'
-  bool is_active() const noexcept { return m_is_active; }
-
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
+  bool process_event(sf::Event& event) override;
 
   /// Resize
-  void process_resize_event(sf::Event& event);
+  void process_resize_event(sf::Event& event) override;
 
   /// Set a uniform text style
   void set_text_style(sf::Text& text);
 
-  void start();
+  void start() override;
 
-  void stop();
+  void stop() override;
 
-  void tick();
+  void tick(const delta_t dt) override;
 
 private:
 
   controls_bar m_controls_bar;
 
-  bool m_is_active{false};
-
   /// The layout of this window
   controls_view_layout m_layout;
-
-  /// The next state to go to, if any
-  std::optional<program_state> m_next_state;
 
   /// The player we are setting up the controls of
   side m_player_side;

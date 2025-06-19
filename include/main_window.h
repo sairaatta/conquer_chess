@@ -14,8 +14,12 @@
 #include "controls_view.h"
 #include "options_view.h"
 #include "loading_view.h"
+#include "view.h"
 
 #include <SFML/Graphics.hpp>
+
+#include <memory>
+#include <map>
 
 /// The single main window.
 class main_window
@@ -28,33 +32,14 @@ public:
 
 private:
 
-  about_view m_about_view;
+  std::map<program_state, std::unique_ptr<view>> m_views;
+
+  //about_view m_about_view;
 
   /// Sleeps to achieve a frame rate of 50-60 frames per second
   sleep_scheduler m_sleep_scheduler;
 
   program_state m_program_state{program_state::loading};
-
-  /// The game screen
-  game_view m_game_view;
-
-  /// The left controls dialog
-  controls_view m_left_controls_view;
-
-  /// The lobby dialog
-  lobby_view m_lobby_view;
-
-  /// The loading screen
-  loading_view m_loading_view;
-
-  /// The main menu screen
-  menu_view m_menu_view;
-
-  /// The options screen
-  options_view m_options_view;
-
-  /// The right controls dialog
-  controls_view m_right_controls_view;
 
   /// Process all events
   /// @return if the user wants to quit
@@ -83,6 +68,7 @@ private:
   /// for example, load textures, move pieces, etc.
   void tick();
 
+  /*
   void tick_about();
   void tick_game();
   void tick_left_controls();
@@ -92,6 +78,7 @@ private:
   void tick_options();
   void tick_replay();
   void tick_right_controls();
+  */
 };
 
 #endif // LOGIC_ONLY

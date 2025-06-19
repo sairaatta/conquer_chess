@@ -8,61 +8,46 @@
 #include "options_view_layout.h"
 #include "options_view_item.h"
 #include "physical_controller_type.h"
-#include "program_state.h"
 #include "controls_bar.h"
+#include "view.h"
 
 #include <SFML/Graphics.hpp>
 
-#include <optional>
-
 /// The Options dialog.
-class options_view
+class options_view : public view
 {
 public:
   explicit options_view();
 
   /// Draw the menu on the main window
-  void draw();
+  void draw() override;
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  /// The next state to go to, if any
-  const auto& get_next_state() const noexcept { return m_next_state; }
-
   options_view_item get_selected() const noexcept { return m_selected; }
-
-  /// Is this window active?
-  ///
-  /// It can be activated by 'start' and deactivated by 'stop'
-  bool is_active() const noexcept { return m_is_active; }
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
+  bool process_event(sf::Event& event) override;
 
   /// Process a resize event
-  void process_resize_event(sf::Event& event);
+  void process_resize_event(sf::Event& event) override;
 
   /// Select an item.
   /// Play a sound when the selected item changes
   void set_selected(const options_view_item i);
 
-  void start();
+  void start() override;
 
-  void stop();
+  void stop() override;
 
-  void tick();
+  void tick(const delta_t dt) override;
 
 private:
 
   controls_bar m_controls_bar;
 
-  bool m_is_active{false};
-
   options_view_layout m_layout;
-
-  /// The next state to go to, if any
-  std::optional<program_state> m_next_state;
 
   /// The selected item
   options_view_item m_selected;

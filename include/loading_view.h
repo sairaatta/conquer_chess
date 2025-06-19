@@ -5,6 +5,7 @@
 
 #include "program_state.h"
 #include "resource_loader.h"
+#include "view.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -14,49 +15,34 @@
 ///
 /// The Loading screen loads the game resources
 /// and shows the progress in doing so.
-class loading_view
+class loading_view : public view
 {
 public:
   loading_view();
 
   /// Displays this window
-  void draw();
-
-  /// The next state to go to, if any.
-  ///
-  /// Will be empty if the user should remain in this screen
-  const auto& get_next_state() const noexcept { return m_next_state; }
-
-  /// Is this window active?
-  ///
-  /// It can be activated by 'start' and deactivated by 'stop'
-  bool is_active() const noexcept { return m_is_active; }
+  void draw() override;
 
   /// Go to the next state (if any).
   ///
   /// For this screen, the textures are loaded.
-  void tick();
+  void tick(const delta_t dt) override;
 
   /// Process an event
   /// @return true if the user wants to quit the program
-  bool process_event(sf::Event& event);
+  bool process_event(sf::Event& event) override;
 
-  void process_resize_event(sf::Event& event);
+  void process_resize_event(sf::Event& event) override;
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
-  void start();
+  void start() override;
 
   /// End displaying this class
-  void stop();
+  void stop() override;
 
 private:
-
-  bool m_is_active{false};
-
-  /// The next state to go to, if any
-  std::optional<program_state> m_next_state;
 
   /// For loading the resources in steps
   resource_loader m_resource_loader;

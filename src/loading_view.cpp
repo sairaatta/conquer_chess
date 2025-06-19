@@ -15,14 +15,14 @@ loading_view::loading_view()
 
 }
 
-void loading_view::tick()
+void loading_view::tick(const delta_t)
 {
-  assert(m_is_active);
+  assert(is_active());
   if (!m_resource_loader.is_done())
   {
     m_resource_loader.process_next();
     if (m_resource_loader.is_done()) {
-      m_next_state = program_state::main_menu;
+      set_next_state(program_state::main_menu);
 
     }
   }
@@ -134,14 +134,16 @@ void loading_view::draw()
 
 void loading_view::start()
 {
-  // Nothing here ...
-  m_is_active = true;
+  assert(!is_active());
+  set_is_active(true);
 }
 
 void loading_view::stop()
 {
+  assert(is_active());
   game_resources::get().get_loading_screen_songs().get_heroes().stop();
-  m_is_active = false;
+  clear_next_state();
+  set_is_active(false);
 }
 
 void test_loading_view()

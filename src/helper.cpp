@@ -6,6 +6,11 @@
 #include <sstream>
 #include <vector>
 
+std::string bool_to_str(const bool b) noexcept
+{
+  return b ? "true" : "false";
+}
+
 double calc_angle_degrees(const double dx, const double dy)
 {
   return calc_angle_radians(dx, dy) * 360.0 / (2.0 * M_PI);
@@ -84,6 +89,11 @@ std::vector<std::string> split_str(
 void test_helper()
 {
 #ifndef NDEBUG
+  // bool_to_str
+  {
+    assert(bool_to_str(true) == "true");
+    assert(bool_to_str(false) == "false");
+  }
   // calc_angle_degreees
   {
     const double tolerance{0.1};

@@ -38,7 +38,7 @@ bool played_game_view::process_event(sf::Event& event)
   }
   else if (event.type == sf::Event::Closed)
   {
-    m_next_state = program_state::main_menu;
+    set_next_state(program_state::main_menu);
     return false;
   }
   else if (event.type == sf::Event::KeyPressed)
@@ -46,7 +46,7 @@ bool played_game_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      m_next_state = program_state::main_menu;
+      set_next_state(program_state::main_menu);
       return false;
     }
     else if (key_pressed == sf::Keyboard::Key::F2)

@@ -7,12 +7,14 @@
 #include "game.h"
 #include "program_state.h"
 #include "controls_bar.h"
+#include "view.h"
+
 #include <SFML/Graphics.hpp>
 
 #include <optional>
 
 /// Dialog to view a played Conquer Chess game
-class played_game_view
+class played_game_view : public view
 {
 public:
   played_game_view(const game& g);
@@ -37,15 +39,12 @@ private:
   /// The layout of this window
   played_game_view_layout m_layout;
 
-  /// The next state to go to, if any
-  std::optional<program_state> m_next_state;
-
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
+  bool process_event(sf::Event& event) override;
 
   /// Show the menu on-screen
-  void draw();
+  void draw() override;
 };
 
 /// Show where the panels will be drawn

@@ -7,17 +7,19 @@
 #include "program_state.h"
 #include "lobby_view_layout.h"
 #include "lobby_view_item.h"
+#include "view.h"
+
 #include <SFML/Graphics.hpp>
 #include <optional>
 
 /// The lobby screen.
-class lobby_view
+class lobby_view : public view
 {
 public:
   lobby_view();
 
   /// Show the menu on-screen
-  void draw();
+  void draw() override;
 
   bool get_dog_mode() const noexcept { return m_dog_mode; }
 
@@ -29,21 +31,12 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
-  /// The next state to go to, if any.
-  ///
-  /// Will be empty if the user should remain in this screen
-  const auto& get_next_state() const noexcept { return m_next_state; }
-
-  /// Is this window active?
-  ///
-  /// It can be activated by 'start' and deactivated by 'stop'
-  bool is_active() const noexcept { return m_is_active; }
 
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
+  bool process_event(sf::Event& event) override;
 
-  void process_resize_event(sf::Event& event);
+  void process_resize_event(sf::Event& event) override;
 
   /// Sets the selected item.
   /// If the selected item changes, play sound
@@ -52,12 +45,12 @@ public:
   /// Set the text to a uniform style
   void set_text_style(sf::Text& t);
 
-  void stop();
+  void stop() override;
 
-  void start();
+  void start() override;
 
   /// Does the countdown
-  void tick();
+  void tick(const delta_t dt) override;
 
 private:
 
@@ -73,8 +66,6 @@ private:
   /// Yes, dog mode
   bool m_dog_mode{false};
 
-  bool m_is_active{false};
-
   /// The layout of this window
   lobby_view_layout m_layout;
 
@@ -83,9 +74,6 @@ private:
 
   /// Is LHS ready to start?
   bool m_lhs_start;
-
-  /// The next state to go to, if any
-  std::optional<program_state> m_next_state;
 
   /// The selected item for RHS
   lobby_view_item m_rhs_cursor;

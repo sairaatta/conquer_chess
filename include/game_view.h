@@ -11,6 +11,7 @@
 #include "game_controller.h"
 #include "game_view_layout.h"
 #include "program_state.h"
+#include "view.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -21,26 +22,21 @@
 /// The Game dialog shows the game and
 /// displays the \link{game} class.
 /// Here is where most of the action happens.
-class game_view
+class game_view : public view
 {
 public:
   explicit game_view();
 
   /// Show the game on-screen
-  void draw();
+  void draw() override;
 
   /// Run the game, until the user quits
-  void tick(delta_t dt);
+  void tick(delta_t dt) override;
 
   /// The the elapsed time in seconds
   double get_elapsed_time_secs() const noexcept;
 
   auto& get_game() noexcept { return m_game; }
-
-  /// The next state to go to, if any.
-  ///
-  /// Will be empty if the user should remain in this screen
-  const auto& get_next_state() const noexcept { return m_next_state; }
 
   const auto& get_game() const noexcept { return m_game; }
 
@@ -53,24 +49,19 @@ public:
   /// Get the text log, i.e. things pieces have to say
   const auto& get_log() const noexcept { return m_log; }
 
-  /// Is this window active?
-  ///
-  /// It can be activated by 'start' and deactivated by 'stop'
-  bool is_active() const noexcept { return m_is_active; }
-
   /// Process all events
   /// @return if the user wants to quit
-  bool process_event(sf::Event& event);
+  bool process_event(sf::Event& event) override;
 
   /// Process a resize events
-  void process_resize_event(sf::Event& event);
+  void process_resize_event(sf::Event& event) override;
 
   /// Set the text to a uniform style
   void set_text_style(sf::Text& text);
 
-  void start();
+  void start() override;
 
-  void stop();
+  void stop() override;
 
 private:
 
@@ -85,16 +76,11 @@ private:
   /// The game controller, interacts with game
   game_controller m_game_controller;
 
-  bool m_is_active{false};
-
   /// The game logic
   game_view_layout m_layout;
 
   /// The text log
   game_log m_log;
-
-  /// The next state to go to, if any
-  std::optional<program_state> m_next_state;
 
   /// Play the new sound effects
   void play_pieces_sound_effects();
@@ -105,9 +91,6 @@ private:
   /// Show the mouse cursor on-screen
   void show_mouse_cursor();
 };
-
-/// Convert 'true' to 'true' and 'false' to 'false'
-std::string bool_to_str(const bool b) noexcept;
 
 /// Create a black/dark square at the right size
 sf::RectangleShape create_black_square(game_view& view);

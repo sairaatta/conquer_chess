@@ -8,6 +8,7 @@
 #include "game_resources.h"
 #include "sfml_helper.h"
 #include "render_window.h"
+
 #include <cassert>
 #include <cmath>
 
@@ -17,16 +18,16 @@ about_view::about_view()
   m_controls_bar.set_draw_player_controls(false);
 }
 
-void about_view::tick()
+void about_view::tick(const delta_t)
 {
-  assert(m_is_active);
+  assert(is_active());
 }
 
 bool about_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-    m_next_state = program_state::main_menu;
+    set_next_state(program_state::main_menu);
     return false;
   }
   if (event.type == sf::Event::KeyPressed)
@@ -34,7 +35,7 @@ bool about_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      m_next_state = program_state::main_menu;
+      set_next_state(program_state::main_menu);
       return false;
     }
   }
@@ -161,14 +162,15 @@ void draw_title(about_view& v)
 
 void about_view::start()
 {
-  m_next_state.reset();
-  m_is_active = true;
+  assert(!is_active());
+  set_is_active(true);
 }
 
 void about_view::stop()
 {
-  m_next_state.reset();
-  m_is_active = false;
+  assert(is_active());
+  clear_next_state();
+  set_is_active(false);
 }
 
 #endif // LOGIC_ONLY

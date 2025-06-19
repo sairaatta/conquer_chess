@@ -6,6 +6,7 @@
 #include "render_window.h"
 #include "game.h"
 #include "draw.h"
+#include "helper.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
 #include "screen_coordinate.h"
@@ -30,14 +31,10 @@ game_view::game_view(
 
 }
 
-std::string bool_to_str(const bool b) noexcept
-{
-  return b ? "true" : "false";
-}
 
 void game_view::tick(delta_t dt)
 {
-  assert(m_is_active);
+  assert(is_active());
 
   // Disard old messages
   m_log.tick();
@@ -51,7 +48,6 @@ void game_view::tick(delta_t dt)
   // Show the new state
   draw();
 
-  //std::clog << collect_action_history(m_game) << '\n';
   game_resources::get().get_songs().get_wonderful_time().stop();
 }
 
@@ -163,7 +159,7 @@ bool game_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-      m_next_state = program_state::lobby;
+      set_next_state(program_state::lobby);
       return false;
   }
   else if (event.type == sf::Event::KeyPressed)
@@ -171,7 +167,7 @@ bool game_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      m_next_state = program_state::lobby;
+      set_next_state(program_state::lobby);
       return false;
     }
   }
@@ -952,16 +948,17 @@ void game_view::start()
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
   );
-  m_next_state.reset();
-  m_is_active = true;
+  assert(!is_active());
+  set_is_active(true);
 }
 
 void game_view::stop()
 {
+  assert(is_active());
   m_clock.restart();
   game_resources::get().get_songs().get_wonderful_time().stop();
-  m_next_state.reset();
-  m_is_active = false;
+  clear_next_state();
+  set_is_active(false);
 }
 
 void test_game_view() //!OCLINT tests may be many

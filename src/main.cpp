@@ -20,6 +20,7 @@
 #include "about.h"
 #include "about_view_layout.h"
 #include "action_history.h"
+#include "castling_type.h"
 #include "board_to_text_options.h"
 #include "chess_move.h"
 #include "played_game_view_layout.h"
@@ -65,22 +66,18 @@ void test()
 {
 #ifndef NDEBUG
 
-  test_sleep_scheduler();
 
 
-  test_action_number();
   test_about();
   test_about_view_layout();
   test_action_history();
+  test_action_number();
   test_board_to_text_options();
+  test_castling_type();
   test_chess_color();
   test_chess_move();
-  test_user_input();
   test_control_action_type();
-  test_user_inputs();
   test_controller();
-  test_physical_controller_type();
-  test_physical_controllers();
   test_controls_view_item();
   test_controls_view_layout();
   test_delta_t();
@@ -107,24 +104,30 @@ void test()
   test_options_view_item();
   test_options_view_layout();
   test_pgn_string();
+  test_physical_controller_type();
+  test_physical_controllers();
   test_piece();
   test_piece_action();
-  test_piece_actions();
   test_piece_action_type();
+  test_piece_actions();
   test_piece_type();
   test_pieces();
   test_played_game_view_layout();
+  test_program_state();
   test_race();
   test_read_only();
   test_replay();
   test_replayer();
   test_screen_coordinate();
   test_screen_rect();
-  test_side();
   test_sfml_helper();
+  test_side();
+  test_sleep_scheduler();
   test_sleep_scheduler();
   test_square();
   test_starting_position_type();
+  test_user_input();
+  test_user_inputs();
   test_volume();
 
 #ifndef LOGIC_ONLY

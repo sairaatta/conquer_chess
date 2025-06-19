@@ -24,14 +24,14 @@ lobby_view::lobby_view()
   m_controls_bar.set_draw_up_down_select(false);
 }
 
-void lobby_view::tick()
+void lobby_view::tick(const delta_t)
 {
-  assert(m_is_active);
+  assert(is_active());
   if (m_clock)
   {
     if (m_clock.value().getElapsedTime().asSeconds() > m_countdown_secs)
     {
-      m_next_state = program_state::game;
+      set_next_state(program_state::game);
     }
   }
 }
@@ -60,7 +60,7 @@ bool lobby_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-      m_next_state = program_state::main_menu;
+    set_next_state(program_state::main_menu);
     return false;
   }
   else if (event.type == sf::Event::KeyPressed)
@@ -68,7 +68,7 @@ bool lobby_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      m_next_state = program_state::main_menu;
+      set_next_state(program_state::main_menu);
       return false;
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
@@ -150,7 +150,7 @@ bool lobby_view::process_event(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
-      m_next_state = program_state::main_menu;
+      set_next_state(program_state::main_menu);
       return false;
     }
   }
@@ -390,12 +390,13 @@ void lobby_view::start()
   m_rhs_cursor = lobby_view_item::color;
   m_lhs_start = false;
   m_rhs_start = false;
-  m_next_state.reset();
-  m_is_active = true;
+  assert(!is_active());
+  set_is_active(true);
 }
 
 void lobby_view::stop()
 {
+  assert(is_active());
   game_resources::get().get_songs().get_soothing().stop();
   if (m_clock.has_value())
   {
@@ -404,8 +405,8 @@ void lobby_view::stop()
   m_clock = {};
   m_lhs_start = false;
   m_rhs_start = false;
-  m_next_state.reset();
-  m_is_active = false;
+  clear_next_state();
+  set_is_active(false);
 }
 
 #endif // LOGIC_ONLY

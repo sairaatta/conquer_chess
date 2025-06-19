@@ -46,12 +46,12 @@ void options_view::decrease_selected()
     break;
     case options_view_item::left_controls:
     {
-      m_next_state = program_state::left_controls;
+      set_next_state(program_state::left_controls);
     }
     break;
     case options_view_item::right_controls:
     {
-      m_next_state = program_state::right_controls;
+      set_next_state(program_state::right_controls);
     }
     break;
   }
@@ -78,12 +78,12 @@ void options_view::increase_selected()
     break;
     case options_view_item::left_controls:
     {
-      m_next_state = program_state::left_controls;
+      set_next_state(program_state::left_controls);
     }
     break;
     case options_view_item::right_controls:
     {
-      m_next_state = program_state::right_controls;
+      set_next_state(program_state::right_controls);
     }
     break;
   }
@@ -114,7 +114,7 @@ bool options_view::process_event(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
-    m_next_state = program_state::main_menu;
+    set_next_state(program_state::main_menu);
     return false;
   }
   else if (event.type == sf::Event::KeyPressed)
@@ -122,22 +122,22 @@ bool options_view::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::Escape)
     {
-      m_next_state = program_state::main_menu;
+      set_next_state(program_state::main_menu);
       return false;
     }
     if (key_pressed == sf::Keyboard::Key::Q)
     {
-      m_next_state = program_state::main_menu;
+      set_next_state(program_state::main_menu);
       return false;
     }
     if (key_pressed == sf::Keyboard::Key::Num1)
     {
-      m_next_state = program_state::left_controls;
+      set_next_state(program_state::left_controls);
       return false;
     }
     if (key_pressed == sf::Keyboard::Key::Num2)
     {
-      m_next_state = program_state::right_controls;
+      set_next_state(program_state::right_controls);
       return false;
     }
     else if (key_pressed == sf::Keyboard::Key::Up)
@@ -372,19 +372,20 @@ void draw_sound_effects_volume(options_view& v)
 
 void options_view::start()
 {
-  m_next_state.reset();
-  m_is_active = true;
+  assert(!is_active());
+  set_is_active(true);
 }
 
 void options_view::stop()
 {
-  m_next_state.reset();
-  m_is_active = false;
+  assert(is_active());
+  clear_next_state();
+  set_is_active(false);
 }
 
-void options_view::tick()
+void options_view::tick(const delta_t)
 {
-  assert(m_is_active);
+  assert(is_active());
   // Nothing here yet
 }
 
