@@ -43,9 +43,6 @@ public:
   /// How long log messages are displayed
   double get_message_display_time_secs() const noexcept { return 5.0; }
 
-  /// Get the replay of a match
-  //const auto& get_replayer() const noexcept { return m_replayer; }
-
   /// Get the size of the screen in pixels
   const auto& get_screen_size() const noexcept { return m_screen_size; }
 

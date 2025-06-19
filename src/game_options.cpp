@@ -93,6 +93,21 @@ void test_game_options()
     assert(volume_as_percentage >= 0.0);
     assert(volume_as_percentage <= 100.001);
   }
+  // get_sound_effects_volume
+  {
+    assert(get_sound_effects_volume() == game_options::get().get_sound_effects_volume());
+  }
+  // reset
+  {
+    game_options::get().reset();
+    assert(game_options::get().get_click_distance() == get_default_click_distance());
+    assert(game_options::get().get_game_speed() == get_default_game_speed());
+    assert(game_options::get().get_margin_width() == get_default_margin_width());
+    assert(game_options::get().get_screen_size() == get_default_screen_size());
+    assert(game_options::get().get_starting_position() == get_default_starting_position());
+    assert(game_options::get().get_music_volume() == get_default_music_volume());
+    assert(game_options::get().get_sound_effects_volume() == get_default_sound_effects_volume());
+  }
   // 40: operator<<
   {
     std::stringstream s;
