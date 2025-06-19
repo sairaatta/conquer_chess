@@ -6,12 +6,14 @@ edit_uri: blob/main/docs/
 nav:
   - Start: index.md
   - Screenshots: screenshots/README.md
+  - Build and run: build_and_run.md
   - Gameplay: gameplay.md
-  - FAQ: faq.md
-  - Acknowledgements: acknowledgements.md
-  - Videos: videos.md
-  - Architecture: architecture/README.md
-  - Developer documentation: docs/index.html
+  - Misc:
+    - Acknowledgements: acknowledgements.md
+    - Architecture: architecture/README.md
+    - Developer documentation: docs/index.html
+    - FAQ: faq.md
+    - Videos: videos.md
 
 theme:
   name: material
