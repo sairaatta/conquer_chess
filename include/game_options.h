@@ -117,7 +117,6 @@ private:
 
 };
 
-
 /// Decrease the game speed
 void decrease_game_speed() noexcept;
 

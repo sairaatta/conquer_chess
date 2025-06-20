@@ -315,7 +315,7 @@ game get_kings_only_game() noexcept;
 std::vector<square> get_occupied_squares(const game& g) noexcept;
 
 /// Get the game options
-const game_options& get_options(const game& g);
+//const game_options& get_options(const game& g);
 
 /// Get the piece that at that square,
 /// will throw if there is no piece

@@ -94,11 +94,6 @@ const game_view_layout& get_layout(const game_view& v) noexcept
   return v.get_layout();
 }
 
-const game_options& get_options(const game_view& v) noexcept
-{
-  return get_options(v.get_game());
-}
-
 const std::vector<piece>& get_pieces(const game_view& v) noexcept
 {
   return get_pieces(v.get_game());
@@ -231,7 +226,7 @@ void game_view::draw_impl()
 void draw_board(game_view& view)
 {
   draw_squares(view);
-  if (get_options(view).get_show_occupied())
+  if (game_options::get().get_show_occupied())
   {
     show_occupied_squares(view);
   }
@@ -569,7 +564,7 @@ void draw_background(game_view& view)
 
 void show_occupied_squares(game_view& view)
 {
-  assert(get_options(view).get_show_occupied());
+  assert(game_options::get().get_show_occupied());
   const auto& pieces{get_pieces(view)};
   for (const auto& piece: pieces)
   {

@@ -120,9 +120,6 @@ std::string get_last_log_messages(
 /// Get the layout
 const game_view_layout& get_layout(const game_view& v) noexcept;
 
-/// Get the game options
-const game_options& get_options(const game_view& v) noexcept;
-
 /// Get the pieces
 const std::vector<piece>& get_pieces(const game_view& v) noexcept;
 

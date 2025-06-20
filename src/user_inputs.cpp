@@ -389,12 +389,25 @@ void process_press_action_1_or_lmb_down(
 
 
   if (is_cursor_on_enemy_piece) {
-    start_attack(
-      g,
-      c,
-      get_cursor_pos(c, action.get_player()),
-      get_player_color(action.get_player())
-    );
+    assert(has_selected_pieces(g, player_color));
+    assert(!get_selected_pieces(g, player_side).empty());
+    assert(get_selected_pieces(g, player_side).size() == 1);
+    const auto selected_piece{get_selected_pieces(g, player_side)[0]};
+    if (
+      can_attack(
+        player_color,
+        selected_piece.get_type(),
+        selected_piece.get_current_square(),
+        cursor
+      )
+    ) {
+      start_attack(
+        g,
+        c,
+        get_cursor_pos(c, action.get_player()),
+        get_player_color(action.get_player())
+      );
+    }
   }
 
 

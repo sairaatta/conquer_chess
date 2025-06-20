@@ -1181,6 +1181,8 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_keyboard_mouse()};
     const double health_before{get_piece_at(g, square("e1")).get_health()};
 
+    assert(get_piece_at(g, square("d2")).get_action_history().get_timed_actions().empty());
+
     do_select(g, c, "d1", side::lhs);
     move_cursor_to(c, "e1", side::lhs);
 
@@ -1190,6 +1192,7 @@ void test_game_controller() //!OCLINT tests may be many
     g.tick(delta_t(0.1));
     const double health_after{get_piece_at(g, square("d2")).get_health()};
     assert(health_after == health_before);
+    assert(get_piece_at(g, square("d2")).get_action_history().get_timed_actions().empty());
   }
   // When a piece is killed, the queen attacker moves to that square
   {
