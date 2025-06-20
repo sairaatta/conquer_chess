@@ -315,7 +315,25 @@ std::optional<piece_action_type> get_piece_action(
 
   if (has_selected_pieces(g, player_side))
   {
-    // Has selected pieces
+    assert(has_selected_pieces(g, player_side));
+
+    assert(get_selected_pieces(g, player_side).size() == 1);
+    const auto selected_piece{get_selected_pieces(g, player_side)[0]};
+
+    if (can_promote(selected_piece))
+    {
+      switch (n.get_number())
+      {
+        case 1: return piece_action_type::promote_to_queen;
+        case 2: return piece_action_type::promote_to_rook;
+        case 3: return piece_action_type::promote_to_bishop;
+        default:
+        case 4:
+          assert(n.get_number() == 4);
+          return piece_action_type::promote_to_knight;
+      }
+    }
+
     const game_coordinate cursor_pos{get_cursor_pos(c, player_side)};
     if (!is_coordinat_on_board(cursor_pos))
     {
@@ -332,32 +350,15 @@ std::optional<piece_action_type> get_piece_action(
       const piece& p{get_piece_at(g, cursor_square)};
       if (p.is_selected())
       {
-        if (can_promote(p))
+        switch (n.get_number())
         {
-          switch (n.get_number())
-          {
-            case 1: return piece_action_type::promote_to_queen;
-            case 2: return piece_action_type::promote_to_rook;
-            case 3: return piece_action_type::promote_to_bishop;
-            default:
-            case 4:
-              assert(n.get_number() == 4);
-              return piece_action_type::promote_to_knight;
-          }
-
-        }
-        else
-        {
-          switch (n.get_number())
-          {
-            case 1: return piece_action_type::unselect;
-            case 2: return {};
-            case 3: return {};
-            default:
-            case 4:
-              assert(n.get_number() == 4);
-              return {};
-          }
+          case 1: return piece_action_type::unselect;
+          case 2: return {};
+          case 3: return {};
+          default:
+          case 4:
+            assert(n.get_number() == 4);
+            return {};
         }
       }
       else
@@ -378,8 +379,6 @@ std::optional<piece_action_type> get_piece_action(
     else
     {
       // No own piece at cursor, maybe can move/castle/en-passant there?
-      assert(get_selected_pieces(g, player_side).size() == 1);
-      const auto selected_piece{get_selected_pieces(g, player_side)[0]};
       if (can_do(g, selected_piece, piece_action_type::attack_en_passant, cursor_square, player_side))
       {
         return piece_action_type::attack_en_passant;
@@ -1075,7 +1074,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::move);
     assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::move);
   }
-  // 53: Pawns are at square where they are promoted -> promote
+  // 53: Pawns are selected at a promotion square (cursor is there too) -> promote
   {
     game g{
       create_game_with_starting_position(starting_position_type::pawns_at_promotion)
@@ -1085,9 +1084,33 @@ void test_game_controller() //!OCLINT tests may be many
     do_select(g, c, "h1", side::rhs);
     move_cursor_to(c, "a8", side::lhs);
     move_cursor_to(c, "h1", side::rhs);
-    assert(get_piece_action(g, c, action_number(1), side::lhs).value() != piece_action_type::unselect);
     assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::promote_to_queen);
     assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::promote_to_queen);
+    assert(get_piece_action(g, c, action_number(2), side::lhs).value() == piece_action_type::promote_to_rook);
+    assert(get_piece_action(g, c, action_number(2), side::rhs).value() == piece_action_type::promote_to_rook);
+    assert(get_piece_action(g, c, action_number(3), side::lhs).value() == piece_action_type::promote_to_bishop);
+    assert(get_piece_action(g, c, action_number(3), side::rhs).value() == piece_action_type::promote_to_bishop);
+    assert(get_piece_action(g, c, action_number(4), side::lhs).value() == piece_action_type::promote_to_knight);
+    assert(get_piece_action(g, c, action_number(4), side::rhs).value() == piece_action_type::promote_to_knight);
+  }
+  // 53: Pawns are selected at a promotion square (cursor is there too) -> promote
+  {
+    game g{
+      create_game_with_starting_position(starting_position_type::pawns_at_promotion)
+    };
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "a8", side::lhs);
+    do_select(g, c, "h1", side::rhs);
+    move_cursor_to(c, "a7", side::lhs);
+    move_cursor_to(c, "h2", side::rhs);
+    assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::promote_to_queen);
+    assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::promote_to_queen);
+    assert(get_piece_action(g, c, action_number(2), side::lhs).value() == piece_action_type::promote_to_rook);
+    assert(get_piece_action(g, c, action_number(2), side::rhs).value() == piece_action_type::promote_to_rook);
+    assert(get_piece_action(g, c, action_number(3), side::lhs).value() == piece_action_type::promote_to_bishop);
+    assert(get_piece_action(g, c, action_number(3), side::rhs).value() == piece_action_type::promote_to_bishop);
+    assert(get_piece_action(g, c, action_number(4), side::lhs).value() == piece_action_type::promote_to_knight);
+    assert(get_piece_action(g, c, action_number(4), side::rhs).value() == piece_action_type::promote_to_knight);
   }
   #define FIX_ISSUE_64
   #ifdef FIX_ISSUE_64
