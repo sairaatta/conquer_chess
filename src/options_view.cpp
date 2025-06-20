@@ -24,6 +24,7 @@ options_view::options_view()
 {
   m_controls_bar.set_draw_player_controls(false);
   m_controls_bar.set_draw_invert(true);
+  m_controls_bar.set_draw_left_right_increase_descrease(true);
 
 }
 

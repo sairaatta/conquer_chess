@@ -25,6 +25,8 @@ void controls_bar::draw()
   const int label_up_width{50};
   const int label_down_width{90};
   const int label_select_width{100};
+  const int label_increase_width{120};
+  const int label_decrease_width{120};
   const int label_quit_width{80};
   const sf::Color semi_transparent(128, 128, 128, 128);
 
@@ -106,6 +108,43 @@ void controls_bar::draw()
     w = 16;
     r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
     draw_rectangle(r, semi_transparent);
+  }
+  if (m_draw_left_right_increase_descrease)
+  {
+    x += w;
+    w = 64;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_input_prompt_symbol(sf::Keyboard::Key::Left, r);
+
+    x += w;
+    w = label_decrease_width;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_text("Decrease", r, font_size);
+
+    x += w;
+    w = 16;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+
+    x += w;
+    w = 64;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_input_prompt_symbol(sf::Keyboard::Key::Right, r);
+
+    x += w;
+    w = label_increase_width;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_text("Increase", r, font_size);
+
+    x += w;
+    w = 16;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+
   }
 
   // Invert
