@@ -256,6 +256,7 @@ void do_move_keyboard_player_piece(
 }
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 void do_move_mouse_player_piece(
   game& g,
   game_controller& c,
@@ -278,6 +279,7 @@ void do_move_mouse_player_piece(
   g.tick(delta_t(0.0));
   assert(count_user_inputs(c) == 0);
 }
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 void do_promote_keyboard_player_piece(
@@ -368,6 +370,7 @@ void do_select_and_move_keyboard_player_piece(
 }
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 void do_select_and_move_mouse_player_piece(
   game& g,
   game_controller& c,
@@ -395,6 +398,7 @@ void do_select_and_move_mouse_player_piece(
     square(to_str)
   );
 }
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 void do_select_and_promote_keyboard_player_piece(
@@ -431,6 +435,7 @@ void do_select_for_keyboard_player(
 }
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 void do_select_for_mouse_player(
   game& g,
   game_controller& c,
@@ -452,6 +457,7 @@ void do_select_for_mouse_player(
   assert(count_user_inputs(c) == 0);
   assert(get_piece_at(g, s).is_selected());
 }
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 const game_coordinate& game_controller::get_cursor_pos(const side player) const noexcept
 {
@@ -509,6 +515,7 @@ side get_keyboard_user_player_side(const game_controller& c)
 }
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 chess_color get_mouse_user_player_color(
   const game_controller& c
 )
@@ -526,6 +533,7 @@ side get_mouse_user_player_side(const game_controller& c)
   assert(c.get_physical_controller(side::rhs).get_type() == physical_controller_type::mouse);
   return side::rhs;
 }
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 const physical_controller& game_controller::get_physical_controller(const side player_side) const noexcept
 {
@@ -834,6 +842,7 @@ void set_cursor_pos(
   set_cursor_pos(c, to_coordinat(s), player_side);
 }
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 void move_mouse_cursor_to(
   game_controller& c,
   const square& s,
@@ -844,6 +853,8 @@ void move_mouse_cursor_to(
   set_mouse_player_pos(c, s); // Processes the action
   assert(square(get_cursor_square(c, get_mouse_user_player_side(c))) == s);
 }
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
+
 
 void game_controller::set_mouse_user_selector(const action_number& number)
 {
@@ -883,7 +894,7 @@ void set_keyboard_player_pos(
 }
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
-
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 void set_mouse_player_pos(
   game_controller& c,
   const square& s
@@ -894,6 +905,7 @@ void set_mouse_player_pos(
   set_cursor_pos(c, s, player_side);
   assert(square(get_cursor_square(c, get_mouse_user_player_side(c))) == s);
 }
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 void test_game_controller() //!OCLINT tests may be many
 {
@@ -1097,6 +1109,7 @@ void test_game_controller() //!OCLINT tests may be many
     );
     assert(has_mouse_controller(g));
   }
+  #ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
   // get_mouse_user_player_side, mouse at LHS
   {
     const game_controller g(
@@ -1111,6 +1124,7 @@ void test_game_controller() //!OCLINT tests may be many
     );
     assert(get_mouse_user_player_side(g) == side::rhs);
   }
+  #endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
   // set_mouse_user_selector
   {
     game_controller g(

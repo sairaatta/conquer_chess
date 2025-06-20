@@ -112,9 +112,6 @@ user_inputs convert_move_to_user_inputs(
 /// to be done by the \link{game_controller}.
 int count_user_inputs(const game_controller& c) noexcept;
 
-/// Create a game controller when the players use the defaulter controllers
-//game_controller create_game_controller_with_default_controllers();
-
 /// Create a game controller when the players use a keyboard and a mouse
 game_controller create_game_controller_with_keyboard_mouse();
 
@@ -136,6 +133,7 @@ void do_move_keyboard_player_piece(
 );
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 /// Let the mouse player move a piece
 /// from the current selected square to a new target
 /// @see 'do_select_and_move_mouse_player_piece' does both
@@ -145,6 +143,7 @@ void do_move_mouse_player_piece(
   game_controller& c,
   const square& s
 );
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 void do_promote_keyboard_player_piece(
@@ -174,6 +173,7 @@ void do_select_and_move_keyboard_player_piece(
 );
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 /// Let the mouse player select a square
 /// (assuming that a piece of the right color is there)
 /// and let it move to another square
@@ -192,6 +192,7 @@ void do_select_and_move_mouse_player_piece(
   const std::string& from_str,
   const std::string& to_str
 );
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// Let the keyboard player select a square
@@ -227,6 +228,7 @@ void do_select_for_keyboard_player(
 );
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 /// Let the mouse player select the square
 /// Assumes that a piece of the right color is there
 /// @see 'do_select_and_move_mouse_player_piece' does both
@@ -236,6 +238,7 @@ void do_select_for_mouse_player(
   game_controller& c,
   const square& s
 );
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// Let the keyboard player attack a piece
@@ -294,6 +297,7 @@ chess_color get_keyboard_user_player_color(
 side get_keyboard_user_player_side(const game_controller& c);
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 /// Get the color of the mouse using player
 /// Will throw if no user uses a mouse
 chess_color get_mouse_user_player_color(
@@ -302,6 +306,7 @@ chess_color get_mouse_user_player_color(
 
 /// What side does the player with the mouse control?
 side get_mouse_user_player_side(const game_controller& c);
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 /// Get the physical controllers
 const physical_controller& get_physical_controller(
@@ -440,11 +445,13 @@ void set_keyboard_player_pos(
 );
 #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 /// The the cursor of the mouse player to the desired square
 void set_mouse_player_pos(
   game_controller& c,
   const square& s
 );
+#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 /// Test this class and its free functions
 void test_game_controller();
