@@ -387,17 +387,19 @@ void process_press_action_1_or_lmb_down(
 
   if (!has_selected_pieces(g, player_side)) return;
 
+  assert(has_selected_pieces(g, player_color));
+  assert(!get_selected_pieces(g, player_side).empty());
+  assert(get_selected_pieces(g, player_side).size() == 1);
+  const auto selected_piece{get_selected_pieces(g, player_side)[0]};
+  const auto selected_piece_type{selected_piece.get_type()};
+  const auto selected_piece_square{selected_piece.get_current_square()};
 
   if (is_cursor_on_enemy_piece) {
-    assert(has_selected_pieces(g, player_color));
-    assert(!get_selected_pieces(g, player_side).empty());
-    assert(get_selected_pieces(g, player_side).size() == 1);
-    const auto selected_piece{get_selected_pieces(g, player_side)[0]};
     if (
       can_attack(
         player_color,
-        selected_piece.get_type(),
-        selected_piece.get_current_square(),
+        selected_piece_type,
+        selected_piece_square,
         cursor
       )
     ) {
@@ -408,16 +410,17 @@ void process_press_action_1_or_lmb_down(
         get_player_color(action.get_player())
       );
     }
+    return;
   }
-
-
-  // 'start_move_unit' will check for piece, color, etc.
-  start_move_unit(
-    g,
-    c,
-    get_cursor_pos(c, action.get_player()),
-    get_player_color(action.get_player())
-  );
+  if (can_move(player_color, selected_piece_type, selected_piece_square, cursor))
+  {
+    start_move_unit(
+      g,
+      c,
+      get_cursor_pos(c, action.get_player()),
+      get_player_color(action.get_player())
+    );
+  }
 }
 
 void process_press_action_2(
