@@ -228,237 +228,6 @@ game_controller create_game_controller_with_two_keyboards()
   return game_controller();
 }
 
-#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-void do_move_keyboard_player_piece(
-  game& g,
-  game_controller& c,
-  const square& s
-)
-{
-  assert(has_keyboard_controller(c));
-  assert(count_selected_units(g, get_keyboard_user_player_color(c)) == 1);
-  set_keyboard_player_pos(c, s);
-
-  assert(s
-    == square(get_cursor_pos(c, get_keyboard_user_player_side(c)))
-  );
-
-  add_user_input(
-    c,
-    create_press_action_1(
-      get_keyboard_user_player_side(c)
-    )
-  );
-  assert(count_user_inputs(c) == 1);
-  c.apply_user_inputs_to_game(g);
-  g.tick(delta_t(0.0));
-  assert(count_user_inputs(c) == 0);
-}
-#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-void do_move_mouse_player_piece(
-  game& g,
-  game_controller& c,
-  const square& s
-
-)
-{
-  assert(has_mouse_controller(c));
-  assert(count_selected_units(g, get_mouse_user_player_color(c)) == 1);
-  set_mouse_player_pos(c, s);
-  assert(square(get_cursor_pos(c, get_mouse_user_player_side(c))) == s);
-
-  add_user_input(
-    c,
-    create_press_lmb_action(
-      get_mouse_user_player_side(c)
-    )
-  );
-  assert(count_user_inputs(c) == 1);
-  g.tick(delta_t(0.0));
-  assert(count_user_inputs(c) == 0);
-}
-#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-void do_promote_keyboard_player_piece(
-  game& g,
-  game_controller& c,
-  const square& pawn_location,
-  const piece_type promote_to
-)
-{
-  assert(has_keyboard_controller(c));
-  assert(count_selected_units(g, get_keyboard_user_player_color(c)) == 1);
-  set_keyboard_player_pos(c, pawn_location);
-  assert(square(get_cursor_pos(c, side::lhs)) == pawn_location);
-  assert(get_piece_at(g, pawn_location).get_type() == piece_type::pawn);
-  switch (promote_to)
-  {
-    case piece_type::bishop:
-      add_user_input(c, create_press_action_3(get_keyboard_user_player_side(c)));
-      break;
-    case piece_type::knight:
-      add_user_input(c, create_press_action_4(get_keyboard_user_player_side(c)));
-      break;
-    case piece_type::king:
-    case piece_type::pawn:
-    case piece_type::queen:
-      assert(promote_to == piece_type::queen);
-      add_user_input(
-        c,
-        create_press_action_1(
-          get_keyboard_user_player_side(c)
-        )
-      );
-      break;
-    case piece_type::rook:
-      add_user_input(c, create_press_action_2(get_keyboard_user_player_side(c)));
-      break;
-  }
-  c.apply_user_inputs_to_game(g);
-  g.tick(delta_t(0.0));
-  assert(count_user_inputs(c) == 0);
-}
-#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-void do_start_attack_keyboard_player_piece(
-  game& g,
-  game_controller& c,
-  const square& s
-)
-{
-  assert(has_keyboard_controller(c));
-  assert(count_selected_units(g, get_keyboard_user_player_color(c)) == 1);
-  set_keyboard_player_pos(c, s);
-  assert(square(get_cursor_pos(c, side::lhs)) == s);
-  add_user_input(c, create_press_action_2(get_keyboard_user_player_side(c)));
-  assert(count_user_inputs(c) != 0);
-  c.apply_user_inputs_to_game(g);
-  g.tick(delta_t(0.0));
-  assert(count_user_inputs(c) == 0);
-}
-
-void do_select_and_move_keyboard_player_piece(
-  game& g,
-  game_controller& c,
-  const square& from,
-  const square& to
-)
-{
-  do_select_for_keyboard_player(g, c, from);
-  assert(count_selected_units(g) > 0);
-  do_move_keyboard_player_piece(g, c, to);
-  assert(count_user_inputs(c) == 0);
-}
-
-void do_select_and_move_keyboard_player_piece(
-  game& g,
-  game_controller& c,
-  const std::string& from_str,
-  const std::string& to_str
-)
-{
-  return do_select_and_move_keyboard_player_piece(
-    g,
-    c,
-    square(from_str),
-    square(to_str)
-  );
-}
-#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-void do_select_and_move_mouse_player_piece(
-  game& g,
-  game_controller& c,
-  const square& from,
-  const square& to
-)
-{
-  do_select_for_mouse_player(g, c, from);
-  assert(count_selected_units(g) > 0);
-  do_move_mouse_player_piece(g, c, to);
-  assert(count_user_inputs(c) == 0);
-}
-
-void do_select_and_move_mouse_player_piece(
-  game& g,
-  game_controller& c,
-  const std::string& from_str,
-  const std::string& to_str
-)
-{
-  return do_select_and_move_mouse_player_piece(
-    g,
-    c,
-    square(from_str),
-    square(to_str)
-  );
-}
-#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-void do_select_and_promote_keyboard_player_piece(
-  game& g,
-  game_controller& c,
-  const square& pawn_location,
-  const piece_type promote_to
-)
-{
-  do_select_for_keyboard_player(g, c, pawn_location);
-  do_promote_keyboard_player_piece(g, c, pawn_location, promote_to);
-  assert(count_user_inputs(c) == 0);
-}
-
-void do_select_and_start_attack_keyboard_player_piece(
-  game& g,
-  game_controller& c,
-  const square& from,
-  const square& to
-)
-{
-  do_select_for_keyboard_player(g, c, from);
-  do_start_attack_keyboard_player_piece(g, c, to);
-  assert(count_user_inputs(c) == 0);
-}
-
-void do_select_for_keyboard_player(
-  game& g,
-  game_controller& c,
-  const square& s
-)
-{
-  return do_select(g, c, s, get_keyboard_user_player_color(c));
-}
-#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-void do_select_for_mouse_player(
-  game& g,
-  game_controller& c,
-  const square& s
-)
-{
-  assert(has_mouse_controller(c));
-  assert(is_piece_at(g, s));
-  assert(!get_piece_at(g, s).is_selected());
-  set_mouse_player_pos(c, s);
-  assert(square(get_cursor_pos(c, get_mouse_user_player_side(c))) == s);
-  add_user_input(
-    c,
-    create_press_lmb_action(
-      get_mouse_user_player_side(c)
-    )
-  );
-  g.tick(delta_t(0.0));
-  assert(count_user_inputs(c) == 0);
-  assert(get_piece_at(g, s).is_selected());
-}
-#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-
 const game_coordinate& game_controller::get_cursor_pos(const side player) const noexcept
 {
   if (player == side::lhs) return m_lhs_cursor_pos;
@@ -491,49 +260,6 @@ square get_cursor_square(
   assert(is_coordinat_on_board(cursor_pos));
   return square(cursor_pos);
 }
-
-#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-chess_color get_keyboard_user_player_color(
-  const game_controller& c
-)
-{
-  return get_player_color(get_keyboard_user_player_side(c));
-}
-#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-side get_keyboard_user_player_side(const game_controller& c)
-{
-  if (c.get_physical_controller(side::lhs).get_type() == physical_controller_type::keyboard)
-  {
-    // 1 keyboard max
-    assert(c.get_physical_controller(side::rhs).get_type() != physical_controller_type::keyboard);
-    return side::lhs;
-  }
-  assert(c.get_physical_controller(side::rhs).get_type() == physical_controller_type::keyboard);
-  return side::rhs;
-}
-#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-chess_color get_mouse_user_player_color(
-  const game_controller& c
-)
-{
-  return get_player_color(get_mouse_user_player_side(c));
-}
-
-side get_mouse_user_player_side(const game_controller& c)
-{
-  assert(has_mouse_controller(c));
-  if (c.get_physical_controller(side::lhs).get_type() == physical_controller_type::mouse)
-  {
-    return side::lhs;
-  }
-  assert(c.get_physical_controller(side::rhs).get_type() == physical_controller_type::mouse);
-  return side::rhs;
-}
-#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 const physical_controller& game_controller::get_physical_controller(const side player_side) const noexcept
 {
@@ -880,20 +606,6 @@ void set_cursor_pos(
   set_cursor_pos(c, to_coordinat(s), player_side);
 }
 
-#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-void move_mouse_cursor_to(
-  game_controller& c,
-  const square& s,
-  const side player_side
-)
-{
-  assert(is_mouse_user(c, player_side));
-  set_mouse_player_pos(c, s); // Processes the action
-  assert(square(get_cursor_square(c, get_mouse_user_player_side(c))) == s);
-}
-#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-
-
 void game_controller::set_mouse_user_selector(const action_number& number)
 {
   assert(m_mouse_user_selector.has_value());
@@ -914,36 +626,6 @@ void game_controller::set_cursor_pos(
     m_rhs_cursor_pos = pos;
   }
 }
-
-#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-void set_keyboard_player_pos(
-  game_controller& c,
-  const square& s
-)
-{
-  assert(has_keyboard_controller(c));
-  const auto player_side{get_keyboard_user_player_side(c)};
-  move_cursor_to(c, s, player_side);
-
-  assert(s
-    == square(get_cursor_pos(c, get_keyboard_user_player_side(c)))
-  );
-  assert(count_user_inputs(c) == 0);
-}
-#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
-#ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-void set_mouse_player_pos(
-  game_controller& c,
-  const square& s
-)
-{
-  assert(has_mouse_controller(c));
-  const side player_side{get_mouse_user_player_side(c)};
-  set_cursor_pos(c, s, player_side);
-  assert(square(get_cursor_square(c, get_mouse_user_player_side(c))) == s);
-}
-#endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
 
 void test_game_controller() //!OCLINT tests may be many
 {
@@ -1118,28 +800,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(collect_messages(g).at(1).get_message_type() == message_type::start_castling_kingside);
     #endif // FIX_ISSUE_3
   }
-  #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-  // 47: set_keyboard_player_pos for RHS player
-  {
-    game_controller c{
-      create_game_controller_with_keyboard_mouse()
-    };
-    assert(get_keyboard_user_player_side(c) == side::lhs);
-    const square s("a1");
-    set_keyboard_player_pos(c, s);
-    assert(s == square(get_cursor_pos(c, get_keyboard_user_player_side(c))));
-  }
-  // 47: set_keyboard_player_pos for RHS player
-  {
-    game_controller c{
-      create_game_controller_with_mouse_keyboard()
-    };
-    assert(get_keyboard_user_player_side(c) == side::rhs);
-    const square s("a1");
-    set_keyboard_player_pos(c, s);
-    assert(s == square(get_cursor_pos(c, get_keyboard_user_player_side(c))));
-  }
-  #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
   // has_mouse_controller
   {
     const game_controller g(
@@ -1147,22 +807,6 @@ void test_game_controller() //!OCLINT tests may be many
     );
     assert(has_mouse_controller(g));
   }
-  #ifdef BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
-  // get_mouse_user_player_side, mouse at LHS
-  {
-    const game_controller g(
-      create_game_controller_with_mouse_keyboard()
-    );
-    assert(get_mouse_user_player_side(g) == side::lhs);
-  }
-  // get_mouse_user_player_side, mouse at RHS
-  {
-    const game_controller g(
-      create_game_controller_with_keyboard_mouse()
-    );
-    assert(get_mouse_user_player_side(g) == side::rhs);
-  }
-  #endif // BELIEVE_get_mouse_user_player_side_IS_A_GOOD_IDEA
   // set_mouse_user_selector
   {
     game_controller g(
@@ -1433,20 +1077,6 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(get_cursor_pos(c, chess_color::white) != get_cursor_pos(c, chess_color::black));
   }
-  #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-  // get_keyboard_player_pos, non-const, white == lhs == keyboard
-  {
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(get_keyboard_user_player_color(c) == chess_color::white);
-    const auto pos_before{get_cursor_pos(c, side::lhs)};
-    const auto pos{get_cursor_pos(c, side::lhs)};
-    set_cursor_pos(c, pos + game_coordinate(0.1, 0.1), side::lhs);
-    const auto pos_after{get_cursor_pos(c, side::lhs)};
-    assert(pos_before != pos_after);
-  }
-  #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
   // get_mouse_player_pos
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
