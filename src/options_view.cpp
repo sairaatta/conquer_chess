@@ -30,20 +30,10 @@ void options_view::decrease_selected()
 {
   switch (m_selected)
   {
-    case options_view_item::game_speed:
-      game_options::get().set_game_speed(get_previous(game_options::get().get_game_speed()));
-    break;
-    case options_view_item::music_volume:
-      game_options::get().set_volume(get_previous(game_options::get().get_music_volume()));
-    break;
-    case options_view_item::sound_effects_volume:
-      game_options::get().set_sound_effects_volume(get_previous(game_options::get().get_sound_effects_volume()));
-    break;
-    case options_view_item::starting_position:
-      assert(!to_str(get_starting_position()).empty());
-      game_options::get().set_starting_position(get_previous(get_starting_position()));
-      assert(!to_str(get_starting_position()).empty());
-    break;
+    case options_view_item::game_speed: decrease_game_speed(); break;
+    case options_view_item::music_volume: decrease_music_volume(); break;
+    case options_view_item::sound_effects_volume: decrease_sound_effects_volume(); break;
+    case options_view_item::starting_position: decrease_starting_position(); break;
     case options_view_item::left_controls:
     {
       set_next_state(program_state::left_controls);
@@ -62,20 +52,10 @@ void options_view::increase_selected()
 {
   switch (m_selected)
   {
-    case options_view_item::game_speed:
-      game_options::get().set_game_speed(get_next(game_options::get().get_game_speed()));
-    break;
-    case options_view_item::music_volume:
-      game_options::get().set_volume(get_next(game_options::get().get_music_volume()));
-    break;
-    case options_view_item::sound_effects_volume:
-      game_options::get().set_sound_effects_volume(get_next(game_options::get().get_sound_effects_volume()));
-    break;
-    case options_view_item::starting_position:
-      assert(!to_str(get_starting_position()).empty());
-      game_options::get().set_starting_position(get_next(get_starting_position()));
-      assert(!to_str(get_starting_position()).empty());
-    break;
+    case options_view_item::game_speed: increase_game_speed(); break;
+    case options_view_item::music_volume: increase_music_volume(); break;
+    case options_view_item::sound_effects_volume: increase_sound_effects_volume(); break;
+    case options_view_item::starting_position: increase_starting_position(); break;
     case options_view_item::left_controls:
     {
       set_next_state(program_state::left_controls);
@@ -128,6 +108,18 @@ bool options_view::process_event_impl(sf::Event& event)
     if (key_pressed == sf::Keyboard::Key::Q)
     {
       set_next_state(program_state::main_menu);
+      return false;
+    }
+    if (key_pressed == sf::Keyboard::Key::T)
+    {
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+      {
+        decrease_starting_position();
+      }
+      else
+      {
+        increase_starting_position();
+      }
       return false;
     }
     if (key_pressed == sf::Keyboard::Key::Num1)

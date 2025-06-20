@@ -119,6 +119,20 @@ private:
 };
 
 
+/// Decrease the game speed
+void decrease_game_speed() noexcept;
+
+/// Decrease the music volume
+void decrease_music_volume() noexcept;
+
+/// Decrease the sound effects volume
+void decrease_sound_effects_volume() noexcept;
+
+/// Decrease the starting position.
+///
+/// Or: get the previous one.
+void decrease_starting_position() noexcept;
+
 /// Are selected squares shown on-screen?
 bool do_show_selected() noexcept;
 
@@ -147,6 +161,20 @@ const volume& get_sound_effects_volume() noexcept;
 
 /// Get the starting position
 starting_position_type get_starting_position() noexcept;
+
+/// Increase the game speed
+void increase_game_speed() noexcept;
+
+/// Increase the music volume
+void increase_music_volume() noexcept;
+
+/// Increase the sound effects volume
+void increase_sound_effects_volume() noexcept;
+
+/// Increase the starting position.
+///
+/// Or: get the next one.
+void increase_starting_position() noexcept;
 
 /// Test this class and its free functions
 void test_game_options();

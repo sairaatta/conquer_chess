@@ -37,6 +37,9 @@ void set_text_position(sf::Text& text, const screen_rect& screen_rect);
 void test_sfml_helper();
 
 /// Convert an SFML key to a filename, as used by \link{input_prompt_textures}
+std::string to_inverted_resource_name(const sf::Keyboard::Key k);
+
+/// Convert an SFML key to a filename, as used by \link{input_prompt_textures}
 std::string to_resource_name(const sf::Keyboard::Key k);
 
 /// Convert an SFML mouse button to a filename, as used by \link{input_prompt_textures}

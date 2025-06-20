@@ -538,11 +538,24 @@ sf::Color to_sfml_color(
   return sf::Color(128 - 0, 128 - 64, 128 - 64);
 }
 
+std::string to_inverted_resource_name(const sf::Keyboard::Key k)
+{
+  std::string s{key_str_to_resource_name(to_str(k)) + "_outline"};
+  const std::string to_remove{"_outline_outline"};
+  if (s.size() > to_remove.size()
+    && s.substr(s.size() - to_remove.size(), to_remove.size()) == to_remove
+  )
+  {
+    return s.substr(0, s.size() - to_remove.size());
+  }
+  return s;
+}
 
 std::string to_resource_name(const sf::Keyboard::Key k)
 {
   return key_str_to_resource_name(to_str(k));
 }
+
 
 std::string to_resource_name(const sf::Mouse::Button k)
 {

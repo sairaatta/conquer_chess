@@ -57,7 +57,21 @@ void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr);
 /// Draw a symbol for a keyboard input prompt.
 ///
 /// For example, a symbol for the key A
+///
+/// @seealso Use \link{draw_input_prompt_inverted_symbol}
+///   for the inverted symbol
 void draw_input_prompt_symbol(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r
+);
+
+/// Draw the inverted symbol for a keyboard input prompt.
+///
+/// For example, a symbol for the key A
+///
+/// @seealso Use \link{draw_input_prompt_symbol}
+///   for the regular symbol
+void draw_input_prompt_inverted_symbol(
   const sf::Keyboard::Key& k,
   const screen_rect& r
 );
@@ -65,6 +79,21 @@ void draw_input_prompt_symbol(
 /// Draw a symbol for a keyboard input prompt on a background
 ///
 /// For example, a symbol for the key A on a black background
+///
+/// @seealso Use \link{draw_input_prompt_symbol_on_background}
+///   for the regular symbol
+void draw_input_prompt_inverted_symbol_on_background(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r,
+  const sf::Color background_color = sf::Color::Black
+);
+
+/// Draw a symbol for a keyboard input prompt on a background
+///
+/// For example, a symbol for the key A on a black background
+///
+/// @seealso Use \link{draw_input_prompt_inverted_symbol_on_background}
+///   for the inverted symbol
 void draw_input_prompt_symbol_on_background(
   const sf::Keyboard::Key& k,
   const screen_rect& r,

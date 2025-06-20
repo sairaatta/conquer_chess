@@ -42,6 +42,12 @@ input_prompt_textures::input_prompt_textures()
     const std::string resource_name{to_resource_name(k)};
     assert(has_texture(resource_name));
   }
+  // Test if all the inverted SFML keys are mapped to a resource
+  for (const auto k: get_all_sfml_keys())
+  {
+    const std::string resource_name{to_inverted_resource_name(k)};
+    assert(has_texture(resource_name));
+  }
 
   // Test if all the SFML keys are mapped to a resource
   for (const auto k: get_all_sfml_buttons())
@@ -55,6 +61,11 @@ input_prompt_textures::input_prompt_textures()
 bool input_prompt_textures::has_texture(const std::string& s) const noexcept
 {
   return m_textures.find(s) != std::end(m_textures);
+}
+
+sf::Texture& input_prompt_textures::get_inverted_texture(const sf::Keyboard::Key& s)
+{
+  return get_texture(to_inverted_resource_name(s));
 }
 
 sf::Texture& input_prompt_textures::get_texture(const sf::Keyboard::Key& s)

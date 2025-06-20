@@ -141,7 +141,14 @@ void draw_game_speed_icon(const screen_rect& sr)
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
   };
-  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+  {
+    draw_input_prompt_inverted_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
+  else
+  {
+    draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
 }
 
 void draw_game_speed_value(const screen_rect& sr)
@@ -155,6 +162,17 @@ void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr)
 {
   draw_text(s, sr, 512, sf::Color::Black);
   draw_text(s, sr, 500, sf::Color::White);
+}
+
+void draw_input_prompt_inverted_symbol(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r
+)
+{
+  draw_texture(
+    game_resources::get().get_input_prompt_textures().get_inverted_texture(k),
+    r
+  );
 }
 
 void draw_input_prompt_symbol(
@@ -177,6 +195,16 @@ void draw_input_prompt_symbol(
     game_resources::get().get_input_prompt_textures().get_texture(k),
     r
   );
+}
+
+void draw_input_prompt_inverted_symbol_on_background(
+  const sf::Keyboard::Key& k,
+  const screen_rect& r,
+  const sf::Color background_color
+)
+{
+  draw_rectangle(r, background_color);
+  draw_input_prompt_inverted_symbol(k, r);
 }
 
 void draw_input_prompt_symbol_on_background(

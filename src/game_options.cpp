@@ -21,6 +21,26 @@ game_options::game_options(
   assert(m_screen_size.get_y() > 0);
 }
 
+void decrease_game_speed() noexcept
+{
+  game_options::get().set_game_speed(get_previous(game_options::get().get_game_speed()));
+}
+
+void decrease_music_volume() noexcept
+{
+  game_options::get().set_volume(get_previous(game_options::get().get_music_volume()));
+}
+
+void decrease_sound_effects_volume() noexcept
+{
+  game_options::get().set_sound_effects_volume(get_previous(game_options::get().get_sound_effects_volume()));
+}
+
+void decrease_starting_position() noexcept
+{
+  game_options::get().set_starting_position(get_previous(get_starting_position()));
+}
+
 bool do_show_selected() noexcept
 {
   return game_options::get().get_show_selected();
@@ -54,6 +74,26 @@ const volume& get_sound_effects_volume() noexcept
 starting_position_type get_starting_position() noexcept
 {
   return game_options::get().get_starting_position();
+}
+
+void increase_game_speed() noexcept
+{
+  game_options::get().set_game_speed(get_next(game_options::get().get_game_speed()));
+}
+
+void increase_music_volume() noexcept
+{
+  game_options::get().set_volume(get_next(game_options::get().get_music_volume()));
+}
+
+void increase_sound_effects_volume() noexcept
+{
+  game_options::get().set_sound_effects_volume(get_next(game_options::get().get_sound_effects_volume()));
+}
+
+void increase_starting_position() noexcept
+{
+  game_options::get().set_starting_position(get_next(get_starting_position()));
 }
 
 void game_options::reset()

@@ -16,6 +16,9 @@ public:
   /// Determine if a texture is present
   bool has_texture(const std::string& s) const noexcept;
 
+  /// Get an inverted texture from an SFML key
+  sf::Texture& get_inverted_texture(const sf::Keyboard::Key& k);
+
   /// Get a texture from a std::string.
   ///
   /// Prefer to use `get_texture` with a SFML key,
