@@ -115,6 +115,20 @@ void game_controller::apply_user_inputs_to_game(
   m_user_inputs = std::vector<user_input>();
 }
 
+bool can_do(
+  const game& g,
+  const game_controller& c,
+  const piece_action_type action,
+  const side player_side
+)
+{
+  if (action == piece_action_type::select)
+  {
+    return can_player_select_piece_at_cursor_pos(g, c, player_side);
+  }
+  return false;
+}
+
 bool can_player_select_piece_at_cursor_pos(
   const game& g,
   const game_controller& c,
@@ -122,23 +136,28 @@ bool can_player_select_piece_at_cursor_pos(
 )
 {
   const auto& cursor_pos{
-    get_cursor_pos(
-      c,
-      get_player_side(cursor_color)
-    )
+    get_cursor_pos(c, get_player_side(cursor_color))
   };
-  if (
-    !is_piece_at(
-      g,
-      cursor_pos,
-      game_options::get().get_click_distance()
-    )
-  )
+  if (!is_piece_at(g, cursor_pos, game_options::get().get_click_distance()))
   {
     return false;
   }
   const auto& piece{get_closest_piece_to(g, cursor_pos)};
-  return !piece.is_selected() && piece.get_color() == cursor_color;
+  const bool is_piece_already_selected{piece.is_selected()};
+  const bool does_player_own_that_piece{piece.get_color() == cursor_color};
+
+  return !is_piece_already_selected && does_player_own_that_piece;
+}
+
+bool can_player_select_piece_at_cursor_pos(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+)
+{
+  return can_player_select_piece_at_cursor_pos(
+    g, c, get_player_color(player_side)
+  );
 }
 
 std::vector<user_inputs> collect_all_user_inputses(
@@ -912,6 +931,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!get_piece_action(g, c, action_number(3), side::rhs));
     assert(!get_piece_action(g, c, action_number(4), side::lhs));
     assert(!get_piece_action(g, c, action_number(4), side::rhs));
+    assert(!can_do(g, c, piece_action_type::select, side::lhs));
   }
   // 53: nothing selected, cursor at square with opponent piece -> no action
   {
@@ -1113,7 +1133,6 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // #27: a2-a4 takes 1 time unit
   {
-    #ifdef CAN_DO_ACTION
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, square("a2")));
@@ -1126,17 +1145,19 @@ void test_game_controller() //!OCLINT tests may be many
     do_select(g, c, "a2", side::lhs);
     move_cursor_to(c, "a4", side::lhs);
     assert(count_selected_units(g, chess_color::white) == 1);
-    do_action(g, c, piece_action_type::move, side::lhs);
+
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
     assert(is_piece_at(g, square("a2")));
     assert(!is_piece_at(g, square("a4")));
     // Should take 1 time unit
-    for (int i{0}; i!=5; ++i)
+    for (int i{0}; i!=4; ++i)
     {
       g.tick(delta_t(0.25));
     }
     assert(!is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("a4")));
-    #endif // CAN_DO_ACTION
   }
   // A piece under attack must have decreasing health
   {

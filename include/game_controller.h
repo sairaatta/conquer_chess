@@ -83,11 +83,26 @@ void add_user_input(game_controller& c, const user_input& input);
 /// Add a user_inputs. These will be processed in 'game::tick'
 void add_user_inputs(game_controller& c, const user_inputs& input);
 
-/// Can the player select a piece at the current mouse position?
+/// Can a player do a certain action?
+bool can_do(
+  const game& g,
+  const game_controller& c,
+  const piece_action_type action,
+  const side player_side
+);
+
+/// Can the player select a piece at the current cursor position?
 bool can_player_select_piece_at_cursor_pos(
   const game& g,
   const game_controller& c,
   const chess_color cursor_color
+);
+
+/// Can the player select a piece at the current cursor position?
+bool can_player_select_piece_at_cursor_pos(
+  const game& g,
+  const game_controller& c,
+  const side player_side
 );
 
 /// Collect all valid 'user_input' for all players.

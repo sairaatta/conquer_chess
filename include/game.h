@@ -67,6 +67,14 @@ bool can_castle_kingside(const piece& p, const game& g) noexcept;
 /// Can this piece castle queenside?
 bool can_castle_queenside(const piece& p, const game& g) noexcept;
 
+bool can_do(
+  const game& g,
+  const piece& selected_piece,
+  const piece_action_type action,
+  const square& cursor_square,
+  const side player_side
+);
+
 /// Can an action be done?
 bool can_do(const game& g,
   const piece& selected_piece,
