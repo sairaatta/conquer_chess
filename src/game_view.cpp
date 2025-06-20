@@ -120,34 +120,14 @@ const game_coordinate& get_cursor_pos(const game_view& view, const side player) 
 std::string get_text_for_action(
   const game_view& view,
   const game_controller& c,
-  const action_number& key
+  const action_number& n
 )
 {
   const auto& g{view.get_game()};
-  const auto default_action{
-    get_default_piece_action(g, c, side::lhs)
-  };
-  if (!default_action) return "";
-  if (key == action_number(1))
-  {
-    return to_human_str(default_action.value());
-  }
-  else
-  {
-    if (default_action.value() == piece_action_type::promote_to_queen)
-    {
-      switch (key.get_number())
-      {
-        case 2: return to_human_str(piece_action_type::promote_to_rook);
-        case 3: return to_human_str(piece_action_type::promote_to_bishop);
-        case 4:
-        default:
-          assert(key.get_number() == 4);
-          return to_human_str(piece_action_type::promote_to_knight);
-      }
-    }
-    return "";
-  }
+  const auto maybe_action{get_piece_action(g, c, n, side::lhs)};
+
+  if (!maybe_action) return "";
+  return to_human_str(maybe_action.value());
 }
 
 const in_game_time& get_time(const game_view& v) noexcept

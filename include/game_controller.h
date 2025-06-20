@@ -8,13 +8,19 @@
 #include "user_inputs.h"
 #include "physical_controller_type.h"
 
+#include <map>
 #include <iosfwd>
 
 /// The class that acts as a controller for \link{game}.
 ///
-/// A \link{game_controller} receives input
-/// from the \link{physical_controllers} and send these
-/// to the \link{game}.
+/// This can be thought of as a virtual person that plays the game for you.
+///
+/// This class:
+///
+/// - deals with input from the \link{physical_controllers}
+/// - keeps track of the cursors
+/// - moves the pieces of a \link{game}
+///
 class game_controller
 {
 public:
@@ -65,7 +71,7 @@ private:
   user_inputs m_user_inputs;
 
   /// Force to pick a setup of physical_controllers
-  friend game_controller create_game_controller_with_default_controllers();
+  //friend game_controller create_game_controller_with_default_controllers();
   friend game_controller create_game_controller_with_keyboard_mouse();
   friend game_controller create_game_controller_with_mouse_keyboard();
   friend game_controller create_game_controller_with_two_keyboards();
@@ -107,7 +113,7 @@ user_inputs convert_move_to_user_inputs(
 int count_user_inputs(const game_controller& c) noexcept;
 
 /// Create a game controller when the players use the defaulter controllers
-game_controller create_game_controller_with_default_controllers();
+//game_controller create_game_controller_with_default_controllers();
 
 /// Create a game controller when the players use a keyboard and a mouse
 game_controller create_game_controller_with_keyboard_mouse();
@@ -118,6 +124,7 @@ game_controller create_game_controller_with_mouse_keyboard();
 /// Create a game controller when the players use two keyboards
 game_controller create_game_controller_with_two_keyboards();
 
+#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// Let the keyboard player move a piece
 /// from the current selected square to a new target
 /// @see 'do_select_and_move_keyboard_player_piece' does both
@@ -127,6 +134,7 @@ void do_move_keyboard_player_piece(
   game_controller& c,
   const square& s
 );
+#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
 /// Let the mouse player move a piece
 /// from the current selected square to a new target
@@ -138,6 +146,7 @@ void do_move_mouse_player_piece(
   const square& s
 );
 
+#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 void do_promote_keyboard_player_piece(
   game& g,
   game_controller& c,
@@ -163,6 +172,7 @@ void do_select_and_move_keyboard_player_piece(
   const std::string& from_str,
   const std::string& to_str
 );
+#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
 /// Let the mouse player select a square
 /// (assuming that a piece of the right color is there)
@@ -183,7 +193,7 @@ void do_select_and_move_mouse_player_piece(
   const std::string& to_str
 );
 
-
+#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// Let the keyboard player select a square
 /// (assuming that a pawn of the right color is there)
 /// and let it promote to another type
@@ -215,6 +225,7 @@ void do_select_for_keyboard_player(
   game_controller& c,
   const square& s
 );
+#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
 /// Let the mouse player select the square
 /// Assumes that a piece of the right color is there
@@ -226,6 +237,7 @@ void do_select_for_mouse_player(
   const square& s
 );
 
+#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// Let the keyboard player attack a piece
 /// from the current selected square to a new target
 /// @see 'do_select_and_start_attack_keyboard_player_piece' does both
@@ -235,6 +247,7 @@ void do_start_attack_keyboard_player_piece(
   game_controller& c,
   const square& s
 );
+#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
 /// Get the a player's cursor position
 const game_coordinate& get_cursor_pos(
@@ -257,21 +270,29 @@ square get_cursor_square(
 /// Get the default, primary, most likely piece action
 /// Returns an empty optional if the current setup
 /// cannot result in an action
-std::optional<piece_action_type> get_default_piece_action(
-  const game& g,
-  const game_controller& c,
-  const side player_side
-) noexcept;
+//
+// DEPRECATED: use 'get_piece_action'
+//
+//std::optional<piece_action_type> get_default_piece_action(
+//  const game& g,
+//  const game_controller& c,
+//  const side player_side
+//) noexcept;
 
+#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// Get the color of the keyboard using player
 /// Will throw if no user uses a keyboard
 chess_color get_keyboard_user_player_color(
   const game_controller& c
 );
+#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
+
+#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// Get the side of the controller that uses the keyboard.
 /// Assumes there is one controller that uses the keyboard
 side get_keyboard_user_player_side(const game_controller& c);
+#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
 /// Get the color of the mouse using player
 /// Will throw if no user uses a mouse
@@ -290,6 +311,30 @@ const physical_controller& get_physical_controller(
 
 /// Get the physical controller type
 physical_controller_type get_physical_controller_type(
+  const game_controller& c,
+  const side player_side
+) noexcept;
+
+/// Get the type of action, if any, a player could by pressing an action key.
+///
+/// For example, pressing action 1 typically un-/selects pieces when
+/// a cursor is on a piece of the own color.
+///
+/// @seealso See \link{get_piece_actions} to obtain these for all of the
+/// action keys
+std::optional<piece_action_type> get_piece_action(
+  const game& g,
+  const game_controller& c,
+  const action_number& n,
+  const side player_side
+) noexcept;
+
+/// Get the type of action, if any, a player could by pressing an action key.
+///
+/// For example, action 1 typically un-/selects pieces, where
+/// action 4 is only used to promote to a knight
+std::map<action_number, std::optional<piece_action_type>> get_piece_actions(
+  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
@@ -387,11 +432,13 @@ void set_cursor_pos(
   const side player_side
 ) noexcept;
 
+#ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 /// The the cursor of the keyboard player to the desired square
 void set_keyboard_player_pos(
   game_controller& c,
   const square& s
 );
+#endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
 
 /// The the cursor of the mouse player to the desired square
 void set_mouse_player_pos(

@@ -630,7 +630,7 @@ void test_user_inputs()
   // Move up does something
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_up_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -640,7 +640,7 @@ void test_user_inputs()
   // Move right does something
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_right_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -650,7 +650,7 @@ void test_user_inputs()
   // Move down does something
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_down_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -660,7 +660,7 @@ void test_user_inputs()
   // Move left does something
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_left_action(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -685,7 +685,7 @@ void test_user_inputs()
   // 64: move white's cursor to e2
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(square(get_cursor_pos(c, side::lhs)) != square("e2"));
     auto inputs{
       get_user_inputs_to_move_cursor_to(c, square("e2"), side::lhs)
@@ -699,7 +699,7 @@ void test_user_inputs()
   // 64: move white's cursor to e2 and select the pawn
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     move_cursor_to(c, "e2", side::lhs);
     assert(!get_piece_at(g, "e2").is_selected());
     const user_input input{get_user_input_to_select(c, side::lhs)};
@@ -711,14 +711,14 @@ void test_user_inputs()
   // do_select
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     do_select(g, c, "e2", side::lhs);
     assert(get_piece_at(g, "e2").is_selected());
   }
   // do_select_and_move_piece
   {
     game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, "e2"));
     do_select_and_move_piece(g, c, "e2", "e4", side::lhs);
     assert(!is_piece_at(g, "e2"));
@@ -727,7 +727,7 @@ void test_user_inputs()
   // process_press_action_1_or_lmb_down, white promotion to queen
   {
     game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, "a8"));
     assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
     do_select(g, c, "a8", side::lhs);
@@ -746,7 +746,7 @@ void test_user_inputs()
   // process_press_action_2_or_lmb_down, white promotion to rook
   {
     game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, "a8"));
     assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
     do_select(g, c, "a8", side::lhs);
@@ -765,7 +765,7 @@ void test_user_inputs()
   // process_press_action_3, white promotion to bishop
   {
     game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, "a8"));
     assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
     do_select(g, c, "a8", side::lhs);
@@ -784,7 +784,7 @@ void test_user_inputs()
   // process_press_action_4, white promotion to knight
   {
     game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
-    game_controller c{create_game_controller_with_default_controllers()};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, "a8"));
     assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
     do_select(g, c, "a8", side::lhs);

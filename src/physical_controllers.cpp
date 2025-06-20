@@ -41,10 +41,12 @@ int count_n_controllers(const physical_controllers& controllers) noexcept
   return controllers.get_controllers().size();
 }
 
+/*
 void use_default_controllers() noexcept
 {
-  use_keyboard_mouse_controllers();
+  use_two_keyboard_controllers();
 }
+*/
 
 void use_keyboard_mouse_controllers() noexcept
 {
@@ -164,39 +166,32 @@ void test_physical_controllers()
   }
   // count_keyboard_controllers
   {
-    use_default_controllers();
+    use_keyboard_mouse_controllers();
     assert(count_keyboard_controllers(physical_controllers::get()) == 1);
     use_two_keyboard_controllers();
     assert(count_keyboard_controllers(physical_controllers::get()) == 2);
   }
   // count_mouse_controllers
   {
-    use_default_controllers();
+    use_keyboard_mouse_controllers();
     assert(count_mouse_controllers(physical_controllers::get()) == 1);
     use_two_keyboard_controllers();
     assert(count_mouse_controllers(physical_controllers::get()) == 0);
   }
   // get_controller
   {
-    use_default_controllers();
+    use_keyboard_mouse_controllers();
     const auto& lhs{physical_controllers::get().get_controller(side::lhs)};
     const auto& rhs{physical_controllers::get().get_controller(side::rhs)};
     assert(lhs != rhs);
   }
-  // get_default_controllers
-  {
-    use_default_controllers();
-    assert(count_n_controllers(physical_controllers::get()) == 2);
-  }
   // get_keyboard_user_player_side
   {
-    use_default_controllers();
+    use_keyboard_mouse_controllers();
     assert(get_keyboard_user_player_side(physical_controllers::get()) == side::lhs);
   }
   // get_mouse_user_player_side
   {
-    use_default_controllers();
-    assert(get_mouse_user_player_side(physical_controllers::get()) == side::rhs);
     use_keyboard_mouse_controllers();
     assert(get_mouse_user_player_side(physical_controllers::get()) == side::rhs);
     use_mouse_keyboard_controllers();
@@ -209,14 +204,14 @@ void test_physical_controllers()
   }
   // has_keyboard_controllers
   {
-    use_default_controllers();
+    use_keyboard_mouse_controllers();
     assert(has_keyboard_controller(physical_controllers::get()));
     use_two_keyboard_controllers();
     assert(has_keyboard_controller(physical_controllers::get()));
   }
   // has_mouse_controller
   {
-    use_default_controllers();
+    use_keyboard_mouse_controllers();
     assert(has_mouse_controller(physical_controllers::get()));
     use_two_keyboard_controllers();
     assert(!has_mouse_controller(physical_controllers::get()));

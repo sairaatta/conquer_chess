@@ -61,9 +61,14 @@ int count_mouse_controllers(const physical_controllers& controllers) noexcept;
 int count_n_controllers(const physical_controllers& controllers) noexcept;
 
 /// Get a keyboard and a mouse controller.
-/// @see use \link{create_two_keyboard_controllers}
+///
+/// Alternatives:
+/// - \link{use_keyboard_mouse_controllers}
+/// - \link{use_mouse_keyboard_controllers}
+/// - \link{use_two_keyboard_controllers}
+///
 /// to create two keyboard controllers
-void use_default_controllers() noexcept;
+//void use_default_controllers() noexcept;
 
 /// Get two controllers,
 /// where LHS player uses keyboard,
