@@ -276,11 +276,14 @@ void process_press_action_1_or_lmb_down(
 
   // true for promotions, false for castling
   const bool is_cursor_on_piece{is_piece_at(g, cursor)};
-  const bool is_cursor_on_piece_of_own_color{
+  const bool is_cursor_on_friendly_piece{
     is_cursor_on_piece && get_piece_at(g, cursor).get_color() == player_color
   };
+  const bool is_cursor_on_enemy_piece{
+    is_cursor_on_piece && get_piece_at(g, cursor).get_color() != player_color
+  };
   const bool is_cursor_on_selected_piece_of_own_color{
-    is_cursor_on_piece_of_own_color && get_piece_at(g, cursor).is_selected()
+    is_cursor_on_friendly_piece && get_piece_at(g, cursor).is_selected()
   };
 
   const bool can_selected_piece_promote{
@@ -324,7 +327,7 @@ void process_press_action_1_or_lmb_down(
     return;
   }
   #endif // FIX_ISSUE_3
-  if (is_cursor_on_piece_of_own_color)
+  if (is_cursor_on_friendly_piece)
   {
     const auto& p{get_piece_at(g, cursor)};
     if (p.is_selected())
@@ -384,6 +387,17 @@ void process_press_action_1_or_lmb_down(
 
   if (!has_selected_pieces(g, player_side)) return;
 
+
+  if (is_cursor_on_enemy_piece) {
+    start_attack(
+      g,
+      c,
+      get_cursor_pos(c, action.get_player()),
+      get_player_color(action.get_player())
+    );
+  }
+
+
   // 'start_move_unit' will check for piece, color, etc.
   start_move_unit(
     g,
@@ -430,12 +444,13 @@ void process_press_action_2(
       }
     }
   }
-  start_attack(
-    g,
-    c,
-    get_cursor_pos(c, action.get_player()),
-    get_player_color(action.get_player())
-  );
+  // Moved this to action 1
+  //start_attack(
+  //  g,
+  //  c,
+  //  get_cursor_pos(c, action.get_player()),
+  //  get_player_color(action.get_player())
+  //);
 }
 
 void process_press_action_3(

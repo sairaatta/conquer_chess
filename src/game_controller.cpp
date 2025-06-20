@@ -1166,8 +1166,7 @@ void test_game_controller() //!OCLINT tests may be many
     do_select(g, c, "c4", side::lhs);
     move_cursor_to(c, "d2", side::lhs);
 
-    // TODO: Must be with action 1
-    add_user_input(c, create_press_action_2(side::lhs));
+    add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
     assert(get_piece_at(g, square("d2")).get_color() == chess_color::black);
@@ -1185,8 +1184,7 @@ void test_game_controller() //!OCLINT tests may be many
     do_select(g, c, "d1", side::lhs);
     move_cursor_to(c, "e1", side::lhs);
 
-    // TODO: Must be with action 1
-    add_user_input(c, create_press_action_2(side::lhs));
+    add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
     g.tick(delta_t(0.1));
