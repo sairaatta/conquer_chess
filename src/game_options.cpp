@@ -110,6 +110,42 @@ void game_options::reset()
 void test_game_options()
 {
 #ifndef NDEBUG
+  // decrease_game_speed and increase_game_speed
+  {
+    const auto s{game_speed::normal};
+    game_options::get().set_game_speed(s);
+    decrease_game_speed();
+    assert(s != game_options::get().get_game_speed());
+    increase_game_speed();
+    assert(s == game_options::get().get_game_speed());
+  }
+  // decrease_music_volume and increase_music_volume
+  {
+    const auto s{volume(50)};
+    game_options::get().set_music_volume(s);
+    decrease_music_volume();
+    assert(s != game_options::get().get_music_volume());
+    increase_music_volume();
+    assert(s == game_options::get().get_music_volume());
+  }
+  // decrease_sound_effects_volume and increase_sound_effects_volume
+  {
+    const auto s{volume(50)};
+    game_options::get().set_sound_effects_volume(s);
+    decrease_sound_effects_volume();
+    assert(s != game_options::get().get_sound_effects_volume());
+    increase_sound_effects_volume();
+    assert(s == game_options::get().get_sound_effects_volume());
+  }
+  // decrease_starting_position and increase_starting_position
+  {
+    const auto s{starting_position_type::kings_only};
+    game_options::get().set_starting_position(s);
+    decrease_starting_position();
+    assert(s != game_options::get().get_starting_position());
+    increase_starting_position();
+    assert(s == game_options::get().get_starting_position());
+  }
   // game_options::do_show_occupied
   {
     assert(!game_options::get().get_show_occupied());

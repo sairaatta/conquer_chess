@@ -332,7 +332,8 @@ void process_press_action_1_or_lmb_down(
       if (can_promote(p))
       {
         //  3. promote to queen (for a pawn at the final file)
-        unselect_all_pieces(g, player_color);
+        // No! Keep the new queen selected
+        // unselect_all_pieces(g, player_color);
         assert(is_promotion_to_queen);
         get_piece_at(g, cursor).add_action(
           piece_action(
@@ -730,7 +731,9 @@ void test_user_inputs()
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, "a8"));
     assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
+    assert(!has_selected_pieces(g, side::lhs));
     do_select(g, c, "a8", side::lhs);
+    assert(has_selected_pieces(g, side::lhs));
     assert(get_piece_at(g, "a8").get_type() == piece_type::pawn);
     move_cursor_to(c, "a8", side::lhs);
     assert(can_promote(get_piece_at(g, "a8")));
@@ -742,6 +745,9 @@ void test_user_inputs()
     g.tick(delta_t(0.0)); // Promotion is instantaneous
     assert(get_piece_at(g, "a8").get_type() != piece_type::pawn);
     assert(get_piece_at(g, "a8").get_type() == piece_type::queen);
+
+    // This does not unselect the queen
+    assert(has_selected_pieces(g, side::lhs));
   }
   // process_press_action_2_or_lmb_down, white promotion to rook
   {
