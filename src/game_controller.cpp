@@ -795,9 +795,7 @@ void test_game_controller() //!OCLINT tests may be many
   // Keyboard: cannot move pawn backward
   {
     game g = create_game_with_starting_position(starting_position_type::pawn_all_out_assault);
-    game_controller c{
-      create_game_controller_with_keyboard_mouse()
-    };
+    game_controller c{create_game_controller_with_keyboard_mouse()};
     move_cursor_to(c, "e4", side::lhs);
     assert(count_selected_units(g, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -1112,32 +1110,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(get_piece_action(g, c, action_number(4), side::lhs).value() == piece_action_type::promote_to_knight);
     assert(get_piece_action(g, c, action_number(4), side::rhs).value() == piece_action_type::promote_to_knight);
   }
-  #define FIX_ISSUE_64
-  #ifdef FIX_ISSUE_64
-  // To do e2-e4, from e1, it takes 5 key presses
-  {
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_two_keyboards()};
-    move_cursor_to(c, "e1", side::lhs);
-    const chess_move m("e4", chess_color::white);
-    const user_inputs inputs{
-      convert_move_to_user_inputs(g, c, m)
-    };
-    assert(!is_empty(inputs));
-    assert(count_user_inputs(inputs) == 5);
-    assert(inputs.get_user_inputs()[0].get_user_input_type() == user_input_type::press_right);
-    assert(inputs.get_user_inputs()[1].get_user_input_type() == user_input_type::press_action_1);
-    assert(inputs.get_user_inputs()[2].get_user_input_type() == user_input_type::press_right);
-    assert(inputs.get_user_inputs()[3].get_user_input_type() == user_input_type::press_right);
-    assert(inputs.get_user_inputs()[4].get_user_input_type() == user_input_type::press_action_1);
-    add_user_inputs(c, inputs);
-    #ifdef FIX_ISSUE_64_NO_ACTION
-    assert(is_piece_at(g, "e2"));
-    g.tick();
-    assert(!is_piece_at(g, "e2"));
-    #endif // FIX_ISSUE_64_NO_ACTION
-  }
-  #endif // FIX_ISSUE_64
   // get_cursor_pos
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
@@ -1184,42 +1156,42 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // A piece under attack must have decreasing health
   {
-    #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
     game_controller c{create_game_controller_with_keyboard_mouse()};
     game g{create_game_with_starting_position(starting_position_type::bishop_and_knight_end_game)};
+
     const double health_before{get_piece_at(g, square("d2")).get_health()};
     // Let the white knight at c4 attack the black king at d2
     assert(get_piece_at(g, square("d2")).get_color() == chess_color::black);
-    do_select_and_start_attack_keyboard_player_piece(
-      g,
-      c,
-      square("c4"),
-      square("d2")
-    );
+
+    do_select(g, c, "c4", side::lhs);
+    move_cursor_to(c, "d2", side::lhs);
+
+    // TODO: Must be with action 1
+    add_user_input(c, create_press_action_2(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
     assert(get_piece_at(g, square("d2")).get_color() == chess_color::black);
     g.tick(delta_t(0.1));
     assert(get_piece_at(g, square("d2")).get_color() == chess_color::black);
     const double health_after{get_piece_at(g, square("d2")).get_health()};
     assert(health_after < health_before);
-    #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
   }
   // Cannot attack a piece of one's own color
   {
-    #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     const double health_before{get_piece_at(g, square("e1")).get_health()};
-    // Let the white queen at d1 attack the white king at e1
-    do_select_and_start_attack_keyboard_player_piece(
-      g,
-      c,
-      square("d1"),
-      square("e1")
-    );
+
+    do_select(g, c, "d1", side::lhs);
+    move_cursor_to(c, "e1", side::lhs);
+
+    // TODO: Must be with action 1
+    add_user_input(c, create_press_action_2(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
     g.tick(delta_t(0.1));
     const double health_after{get_piece_at(g, square("d2")).get_health()};
     assert(health_after == health_before);
-    #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
   }
   // When a piece is killed, the queen attacker moves to that square
   {
