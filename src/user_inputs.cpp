@@ -6,6 +6,7 @@
 #include "square.h"
 #include "game_coordinate.h"
 #include "piece.h"
+#include "pieces.h"
 #include "piece_actions.h"
 #include "physical_controller.h"
 
@@ -412,7 +413,7 @@ void process_press_action_1_or_lmb_down(
     }
     return;
   }
-  if (can_move(player_color, selected_piece_type, selected_piece_square, cursor))
+  if (can_move(g.get_pieces(), player_color, selected_piece_type, selected_piece_square, cursor))
   {
     start_move_unit(
       g,

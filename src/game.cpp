@@ -228,7 +228,7 @@ bool can_do_move(
   assert(player_color == selected_piece.get_color());
   // Is it theoretically possible, e.g. on an empty board?
   if (
-    !can_move(
+    !can_move_on_empty_board(
       player_color,
       selected_piece.get_type(),
       selected_piece.get_current_square(),
@@ -1170,7 +1170,7 @@ piece& get_piece_that_moves(game& g, const chess_move& move)
     const auto& from{piece.get_current_square()};
     assert(move.get_to().has_value());
     const auto& to{move.get_to().value()};
-    if (can_move(color, piece_type, from, to))
+    if (can_move_on_empty_board(color, piece_type, from, to))
     {
       return piece;
     }

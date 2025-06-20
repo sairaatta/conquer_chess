@@ -193,7 +193,7 @@ bool can_capture(
 
 /// Can a piece move from 'from' to 'to'?
 /// This function assumes the board is empty
-bool can_move(
+bool can_move_on_empty_board(
   const chess_color color,
   const piece_type& p,
   const square& from,

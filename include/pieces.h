@@ -57,6 +57,19 @@ std::vector<double> calc_distances(
   const game_coordinate& coordinat
 );
 
+/// Can a piece move from 'from' to 'to'?
+///
+/// To do so:
+/// - It must be able to do on an empty board
+/// - There must be no piece in-between
+bool can_move(
+  const std::vector<piece>& pieces,
+  const chess_color placer_color,
+  const piece_type selected_piece_type,
+  const square& selected_piece_square,
+  const square& destination_square
+);
+
 /// Collect the history of a game,
 /// i.e. the moves played in time
 action_history collect_action_history(const std::vector<piece>& pieces);

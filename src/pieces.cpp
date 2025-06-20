@@ -79,6 +79,45 @@ std::vector<double> calc_distances(
   return distances;
 }
 
+bool can_move(
+  const std::vector<piece>& pieces,
+  const chess_color player_color,
+  const piece_type selected_piece_type,
+  const square& selected_piece_square,
+  const square& destination_square
+)
+{
+  if (
+    !can_move_on_empty_board(
+      player_color,
+      selected_piece_type,
+      selected_piece_square,
+      destination_square
+    )
+  )
+  {
+    return false;
+  }
+  if (selected_piece_type == piece_type::knight)
+  {
+   return true;
+  }
+  // Inclusive
+  auto squares{get_intermediate_squares(selected_piece_square, destination_square)};
+  assert(squares.size() >= 2); // includes start and end
+  if (squares.size() == 2) return true;
+
+  // Only keep the middle
+  squares.erase(squares.begin());
+  squares.pop_back();
+  assert(!squares.empty());
+  for (const auto s: squares)
+  {
+    if (is_piece_at(pieces, s)) return false;
+  }
+  return true;
+}
+
 action_history collect_action_history(const std::vector<piece>& pieces)
 {
   std::vector<action_history> histories;
