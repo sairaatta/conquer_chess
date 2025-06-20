@@ -52,6 +52,13 @@ std::vector<sf::Keyboard::Key> get_all_sfml_keys() noexcept
   return v;
 }
 
+bool is_shift_pressed() noexcept
+{
+  return sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift)
+    || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RShift)
+  ;
+}
+
 std::string key_str_to_resource_name(std::string key_str)
 {
   // This can be made constant-time, by using a LUT

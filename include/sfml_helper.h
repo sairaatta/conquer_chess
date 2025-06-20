@@ -19,6 +19,9 @@ std::vector<sf::Mouse::Button> get_all_sfml_buttons() noexcept;
 /// Get all the SFML keys
 std::vector<sf::Keyboard::Key> get_all_sfml_keys() noexcept;
 
+/// Determine if the left or right shift has been pressed
+bool is_shift_pressed() noexcept;
+
 /// Convert an SFML key that has already been converted
 /// to a filename to a filename, as used by \link{input_prompt_textures}
 std::string key_str_to_resource_name(std::string key_str);

@@ -12,17 +12,20 @@ public:
 
   controls_bar();
 
-
   void draw();
 
-  void set_draw_up_down_select(const bool b) noexcept { m_draw_up_down_select = b; }
+  /// Show that there is a way to invert a direction, by pressing shift
+  void set_draw_invert(const bool b) noexcept { m_draw_invert = b; }
+
   void set_draw_player_controls(const bool b) noexcept { m_draw_player_controls = b; }
+  void set_draw_up_down_select(const bool b) noexcept { m_draw_up_down_select = b; }
   void set_window_size(const screen_coordinate& window_size) noexcept { m_window_size = window_size; }
 
 private:
 
-  bool m_draw_up_down_select{true};
+  bool m_draw_invert{false};
   bool m_draw_player_controls{true};
+  bool m_draw_up_down_select{true};
 
   screen_coordinate m_window_size;
 };

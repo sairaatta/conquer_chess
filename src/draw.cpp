@@ -141,7 +141,7 @@ void draw_game_speed_icon(const screen_rect& sr)
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
   };
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+  if (is_shift_pressed())
   {
     draw_input_prompt_inverted_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
   }
@@ -247,7 +247,14 @@ void draw_music_volume_label(const screen_rect& sr)
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
   };
-  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  if (is_shift_pressed())
+  {
+    draw_input_prompt_inverted_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
+  else
+  {
+    draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
 }
 
 void draw_music_volume_value(const screen_rect& sr)
@@ -489,7 +496,14 @@ void draw_sound_effects_volume_label(const screen_rect& sr)
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
   };
-  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  if (is_shift_pressed())
+  {
+    draw_input_prompt_inverted_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
+  else
+  {
+    draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
 }
 
 void draw_sound_effects_volume_value(const screen_rect& sr)
@@ -596,7 +610,14 @@ void draw_starting_position_label(const screen_rect& sr)
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
   };
-  draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  if (is_shift_pressed())
+  {
+    draw_input_prompt_inverted_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
+  else
+  {
+    draw_input_prompt_symbol_on_background(k, r, sf::Color(128, 128, 128, 128));
+  }
 }
 
 void draw_starting_position_value(const screen_rect& sr)

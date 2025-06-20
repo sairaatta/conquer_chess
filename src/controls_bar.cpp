@@ -108,6 +108,40 @@ void controls_bar::draw()
     draw_rectangle(r, semi_transparent);
   }
 
+  // Invert
+  if (m_draw_invert)
+  {
+    x += w;
+    w = 64;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_input_prompt_symbol(sf::Keyboard::Key::LShift, r);
+
+    // Left and right shift are the same symbol
+    //x += w;
+    //w = 64;
+    //r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    //draw_rectangle(r, semi_transparent);
+    //draw_input_prompt_symbol(sf::Keyboard::Key::RShift, r);
+
+    x += w;
+    w = 64;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_input_prompt_symbol(sf::Mouse::Button::Right, r);
+
+    x += w;
+    w = label_select_width;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_text("Invert", r, font_size);
+
+    x += w;
+    w = 16;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+  }
+
   if (m_draw_player_controls)
   {
     for (const auto player_side: { side::lhs, side::rhs })

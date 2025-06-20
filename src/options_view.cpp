@@ -23,6 +23,7 @@ options_view::options_view()
   : m_selected{options_view_item::game_speed}
 {
   m_controls_bar.set_draw_player_controls(false);
+  m_controls_bar.set_draw_invert(true);
 
 }
 
@@ -105,14 +106,50 @@ bool options_view::process_event_impl(sf::Event& event)
       set_next_state(program_state::main_menu);
       return false;
     }
+    if (key_pressed == sf::Keyboard::Key::G)
+    {
+      if (is_shift_pressed())
+      {
+        decrease_game_speed();
+      }
+      else
+      {
+        increase_game_speed();
+      }
+      return false;
+    }
+    if (key_pressed == sf::Keyboard::Key::M)
+    {
+      if (is_shift_pressed())
+      {
+        decrease_music_volume();
+      }
+      else
+      {
+        increase_music_volume();
+      }
+      return false;
+    }
     if (key_pressed == sf::Keyboard::Key::Q)
     {
       set_next_state(program_state::main_menu);
       return false;
     }
+    if (key_pressed == sf::Keyboard::Key::S)
+    {
+      if (is_shift_pressed())
+      {
+        decrease_sound_effects_volume();
+      }
+      else
+      {
+        increase_sound_effects_volume();
+      }
+      return false;
+    }
     if (key_pressed == sf::Keyboard::Key::T)
     {
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+      if (is_shift_pressed())
       {
         decrease_starting_position();
       }
@@ -196,7 +233,14 @@ bool options_view::process_event_impl(sf::Event& event)
   }
   else if (event.type == sf::Event::MouseButtonPressed)
   {
-    increase_selected();
+    if (event.mouseButton.button == sf::Mouse::Button::Left)
+    {
+      increase_selected();
+    }
+    else if (event.mouseButton.button == sf::Mouse::Button::Right)
+    {
+      decrease_selected();
+    }
   }
   return false; // if no events proceed with tick
 }
