@@ -1087,8 +1087,9 @@ void test_game_controller() //!OCLINT tests may be many
     const auto pos_after{get_cursor_pos(c, side::rhs)};
     assert(pos_before != pos_after);
   }
-  // #27: a2-a4 takes as long as b2-b3
+  // #27: a2-a4 takes 1 time unit
   {
+    #ifdef CAN_DO_ACTION
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, square("a2")));
@@ -1097,23 +1098,21 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(g, square("a3")));
     assert(!is_piece_at(g, square("b3")));
     assert(count_selected_units(g, chess_color::white) == 0);
-    #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-    do_select_for_keyboard_player(g, c, square("a2"));
+
+    do_select(g, c, "a2", side::lhs);
+    move_cursor_to(c, "a4", side::lhs);
     assert(count_selected_units(g, chess_color::white) == 1);
-    do_move_keyboard_player_piece(g, c, square("a4"));
-    assert(count_selected_units(g, chess_color::white) == 0);
-    do_select_for_keyboard_player(g, c, square("b2"));
-    do_move_keyboard_player_piece(g, c, square("b3"));
+    do_action(g, c, piece_action_type::move, side::lhs);
+    assert(is_piece_at(g, square("a2")));
+    assert(!is_piece_at(g, square("a4")));
+    // Should take 1 time unit
     for (int i{0}; i!=5; ++i)
     {
       g.tick(delta_t(0.25));
     }
     assert(!is_piece_at(g, square("a2")));
-    assert(!is_piece_at(g, square("b2")));
     assert(is_piece_at(g, square("a4")));
-    assert(!is_piece_at(g, square("a3")));
-    assert(is_piece_at(g, square("b3")));
-    #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
+    #endif // CAN_DO_ACTION
   }
   // A piece under attack must have decreasing health
   {
