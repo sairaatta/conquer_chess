@@ -70,6 +70,9 @@ public:
   /// Set the game speed
   void set_game_speed(const game_speed speed) noexcept { m_game_speed = speed; }
 
+  /// Set the volume, as a percentage
+  void set_music_volume(const volume& v) noexcept { m_music_volume = v; }
+
   /// Set showing the debug info
   void set_show_debug_info(const bool b) noexcept { m_show_debug_info = b; }
 
@@ -78,10 +81,6 @@ public:
 
   /// Set the sound effects volume, as a percentage
   void set_sound_effects_volume(const volume& v) noexcept { m_sound_effects_volume = v; }
-
-  /// Set the volume, as a percentage
-  void set_volume(const volume& v) noexcept { m_music_volume = v; }
-
 
 private:
 

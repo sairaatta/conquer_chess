@@ -28,7 +28,7 @@ void decrease_game_speed() noexcept
 
 void decrease_music_volume() noexcept
 {
-  game_options::get().set_volume(get_previous(game_options::get().get_music_volume()));
+  game_options::get().set_music_volume(get_previous(game_options::get().get_music_volume()));
 }
 
 void decrease_sound_effects_volume() noexcept
@@ -83,7 +83,7 @@ void increase_game_speed() noexcept
 
 void increase_music_volume() noexcept
 {
-  game_options::get().set_volume(get_next(game_options::get().get_music_volume()));
+  game_options::get().set_music_volume(get_next(game_options::get().get_music_volume()));
 }
 
 void increase_sound_effects_volume() noexcept
@@ -124,7 +124,7 @@ void test_game_options()
     assert(volume_before == get_music_volume());
     const volume volume_after(get_next(volume_before));
     assert(volume_before != volume_after);
-    game_options::get().set_volume(volume_after);
+    game_options::get().set_music_volume(volume_after);
     assert(get_music_volume() == volume_after);
   }
   // get_music_volume_as_percentage
@@ -147,6 +147,38 @@ void test_game_options()
     assert(game_options::get().get_starting_position() == get_default_starting_position());
     assert(game_options::get().get_music_volume() == get_default_music_volume());
     assert(game_options::get().get_sound_effects_volume() == get_default_sound_effects_volume());
+  }
+  // set_game_speed
+  {
+    for (const auto s: { game_speed::slowest, game_speed::fastest })
+    {
+      game_options::get().set_game_speed(s);
+      assert(game_options::get().get_game_speed() == s);
+    }
+  }
+  // set_music_volume
+  {
+    for (const auto v: { volume(10), volume(20) })
+    {
+      game_options::get().set_music_volume(v);
+      assert(game_options::get().get_music_volume() == v);
+    }
+  }
+  // set_sound_effects_volume
+  {
+    for (const auto v: { volume(10), volume(20) })
+    {
+      game_options::get().set_sound_effects_volume(v);
+      assert(game_options::get().get_sound_effects_volume() == v);
+    }
+  }
+  // set_starting_position
+  {
+    for (const auto p: { starting_position_type::before_en_passant, starting_position_type::standard })
+    {
+      game_options::get().set_starting_position(p);
+      assert(game_options::get().get_starting_position() == p);
+    }
   }
   // 40: operator<<
   {
