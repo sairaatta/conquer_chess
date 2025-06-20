@@ -344,16 +344,16 @@ std::optional<piece_action_type> get_piece_action(
       else
       {
         assert(!p.is_selected());
-          switch (n.get_number())
-          {
-            case 1: return piece_action_type::select;
-            case 2: return {};
-            case 3: return {};
-            default:
-            case 4:
-              assert(n.get_number() == 4);
-              return {};
-          }
+        switch (n.get_number())
+        {
+          case 1: return piece_action_type::select;
+          case 2: return {};
+          case 3: return {};
+          default:
+          case 4:
+            assert(n.get_number() == 4);
+            return {};
+        }
       }
     }
     else
@@ -375,11 +375,29 @@ std::optional<piece_action_type> get_piece_action(
       }
       if (can_do(g, selected_piece, piece_action_type::move, cursor_square, player_side))
       {
-        return piece_action_type::move;
+        switch (n.get_number())
+        {
+          case 1: return piece_action_type::move;
+          case 2: return {};
+          case 3: return {};
+          default:
+          case 4:
+            assert(n.get_number() == 4);
+            return {};
+        }
       }
       if (can_do(g, selected_piece, piece_action_type::attack, cursor_square, player_side))
       {
-        return piece_action_type::attack;
+        switch (n.get_number())
+        {
+          case 1: return piece_action_type::attack;
+          case 2: return {};
+          case 3: return {};
+          default:
+          case 4:
+            assert(n.get_number() == 4);
+            return {};
+        }
       }
     }
   }
@@ -975,6 +993,12 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "d5", side::rhs);
     assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::move);
     assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::move);
+    assert(!get_piece_action(g, c, action_number(2), side::lhs));
+    assert(!get_piece_action(g, c, action_number(2), side::rhs));
+    assert(!get_piece_action(g, c, action_number(3), side::lhs));
+    assert(!get_piece_action(g, c, action_number(3), side::rhs));
+    assert(!get_piece_action(g, c, action_number(4), side::lhs));
+    assert(!get_piece_action(g, c, action_number(4), side::rhs));
   }
   // 53: Piece selected, opponent at target square -> attack
   {
