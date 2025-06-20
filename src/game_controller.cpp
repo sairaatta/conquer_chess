@@ -1131,6 +1131,31 @@ void test_game_controller() //!OCLINT tests may be many
     const auto pos_after{get_cursor_pos(c, side::rhs)};
     assert(pos_before != pos_after);
   }
+  // #27: a2-a3 takes 1 time unit
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(is_piece_at(g, square("a2")));
+    assert(!is_piece_at(g, square("a3")));
+    assert(count_selected_units(g, chess_color::white) == 0);
+
+    do_select(g, c, "a2", side::lhs);
+    move_cursor_to(c, "a3", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    assert(is_piece_at(g, square("a2")));
+    assert(!is_piece_at(g, square("a3")));
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(!is_piece_at(g, square("a2")));
+    assert(is_piece_at(g, square("a3")));
+  }
   // #27: a2-a4 takes 1 time unit
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
@@ -1159,6 +1184,32 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("a4")));
   }
+  // #27: a2-a5 does nothing
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(is_piece_at(g, square("a2")));
+    assert(!is_piece_at(g, square("a5")));
+    assert(count_selected_units(g, chess_color::white) == 0);
+
+    do_select(g, c, "a2", side::lhs);
+    move_cursor_to(c, "a5", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    assert(is_piece_at(g, square("a2")));
+    assert(!is_piece_at(g, square("a5")));
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(is_piece_at(g, square("a2")));
+    assert(!is_piece_at(g, square("a5")));
+  }
+
   // A piece under attack must have decreasing health
   {
     game_controller c{create_game_controller_with_keyboard_mouse()};

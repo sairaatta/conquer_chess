@@ -254,6 +254,9 @@ bool is_enpassantable(const piece& p);
 /// Is the unit idle?
 bool is_idle(const piece& p) noexcept;
 
+/// Is this piece (a pawn) on the starting rank?
+bool is_on_starting_rank(const chess_color c, const square& q) noexcept;
+
 /// Is the piece a pawn?
 bool is_pawn(const piece& p) noexcept;
 

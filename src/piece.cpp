@@ -212,9 +212,22 @@ bool can_move(
         || are_on_same_diagonal(from, to)
       ;
     case piece_type::pawn:
-      return are_on_same_file(from, to)
-        && is_forward(color, from, to)
-      ;
+    {
+      if (!are_on_same_file(from, to)) return false;
+      if (!is_forward(color, from, to)) return false;
+
+      const int n_squares{std::abs(from.get_x() - to.get_x())};
+      assert(n_squares > 0);
+      assert(n_squares < 8);
+      if (is_on_starting_rank(color, from))
+      {
+        return n_squares <= 2;
+      }
+      else
+      {
+        return n_squares == 1;
+      }
+    }
     case piece_type::rook:
       return are_on_same_rank(from, to)
         || are_on_same_file(from, to)
@@ -371,6 +384,12 @@ bool piece::is_enpassantable() const
 bool is_idle(const piece& p) noexcept
 {
   return !has_actions(p);
+}
+
+bool is_on_starting_rank(const chess_color c, const square& q) noexcept
+{
+  const int starting_rank{c == chess_color::white ? 1 : 6};
+  return q.get_x() == starting_rank;
 }
 
 bool is_pawn(const piece& p) noexcept
@@ -617,6 +636,9 @@ void test_piece()
     assert(!can_move(chess_color::white, piece_type::pawn, square("e4"), square("d5")));
     assert(!can_move(chess_color::white, piece_type::pawn, square("e4"), square("e3")));
     assert(can_move(chess_color::white, piece_type::pawn, square("e4"), square("e5")));
+
+    // Not in one time unit
+    assert(!can_move(chess_color::white, piece_type::pawn, square("e4"), square("e6")));
     assert(!can_move(chess_color::white, piece_type::pawn, square("e4"), square("f3")));
     assert(!can_move(chess_color::white, piece_type::pawn, square("e4"), square("f4")));
     assert(!can_move(chess_color::white, piece_type::pawn, square("e4"), square("f5")));
@@ -784,6 +806,13 @@ void test_piece()
   {
     const auto p{get_test_white_king()};
     assert(is_idle(p));
+  }
+  // is_on_starting_rank
+  {
+    assert(is_on_starting_rank(chess_color::white, square("a2")));
+    assert(is_on_starting_rank(chess_color::black, square("a7")));
+    assert(!is_on_starting_rank(chess_color::white, square("a7")));
+    assert(!is_on_starting_rank(chess_color::black, square("a2")));
   }
   // to_char
   {
