@@ -17,6 +17,34 @@ std::vector<race> get_all_races() noexcept
   return v;
 }
 
+double get_attack_speed(const race r) noexcept
+{
+  switch (r)
+  {
+    case race::classic: return 1.0;
+    case race::protoss: return 1.1;
+    case race::terran: return 1.0;
+    default:
+    case race::zerg:
+      assert(r == race::zerg);
+      return 0.9;
+  }
+}
+
+double get_movement_speed(const race r) noexcept
+{
+  switch (r)
+  {
+    case race::classic: return 1.0;
+    case race::protoss: return 0.9;
+    case race::terran: return 1.0;
+    default:
+    case race::zerg:
+      assert(r == race::zerg);
+      return 1.1;
+  }
+}
+
 
 race get_next(const race r) noexcept
 {
@@ -49,6 +77,20 @@ race get_previous(const race r) noexcept
 void test_race()
 {
 #ifndef NDEBUG
+  // get_attack_speed
+  {
+    for (const auto c: get_all_races())
+    {
+      assert(get_attack_speed(c) > 0.0);
+    }
+  }
+  // get_movement_speed
+  {
+    for (const auto c: get_all_races())
+    {
+      assert(get_movement_speed(c) > 0.0);
+    }
+  }
   // get_next and get_prev
   {
     for (const auto c: get_all_races())
