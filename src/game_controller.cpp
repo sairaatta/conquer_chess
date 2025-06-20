@@ -594,14 +594,40 @@ std::optional<piece_action_type> get_piece_action(
             case 1: return piece_action_type::promote_to_queen;
             case 2: return piece_action_type::promote_to_rook;
             case 3: return piece_action_type::promote_to_bishop;
-            case 4: return piece_action_type::promote_to_knight;
+            default:
+            case 4:
+              assert(n.get_number() == 4);
+              return piece_action_type::promote_to_knight;
           }
 
         }
         else
         {
-          return piece_action_type::unselect;
+          switch (n.get_number())
+          {
+            case 1: return piece_action_type::unselect;
+            case 2: return {};
+            case 3: return {};
+            default:
+            case 4:
+              assert(n.get_number() == 4);
+              return {};
+          }
         }
+      }
+      else
+      {
+        assert(!p.is_selected());
+          switch (n.get_number())
+          {
+            case 1: return piece_action_type::select;
+            case 2: return {};
+            case 3: return {};
+            default:
+            case 4:
+              assert(n.get_number() == 4);
+              return {};
+          }
       }
     }
     else
@@ -641,7 +667,19 @@ std::optional<piece_action_type> get_piece_action(
       const auto player_color{get_player_color(player_side)};
       if (p.get_color() == player_color)
       {
-        if (!p.is_selected()) return piece_action_type::select;
+        if (!p.is_selected())
+        {
+          switch (n.get_number())
+          {
+            case 1: return piece_action_type::select;
+            case 2: return {};
+            case 3: return {};
+            default:
+            case 4:
+              assert(n.get_number() == 4);
+              return {};
+          }
+        }
       }
     }
   }
@@ -1206,6 +1244,12 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "d5", side::rhs);
     assert(!get_piece_action(g, c, action_number(1), side::lhs));
     assert(!get_piece_action(g, c, action_number(1), side::rhs));
+    assert(!get_piece_action(g, c, action_number(2), side::lhs));
+    assert(!get_piece_action(g, c, action_number(2), side::rhs));
+    assert(!get_piece_action(g, c, action_number(3), side::lhs));
+    assert(!get_piece_action(g, c, action_number(3), side::rhs));
+    assert(!get_piece_action(g, c, action_number(4), side::lhs));
+    assert(!get_piece_action(g, c, action_number(4), side::rhs));
   }
   // 53: nothing selected, cursor at square with opponent piece -> no action
   {
@@ -1215,6 +1259,12 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "d1", side::rhs);
     assert(!get_piece_action(g, c, action_number(1), side::lhs));
     assert(!get_piece_action(g, c, action_number(1), side::rhs));
+    assert(!get_piece_action(g, c, action_number(2), side::lhs));
+    assert(!get_piece_action(g, c, action_number(2), side::rhs));
+    assert(!get_piece_action(g, c, action_number(3), side::lhs));
+    assert(!get_piece_action(g, c, action_number(3), side::rhs));
+    assert(!get_piece_action(g, c, action_number(4), side::lhs));
+    assert(!get_piece_action(g, c, action_number(4), side::rhs));
   }
   // 53: nothing selected, cursor at square of own color -> select
   {
@@ -1226,6 +1276,12 @@ void test_game_controller() //!OCLINT tests may be many
     assert(get_piece_action(g, c, action_number(1), side::rhs));
     assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::select);
     assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::select);
+    assert(!get_piece_action(g, c, action_number(2), side::lhs));
+    assert(!get_piece_action(g, c, action_number(2), side::rhs));
+    assert(!get_piece_action(g, c, action_number(3), side::lhs));
+    assert(!get_piece_action(g, c, action_number(3), side::rhs));
+    assert(!get_piece_action(g, c, action_number(4), side::lhs));
+    assert(!get_piece_action(g, c, action_number(4), side::rhs));
   }
   // 53: selected piece, cursor still there -> unselect
   {
@@ -1239,6 +1295,31 @@ void test_game_controller() //!OCLINT tests may be many
     g.tick(delta_t(0.0));
     assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::unselect);
     assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::unselect);
+
+    assert(!get_piece_action(g, c, action_number(2), side::lhs));
+    assert(!get_piece_action(g, c, action_number(2), side::rhs));
+    assert(!get_piece_action(g, c, action_number(3), side::lhs));
+    assert(!get_piece_action(g, c, action_number(3), side::rhs));
+    assert(!get_piece_action(g, c, action_number(4), side::lhs));
+    assert(!get_piece_action(g, c, action_number(4), side::rhs));
+
+  }
+  // 53: Piece selected, cursor at valid other selection target
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "d2", side::lhs);
+    do_select(g, c, "d7", side::rhs);
+    move_cursor_to(c, "e2", side::lhs);
+    move_cursor_to(c, "e7", side::rhs);
+    assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::select);
+    assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::select);
+    assert(!get_piece_action(g, c, action_number(2), side::lhs));
+    assert(!get_piece_action(g, c, action_number(2), side::rhs));
+    assert(!get_piece_action(g, c, action_number(3), side::lhs));
+    assert(!get_piece_action(g, c, action_number(3), side::rhs));
+    assert(!get_piece_action(g, c, action_number(4), side::lhs));
+    assert(!get_piece_action(g, c, action_number(4), side::rhs));
   }
   // 53: Piece selected, cursor at valid target square -> move
   {
