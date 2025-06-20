@@ -575,6 +575,8 @@ std::vector<piece> get_selected_pieces(
       return piece.is_selected() && piece.get_color() == player;
     }
   );
+  // Selection is exclusive
+  assert(pieces.size() < 2);
   return pieces;
 }
 

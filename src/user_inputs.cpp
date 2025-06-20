@@ -135,7 +135,7 @@ void do_select(
   // -|---------------------|-----------------|----------------
   // 1|Yes                  |Selected unit    |Unselect unit
   // 2|Yes                  |Unselected unit  |Select unit
-  // 3|Yes                  |Empty square     |Unselect all units
+  // 3|Yes                  |Empty square     |Do nothing
   // 4|No                   |Selected unit    |NA
   // 5|No                   |Unselected unit  |Select unit
   // 6|No                   |Empty square     |Nothing
@@ -149,17 +149,21 @@ void do_select(
         if (piece.is_selected())
         {
           unselect(piece); // 1
+          assert(get_selected_pieces(g, player_color).size() == 0);
         }
         else
         {
           unselect_all_pieces(g, player_color);
           select(piece); // 2
+          assert(get_selected_pieces(g, player_color).size() == 1);
         }
       }
     }
     else
     {
-      unselect_all_pieces(g, player_color); // 3
+      // 3. NO! Do nothing
+      // unselect_all_pieces(g, player_color); // 3
+      assert(get_selected_pieces(g, player_color).size() == 1);
     }
   }
   else

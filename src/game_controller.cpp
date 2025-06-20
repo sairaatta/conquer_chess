@@ -766,6 +766,15 @@ void test_game_controller() //!OCLINT tests may be many
     g.tick();
     assert(count_selected_units(g, chess_color::white) == 0);
   }
+  // Cannot select two units
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "d2", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    do_select(g, c, "e2", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+  }
   // Keyboard: can move pawn forward
   {
     game g{create_game_with_standard_starting_position()};
