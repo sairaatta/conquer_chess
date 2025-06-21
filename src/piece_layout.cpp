@@ -8,12 +8,12 @@ piece_layout::piece_layout(const screen_rect& r)
   const int square_height{get_height(r)};
   m_health_bar = screen_rect(
     screen_coordinate(
-       r.get_tl().get_x(),
-       r.get_tl().get_y()
+       r.get_tl().get_x() + (0.1 * square_width),
+       r.get_tl().get_y() + (0.05 * square_height)
     ),
     screen_coordinate(
-       r.get_br().get_x(),
-       r.get_tl().get_y() + (0.2 * square_height)
+       r.get_br().get_x() - (0.1 * square_width),
+       r.get_tl().get_y() + (0.15 * square_height)
     )
   );
   m_piece = screen_rect(
@@ -38,10 +38,10 @@ void test_piece_layout()
       screen_coordinate(100, 100)
     );
     const auto layout{piece_layout(r)};
-    assert(layout.get_health_bar().get_tl().get_x() == 0);
-    assert(layout.get_health_bar().get_tl().get_y() == 0);
-    assert(layout.get_health_bar().get_br().get_x() == 100);
-    assert(layout.get_health_bar().get_br().get_y() == 20);
+    assert(layout.get_health_bar().get_tl().get_x() == 10);
+    assert(layout.get_health_bar().get_tl().get_y() == 5);
+    assert(layout.get_health_bar().get_br().get_x() == 90);
+    assert(layout.get_health_bar().get_br().get_y() == 15);
 
     assert(layout.get_piece().get_tl().get_x() == 10);
     assert(layout.get_piece().get_tl().get_y() == 20);

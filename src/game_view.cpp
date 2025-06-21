@@ -2,6 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
+#include "board_layout.h"
 #include "draw.h"
 #include "game.h"
 #include "game_rect.h"
@@ -11,6 +12,7 @@
 #include "lobby_options.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
+#include "piece_layout.h"
 #include "pieces.h"
 #include "render_window.h"
 #include "screen_coordinate.h"
@@ -871,46 +873,50 @@ void draw_square_under_cursor(
 void draw_unit_health_bars(game_view& view)
 {
   const auto& game{view.get_game()};
-  const auto& layout{view.get_layout()};
+  const board_layout bl(view.get_layout().get_board());
+
   for (const auto& piece: game.get_pieces())
   {
-    // Black box around it
-    sf::RectangleShape black_box;
+    const auto health_bar_rect{
+      piece_layout(
+        bl.get_square(
+          piece.get_current_square().get_x(),
+          piece.get_current_square().get_y()
+        )
+      ).get_health_bar()
+    };
 
-    black_box.setSize(sf::Vector2f(get_square_width(layout) - 4.0, 16.0 - 4.0));
-    //black_box.setScale(1.0, 1.0);
-    black_box.setFillColor(sf::Color(0, 0, 0));
-    black_box.setOrigin(0.0, 0.0);
-    const auto black_box_pos = convert_to_screen_coordinate(
-      to_coordinat(piece.get_current_square()) + game_coordinate(-0.5, -0.5),
-      layout
-    );
-    black_box.setPosition(
-      2.0 + black_box_pos.get_x(),
-      2.0 + black_box_pos.get_y()
-    );
-    get_render_window().draw(black_box);
-
-    // Health
-    sf::RectangleShape health_bar;
-    const double max_width{get_square_width(layout) - 8.0}; // with full health
-    health_bar.setSize(
-      sf::Vector2f(
-      max_width * get_f_health(piece),
-      16.0 - 8.0)
+    // Black background
+    draw_rectangle(
+      health_bar_rect,
+      sf::Color::Black
     );
 
-    health_bar.setFillColor(f_health_to_color(get_f_health(piece)));
-    health_bar.setOrigin(0.0, 0.0);
-    const auto health_bar_pos = convert_to_screen_coordinate(
-      to_coordinat(piece.get_current_square()) + game_coordinate(-0.5, -0.5),
-      layout
+    // Bar
+    const double f_health{get_f_health(piece)};
+    const int dx = f_health * get_width(health_bar_rect);
+    const screen_rect bar(
+      health_bar_rect.get_tl(),
+      screen_coordinate(
+        health_bar_rect.get_tl().get_x() + dx,
+        health_bar_rect.get_br().get_y()
+      )
     );
-    health_bar.setPosition(
-      4.0 + health_bar_pos.get_x(),
-      4.0 + health_bar_pos.get_y()
+
+    const sf::Color health_color{f_health_to_color(get_f_health(piece))};
+    draw_rectangle(
+      health_bar_rect,
+      health_color
     );
-    get_render_window().draw(health_bar);
+
+    // Black outline
+    const int outline_thickness{1};
+    draw_outline(
+      health_bar_rect,
+      sf::Color::Black,
+      outline_thickness
+    );
+
   }
 }
 
