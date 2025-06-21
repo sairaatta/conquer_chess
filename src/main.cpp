@@ -183,7 +183,7 @@ void test()
   std::clog << "Testing " << __LINE__ << "\n";
   test_screen_rect();
   std::clog << "Testing " << __LINE__ << "\n";
-  test_sfml_helper();
+  test_sfml_helper(); // HIERO
   std::clog << "Testing " << __LINE__ << "\n";
   test_side();
   std::clog << "Testing " << __LINE__ << "\n";

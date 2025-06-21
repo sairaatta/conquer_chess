@@ -6,6 +6,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <iostream>
 
 std::string button_str_to_resource_name(std::string button_str)
 {
@@ -164,6 +165,8 @@ void set_text_position(sf::Text& text, const screen_rect& screen_rect)
 void test_sfml_helper()
 {
 #ifndef NDEBUG
+  std::clog << "Testing sfml_helper\n";
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // f_health_to_color
   {
     const sf::Color lowest{f_health_to_color(1.0 * 0.125)};
@@ -177,21 +180,25 @@ void test_sfml_helper()
     assert(low != high);
     assert(mid != high);
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // get_all_sfml_buttons
   {
     const auto v{get_all_sfml_buttons()};
     assert(!v.empty());
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // get_all_sfml_keys
   {
     const auto v{get_all_sfml_keys()};
     assert(!v.empty());
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // is_shift_pressed
   {
     const auto b{is_shift_pressed()};
     assert(b || !b);
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // key_str_to_resource_name
   {
     assert(key_str_to_resource_name("A") == "keyboard_a");
@@ -206,6 +213,7 @@ void test_sfml_helper()
     assert(key_str_to_resource_name("LSystem") == "keyboard_win");
     assert(key_str_to_resource_name("RSystem") == "keyboard_win");
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // set_rect, on screen_rect
   {
     sf::RectangleShape r;
@@ -214,6 +222,7 @@ void test_sfml_helper()
     assert(r.getSize().x == get_width(screen_size));
     assert(r.getSize().y == get_height(screen_size));
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // set_rect, on screen_coordinate
   {
     sf::RectangleShape r;
@@ -222,6 +231,7 @@ void test_sfml_helper()
     assert(r.getSize().x == screen_size.get_x());
     assert(r.getSize().y == screen_size.get_y());
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // set_text_position
   {
     sf::Text t;
@@ -230,6 +240,7 @@ void test_sfml_helper()
     set_text_position(t, screen_size);
     assert(!t.getString().isEmpty()); // Does not test set_text_poistion at all
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // to_resource_name, for keys
   {
     assert(to_resource_name(sf::Keyboard::Key::A) == "keyboard_a");
@@ -273,11 +284,13 @@ void test_sfml_helper()
     }
     assert(to_resource_name(sf::Keyboard::Key::BackSlash) == "keyboard_slash_back");
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // to_inverted_resource_name, for keys
   {
     assert(to_inverted_resource_name(sf::Keyboard::Key::A) == "keyboard_a_outline");
     assert(to_inverted_resource_name(sf::Keyboard::Key::Unknown) == "keyboard_question");
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // to_resource_name, for mouse buttons
   {
     assert(to_resource_name(sf::Mouse::Button::Left) == "mouse_left");
@@ -287,6 +300,7 @@ void test_sfml_helper()
     assert(to_resource_name(sf::Mouse::Button::XButton1) == "keyboard_question_outline");
     assert(to_resource_name(sf::Mouse::Button::XButton2) == "keyboard_question_outline");
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // to_str, for keys
   {
     assert(to_str(sf::Keyboard::Key::A) == "A");
@@ -404,14 +418,15 @@ void test_sfml_helper()
     assert(to_str(sf::Keyboard::Key::X) == "X");
     assert(to_str(sf::Keyboard::Key::Y) == "Y");
     assert(to_str(sf::Keyboard::Key::Z) == "Z");
-
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // to_sfml_color
   {
     const sf::Color b{to_sfml_color(chess_color::black)};
     const sf::Color w{to_sfml_color(chess_color::white)};
     assert(b != w);
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // to_sfml_color
   {
     const sf::Color ba{to_sfml_color(chess_color::black, piece_action_type::attack)};
@@ -425,6 +440,7 @@ void test_sfml_helper()
     assert(bm != wm);
     assert(wa != wm);
   }
+  std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // 62: to_one_char_str
   {
     assert(to_one_char_str(sf::Keyboard::A) == "A");
@@ -464,6 +480,8 @@ void test_sfml_helper()
     assert(to_one_char_str(sf::Keyboard::Numpad8) == "8");
     assert(to_one_char_str(sf::Keyboard::Numpad9) == "9");
   }
+  std::clog << "Done testing sfml_helper.\n";
+
 #endif
 }
 
