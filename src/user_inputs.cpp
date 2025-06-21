@@ -401,7 +401,7 @@ void process_press_action_1_or_lmb_down(
 
   if (is_cursor_on_enemy_piece) {
     if (
-      can_attack(
+      can_attack_on_empty_board(
         player_color,
         selected_piece_type,
         selected_piece_square,

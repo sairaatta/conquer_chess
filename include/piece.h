@@ -175,7 +175,7 @@ private:
 
 /// Can a piece attack from 'from' to 'to'?
 /// This function assumes the board is empty
-bool can_attack(
+bool can_attack_on_empty_board(
   const chess_color color,
   const piece_type& p,
   const square& from,

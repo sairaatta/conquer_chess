@@ -337,7 +337,7 @@ std::vector<piece_action> to_atomic(const piece_action& a)
     const auto& from{squares[i - 1]};
     const auto& to{squares[i]};
     if (a.get_action_type() == piece_action_type::attack
-      && can_attack(a.get_color(), a.get_piece_type(), from, a.get_to()))
+      && can_attack_on_empty_board(a.get_color(), a.get_piece_type(), from, a.get_to()))
     {
       atomic_actions.push_back(
         piece_action(

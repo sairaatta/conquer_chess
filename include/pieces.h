@@ -335,6 +335,20 @@ bool is_piece_at(
   const square& coordinat
 );
 
+/// Determine if a piece (at `piece_square`) is looking at a target square
+bool is_piece_looking_at_square(
+  const std::vector<piece>& pieces,
+  const square& piece_square,
+  const square& target_square
+);
+
+/// Determine if the square is protected by (another) piece of a certain color
+bool is_square_protected(
+  const std::vector<piece>& pieces,
+  const square& s,
+  const chess_color c
+);
+
 /// Test all these free functions
 void test_pieces();
 

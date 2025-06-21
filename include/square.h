@@ -51,6 +51,14 @@ bool are_adjacent_for_knight(const square& a, const square& b) noexcept;
 /// Are all the squares unique?
 bool are_all_unique(std::vector<square> squares);
 
+/// Are the squares seperated by the jump of a knight?
+///
+/// e.g. b1 and c3
+///
+/// @seealso see \link{are_on_same_half_diagonal} to see if the
+/// squares are seperated by multiple knight jumps in the same direction.
+bool are_at_knights_jump_distance(const square& a, const square& b) noexcept;
+
 /// Are the squares adjacent on the same diagonal, e.g. d1 and e2
 bool are_on_adjacent_diagonal(const square& a, const square& b) noexcept;
 
@@ -62,7 +70,10 @@ bool are_on_same_file(const square& a, const square& b) noexcept;
 
 /// Are the squares on the same half-diagonal,
 /// also 'the jump of a knight'
-/// e.g. b1 and c3
+/// e.g. b1 and d5
+///
+/// @seealso see \link{are_at_knights_jump_distance} to see if the
+/// squares are separated by one knight jump
 bool are_on_same_half_diagonal(const square& a, const square& b) noexcept;
 
 /// Are the squares on the same rank, e.g. a1 and a8

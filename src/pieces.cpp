@@ -232,7 +232,7 @@ double get_f_protected(
   {
     if (p.get_color() != c) continue;
     ++n_total;
-    if (p.get_type() == piece_type::queen) ++n_protected; // STUB
+    if (is_square_protected(pieces, p.get_current_square(), c)) ++n_protected;
   }
   assert(n_total > 0);
   return static_cast<double>(n_protected) / static_cast<double>(n_total);
@@ -1044,6 +1044,74 @@ bool is_piece_at(
   return iter != std::end(pieces);
 }
 
+bool is_piece_looking_at_square(
+  const std::vector<piece>& pieces,
+  const square& piece_square,
+  const square& target_square
+)
+{
+  assert(is_piece_at(pieces, piece_square));
+  const auto& piece{get_piece_at(pieces, piece_square)};
+  const auto piec_color{piece.get_color()};
+  const auto piece_type{piece.get_type()};
+  if (
+    !can_move_on_empty_board(
+      piec_color,
+      piece_type,
+      piece_square,
+      target_square
+    )
+  )
+  {
+    return false;
+  }
+  // Knight hop over pieces
+  if (piece_type == piece_type::knight)
+  {
+    return true;
+  }
+  // Inclusive
+  auto squares{get_intermediate_squares(piece_square, target_square)};
+  assert(squares.size() >= 2); // includes start and end
+
+  // They are adjacent
+  if (squares.size() == 2) return true;
+
+  // Only keep the middle
+  squares.erase(squares.begin());
+  squares.pop_back();
+  assert(!squares.empty());
+  for (const auto s: squares)
+  {
+    if (is_piece_at(pieces, s)) return false;
+  }
+  return true;
+}
+
+bool is_square_protected(
+  const std::vector<piece>& pieces,
+  const square& s,
+  const chess_color c
+)
+{
+  for (const auto& p: pieces)
+  {
+    if (p.get_color() != c) continue;
+
+    if (p.get_current_square() == s)
+    {
+      // The piece we want to find out of if it is protected
+      assert(p.get_color() == c);
+      continue;
+    }
+    if (is_piece_looking_at_square(pieces, p.get_current_square(), s))
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
 void test_pieces()
 {
 #ifndef NDEBUG
@@ -1283,6 +1351,69 @@ void test_pieces()
     const auto pieces{get_standard_starting_pieces()};
     assert(is_piece_at(pieces, to_coordinat(square("d1")), 1.0));
     assert(!is_piece_at(pieces, to_coordinat(square("e4")), 1.0));
+  }
+  // is_piece_looking_at_square
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    assert(is_piece_looking_at_square(pieces, square("d1"), square("d2")));
+    assert(!is_piece_looking_at_square(pieces, square("d1"), square("d3")));
+  }
+  // is_square_protected
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    assert(!is_square_protected(pieces, square("a1"), chess_color::white));
+    assert(is_square_protected(pieces, square("a2"), chess_color::white));
+    assert(is_square_protected(pieces, square("a3"), chess_color::white));
+    assert(is_square_protected(pieces, square("a4"), chess_color::white));
+    assert(!is_square_protected(pieces, square("a5"), chess_color::white));
+    assert(!is_square_protected(pieces, square("a6"), chess_color::white));
+    assert(!is_square_protected(pieces, square("a7"), chess_color::white));
+    assert(!is_square_protected(pieces, square("a8"), chess_color::white));
+
+    assert(is_square_protected(pieces, square("b1"), chess_color::white));
+    assert(is_square_protected(pieces, square("b2"), chess_color::white));
+    assert(is_square_protected(pieces, square("b3"), chess_color::white));
+    assert(is_square_protected(pieces, square("b4"), chess_color::white));
+    assert(!is_square_protected(pieces, square("b5"), chess_color::white));
+    assert(!is_square_protected(pieces, square("b6"), chess_color::white));
+    assert(!is_square_protected(pieces, square("b7"), chess_color::white));
+    assert(!is_square_protected(pieces, square("b8"), chess_color::white));
+
+    assert(is_square_protected(pieces, square("c1"), chess_color::white));
+    assert(is_square_protected(pieces, square("c2"), chess_color::white));
+    assert(is_square_protected(pieces, square("c3"), chess_color::white));
+    assert(is_square_protected(pieces, square("c4"), chess_color::white));
+    assert(!is_square_protected(pieces, square("c5"), chess_color::white));
+    assert(!is_square_protected(pieces, square("c6"), chess_color::white));
+    assert(!is_square_protected(pieces, square("c7"), chess_color::white));
+    assert(!is_square_protected(pieces, square("c8"), chess_color::white));
+
+    assert(is_square_protected(pieces, square("d1"), chess_color::white));
+    assert(is_square_protected(pieces, square("d2"), chess_color::white));
+    assert(is_square_protected(pieces, square("d3"), chess_color::white));
+    assert(is_square_protected(pieces, square("d4"), chess_color::white));
+    assert(!is_square_protected(pieces, square("d5"), chess_color::white));
+    assert(!is_square_protected(pieces, square("d6"), chess_color::white));
+    assert(!is_square_protected(pieces, square("d7"), chess_color::white));
+    assert(!is_square_protected(pieces, square("d8"), chess_color::white));
+
+    assert(is_square_protected(pieces, square("e1"), chess_color::white));
+    assert(is_square_protected(pieces, square("e2"), chess_color::white));
+    assert(is_square_protected(pieces, square("e3"), chess_color::white));
+    assert(is_square_protected(pieces, square("e4"), chess_color::white));
+    assert(!is_square_protected(pieces, square("e5"), chess_color::white));
+    assert(!is_square_protected(pieces, square("e6"), chess_color::white));
+    assert(!is_square_protected(pieces, square("e7"), chess_color::white));
+    assert(!is_square_protected(pieces, square("e8"), chess_color::white));
+
+    assert(is_square_protected(pieces, square("f1"), chess_color::white));
+    assert(is_square_protected(pieces, square("f2"), chess_color::white));
+    assert(is_square_protected(pieces, square("f3"), chess_color::white));
+    assert(is_square_protected(pieces, square("f4"), chess_color::white));
+    assert(!is_square_protected(pieces, square("f5"), chess_color::white));
+    assert(!is_square_protected(pieces, square("f6"), chess_color::white));
+    assert(!is_square_protected(pieces, square("f7"), chess_color::white));
+    assert(!is_square_protected(pieces, square("f8"), chess_color::white));
   }
   // to_board_strs
   {

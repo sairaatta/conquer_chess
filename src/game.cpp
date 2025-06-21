@@ -140,7 +140,7 @@ bool can_do_attack(
   assert(player_color == selected_piece.get_color());
   // Is it theoretically possible, e.g. on an empty board?
   if (
-    !can_attack(
+    !can_attack_on_empty_board(
       player_color,
       selected_piece.get_type(),
       selected_piece.get_current_square(),

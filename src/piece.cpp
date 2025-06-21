@@ -80,7 +80,7 @@ void piece::add_action(const piece_action& action)
   else if (action.get_action_type() == piece_action_type::attack)
   {
     if (
-      !can_attack(
+      !can_attack_on_empty_board(
         get_color(),
         get_type(),
         square(action.get_from()),
@@ -149,7 +149,7 @@ void piece::add_message(const message_type& message)
   m_messages.push_back(message);
 }
 
-bool can_attack(
+bool can_attack_on_empty_board(
   const chess_color color,
   const piece_type& type,
   const square& from,
@@ -184,14 +184,14 @@ bool can_attack(
 
 /// Can a piece capture from 'from' to 'to'?
 /// This function assumes the board is empty
-bool can_capture(
+bool can_capture_on_empty_board(
   const chess_color color,
   const piece_type& p,
   const square& from,
   const square& to
 )
 {
-  return can_attack(color, p, from, to);
+  return can_attack_on_empty_board(color, p, from, to);
 }
 
 bool can_move_on_empty_board(
@@ -242,6 +242,7 @@ bool can_move_on_empty_board(
     default:
     case piece_type::knight:
       assert(type == piece_type::knight);
+      return are_at_knights_jump_distance(from, to);
       return are_on_same_half_diagonal(from, to);
   }
 }
@@ -525,79 +526,79 @@ void test_piece()
   ////////////////////////////////////////////////////////////////////////////
   // can_attack, on empty board
   {
-    assert(can_attack(chess_color::white, piece_type::bishop, square("e4"), square("d3")));
-    assert(!can_attack(chess_color::white, piece_type::bishop, square("e4"), square("d4")));
-    assert(can_attack(chess_color::white, piece_type::bishop, square("e4"), square("d5")));
-    assert(!can_attack(chess_color::white, piece_type::bishop, square("e4"), square("e3")));
-    assert(!can_attack(chess_color::white, piece_type::bishop, square("e4"), square("e5")));
-    assert(can_attack(chess_color::white, piece_type::bishop, square("e4"), square("f3")));
-    assert(!can_attack(chess_color::white, piece_type::bishop, square("e4"), square("f4")));
-    assert(can_attack(chess_color::white, piece_type::bishop, square("e4"), square("f5")));
-    assert(!can_attack(chess_color::white, piece_type::bishop, square("e4"), square("f6")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("e3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("e5")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f6")));
 
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("d3")));
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("d4")));
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("d5")));
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("e3")));
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("e5")));
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("f3")));
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("f4")));
-    assert(can_attack(chess_color::white, piece_type::king, square("e4"), square("f5")));
-    assert(!can_attack(chess_color::white, piece_type::king, square("e4"), square("f6")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d5")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("e3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("e5")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f6")));
 
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("d3")));
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("d4")));
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("d5")));
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("e3")));
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("e5")));
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("f3")));
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("f4")));
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("f5")));
-    assert(can_attack(chess_color::white, piece_type::knight, square("e4"), square("f6")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d4")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("e3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("e5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f4")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f5")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f6")));
 
     // Knights cannot attack over distance
-    assert(!can_attack(chess_color::white, piece_type::knight, square("e4"), square("g8")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("g8")));
 
-    assert(!can_attack(chess_color::white, piece_type::pawn, square("e4"), square("d3")));
-    assert(!can_attack(chess_color::white, piece_type::pawn, square("e4"), square("d4")));
-    assert(can_attack(chess_color::white, piece_type::pawn, square("e4"), square("d5")));
-    assert(!can_attack(chess_color::white, piece_type::pawn, square("e4"), square("e3")));
-    assert(!can_attack(chess_color::white, piece_type::pawn, square("e4"), square("e5")));
-    assert(!can_attack(chess_color::white, piece_type::pawn, square("e4"), square("f3")));
-    assert(!can_attack(chess_color::white, piece_type::pawn, square("e4"), square("f4")));
-    assert(can_attack(chess_color::white, piece_type::pawn, square("e4"), square("f5")));
-    assert(!can_attack(chess_color::white, piece_type::pawn, square("e4"), square("f6")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("d3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("d4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("d5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("e3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("e5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("f3")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("f4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("f5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("f6")));
 
-    assert(!can_attack(chess_color::black, piece_type::pawn, square("e4"), square("e5")));
-    assert(can_attack(chess_color::black, piece_type::pawn, square("e4"), square("d3")));
-    assert(can_attack(chess_color::black, piece_type::pawn, square("e4"), square("f3")));
-    assert(!can_attack(chess_color::black, piece_type::pawn, square("e4"), square("f4")));
-    assert(!can_attack(chess_color::black, piece_type::pawn, square("e4"), square("f5")));
+    assert(!can_attack_on_empty_board(chess_color::black, piece_type::pawn, square("e4"), square("e5")));
+    assert(can_attack_on_empty_board(chess_color::black, piece_type::pawn, square("e4"), square("d3")));
+    assert(can_attack_on_empty_board(chess_color::black, piece_type::pawn, square("e4"), square("f3")));
+    assert(!can_attack_on_empty_board(chess_color::black, piece_type::pawn, square("e4"), square("f4")));
+    assert(!can_attack_on_empty_board(chess_color::black, piece_type::pawn, square("e4"), square("f5")));
 
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("d3")));
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("d4")));
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("d5")));
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("e3")));
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("e5")));
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("f3")));
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("f4")));
-    assert(can_attack(chess_color::white, piece_type::queen, square("e4"), square("f5")));
-    assert(!can_attack(chess_color::white, piece_type::queen, square("e4"), square("f6")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d5")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e5")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f4")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f6")));
 
-    assert(!can_attack(chess_color::white, piece_type::rook, square("e4"), square("d3")));
-    assert(can_attack(chess_color::white, piece_type::rook, square("e4"), square("d4")));
-    assert(!can_attack(chess_color::white, piece_type::rook, square("e4"), square("d5")));
-    assert(can_attack(chess_color::white, piece_type::rook, square("e4"), square("e3")));
-    assert(can_attack(chess_color::white, piece_type::rook, square("e4"), square("e5")));
-    assert(!can_attack(chess_color::white, piece_type::rook, square("e4"), square("f3")));
-    assert(can_attack(chess_color::white, piece_type::rook, square("e4"), square("f4")));
-    assert(!can_attack(chess_color::white, piece_type::rook, square("e4"), square("f5")));
-    assert(!can_attack(chess_color::white, piece_type::rook, square("e4"), square("f6")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d4")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d5")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("e3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("e5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f3")));
+    assert(can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f4")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f5")));
+    assert(!can_attack_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f6")));
   }
   // can_capture
   {
     // The same as can_attack
-    assert(can_capture(chess_color::white, piece_type::king, square("e4"), square("d3")));
+    assert(can_capture_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d3")));
   }
   // can_move, on empty board
   {

@@ -57,6 +57,14 @@ bool are_all_unique(std::vector<square> squares)
   ;
 }
 
+bool are_at_knights_jump_distance(const square& a, const square& b) noexcept
+{
+  const int dx{std::abs(a.get_x() - b.get_x())};
+  const int dy{std::abs(a.get_y() - b.get_y())};
+  if (dx > 2 || dy > 2) return false;
+  return dx == dy * 2 || dy == dx * 2;
+}
+
 bool are_on_adjacent_diagonal(const square& a, const square& b) noexcept
 {
   return are_on_same_diagonal(a, b)
@@ -82,6 +90,7 @@ bool are_on_same_half_diagonal(const square& a, const square& b) noexcept
   const int dy{std::abs(a.get_y() - b.get_y())};
   return dx == dy * 2 || dy == dx * 2;
 }
+
 
 bool are_on_same_rank(const square& a, const square& b) noexcept
 {
