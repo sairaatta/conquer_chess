@@ -35,7 +35,7 @@ void controls_bar::draw()
   screen_rect r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
 
   // Up
-  if (m_draw_up_down_select)
+  if (m_draw_up_down)
   {
     x += w;
     w = 64;
@@ -56,7 +56,7 @@ void controls_bar::draw()
   }
 
   // Down
-  if (m_draw_up_down_select)
+  if (m_draw_up_down)
   {
     x += w;
     w = 64;
@@ -77,7 +77,7 @@ void controls_bar::draw()
   }
 
   // Select
-  if (m_draw_up_down_select)
+  if (m_draw_select)
   {
     x += w;
     w = 64;
@@ -118,6 +118,12 @@ void controls_bar::draw()
     draw_input_prompt_symbol(sf::Keyboard::Key::Left, r);
 
     x += w;
+    w = 64;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_input_prompt_symbol(sf::Mouse::Button::Right, r);
+
+    x += w;
     w = label_decrease_width;
     r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
     draw_rectangle(r, semi_transparent);
@@ -133,6 +139,12 @@ void controls_bar::draw()
     r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
     draw_rectangle(r, semi_transparent);
     draw_input_prompt_symbol(sf::Keyboard::Key::Right, r);
+
+    x += w;
+    w = 64;
+    r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
+    draw_rectangle(r, semi_transparent);
+    draw_input_prompt_symbol(sf::Mouse::Button::Left, r);
 
     x += w;
     w = label_increase_width;
@@ -163,11 +175,13 @@ void controls_bar::draw()
     //draw_rectangle(r, semi_transparent);
     //draw_input_prompt_symbol(sf::Keyboard::Key::RShift, r);
 
+    /*
     x += w;
     w = 64;
     r = screen_rect(screen_coordinate(x, y1), screen_coordinate(x + w, y2));
     draw_rectangle(r, semi_transparent);
     draw_input_prompt_symbol(sf::Mouse::Button::Right, r);
+    */
 
     x += w;
     w = label_select_width;

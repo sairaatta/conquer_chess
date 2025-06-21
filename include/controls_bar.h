@@ -20,7 +20,8 @@ public:
 
   /// Draw the arrows to left and right, with the texts 'decrease' and 'increase'
   void set_draw_left_right_increase_descrease(const bool b) noexcept { m_draw_left_right_increase_descrease = b; }
-  void set_draw_up_down_select(const bool b) noexcept { m_draw_up_down_select = b; }
+  void set_draw_up_down(const bool b) noexcept { m_draw_up_down = b; }
+  void set_draw_select(const bool b) noexcept { m_draw_select = b; }
 
   void set_window_size(const screen_coordinate& window_size) noexcept { m_window_size = window_size; }
 
@@ -29,7 +30,8 @@ private:
   bool m_draw_invert{false};
   bool m_draw_left_right_increase_descrease{false};
   bool m_draw_player_controls{true};
-  bool m_draw_up_down_select{true};
+  bool m_draw_up_down{true};
+  bool m_draw_select{true};
 
   screen_coordinate m_window_size;
 };

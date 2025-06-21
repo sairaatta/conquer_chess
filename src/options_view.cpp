@@ -274,10 +274,7 @@ void options_view::draw_impl()
   draw_background(*this);
   draw_layout_panels(*this);
 
-  assert(!to_str(get_starting_position()).empty());
   draw_top(*this);
-  assert(!to_str(get_starting_position()).empty());
-
   draw_bottom(*this);
   draw_selected_panel(*this);
 
@@ -288,7 +285,17 @@ void options_view::draw_impl()
   );
   draw_pieces(*this);
 
-  assert(!to_str(get_starting_position()).empty());
+  // Update the controls bar
+  m_controls_bar.set_draw_left_right_increase_descrease(
+       m_selected == options_view_item::game_speed
+    || m_selected == options_view_item::music_volume
+    || m_selected == options_view_item::sound_effects_volume
+    || m_selected == options_view_item::starting_position
+  );
+  m_controls_bar.set_draw_select(
+       m_selected == options_view_item::left_controls
+    || m_selected == options_view_item::right_controls
+  );
   m_controls_bar.draw();
 
 }

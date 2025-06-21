@@ -14,7 +14,8 @@
 
 about_view::about_view()
 {
-  m_controls_bar.set_draw_up_down_select(false);
+  m_controls_bar.set_draw_up_down(false);
+  m_controls_bar.set_draw_select(false);
   m_controls_bar.set_draw_player_controls(false);
 }
 

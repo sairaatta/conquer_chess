@@ -28,7 +28,8 @@
 game_view::game_view(
 ) : m_log{game_options::get().get_message_display_time_secs()}
 {
-  m_controls_bar.set_draw_up_down_select(false);
+  m_controls_bar.set_draw_up_down(false);
+  m_controls_bar.set_draw_select(false);
   m_controls_bar.set_draw_player_controls(false);
 
 }

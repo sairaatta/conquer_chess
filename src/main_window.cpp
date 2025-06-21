@@ -45,6 +45,8 @@ main_window::main_window()
     assert(!m_views[s]->is_active());
     m_views[s]->start();
     assert(m_views[s]->is_active());
+    m_views[s]->tick(delta_t(0.01));
+    m_views[s]->draw();
     m_views[s]->stop();
     assert(!m_views[s]->is_active());
   }

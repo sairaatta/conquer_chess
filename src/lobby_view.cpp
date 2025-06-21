@@ -21,7 +21,8 @@ lobby_view::lobby_view()
     m_rhs_cursor{lobby_view_item::color},
     m_rhs_start{false}
 {
-  m_controls_bar.set_draw_up_down_select(false);
+  m_controls_bar.set_draw_up_down(false);
+  m_controls_bar.set_draw_select(false);
 }
 
 void lobby_view::tick_impl(const delta_t)
