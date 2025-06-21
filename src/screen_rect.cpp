@@ -46,10 +46,15 @@ screen_rect create_centered_rect(const screen_coordinate c, const int w, const i
 {
   assert(w > 0);
   assert(h > 0);
-  return screen_rect{
-    screen_coordinate(c.get_x() - (w / 2), c.get_y() - (w / 2)),
-    screen_coordinate(c.get_x() + (w / 2), c.get_y() + (w / 2))
-  };
+  const int x1{c.get_x() - (w / 2)};
+  const int y1{c.get_y() - (w / 2)};
+  const screen_rect r(
+    screen_coordinate(x1, y1),
+    screen_coordinate(x1 + w, y1 + h)
+  );
+  assert(get_height(r) == h);
+  assert(get_width(r) == w);
+  return r;
 }
 
 screen_coordinate get_center(const screen_rect& r) noexcept
@@ -175,6 +180,25 @@ bool is_in(const screen_coordinate& pos, const screen_rect& r) noexcept
 void test_screen_rect()
 {
 #ifndef NDEBUG
+  // create_centered_rect
+  {
+    // Easy
+    {
+      const int width{64};
+      const int height{128};
+      const auto r{create_centered_rect(screen_coordinate(100, 200), width, height)};
+      assert(get_width(r) == width);
+      assert(get_height(r) == height);
+    }
+    // Harder
+    {
+      const int width{65};
+      const int height{129};
+      const auto r{create_centered_rect(screen_coordinate(101, 201), width, height)};
+      assert(get_width(r) == width);
+      assert(get_height(r) == height);
+    }
+  }
   // get_bottom_left_corner
   {
     const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 2));
