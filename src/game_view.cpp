@@ -440,13 +440,14 @@ void draw_controls(
 
 void draw_game_info(game_view& view)
 {
+  const auto game_info_rect{view.get_layout().get_game_info()};
+
   // Background
-  const auto r{view.get_layout().get_game_info()};
-  draw_rectangle(
-    r, sf::Color(128, 128, 128, 128)
-  );
+  draw_rectangle(game_info_rect, sf::Color(128, 128, 128, 128));
+
   // Strength
   {
+    const auto& r{game_info_rect};
     const auto lhs_color{get_color(side::lhs)};
     const auto rhs_color{get_color(side::rhs)};
     const int lhs_piece_value{get_total_pieces_value(view.get_game().get_pieces(), lhs_color)};
@@ -478,9 +479,90 @@ void draw_game_info(game_view& view)
     draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
     draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
   }
+  // Activity
+  const int protected_bar_height{5}; // pixels
+  const int activity_bar_height{5}; // pixels
 
+  for (const side s: get_all_sides())
+  {
+    const auto& r{game_info_rect};
+    const int half_width{(get_width(r) / 2)};
+    int x1{r.get_tl().get_x()};
+    if (s == side::rhs) x1 += half_width;
+    int x2{r.get_br().get_x() - half_width};
+    if (s == side::rhs) x2 += half_width;
+    const int y1{r.get_br().get_y() - protected_bar_height - activity_bar_height};
+    const int y2{y1 + activity_bar_height};
+    draw_rectangle(
+      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)),
+      sf::Color(
+        s == side::lhs ? 255 : 0,
+        196,
+        s == side::rhs ? 255 : 0,
+        128
+      )
+    );
+    const double f{get_f_active(view.get_game().get_pieces(), get_player_color(s))};
+    assert(f >= 0.0);
+    assert(f <= 1.0);
+    const int dx = f * half_width;
+    draw_rectangle(
+      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
+      sf::Color(
+        s == side::lhs ? 255 : 0,
+        196,
+        s == side::rhs ? 255 : 0,
+        196
+      )
+    );
+    draw_outline(
+      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
+      sf::Color::Black,
+      1
+    );
+  }
+  // Percentage protected
+  for (const side s: get_all_sides())
+  {
+    const auto& r{game_info_rect};
+    const int half_width{(get_width(r) / 2)};
+    int x1{r.get_tl().get_x()};
+    if (s == side::rhs) x1 += half_width;
+    int x2{r.get_br().get_x() - half_width};
+    if (s == side::rhs) x2 += half_width;
+    const int y1{r.get_br().get_y() - protected_bar_height};
+    const int y2{y1 + protected_bar_height};
+    draw_rectangle(
+      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)),
+      sf::Color(
+        s == side::lhs ? 255 : 0,
+        64,
+        s == side::rhs ? 255 : 0,
+        128
+      )
+    );
+    const double f{get_f_protected(view.get_game().get_pieces(), get_player_color(s))};
+    assert(f >= 0.0);
+    assert(f <= 1.0);
+    const int dx = f * half_width;
+    draw_rectangle(
+      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
+      sf::Color(
+        s == side::lhs ? 255 : 0,
+        64,
+        s == side::rhs ? 255 : 0,
+        196
+      )
+    );
+    draw_outline(
+      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
+      sf::Color::Black,
+      1
+    );
+  }
   // Clock time
   {
+    const auto& r{game_info_rect};
     std::string s{
       to_str(view.get_game().get_in_game_time())
     };
@@ -517,17 +599,12 @@ void show_debug(game_view& view, const side player_side)
     get_closest_piece_to(g, get_cursor_pos(c, player_side))
   };
 
-  const auto color{get_player_color(player_side)};
   std::vector<sf::String> texts =
   {
     "Game position: " + to_notation(get_cursor_pos(c, player_side)),
     "Screen position: " + to_str(convert_to_screen_coordinate(get_cursor_pos(c, player_side), layout)),
     "Cursor position: " + to_str(get_cursor_pos(c, player_side)),
-    "Is there a piece here: " + bool_to_str(is_piece_at(g, get_cursor_pos(c, player_side), 0.5)),
-    "Closest piece: " + to_str(closest_piece.get_type()) + ": " + to_str(to_coordinat(closest_piece.get_current_square())),
-    "Number of user inputs: " + std::to_string(count_user_inputs(c)),
-    "Number of selected units: " + std::to_string(count_selected_units(g, color)),
-    "Number of piece actions: " + std::to_string(count_piece_actions(g, color))
+    "Closest piece: " + to_str(closest_piece.get_type()) + ": " + to_str(to_coordinat(closest_piece.get_current_square()))
 
   };
   draw_texts(

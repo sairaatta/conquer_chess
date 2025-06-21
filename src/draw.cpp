@@ -346,13 +346,17 @@ void draw_options_button(const screen_rect& sr)
   );
 }
 
-void draw_outline(const screen_rect& sr, const sf::Color& outline_color)
+void draw_outline(
+  const screen_rect& sr,
+  const sf::Color& outline_color,
+  const int outline_thickness
+)
 {
   sf::RectangleShape rectangle;
   set_rect(rectangle, sr);
   rectangle.setFillColor(sf::Color::Transparent);
   rectangle.setOutlineColor(outline_color);
-  rectangle.setOutlineThickness(5);
+  rectangle.setOutlineThickness(outline_thickness);
   get_render_window().draw(rectangle);
 }
 

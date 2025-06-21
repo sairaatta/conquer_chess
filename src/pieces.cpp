@@ -203,6 +203,41 @@ int count_selected_units(
   );
 }
 
+double get_f_active(
+  const std::vector<piece>& pieces,
+  const chess_color c
+)
+{
+  int n_total{0};
+  int n_active{0};
+  for (const auto& p: pieces)
+  {
+    if (p.get_color() != c) continue;
+    ++n_total;
+    if (!p.get_actions().empty()) ++n_active;
+  }
+  assert(n_total > 0);
+  return static_cast<double>(n_active) / static_cast<double>(n_total);
+}
+
+/// Get the fraction of pieces that is protected by another
+double get_f_protected(
+  const std::vector<piece>& pieces,
+  const chess_color c
+)
+{
+  int n_total{0};
+  int n_protected{0};
+  for (const auto& p: pieces)
+  {
+    if (p.get_color() != c) continue;
+    ++n_total;
+    if (p.get_type() == piece_type::queen) ++n_protected; // STUB
+  }
+  assert(n_total > 0);
+  return static_cast<double>(n_protected) / static_cast<double>(n_total);
+}
+
 std::vector<piece> get_kings_only_starting_pieces(
   const race white_race,
   const race black_race
@@ -946,6 +981,7 @@ std::vector<piece> get_starting_pieces(
   }
 }
 
+
 int get_total_pieces_value(
   const std::vector<piece>& pieces,
   const chess_color c
@@ -1076,6 +1112,18 @@ void test_pieces()
     const auto n_black{count_selected_units(pieces, chess_color::black)};
     const auto n_white{count_selected_units(pieces, chess_color::white)};
     assert(n_total == n_black + n_white);
+  }
+  // get_f_active
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    assert(get_f_active(pieces, chess_color::white) == 0.0);
+
+  }
+  // get_f_protected
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    assert(get_f_protected(pieces, chess_color::white) > 0.0);
+
   }
   // get_piece_at, const
   {

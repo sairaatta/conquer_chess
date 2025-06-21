@@ -160,7 +160,11 @@ void draw_normal_texts(
 void draw_options_button(const screen_rect& sr);
 
 /// Draw a thick, red outline at the edges of this rectangle
-void draw_outline(const screen_rect& sr, const sf::Color& outline_color = sf::Color::Red);
+void draw_outline(
+  const screen_rect& sr,
+  const sf::Color& outline_color = sf::Color::Red,
+  const int outline_thickness = 5
+);
 
 /// Draw the fancy physical controller symbol
 void draw_physical_controller_symbol(const physical_controller_type& t, const screen_rect& sr);
