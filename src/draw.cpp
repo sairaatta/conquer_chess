@@ -285,12 +285,12 @@ void draw_navigation_controls(const screen_rect& r, const side p)
       const int y3{y2 + symbol_height};
       const auto r_up{screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2))};
       draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_up(), r_up);
-      const auto r_right{screen_rect(screen_coordinate(x1, y2), screen_coordinate(x2, y3))};
-      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_right(), r_right);
+      const auto r_left{screen_rect(screen_coordinate(x1, y2), screen_coordinate(x2, y3))};
+      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_left(), r_left);
       const auto r_down{screen_rect(screen_coordinate(x2, y2), screen_coordinate(x3, y3))};
       draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_down(), r_down);
-      const auto r_left{screen_rect(screen_coordinate(x3, y2), screen_coordinate(x4, y3))};
-      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_left(), r_left);
+      const auto r_right{screen_rect(screen_coordinate(x3, y2), screen_coordinate(x4, y3))};
+      draw_input_prompt_symbol(c.get_key_bindings().get_key_for_move_right(), r_right);
     }
     break;
     case physical_controller_type::mouse:
