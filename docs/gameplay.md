@@ -54,6 +54,10 @@ When both players are ready, there is a countdown and the game starts.
 
 ![Game screen v0.8](screenshots/20250619_3.jpg)
 
-When the game starts, the goal is to kill the king of the opponent.
+The goal of the game is to:
+
+- put the king of the opponent into a checkmate (as per regular chess)
+- kill the king of the opponent, by attack it
+
 
 

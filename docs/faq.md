@@ -12,9 +12,9 @@ that is a mix between chess and some classic real-time strategy games.
 The name 'Conquer Chess: Battle for Liberty' is a mix
 of classic real-time strategy games:
 
-- Command and Conquer
-- Dune 2: Battle for Arrakis
-- Starcraft 2: Wings of Liberty
+- Command and **Conquer**
+- Dune 2: **Battle** for Arrakis
+- Starcraft 2: Wings **of Liberty**
 
 Mix those names and you'll get 'Conquer Chess: Battle for Liberty'.
 
@@ -42,7 +42,6 @@ these are the differences:
 
 :construction: the exact rules are still under construction :construction:
 
-- Goal is to mate the opponent's king
 - All pieces have health
 - All pieces have an equal amount of health, except the king, which has
   infinite health
@@ -82,8 +81,7 @@ from (the now expired link)
 
 ### What is the game speed?
 
-Under normal game speed, a piece moves one square (Manhattan distance)
-per second.
+Under normal game speed, a piece moves one chess turn per second.
 
 ## Controls
 
