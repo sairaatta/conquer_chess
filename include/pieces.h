@@ -62,6 +62,7 @@ std::vector<double> calc_distances(
 /// To do so:
 /// - It must be able to do on an empty board
 /// - There must be no piece in-between
+/// - There must be no piece at the target
 bool can_move(
   const std::vector<piece>& pieces,
   const chess_color placer_color,

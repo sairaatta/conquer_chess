@@ -213,7 +213,10 @@ void draw_text(
 /// Draw the texts on the main window,
 /// using one row per element.
 void draw_texts(
-  const std::vector<sf::String>& s, const screen_rect& r, const int character_size
+  const std::vector<sf::String>& s,
+  const screen_rect& r,
+  const int character_size,
+  const sf::Color fill_color = sf::Color::Black
 );
 
 /// Draw the texture on the main window scaled to that size

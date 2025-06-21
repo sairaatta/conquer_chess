@@ -35,57 +35,6 @@ screen_coordinate get_default_screen_size() noexcept
   return screen_coordinate(1080, 1920);
 }
 
-std::ostream& operator<<(std::ostream& os, const screen_coordinate& coordinat)
-{
-  os << "(" << coordinat.get_x() << ","  << coordinat.get_y() << ")";
-  return os;
-}
-
-screen_coordinate operator+(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
-{
-  return screen_coordinate(
-    lhs.get_x() + rhs.get_x(),
-    lhs.get_y() + rhs.get_y()
-  );
-}
-
-screen_coordinate operator-(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
-{
-  return screen_coordinate(
-    lhs.get_x() - rhs.get_x(),
-    lhs.get_y() - rhs.get_y()
-  );
-}
-
-screen_coordinate operator*(const screen_coordinate& lhs, const double& factor) noexcept
-{
-  return screen_coordinate(
-    static_cast<double>(lhs.get_x()) * factor,
-    static_cast<double>(lhs.get_y()) * factor
-  );
-}
-
-screen_coordinate operator/(const screen_coordinate& lhs, const double& factor)
-{
-  assert(factor != 0.0);
-  return screen_coordinate(
-    static_cast<double>(lhs.get_x()) / factor,
-    static_cast<double>(lhs.get_y()) / factor
-  );
-}
-
-screen_coordinate& operator+=(screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
-{
-  lhs = lhs + rhs;
-  return lhs;
-}
-
-bool operator==(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
-{
-  return lhs.get_x() == rhs.get_x()
-    && lhs.get_y() == rhs.get_y()
-  ;
-}
 
 void test_screen_coordinate()
 {
@@ -168,4 +117,66 @@ void test_screen_coordinate()
     assert(!(a == e));
   }
   #endif
+}
+
+std::string to_str(const screen_coordinate& c) noexcept
+{
+  return "("
+    + std::to_string(c.get_x())
+    + ","
+    + std::to_string(c.get_y())
+    + ")"
+  ;
+}
+
+std::ostream& operator<<(std::ostream& os, const screen_coordinate& c)
+{
+  os << to_str(c);
+  return os;
+}
+
+screen_coordinate operator+(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
+{
+  return screen_coordinate(
+    lhs.get_x() + rhs.get_x(),
+    lhs.get_y() + rhs.get_y()
+  );
+}
+
+screen_coordinate operator-(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
+{
+  return screen_coordinate(
+    lhs.get_x() - rhs.get_x(),
+    lhs.get_y() - rhs.get_y()
+  );
+}
+
+screen_coordinate operator*(const screen_coordinate& lhs, const double& factor) noexcept
+{
+  return screen_coordinate(
+    static_cast<double>(lhs.get_x()) * factor,
+    static_cast<double>(lhs.get_y()) * factor
+  );
+}
+
+screen_coordinate operator/(const screen_coordinate& lhs, const double& factor)
+{
+  assert(factor != 0.0);
+  return screen_coordinate(
+    static_cast<double>(lhs.get_x()) / factor,
+    static_cast<double>(lhs.get_y()) / factor
+  );
+}
+
+screen_coordinate& operator+=(screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
+{
+  lhs = lhs + rhs;
+  return lhs;
+}
+
+bool operator==(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
+{
+  return lhs.get_x() == rhs.get_x()
+    && lhs.get_y() == rhs.get_y()
+  ;
 }

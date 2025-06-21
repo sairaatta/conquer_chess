@@ -98,6 +98,10 @@ bool can_move(
   {
     return false;
   }
+  if (is_piece_at(pieces, destination_square))
+  {
+    return false;
+  }
   if (selected_piece_type == piece_type::knight)
   {
    return true;
@@ -1007,6 +1011,50 @@ bool is_piece_at(
 void test_pieces()
 {
 #ifndef NDEBUG
+  // can_move
+  {
+    // Standard board
+    {
+      const auto pieces{get_standard_starting_pieces()};
+      assert(can_move(pieces, chess_color::white, piece_type::knight, square("b1"), square("c3")));
+      assert(!can_move(pieces, chess_color::white, piece_type::knight, square("b1"), square("d2")));
+      assert(!can_move(pieces, chess_color::white, piece_type::queen, square("d1"), square("d2")));
+      assert(!can_move(pieces, chess_color::white, piece_type::queen, square("d1"), square("d3")));
+      assert(can_move(pieces, chess_color::white, piece_type::knight, square("g1"), square("f3")));
+      assert(can_move(pieces, chess_color::white, piece_type::pawn, square("a2"), square("a3")));
+      assert(can_move(pieces, chess_color::white, piece_type::pawn, square("a2"), square("a4")));
+      assert(!can_move(pieces, chess_color::white, piece_type::pawn, square("a2"), square("a1")));
+
+      assert(can_move(pieces, chess_color::black, piece_type::knight, square("b8"), square("c6")));
+      assert(can_move(pieces, chess_color::black, piece_type::knight, square("g8"), square("f6")));
+      assert(can_move(pieces, chess_color::black, piece_type::pawn, square("a7"), square("a6")));
+      assert(can_move(pieces, chess_color::black, piece_type::pawn, square("a7"), square("a5")));
+      assert(!can_move(pieces, chess_color::black, piece_type::pawn, square("a7"), square("a8")));
+
+    }
+    // All pawns have moved two squares forward
+    {
+      const auto pieces{get_pieces_pawn_all_out_assault()};
+      assert(can_move(pieces, chess_color::white, piece_type::rook, square("a1"), square("a3")));
+      assert(!can_move(pieces, chess_color::white, piece_type::rook, square("a1"), square("a7")));
+      assert(can_move(pieces, chess_color::white, piece_type::knight, square("b1"), square("d2")));
+      assert(can_move(pieces, chess_color::white, piece_type::bishop, square("c1"), square("e3")));
+      assert(can_move(pieces, chess_color::white, piece_type::queen, square("d1"), square("d3")));
+      assert(can_move(pieces, chess_color::white, piece_type::king, square("e1"), square("e2")));
+      assert(can_move(pieces, chess_color::white, piece_type::bishop, square("f1"), square("h3")));
+      assert(can_move(pieces, chess_color::white, piece_type::knight, square("g1"), square("e2")));
+      assert(can_move(pieces, chess_color::white, piece_type::rook, square("h1"), square("h3")));
+
+      assert(can_move(pieces, chess_color::black, piece_type::rook, square("a8"), square("a6")));
+      assert(can_move(pieces, chess_color::black, piece_type::knight, square("b8"), square("d7")));
+      assert(can_move(pieces, chess_color::black, piece_type::bishop, square("c8"), square("e6")));
+      assert(can_move(pieces, chess_color::black, piece_type::queen, square("d8"), square("d6")));
+      assert(can_move(pieces, chess_color::black, piece_type::king, square("e8"), square("e7")));
+      assert(can_move(pieces, chess_color::black, piece_type::bishop, square("f8"), square("h6")));
+      assert(can_move(pieces, chess_color::black, piece_type::knight, square("g8"), square("e7")));
+      assert(can_move(pieces, chess_color::black, piece_type::rook, square("h8"), square("h6")));
+    }
+  }
   // count_dead_pieces
   {
     // No dead pieces at the start

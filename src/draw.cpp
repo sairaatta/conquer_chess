@@ -657,7 +657,12 @@ void draw_text(
   get_render_window().draw(text);
 }
 
-void draw_texts(const std::vector<sf::String>& s, const screen_rect& r, const int character_size)
+void draw_texts(
+  const std::vector<sf::String>& s,
+  const screen_rect& r,
+  const int character_size,
+  const sf::Color fill_color
+  )
 {
   const int n_lines = s.size();
   const double row_height{
@@ -675,7 +680,7 @@ void draw_texts(const std::vector<sf::String>& s, const screen_rect& r, const in
       screen_coordinate(x1, y1),
       screen_coordinate(x2, y2)
     );
-    draw_text(s[i], row_rect, character_size);
+    draw_text(s[i], row_rect, character_size, fill_color);
   }
 
 }
