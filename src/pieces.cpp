@@ -1052,11 +1052,19 @@ bool is_piece_looking_at_square(
 {
   assert(is_piece_at(pieces, piece_square));
   const auto& piece{get_piece_at(pieces, piece_square)};
-  const auto piec_color{piece.get_color()};
+  const auto piece_color{piece.get_color()};
   const auto piece_type{piece.get_type()};
-  if (
-    !can_move_on_empty_board(
-      piec_color,
+
+  if (piece_type == piece_type::pawn)
+  {
+    return is_forward(piece_color, piece_square, target_square)
+      && are_on_adjacent_diagonal(piece_square, target_square)
+    ;
+  }
+
+  assert(piece_type != piece_type::pawn);
+  if (!can_move_on_empty_board(
+      piece_color,
       piece_type,
       piece_square,
       target_square
@@ -1354,66 +1362,116 @@ void test_pieces()
   }
   // is_piece_looking_at_square
   {
-    const auto pieces{get_standard_starting_pieces()};
-    assert(is_piece_looking_at_square(pieces, square("d1"), square("d2")));
-    assert(!is_piece_looking_at_square(pieces, square("d1"), square("d3")));
+    // Standard
+    {
+      const auto pieces{get_standard_starting_pieces()};
+      assert(is_piece_looking_at_square(pieces, square("d1"), square("d2")));
+      assert(!is_piece_looking_at_square(pieces, square("d1"), square("d3")));
+
+      // Pawns look diagonally
+      assert(!is_piece_looking_at_square(pieces, square("e2"), square("e3")));
+      assert(!is_piece_looking_at_square(pieces, square("e2"), square("e4")));
+      assert(is_piece_looking_at_square(pieces, square("e2"), square("d3")));
+      assert(is_piece_looking_at_square(pieces, square("e2"), square("f3")));
+    }
+    // Pawn all-out assault, king can only see 1 square
+    {
+      const auto pieces{get_pieces_pawn_all_out_assault()};
+      assert(is_piece_looking_at_square(pieces, square("e1"), square("e2")));
+      assert(!is_piece_looking_at_square(pieces, square("e1"), square("e3")));
+    }
   }
   // is_square_protected
   {
-    const auto pieces{get_standard_starting_pieces()};
-    assert(!is_square_protected(pieces, square("a1"), chess_color::white));
-    assert(is_square_protected(pieces, square("a2"), chess_color::white));
-    assert(is_square_protected(pieces, square("a3"), chess_color::white));
-    assert(is_square_protected(pieces, square("a4"), chess_color::white));
-    assert(!is_square_protected(pieces, square("a5"), chess_color::white));
-    assert(!is_square_protected(pieces, square("a6"), chess_color::white));
-    assert(!is_square_protected(pieces, square("a7"), chess_color::white));
-    assert(!is_square_protected(pieces, square("a8"), chess_color::white));
+    // standard
+    {
+      const auto pieces{get_standard_starting_pieces()};
+      assert(!is_square_protected(pieces, square("a1"), chess_color::white));
+      assert(is_square_protected(pieces, square("a2"), chess_color::white));
+      assert(is_square_protected(pieces, square("a3"), chess_color::white));
+      assert(!is_square_protected(pieces, square("a4"), chess_color::white));
+      assert(!is_square_protected(pieces, square("a5"), chess_color::white));
+      assert(!is_square_protected(pieces, square("a6"), chess_color::white));
+      assert(!is_square_protected(pieces, square("a7"), chess_color::white));
+      assert(!is_square_protected(pieces, square("a8"), chess_color::white));
 
-    assert(is_square_protected(pieces, square("b1"), chess_color::white));
-    assert(is_square_protected(pieces, square("b2"), chess_color::white));
-    assert(is_square_protected(pieces, square("b3"), chess_color::white));
-    assert(is_square_protected(pieces, square("b4"), chess_color::white));
-    assert(!is_square_protected(pieces, square("b5"), chess_color::white));
-    assert(!is_square_protected(pieces, square("b6"), chess_color::white));
-    assert(!is_square_protected(pieces, square("b7"), chess_color::white));
-    assert(!is_square_protected(pieces, square("b8"), chess_color::white));
+      assert(is_square_protected(pieces, square("b1"), chess_color::white));
+      assert(is_square_protected(pieces, square("b2"), chess_color::white));
+      assert(is_square_protected(pieces, square("b3"), chess_color::white));
+      assert(!is_square_protected(pieces, square("b4"), chess_color::white));
+      assert(!is_square_protected(pieces, square("b5"), chess_color::white));
+      assert(!is_square_protected(pieces, square("b6"), chess_color::white));
+      assert(!is_square_protected(pieces, square("b7"), chess_color::white));
+      assert(!is_square_protected(pieces, square("b8"), chess_color::white));
 
-    assert(is_square_protected(pieces, square("c1"), chess_color::white));
-    assert(is_square_protected(pieces, square("c2"), chess_color::white));
-    assert(is_square_protected(pieces, square("c3"), chess_color::white));
-    assert(is_square_protected(pieces, square("c4"), chess_color::white));
-    assert(!is_square_protected(pieces, square("c5"), chess_color::white));
-    assert(!is_square_protected(pieces, square("c6"), chess_color::white));
-    assert(!is_square_protected(pieces, square("c7"), chess_color::white));
-    assert(!is_square_protected(pieces, square("c8"), chess_color::white));
+      assert(is_square_protected(pieces, square("c1"), chess_color::white));
+      assert(is_square_protected(pieces, square("c2"), chess_color::white));
+      assert(is_square_protected(pieces, square("c3"), chess_color::white));
+      assert(!is_square_protected(pieces, square("c4"), chess_color::white));
+      assert(!is_square_protected(pieces, square("c5"), chess_color::white));
+      assert(!is_square_protected(pieces, square("c6"), chess_color::white));
+      assert(!is_square_protected(pieces, square("c7"), chess_color::white));
+      assert(!is_square_protected(pieces, square("c8"), chess_color::white));
 
-    assert(is_square_protected(pieces, square("d1"), chess_color::white));
-    assert(is_square_protected(pieces, square("d2"), chess_color::white));
-    assert(is_square_protected(pieces, square("d3"), chess_color::white));
-    assert(is_square_protected(pieces, square("d4"), chess_color::white));
-    assert(!is_square_protected(pieces, square("d5"), chess_color::white));
-    assert(!is_square_protected(pieces, square("d6"), chess_color::white));
-    assert(!is_square_protected(pieces, square("d7"), chess_color::white));
-    assert(!is_square_protected(pieces, square("d8"), chess_color::white));
+      assert(is_square_protected(pieces, square("d1"), chess_color::white));
+      assert(is_square_protected(pieces, square("d2"), chess_color::white));
+      assert(is_square_protected(pieces, square("d3"), chess_color::white));
+      assert(!is_square_protected(pieces, square("d4"), chess_color::white));
+      assert(!is_square_protected(pieces, square("d5"), chess_color::white));
+      assert(!is_square_protected(pieces, square("d6"), chess_color::white));
+      assert(!is_square_protected(pieces, square("d7"), chess_color::white));
+      assert(!is_square_protected(pieces, square("d8"), chess_color::white));
 
-    assert(is_square_protected(pieces, square("e1"), chess_color::white));
-    assert(is_square_protected(pieces, square("e2"), chess_color::white));
-    assert(is_square_protected(pieces, square("e3"), chess_color::white));
-    assert(is_square_protected(pieces, square("e4"), chess_color::white));
-    assert(!is_square_protected(pieces, square("e5"), chess_color::white));
-    assert(!is_square_protected(pieces, square("e6"), chess_color::white));
-    assert(!is_square_protected(pieces, square("e7"), chess_color::white));
-    assert(!is_square_protected(pieces, square("e8"), chess_color::white));
+      assert(is_square_protected(pieces, square("e1"), chess_color::white));
+      assert(is_square_protected(pieces, square("e2"), chess_color::white));
+      assert(is_square_protected(pieces, square("e3"), chess_color::white));
+      assert(!is_square_protected(pieces, square("e4"), chess_color::white));
+      assert(!is_square_protected(pieces, square("e5"), chess_color::white));
+      assert(!is_square_protected(pieces, square("e6"), chess_color::white));
+      assert(!is_square_protected(pieces, square("e7"), chess_color::white));
+      assert(!is_square_protected(pieces, square("e8"), chess_color::white));
 
-    assert(is_square_protected(pieces, square("f1"), chess_color::white));
-    assert(is_square_protected(pieces, square("f2"), chess_color::white));
-    assert(is_square_protected(pieces, square("f3"), chess_color::white));
-    assert(is_square_protected(pieces, square("f4"), chess_color::white));
-    assert(!is_square_protected(pieces, square("f5"), chess_color::white));
-    assert(!is_square_protected(pieces, square("f6"), chess_color::white));
-    assert(!is_square_protected(pieces, square("f7"), chess_color::white));
-    assert(!is_square_protected(pieces, square("f8"), chess_color::white));
+      assert(is_square_protected(pieces, square("f1"), chess_color::white));
+      assert(is_square_protected(pieces, square("f2"), chess_color::white));
+      assert(is_square_protected(pieces, square("f3"), chess_color::white));
+      assert(!is_square_protected(pieces, square("f4"), chess_color::white));
+      assert(!is_square_protected(pieces, square("f5"), chess_color::white));
+      assert(!is_square_protected(pieces, square("f6"), chess_color::white));
+      assert(!is_square_protected(pieces, square("f7"), chess_color::white));
+      assert(!is_square_protected(pieces, square("f8"), chess_color::white));
+    }
+    // Pawn all out assault
+    {
+      const auto pieces{get_pieces_pawn_all_out_assault()};
+      assert(!is_square_protected(pieces, square("e4"), chess_color::white));
+    }
+    // Kasparov versus Topalov
+    {
+      const auto pieces{get_pieces_kasparov_vs_topalov()};
+      assert(!is_square_protected(pieces, square("a3"), chess_color::white));
+
+      // Pawn at a3 protects the pawn on b4
+      assert(is_piece_at(pieces, square("a3")));
+      assert(get_piece_at(pieces, square("a3")).get_color() == chess_color::white);
+      assert(get_piece_at(pieces, square("a3")).get_type() == piece_type::pawn);
+      assert(is_piece_at(pieces, square("b4")));
+      assert(get_piece_at(pieces, square("b4")).get_color() == chess_color::white);
+      assert(get_piece_at(pieces, square("b4")).get_type() == piece_type::pawn);
+      assert(is_square_protected(pieces, square("b4"), chess_color::white));
+
+
+      assert(!is_square_protected(pieces, square("h2"), chess_color::white));
+
+      // Pawn at h2 protects the pawn on g3
+      assert(is_piece_at(pieces, square("h2")));
+      assert(get_piece_at(pieces, square("h2")).get_color() == chess_color::white);
+      assert(get_piece_at(pieces, square("h2")).get_type() == piece_type::pawn);
+      assert(is_piece_at(pieces, square("g3")));
+      assert(get_piece_at(pieces, square("g3")).get_color() == chess_color::white);
+      assert(get_piece_at(pieces, square("g3")).get_type() == piece_type::pawn);
+      assert(is_square_protected(pieces, square("g3"), chess_color::white));
+
+    }
   }
   // to_board_strs
   {

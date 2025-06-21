@@ -207,10 +207,7 @@ bool can_move_on_empty_board(
   switch (type)
   {
     case piece_type::king:
-      return are_on_same_rank(from, to)
-        || are_on_same_file(from, to)
-        || are_on_same_diagonal(from, to)
-      ;
+      return are_adjacent(from, to);
     case piece_type::pawn:
     {
       if (!are_on_same_file(from, to)) return false;
@@ -612,6 +609,7 @@ void test_piece()
     assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f5")));
     assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f6")));
 
+    // A king can move 1 square
     assert(can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d3")));
     assert(can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d4")));
     assert(can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d5")));
@@ -621,6 +619,7 @@ void test_piece()
     assert(can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f4")));
     assert(can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f5")));
     assert(!can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f6")));
+    assert(!can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("e6")));
 
     assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d3")));
     assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d4")));
