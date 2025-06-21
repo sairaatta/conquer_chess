@@ -4,7 +4,7 @@
 # Other .pro files are used for specific tasks,
 # such as codecov or profiling
 
-# On GHA, this DEFINE is added in the .yaml script
+# On GHA, this DEFINE is added by the .yaml script
 #
 #DEFINES += LOGIC_ONLY
 

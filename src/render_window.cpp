@@ -1,5 +1,7 @@
 #include "render_window.h"
 
+#ifndef LOGIC_ONLY
+
 #include "screen_coordinate.h"
 
 sf::RenderWindow& get_render_window() noexcept {
@@ -18,3 +20,5 @@ sf::RenderWindow& get_render_window() noexcept {
 
   return window;
 }
+
+#endif // LOGIC_ONLY
