@@ -2,6 +2,14 @@
 
 ## v0.8
 
+![Game screen v0.8](20250621_4.jpg)
+
+> The game screen shows the piece values (red), activity (green) and
+> protectedness (blue) of the players.
+> The upper bar shows the ration between the player,
+> the middle bar the value of the left player,
+> the lower bar the value of the right player.
+
 ![Game screen v0.8](20250621_3.jpg)
 
 > The game screen shows the relative strengths of the players,

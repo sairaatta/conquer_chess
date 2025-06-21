@@ -443,131 +443,15 @@ void draw_controls(
 
 void draw_game_info(game_view& view)
 {
-  const auto game_info_rect{view.get_layout().get_game_info()};
-  //const game_info_layout layout(view.get_layout().get_game_info());
+  //const auto game_info_rect{view.get_layout().get_game_info()};
+  const game_info_layout layout(view.get_layout().get_game_info());
 
   // Background
-  //draw_rectangle(layout.get_background(), sf::Color(128, 128, 128, 128));
-  //assert(1 == 2);
+  draw_rectangle(layout.get_background(), sf::Color(128, 128, 128, 128));
 
-  // Strength
-  {
-    const auto& r{game_info_rect};
-    const auto lhs_color{get_color(side::lhs)};
-    const auto rhs_color{get_color(side::rhs)};
-    const int lhs_piece_value{get_total_pieces_value(view.get_game().get_pieces(), lhs_color)};
-    const int rhs_piece_value{get_total_pieces_value(view.get_game().get_pieces(), rhs_color)};
-    const double f{
-      static_cast<double>(lhs_piece_value)
-      / static_cast<double>(lhs_piece_value + rhs_piece_value)
-    };
-    const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
-    const int rhs_bar_width{get_width(r) - lhs_bar_width};
-    const int x1{r.get_tl().get_x()};
-    const int x2{x1 + lhs_bar_width};
-    const int x3{x2 + rhs_bar_width};
-    const int y1{r.get_tl().get_y()};
-    const int y2{r.get_br().get_y()};
-    sf::Color lhs_bar_color;
-    switch (lhs_color)
-      {
-      case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
-      case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
-      }
-    sf::Color rhs_bar_color;
-    switch (rhs_color)
-      {
-      case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
-      case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
-      }
-
-    draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-    draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
-  }
-  // Activity
-  const int protected_bar_height{5}; // pixels
-  const int activity_bar_height{5}; // pixels
-
-  for (const side s: get_all_sides())
-  {
-    const auto& r{game_info_rect};
-    const int half_width{(get_width(r) / 2)};
-    int x1{r.get_tl().get_x()};
-    if (s == side::rhs) x1 += half_width;
-    int x2{r.get_br().get_x() - half_width};
-    if (s == side::rhs) x2 += half_width;
-    const int y1{r.get_br().get_y() - protected_bar_height - activity_bar_height};
-    const int y2{y1 + activity_bar_height};
-    draw_rectangle(
-      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)),
-      sf::Color(
-        s == side::lhs ? 255 : 0,
-        196,
-        s == side::rhs ? 255 : 0,
-        128
-      )
-    );
-    const double f{get_f_active(view.get_game().get_pieces(), get_player_color(s))};
-    assert(f >= 0.0);
-    assert(f <= 1.0);
-    const int dx = f * half_width;
-    draw_rectangle(
-      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
-      sf::Color(
-        s == side::lhs ? 255 : 0,
-        196,
-        s == side::rhs ? 255 : 0,
-        196
-      )
-    );
-    draw_outline(
-      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
-      sf::Color::Black,
-      1
-    );
-  }
-  // Percentage protected
-  for (const side s: get_all_sides())
-  {
-    const auto& r{game_info_rect};
-    const int half_width{(get_width(r) / 2)};
-    int x1{r.get_tl().get_x()};
-    if (s == side::rhs) x1 += half_width;
-    int x2{r.get_br().get_x() - half_width};
-    if (s == side::rhs) x2 += half_width;
-    const int y1{r.get_br().get_y() - protected_bar_height};
-    const int y2{y1 + protected_bar_height};
-    draw_rectangle(
-      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)),
-      sf::Color(
-        s == side::lhs ? 255 : 0,
-        64,
-        s == side::rhs ? 255 : 0,
-        128
-      )
-    );
-    const double f{get_f_protected(view.get_game().get_pieces(), get_player_color(s))};
-    assert(f >= 0.0);
-    assert(f <= 1.0);
-    const int dx = f * half_width;
-    draw_rectangle(
-      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
-      sf::Color(
-        s == side::lhs ? 255 : 0,
-        64,
-        s == side::rhs ? 255 : 0,
-        196
-      )
-    );
-    draw_outline(
-      screen_rect(screen_coordinate(x1, y1), screen_coordinate(x1 + dx, y2)),
-      sf::Color::Black,
-      1
-    );
-  }
   // Clock time
   {
-    const auto& r{game_info_rect};
+    const auto& r{layout.get_time()};
     std::string s{
       to_str(view.get_game().get_in_game_time())
     };
@@ -576,9 +460,218 @@ void draw_game_info(game_view& view)
     draw_rectangle(
       text_rect, sf::Color(128, 128, 128, 128)
       );
-
     draw_text(s, text_rect, 32);
   }
+
+  // Piece value
+  {
+    const auto lhs_color{get_color(side::lhs)};
+    const auto rhs_color{get_color(side::rhs)};
+    std::map<side, int> piece_values;
+    piece_values[side::lhs] = get_total_pieces_value(view.get_game().get_pieces(), lhs_color);
+    piece_values[side::rhs] = get_total_pieces_value(view.get_game().get_pieces(), rhs_color);
+    // Relative
+    {
+      const double f{
+        piece_values[side::lhs] + piece_values[side::rhs] == 0
+        ? 0.5
+        : static_cast<double>(piece_values[side::lhs]) / static_cast<double>(piece_values[side::lhs] + piece_values[side::rhs])
+      };
+      const auto& r{layout.get_relative_piece_value()};
+      const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+      const int rhs_bar_width{get_width(r) - lhs_bar_width};
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + lhs_bar_width};
+      const int x3{x2 + rhs_bar_width};
+      const int y1{r.get_tl().get_y()};
+      const int y2{r.get_br().get_y()};
+      sf::Color lhs_bar_color;
+      switch (lhs_color)
+      {
+        case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      sf::Color rhs_bar_color;
+      switch (rhs_color)
+      {
+        case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+
+      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      draw_outline(r, sf::Color::Red, 1);
+    }
+    // Absolute
+    for (const side s: get_all_sides())
+    {
+      const double f{static_cast<double>(piece_values[s]) / get_max_pieces_value()};
+      const auto& r{layout.get_piece_value(s)};
+      const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+      const int rhs_bar_width{get_width(r) - lhs_bar_width};
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + lhs_bar_width};
+      const int x3{x2 + rhs_bar_width};
+      const int y1{r.get_tl().get_y()};
+      const int y2{r.get_br().get_y()};
+      sf::Color lhs_bar_color;
+      switch (lhs_color)
+      {
+        case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      sf::Color rhs_bar_color;
+      switch (rhs_color)
+      {
+        case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      draw_outline(r, sf::Color::Red, 1);
+    }
+  }
+
+  // Activity
+  {
+    const auto lhs_color{get_color(side::lhs)};
+    const auto rhs_color{get_color(side::rhs)};
+    std::map<side, double> f_active;
+    f_active[side::lhs] = get_f_active(view.get_game().get_pieces(), lhs_color);
+    f_active[side::rhs] = get_f_active(view.get_game().get_pieces(), rhs_color);
+    // Relative
+    {
+      const double f{
+        f_active[side::lhs] + f_active[side::rhs] < 0.001
+        ? 0.5
+        : f_active[side::lhs] / (f_active[side::lhs] + f_active[side::rhs])
+      };
+      const auto& r{layout.get_relative_f_active()};
+      const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+      const int rhs_bar_width{get_width(r) - lhs_bar_width};
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + lhs_bar_width};
+      const int x3{x2 + rhs_bar_width};
+      const int y1{r.get_tl().get_y()};
+      const int y2{r.get_br().get_y()};
+      sf::Color lhs_bar_color;
+      switch (lhs_color)
+      {
+        case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      sf::Color rhs_bar_color;
+      switch (rhs_color)
+      {
+        case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+
+      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      draw_outline(r, sf::Color::Green, 1);
+    }
+    // Absolute
+    for (const side s: get_all_sides())
+    {
+      const double f{f_active[s]};
+      const auto& r{layout.get_f_active(s)};
+      const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+      const int rhs_bar_width{get_width(r) - lhs_bar_width};
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + lhs_bar_width};
+      const int x3{x2 + rhs_bar_width};
+      const int y1{r.get_tl().get_y()};
+      const int y2{r.get_br().get_y()};
+      sf::Color lhs_bar_color;
+      switch (lhs_color)
+      {
+        case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      sf::Color rhs_bar_color;
+      switch (rhs_color)
+      {
+        case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      draw_outline(r, sf::Color::Green, 1);
+    }
+  }
+
+
+  // Protectedness
+  {
+    const auto lhs_color{get_color(side::lhs)};
+    const auto rhs_color{get_color(side::rhs)};
+    std::map<side, double> f_protected;
+    f_protected[side::lhs] = get_f_protected(view.get_game().get_pieces(), lhs_color);
+    f_protected[side::rhs] = get_f_protected(view.get_game().get_pieces(), rhs_color);
+    // Relative
+    {
+      const double f{
+        f_protected[side::lhs] + f_protected[side::rhs] < 0.001
+        ? 0.5
+        : f_protected[side::lhs] / (f_protected[side::lhs] + f_protected[side::rhs])
+      };
+      const auto& r{layout.get_relative_f_protected()};
+      const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+      const int rhs_bar_width{get_width(r) - lhs_bar_width};
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + lhs_bar_width};
+      const int x3{x2 + rhs_bar_width};
+      const int y1{r.get_tl().get_y()};
+      const int y2{r.get_br().get_y()};
+      sf::Color lhs_bar_color;
+      switch (lhs_color)
+      {
+        case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      sf::Color rhs_bar_color;
+      switch (rhs_color)
+      {
+        case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+
+      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      draw_outline(r, sf::Color::Blue, 1);
+    }
+    // Absolute
+    for (const side s: get_all_sides())
+    {
+      const double f{f_protected[s]};
+      const auto& r{layout.get_f_protected(s)};
+      const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+      const int rhs_bar_width{get_width(r) - lhs_bar_width};
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + lhs_bar_width};
+      const int x3{x2 + rhs_bar_width};
+      const int y1{r.get_tl().get_y()};
+      const int y2{r.get_br().get_y()};
+      sf::Color lhs_bar_color;
+      switch (lhs_color)
+      {
+        case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      sf::Color rhs_bar_color;
+      switch (rhs_color)
+      {
+        case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
+        case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      draw_outline(r, sf::Color::Blue, 1);
+    }
+  }
+
+
 }
 
 void draw_navigation_controls(game_view& view)

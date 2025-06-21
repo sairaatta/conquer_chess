@@ -257,6 +257,11 @@ std::vector<piece> get_kings_only_starting_pieces(
   return pieces;
 }
 
+int get_max_pieces_value() noexcept
+{
+  return 40;
+}
+
 std::vector<square> get_occupied_squares(const std::vector<piece>& pieces) noexcept
 {
   std::vector<square> squares;
@@ -1331,6 +1336,12 @@ void test_pieces()
   }
   // get_total_pieces_value
   {
+    // Default
+    {
+      const auto pieces{get_standard_starting_pieces()};
+      const int x{get_total_pieces_value(pieces, chess_color::white)};
+      assert(x == get_max_pieces_value());
+    }
     // Each side has a king and queen
     {
       const auto pieces{get_pieces_queen_endgame()};

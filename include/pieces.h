@@ -115,6 +115,9 @@ std::vector<piece> get_kings_only_starting_pieces(
   const race black_race = race::classic
 ) noexcept;
 
+/// Get the maximum piece value a color can have on a standard chessboard
+int get_max_pieces_value() noexcept;
+
 /// Get all the squares that are occupied
 std::vector<square> get_occupied_squares(const std::vector<piece>& pieces) noexcept;
 
