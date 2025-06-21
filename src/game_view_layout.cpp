@@ -408,6 +408,11 @@ void test_game_view_layout()
       }
     }
   }
+  // get_navigation_controls
+  {
+    const game_view_layout layout;
+    assert(layout.get_navigation_controls(side::lhs) != layout.get_navigation_controls(side::rhs));
+  }
   #endif
 }
 
