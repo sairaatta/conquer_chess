@@ -8,7 +8,8 @@
 #include "game_rect.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
-#include "helper.h"
+#include "game_info_layout.h"
+//#include "helper.h"
 #include "lobby_options.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
@@ -443,9 +444,11 @@ void draw_controls(
 void draw_game_info(game_view& view)
 {
   const auto game_info_rect{view.get_layout().get_game_info()};
+  //const game_info_layout layout(view.get_layout().get_game_info());
 
   // Background
-  draw_rectangle(game_info_rect, sf::Color(128, 128, 128, 128));
+  //draw_rectangle(layout.get_background(), sf::Color(128, 128, 128, 128));
+  //assert(1 == 2);
 
   // Strength
   {

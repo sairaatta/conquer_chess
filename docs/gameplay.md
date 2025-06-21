@@ -52,7 +52,7 @@ When both players are ready, there is a countdown and the game starts.
 
 ## Game
 
-![Game screen v0.8](screenshots/20250621_2.jpg)
+![Game screen v0.8](screenshots/20250621_3.jpg)
 
 The goal of the game is to:
 

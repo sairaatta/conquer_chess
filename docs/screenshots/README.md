@@ -2,6 +2,12 @@
 
 ## v0.8
 
+![Game screen v0.8](20250621_3.jpg)
+
+> The game screen shows the relative strengths of the players,
+> the percentage of pieces being active
+> and the percentage of pieces being protected.
+
 ![Game screen v0.8](20250621_2.jpg)
 
 > The game screen shows the relative strengths of the players
