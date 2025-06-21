@@ -53,12 +53,14 @@ std::vector<sf::Keyboard::Key> get_all_sfml_keys() noexcept
   return v;
 }
 
+#ifndef LOGIC_ONLY
 bool is_shift_pressed() noexcept
 {
   return sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift)
     || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RShift)
   ;
 }
+#endif // LOGIC_ONLY
 
 std::string key_str_to_resource_name(std::string key_str)
 {
@@ -193,11 +195,13 @@ void test_sfml_helper()
     assert(!v.empty());
   }
   std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
+  #ifndef LOGIC_ONLY
   // is_shift_pressed
   {
     const auto b{is_shift_pressed()};
     assert(b || !b);
   }
+  #endif // LOGIC_ONLY
   std::clog << "Testing " << __FILE__ << ":" << __LINE__ << "\n";
   // key_str_to_resource_name
   {
