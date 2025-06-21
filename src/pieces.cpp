@@ -942,6 +942,21 @@ std::vector<piece> get_starting_pieces(
   }
 }
 
+int get_total_pieces_value(
+  const std::vector<piece>& pieces,
+  const chess_color c
+)
+{
+  int sum{0};
+  for (const auto& p: pieces)
+  {
+    if (p.get_color() != c) continue;
+    if (p.get_type() == piece_type::king) continue;
+    sum += get_piece_value(p.get_type());
+  }
+  return sum;
+}
+
 bool has_piece_with_id(
   const std::vector<piece>& pieces,
   const piece_id& i
@@ -1140,6 +1155,21 @@ void test_pieces()
     for (const auto t: get_all_starting_position_types())
     {
       assert(!get_starting_pieces(t).empty());
+    }
+  }
+  // get_total_pieces_value
+  {
+    // Each side has a king and queen
+    {
+      const auto pieces{get_pieces_queen_endgame()};
+      assert(get_total_pieces_value(pieces, chess_color::white) == 10);
+      assert(get_total_pieces_value(pieces, chess_color::black) == 10);
+    }
+    // White has a bishop and knight, black has nothing
+    {
+      const auto pieces{get_pieces_bishop_and_knight_end_game()};
+      assert(get_total_pieces_value(pieces, chess_color::white) == 6);
+      assert(get_total_pieces_value(pieces, chess_color::black) == 0);
     }
   }
   // has_piece_with_id

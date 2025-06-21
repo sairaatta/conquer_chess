@@ -2,6 +2,10 @@
 
 ## v0.8
 
+![Game screen v0.8](20250621_2.jpg)
+
+> The game screen shows the relative strengths of the players
+
 ![Game screen v0.8](20250621_1.jpg)
 
 > The game screen shows the time

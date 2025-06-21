@@ -4,6 +4,19 @@
 #include <iostream>
 #include <sstream>
 
+std::vector<piece_type> get_all_piece_types() noexcept
+{
+  return
+  {
+    piece_type::bishop,
+    piece_type::king,
+    piece_type::knight,
+    piece_type::pawn,
+    piece_type::queen,
+    piece_type::rook
+  };
+}
+
 double get_max_health(const piece_type type)
 {
   switch (type)
@@ -20,17 +33,20 @@ double get_max_health(const piece_type type)
   }
 }
 
-std::vector<piece_type> get_all_piece_types() noexcept
+int get_piece_value(const piece_type type)
 {
-  return
+  switch (type)
   {
-    piece_type::bishop,
-    piece_type::king,
-    piece_type::knight,
-    piece_type::pawn,
-    piece_type::queen,
-    piece_type::rook
-  };
+    case piece_type::bishop: return 3;
+    case piece_type::king: return 0;
+    case piece_type::knight: return 3;
+    case piece_type::pawn: return 1;
+    case piece_type::queen: return 10;
+    default:
+    case piece_type::rook:
+      assert(type == piece_type::rook);
+      return 5;
+  }
 }
 
 void test_piece_type()
@@ -67,6 +83,15 @@ void test_piece_type()
     {
       assert(get_max_health(t) > 0.0);
     }
+  }
+  // get_piece_value
+  {
+    assert(get_piece_value(piece_type::bishop) == 3);
+    assert(get_piece_value(piece_type::king) == 0);
+    assert(get_piece_value(piece_type::knight) == 3);
+    assert(get_piece_value(piece_type::pawn) == 1);
+    assert(get_piece_value(piece_type::queen) == 10);
+    assert(get_piece_value(piece_type::rook) == 5);
   }
   // to_piece_type
   {

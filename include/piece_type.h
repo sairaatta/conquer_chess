@@ -21,6 +21,11 @@ std::vector<piece_type> get_all_piece_types() noexcept;
 /// Get the maximum health for a piece
 double get_max_health(const piece_type type);
 
+/// Get the value of the pieces.
+///
+/// A king has a value of zero, although in practice its value is infinite
+int get_piece_value(const piece_type type);
+
 /// Test this class and its free functions
 void test_piece_type();
 

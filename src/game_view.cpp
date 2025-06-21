@@ -2,20 +2,21 @@
 
 #ifndef LOGIC_ONLY
 
-#include "physical_controller.h"
-#include "render_window.h"
-#include "game.h"
 #include "draw.h"
-#include "helper.h"
+#include "game.h"
+#include "game_rect.h"
 #include "game_resources.h"
 #include "game_view_layout.h"
+#include "helper.h"
+#include "lobby_options.h"
+#include "physical_controller.h"
+#include "physical_controllers.h"
+#include "pieces.h"
+#include "render_window.h"
 #include "screen_coordinate.h"
 #include "screen_rect.h"
-#include "sfml_helper.h"
 #include "screen_rect.h"
-#include "physical_controllers.h"
-#include "game_rect.h"
-#include "lobby_options.h"
+#include "sfml_helper.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -437,15 +438,58 @@ void draw_controls(
 
 void draw_game_info(game_view& view)
 {
+  // Background
   const auto r{view.get_layout().get_game_info()};
   draw_rectangle(
     r, sf::Color(128, 128, 128, 128)
   );
-  std::string s{
-    to_str(view.get_game().get_in_game_time())
-  };
-  if (s.size() > 4) s.resize(4);
-  draw_text(s, r, 32);
+  // Strength
+  {
+    const auto lhs_color{get_color(side::lhs)};
+    const auto rhs_color{get_color(side::rhs)};
+    const int lhs_piece_value{get_total_pieces_value(view.get_game().get_pieces(), lhs_color)};
+    const int rhs_piece_value{get_total_pieces_value(view.get_game().get_pieces(), rhs_color)};
+    const double f{
+      static_cast<double>(lhs_piece_value)
+      / static_cast<double>(lhs_piece_value + rhs_piece_value)
+    };
+    const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+    const int rhs_bar_width{get_width(r) - lhs_bar_width};
+    const int x1{r.get_tl().get_x()};
+    const int x2{x1 + lhs_bar_width};
+    const int x3{x2 + rhs_bar_width};
+    const int y1{r.get_tl().get_y()};
+    const int y2{r.get_br().get_y()};
+    sf::Color lhs_bar_color;
+    switch (lhs_color)
+      {
+      case chess_color::white: lhs_bar_color = sf::Color(255, 255, 255, 128); break;
+      case chess_color::black: lhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+    sf::Color rhs_bar_color;
+    switch (rhs_color)
+      {
+      case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
+      case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
+      }
+
+    draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+    draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+  }
+
+  // Clock time
+  {
+    std::string s{
+      to_str(view.get_game().get_in_game_time())
+    };
+    if (s.size() > 4) s.resize(4);
+    const auto text_rect{create_centered_rect(get_center(r), 80, 48)};
+    draw_rectangle(
+      text_rect, sf::Color(128, 128, 128, 128)
+      );
+
+    draw_text(s, text_rect, 32);
+  }
 }
 
 void draw_navigation_controls(game_view& view)

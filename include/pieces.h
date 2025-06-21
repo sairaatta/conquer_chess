@@ -295,6 +295,14 @@ std::vector<piece> get_starting_pieces(
   const race black_race
 ) noexcept;
 
+/// Get the total value of all (non-king) chess pieces.
+///
+/// The king is not counted, as it has an infinite value.
+int get_total_pieces_value(
+  const std::vector<piece>& pieces,
+  const chess_color c
+);
+
 /// Is there a piece with the ID among the pieces?
 bool has_piece_with_id(
   const std::vector<piece>& pieces,

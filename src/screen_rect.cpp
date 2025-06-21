@@ -47,7 +47,7 @@ screen_rect create_centered_rect(const screen_coordinate c, const int w, const i
   assert(w > 0);
   assert(h > 0);
   const int x1{c.get_x() - (w / 2)};
-  const int y1{c.get_y() - (w / 2)};
+  const int y1{c.get_y() - (h / 2)};
   const screen_rect r(
     screen_coordinate(x1, y1),
     screen_coordinate(x1 + w, y1 + h)
@@ -189,6 +189,10 @@ void test_screen_rect()
       const auto r{create_centered_rect(screen_coordinate(100, 200), width, height)};
       assert(get_width(r) == width);
       assert(get_height(r) == height);
+      assert(r.get_tl().get_x() == 100 - 32);
+      assert(r.get_tl().get_y() == 200 - 64);
+      assert(r.get_br().get_x() == 100 + 32);
+      assert(r.get_br().get_y() == 200 + 64);
     }
     // Harder
     {
