@@ -516,45 +516,55 @@ void draw_sound_effects_volume_value(const screen_rect& sr)
 }
 
 void draw_squares(
-  const screen_rect& rect,
+  const screen_rect& r,
   const bool semi_transparent
 )
 {
-  auto& r{game_resources::get()};
-  const int square_width{1 + (get_width(rect) / 8)};
-  const int square_height{1 + (get_height(rect) / 8)};
-  sf::RectangleShape black_square;
-  sf::RectangleShape white_square;
-  black_square.setSize(sf::Vector2f(square_width, square_height));
-  black_square.setOrigin(sf::Vector2f(square_width / 2.0, square_height / 2.0));
-  white_square.setSize(sf::Vector2f(square_width, square_height));
-  white_square.setOrigin(sf::Vector2f(square_width / 2.0, square_height / 2.0));
-  if (semi_transparent)
+  // Create the x coordinates of the squares
+  std::vector<double> xs;
   {
-    black_square.setTexture(&r.get_textures().get_semitransparent_square(chess_color::black));
-    white_square.setTexture(&r.get_textures().get_semitransparent_square(chess_color::white));
+    double x = r.get_tl().get_x();
+    const double dx = get_width(r) / 8.0;
+    xs.push_back(x);
+    for (int i = 0; i != 8; ++i)
+    {
+      x += dx;
+      xs.push_back(x);
+    }
   }
-  else
+  assert(xs.size() == 8 + 1);
+
+  // Create the y coordinates of the squares
+  std::vector<double> ys;
   {
-    black_square.setTexture(&r.get_textures().get_square(chess_color::black));
-    white_square.setTexture(&r.get_textures().get_square(chess_color::white));
+    double y = r.get_tl().get_y();
+    const double dy = get_height(r) / 8.0;
+    ys.push_back(y);
+    for (int i = 0; i != 8; ++i)
+    {
+      y += dy;
+      ys.push_back(y);
+    }
   }
 
   for (int x = 0; x != 8; ++x)
   {
     for (int y = 0; y != 8; ++y)
     {
-      sf::RectangleShape& s = (x + y) % 2 == 0 ? black_square : white_square;
-      const screen_coordinate square_pos{
-        static_cast<int>(
-          rect.get_tl().get_x() + ((0.5 + x) * square_width)
-        ),
-        static_cast<int>(
-          rect.get_tl().get_y() + ((0.5 + y) * square_height)
-        )
+      const chess_color c{(x + y) % 2 == 0 ? chess_color::black : chess_color::white };
+      const screen_rect square_rect{
+        screen_coordinate(xs[x], ys[y]),
+        screen_coordinate(xs[x + 1], ys[y + 1])
       };
-      s.setPosition(square_pos.get_x(), square_pos.get_y());
-      get_render_window().draw(s);
+      auto& t{game_resources::get().get_textures()};
+      if (semi_transparent)
+      {
+        draw_texture(t.get_semitransparent_square(c), square_rect);
+      }
+      else
+      {
+        draw_texture(t.get_square(c), square_rect);
+      }
     }
   }
 }

@@ -685,7 +685,8 @@ void draw_pieces(game_view& view)
     }
     sprite.setOrigin(sf::Vector2f(0.45 * square_width, 0.45 * square_height));
     const auto screen_position = convert_to_screen_coordinate(
-      to_coordinat(piece.get_current_square()) + game_coordinate(0.0, 0.1),
+      to_coordinat(piece.get_current_square())
+        + game_coordinate(0.0, 0.1), // Draw the piece at the bottom of the square
       layout
     );
     sprite.setPosition(
@@ -733,10 +734,7 @@ void show_sidebar(game_view& view, const side player_side)
 
 void draw_squares(game_view& view)
 {
-  draw_squares(
-    view.get_layout().get_board(),
-    view.get_show_squares_semitransparent()
-  );
+  draw_squares(view.get_layout().get_board());
 }
 
 void draw_square_under_cursor(

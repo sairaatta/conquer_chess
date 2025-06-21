@@ -10,7 +10,7 @@ options_view_layout::options_view_layout(
 {
   const int panel_height{100};
   const int top_panel_width{900};
-  const int chess_board_width{200};
+  const int chess_board_width{8 * 24};
   const int chess_board_height{chess_board_width};
 
   // Top panel

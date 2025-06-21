@@ -187,7 +187,7 @@ void draw_sound_effects_volume_value(const screen_rect& sr);
 /// Draw the squares of a chessboard at the window target rectangle's location
 void draw_squares(
   const screen_rect& rect,
-  const bool semi_transparent
+  const bool semi_transparent = true
 );
 
 /// Draw a Start menu button on the main window
