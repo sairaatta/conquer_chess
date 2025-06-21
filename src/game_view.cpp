@@ -604,16 +604,7 @@ void show_debug(game_view& view, const side player_side)
     "Game position: " + to_notation(get_cursor_pos(c, player_side)),
     "Screen position: " + to_str(convert_to_screen_coordinate(get_cursor_pos(c, player_side), layout)),
     "Cursor position: " + to_str(get_cursor_pos(c, player_side)),
-    "Closest piece: " + to_str(closest_piece.get_type()) + ": " + to_str(to_coordinat(closest_piece.get_current_square())),
-    "Is piece protected: " +
-      bool_to_str(
-        is_square_protected(
-          g.get_pieces(),
-          get_cursor_square(c, player_side),
-          get_player_color(player_side
-        )
-      )
-    )
+    "Closest piece: " + to_str(closest_piece.get_type()) + ": " + to_str(to_coordinat(closest_piece.get_current_square()))
   };
   draw_texts(
     texts,
@@ -742,7 +733,7 @@ void draw_pieces(game_view& view)
           player_side == side::lhs ? 255 : 0,
           0,
           player_side == side::rhs ? 255 : 0,
-          128
+          64 // Be subtle
         )
       );
     }
