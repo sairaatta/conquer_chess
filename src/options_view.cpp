@@ -359,8 +359,7 @@ void draw_pieces(options_view& view)
 {
   draw_pieces(
     get_starting_pieces(game_options::get().get_starting_position()),
-    view.get_layout().get_chess_board(),
-    game_options::get().get_show_selected()
+    view.get_layout().get_chess_board()
   );
 }
 

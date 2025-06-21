@@ -172,8 +172,7 @@ void draw_physical_controller_symbol(const physical_controller_type& t, const sc
 /// Draw the pieces
 void draw_pieces(
   const std::vector<piece>& pieces,
-  const screen_rect& rect,
-  const bool show_selected
+  const screen_rect& rect
 );
 
 /// Draw a Quit menu button on the main window
@@ -224,7 +223,7 @@ void draw_texts(
 );
 
 /// Draw the texture on the main window scaled to that size
-void draw_texture(sf::Texture& t, const screen_rect& r);
+void draw_texture(sf::Texture& t, const screen_rect& r, const sf::Color& fill_color = sf::Color::Transparent);
 
 constexpr int get_normal_character_size() noexcept { return 32; }
 

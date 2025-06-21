@@ -22,6 +22,7 @@
 #include "action_history.h"
 #include "castling_type.h"
 #include "board_to_text_options.h"
+#include "board_layout.h"
 #include "chess_move.h"
 #include "played_game_view_layout.h"
 #include "controls_view_item.h"
@@ -72,6 +73,7 @@ void test()
 #ifndef NDEBUG
 
 
+  test_board_layout();
 
   test_about();
   test_about_view_layout();

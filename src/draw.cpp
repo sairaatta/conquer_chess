@@ -2,13 +2,14 @@
 
 #ifndef LOGIC_ONLY
 
-#include "game_resources.h"
-#include "render_window.h"
-#include "game_options.h"
-#include "sfml_helper.h"
-#include "piece.h"
+#include "board_layout.h"
 #include "game_coordinate.h"
+#include "game_options.h"
+#include "game_resources.h"
 #include "physical_controllers.h"
+#include "piece.h"
+#include "render_window.h"
+#include "sfml_helper.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
@@ -370,25 +371,49 @@ void draw_physical_controller_symbol(const physical_controller_type& t, const sc
 
 void draw_pieces(
   const std::vector<piece>& pieces,
-  const screen_rect& rect,
-  const bool show_selected
+  const screen_rect& rect
 )
 {
-  auto& window{get_render_window()};
-  const int square_width{1 + get_width(rect) / 8};
-  const int square_height{1 + get_height(rect) / 8};
+  //auto& window{get_render_window()};
+  const board_layout layout(rect);
+
+  //const int square_width{1 + get_width(rect) / 8};
+  //const int square_height{1 + get_height(rect) / 8};
   for (const auto& piece: pieces)
   {
-    sf::RectangleShape sprite;
-    sprite.setSize(sf::Vector2f(0.9 * square_width, 0.9 * square_height));
-    sprite.setTexture(
-      &get_piece_texture(
-        piece.get_race(),
-        piece.get_color(),
-        piece.get_type()
+    const auto square_rect{
+      layout.get_square(
+        piece.get_current_square().get_x(),
+        piece.get_current_square().get_y()
       )
-    );
+    };
+    const int square_width{get_width(square_rect)};
+    const int square_height{get_height(square_rect)};
+    /// +------------------+
+    /// |+----------------+|
+    /// || Health         ||
+    /// |+----------------+|
+    /// ||Player          ||
+    /// ||                ||
+    /// ||                ||
+    /// ||                ||
+    /// |+----------------+|
+    /// +------------------+
+    ///
+    const auto piece_rect{
+      screen_rect(
+        screen_coordinate(
+           square_rect.get_tl().get_x() + (0.1 * square_width),
+           square_rect.get_tl().get_y() + (0.2 * square_height)
+        ),
+        screen_coordinate(
+           square_rect.get_br().get_x() - (0.1 * square_width),
+           square_rect.get_br().get_y() - (0.0 * square_height)
+        )
+      )
+    };
     // Transparency effect when moving
+    sf::Color fill_color{sf::Color::Transparent};
     if (!piece.get_actions().empty()
       && piece.get_actions()[0].get_action_type() == piece_action_type::move
     )
@@ -403,30 +428,17 @@ void draw_pieces(
       {
         alpha = static_cast<int>(f * 255.0);
       }
-      sprite.setFillColor(sf::Color(255, 255, 255, alpha));
+      fill_color = sf::Color(255, 255, 255, alpha);
     }
-    else
-    {
-      //sprite.setFillColor(sf::Color(0, 0, 0, 255));
-    }
-    if (show_selected && piece.is_selected())
-    {
-      sprite.setOutlineColor(sf::Color(255, 0, 0));
-      sprite.setOutlineThickness(2);
-    }
-    sprite.setOrigin(sf::Vector2f(0.45 * square_width, 0.45 * square_height));
-    const game_coordinate game_pos{
-      to_coordinat(piece.get_current_square()) + game_coordinate(0.0, 0.1)
-    };
-    const screen_coordinate screen_position{
-      rect.get_tl().get_x() + static_cast<int>(game_pos.get_x() * square_width),
-      rect.get_tl().get_y() + static_cast<int>(game_pos.get_y() * square_height),
-    };
-    sprite.setPosition(
-      screen_position.get_x(),
-      screen_position.get_y()
+    draw_texture(
+      get_piece_texture(
+        piece.get_race(),
+        piece.get_color(),
+        piece.get_type()
+      ),
+      piece_rect,
+      fill_color
     );
-    window.draw(sprite);
   }
 }
 
@@ -524,42 +536,14 @@ void draw_squares(
   const bool semi_transparent
 )
 {
-  // Create the x coordinates of the squares
-  std::vector<double> xs;
-  {
-    double x = r.get_tl().get_x();
-    const double dx = get_width(r) / 8.0;
-    xs.push_back(x);
-    for (int i = 0; i != 8; ++i)
-    {
-      x += dx;
-      xs.push_back(x);
-    }
-  }
-  assert(xs.size() == 8 + 1);
-
-  // Create the y coordinates of the squares
-  std::vector<double> ys;
-  {
-    double y = r.get_tl().get_y();
-    const double dy = get_height(r) / 8.0;
-    ys.push_back(y);
-    for (int i = 0; i != 8; ++i)
-    {
-      y += dy;
-      ys.push_back(y);
-    }
-  }
+  const board_layout layout(r);
 
   for (int x = 0; x != 8; ++x)
   {
     for (int y = 0; y != 8; ++y)
     {
       const chess_color c{(x + y) % 2 == 0 ? chess_color::black : chess_color::white };
-      const screen_rect square_rect{
-        screen_coordinate(xs[x], ys[y]),
-        screen_coordinate(xs[x + 1], ys[y + 1])
-      };
+      const screen_rect square_rect{layout.get_square(x, y)};
       auto& t{game_resources::get().get_textures()};
       if (semi_transparent)
       {
@@ -689,11 +673,15 @@ void draw_texts(
 
 }
 
-void draw_texture(sf::Texture& t, const screen_rect& sr)
+void draw_texture(sf::Texture& t, const screen_rect& sr, const sf::Color& fill_color)
 {
   sf::RectangleShape rectangle;
   set_rect(rectangle, sr);
   rectangle.setTexture(&t);
+  if (fill_color != sf::Color::Transparent)
+  {
+    rectangle.setFillColor(fill_color);
+  }
   get_render_window().draw(rectangle);
 }
 
