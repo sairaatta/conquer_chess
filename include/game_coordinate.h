@@ -101,6 +101,11 @@ std::string to_notation(const game_coordinate& g);
 /// i.e. at coorddinat (x.5, y.5)
 game_coordinate center_on_center(const game_coordinate& coordinat);
 
+/// Converts the coordinate to a string.
+///
+/// Rounds of to one decimal behind the comma.
+std::string to_str(const game_coordinate& c) noexcept;
+
 std::ostream& operator<<(std::ostream& os, const game_coordinate& coordinat);
 
 bool operator==(const game_coordinate& lhs, const game_coordinate& rhs) noexcept;

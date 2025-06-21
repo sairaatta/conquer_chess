@@ -218,6 +218,14 @@ void test_game_coordinate()
     assert(to_notation(game_coordinate(0.5, 0.5)) == "a1");
     assert(to_notation(game_coordinate(9.5, 9.5)) == "--");
   }
+  // to_str
+  {
+    const game_coordinate c(1.2345, 6.7890);
+    const std::string expected{"(1.2, 6.8)"};
+    const std::string created{to_str(c)};
+    assert(expected == created);
+  }
+
   // operator ==
   {
     const game_coordinate a(1.2345, 6.7890);
@@ -291,6 +299,21 @@ std::string to_notation(const game_coordinate& g)
   return "--";
 }
 
+std::string to_str(const game_coordinate& c) noexcept
+{
+  std::string x{std::to_string(c.get_x() + 0.05)};
+  std::string y{std::to_string(c.get_y() + 0.05)};
+  if (x.size() > 3) x.resize(3);
+  if (y.size() > 3) y.resize(3);
+  return
+      "("
+    + x
+    + ", "
+    + y
+    + ")"
+  ;
+}
+
 bool operator==(const game_coordinate& lhs, const game_coordinate& rhs) noexcept
 {
   return lhs.get_x() == rhs.get_x()
@@ -303,11 +326,9 @@ bool operator!=(const game_coordinate& lhs, const game_coordinate& rhs) noexcept
   return !(lhs == rhs);
 }
 
-std::ostream& operator<<(std::ostream& os, const game_coordinate& coordinat)
+std::ostream& operator<<(std::ostream& os, const game_coordinate& c)
 {
-  const double x{std::round(coordinat.get_x() * 10.0) / 10.0};
-  const double y{std::round(coordinat.get_y() * 10.0) / 10.0};
-  os << "(" << x << ", "  << y << ")";
+  os << to_str(c);
   return os;
 }
 

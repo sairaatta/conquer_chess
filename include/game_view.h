@@ -103,7 +103,8 @@ physical_controller_type get_physical_controller_type(const game_view& view, con
 std::string get_controls_text(
   const game_view& view,
   const game_controller& c,
-  const action_number& key
+  const side player_side,
+  const action_number& n
 );
 
 /// Get the last log messages for a player
@@ -131,7 +132,8 @@ const game_coordinate& get_cursor_pos(
 std::string get_text_for_action(
   const game_view& view,
   const game_controller& c,
-  const action_number& key
+  const side player_side,
+  const action_number& n
 );
 
 /// Get the time in the game

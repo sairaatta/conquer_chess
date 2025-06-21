@@ -68,10 +68,11 @@ physical_controller_type get_physical_controller_type(const game_view& view, con
 std::string get_controls_text(
   const game_view& view,
   const game_controller& c,
-  const action_number& key
+  const side player_side,
+  const action_number& n
 )
 {
-  return get_text_for_action(view, c, key);
+  return get_text_for_action(view, c, player_side, n);
 }
 
 double game_view::get_elapsed_time_secs() const noexcept
@@ -117,11 +118,12 @@ const game_coordinate& get_cursor_pos(const game_view& view, const side player) 
 std::string get_text_for_action(
   const game_view& view,
   const game_controller& c,
+  const side player_side,
   const action_number& n
 )
 {
   const auto& g{view.get_game()};
-  const auto maybe_action{get_piece_action(g, c, n, side::lhs)};
+  const auto maybe_action{get_piece_action(g, c, n, player_side)};
 
   if (!maybe_action) return "";
   return to_human_str(maybe_action.value());
@@ -237,32 +239,32 @@ void draw_board(game_view& view)
 
 void draw_controls(
   game_view& view,
-  const side player
+  const side player_side
 )
 {
   // Stub for keyboard only
-  const auto& c{physical_controllers::get().get_controller(player)};
+  const auto& c{physical_controllers::get().get_controller(player_side)};
   assert(c.get_type() == physical_controller_type::keyboard);
 
   const auto& layout{view.get_layout()};
 
   // Blur the entire background here
-  draw_rectangle(layout.get_controls(player), sf::Color(128, 128, 128, 128));
+  draw_rectangle(layout.get_controls(player_side), sf::Color(128, 128, 128, 128));
 
-  draw_navigation_controls(layout.get_navigation_controls(player), player);
+  draw_navigation_controls(layout.get_navigation_controls(player_side), player_side);
 
 
   for (const auto n: get_all_action_numbers())
   {
     const screen_rect row_rect{
-      layout.get_controls_key(player, n)
+      layout.get_controls_key(player_side, n)
     };
     const screen_rect symbol_rect{
       row_rect.get_tl(),
       row_rect.get_tl() + screen_coordinate(64, 64)
     };
     draw_input_prompt_symbol(
-      physical_controllers::get().get_controller(player).get_key_bindings().get_key_for_action(n),
+      physical_controllers::get().get_controller(player_side).get_key_bindings().get_key_for_action(n),
       symbol_rect
     );
     const screen_rect text_rect{
@@ -270,7 +272,7 @@ void draw_controls(
       screen_coordinate(row_rect.get_br().get_x(), symbol_rect.get_br().get_y())
     };
     const std::string text{
-      get_controls_text(view, view.get_game_controller(), n)
+      get_controls_text(view, view.get_game_controller(), player_side, n)
     };
     if (!text.empty())
     {
@@ -511,19 +513,19 @@ void show_debug(game_view& view, const side player_side)
   const auto& layout{view.get_layout()};
   sf::Text text;
   text.setFont(game_resources::get().get_fonts().get_arial_font());
-  //const piece& closest_piece{
-  //  get_closest_piece_to(g, get_cursor_pos(c, player_side))
-  //};
+  const piece& closest_piece{
+    get_closest_piece_to(g, get_cursor_pos(c, player_side))
+  };
 
   const auto color{get_player_color(player_side)};
   std::vector<sf::String> texts =
   {
     "Game position: " + to_notation(get_cursor_pos(c, player_side)),
     "Screen position: " + to_str(convert_to_screen_coordinate(get_cursor_pos(c, player_side), layout)),
-    // "Cursor position: " + to_str(get_cursor_pos(c, player_side)),
+    "Cursor position: " + to_str(get_cursor_pos(c, player_side)),
     "Is there a piece here: " + bool_to_str(is_piece_at(g, get_cursor_pos(c, player_side), 0.5)),
-    // "Closest piece: " + to_str(closest_piece.get_type()) + ": " + to_str(to_coordinat(closest_piece.get_current_square())),
-    //"Number of user inputs: " + std::to_string(count_user_inputs(c)),
+    "Closest piece: " + to_str(closest_piece.get_type()) + ": " + to_str(to_coordinat(closest_piece.get_current_square())),
+    "Number of user inputs: " + std::to_string(count_user_inputs(c)),
     "Number of selected units: " + std::to_string(count_selected_units(g, color)),
     "Number of piece actions: " + std::to_string(count_piece_actions(g, color))
 
