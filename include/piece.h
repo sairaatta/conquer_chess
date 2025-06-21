@@ -17,6 +17,9 @@
 #include <vector>
 
 /// A chess piece.
+///
+/// @seealso for drawing a piece and/or its health bar properly
+///   use \link{piece_layout}
 class piece
 {
 public:

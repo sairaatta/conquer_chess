@@ -20,15 +20,12 @@
 #include "about.h"
 #include "about_view_layout.h"
 #include "action_history.h"
-#include "castling_type.h"
-#include "board_to_text_options.h"
 #include "board_layout.h"
+#include "board_to_text_options.h"
+#include "castling_type.h"
 #include "chess_move.h"
-#include "played_game_view_layout.h"
 #include "controls_view_item.h"
 #include "controls_view_layout.h"
-#include "physical_controller.h"
-#include "physical_controllers.h"
 #include "fps_clock.h"
 #include "game_controller.h"
 #include "game_log.h"
@@ -36,7 +33,6 @@
 #include "game_rect.h"
 #include "game_view_layout.h"
 #include "helper.h"
-#include "piece_id.h"
 #include "in_game_time.h"
 #include "key_bindings.h"
 #include "lobby_options.h"
@@ -46,15 +42,20 @@
 #include "menu_view_layout.h"
 #include "options_view_layout.h"
 #include "pgn_string.h"
+#include "physical_controller.h"
+#include "physical_controllers.h"
 #include "piece_actions.h"
-#include "program_state.h"
+#include "piece_id.h"
+#include "piece_layout.h"
 #include "pieces.h"
+#include "played_game_view_layout.h"
+#include "program_state.h"
 #include "race.h"
-#include "sfml_helper.h"
 #include "read_only.h"
 #include "replay.h"
 #include "replayer.h"
 #include "screen_coordinate.h"
+#include "sfml_helper.h"
 #include "sleep_scheduler.h"
 #include "test_game.h"
 
@@ -119,6 +120,7 @@ void test()
   test_piece_actions();
   test_piece_type();
   test_pieces();
+  test_piece_layout();
   test_played_game_view_layout();
   test_program_state();
   test_race();

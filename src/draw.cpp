@@ -3,8 +3,9 @@
 #ifndef LOGIC_ONLY
 
 #include "board_layout.h"
-#include "game_coordinate.h"
+//#include "game_coordinate.h"
 #include "game_options.h"
+#include "piece_layout.h"
 #include "game_resources.h"
 #include "physical_controllers.h"
 #include "piece.h"
@@ -374,11 +375,7 @@ void draw_pieces(
   const screen_rect& rect
 )
 {
-  //auto& window{get_render_window()};
   const board_layout layout(rect);
-
-  //const int square_width{1 + get_width(rect) / 8};
-  //const int square_height{1 + get_height(rect) / 8};
   for (const auto& piece: pieces)
   {
     const auto square_rect{
@@ -387,8 +384,6 @@ void draw_pieces(
         piece.get_current_square().get_y()
       )
     };
-    const int square_width{get_width(square_rect)};
-    const int square_height{get_height(square_rect)};
     /// +------------------+
     /// |+----------------+|
     /// || Health         ||
@@ -400,18 +395,7 @@ void draw_pieces(
     /// |+----------------+|
     /// +------------------+
     ///
-    const auto piece_rect{
-      screen_rect(
-        screen_coordinate(
-           square_rect.get_tl().get_x() + (0.1 * square_width),
-           square_rect.get_tl().get_y() + (0.2 * square_height)
-        ),
-        screen_coordinate(
-           square_rect.get_br().get_x() - (0.1 * square_width),
-           square_rect.get_br().get_y() - (0.0 * square_height)
-        )
-      )
-    };
+    const auto piece_rect{piece_layout(square_rect).get_piece()};
     // Transparency effect when moving
     sf::Color fill_color{sf::Color::Transparent};
     if (!piece.get_actions().empty()
