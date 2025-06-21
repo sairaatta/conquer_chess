@@ -164,7 +164,7 @@ void main_window::show_debug_info()
 {
   const auto debug_rect = screen_rect(
     screen_coordinate(4, 4),
-    screen_coordinate(300, 30)
+    screen_coordinate(400, 30)
   );
   const int fps{
     static_cast<int>(std::round(m_sleep_scheduler.get_fps()))

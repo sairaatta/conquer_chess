@@ -52,12 +52,29 @@ When both players are ready, there is a countdown and the game starts.
 
 ## Game
 
-![Game screen v0.8](screenshots/20250619_3.jpg)
+![Game screen v0.8](screenshots/20250621_1.jpg)
 
 The goal of the game is to:
 
 - put the king of the opponent into a checkmate (as per regular chess)
-- kill the king of the opponent, by attack it
+- kill the king of the opponent, by attacking it until its health reaches zero
+
+The game is timed in chess moves.
+This time is shown directly below the board.
+
+The pieces move exactly the same as in regular chess.
+
+Moving a piece takes one chess move (as per regular chess):
+it takes just as long to move a pawn one square forward,
+as to move a queen accross the board.
+
+Capturing a piece takes one chess move (as per regular chess):
+when a piece starts attacking, it will take one time unit
+to lower the health of the attacked piece to zero.
+When the health of the attacked piece reaches zero,
+the attacker instantaneously moves to the square of the
+captured piece.
+
 
 
 

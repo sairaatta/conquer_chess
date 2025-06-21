@@ -33,82 +33,86 @@ game_view_layout::game_view_layout(
   };
   const int debug_panel_height{log_panel_height};
   const int panel_width{300};
-
-  const int max_board_width = m_window_size.get_x() - (2 * panel_width) - (4 * margin_width);
-  const int max_board_height = m_window_size.get_y() - (2 * margin_width);
-  const int board_width = std::min(max_board_height, max_board_width);
-  const int board_height = board_width;
+  const int game_info_height{80};
+  const int board_width{64 * 8};
+  const int board_height{board_width};
   assert(board_width == board_height);
 
   const int x1{margin_width};
   const int x2{x1 + panel_width};
   const int x3{x2 + margin_width};
-  const int x4{x3 + board_width};
+  const int x4{x3 + (board_width / 2) + (margin_width / 2)};
   const int x5{x4 + margin_width};
-  const int x6{x5 + panel_width};
+  const int x6{x5 + (board_width / 2)};
+  const int x7{x6 + margin_width};
+  const int x8{x7 + panel_width};
 
-  const int y1{margin_width};
+  const int y1{24 + margin_width};
   const int y2{y1 + unit_info_height};
-  const int y3{y2 + controls_height};
-  const int y4{y3 + margin_width};
-  const int y5{y4 + log_panel_height};
-  const int y6{y5 + margin_width};
-  const int y7{y6 + debug_panel_height};
+  const int y3{y2 + controls_height - game_info_height};
+  const int y4{y3 + game_info_height};
+  const int y5{y4 + margin_width};
+  const int y6{y5 + log_panel_height};
+  const int y7{y6 + margin_width};
+  const int y8{y7 + debug_panel_height};
 
+  // Unit info and controls
+  for (const side s: get_all_sides())
+  {
+    int x_left{0};
+    int x_right{0};
+    switch (s)
+    {
+      case side::lhs: x_left = x1; x_right = x2; break;
+      case side::rhs: x_left = x7; x_right = x8; break;
+    }
+    m_unit_info[s] = screen_rect(
+      screen_coordinate(x_left, y1),
+      screen_coordinate(x_right, y2)
+      );
+    m_controls[s] = screen_rect(
+      screen_coordinate(x_left, y2),
+      screen_coordinate(x_right, y4)
+    );
+  }
 
-  // Panel 1
-  m_unit_info[side::lhs] = screen_rect(
-    screen_coordinate(x1, y1),
-    screen_coordinate(x2, y2)
-  );
-  m_controls[side::lhs] = screen_rect(
-    screen_coordinate(x1, y2),
-    screen_coordinate(x2, y3)
-  );
-  m_log[side::lhs] = screen_rect(
-    screen_coordinate(x1, y4),
-    screen_coordinate(x2, y5)
-  );
-  m_debug[side::lhs] = screen_rect(
-    screen_coordinate(x1, y6),
-    screen_coordinate(x2, y7)
-  );
+  // Log and debug
+  for (const side s: get_all_sides())
+  {
+    int x_left{0};
+    int x_right{0};
+    switch (s)
+    {
+      case side::lhs: x_left = x1; x_right = x4; break;
+      case side::rhs: x_left = x5; x_right = x8; break;
+    }
+    m_log[s] = screen_rect(
+      screen_coordinate(x_left, y5),
+      screen_coordinate(x_right, y6)
+      );
+    m_debug[s] = screen_rect(
+      screen_coordinate(x_left, y7),
+      screen_coordinate(x_right, y8)
+      );
+  }
 
   // Board
   m_board = screen_rect(
     screen_coordinate(x3, y1),
     screen_coordinate(x3 + board_width, y1 + board_height)
   );
-  // Center board vertically
-  const int empty_vertical_space{
-    m_window_size.get_y()
-    - (2 * margin_width)
-    - get_height(m_board)
-  };
-  m_board += screen_coordinate(0, empty_vertical_space / 2);
+
+  // Game info
+  m_game_info = screen_rect(
+    screen_coordinate(x3, y3),
+    screen_coordinate(x6, y4)
+  );
+
   assert(get_width(m_board) == get_height(m_board));
-
-  // Panel 2
-  m_unit_info[side::rhs] = screen_rect(
-    screen_coordinate(x5, y1),
-    screen_coordinate(x6, y2)
-  );
-  m_controls[side::rhs] = screen_rect(
-    screen_coordinate(x5, y2),
-    screen_coordinate(x6, y3)
-  );
-  m_log[side::rhs] = screen_rect(
-    screen_coordinate(x5, y4),
-    screen_coordinate(x6, y5)
-  );
-  m_debug[side::rhs] = screen_rect(
-    screen_coordinate(x5, y6),
-    screen_coordinate(x6, y7)
-  );
-
   assert(get_board_width(*this) == get_board_height(*this));
   assert(get_square_width(*this) == get_square_height(*this));
 
+  // Controls details
   for (const auto s: get_all_sides())
   {
     const int x_mid{(m_controls[s].get_tl().get_x() + m_controls[s].get_br().get_x()) / 2};
@@ -223,66 +227,10 @@ const screen_rect& game_view_layout::get_controls_key(
   return m_controls_key.at(key).at(player);
 }
 
-/*
-screen_rect game_view_layout::get_controls_key_icon(
-  const side player,
-  const action_number& key
-) const noexcept
-{
-  const auto full_rect{get_controls_key(player, key)};
-  const screen_rect corner{
-    get_bottom_right_corner(full_rect)
-  };
-  // Make it square
-  const screen_rect square_corner(
-    screen_coordinate(
-      corner.get_br().get_x() - get_height(corner),
-      corner.get_tl().get_y()
-    ),
-    corner.get_br()
-  );
-  return square_corner;
-}
-
-screen_rect game_view_layout::get_controls_key_input(
-  const side player,
-  const action_number& key
-) const noexcept
-{
-  const auto full_rect{get_controls_key(player, key)};
-  const screen_rect corner{
-    get_bottom_left_corner(full_rect)
-  };
-  // Make it bigger to touch the icon square
-  const screen_rect icon_square{get_controls_key_icon(player, key)};
-  const screen_rect touching_rect{
-    corner.get_tl(),
-    screen_coordinate(
-      icon_square.get_tl().get_x(),
-      icon_square.get_br().get_y()
-    )
-  };
-  return touching_rect;
-}
-
-screen_rect game_view_layout::get_controls_key_name(
-  const side player,
-  const action_number& key
-) const noexcept
-{
-  const auto full_rect{get_controls_key(player, key)};
-  const screen_rect half{
-    get_upper_half(full_rect)
-  };
-  return half;
-}
-*/
-
 const screen_rect& game_view_layout::get_debug(const side player) const noexcept
 {
   return m_debug.at(player);
 }
-
 
 const screen_rect& game_view_layout::get_log(const side player) const noexcept
 {
@@ -344,6 +292,10 @@ void test_game_view_layout()
     assert(layout.get_board().get_br().get_y() > 0.0);
     assert(layout.get_board().get_tl().get_x() > 0.0);
     assert(layout.get_board().get_tl().get_y() > 0.0);
+
+    assert(get_height(layout.get_game_info()) > 20);
+    assert(get_width(layout.get_game_info()) > 20);
+
 
     assert(layout.get_debug(side::lhs).get_br().get_x() > 0.0);
     assert(layout.get_debug(side::lhs).get_br().get_y() > 0.0);

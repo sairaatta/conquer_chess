@@ -42,9 +42,7 @@ these are the differences:
 
 :construction: the exact rules are still under construction :construction:
 
-- All pieces have health
-- All pieces have an equal amount of health, except the king, which has
-  infinite health
+- All pieces have an equal amount health
 - All pieces move in the same directions as regular chess.
   For example, pawns move forward, bishops move diagonally
   and rooks move horizontally

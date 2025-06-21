@@ -195,14 +195,6 @@ void game_view::process_piece_messages()
   clear_piece_messages(m_game);
 }
 
-void game_view::set_text_style(sf::Text& text)
-{
-  text.setFont(get_arial_font());
-  text.setStyle(sf::Text::Bold);
-  text.setCharacterSize(m_layout.get_font_size());
-  text.setFillColor(sf::Color::Black);
-}
-
 void game_view::draw_impl()
 {
   // Show the layout of the screen: board and sidebars
@@ -214,6 +206,9 @@ void game_view::draw_impl()
 
   // Show the board: squares, unit paths, pieces, health bars
   draw_board(*this);
+
+  // Clock time
+  draw_game_info(*this);
 
   // Show the sidebars: controls (with log), units, debug
   show_sidebar(*this, side::lhs);
@@ -231,12 +226,12 @@ void draw_board(game_view& view)
   {
     show_occupied_squares(view);
   }
-  show_square_under_cursor(view, side::lhs);
-  show_square_under_cursor(view, side::rhs);
-  show_possible_moves(view);
-  show_unit_paths(view);
-  show_pieces(view);
-  show_unit_health_bars(view);
+  draw_square_under_cursor(view, side::lhs);
+  draw_square_under_cursor(view, side::rhs);
+  draw_possible_moves(view);
+  draw_unit_paths(view);
+  draw_pieces(view);
+  draw_unit_health_bars(view);
 }
 
 void draw_controls(
@@ -440,6 +435,19 @@ void draw_controls(
   #endif // CARE_ABOUT_OLD_CODE
 }
 
+void draw_game_info(game_view& view)
+{
+  const auto r{view.get_layout().get_game_info()};
+  draw_rectangle(
+    r, sf::Color(128, 128, 128, 128)
+  );
+  std::string s{
+    to_str(view.get_game().get_in_game_time())
+  };
+  if (s.size() > 4) s.resize(4);
+  draw_text(s, r, 32);
+}
+
 void draw_navigation_controls(game_view& view)
 {
   for (const auto s: get_all_sides())
@@ -588,7 +596,7 @@ void show_occupied_squares(game_view& view)
   }
 }
 
-void show_pieces(game_view& view)
+void draw_pieces(game_view& view)
 {
   const auto& game = view.get_game();
   const auto& layout = view.get_layout();
@@ -644,7 +652,7 @@ void show_pieces(game_view& view)
   }
 }
 
-void show_possible_moves(game_view& view)
+void draw_possible_moves(game_view& view)
 {
   const auto& g{view.get_game()};
   const auto& layout{view.get_layout()};
@@ -687,7 +695,7 @@ void draw_squares(game_view& view)
   );
 }
 
-void show_square_under_cursor(
+void draw_square_under_cursor(
   game_view& view,
   const side player
 )
@@ -737,7 +745,7 @@ void show_square_under_cursor(
   s.setOutlineThickness(old_thickness);
 }
 
-void show_unit_health_bars(game_view& view)
+void draw_unit_health_bars(game_view& view)
 {
   const auto& game{view.get_game()};
   const auto& layout{view.get_layout()};
@@ -783,7 +791,7 @@ void show_unit_health_bars(game_view& view)
   }
 }
 
-void show_unit_paths(game_view& view)
+void draw_unit_paths(game_view& view)
 {
   const auto& game{view.get_game()};
   const auto& layout{view.get_layout()};

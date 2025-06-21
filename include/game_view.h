@@ -56,9 +56,6 @@ public:
   /// Process a resize events
   void process_resize_event_impl(sf::Event& event) override;
 
-  /// Set the text to a uniform style
-  void set_text_style(sf::Text& text);
-
   void start_impl() override;
 
   void stop_impl() override;
@@ -161,6 +158,9 @@ void draw_board(game_view& view);
 /// Show the controls (e.g. for a unit) on-screen for a player
 void draw_controls(game_view& view, const side player);
 
+/// Show the game info, e.g. the time
+void draw_game_info(game_view& view);
+
 /// Show the controls (e.g. for a unit) on-screen for a player
 void draw_navigation_controls(game_view& view);
 
@@ -179,12 +179,12 @@ void draw_log(game_view& view, const side player);
 void show_occupied_squares(game_view& view);
 
 /// Show the pieces of the board on-screen
-void show_pieces(game_view& view);
+void draw_pieces(game_view& view);
 
 /// Show the possible moves for the selected pieces.
 /// e.g. put crosses on squares that can be attacked.
 /// Does nothing if no pieces are selected
-void show_possible_moves(game_view& view);
+void draw_possible_moves(game_view& view);
 
 /// Show the info on the side-bar on-screen for a player
 void show_sidebar(game_view& view, const side player_side);
@@ -193,16 +193,16 @@ void show_sidebar(game_view& view, const side player_side);
 void draw_squares(game_view& view);
 
 /// Show the highlighted square under the cursor on-screen for a player
-void show_square_under_cursor(
+void draw_square_under_cursor(
   game_view& view,
   const side player
 );
 
 /// Show the pieces' health bars on-screen
-void show_unit_health_bars(game_view& view);
+void draw_unit_health_bars(game_view& view);
 
 /// Show the planned paths for the units on-screen
-void show_unit_paths(game_view& view);
+void draw_unit_paths(game_view& view);
 
 /// Show the selected unit(s) on-screen for a player
 void draw_unit_info(game_view& view, const side player_side);

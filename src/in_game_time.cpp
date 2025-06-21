@@ -87,7 +87,16 @@ void test_in_game_time()
     s << in_game_time(0.123);
     assert(!s.str().empty());
   }
+  // to_str
+  {
+    assert(!to_str(in_game_time(0.123)).empty());
+  }
 #endif // DEBUG
+}
+
+std::string to_str(const in_game_time& t) noexcept
+{
+  return std::to_string(t.get());
 }
 
 bool operator==(const in_game_time& lhs, const in_game_time& rhs) noexcept
@@ -138,6 +147,6 @@ bool operator>=(const in_game_time& lhs, const in_game_time& rhs) noexcept
 
 std::ostream& operator<<(std::ostream& os, const in_game_time& dt) noexcept
 {
-  os << dt.get();
+  os << to_str(dt);
   return os;
 }

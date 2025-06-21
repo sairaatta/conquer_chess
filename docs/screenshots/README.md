@@ -2,6 +2,10 @@
 
 ## v0.8
 
+![Game screen v0.8](20250621_1.jpg)
+
+> The game screen shows the time
+
 ![Game screen v0.8](20250619_4.jpg)
 
 > The game screen, now for protoss (left) versus terran (right)

@@ -27,6 +27,8 @@ private:
 /// Test this class and its free functions
 void test_in_game_time();
 
+std::string to_str(const in_game_time& t) noexcept;
+
 bool operator==(const in_game_time& lhs, const in_game_time& rhs) noexcept;
 bool operator<(const in_game_time& lhs, const in_game_time& rhs) noexcept;
 bool operator<=(const in_game_time& lhs, const in_game_time& rhs) noexcept;

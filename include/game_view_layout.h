@@ -18,24 +18,33 @@
 /// The layout of the Game dialog (\link{game_view}).
 ///
 /// ```text
-///   x          x x             x x          x
-///   1          2 3             4 5          6
+///   x          x x     x x     x x          x
+///   1          2 3     4 5     6 7          8
 ///
 /// +-------------------------------------------+
 /// |                                           |
-/// | 3----------+ 1-------------+ 9----------+ | y1 -
-/// | | unit     | |             | | unit     | |    | 100 pixels
-/// | +----------4 | board       | +----------A | y2 -
-/// | | controls | |             | | controls | |    | 100 pixels
-/// | +----------6 |             | +----------C | y4 -
-/// |              |             |              |
-/// | 5----------+ |             | B----------+ | y5
-/// | | log      | |             | | log      | |
-/// | +----------6 |             | +----------C | y6
-/// |              |             |              |
-/// | 7----------+ |             | D----------+ | y7
-/// | | debug    | |             | | debug    | |
-/// | +----------8 +-------------2 +----------E | y8
+/// | +----------+ +-------------+ +----------+ | y1
+/// | | unit     | |             | | unit     | |
+/// | |          | |             | |          | |
+/// | |          | |             | |          | |
+/// | | info     | |             | | info     | |
+/// | +----------+ | board       | +----------+ | y2
+/// | | controls | |             | | controls | |
+/// | |          | |             | |          | |
+/// | |          | |             | |          | |
+/// | |          | +-------------+ |          | |
+/// | |          |                 |          | |
+/// | |          | +-------------+ |          | | y3
+/// | |          | | game_info   | |          | |
+/// | +----------+ +-------------+ +----------+ | y4
+/// |                                           |
+/// | +------------------+ +------------------+ | y5
+/// | | log              | | log              | |
+/// | +------------------+ +------------------+ | y6
+/// |                                           |
+/// | +------------------+ +------------------+ | y7
+/// | | debug            | | debug            | |
+/// | +------------------+ +------------------+ | y8
 /// |                                           |
 /// +-------------------------------------------+
 ///
@@ -68,25 +77,9 @@ public:
   ///      for this section
   const screen_rect& get_controls_key(const side player, const action_number& key) const noexcept;
 
-  /*
-  /// The square that show the icon of the user input, e.g. an arrow
-  /// as is part of \link{get_controls_key}
-  screen_rect get_controls_key_icon(const side player, const action_number& key) const noexcept;
-
-  /// The square that show the user input needed, e.g. 'Q',
-  /// as is part of \link{get_controls_key}
-  screen_rect get_controls_key_input(const side player, const action_number& key) const noexcept;
-
-  /// The square that show the text for the name of the user input,
-  /// e.g. 'attack',
-  /// as is part of \link{get_controls_key}
-  screen_rect get_controls_key_name(const side player, const action_number& key) const noexcept;
-  */
-
   const screen_rect& get_debug(const side player) const noexcept;
 
-  /// Get the size of the font that would fit nicely
-  int get_font_size() const noexcept { return m_font_size.get_value(); }
+  const auto& get_game_info() const noexcept { return m_game_info; }
 
   /// The area where the frame rate (in frames per seconds) is dsplayed
   const screen_rect& get_log(const side player) const noexcept;
@@ -105,7 +98,7 @@ private:
   std::map<side, screen_rect> m_controls;
   std::map<action_number, std::map<side, screen_rect>> m_controls_key;
   std::map<side, screen_rect> m_debug;
-  read_only<int> m_font_size{32};
+  screen_rect m_game_info;
   std::map<side, screen_rect> m_log;
   std::map<side, screen_rect> m_navigation_controls;
   std::map<side, screen_rect> m_unit_info;
