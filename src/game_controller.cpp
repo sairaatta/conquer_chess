@@ -1250,7 +1250,6 @@ void test_game_controller() //!OCLINT tests may be many
 
     do_select(g, c, "d1", side::lhs);
     move_cursor_to(c, "e1", side::lhs);
-
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
@@ -1261,28 +1260,34 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // When a piece is killed, the queen attacker moves to that square
   {
-    #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
-
     game_controller c{create_game_controller_with_keyboard_mouse()};
     game g{create_game_with_starting_position(starting_position_type::before_scholars_mate)};
-    do_select_and_start_attack_keyboard_player_piece(
-      g,
-      c,
-      square("h5"),
-      square("f7")
-    );
+
+    // The attacker
+    assert(is_piece_at(g, square("h5")));
+    assert(get_piece_at(g, square("h5")).get_type() == piece_type::queen);
+    assert(get_piece_at(g, square("h5")).get_color() == chess_color::white);
+
+    // The piece under attack
+    assert(is_piece_at(g, square("f7")));
+    assert(get_piece_at(g, square("f7")).get_type() == piece_type::pawn);
+    assert(get_piece_at(g, square("f7")).get_color() == chess_color::black);
+
+
+    do_select(g, c, "h5", side::lhs);
+    move_cursor_to(c, "f7", side::lhs);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
     int cnt{0};
-    while (is_piece_at(g, square("f7"))
-      && get_piece_at(g, square("f7")).get_color() == chess_color::black
-    )
+    while (get_piece_at(g, square("f7")).get_color() == chess_color::black)
     {
-      g.tick(delta_t(0.1));
-      ++cnt;
+      assert(is_piece_at(g, square("f7")));
+      g.tick(delta_t(0.25));
       assert(cnt < 1000);
     }
     // Must be captured
     assert(get_piece_at(g, square("f7")).get_color() == chess_color::white);
-    #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
   }
   // #20: A queen cannot attack over pieces
   {
