@@ -177,12 +177,21 @@ void test_sfml_helper()
     assert(low != high);
     assert(mid != high);
   }
+  // get_all_sfml_buttons
+  {
+    const auto v{get_all_sfml_buttons()};
+    assert(!v.empty());
+  }
   // get_all_sfml_keys
   {
     const auto v{get_all_sfml_keys()};
     assert(!v.empty());
   }
-
+  // is_shift_pressed
+  {
+    const auto b{is_shift_pressed()};
+    assert(b || !b);
+  }
   // key_str_to_resource_name
   {
     assert(key_str_to_resource_name("A") == "keyboard_a");
@@ -263,6 +272,11 @@ void test_sfml_helper()
       assert(x == r);
     }
     assert(to_resource_name(sf::Keyboard::Key::BackSlash) == "keyboard_slash_back");
+  }
+  // to_inverted_resource_name, for keys
+  {
+    assert(to_inverted_resource_name(sf::Keyboard::Key::A) == "keyboard_a_outline");
+    assert(to_inverted_resource_name(sf::Keyboard::Key::Unknown) == "keyboard_question");
   }
   // to_resource_name, for mouse buttons
   {
