@@ -81,14 +81,14 @@ key_bindings create_left_keyboard_key_bindings() noexcept
 key_bindings create_right_keyboard_key_bindings() noexcept
 {
   return key_bindings(
-    sf::Keyboard::Key::O,
-    sf::Keyboard::Key::Semicolon,
+    sf::Keyboard::Key::I,
     sf::Keyboard::Key::L,
     sf::Keyboard::Key::K,
-    sf::Keyboard::Key::I,
-    sf::Keyboard::Key::P,
-    sf::Keyboard::Key::Comma,
-    sf::Keyboard::Key::Slash
+    sf::Keyboard::Key::J,
+    sf::Keyboard::Key::U,
+    sf::Keyboard::Key::O,
+    sf::Keyboard::Key::M,
+    sf::Keyboard::Key::Period
   );
 }
 
