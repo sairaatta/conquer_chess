@@ -73,142 +73,139 @@
 void test()
 {
 #ifndef NDEBUG
-  std::clog << "Start testing\n";
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_board_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_about();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_about_view_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_action_history();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_action_number();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_board_to_text_options();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_castling_type();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_chess_color();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_chess_move();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_control_action_type();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_controller();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_controls_view_item();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_controls_view_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_delta_t();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_fps_clock();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_game();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_game_controller();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_game_coordinate();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_game_options();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_game_rect();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_game_speed();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_game_view_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_helper();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_id();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_in_game_time();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_key_bindings();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_lobby_options();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_lobby_view_item();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_lobby_view_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_log();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_menu_view_item();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_menu_view_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_message();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_message_type();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_options_view_item();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_options_view_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_pgn_string();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_physical_controller_type();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_physical_controllers();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_piece();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_piece_action();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_piece_action_type();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_piece_actions();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_piece_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_piece_type();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_pieces();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_played_game_view_layout();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_program_state();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_race();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_read_only();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_replay();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_replayer();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_screen_coordinate();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_screen_rect();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_sfml_helper(); // HIERO
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_side();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_sleep_scheduler();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_sleep_scheduler();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_square();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_starting_position_type();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_user_input();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_user_inputs();
-  std::clog << "Testing " << __LINE__ << "\n";
+
   test_volume();
 #ifndef LOGIC_ONLY
-  std::clog << "Testing " << __LINE__ << "\n";
-  test_loading_view();
-  std::clog << "Testing " << __LINE__ << "\n";
-  test_resource_loader();
-  std::clog << "Testing " << __LINE__ << "\n";
-#endif // LOGIC_ONLY
 
-  std::clog << "Done testing.\n";
+  test_loading_view();
+
+  test_resource_loader();
+
+#endif // LOGIC_ONLY
 
 #endif // NDEBUG
 }

@@ -81,6 +81,16 @@ void test_game_info_layout()
     assert(layout.get_background().get_tl().get_y() == 0);
     assert(layout.get_background().get_br().get_x() == 40);
     assert(layout.get_background().get_br().get_x() == 30);
+
+    assert(layout.get_background() != layout.get_time());
+    assert(layout.get_background() != layout.get_relative_piece_value());
+    assert(layout.get_background() != layout.get_relative_f_active());
+    assert(layout.get_background() != layout.get_relative_f_protected());
+
+    assert(layout.get_piece_value(side::lhs) != layout.get_piece_value(side::rhs));
+    assert(layout.get_f_active(side::lhs) != layout.get_f_active(side::rhs));
+    assert(layout.get_f_protected(side::lhs) != layout.get_f_protected(side::rhs));
+
   }
 #endif
 
