@@ -2,6 +2,10 @@
 
 ## v0.8
 
+![Game screen v0.8](20250622_1.jpg)
+
+> The game screen shows a shield symbol on the protected pieces.
+
 ![Game screen v0.8](20250621_4.jpg)
 
 > The game screen shows the piece values (red), activity (green) and

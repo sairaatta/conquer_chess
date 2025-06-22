@@ -4,6 +4,7 @@
 #ifndef LOGIC_ONLY
 
 #include "artwork_textures.h"
+#include "board_game_textures.h"
 #include "chess_color.h"
 #include "fonts.h"
 #include "lobby_menu_textures.h"
@@ -50,12 +51,15 @@ public:
 
   artwork_textures& get_artwork_textures() noexcept;
 
+  board_game_textures& get_board_game_textures() noexcept;
+
   fonts& get_fonts() noexcept;
 
   input_prompt_textures& get_input_prompt_textures() noexcept;
 
   int get_n_fonts() noexcept;
   int get_n_artwork_textures() noexcept;
+  int get_n_board_game_textures() noexcept;
   int get_n_input_prompt_textures() noexcept;
   int get_n_loading_screen_fonts() noexcept;
   int get_n_loading_screen_songs() noexcept;
@@ -106,6 +110,7 @@ private:
   game_resources();
 
   static std::optional<artwork_textures> m_artwork_textures;
+  static std::optional<board_game_textures> m_board_game_textures;
   static std::optional<fonts> m_fonts;
   static std::optional<loading_screen_fonts> m_loading_screen_fonts;
   static std::optional<input_prompt_textures> m_input_prompt_textures;

@@ -815,52 +815,14 @@ void show_occupied_squares(game_view& view)
 void draw_pieces(game_view& view)
 {
   const auto& game{view.get_game()};
-  //const auto& board_rect{view.get_layout().get_board()};
   const board_layout layout(view.get_layout().get_board());
-  //const double square_width{static_cast<double>(get_width(board_rect)) / 8.0};
-  //const double square_height{static_cast<double>(get_height(board_rect)) / 8.0};
   for (const auto& piece: game.get_pieces())
   {
     const int x = piece.get_current_square().get_x();
     const int y = piece.get_current_square().get_y();
-    //const int x1 = board_rect.get_tl().get_x() + (static_cast<double>(square_width) * x);
-    //const int x2 = board_rect.get_tl().get_x() + (static_cast<double>(square_width) * (x + 1));
-    //const int y1 = board_rect.get_tl().get_y() + (static_cast<double>(square_height) * y);
-    //const int y2 = board_rect.get_tl().get_y() + (static_cast<double>(square_height) * (y + 1));
-
-    //const screen_rect square_rect(
-    //  screen_coordinate(x1, y1),
-    //  screen_coordinate(x2, y2)
-    //);
     const screen_rect square_rect(layout.get_square(x, y));
     const piece_layout piece_layout(square_rect);
 
-    // Highlight protected squares
-    const bool is_piece_protected{is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color())};
-    if (is_piece_protected)
-    {
-      //const auto player_side{get_player_side(piece.get_color())};
-
-      draw_rectangle(
-        piece_layout.get_is_protected(),
-        sf::Color::Blue
-      );
-    }
-
-
-    const screen_rect sprite_rect(piece_layout.get_piece());
-
-    /*
-    sf::RectangleShape sprite;
-    sprite.setSize(sf::Vector2f(0.9 * square_width, 0.9 * square_height));
-    sprite.setTexture(
-      &get_piece_texture(
-        piece.get_race(),
-        piece.get_color(),
-        piece.get_type()
-      )
-    );
-    */
     // Transparency effect when moving
     sf::Color fill_color = sf::Color::Transparent;
     if (!piece.get_actions().empty()
@@ -879,14 +841,8 @@ void draw_pieces(game_view& view)
       }
       fill_color = sf::Color(255, 255, 255, alpha);
     }
-    /*
-    sprite.setOrigin(sf::Vector2f(0.45 * square_width, 0.45 * square_height));
-    sprite.setPosition(
-      get_center(sprite_rect).get_x(),
-      get_center(sprite_rect).get_y()
-    );
-    get_render_window().draw(sprite);
-    */
+
+    const screen_rect sprite_rect(piece_layout.get_piece());
     draw_texture(
       get_piece_texture(
         piece.get_race(),
@@ -896,6 +852,17 @@ void draw_pieces(game_view& view)
       sprite_rect,
       fill_color
     );
+
+    // Show the piece is proteced
+    const bool is_piece_protected{is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color())};
+    if (is_piece_protected)
+    {
+      draw_texture(
+        game_resources::get().get_board_game_textures().get_shield(),
+        piece_layout.get_is_protected(),
+        sf::Color::Blue
+      );
+    }
   }
 }
 

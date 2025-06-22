@@ -7,6 +7,7 @@
 #include <optional>
 
 std::optional<artwork_textures> game_resources::m_artwork_textures;
+std::optional<board_game_textures> game_resources::m_board_game_textures;
 std::optional<fonts> game_resources::m_fonts;
 std::optional<input_prompt_textures> game_resources::m_input_prompt_textures;
 std::optional<lobby_menu_textures> game_resources::m_lobby_menu_textures = {};
@@ -46,6 +47,13 @@ artwork_textures& game_resources::get_artwork_textures() noexcept
   if (!m_artwork_textures) m_artwork_textures = artwork_textures();
   assert(m_artwork_textures);
   return m_artwork_textures.value();
+}
+
+board_game_textures& game_resources::get_board_game_textures() noexcept
+{
+  if (!m_board_game_textures) m_board_game_textures = board_game_textures();
+  assert(m_board_game_textures);
+  return m_board_game_textures.value();
 }
 
 sf::Font& get_code_squared_font() noexcept
@@ -134,6 +142,11 @@ map_textures& game_resources::get_map_textures() noexcept
 int game_resources::get_n_artwork_textures() noexcept
 {
   return get_artwork_textures().get_n_textures();
+}
+
+int game_resources::get_n_board_game_textures() noexcept
+{
+  return get_board_game_textures().get_n_textures();
 }
 
 int game_resources::get_n_input_prompt_textures() noexcept

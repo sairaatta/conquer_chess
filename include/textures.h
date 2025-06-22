@@ -13,22 +13,7 @@ class textures
 public:
   textures();
 
-  int get_n_textures() const noexcept { return sizeof(*this) / sizeof(m_all_races_1); };
-
-  /// Get a texture showing all three races
-  sf::Texture& get_all_races(const int index);
-
-  /// Texture showing all three races
-  sf::Texture& get_all_races_1() noexcept { return m_all_races_1; }
-
-  /// Texture showing all three races
-  sf::Texture& get_all_races_2() noexcept { return m_all_races_2; }
-
-  /// Texture showing all three races
-  sf::Texture& get_all_races_3() noexcept { return m_all_races_3; }
-
-  /// Texture showing all three races
-  sf::Texture& get_all_races_4() noexcept { return m_all_races_4; }
+  int get_n_textures() const noexcept { return sizeof(*this) / sizeof(m_title); };
 
   /// Get a strip of chess board squares
   sf::Texture& get_strip(const chess_color color) noexcept;
@@ -58,11 +43,6 @@ public:
   sf::Texture& get_semitransparent_square(const chess_color color) noexcept;
 
 private:
-
-  sf::Texture m_all_races_1;
-  sf::Texture m_all_races_2;
-  sf::Texture m_all_races_3;
-  sf::Texture m_all_races_4;
 
   std::map<chess_color, std::map<chess_color, sf::Texture>> m_semitransparent_occupied_squares;
   std::map<chess_color, std::map<chess_color, sf::Texture>> m_occupied_squares;

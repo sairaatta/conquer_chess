@@ -71,8 +71,10 @@ void draw_about_panel(menu_view& v)
 
 void draw_background_image(menu_view& v)
 {
+  const int index{v.get_background_image_index()};
+  const int n{index + 1};
   draw_texture(
-    game_resources::get().get_textures().get_all_races(v.get_background_image_index()),
+    game_resources::get().get_artwork_textures().get_all_races(n),
     v.get_layout().get_background_image()
   );
 }

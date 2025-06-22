@@ -11,10 +11,6 @@
 textures::textures()
 {
   const std::vector<std::pair<std::reference_wrapper<sf::Texture>, std::string>> v = {
-    std::make_pair(std::ref(m_all_races_1), "all_races_1.jpg"),
-    std::make_pair(std::ref(m_all_races_2), "all_races_2.jpg"),
-    std::make_pair(std::ref(m_all_races_3), "all_races_3.jpg"),
-    std::make_pair(std::ref(m_all_races_4), "all_races_4.jpg"),
     std::make_pair(std::ref(m_subtitle), "subtitle.png"),
     std::make_pair(std::ref(m_title), "title.png")
   };
@@ -111,20 +107,6 @@ textures::textures()
     }
   }
 
-}
-
-sf::Texture& textures::get_all_races(const int index) {
-  assert(index >= 0);
-  assert(index < 4);
-  switch (index) {
-    case 0: return get_all_races_1();
-    case 1: return get_all_races_2();
-    case 2: return get_all_races_3();
-    default:
-    case 3:
-      assert(index == 3);
-      return get_all_races_4();
-  }
 }
 
 sf::Texture& textures::get_occupied_square(

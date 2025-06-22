@@ -302,6 +302,8 @@
         <file>resources/textures/board_game/dice_shield.png</file>
         <file>resources/textures/board_game/dice_skull.png</file>
         <file>resources/textures/board_game/dice_sword.png</file>
+        <file>resources/textures/board_game/dollar.png</file>
+        <file>resources/textures/board_game/pawn_up.png</file>
         <file>resources/textures/board_game/shield.png</file>
         <file>resources/textures/board_game/skull.png</file>
         <file>resources/textures/board_game/sword.png</file>
