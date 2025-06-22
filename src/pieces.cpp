@@ -1391,6 +1391,11 @@ void test_pieces()
       assert(is_piece_looking_at_square(pieces, square("e1"), square("e2")));
       assert(!is_piece_looking_at_square(pieces, square("e1"), square("e3")));
     }
+    // Pawn all-out assault, queen can see far
+    {
+      const auto pieces{get_pieces_pawn_all_out_assault()};
+      assert(is_piece_looking_at_square(pieces, square("d1"), square("d3")));
+    }
   }
   // is_square_protected
   {
