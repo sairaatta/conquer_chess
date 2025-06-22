@@ -92,7 +92,7 @@ key_bindings create_right_keyboard_key_bindings() noexcept
   );
 }
 
-sf::Keyboard::Key key_bindings::get_key_for_action(const action_number& number) const noexcept
+sf::Keyboard::Key key_bindings::get_key_for_action(const action_number& number) const
 {
   const int i{number.get_number() - 1};
   assert(i >= 0);

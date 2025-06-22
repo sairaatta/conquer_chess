@@ -16,6 +16,7 @@
 #include "piece_layout.h"
 #include "pieces.h"
 #include "render_window.h"
+#include "physical_controller.h"
 #include "screen_coordinate.h"
 #include "screen_rect.h"
 #include "screen_rect.h"
@@ -247,13 +248,11 @@ void draw_controls(
 {
   // Stub for keyboard only
   const auto& c{physical_controllers::get().get_controller(player_side)};
-  assert(c.get_type() == physical_controller_type::keyboard);
 
   const auto& layout{view.get_layout()};
 
   // Blur the entire background here
   draw_rectangle(layout.get_controls(player_side), sf::Color(128, 128, 128, 128));
-
   draw_navigation_controls(layout.get_navigation_controls(player_side), player_side);
 
 
@@ -266,10 +265,22 @@ void draw_controls(
       row_rect.get_tl(),
       row_rect.get_tl() + screen_coordinate(64, 64)
     };
-    draw_input_prompt_symbol(
-      physical_controllers::get().get_controller(player_side).get_key_bindings().get_key_for_action(n),
-      symbol_rect
-    );
+    if (c.get_type() == physical_controller_type::keyboard)
+    {
+      draw_input_prompt_symbol(
+        physical_controllers::get().get_controller(player_side).get_key_bindings().get_key_for_action(n),
+        symbol_rect
+      );
+    }
+    else
+    {
+      /*
+      draw_input_prompt_symbol(
+        physical_controllers::get().get_controller(player_side).get_mouse_bindings().get_do_it_button()),
+        symbol_rect
+      );
+      */
+    }
     const screen_rect text_rect{
       symbol_rect.get_tl() + screen_coordinate(64, 0),
       screen_coordinate(row_rect.get_br().get_x(), symbol_rect.get_br().get_y())

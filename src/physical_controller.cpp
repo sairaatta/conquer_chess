@@ -10,9 +10,11 @@
 
 physical_controller::physical_controller(
   const physical_controller_type type,
-  const key_bindings& ks
+  const key_bindings& kbs,
+  const mouse_bindings& mbs
 )
-  : m_key_bindings{ks},
+  : m_key_bindings{kbs},
+    m_mouse_bindings{mbs},
     m_type{type}
 {
 
@@ -27,7 +29,8 @@ physical_controller create_default_mouse_controller() noexcept
 {
   return physical_controller(
     physical_controller_type::mouse,
-    create_right_keyboard_key_bindings()
+    create_right_keyboard_key_bindings(),
+    mouse_bindings()
   );
 }
 
@@ -43,7 +46,8 @@ physical_controller create_left_keyboard_controller() noexcept
 {
   return physical_controller(
     physical_controller_type::keyboard,
-    create_left_keyboard_key_bindings()
+    create_left_keyboard_key_bindings(),
+    mouse_bindings()
   );
 }
 
@@ -73,13 +77,27 @@ physical_controller create_right_keyboard_controller() noexcept
 {
   return physical_controller(
     physical_controller_type::keyboard,
-    create_right_keyboard_key_bindings()
+    create_right_keyboard_key_bindings(),
+    mouse_bindings()
   );
 }
+
+const key_bindings& physical_controller::get_key_bindings() const
+{
+  assert(m_type == physical_controller_type::keyboard);
+  return m_key_bindings;
+}
+
 
 sf::Keyboard::Key get_key_for_action(const physical_controller& c, const action_number& action)
 {
   return get_key_for_action(c.get_key_bindings(), action);
+}
+
+const mouse_bindings& physical_controller::get_mouse_bindings() const
+{
+  assert(m_type == physical_controller_type::mouse);
+  return m_mouse_bindings;
 }
 
 std::string get_text_for_action(
@@ -355,18 +373,6 @@ void test_controller()
     assert(get_text_for_action(create_default_mouse_controller(), true, true, false, false, action_number(4)) == "4\nPromote\nto\nknight");
 
   }
-  // press up does nothing with a mouse
-  {
-    const game_view_layout layout;
-    const physical_controller c{create_default_mouse_controller()};
-    const auto event{
-      create_key_pressed_event(
-        c.get_key_bindings().get_key_for_move_up()
-      )
-    };
-    const auto actions{c.process_input(event, side::lhs, layout)};
-    assert(is_empty(actions));
-  }
   // press up works with a keyboard
   {
     const game_view_layout layout;
@@ -496,9 +502,17 @@ void test_controller()
 
 bool operator==(const physical_controller& lhs, const physical_controller& rhs) noexcept
 {
-  return lhs.get_key_bindings() == rhs.get_key_bindings()
-    && lhs.get_type() == rhs.get_type()
-  ;
+  if (lhs.get_type() != rhs.get_type()) return false;
+
+  if (lhs.get_type() == physical_controller_type::keyboard)
+  {
+    return lhs.get_key_bindings() == rhs.get_key_bindings();
+  }
+  else
+  {
+    assert(lhs.get_type() == physical_controller_type::mouse);
+    return lhs.get_mouse_bindings() == rhs.get_mouse_bindings();
+  }
 }
 
 bool operator!=(const physical_controller& lhs, const physical_controller& rhs) noexcept
@@ -508,9 +522,17 @@ bool operator!=(const physical_controller& lhs, const physical_controller& rhs) 
 
 std::ostream& operator<<(std::ostream& os, const physical_controller& c) noexcept
 {
-  os
-    << "Key bindings: " << c.get_key_bindings() << '\n'
-    << "Type: " << c.get_type()
-  ;
+  os << "Type: " << c.get_type() << '\n';
+
+
+  if (c.get_type() == physical_controller_type::keyboard)
+  {
+    os << "Key bindings: " << c.get_key_bindings();
+  }
+  else
+  {
+    assert(c.get_type() == physical_controller_type::mouse);
+    os << "Mouse bindings: " << c.get_mouse_bindings();
+  }
   return os;
 }

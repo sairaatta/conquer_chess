@@ -3,6 +3,7 @@
 
 #include "ccfwd.h"
 #include "key_bindings.h"
+#include "mouse_bindings.h"
 #include "physical_controller_type.h"
 #include "side.h"
 
@@ -19,11 +20,15 @@ class physical_controller
 public:
   explicit physical_controller(
     const physical_controller_type type,
-    const key_bindings& ks
+    const key_bindings& kbs,
+    const mouse_bindings& mbs
   );
 
-  /// Key binding, only used when the type is a keyboard
-  const auto& get_key_bindings() const noexcept { return m_key_bindings; }
+  /// Get the key bindings, if this is a keyboard
+  const key_bindings& get_key_bindings() const;
+
+  /// Get the mouse bindings, if this is a mouse
+  const mouse_bindings& get_mouse_bindings() const;
 
   const physical_controller_type& get_type() const noexcept { return m_type; }
 
@@ -41,6 +46,9 @@ private:
 
   /// Key binding, only used when the type is a keyboard
   key_bindings m_key_bindings;
+
+  /// Key binding, only used when the type is a keyboard
+  mouse_bindings m_mouse_bindings;
 
   physical_controller_type m_type;
 

@@ -36,7 +36,7 @@ public:
   ) const noexcept;
 
   /// Get the key for action 1, 2, 3 or 4.
-  sf::Keyboard::Key get_key_for_action(const action_number& action) const noexcept;
+  sf::Keyboard::Key get_key_for_action(const action_number& action) const;
 
   /// Get the key for moving down
   sf::Keyboard::Key get_key_for_move_down() const noexcept { return m_down; }

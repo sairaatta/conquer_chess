@@ -58,10 +58,23 @@ void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr);
 ///
 /// For example, a symbol for the key A
 ///
-/// @seealso Use \link{draw_input_prompt_inverted_symbol}
-///   for the inverted symbol
+/// @seealso
+///   - There is a function with an identical name for mouse buttons
+///   - Use \link{draw_input_prompt_inverted_symbol}
+///     for the inverted symbol
 void draw_input_prompt_symbol(
   const sf::Keyboard::Key& k,
+  const screen_rect& r
+);
+
+/// Draw a symbol for a mouse input prompt.
+///
+/// For example, a symbol for the left mouse button
+///
+/// @seealso
+///   - There is a function with an identical name for keyboard buttons
+void draw_input_prompt_symbol(
+  const sf::Mouse::Button& k,
   const screen_rect& r
 );
 
@@ -98,14 +111,6 @@ void draw_input_prompt_symbol_on_background(
   const sf::Keyboard::Key& k,
   const screen_rect& r,
   const sf::Color background_color = sf::Color::Black
-);
-
-/// Draw a symbol for a mouse input prompt.
-///
-/// For example, a symbol for the key A
-void draw_input_prompt_symbol(
-  const sf::Mouse::Button& k,
-  const screen_rect& r
 );
 
 /// The button that shows the text 'Music volume'

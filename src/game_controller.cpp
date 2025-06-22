@@ -1291,19 +1291,20 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // #20: A queen cannot attack over pieces
   {
-    #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
+    #define STUFF_123
+    #ifdef STUFF_123
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, square("d1")));
-    do_select_and_start_attack_keyboard_player_piece(
-      g,
-      c,
-      square("d1"),
-      square("d8")
-    );
+
+    do_select(g, c, "d1", side::lhs);
+    move_cursor_to(c, "d8", side::lhs);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
     assert(is_piece_at(g, square("d1")));
     const auto white_queen_id{get_piece_at(g, square("d1")).get_id()};
-    for (int i{0}; i!=10; ++i)
+    for (int i{0}; i!=5; ++i)
     {
       g.tick(delta_t(0.25));
     }

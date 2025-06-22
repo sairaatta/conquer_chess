@@ -21,6 +21,7 @@ class lobby_options;
 class menu_view;
 class menu_view_layout;
 class message;
+class mouse_bindings;
 class options_view;
 class options_view_layout;
 class physical_controller;

@@ -30,13 +30,6 @@ public:
   /// Get the physical controllers
   const std::vector<physical_controller>& get_controllers() const noexcept;
 
-  /// Process the input for this controller.
-  /// Returns an an empty vector if this controller is uneffected by the event
-  //user_inputs process_input(
-  //  const sf::Event& event,
-  //  const game& g
-  //) const;
-
   /// Set a controller
   void set(const side player_side, const physical_controller& controller);
 
@@ -60,29 +53,35 @@ int count_mouse_controllers(const physical_controllers& controllers) noexcept;
 /// Count the number of controllers
 int count_n_controllers(const physical_controllers& controllers) noexcept;
 
-/// Get a keyboard and a mouse controller.
+
+/// Get two controllers,
+/// where LHS player uses keyboard,
+/// and RHS player uses mouse
 ///
 /// Alternatives:
 /// - \link{use_keyboard_mouse_controllers}
 /// - \link{use_mouse_keyboard_controllers}
 /// - \link{use_two_keyboard_controllers}
-///
-/// to create two keyboard controllers
-//void use_default_controllers() noexcept;
-
-/// Get two controllers,
-/// where LHS player uses keyboard,
-/// and RHS player uses mouse
 void use_keyboard_mouse_controllers() noexcept;
 
 /// Get two controllers,
 /// where LHS player uses mouse,
 /// and RHS player uses keyboard
+///
+/// Alternatives:
+/// - \link{use_keyboard_mouse_controllers}
+/// - \link{use_mouse_keyboard_controllers}
+/// - \link{use_two_keyboard_controllers}
 void use_mouse_keyboard_controllers() noexcept;
 
 /// Get two keyboard controllers.
 /// @see use \link{create_default_controllers}
 /// to create the defaults one-keyboard-one-mouse controllers
+///
+/// Alternatives:
+/// - \link{use_keyboard_mouse_controllers}
+/// - \link{use_mouse_keyboard_controllers}
+/// - \link{use_two_keyboard_controllers}
 void use_two_keyboard_controllers() noexcept;
 
 /// Get the side of the controller that uses the keyboard.
