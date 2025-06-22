@@ -1120,6 +1120,13 @@ void tick_attack(
   assert(!p.get_actions().empty());
   const auto& first_action{p.get_actions()[0]};
   assert(first_action.get_action_type() == piece_action_type::attack);
+  if (!can_do_attack(g, p, first_action.get_to(), get_player_side(p.get_color())))
+  {
+    p.add_message(message_type::cannot);
+    remove_first(p.get_actions());
+    return;
+  }
+  /*
   // Done if piece moved away
   if (!is_piece_at(g, first_action.get_to()))
   {
@@ -1127,9 +1134,11 @@ void tick_attack(
     remove_first(p.get_actions());
     return;
   }
+  */
   assert(is_piece_at(g, first_action.get_to()));
   piece& target{get_piece_at(g, first_action.get_to())};
 
+  /*
   // Done if target is of own color
   if (p.get_color() == target.get_color())
   {
@@ -1137,6 +1146,7 @@ void tick_attack(
     remove_first(p.get_actions());
     return;
   }
+  */
   assert(p.get_color() != target.get_color());
   const auto damage{game_options::get().get_damage_per_chess_move() * dt.get()};
   target.receive_damage(damage);
