@@ -75,14 +75,18 @@ square get_from_for_bishop(const game& g, const chess_move& m)
   assert(!pieces.empty());
   assert(m.get_to().has_value());
   const square target{m.get_to().value()};
+
+  std::optional<square> from_square;
   for (const auto& piece: pieces)
   {
     if (are_on_same_diagonal(piece.get_current_square(), target))
     {
-      return piece.get_current_square();
+      from_square = piece.get_current_square();
+      break;
     }
   }
-  assert(!"Should not get here: there had to be a bishop on the diagonal");
+  assert(from_square.has_value() && "There had to be a bishop on the diagonal for this function to be called");
+  return from_square.value();
 }
 
 square get_from_for_king(const game& g, const chess_move& m)
@@ -108,14 +112,17 @@ square get_from_for_knight(const game& g, const chess_move& m)
   assert(m.get_to().has_value());
   const square target{m.get_to().value()};
 
+  std::optional<square> from_square;
   for (const auto& piece: pieces)
   {
     if (are_adjacent_for_knight(piece.get_current_square(), target))
     {
-      return piece.get_current_square();
+      from_square = piece.get_current_square();
+      break;
     }
   }
-  assert(!"Should not get here: there had to be a knight a knight's jump away");
+  assert(from_square.has_value() && "there had to be a knight a knight's jump away for this function to be called");
+  return from_square.value();
 }
 
 square get_from_for_pawn(const game& g, const chess_move& m)
@@ -147,6 +154,8 @@ square get_from_for_queen(const game& g, const chess_move& m)
   assert(!pieces.empty());
   assert(m.get_to().has_value());
   const square target{m.get_to().value()};
+
+  std::optional<square> from_square;
   for (const auto& piece: pieces)
   {
     if (are_on_same_diagonal(piece.get_current_square(), target)
@@ -154,10 +163,12 @@ square get_from_for_queen(const game& g, const chess_move& m)
       || are_on_same_file(piece.get_current_square(), target)
     )
     {
-      return piece.get_current_square();
+      from_square = piece.get_current_square();
+      break;
     }
   }
-  assert(!"Should not get here: there had to be a queen on the same rank, file, or diagonal");
+  assert(from_square.has_value() && "There had to be a queen on the same rank, file, or diagonal for this function to be called");
+  return from_square.value();
 }
 
 square get_from_for_rook(const game& g, const chess_move& m)
@@ -170,16 +181,20 @@ square get_from_for_rook(const game& g, const chess_move& m)
   assert(!pieces.empty());
   assert(m.get_to().has_value());
   const square target{m.get_to().value()};
+
+  std::optional<square> from_square;
   for (const auto& piece: pieces)
   {
     if (are_on_same_rank(piece.get_current_square(), target)
       || are_on_same_file(piece.get_current_square(), target)
     )
     {
-      return piece.get_current_square();
+      from_square = piece.get_current_square();
+      break;
     }
   }
-  assert(!"Should not get here: there had to be a rook on the same rank or file");
+  assert(from_square.has_value() && "There had to be a rook on the same rank or file for this function to be called");
+  return from_square.value();
 }
 
 
