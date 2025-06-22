@@ -839,16 +839,11 @@ void draw_pieces(game_view& view)
     const bool is_piece_protected{is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color())};
     if (is_piece_protected)
     {
-      const auto player_side{get_player_side(piece.get_color())};
+      //const auto player_side{get_player_side(piece.get_color())};
 
       draw_rectangle(
         piece_layout.get_is_protected(),
-        sf::Color(
-          player_side == side::lhs ? 255 : 0,
-          0,
-          player_side == side::rhs ? 255 : 0,
-          64 // Be subtle
-        )
+        sf::Color::Blue
       );
     }
 
