@@ -80,7 +80,7 @@ void test_screen_rect();
 
 bool operator==(const screen_rect& lhs, const screen_rect& rhs) noexcept;
 bool operator!=(const screen_rect& lhs, const screen_rect& rhs) noexcept;
-screen_rect& operator+=(screen_rect& rect, const screen_coordinate& delta) noexcept;
+//screen_rect& operator+=(screen_rect& rect, const screen_coordinate& delta) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const screen_rect& r) noexcept;
 

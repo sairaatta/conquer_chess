@@ -299,6 +299,12 @@
         <file>resources/textures/black_black_semitransparent.png</file>
         <file>resources/textures/black_white_semitransparent.png</file>
         <file>resources/textures/black_strip.png</file>
+        <file>resources/textures/board_game/dice_shield.png</file>
+        <file>resources/textures/board_game/dice_skull.png</file>
+        <file>resources/textures/board_game/dice_sword.png</file>
+        <file>resources/textures/board_game/shield.png</file>
+        <file>resources/textures/board_game/skull.png</file>
+        <file>resources/textures/board_game/sword.png</file>
         <file>resources/textures/white_square.png</file>
         <file>resources/textures/white_square_semitransparent.png</file>
         <file>resources/textures/white_black.png</file>

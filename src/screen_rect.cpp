@@ -410,6 +410,7 @@ bool operator!=(const screen_rect& lhs, const screen_rect& rhs) noexcept
   return !(lhs == rhs);
 }
 
+/*
 screen_rect& operator+=(screen_rect& rect, const screen_coordinate& delta) noexcept
 {
   rect = screen_rect(
@@ -418,6 +419,7 @@ screen_rect& operator+=(screen_rect& rect, const screen_coordinate& delta) noexc
   );
   return rect;
 }
+*/
 
 std::ostream& operator<<(std::ostream& os, const screen_rect& r) noexcept
 {

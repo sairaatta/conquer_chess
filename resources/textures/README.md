@@ -1,5 +1,6 @@
 # Textures
 
+- [board_game](board_game/README.md)
 - [input_prompts](input_prompts/README.md)
 - [lobby_menu](lobby_menu/README.md)
 - [options_menu](options_menu/README.md)
