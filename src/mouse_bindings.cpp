@@ -71,7 +71,7 @@ void test_mouse_bindings()
   {
     const mouse_bindings k;
     assert(k.get_do_button() == sf::Mouse::Button::Left);
-    assert(k.get_do_button() == sf::Mouse::Button::Right);
+    assert(k.get_next_button() == sf::Mouse::Button::Right);
   }
   /* Unsure if this is relevant for a mouse
   // create_actions
