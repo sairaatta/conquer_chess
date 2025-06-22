@@ -108,6 +108,7 @@ void test()
   test_menu_view_layout();
   test_message();
   test_message_type();
+  test_mouse_bindings();
   test_options_view_item();
   test_options_view_layout();
   test_pgn_string();
