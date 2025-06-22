@@ -36,12 +36,16 @@ Black|One second
 
 The effect of race
 
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
+
 Race   |Movement speed [1] |Attack speed [2]  |Effect of allies [3] |Other features
 -------|-------------------|------------------|---------------------|---------------
 Classic|1                  |1                 |None                 |None
 Protoss|0.9                |1.1               |Moves faster         |Regenerating shields
 Terran |1.0                |1.0               |Heals                |Better armor
 Zerg   |1.1                |0.9               |Attacks faster       |Regenerate
+
+<!-- markdownlint-enable MD013 -->
 
 - :construction: This is under contruction
 - [1] In chess move per time unit
