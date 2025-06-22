@@ -17,6 +17,7 @@
 /// - \link{lobby_options::get}: to get the one-and-only \link{lobby_options}
 
 // Use LOGIC_ONLY to be able to run on GHA
+
 #include "about.h"
 #include "about_view_layout.h"
 #include "action_history.h"

@@ -146,7 +146,10 @@ bool can_do_attack(
       selected_piece.get_current_square(),
       cursor_square
     )
-  ) return false;
+  )
+  {
+    return false;
+  }
   // Is it possible in this situation?
   assert(is_piece_at(g, selected_piece.get_current_square()));
   assert(get_piece_at(g, selected_piece.get_current_square()).get_color()

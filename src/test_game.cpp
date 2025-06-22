@@ -1,10 +1,10 @@
 #include "test_game.h"
 
 #include "game.h"
-#include "test_game.h"
 #include "piece.h"
 #include "piece_actions.h"
 #include "lobby_options.h"
+
 #include <cassert>
 #include <sstream>
 
@@ -235,12 +235,27 @@ void test_game_functions()
     assert(can_castle_queenside(get_piece_at(g, "e1"), g));
     assert(can_castle_queenside(get_piece_at(g, "e8"), g));
   }
+  // can_do_attack: Qd1 cannot attack c8, even not on an empty board
+  {
+    game g{create_game_with_standard_starting_position()};
+    auto& white_queen{get_piece_at(g, "d1")};
+    white_queen.set_selected(true);
+    // Wrong file
+    assert(!can_do_attack(g, white_queen, square("c8"), side::lhs));
+  }
+  // can_do_attack: Qd1 cannot attack d2, as this is a friendly piece
+  {
+    game g{create_game_with_standard_starting_position()};
+    auto& white_queen{get_piece_at(g, "d1")};
+    white_queen.set_selected(true);
+    // Cannot attack own pieces
+    assert(!can_do_attack(g, white_queen, square("d2"), side::lhs));
+  }
   // collect_all_piece_actions
   {
     // default start
     {
-      game_options::get().set_starting_position(starting_position_type::standard);
-      const game g;
+      const game g{create_game_with_standard_starting_position()};
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action e2e3(
