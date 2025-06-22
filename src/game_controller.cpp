@@ -1204,6 +1204,18 @@ void test_game_controller() //!OCLINT tests may be many
     }
     assert(!is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("a4")));
+
+    // Has just double moved
+    assert(has_just_double_moved(get_piece_at(g, "a4"), g.get_in_game_time()));
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      g.tick(delta_t(0.25));
+      assert(has_just_double_moved(get_piece_at(g, "a4"), g.get_in_game_time()));
+    }
+    // Rounding off error?
+    g.tick(delta_t(0.00001));
+    assert(!has_just_double_moved(get_piece_at(g, "a4"), g.get_in_game_time()));
   }
   // #27: a2-a5 does nothing
   {
@@ -1303,8 +1315,6 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // #20: A queen cannot attack over pieces
   {
-    #define STUFF_123
-    #ifdef STUFF_123
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, square("d1")));
@@ -1325,7 +1335,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(p.get_messages().back() == message_type::cannot);
     const auto messages{get_piece_at(g, square("d1")).get_messages()};
     assert(messages.back() == message_type::cannot);
-    #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
   }
   // operator<<
   {
