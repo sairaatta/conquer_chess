@@ -5,7 +5,8 @@
     Conquer Chess is tested to build correctly under Ubuntu, using
     [the `check_build` script](https://github.com/richelbilderbeek/conquer_chess/blob/main/.github/workflows/check_build.yaml).
 
-    If you 
+    Feel encouraged to [contribute](contributing.md) by writing this
+    guide for another operating system or Linux distribution.
 
 ## Install prerequisites
 
