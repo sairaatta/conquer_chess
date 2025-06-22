@@ -11,12 +11,11 @@ nav:
   - Gameplay: gameplay.md
   - Misc:
     - Acknowledgements: acknowledgements.md
-    - Code of conduct: ../CODE_OF_CONDUCT.md
-    - Contributing: ../CONTRIBUTING.md
+    - Code of conduct: CODE_OF_CONDUCT.md
+    - Contributing: CONTRIBUTING.md
     - Architecture: architecture/README.md
     - Developer documentation: docs/docs/index.html
     - FAQ: faq.md
-    - Main page: ../README.md
     - Videos: videos.md
 
 theme:
