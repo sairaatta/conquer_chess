@@ -27,7 +27,15 @@ private:
 /// Test this class and its free functions
 void test_in_game_time();
 
+/// Convert to literal string, with all the digits behind the comma.
+///
+/// For example: 1.23456789
 std::string to_str(const in_game_time& t) noexcept;
+
+/// Convert to string, rounded off to two digits
+///
+/// For example: 1.23
+std::string to_human_str(const in_game_time& t) noexcept;
 
 bool operator==(const in_game_time& lhs, const in_game_time& rhs) noexcept;
 bool operator<(const in_game_time& lhs, const in_game_time& rhs) noexcept;

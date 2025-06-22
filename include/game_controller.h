@@ -105,10 +105,11 @@ bool can_player_select_piece_at_cursor_pos(
   const side player_side
 );
 
-/// Collect all valid 'user_input' for all players.
-/// Each 'user_inputs' equals one 'piece_action'
-/// @see use 'collect_all_piece_actions'
-/// to get all the 'piece_action's from a game
+/// Collect all valid \link{user_input} for all players.
+///
+/// Each \link{user_input} equals one \link{piece_action}
+/// @see use \link{collect_all_piece_actions}
+/// to get all the all \link{piece_action} from a game
 std::vector<user_inputs> collect_all_user_inputses(
   const game& g,
   const game_controller& c

@@ -298,8 +298,6 @@ void process_press_action_1_or_lmb_down(
   const bool is_promotion_to_queen{
     is_cursor_on_selected_piece_of_own_color && can_selected_piece_promote
   };
-  #define FIX_ISSUE_3
-  #ifdef FIX_ISSUE_3
   const square king_square{get_default_king_square(player_color)};
   const bool is_castle_kingside{
        !is_cursor_on_piece
@@ -331,7 +329,6 @@ void process_press_action_1_or_lmb_down(
     );
     return;
   }
-  #endif // FIX_ISSUE_3
   if (is_cursor_on_friendly_piece)
   {
     const auto& p{get_piece_at(g, cursor)};

@@ -49,8 +49,8 @@ void test_game_class()
         assert(p.get_in_game_time() == g.get_in_game_time());
       }
     }
-    //#define FIX_ISSUE_21
-    #ifdef FIX_ISSUE_21
+    //#define FIX_ISSUE_21_A
+    #ifdef FIX_ISSUE_21_A
     // a2-a4 makes a pawn en-passantable
     {
       game g;
@@ -70,7 +70,7 @@ void test_game_class()
       assert(p.is_enpassantable());
       assert(is_piece_at(g, square("a4")));
     }
-    #endif // FIX_ISSUE_21
+    #endif // FIX_ISSUE_21_A
 
     // #27: a2-a4 takes as long as b2-b3
     {
@@ -821,27 +821,6 @@ void test_game_functions()
     }
     assert(!"Progress #21");
     #endif // FIX_ISSUE_21
-  }
-  // collect_all_user_inputses
-  {
-    //#define FIX_ISSUE_34
-    #ifdef FIX_ISSUE_34
-    // default start
-    {
-      const game g;
-      const auto user_inputs{collect_all_user_inputses(g)};
-      assert(!user_inputs.empty());
-      const auto piece_actions{collect_all_piece_actions(g)};
-      assert(user_inputs.size() == piece_actions.size());
-    }
-    // default start
-    {
-      const game g;
-      const auto user_inputs{collect_all_user_inputses(g)};
-      const auto e2e4{create_user_inputs("e2e4", chess_color::white, g)};
-      assert(is_present_in(e2e4, user_inputs));
-    }
-    #endif // FIX_ISSUE_34
   }
   // count_piece_actions: actions in pieces accumulate
   {

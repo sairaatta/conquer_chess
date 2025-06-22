@@ -675,6 +675,21 @@ void test_game_controller() //!OCLINT tests may be many
     add_user_input(c, create_press_action_1(side::lhs));
     assert(!is_empty(get_user_inputs(c)));
   }
+  // collect_all_user_inputses
+  {
+    // #define FIX_ISSUE_34
+    #ifdef FIX_ISSUE_34
+    // default start
+    {
+      const game g{create_game_with_standard_starting_position()};
+      const game_controller c(create_game_controller_with_two_keyboards());
+      const auto user_inputs{collect_all_user_inputses(g, c)};
+      assert(!user_inputs.empty());
+      const auto piece_actions{collect_all_piece_actions(g)};
+      assert(user_inputs.size() == piece_actions.size());
+    }
+    #endif // FIX_ISSUE_34
+  }
   // has_mouse_controller
   {
     const game_controller g(
@@ -843,10 +858,7 @@ void test_game_controller() //!OCLINT tests may be many
     g.tick(delta_t(0.0));
     assert(count_selected_units(g, chess_color::white) == 0);
     assert(get_closest_piece_to(g, to_coordinat("e4")).get_type() == piece_type::pawn);
-    #define FIX_ISSUE_3
-    #ifdef FIX_ISSUE_3
     assert(collect_messages(g).at(1).get_message_type() == message_type::start_castling_kingside);
-    #endif // FIX_ISSUE_3
   }
   // has_mouse_controller
   {
@@ -1324,7 +1336,6 @@ void test_game_controller() //!OCLINT tests may be many
   }
   // to_pgn
   {
-    #ifdef BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
     game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(to_pgn(g).empty());
@@ -1335,12 +1346,16 @@ void test_game_controller() //!OCLINT tests may be many
       square("e2"),
       square("e4")
     );
-    do_select_and_move_keyboard_player_piece(g, c, "e2", "e4");
+
+    do_select(g, c, "e2", side::lhs);
+    move_cursor_to(c, "e4", side::lhs);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
     tick_until_idle(g);
     const std::string pgn{to_pgn(g)};
     assert(!pgn.empty());
-    assert(pgn == "0: white pawn move from e2 to e4");
-    #endif // BELIEVE_get_keyboard_user_player_side_IS_A_GOOD_IDEA
+    assert(pgn == "0.00: white pawn move from e2 to e4");
   }
   #endif // NDEBUG // no tests in release
 }

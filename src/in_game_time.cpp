@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 
 #include "delta_t.h"
@@ -21,6 +22,21 @@ void test_in_game_time()
     const in_game_time t{dt};
     assert(t.get() == dt);
   }
+  // to_human_str
+  {
+    assert(!to_human_str(in_game_time(0.123)).empty());
+    // Shows all digits
+    assert(to_human_str(in_game_time(1.0 / 3.0)).size() == 4);
+    assert(to_human_str(in_game_time(1.0 / 3.0)) == "0.33");
+    assert(to_human_str(in_game_time(2.0 / 3.0)) == "0.67");
+  }
+  // to_str
+  {
+    assert(!to_str(in_game_time(0.123)).empty());
+    // Shows all digits
+    assert(to_str(in_game_time(1.0 / 3.0)).size() > 6);
+  }
+
   // operator==
   {
     const in_game_time a(0.1);
@@ -87,11 +103,14 @@ void test_in_game_time()
     s << in_game_time(0.123);
     assert(!s.str().empty());
   }
-  // to_str
-  {
-    assert(!to_str(in_game_time(0.123)).empty());
-  }
 #endif // DEBUG
+}
+
+std::string to_human_str(const in_game_time& t) noexcept
+{
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision(2) << t.get();
+  return oss.str();
 }
 
 std::string to_str(const in_game_time& t) noexcept

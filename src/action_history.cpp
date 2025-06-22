@@ -147,7 +147,7 @@ std::string to_str(const action_history& history) noexcept
   std::stringstream s;
   for (const auto& timed_action: history.get_timed_actions())
   {
-    s << timed_action.first << ": " << timed_action.second << '\n';
+    s << to_human_str(timed_action.first) << ": " << timed_action.second << '\n';
   }
   std::string t{s.str()};
   if (!t.empty()) t.pop_back();
