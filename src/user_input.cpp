@@ -1,9 +1,11 @@
 #include "user_input.h"
 
+#include "game_coordinate.h"
+
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
-#include "game_coordinate.h"
 
 user_input::user_input(
   const user_input_type type,
@@ -134,6 +136,21 @@ void test_user_input()
     const user_input c{create_press_action_2(side::lhs)};
     assert(a == b);
     assert(!(a == c));
+  }
+  // operator<<, keyboard input
+  {
+    const user_input i{create_press_action_1(side::lhs)};
+    std::stringstream s;
+    s << i;
+    assert(!s.str().empty());
+
+  }
+  // operator<<, mouse input
+  {
+    const user_input i{create_press_lmb_action(side::lhs)};
+    std::stringstream s;
+    s << i;
+    assert(!s.str().empty());
   }
 #endif // DEBUG
 }
