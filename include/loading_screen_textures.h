@@ -5,24 +5,35 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <map>
 /// The textures used in the loading screen.
+///
+/// This must a seperate class,
+/// so that the loading screen only loads the minimal amount of
+/// resources at the start.
 class loading_screen_textures
 {
 public:
   loading_screen_textures();
 
-  int get_n_textures() const noexcept { return sizeof(*this) / sizeof(m_all_races_1); };
+  std::string get_filename(
+    const int i
+  ) const noexcept;
 
-  sf::Texture& get_all_races_1() noexcept { return m_all_races_1; }
-  sf::Texture& get_all_races_2() noexcept { return m_all_races_2; }
-  sf::Texture& get_all_races_3() noexcept { return m_all_races_3; }
-  sf::Texture& get_all_races_4() noexcept { return m_all_races_4; }
+  int get_n_textures() const noexcept
+  {
+    return sizeof(*this)
+      / sizeof(m_all_races.at(1))
+    ;
+  }
+
+  /// Get texture of a artwork with all races
+  sf::Texture& get_all_races(
+    const int i
+  );
 private:
 
-  sf::Texture m_all_races_1;
-  sf::Texture m_all_races_2;
-  sf::Texture m_all_races_3;
-  sf::Texture m_all_races_4;
+  std::map<int, sf::Texture> m_all_races;
 };
 
 #endif // LOGIC_ONLY

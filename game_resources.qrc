@@ -288,10 +288,10 @@
         <file>resources/sound_effects/yes_high.ogg</file>
         <file>resources/sound_effects/yes_low.ogg</file>
         <file>resources/sound_effects/yes_mid.ogg</file>
-        <file>resources/textures/all_races_1.jpg</file>
-        <file>resources/textures/all_races_2.jpg</file>
-        <file>resources/textures/all_races_3.jpg</file>
-        <file>resources/textures/all_races_4.jpg</file>
+        <file>resources/textures/artwork/all_races_1.jpg</file>
+        <file>resources/textures/artwork/all_races_2.jpg</file>
+        <file>resources/textures/artwork/all_races_3.jpg</file>
+        <file>resources/textures/artwork/all_races_4.jpg</file>
         <file>resources/textures/black_square.png</file>
         <file>resources/textures/black_square_semitransparent.png</file>
         <file>resources/textures/black_black.png</file>

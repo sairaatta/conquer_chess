@@ -84,7 +84,7 @@ void loading_view::draw_impl()
     sf::RectangleShape rectangle;
     set_rect(rectangle, window_rect);
     rectangle.setTexture(
-      &game_resources::get().get_loading_screen_textures().get_all_races_1()
+      &game_resources::get().get_loading_screen_textures().get_all_races(1)
     );
     get_render_window().draw(rectangle);
   }

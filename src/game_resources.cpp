@@ -6,6 +6,7 @@
 #include <cassert>
 #include <optional>
 
+std::optional<artwork_textures> game_resources::m_artwork_textures;
 std::optional<fonts> game_resources::m_fonts;
 std::optional<input_prompt_textures> game_resources::m_input_prompt_textures;
 std::optional<lobby_menu_textures> game_resources::m_lobby_menu_textures = {};
@@ -38,6 +39,13 @@ sf::Texture& get_action_icon(
 sf::Font& get_arial_font() noexcept
 {
   return game_resources::get().get_fonts().get_arial_font();
+}
+
+artwork_textures& game_resources::get_artwork_textures() noexcept
+{
+  if (!m_artwork_textures) m_artwork_textures = artwork_textures();
+  assert(m_artwork_textures);
+  return m_artwork_textures.value();
 }
 
 sf::Font& get_code_squared_font() noexcept
@@ -121,6 +129,11 @@ map_textures& game_resources::get_map_textures() noexcept
   if (!m_map_textures) m_map_textures = map_textures();
   assert(m_map_textures);
   return m_map_textures.value();
+}
+
+int game_resources::get_n_artwork_textures() noexcept
+{
+  return get_artwork_textures().get_n_textures();
 }
 
 int game_resources::get_n_input_prompt_textures() noexcept
