@@ -249,6 +249,15 @@ void test_game_functions()
     // Cannot attack own pieces
     assert(!can_do_attack(g, white_queen, square("d2"), side::lhs));
   }
+  // can_do_promote: a pawn can promote at last rank
+  {
+    game g{
+      create_game_with_starting_position(starting_position_type::pawns_at_promotion)
+    };
+    auto& white_pawn{get_piece_at(g, "a8")};
+    white_pawn.set_selected(true);
+    assert(can_do_promote(white_pawn, side::lhs));
+  }
   // collect_all_piece_actions
   {
     // default start

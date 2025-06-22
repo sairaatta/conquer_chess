@@ -102,7 +102,7 @@ bool can_do(
     case piece_action_type::promote_to_knight:
     case piece_action_type::promote_to_queen:
     case piece_action_type::promote_to_rook:
-      return can_do_promote(selected_piece, cursor_square, player_side);
+      return can_do_promote(selected_piece, player_side);
     case piece_action_type::select:
       assert(!"No idea yet");
       return false;
@@ -254,16 +254,11 @@ bool can_do_move(
 
 bool can_do_promote(
   const piece& selected_piece,
-  const square& cursor_square,
   const side player_side
 )
 {
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
-  if (selected_piece.get_current_square() != cursor_square)
-  {
-    return false;
-  }
   return can_promote(selected_piece);
 }
 

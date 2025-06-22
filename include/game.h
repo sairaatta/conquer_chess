@@ -138,7 +138,6 @@ bool can_do_move(
 /// Can a piece_action_type::promote_to_bishop action be done?
 bool can_do_promote(
   const piece& selected_piece,
-  const square& cursor_square,
   const side player_side
 );
 
