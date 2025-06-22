@@ -1,5 +1,59 @@
 # Build and run
 
+!!! info "This guide assumes Ubuntu"
+
+    Conquer Chess is tested to build correctly under Ubuntu, using
+    [the `check_build` script](https://github.com/richelbilderbeek/conquer_chess/blob/main/.github/workflows/check_build.yaml).
+
+    If you 
+
+## Install prerequisites
+
+Install git:
+
+```console
+sudo apt install git
+```
+
+Install Qt6:
+
+```console
+sudo apt install qt6-base-dev
+
+# Maybe too:
+# - qt6-base-dev-tools
+# - qt6-tools-dev
+# - qt6-tools-dev-tools
+# - qt6-declarative-dev
+# - qt6-quick3d-dev
+# - qt6-sensors-dev
+```
+
+Install SFML:
+
+```console
+sudo apt install libsfml-dev
+```
+
+## Download code
+
+Navigate to your favorite folder for games,
+where you must download **two** code repositories.
+
+In your games folder, download the Conquer Chess code:
+
+```
+git clone https://github.com/richelbilderbeek/conquer_chess.git
+```
+
+In your games folder, download the `magic_enum` code:
+
+```
+git clone https://github.com/Neargye/magic_enum
+```
+
+## Build
+
 To build Conquer Chess, do, in the root of this repository:
 
 ```console

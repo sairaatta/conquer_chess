@@ -1,19 +1,24 @@
 --- # Conquer Chess website
 site_name: Conquer Chess
 repo_url: https://github.com/richelbilderbeek/conquer_chess
-edit_uri: blob/main/docs/
+
+# edit_uri: blob/main/docs/
+edit_uri: blob/main/
 
 nav:
-  - Start: index.md
-  - Screenshots: screenshots/README.md
-  - Build and run: build_and_run.md
-  - Gameplay: gameplay.md
+  - Start: docs/index.md
+  - Screenshots: docs/screenshots/README.md
+  - Build and run: docs/build_and_run.md
+  - Gameplay: docs/gameplay.md
   - Misc:
-    - Acknowledgements: acknowledgements.md
-    - Architecture: architecture/README.md
-    - Developer documentation: docs/index.html
-    - FAQ: faq.md
-    - Videos: videos.md
+    - Acknowledgements: docs/acknowledgements.md
+    - Code of conduct: CODE_OF_CONDUCT.md
+    - Contributing: CONTRIBUTING.md
+    - Architecture: docs/architecture/README.md
+    - Developer documentation: docs/docs/index.html
+    - FAQ: docs/faq.md
+    - Main page: README.md
+    - Videos: docs/videos.md
 
 theme:
   name: material
