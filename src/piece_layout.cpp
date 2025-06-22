@@ -28,6 +28,16 @@ piece_layout::piece_layout(const screen_rect& r)
        r.get_br().get_y() - (0.0 * square_height)
     )
   );
+  m_is_protected = screen_rect(
+    screen_coordinate(
+       m_piece.get_br().get_x() - 4 - 16,
+       m_piece.get_br().get_y() - 4 - 16
+    ),
+    screen_coordinate(
+       m_piece.get_br().get_x() - 4,
+       m_piece.get_br().get_y() - 4
+    )
+  );
 }
 
 void test_piece_layout()
@@ -49,6 +59,10 @@ void test_piece_layout()
     assert(layout.get_piece().get_tl().get_y() == 20);
     assert(layout.get_piece().get_br().get_x() == 90);
     assert(layout.get_piece().get_br().get_y() == 100);
+
+    assert(get_width(layout.get_is_protected()) < get_width(layout.get_piece()));
+    assert(get_height(layout.get_is_protected()) < get_height(layout.get_piece()));
+
   }
 #endif
 

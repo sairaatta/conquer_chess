@@ -178,7 +178,8 @@ screen_coordinate convert_to_screen_coordinate(
   const double n_squares_down{c.get_y()};
   const int pixel_x = r.get_tl().get_x() + (n_squares_up * square_width);
   const int pixel_y = r.get_tl().get_y() + (n_squares_down * square_height);
-  return screen_coordinate(pixel_x, pixel_y);
+  const screen_coordinate pixel(pixel_x, pixel_y);
+  return pixel;
 }
 
 screen_rect convert_to_screen_rect(
