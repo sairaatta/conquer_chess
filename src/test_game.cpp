@@ -258,6 +258,25 @@ void test_game_functions()
     white_pawn.set_selected(true);
     assert(can_do_promote(white_pawn, side::lhs));
   }
+  // can_do_castle_kingside
+  {
+    game g{
+      create_game_with_starting_position(starting_position_type::ready_to_castle)
+    };
+    auto& white_king{get_piece_at(g, "e1")};
+    white_king.set_selected(true);
+    assert(can_do_castle_kingside(g, white_king, side::lhs));
+  }
+  // can_do_castle_queenside
+  {
+    game g{
+      create_game_with_starting_position(starting_position_type::ready_to_castle)
+    };
+    auto& white_king{get_piece_at(g, "e1")};
+    white_king.set_selected(true);
+    assert(can_do_castle_queenside(g, white_king, side::lhs));
+  }
+
   // collect_all_piece_actions
   {
     // default start
@@ -703,13 +722,18 @@ void test_game_functions()
     #endif // FIX_ISSUE_21
     // can_do: castling
     {
-      const game g{
+      game g{
         create_game_with_starting_position(starting_position_type::ready_to_castle)
       };
-      assert(can_do(g, get_piece_at(g, "e1"), piece_action_type::castle_kingside, "g1", side::lhs));
-      assert(can_do(g, get_piece_at(g, "e8"), piece_action_type::castle_kingside, "g8", side::rhs));
-      assert(can_do(g, get_piece_at(g, "e1"), piece_action_type::castle_queenside, "c1", side::lhs));
-      assert(can_do(g, get_piece_at(g, "e8"), piece_action_type::castle_queenside, "c8", side::rhs));
+      auto& white_king{get_piece_at(g, "e1")};
+      auto& black_king{get_piece_at(g, "e8")};
+      white_king.set_selected(true);
+      black_king.set_selected(true);
+      const std::string s{"e4"}; // Irrelevant
+      assert(can_do(g, white_king, piece_action_type::castle_kingside, s, side::lhs));
+      assert(can_do(g, black_king, piece_action_type::castle_kingside, s, side::rhs));
+      assert(can_do(g, white_king, piece_action_type::castle_queenside, s, side::lhs));
+      assert(can_do(g, black_king, piece_action_type::castle_queenside, s, side::rhs));
     }
     // can_do: promote
     {

@@ -93,9 +93,9 @@ bool can_do(
     case piece_action_type::attack:
       return can_do_attack(g, selected_piece, cursor_square, player_side);
     case piece_action_type::castle_kingside:
-      return can_do_castle_kingside(g, selected_piece, cursor_square, player_side);
+      return can_do_castle_kingside(g, selected_piece, player_side);
     case piece_action_type::castle_queenside:
-      return can_do_castle_queenside(g, selected_piece, cursor_square, player_side);
+      return can_do_castle_queenside(g, selected_piece, player_side);
     case piece_action_type::move:
       return can_do_move(g, selected_piece, cursor_square, player_side);
     case piece_action_type::promote_to_bishop:
@@ -171,32 +171,30 @@ bool can_do_attack(
 bool can_do_castle_kingside(
   const game& g,
   const piece& selected_piece,
-  const square& cursor_square,
   const side player_side
 )
 {
+  if (!selected_piece.is_selected()) return false;
+
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_default_king_square(player_color)};
-  if (!is_piece_at(g, king_square)) return false;
-  const square ksc_square{king_square.get_x(), king_square.get_y() + 2};
-  if (cursor_square != ksc_square) return false;
+  if (selected_piece.get_current_square() != king_square) return false;
   return can_castle_kingside(get_piece_at(g, king_square), g);
 }
 
 bool can_do_castle_queenside(
   const game& g,
   const piece& selected_piece,
-  const square& cursor_square,
   const side player_side
 )
 {
+  if (!selected_piece.is_selected()) return false;
+
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_default_king_square(player_color)};
-  if (!is_piece_at(g, king_square)) return false;
-  const square qsc_square{king_square.get_x(), king_square.get_y() - 2};
-  if (cursor_square != qsc_square) return false;
+  if (selected_piece.get_current_square() != king_square) return false;
   return can_castle_queenside(get_piece_at(g, king_square), g);
 }
 

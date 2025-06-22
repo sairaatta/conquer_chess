@@ -105,7 +105,6 @@ bool can_do_attack(
 bool can_do_castle_kingside(
   const game& g,
   const piece& selected_piece,
-  const square& cursor_square,
   const side player_side
 );
 
@@ -113,7 +112,6 @@ bool can_do_castle_kingside(
 bool can_do_castle_queenside(
   const game& g,
   const piece& selected_piece,
-  const square& cursor_square,
   const side player_side
 );
 

@@ -383,14 +383,14 @@ std::optional<piece_action_type> get_piece_action(
       {
         return piece_action_type::attack_en_passant;
       }
-      if (can_do(g, selected_piece, piece_action_type::castle_kingside, cursor_square, player_side))
-      {
-        return piece_action_type::castle_kingside;
-      }
-      if (can_do(g, selected_piece, piece_action_type::castle_queenside, cursor_square, player_side))
-      {
-        return piece_action_type::castle_queenside;
-      }
+
+      // Castling
+      const bool can_castle_kingside{can_do(g, selected_piece, piece_action_type::castle_kingside, cursor_square, player_side)};
+      if (can_castle_kingside && n == action_number(1)) return piece_action_type::castle_kingside;
+      const bool can_castle_queenside{can_do(g, selected_piece, piece_action_type::castle_queenside, cursor_square, player_side)};
+      if (can_castle_queenside && n == action_number(1)) return piece_action_type::castle_queenside;
+      if (can_castle_kingside && can_castle_queenside && n == action_number(2)) return piece_action_type::castle_queenside;
+
       if (can_do(g, selected_piece, piece_action_type::move, cursor_square, player_side))
       {
         switch (n.get_number())
@@ -1071,7 +1071,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::castle_kingside);
     assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::castle_kingside);
   }
-  // 53: King selected, cursor at valid queen-side castling square -> queen-side castle
+  // 53: King selected, queen-side castle
   {
     game g{
       create_game_with_starting_position(starting_position_type::ready_to_castle)
@@ -1082,8 +1082,10 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "c1", side::lhs);
     move_cursor_to(c, "c8", side::rhs);
     assert(get_piece_action(g, c, action_number(1), side::lhs).value() != piece_action_type::move);
-    assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::castle_queenside);
-    assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::castle_queenside);
+    assert(get_piece_action(g, c, action_number(1), side::lhs).value() == piece_action_type::castle_kingside);
+    assert(get_piece_action(g, c, action_number(2), side::lhs).value() == piece_action_type::castle_queenside);
+    assert(get_piece_action(g, c, action_number(1), side::rhs).value() == piece_action_type::castle_kingside);
+    assert(get_piece_action(g, c, action_number(2), side::rhs).value() == piece_action_type::castle_queenside);
   }
   // 53: Pawns move to the square where they are promoted -> move
   {
