@@ -11,9 +11,9 @@ nav:
   - Gameplay: gameplay.md
   - Misc:
     - Acknowledgements: acknowledgements.md
-    - Code of conduct: CODE_OF_CONDUCT.md
-    - Contributing: CONTRIBUTING.md
     - Architecture: architecture/README.md
+    - Code of conduct: code_of_conduct.md
+    - Contributing: contributing.md
     - Developer documentation: docs/docs/index.html
     - FAQ: faq.md
     - Videos: videos.md
