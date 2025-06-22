@@ -4,6 +4,7 @@
 #include "game.h"
 #include "physical_controllers.h"
 #include "piece.h"
+#include "message_type.h"
 
 #include <cassert>
 #include <sstream>
@@ -1316,6 +1317,45 @@ void test_game_controller() //!OCLINT tests may be many
 
   }
 #endif // FIX_CASTLING_QUEENSIDE
+  // WHen two pieces want to move to the same square, one will go back
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+
+    // Start c2-c3
+    do_select(g, c, "c2", side::lhs);
+    move_cursor_to(c, "c3", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    // Get that pawn moving
+    g.tick(delta_t(0.25));
+
+    // Start Nb1-c3
+    do_select(g, c, "b1", side::lhs);
+    move_cursor_to(c, "c3", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(is_piece_at(g, square("c3")));
+    assert(is_piece_at(g, square("b1")));
+    assert(!is_piece_at(g, square("c2"))); // The pawn got there first
+
+    const auto knight_messages{get_piece_at(g, "b1").get_messages()};
+    assert(knight_messages.size() == 5);
+    assert(knight_messages[0] == message_type::select);
+    assert(knight_messages[1] == message_type::start_move);
+    assert(knight_messages[2] == message_type::start_move); // ?Why twice
+    assert(knight_messages[3] == message_type::cannot);
+    assert(knight_messages[4] == message_type::done);
+  }
   // A piece under attack must have decreasing health
   {
     game_controller c{create_game_controller_with_keyboard_mouse()};
