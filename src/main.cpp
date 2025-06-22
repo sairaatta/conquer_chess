@@ -28,6 +28,7 @@
 #include "controls_view_layout.h"
 #include "fps_clock.h"
 #include "game_controller.h"
+#include "game_info_layout.h"
 #include "game_log.h"
 #include "game_options.h"
 #include "game_rect.h"
@@ -67,144 +68,79 @@
 #include <SFML/Graphics.hpp>
 
 #include <cassert>
-#include <iostream>
 
 /// All tests are called from here, only in debug mode
 void test()
 {
 #ifndef NDEBUG
-
-  test_board_layout();
-
   test_about();
-
   test_about_view_layout();
-
   test_action_history();
-
   test_action_number();
-
+  test_board_layout();
   test_board_to_text_options();
-
   test_castling_type();
-
   test_chess_color();
-
   test_chess_move();
-
   test_control_action_type();
-
   test_controller();
-
   test_controls_view_item();
-
   test_controls_view_layout();
-
   test_delta_t();
-
   test_fps_clock();
-
   test_game();
-
   test_game_controller();
-
   test_game_coordinate();
-
+  test_game_info_layout();
   test_game_options();
-
   test_game_rect();
-
   test_game_speed();
-
   test_game_view_layout();
-
   test_helper();
-
   test_id();
-
   test_in_game_time();
-
   test_key_bindings();
-
   test_lobby_options();
-
   test_lobby_view_item();
-
   test_lobby_view_layout();
-
   test_log();
-
   test_menu_view_item();
-
   test_menu_view_layout();
-
   test_message();
-
   test_message_type();
-
   test_options_view_item();
-
   test_options_view_layout();
-
   test_pgn_string();
-
   test_physical_controller_type();
-
   test_physical_controllers();
-
   test_piece();
-
   test_piece_action();
-
   test_piece_action_type();
-
   test_piece_actions();
-
   test_piece_layout();
-
   test_piece_type();
-
   test_pieces();
-
   test_played_game_view_layout();
-
   test_program_state();
-
   test_race();
-
   test_read_only();
-
   test_replay();
-
   test_replayer();
-
   test_screen_coordinate();
-
   test_screen_rect();
-
   test_sfml_helper(); // HIERO
-
   test_side();
-
   test_sleep_scheduler();
-
   test_sleep_scheduler();
-
   test_square();
-
   test_starting_position_type();
-
   test_user_input();
-
   test_user_inputs();
-
   test_volume();
+
 #ifndef LOGIC_ONLY
-
   test_loading_view();
-
   test_resource_loader();
-
 #endif // LOGIC_ONLY
 
 #endif // NDEBUG

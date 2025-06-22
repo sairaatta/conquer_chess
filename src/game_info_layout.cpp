@@ -80,7 +80,7 @@ void test_game_info_layout()
     assert(layout.get_background().get_tl().get_x() == 0);
     assert(layout.get_background().get_tl().get_y() == 0);
     assert(layout.get_background().get_br().get_x() == 40);
-    assert(layout.get_background().get_br().get_x() == 30);
+    assert(layout.get_background().get_br().get_y() == 30);
 
     assert(layout.get_background() != layout.get_time());
     assert(layout.get_background() != layout.get_relative_piece_value());

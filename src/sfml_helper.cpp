@@ -6,7 +6,6 @@
 
 #include <cassert>
 #include <cmath>
-#include <iostream>
 
 std::string button_str_to_resource_name(std::string button_str)
 {
