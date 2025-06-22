@@ -4,6 +4,7 @@ repo_url: https://github.com/richelbilderbeek/conquer_chess
 
 # edit_uri: blob/main/docs/
 edit_uri: blob/main/
+docs_dir: .
 
 nav:
   - Start: docs/index.md
