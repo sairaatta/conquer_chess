@@ -457,23 +457,18 @@ void test_controller()
     const auto actions{c.process_input(event, side::lhs, layout)};
     assert(!is_empty(actions));
   }
-  // press action 4 works
-  /*
+  // press action 4 works with a keyboard
   {
-    const game g;
+    const game_view_layout layout;
     const physical_controller c{create_left_keyboard_controller()};
     const auto event{
       create_key_pressed_event(
         c.get_key_bindings().get_key_for_action(action_number(4))
       )
     };
-    const auto actions{
-      c.process_input(event, side::lhs, g.get_layout())
-    };
+    const auto actions{c.process_input(event, side::lhs, layout)};
     assert(!is_empty(actions));
   }
-  */
-  //
   {
     const game_view_layout layout;
     const physical_controller c{create_default_mouse_controller()};
@@ -487,10 +482,14 @@ void test_controller()
     const physical_controller a{create_left_keyboard_controller()};
     const physical_controller b{create_left_keyboard_controller()};
     const physical_controller c{create_right_keyboard_controller()};
+    const physical_controller d{create_default_mouse_controller()};
+    const physical_controller e{create_default_mouse_controller()};
     assert(a == b);
     assert(!(a == c));
+    assert(!(a == d));
+    assert(d == e);
   }
-  // 41: operator<<
+  // operator<<
   {
     const physical_controller c{create_left_keyboard_controller()};
     std::stringstream s;
