@@ -42,13 +42,13 @@ where you must download **two** code repositories.
 
 In your games folder, download the Conquer Chess code:
 
-```
+```console
 git clone https://github.com/richelbilderbeek/conquer_chess.git
 ```
 
 In your games folder, download the `magic_enum` code:
 
-```
+```console
 git clone https://github.com/Neargye/magic_enum
 ```
 
