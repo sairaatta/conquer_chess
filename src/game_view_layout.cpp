@@ -1,6 +1,7 @@
 #include "game_view_layout.h"
 
 #include "action_number.h"
+#include "board_layout.h"
 #include "helper.h"
 #include "game_rect.h"
 #include "game_coordinate.h"
@@ -163,23 +164,21 @@ game_coordinate convert_to_game_coordinate(
 }
 
 screen_coordinate convert_to_screen_coordinate(
-  const game_coordinate& coordinat,
+  const game_coordinate& c,
   const game_view_layout& layout
 )
 {
-  const auto tl_board{layout.get_board().get_tl()};
-  //const auto br_board{layout.get_board().get_br()};
+  const screen_rect r{layout.get_board()};
+  const double square_width{(1.0 / 8.0) * get_width(r)};
+  const double square_height{(1.0 / 8.0) * get_height(r)};
+  assert(square_width > 1.0);
+  assert(square_height > 1.0);
 
-  const double square_width{
-    get_square_width(layout)
-  };
-  const double square_height{
-    get_square_height(layout)
-  };
-  return screen_coordinate(
-    tl_board.get_x() + (square_width * coordinat.get_x()),
-    tl_board.get_y() + (square_height * coordinat.get_y())
-  );
+  const double n_squares_up{c.get_x()}; // This is what it means
+  const double n_squares_down{c.get_y()};
+  const int pixel_x = r.get_tl().get_x() + (n_squares_up * square_width);
+  const int pixel_y = r.get_tl().get_y() + (n_squares_down * square_height);
+  return screen_coordinate(pixel_x, pixel_y);
 }
 
 screen_rect convert_to_screen_rect(
@@ -329,6 +328,7 @@ void test_game_view_layout()
       game_coordinate(0.0, 0.0),
       layout
     );
+
     assert(tl_board.get_x() == layout.get_board().get_tl().get_x());
     assert(tl_board.get_y() == layout.get_board().get_tl().get_y());
   }
@@ -342,7 +342,8 @@ void test_game_view_layout()
       ),
       layout
     );
-    assert(board_rect == layout.get_board());
+    const auto expected{layout.get_board()};
+    assert(board_rect == expected);
   }
   // in-game (8,8) must be bottom-right of screen board
   // (no piece can ever have its top-right at the bottom-right of the board)
