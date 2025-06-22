@@ -13,5 +13,3 @@ You can now run the game with:
 ./conquer_chess
 ```
 
-
-

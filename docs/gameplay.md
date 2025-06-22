@@ -46,7 +46,7 @@ Zerg   |1.1                |0.9               |Attacks faster       |Regenerate
 - :construction: This is under contruction
 - [1] In chess move per time unit
 - [2] In chess move per time unit
-- [3] That is, another friendly piece is protecting it 
+- [3] That is, another friendly piece is protecting it
 
 When both players are ready, there is a countdown and the game starts.
 
@@ -74,7 +74,4 @@ to lower the health of the attacked piece to zero.
 When the health of the attacked piece reaches zero,
 the attacker instantaneously moves to the square of the
 captured piece.
-
-
-
 
