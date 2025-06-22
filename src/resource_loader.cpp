@@ -26,7 +26,16 @@ double get_progress(const resource_loader& loader) noexcept
 bool resource_loader::is_done() const noexcept
 {
   assert(m_index <= get_n_items());
-  return m_index == get_n_items();
+  if (m_is_done)
+  {
+    // Ensure all items are loaded
+    assert(m_index == get_n_items());
+  }
+  else {
+    // Ensure all items are loaded
+    assert(m_index < get_n_items() && "Increase the value in resource_load::get_n_items");
+  }
+  return m_is_done;
 }
 
 void resource_loader::process_next()
@@ -121,13 +130,19 @@ void resource_loader::process_next()
         + std::to_string(resources.get_n_themba_textures())
         + " Themba textures";
       break;
-    default:
     case 17:
-      assert(m_index == 17);
-      assert(m_index + 1 == get_n_items()); // If not, update get_m_items
+      m_descriptor = "Loaded "
+        + std::to_string(resources.get_n_artwork_textures())
+        + " artwork textures";
+      break;
+    default:
+    case 18:
+      assert(m_index == 18);
+      assert(m_index + 1 == get_n_items() && "Decrease the value in resource_load::get_n_items");
       m_descriptor = "Loaded "
         + std::to_string(resources.get_n_textures())
         + " textures";
+      m_is_done = true;
       break;
   }
   ++m_index;
