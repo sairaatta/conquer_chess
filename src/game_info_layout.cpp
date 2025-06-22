@@ -19,9 +19,16 @@ game_info_layout::game_info_layout(const screen_rect& r)
   const int y3 = y2 + (0.33 * square_height);
   const int y4{r.get_br().get_y()};
 
+  const int symbol_width{square_height};
+  const int symbol_height{symbol_width};
+
   m_time = screen_rect(
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y4)
+  );
+    m_time_symbol = screen_rect(
+    m_time.get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_time.get_br()
   );
 
   // Piece value
@@ -37,6 +44,10 @@ game_info_layout::game_info_layout(const screen_rect& r)
     screen_coordinate(x2, y3),
     screen_coordinate(x3, y4)
   );
+  m_piece_value_symbol = screen_rect(
+    m_piece_value[side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_piece_value[side::rhs].get_br()
+  );
 
   // Activity
   m_relative_f_active = screen_rect(
@@ -51,6 +62,10 @@ game_info_layout::game_info_layout(const screen_rect& r)
     screen_coordinate(x3, y3),
     screen_coordinate(x4, y4)
   );
+  m_activity_symbol = screen_rect(
+    m_f_active[side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_f_active[side::rhs].get_br()
+  );
 
   // Protectedness
   m_relative_f_protected = screen_rect(
@@ -64,6 +79,10 @@ game_info_layout::game_info_layout(const screen_rect& r)
   m_f_protected[side::rhs] = screen_rect(
     screen_coordinate(x4, y3),
     screen_coordinate(x5, y4)
+  );
+  m_protectedness_symbol = screen_rect(
+    m_f_protected[side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_f_protected[side::rhs].get_br()
   );
 }
 

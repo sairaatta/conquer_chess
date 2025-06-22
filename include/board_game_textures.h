@@ -22,6 +22,9 @@ public:
   sf::Texture& get_dice_skull() { return m_dice_skull; }
   sf::Texture& get_dice_sword() { return m_dice_sword; }
   sf::Texture& get_dollar() { return m_dollar; }
+  sf::Texture& get_flag_triangle() { return m_flag_triangle; }
+  sf::Texture& get_flag_square() { return m_flag_square; }
+  sf::Texture& get_hourglass() { return m_hourglass; }
   sf::Texture& get_pawn_up() { return m_pawn_up; }
   sf::Texture& get_shield() { return m_shield; }
   sf::Texture& get_skull() { return m_skull; }
@@ -33,6 +36,9 @@ private:
   sf::Texture m_dice_skull;
   sf::Texture m_dice_sword;
   sf::Texture m_dollar;
+  sf::Texture m_flag_square;
+  sf::Texture m_flag_triangle;
+  sf::Texture m_hourglass;
   sf::Texture m_pawn_up;
   sf::Texture m_shield;
   sf::Texture m_skull;

@@ -460,20 +460,33 @@ void draw_game_info(game_view& view)
   // Background
   draw_rectangle(layout.get_background(), sf::Color(128, 128, 128, 128));
 
+  // Clock time symbol
+  {
+    const auto& r{layout.get_time_symbol()};
+    draw_texture(
+      game_resources::get().get_board_game_textures().get_hourglass(),
+      r
+    );
+  }
   // Clock time
   {
     const auto& r{layout.get_time()};
-    std::string s{
-      to_str(view.get_game().get_in_game_time())
-    };
-    if (s.size() > 4) s.resize(4);
-    const auto text_rect{create_centered_rect(get_center(r), 80, 48)};
     draw_rectangle(
-      text_rect, sf::Color(128, 128, 128, 128)
-      );
+      r,
+      sf::Color(128, 128, 128, 128)
+    );
+    const std::string s{to_human_str(view.get_game().get_in_game_time())};
+    const auto text_rect{create_centered_rect(get_center(r), 80, 48)};
     draw_text(s, text_rect, 32);
   }
-
+  // Piece value symbol
+  {
+    const auto& r{layout.get_piece_value_symbol()};
+    draw_texture(
+      game_resources::get().get_board_game_textures().get_dollar(),
+      r
+    );
+  }
   // Piece value
   {
     const auto lhs_color{get_color(side::lhs)};
@@ -543,6 +556,14 @@ void draw_game_info(game_view& view)
     }
   }
 
+  // Piece value symbol
+  {
+    const auto& r{layout.get_activity_symbol()};
+    draw_texture(
+      game_resources::get().get_board_game_textures().get_flag_square(),
+      r
+    );
+  }
   // Activity
   {
     const auto lhs_color{get_color(side::lhs)};
@@ -612,6 +633,13 @@ void draw_game_info(game_view& view)
     }
   }
 
+  {
+    const auto& r{layout.get_protectedness_symbol()};
+    draw_texture(
+      game_resources::get().get_board_game_textures().get_shield(),
+      r
+    );
+  }
 
   // Protectedness
   {

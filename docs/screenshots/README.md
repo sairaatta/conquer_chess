@@ -2,6 +2,10 @@
 
 ## v0.8
 
+![Game screen v0.8](20250622_2.jpg)
+
+> The game screen shows a symbol behind the game info bars
+
 ![Game screen v0.8](20250622_1.jpg)
 
 > The game screen shows a shield symbol on the protected pieces.
