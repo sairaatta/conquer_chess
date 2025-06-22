@@ -1,5 +1,7 @@
 #include "piece_layout.h"
 
+#include "screen_coordinate.h"
+
 #include <cassert>
 
 piece_layout::piece_layout(const screen_rect& r)
