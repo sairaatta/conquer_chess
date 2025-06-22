@@ -129,6 +129,15 @@ void test_user_input()
     std::default_random_engine rng_engine(seed);
     create_random_user_input(rng_engine);
   }
+  // create_random_user_input, create a user_input that needs a coordinate
+  {
+    std::default_random_engine rng_engine;
+    while (1)
+    {
+      const auto i{create_random_user_input(rng_engine)};
+      if (i.get_user_input_type() == user_input_type::lmb_down) break;
+    }
+  }
   // operator==
   {
     const user_input a{create_press_action_1(side::lhs)};
