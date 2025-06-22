@@ -484,7 +484,8 @@ void draw_game_info(game_view& view)
     const auto& r{layout.get_piece_value_symbol()};
     draw_texture(
       game_resources::get().get_board_game_textures().get_dollar(),
-      r
+      r,
+      sf::Color(255, 0, 0, 128)
     );
   }
   // Piece value
@@ -556,12 +557,13 @@ void draw_game_info(game_view& view)
     }
   }
 
-  // Piece value symbol
+  // Activity symbol
   {
     const auto& r{layout.get_activity_symbol()};
     draw_texture(
       game_resources::get().get_board_game_textures().get_flag_square(),
-      r
+      r,
+      sf::Color(0, 255, 0, 128)
     );
   }
   // Activity
@@ -633,11 +635,13 @@ void draw_game_info(game_view& view)
     }
   }
 
+  // Protectednes symbol
   {
     const auto& r{layout.get_protectedness_symbol()};
     draw_texture(
       game_resources::get().get_board_game_textures().get_shield(),
-      r
+      r,
+      sf::Color(0, 0, 255, 128)
     );
   }
 

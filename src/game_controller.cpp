@@ -1179,7 +1179,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("a3")));
   }
-  // #27: a2-a4 takes 1 time unit
+  // #27: a2-a4 takes 1 time unit, after which the pawn is en-passantable
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -1244,7 +1244,78 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(g, square("a2")));
     assert(!is_piece_at(g, square("a5")));
   }
+#ifdef FIX_CASTLING_KINGSIDE
+  // castling kingside
+  {
+    game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
 
+    auto& white_king{get_piece_at(g, "e1")};
+    assert(white_king.get_messages().size() == 0);
+    auto& white_rook{get_piece_at(g, "h1")};
+    assert(white_rook.get_messages().size() == 0);
+
+    do_select(g, c, "e1", side::lhs);
+    assert(white_king.is_selected());
+
+    move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
+
+    assert(white_king.get_messages().size() == 1); // Selected
+    assert(white_rook.get_messages().size() == 0); // No need to be selected
+
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    assert(white_king.get_messages().size() == 2); // Castling started
+    assert(white_rook.get_messages().size() == 1); // Castling started
+
+    assert(is_piece_at(g, square("e1")));  // K
+    assert(!is_piece_at(g, square("f1"))); // Empty
+    assert(!is_piece_at(g, square("g1"))); // Empty
+    assert(is_piece_at(g, square("h1")));  // Rook
+    // Should take 1 time unit
+    for (int i{0}; i!=5; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(!is_piece_at(g, square("e1"))); // Empty
+    assert(is_piece_at(g, square("f1")));  // Rook
+    assert(is_piece_at(g, square("g1")));  // K
+    assert(!is_piece_at(g, square("h1"))); // Empty
+
+  }
+#endif // FIX_CASTLING_KINGSIDE
+#ifdef FIX_CASTLING_QUEENSIDE
+  // castling queenside
+  {
+    game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+
+    do_select(g, c, "e1", side::lhs);
+    move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
+    assert(count_selected_units(g, chess_color::white) == 1);
+
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    assert(is_piece_at(g, square("a1")));  // Rook
+    assert(!is_piece_at(g, square("b1"))); // Empty
+    assert(!is_piece_at(g, square("c1"))); // Empty
+    assert(!is_piece_at(g, square("d1"))); // Empty
+    assert(is_piece_at(g, square("e1")));  // K
+    // Should take 1 time unit
+    for (int i{0}; i!=5; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(!is_piece_at(g, square("a1"))); // Empty
+    assert(!is_piece_at(g, square("b1"))); // Empty
+    assert(is_piece_at(g, square("c1")));  // K
+    assert(is_piece_at(g, square("d1")));  // Rook
+    assert(!is_piece_at(g, square("e1"))); // Empty
+
+  }
+#endif // FIX_CASTLING_QUEENSIDE
   // A piece under attack must have decreasing health
   {
     game_controller c{create_game_controller_with_keyboard_mouse()};

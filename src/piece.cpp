@@ -1076,6 +1076,7 @@ void piece::tick(
       break;
     case piece_action_type::castle_kingside:
       m_is_selected = false; //
+      //#define FIX_ISSUE_3
       #ifdef FIX_ISSUE_3
       tick_castle_kingside(*this, dt, g);
       #else
@@ -1126,27 +1127,9 @@ void tick_attack(
     remove_first(p.get_actions());
     return;
   }
-  /*
-  // Done if piece moved away
-  if (!is_piece_at(g, first_action.get_to()))
-  {
-    p.add_message(message_type::cannot);
-    remove_first(p.get_actions());
-    return;
-  }
-  */
   assert(is_piece_at(g, first_action.get_to()));
   piece& target{get_piece_at(g, first_action.get_to())};
 
-  /*
-  // Done if target is of own color
-  if (p.get_color() == target.get_color())
-  {
-    p.add_message(message_type::cannot);
-    remove_first(p.get_actions());
-    return;
-  }
-  */
   assert(p.get_color() != target.get_color());
   const auto damage{game_options::get().get_damage_per_chess_move() * dt.get()};
   target.receive_damage(damage);
