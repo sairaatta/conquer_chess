@@ -14,11 +14,6 @@
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-| Image                               | Filename          | Search terms                                                                                     |
-| ----------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------ |
-| ![all_races_1.jpg](all_races_1.jpg) | `all_races_1.jpg` | `starcraft 2, chess, 1 protoss,  1 terran, 1 zerg, close-up, cubism`                             |
-| ![all_races_2.jpg](all_races_2.jpg) | `all_races_2.jpg` | `starcraft 2, chess, 1 protoss,  1 terran, 1 zerg, close-up, oil painting, three faces`          |
-| ![all_races_3.jpg](all_races_3.jpg) | `all_races_3.jpg` | `starcraft 2, chess, 1 protoss,  1 terran, 1 zerg, close-up, oil painting, three faces, cubism`  |
-| ![all_races_4.jpg](all_races_4.jpg) | `all_races_4.jpg` | `starcraft 2, chess, 1 protoss,  1 terran, 1 zerg, close-up, oil painting, three faces, cartoon` |
+None yet.
 
 <!-- markdownlint-enable MD013 -->
