@@ -14,6 +14,9 @@ class board_layout
 public:
   board_layout(const screen_rect& r);
 
+  /// Get the size of the entire board
+  const screen_rect& get_background() const noexcept;
+
   /// Get the rectangle for the square.
   ///
   /// The board is set up to have white at the left.
@@ -25,9 +28,14 @@ public:
 
 private:
 
-  std::vector<std::vector<screen_rect>> m_rects;
+  screen_rect m_background;
 
+  std::vector<std::vector<screen_rect>> m_rects;
 };
+
+int get_height(const board_layout& b);
+
+int get_width(const board_layout& b);
 
 void test_board_layout();
 

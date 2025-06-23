@@ -98,9 +98,11 @@ game_view_layout::game_view_layout(
   }
 
   // Board
-  m_board = screen_rect(
-    screen_coordinate(x3, y1),
-    screen_coordinate(x3 + board_width, y1 + board_height)
+  m_board = board_layout(
+    screen_rect(
+      screen_coordinate(x3, y1),
+      screen_coordinate(x3 + board_width, y1 + board_height)
+    )
   );
 
   // Game info
@@ -109,7 +111,7 @@ game_view_layout::game_view_layout(
     screen_coordinate(x6, y4)
   );
 
-  assert(get_width(m_board) == get_height(m_board));
+  assert(get_width(m_board.value().get_background()) == get_height(m_board.value().get_background()));
   assert(get_board_width(*this) == get_board_height(*this));
   assert(get_square_width(*this) == get_square_height(*this));
 
@@ -145,10 +147,10 @@ game_coordinate convert_to_game_coordinate(
 {
   // How many pixels on the board
   const int screen_on_board_x{
-    coordinat.get_x() - layout.get_board().get_tl().get_x()
+    coordinat.get_x() - layout.get_board().get_background().get_tl().get_x()
   };
   const int screen_on_board_y{
-    coordinat.get_y() - layout.get_board().get_tl().get_y()
+    coordinat.get_y() - layout.get_board().get_background().get_tl().get_y()
   };
   // Fraction of the board
   const double f_x{
@@ -168,7 +170,7 @@ screen_coordinate convert_to_screen_coordinate(
   const game_view_layout& layout
 )
 {
-  const screen_rect r{layout.get_board()};
+  const screen_rect r{layout.get_board().get_background()};
   const double square_width{(1.0 / 8.0) * get_width(r)};
   const double square_height{(1.0 / 8.0) * get_height(r)};
   assert(square_width > 1.0);
@@ -248,7 +250,7 @@ std::vector<screen_rect> get_panels(
 {
   const bool show_debug_panel{game_options::get().get_show_debug_info()};
   std::vector<screen_rect> v{
-    layout.get_board(),
+    layout.get_board().get_background(),
     layout.get_controls(side::lhs),
     layout.get_controls(side::rhs),
     layout.get_log(side::lhs),
@@ -288,10 +290,10 @@ void test_game_view_layout()
   }
   {
     const game_view_layout layout;
-    assert(layout.get_board().get_br().get_x() > 0.0);
-    assert(layout.get_board().get_br().get_y() > 0.0);
-    assert(layout.get_board().get_tl().get_x() > 0.0);
-    assert(layout.get_board().get_tl().get_y() > 0.0);
+    assert(layout.get_board().get_background().get_br().get_x() > 0.0);
+    assert(layout.get_board().get_background().get_br().get_y() > 0.0);
+    assert(layout.get_board().get_background().get_tl().get_x() > 0.0);
+    assert(layout.get_board().get_background().get_tl().get_y() > 0.0);
 
     assert(get_height(layout.get_game_info()) > 20);
     assert(get_width(layout.get_game_info()) > 20);
@@ -330,8 +332,8 @@ void test_game_view_layout()
       layout
     );
 
-    assert(tl_board.get_x() == layout.get_board().get_tl().get_x());
-    assert(tl_board.get_y() == layout.get_board().get_tl().get_y());
+    assert(tl_board.get_x() == layout.get_board().get_background().get_tl().get_x());
+    assert(tl_board.get_y() == layout.get_board().get_background().get_tl().get_y());
   }
   // convert_to_screen_rect
   {
@@ -344,7 +346,7 @@ void test_game_view_layout()
       layout
     );
     const auto expected{layout.get_board()};
-    assert(board_rect == expected);
+    assert(board_rect == expected.get_background());
   }
   // in-game (8,8) must be bottom-right of screen board
   // (no piece can ever have its top-right at the bottom-right of the board)
@@ -354,8 +356,8 @@ void test_game_view_layout()
       game_coordinate(8.0, 8.0),
       layout
     );
-    assert(br_board.get_x() == layout.get_board().get_br().get_x());
-    assert(br_board.get_y() == layout.get_board().get_br().get_y());
+    assert(br_board.get_x() == layout.get_board().get_background().get_br().get_x());
+    assert(br_board.get_y() == layout.get_board().get_background().get_br().get_y());
   }
   //--------------------------------------------------------------------------
   // screen -> game
@@ -365,11 +367,11 @@ void test_game_view_layout()
   {
     const game_view_layout layout;
     const auto br_board = convert_to_game_coordinate(
-      layout.get_board().get_br(),
+      layout.get_board().get_background().get_br(),
       layout
     );
     const auto tl_board = convert_to_game_coordinate(
-      layout.get_board().get_tl(),
+      layout.get_board().get_background().get_tl(),
       layout
     );
     assert(tl_board.get_x() == 0.0);
@@ -384,8 +386,8 @@ void test_game_view_layout()
     const square h8("h8");
     const screen_rect a1_rect{convert_to_screen_rect(a1, layout)};
     const screen_rect h8_rect{convert_to_screen_rect(h8, layout)};
-    assert(a1_rect.get_tl() == layout.get_board().get_tl());
-    assert(h8_rect.get_br() == layout.get_board().get_br());
+    assert(a1_rect.get_tl() == layout.get_board().get_background().get_tl());
+    assert(h8_rect.get_br() == layout.get_board().get_background().get_br());
   }
   // 39: operator<<
   {
@@ -423,7 +425,7 @@ std::ostream& operator<<(std::ostream& os, const game_view_layout& layout) noexc
   std::stringstream s;
   s
     << "background: " << layout.get_background() << '\n'
-    << "board: " << layout.get_board() << '\n'
+    << "board: " << layout.get_board().get_background() << '\n'
   ;
   for (const auto side: get_all_sides())
   {

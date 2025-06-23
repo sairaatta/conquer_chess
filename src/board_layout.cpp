@@ -5,7 +5,12 @@
 #include <cassert>
 
 board_layout::board_layout(const screen_rect& r)
+  : m_background(r)
 {
+  assert(get_width(r) >= 8);
+  assert(get_height(r) >= 8);
+
+
   // Create the x coordinates of the squares
   std::vector<double> xs;
   {
@@ -46,6 +51,22 @@ board_layout::board_layout(const screen_rect& r)
       m_rects[y][x] = square_rect;
     }
   }
+}
+
+const screen_rect& board_layout::get_background() const noexcept
+{
+  return m_background;
+}
+
+int get_height(const board_layout& b)
+{
+  return get_height(b.get_background());
+}
+
+int get_width(const board_layout& b)
+{
+  return get_width(b.get_background());
+
 }
 
 const screen_rect& board_layout::get_square(const int x, const int y) const

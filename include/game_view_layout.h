@@ -7,8 +7,10 @@
 #include "screen_coordinate.h"
 #include "layout.h"
 #include "side.h"
-#include "read_only.h"
+#include "board_layout.h"
+//#include "read_only.h"
 
+#include <optional>
 #include <iosfwd>
 #include <map>
 #include <vector>
@@ -65,7 +67,7 @@ public:
   /// The entire screen are
   const auto& get_background() const noexcept { return m_background; }
 
-  const auto& get_board() const noexcept { return m_board; }
+  const auto& get_board() const { return m_board.value(); }
   const screen_rect& get_controls(const side player) const noexcept;
 
   /// The square that shows:
@@ -96,7 +98,8 @@ public:
 private:
 
   screen_rect m_background;
-  screen_rect m_board;
+  // screen_rect m_board;
+  std::optional<board_layout> m_board;
   std::map<side, screen_rect> m_controls;
   std::map<action_number, std::map<side, screen_rect>> m_controls_key;
   std::map<side, screen_rect> m_debug;

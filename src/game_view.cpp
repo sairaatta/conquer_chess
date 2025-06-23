@@ -935,7 +935,7 @@ void show_sidebar(game_view& view, const side player_side)
 
 void draw_squares(game_view& view)
 {
-  draw_squares(view.get_layout().get_board());
+  draw_squares(view.get_layout().get_board().get_background());
 }
 
 void draw_square_under_cursor(
