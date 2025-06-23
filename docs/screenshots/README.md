@@ -2,6 +2,10 @@
 
 ## v0.8
 
+![Game screen v0.8](20250622_3.jpg)
+
+> The game screen shows a colored symbol behind the game info bars
+
 ![Game screen v0.8](20250622_2.jpg)
 
 > The game screen shows a symbol behind the game info bars
