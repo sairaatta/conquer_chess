@@ -435,27 +435,80 @@ void process_press_action_2(
   // press_action_2 can be
   //  1. attack (for a selected piece and cursor points to square with enemy
   //  3. promote to rook (for a selected pawn at the final file)
-
   const side player_side{action.get_player()};
   const chess_color player_color{get_player_color(player_side)};
-  const square to{square(get_cursor_pos(c, player_side))};
-
-  if (is_piece_at(g, to) && get_piece_at(g, to).get_color() == player_color)
+  const game_coordinate cursor_pos{get_cursor_pos(c, player_side)};
+  if (!is_coordinat_on_board(cursor_pos))
   {
-    const auto& p{get_piece_at(g, to)};
+    return;
+  }
+  const square cursor{square(cursor_pos)};
+
+  // true for promotions, false for castling
+  const bool is_cursor_on_piece{is_piece_at(g, cursor)};
+  const bool is_cursor_on_friendly_piece{
+    is_cursor_on_piece && get_piece_at(g, cursor).get_color() == player_color
+  };
+  //const bool is_cursor_on_enemy_piece{
+  //  is_cursor_on_piece && get_piece_at(g, cursor).get_color() != player_color
+  //};
+  const square king_square{get_default_king_square(player_color)};
+  const bool can_castle_kingside_with_action_1{
+       !is_cursor_on_piece
+    && is_piece_at(g, king_square)
+    && get_piece_at(g, king_square).get_color() == player_color
+    && get_piece_at(g, king_square).is_selected()
+    && can_castle_kingside(get_piece_at(g, king_square), g)
+  };
+  const bool is_castle_queenside{
+       can_castle_kingside_with_action_1
+    && !is_cursor_on_piece
+    && is_piece_at(g, king_square)
+    && get_piece_at(g, king_square).get_color() == player_color
+    && get_piece_at(g, king_square).is_selected()
+    && can_castle_queenside(get_piece_at(g, king_square), g)
+  };
+  if (is_castle_queenside)
+  {
+    unselect_all_pieces(g, player_color);
+    get_piece_at(g, get_default_king_square(player_color)).add_action(
+      piece_action(
+        player_color,
+        piece_type::king,
+        piece_action_type::castle_queenside,
+        get_default_king_square(player_color),
+        cursor
+      )
+    );
+    get_piece_at(g, get_default_rook_square(player_color, castling_type::queen_side)).add_action(
+      piece_action(
+        player_color,
+        piece_type::rook,
+        piece_action_type::castle_queenside,
+        get_default_rook_square(player_color, castling_type::queen_side),
+        cursor
+      )
+    );
+    return;
+  }
+
+
+  if (is_cursor_on_piece && is_cursor_on_friendly_piece)
+  {
+    const auto& p{get_piece_at(g, cursor)};
     if (p.is_selected())
     {
       if (can_promote(p))
       {
         //  3. promote to queen (for a pawn at the final file)
         unselect_all_pieces(g, player_color);
-        get_piece_at(g, to).add_action(
+        get_piece_at(g, cursor).add_action(
           piece_action(
             player_color,
             piece_type::rook,
             piece_action_type::promote_to_rook,
-            to,
-            to
+            cursor,
+            cursor
           )
         );
         return;

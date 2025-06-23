@@ -844,22 +844,44 @@ void test_game_controller() //!OCLINT tests may be many
   // 3: white castles kingside
   {
     game g = create_game_with_starting_position(starting_position_type::ready_to_castle);
-    game_controller c{
-      create_game_controller_with_keyboard_mouse()
-    };
-    move_cursor_to(c, "e1", side::lhs);
-    add_user_input(c, create_press_action_1(side::lhs));
-    c.apply_user_inputs_to_game(g);
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    do_select(g, c, "e1", side::lhs);
     g.tick(delta_t(0.0));
     assert(count_selected_units(g, chess_color::white) == 1);
     assert(collect_messages(g).at(0).get_message_type() == message_type::select);
-    move_cursor_to(c, "g1", side::lhs);
+    move_cursor_to(c, "g1", side::lhs); // Cursor must not be on king
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.0));
     assert(count_selected_units(g, chess_color::white) == 0);
     assert(get_closest_piece_to(g, to_coordinat("e4")).get_type() == piece_type::pawn);
-    assert(collect_messages(g).at(1).get_message_type() == message_type::start_castling_kingside);
+
+    const auto msg{collect_messages(g)};
+    assert(msg.at(1).get_message_type() == message_type::start_castling_kingside);
+  }
+  // 3: white castles queenside
+  {
+    game g = create_game_with_starting_position(starting_position_type::ready_to_castle);
+    game_controller c{
+      create_game_controller_with_keyboard_mouse()
+    };
+    do_select(g, c, "e1", side::lhs);
+
+    g.tick(delta_t(0.0));
+    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(collect_messages(g).at(0).get_message_type() == message_type::select);
+    move_cursor_to(c, "g1", side::lhs); // Cursor must not be on king
+
+    add_user_input(c, create_press_action_2(side::lhs));
+    c.apply_user_inputs_to_game(g);
+    g.tick(delta_t(0.0));
+
+    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(get_closest_piece_to(g, to_coordinat("e4")).get_type() == piece_type::pawn);
+
+    const auto msg{collect_messages(g)};
+    assert(msg.at(0).get_message_type() == message_type::start_castling_queenside);
+    assert(msg.at(2).get_message_type() == message_type::start_castling_queenside);
   }
   // has_mouse_controller
   {
