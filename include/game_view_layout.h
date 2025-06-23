@@ -67,7 +67,7 @@ public:
   /// The entire screen are
   const auto& get_background() const noexcept { return m_background; }
 
-  const auto& get_board() const { return m_board.value(); }
+  const auto& get_board() const { return m_board; }
   const screen_rect& get_controls(const side player) const noexcept;
 
   /// The square that shows:
@@ -99,7 +99,7 @@ private:
 
   screen_rect m_background;
   // screen_rect m_board;
-  std::optional<board_layout> m_board;
+  board_layout m_board;
   std::map<side, screen_rect> m_controls;
   std::map<action_number, std::map<side, screen_rect>> m_controls_key;
   std::map<side, screen_rect> m_debug;

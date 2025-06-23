@@ -15,7 +15,7 @@ public:
   board_layout(const screen_rect& r);
 
   /// Get the size of the entire board
-  const screen_rect& get_background() const noexcept;
+  const screen_rect& get_board() const noexcept;
 
   /// Get the rectangle for the square.
   ///

@@ -53,19 +53,19 @@ board_layout::board_layout(const screen_rect& r)
   }
 }
 
-const screen_rect& board_layout::get_background() const noexcept
+const screen_rect& board_layout::get_board() const noexcept
 {
   return m_background;
 }
 
 int get_height(const board_layout& b)
 {
-  return get_height(b.get_background());
+  return get_height(b.get_board());
 }
 
 int get_width(const board_layout& b)
 {
-  return get_width(b.get_background());
+  return get_width(b.get_board());
 
 }
 
@@ -103,6 +103,11 @@ void test_board_layout()
     assert(a8.get_tl().get_y() == 0);
     assert(a8.get_br().get_x() == 64);
     assert(a8.get_br().get_y() == 8);
+
+    assert(get_width(layout) == 64);
+    assert(get_height(layout) == 64);
+    assert(get_width(layout.get_board()) == 64);
+    assert(get_height(layout.get_board()) == 64);
   }
 
 #endif // NDEBUG
