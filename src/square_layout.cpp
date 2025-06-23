@@ -1,10 +1,10 @@
-#include "piece_layout.h"
+#include "square_layout.h"
 
 #include "screen_coordinate.h"
 
 #include <cassert>
 
-piece_layout::piece_layout(const screen_rect& r)
+square_layout::square_layout(const screen_rect& r)
 {
   const int square_width{get_width(r)};
   const int square_height{get_height(r)};
@@ -49,7 +49,7 @@ void test_piece_layout()
       screen_coordinate(0, 0),
       screen_coordinate(100, 100)
     );
-    const auto layout{piece_layout(r)};
+    const auto layout{square_layout(r)};
     assert(layout.get_health_bar().get_tl().get_x() == 10);
     assert(layout.get_health_bar().get_tl().get_y() == 5);
     assert(layout.get_health_bar().get_br().get_x() == 90);

@@ -13,7 +13,7 @@
 #include "lobby_options.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
-#include "piece_layout.h"
+#include "square_layout.h"
 #include "pieces.h"
 #include "render_window.h"
 #include "physical_controller.h"
@@ -853,7 +853,7 @@ void draw_pieces(game_view& view)
     const int x = piece.get_current_square().get_x();
     const int y = piece.get_current_square().get_y();
     const screen_rect square_rect(layout.get_square(x, y));
-    const piece_layout piece_layout(square_rect);
+    const square_layout piece_layout(square_rect);
 
     // Transparency effect when moving
     sf::Color fill_color = sf::Color::Transparent;
@@ -996,7 +996,7 @@ void draw_unit_health_bars(game_view& view)
   for (const auto& piece: game.get_pieces())
   {
     const auto health_bar_rect{
-      piece_layout(
+      square_layout(
         bl.get_square(
           piece.get_current_square().get_x(),
           piece.get_current_square().get_y()

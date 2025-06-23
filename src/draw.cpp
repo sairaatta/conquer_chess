@@ -5,7 +5,7 @@
 #include "board_layout.h"
 //#include "game_coordinate.h"
 #include "game_options.h"
-#include "piece_layout.h"
+#include "square_layout.h"
 #include "game_resources.h"
 #include "physical_controllers.h"
 #include "piece.h"
@@ -395,7 +395,7 @@ void draw_pieces(
     /// |+----------------+|
     /// +------------------+
     ///
-    const auto piece_rect{piece_layout(square_rect).get_piece()};
+    const auto piece_rect{square_layout(square_rect).get_piece()};
     // Transparency effect when moving
     sf::Color fill_color{sf::Color::Transparent};
     if (!piece.get_actions().empty()

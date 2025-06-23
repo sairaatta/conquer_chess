@@ -48,7 +48,7 @@
 #include "physical_controllers.h"
 #include "piece_actions.h"
 #include "piece_id.h"
-#include "piece_layout.h"
+#include "square_layout.h"
 #include "pieces.h"
 #include "played_game_view_layout.h"
 #include "program_state.h"
