@@ -24,7 +24,7 @@ game_info_layout::game_info_layout(const screen_rect& r)
 
   m_time = screen_rect(
     screen_coordinate(x1, y1),
-    screen_coordinate(x2, y4)
+    screen_coordinate(x2 - 1, y4) // -1 to have non-overlaping rectangles
   );
     m_time_symbol = screen_rect(
     m_time.get_br() - screen_coordinate(symbol_width, symbol_height),
@@ -34,15 +34,15 @@ game_info_layout::game_info_layout(const screen_rect& r)
   // Piece value
   m_relative_piece_value = screen_rect(
     screen_coordinate(x2, y1),
-    screen_coordinate(x3, y2)
+    screen_coordinate(x3 - 1, y2) // -1 to have non-overlaping rectangles
   );
   m_piece_value[side::lhs] = screen_rect(
     screen_coordinate(x2, y2),
-    screen_coordinate(x3, y3)
+    screen_coordinate(x3 - 1, y3) // -1 to have non-overlaping rectangles
   );
   m_piece_value[side::rhs] = screen_rect(
     screen_coordinate(x2, y3),
-    screen_coordinate(x3, y4)
+    screen_coordinate(x3 - 1, y4) // -1 to have non-overlaping rectangles
   );
   m_piece_value_symbol = screen_rect(
     m_piece_value[side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
@@ -52,15 +52,15 @@ game_info_layout::game_info_layout(const screen_rect& r)
   // Activity
   m_relative_f_active = screen_rect(
     screen_coordinate(x3, y1),
-    screen_coordinate(x4, y2)
+    screen_coordinate(x4 - 1, y2) // -1 to have non-overlaping rectangles
   );
   m_f_active[side::lhs] = screen_rect(
     screen_coordinate(x3, y2),
-    screen_coordinate(x4, y3)
+    screen_coordinate(x4 - 1, y3) // -1 to have non-overlaping rectangles
   );
   m_f_active[side::rhs] = screen_rect(
     screen_coordinate(x3, y3),
-    screen_coordinate(x4, y4)
+    screen_coordinate(x4 - 1, y4) // -1 to have non-overlaping rectangles
   );
   m_activity_symbol = screen_rect(
     m_f_active[side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
@@ -119,6 +119,17 @@ void test_game_info_layout()
     assert(layout.get_piece_value(side::lhs) != layout.get_piece_value(side::rhs));
     assert(layout.get_f_active(side::lhs) != layout.get_f_active(side::rhs));
     assert(layout.get_f_protected(side::lhs) != layout.get_f_protected(side::rhs));
+
+    // Use the full rectangle
+    assert(layout.get_time().get_tl().get_x() == layout.get_background().get_tl().get_x());
+    assert(layout.get_time().get_tl().get_y() == layout.get_background().get_tl().get_y());
+    assert(layout.get_background().get_br().get_x() == layout.get_relative_f_protected().get_br().get_x());
+    assert(layout.get_background().get_br().get_y() == layout.get_f_protected(side::rhs).get_br().get_y());
+
+    // No overlapping pixels
+    assert(layout.get_time().get_br().get_x() + 1 == layout.get_relative_piece_value().get_tl().get_x());
+    assert(layout.get_relative_piece_value().get_br().get_x() + 1 == layout.get_relative_f_active().get_tl().get_x());
+    assert(layout.get_relative_f_active().get_br().get_x() + 1 == layout.get_relative_f_protected().get_tl().get_x());
 
   }
 #endif
