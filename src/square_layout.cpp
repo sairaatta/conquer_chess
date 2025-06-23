@@ -9,36 +9,40 @@ square_layout::square_layout(const screen_rect& r)
 {
   const int square_width{get_width(r)};
   const int square_height{get_height(r)};
-  m_health_bar = screen_rect(
-    screen_coordinate(
-       r.get_tl().get_x() + (0.1 * square_width),
-       r.get_tl().get_y() + (0.05 * square_height)
-    ),
-    screen_coordinate(
-       r.get_br().get_x() - (0.1 * square_width),
-       r.get_tl().get_y() + (0.15 * square_height)
-    )
-  );
-  m_piece = screen_rect(
-    screen_coordinate(
-       r.get_tl().get_x() + (0.1 * square_width),
-       r.get_tl().get_y() + (0.2 * square_height)
-    ),
-    screen_coordinate(
-       r.get_br().get_x() - (0.1 * square_width),
-       r.get_br().get_y() - (0.0 * square_height)
-    )
-  );
-  m_is_protected = screen_rect(
-    screen_coordinate(
-       m_piece.get_br().get_x() - 4 - 16,
-       m_piece.get_br().get_y() - 4 - 16
-    ),
-    screen_coordinate(
-       m_piece.get_br().get_x() - 4,
-       m_piece.get_br().get_y() - 4
-    )
-  );
+
+  // Health bar
+  {
+    const int x1 = r.get_tl().get_x() + (0.1 * square_width);
+    const int y1 = r.get_tl().get_y() + (0.05 * square_height);
+    const int x2 = r.get_br().get_x() - (0.1 * square_width);
+    const int y2 = r.get_tl().get_y() + (0.15 * square_height);
+    m_health_bar = screen_rect(
+      screen_coordinate(x1, y1),
+      screen_coordinate(x2, y2)
+    );
+  }
+  // Piece
+  {
+    const int x1 = r.get_tl().get_x() + (0.1 * square_width);
+    const int y1 = r.get_tl().get_y() + (0.2 * square_height);
+    const int x2 = r.get_br().get_x() - (0.1 * square_width);
+    const int y2 = r.get_br().get_y() - (0.0 * square_height);
+    m_piece = screen_rect(
+      screen_coordinate(x1, y1),
+      screen_coordinate(x2, y2)
+    );
+  }
+  // Is protected
+  {
+    const int x1 = m_piece.get_br().get_x() - 4 - 16;
+    const int y1 = m_piece.get_br().get_y() - 4 - 16;
+    const int x2 = m_piece.get_br().get_x() - 4;
+    const int y2 = m_piece.get_br().get_y() - 4;
+    m_is_protected = screen_rect(
+      screen_coordinate(x1, y1),
+      screen_coordinate(x2, y2)
+    );
+  }
 }
 
 void test_piece_layout()
