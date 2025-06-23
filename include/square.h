@@ -13,6 +13,8 @@
 /// A chess square.
 ///
 /// A chess square, e.g. e4.
+///
+/// @seealso a \link{square_layout} defines the layout of a square.
 class square
 {
 public:

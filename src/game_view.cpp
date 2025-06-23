@@ -850,10 +850,9 @@ void draw_pieces(game_view& view)
   const board_layout layout(view.get_layout().get_board());
   for (const auto& piece: game.get_pieces())
   {
-    const int x = piece.get_current_square().get_x();
-    const int y = piece.get_current_square().get_y();
-    const screen_rect square_rect(layout.get_square(x, y));
-    const square_layout piece_layout(square_rect);
+    const int x{piece.get_current_square().get_x()};
+    const int y{piece.get_current_square().get_y()};
+    const square_layout& square_layout(layout.get_square(x, y));
 
     // Transparency effect when moving
     sf::Color fill_color = sf::Color::Transparent;
@@ -874,7 +873,7 @@ void draw_pieces(game_view& view)
       fill_color = sf::Color(255, 255, 255, alpha);
     }
 
-    const screen_rect sprite_rect(piece_layout.get_piece());
+    const screen_rect sprite_rect(square_layout.get_piece());
     draw_texture(
       get_piece_texture(
         piece.get_race(),
@@ -891,7 +890,7 @@ void draw_pieces(game_view& view)
     {
       draw_texture(
         game_resources::get().get_board_game_textures().get_shield(),
-        piece_layout.get_is_protected(),
+        square_layout.get_is_protected(),
         sf::Color::Blue
       );
     }

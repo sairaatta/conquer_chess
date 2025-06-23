@@ -69,7 +69,7 @@ int get_width(const board_layout& b)
 
 }
 
-const screen_rect& board_layout::get_square(const int x, const int y) const
+const square_layout& board_layout::get_square(const int x, const int y) const
 {
   assert(x >= 0);
   assert(x < 8);
@@ -93,16 +93,16 @@ void test_board_layout()
       )
     );
     const auto& a1{layout.get_square(0, 0)};
-    assert(a1.get_tl().get_x() == 0);
-    assert(a1.get_tl().get_y() == 0);
-    assert(a1.get_br().get_x() == 8);
-    assert(a1.get_br().get_y() == 8);
+    assert(a1.get_square().get_tl().get_x() == 0);
+    assert(a1.get_square().get_tl().get_y() == 0);
+    assert(a1.get_square().get_br().get_x() == 8);
+    assert(a1.get_square().get_br().get_y() == 8);
 
     const auto& a8{layout.get_square(7, 0)};
-    assert(a8.get_tl().get_x() == 64 - 8);
-    assert(a8.get_tl().get_y() == 0);
-    assert(a8.get_br().get_x() == 64);
-    assert(a8.get_br().get_y() == 8);
+    assert(a8.get_square().get_tl().get_x() == 64 - 8);
+    assert(a8.get_square().get_tl().get_y() == 0);
+    assert(a8.get_square().get_br().get_x() == 64);
+    assert(a8.get_square().get_br().get_y() == 8);
 
     assert(get_width(layout) == 64);
     assert(get_height(layout) == 64);

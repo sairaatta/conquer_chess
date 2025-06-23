@@ -3,6 +3,8 @@
 
 #include "screen_rect.h"
 
+#include "square_layout.h"
+
 #include <vector>
 
 /// The layout of a chess board.
@@ -24,13 +26,14 @@ public:
   /// - (7,0) is a8
   /// - (0,7) is h1
   /// - (7,7) is h8
-  const screen_rect& get_square(const int x, const int y) const;
+  const square_layout& get_square(const int x, const int y) const;
 
 private:
 
   screen_rect m_background;
 
-  std::vector<std::vector<screen_rect>> m_rects;
+  //std::vector<std::vector<screen_rect>> m_rects;
+  std::vector<std::vector<square_layout>> m_rects;
 };
 
 int get_height(const board_layout& b);

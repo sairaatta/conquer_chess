@@ -527,7 +527,7 @@ void draw_squares(
     for (int y = 0; y != 8; ++y)
     {
       const chess_color c{(x + y) % 2 == 0 ? chess_color::black : chess_color::white };
-      const screen_rect square_rect{layout.get_square(x, y)};
+      const screen_rect square_rect{layout.get_square(x, y).get_square()};
       auto& t{game_resources::get().get_textures()};
       if (semi_transparent)
       {

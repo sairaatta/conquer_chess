@@ -5,6 +5,7 @@
 #include <cassert>
 
 square_layout::square_layout(const screen_rect& r)
+  : m_square(r)
 {
   const int square_width{get_width(r)};
   const int square_height{get_height(r)};
