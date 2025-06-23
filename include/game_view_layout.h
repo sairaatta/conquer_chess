@@ -62,6 +62,9 @@ public:
     const int margin_width = get_default_margin_width()
   );
 
+  /// The entire screen are
+  const auto& get_background() const noexcept { return m_background; }
+
   const auto& get_board() const noexcept { return m_board; }
   const screen_rect& get_controls(const side player) const noexcept;
 
@@ -89,11 +92,10 @@ public:
   /// Information about a unit
   const screen_rect& get_unit_info(const side player) const noexcept;
 
-  screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
 private:
 
-
+  screen_rect m_background;
   screen_rect m_board;
   std::map<side, screen_rect> m_controls;
   std::map<action_number, std::map<side, screen_rect>> m_controls_key;
@@ -102,9 +104,6 @@ private:
   std::map<side, screen_rect> m_log;
   std::map<side, screen_rect> m_navigation_controls;
   std::map<side, screen_rect> m_unit_info;
-
-  /// The size of the window
-  screen_coordinate m_window_size;
 };
 
 /// Convert an in-game coordinat to an on-screen coordinat

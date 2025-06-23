@@ -814,7 +814,7 @@ void draw_background(game_view& view)
   const auto& layout{view.get_layout()};
   draw_texture(
     get_map_texture(get_race_of_color(chess_color::white)),
-    screen_rect(screen_coordinate(0, 0), layout.get_window_size())
+    screen_rect(layout.get_background())
   );
 }
 

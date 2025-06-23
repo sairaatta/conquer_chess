@@ -16,7 +16,7 @@
 game_view_layout::game_view_layout(
   const screen_coordinate& window_size,
   const int margin_width
-) : m_window_size{window_size}
+) : m_background(screen_coordinate(), window_size)
 {
   const int unit_info_height{300};
 
@@ -422,7 +422,7 @@ std::ostream& operator<<(std::ostream& os, const game_view_layout& layout) noexc
 {
   std::stringstream s;
   s
-    << "window_size: " << layout.get_window_size() << '\n'
+    << "background: " << layout.get_background() << '\n'
     << "board: " << layout.get_board() << '\n'
   ;
   for (const auto side: get_all_sides())
