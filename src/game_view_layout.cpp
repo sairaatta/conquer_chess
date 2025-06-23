@@ -16,8 +16,8 @@
 game_view_layout::game_view_layout(
   const screen_coordinate& window_size,
   const int margin_width
-) : m_background(screen_coordinate(), window_size),
-    m_board(board_layout(screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 8))))
+) : m_background(screen_coordinate(), window_size) //,
+    //m_board(board_layout(screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 8))))
 {
   const int unit_info_height{300};
 

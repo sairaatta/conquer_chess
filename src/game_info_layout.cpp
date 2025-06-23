@@ -86,6 +86,16 @@ game_info_layout::game_info_layout(const screen_rect& r)
   );
 }
 
+int get_height(const game_info_layout& layout) noexcept
+{
+  return get_height(layout.get_background());
+}
+
+int get_width(const game_info_layout& layout) noexcept
+{
+  return get_width(layout.get_background());
+}
+
 void test_game_info_layout()
 {
 #ifndef NDEBUG

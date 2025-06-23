@@ -28,7 +28,7 @@ class game_info_layout
 {
 public:
 
-  game_info_layout(const screen_rect& square_rect);
+  game_info_layout(const screen_rect& square_rect = screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 4)));
 
   const screen_rect& get_background() const noexcept { return m_background; }
 
@@ -74,6 +74,10 @@ private:
   std::map<side, screen_rect> m_f_protected;
   screen_rect m_protectedness_symbol;
 };
+
+int get_height(const game_info_layout& layout) noexcept;
+
+int get_width(const game_info_layout& layout) noexcept;
 
 void test_game_info_layout();
 

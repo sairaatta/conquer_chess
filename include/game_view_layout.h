@@ -8,9 +8,7 @@
 #include "layout.h"
 #include "side.h"
 #include "board_layout.h"
-//#include "read_only.h"
-
-#include <optional>
+#include "game_info_layout.h"
 #include <iosfwd>
 #include <map>
 #include <vector>
@@ -64,10 +62,11 @@ public:
     const int margin_width = get_default_margin_width()
   );
 
-  /// The entire screen are
+  /// The entire screen
   const auto& get_background() const noexcept { return m_background; }
 
-  const auto& get_board() const { return m_board; }
+  const auto& get_board() const noexcept { return m_board; }
+
   const screen_rect& get_controls(const side player) const noexcept;
 
   /// The square that shows:
@@ -98,12 +97,11 @@ public:
 private:
 
   screen_rect m_background;
-  // screen_rect m_board;
   board_layout m_board;
   std::map<side, screen_rect> m_controls;
   std::map<action_number, std::map<side, screen_rect>> m_controls_key;
   std::map<side, screen_rect> m_debug;
-  screen_rect m_game_info;
+  game_info_layout m_game_info;
   std::map<side, screen_rect> m_log;
   std::map<side, screen_rect> m_navigation_controls;
   std::map<side, screen_rect> m_unit_info;

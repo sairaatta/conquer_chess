@@ -14,7 +14,7 @@
 class board_layout
 {
 public:
-  board_layout(const screen_rect& r);
+  board_layout(const screen_rect& r = screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 8)));
 
   /// Get the size of the entire board
   const screen_rect& get_board() const noexcept;
