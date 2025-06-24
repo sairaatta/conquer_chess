@@ -135,7 +135,7 @@ void test_user_input()
     while (1)
     {
       const auto i{create_random_user_input(rng_engine)};
-      if (i.get_user_input_type() == user_input_type::lmb_down) break;
+      if (i.get_user_input_type() == user_input_type::mouse_move) break;
     }
   }
   // operator==
