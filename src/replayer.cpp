@@ -93,6 +93,12 @@ void test_replayer()
     s << r;
     assert(!s.str().empty());
   }
+  // operator==
+  {
+    const replayer a;
+    const replayer b;
+    assert(a == b);
+  }
 #endif // NDEBUG
 }
 
