@@ -180,14 +180,15 @@ bool controls_view::process_event_impl(sf::Event& event)
 void controls_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  const screen_coordinate window_size(
-    event.size.width, event.size.height
+  const screen_rect w(
+    screen_coordinate(0, 0),
+    screen_coordinate(event.size.width, event.size.height)
   );
   m_layout = controls_view_layout(
-    window_size,
+    w,
     get_default_margin_width()
   );
-  m_controls_bar.set_window_size(window_size);
+  m_controls_bar.set_screen_rect(w);
 }
 
 void controls_view::set_text_style(sf::Text& text)
@@ -213,7 +214,7 @@ void draw_background(controls_view& v)
   const auto& layout = v.get_layout();
   draw_texture(
     game_resources::get().get_options_menu_textures().get_texture(options_view_item::left_controls),
-    screen_rect(screen_coordinate(0,0), layout.get_window_size())
+    layout.get_background()
   );
 }
 

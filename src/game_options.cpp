@@ -10,15 +10,12 @@ game_options::game_options(
 ) : m_click_distance{get_default_click_distance()},
     m_game_speed{get_default_game_speed()},
     m_margin_width{get_default_margin_width()},
-    m_screen_size{get_default_screen_size()},
     m_starting_position{get_default_starting_position()},
     m_music_volume{get_default_music_volume()},
     m_sound_effects_volume{get_default_sound_effects_volume()}
 {
   assert(m_click_distance > 0.0);
   assert(m_margin_width >= 0);
-  assert(m_screen_size.get_x() > 0);
-  assert(m_screen_size.get_y() > 0);
 }
 
 void decrease_game_speed() noexcept
@@ -101,7 +98,6 @@ void game_options::reset()
   m_click_distance = get_default_click_distance();
   m_game_speed = get_default_game_speed();
   m_margin_width = get_default_margin_width();
-  m_screen_size = get_default_screen_size();
   m_starting_position = get_default_starting_position();
   m_music_volume = get_default_music_volume();
   m_sound_effects_volume = get_default_sound_effects_volume();
@@ -179,7 +175,6 @@ void test_game_options()
     assert(game_options::get().get_click_distance() == get_default_click_distance());
     assert(game_options::get().get_game_speed() == get_default_game_speed());
     assert(game_options::get().get_margin_width() == get_default_margin_width());
-    assert(game_options::get().get_screen_size() == get_default_screen_size());
     assert(game_options::get().get_starting_position() == get_default_starting_position());
     assert(game_options::get().get_music_volume() == get_default_music_volume());
     assert(game_options::get().get_sound_effects_volume() == get_default_sound_effects_volume());
@@ -233,7 +228,6 @@ std::ostream& operator<<(std::ostream& os, const game_options& options) noexcept
     << "game speed: " << options.get_game_speed() << '\n'
     << "Margin width: " << options.get_margin_width() << '\n'
     << "Message display time (sec): " << options.get_message_display_time_secs() << '\n'
-    << "Screen size: " << options.get_screen_size() << '\n'
     << "Starting position: " << options.get_starting_position() << '\n'
     << "Music volume: " << options.get_music_volume() << '\n'
     << "Sound effects volume: " << options.get_sound_effects_volume()

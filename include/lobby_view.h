@@ -42,9 +42,6 @@ public:
   /// If the selected item changes, play sound
   void set_selected(const lobby_view_item i);
 
-  /// Set the text to a uniform style
-  void set_text_style(sf::Text& t);
-
   void stop_impl() override;
 
   void start_impl() override;

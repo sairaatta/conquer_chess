@@ -4,13 +4,12 @@
 #include <cmath>
 
 played_game_view_layout::played_game_view_layout(
-  const screen_coordinate& window_size,
+  const screen_rect& r,
   const int margin_width
-) : m_font_size{64},
-    m_window_size{window_size}
+) : m_background{r}
 {
-  const int panel_height{window_size.get_y() - (2 * margin_width)};
-  const int panel_width{window_size.get_x() - (2 * margin_width)};
+  const int panel_height{get_height(r) - (2 * margin_width)};
+  const int panel_width{get_width(r) - (2 * margin_width)};
   const int x1{margin_width};
   const int x2{x1 + panel_width};
 
@@ -20,10 +19,6 @@ played_game_view_layout::played_game_view_layout(
   m_text = screen_rect(
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
-  );
-  m_font_size = std::min(
-    panel_height / 10,
-    panel_width / 35
   );
 }
 

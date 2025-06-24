@@ -4,9 +4,9 @@
 #include <cmath>
 
 menu_view_layout::menu_view_layout(
-  const screen_coordinate& window_size,
+  const screen_rect& r,
   const int margin_width
-) : m_window_size{window_size}
+) : m_background_image{r}
 {
   const int panel_height{100};
   const int panel_width{400};
@@ -15,7 +15,7 @@ menu_view_layout::menu_view_layout(
   const int x3{x2 + panel_width};
   const int x4{x3 + margin_width};
   const int x5{x4 + margin_width};
-  const int x6{window_size.get_x() - margin_width};
+  const int x6{get_width(r) - margin_width};
   assert(x4 < x5);
   assert(x5 < x6);
 
@@ -47,10 +47,6 @@ menu_view_layout::menu_view_layout(
   m_subtitle = screen_rect(
     screen_coordinate(x2, y4),
     screen_coordinate(x3, y5)
-  );
-  m_background_image = screen_rect(
-    screen_coordinate(0, 0),
-    screen_coordinate(window_size.get_x(), window_size.get_y())
   );
   m_start = screen_rect(
     screen_coordinate(x2, y8),

@@ -58,7 +58,7 @@ class game_view_layout
 {
 public:
   explicit game_view_layout(
-    const screen_coordinate& window_size = get_default_screen_size(),
+    const screen_rect& r = get_default_screen_rect(),
     const int margin_width = get_default_margin_width()
   );
 
@@ -92,7 +92,6 @@ public:
 
   /// Information about a unit
   const screen_rect& get_unit_info(const side player) const noexcept;
-
 
 private:
 

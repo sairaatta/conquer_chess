@@ -30,12 +30,6 @@ double calc_distance(const screen_coordinate& a, const screen_coordinate& b) noe
   return calc_distance(delta.get_x(), delta.get_y());
 }
 
-screen_coordinate get_default_screen_size() noexcept
-{
-  return screen_coordinate(1080, 1920);
-}
-
-
 void test_screen_coordinate()
 {
   #ifndef NDEBUG
@@ -55,11 +49,6 @@ void test_screen_coordinate()
     const screen_coordinate c(0, 0);
     const screen_coordinate d(3, 4);
     assert(calc_distance(c, d) == 5.0);
-  }
-  // get_default_screen_size
-  {
-    assert(get_default_screen_size().get_x() > 0);
-    assert(get_default_screen_size().get_y() > 0);
   }
   // operator+
   {
@@ -115,6 +104,18 @@ void test_screen_coordinate()
     assert(!(a == c));
     assert(!(a == d));
     assert(!(a == e));
+  }
+  // operator!=
+  {
+    const screen_coordinate a(1, 2);
+    const screen_coordinate b(1, 2);
+    const screen_coordinate c(3, 4);
+    const screen_coordinate d(1, 3);
+    const screen_coordinate e(4, 2);
+    assert(!(a != b));
+    assert(a != c);
+    assert(a != d);
+    assert(a != e);
   }
   #endif
 }
@@ -179,4 +180,9 @@ bool operator==(const screen_coordinate& lhs, const screen_coordinate& rhs) noex
   return lhs.get_x() == rhs.get_x()
     && lhs.get_y() == rhs.get_y()
   ;
+}
+
+bool operator!=(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept
+{
+  return !(lhs == rhs);
 }

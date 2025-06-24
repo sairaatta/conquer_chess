@@ -14,19 +14,20 @@
 #include <sstream>
 
 game_view_layout::game_view_layout(
-  const screen_coordinate& window_size,
+  const screen_rect& r,
   const int margin_width
-) : m_background(screen_coordinate(), window_size) //,
-    //m_board(board_layout(screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 8))))
+) : m_background{r}
 {
   const int unit_info_height{300};
 
   /// 2 for the ASDW, then 1 per action key
   const int controls_height{(2 + 4) * 64};
 
+  const int h{get_height(r)};
+
   const int log_panel_height{
     (
-      window_size.get_y()
+      h
       - (4 * margin_width)
       - unit_info_height
       - controls_height

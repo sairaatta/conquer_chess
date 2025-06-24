@@ -4,9 +4,9 @@
 #include <cmath>
 
 options_view_layout::options_view_layout(
-  const screen_coordinate& window_size,
+  const screen_rect& r,
   const int margin_size
-) : m_window_size{window_size}
+) : m_background{r}
 {
   const int panel_height{100};
   const int top_panel_width{900};

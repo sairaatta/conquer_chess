@@ -5,15 +5,12 @@
 #include "controls_bar.h"
 
 lobby_view_layout::lobby_view_layout(
-  const screen_coordinate& window_size,
+  const screen_rect& r,
   const int margin_width
-) : m_font_size{64},
-    m_window_size{window_size}
+) : m_background{r}
 {
-  m_background = screen_rect(
-    screen_coordinate(0, 0),
-    screen_coordinate(window_size.get_x(), window_size.get_y())
-  );
+  const int w{get_height(r)};
+  const int h{get_width(r)};
 
   // Central panel
   const int n_vertical_units{5};
@@ -21,7 +18,7 @@ lobby_view_layout::lobby_view_layout(
   const int panel_height{
     static_cast<int>(
       static_cast<double>(
-        window_size.get_y() - (n_vertical_margins * margin_width))
+        h - (n_vertical_margins * margin_width))
         / static_cast<double>(n_vertical_units)
     )
   };
@@ -29,13 +26,13 @@ lobby_view_layout::lobby_view_layout(
     300
   };
   const int x1{margin_width};
-  const int x2{(window_size.get_x() / 2) - panel_width - (6 * margin_width)};
+  const int x2{(w / 2) - panel_width - (6 * margin_width)};
   const int x3{x2 + margin_width + margin_width};
   const int x4{x3 + panel_width};
   const int x5{x4 + margin_width + margin_width};
   const int x6{x5 + panel_width};
   const int x7{x6 + margin_width + margin_width};
-  const int x8{window_size.get_x() - margin_width};
+  const int x8{w - margin_width};
 
   const int title_height{200};
   const int y1{margin_width};

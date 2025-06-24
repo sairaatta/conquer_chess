@@ -10,14 +10,14 @@
 
 #include <cassert>
 
-controls_bar::controls_bar() : m_window_size{get_default_screen_size()}
+controls_bar::controls_bar() : m_background{get_default_screen_rect()}
 {
 
 }
 
 void controls_bar::draw()
 {
-  const auto controls_bar_rect{create_controls_bar_area(m_window_size)};
+  const auto controls_bar_rect{create_controls_bar_area(m_background.get_br())};
   assert(get_height(controls_bar_rect) == 64);
   const int y1{controls_bar_rect.get_tl().get_y()};
   const int y2{controls_bar_rect.get_br().get_y()};
@@ -134,7 +134,8 @@ void controls_bar::draw()
     for (const auto player_side: { side::lhs, side::rhs })
     {
       const auto& c{physical_controllers::get().get_controller(player_side)};
-      if (player_side == side::rhs) x = m_window_size.get_x() / 2;
+
+      if (player_side == side::rhs) x = get_width(m_background) / 2;
 
       // Symbol
       show_physical_controller_type_symbol(c.get_type());

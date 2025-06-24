@@ -250,14 +250,15 @@ bool options_view::process_event_impl(sf::Event& event)
 void options_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  const screen_coordinate window_size(
-    event.size.width, event.size.height
+  const screen_rect w(
+    screen_coordinate(0, 0),
+    screen_coordinate(event.size.width, event.size.height)
   );
   m_layout = options_view_layout(
-    window_size,
+    w,
     get_default_margin_width()
   );
-  m_controls_bar.set_window_size(window_size);
+  m_controls_bar.set_screen_rect(w);
 }
 
 void options_view::set_selected(const options_view_item i)
@@ -302,15 +303,10 @@ void options_view::draw_impl()
 
 void draw_background(options_view& v)
 {
-  const screen_rect sr(
-    screen_coordinate(0,0),
-    v.get_layout().get_window_size()
-  );
   draw_texture(
     game_resources::get().get_options_menu_textures().get_texture(options_view_item::game_speed),
-    sr
+    v.get_layout().get_background()
   );
-
 }
 
 void draw_bottom(options_view& v)

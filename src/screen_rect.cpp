@@ -10,7 +10,16 @@ screen_rect::screen_rect(
 ) : m_top_left{top_left},
     m_bottom_right{bottom_right}
 {
+  assert(top_left != bottom_right);
+  assert(top_left.get_x() < bottom_right.get_x());
+  assert(top_left.get_y() < bottom_right.get_y());
+}
 
+screen_rect create_rect_inside(const screen_rect& r) noexcept
+{
+  const auto tl{r.get_tl() + screen_coordinate(1, 1)};
+  const auto br{r.get_br() - screen_coordinate(1, 1)};
+  return screen_rect(tl, br);
 }
 
 screen_rect get_bottom_left_corner(const screen_rect& r) noexcept
@@ -63,6 +72,13 @@ screen_coordinate get_center(const screen_rect& r) noexcept
     (r.get_tl().get_x() + r.get_br().get_x()) / 2,
     (r.get_tl().get_y() + r.get_br().get_y()) / 2
   );
+}
+
+screen_rect get_default_screen_rect() noexcept
+{
+  const screen_coordinate tl(0, 0);
+  const screen_coordinate br(1080, 1920);
+  return screen_rect(tl, br);
 }
 
 int get_height(const screen_rect& r) noexcept
@@ -183,7 +199,7 @@ void test_screen_rect()
   // screen_rect::get_br and screen_rect::get_tl
   {
     const screen_coordinate tl(1, 2);
-    const screen_coordinate br(1, 2);
+    const screen_coordinate br(3, 4);
     const screen_rect r(tl, br);
     assert(r.get_br() == br);
     assert(r.get_tl() == tl);
@@ -211,6 +227,18 @@ void test_screen_rect()
       assert(get_height(r) == height);
     }
   }
+  // create_rect_inside
+  {
+    const screen_rect r(screen_coordinate(1, 2), screen_coordinate(11, 12));
+    const screen_rect created{create_rect_inside(r)};
+    assert(r != created);
+    const screen_rect expected(
+      screen_coordinate(2, 3),
+      screen_coordinate(10, 11)
+    );
+    assert(created == expected);
+  }
+
   // get_bottom_left_corner
   {
     const screen_rect r(screen_coordinate(0, 0), screen_coordinate(2, 2));
@@ -366,8 +394,11 @@ void test_screen_rect()
   }
   // get_default_controls_screen_size
   {
-    const auto r{get_default_screen_size()};
-    assert(r.get_x() > 0);
+    const auto r{get_default_screen_rect()};
+    assert(r.get_tl().get_x() == 0);
+    assert(r.get_tl().get_y() == 0);
+    assert(r.get_br().get_x() > 320);
+    assert(r.get_br().get_y() > 200);
   }
   // is_in
   {

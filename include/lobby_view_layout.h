@@ -53,7 +53,7 @@ class lobby_view_layout
 {
 public:
   explicit lobby_view_layout(
-    const screen_coordinate& window_size = get_default_screen_size(),
+    const screen_rect& r = get_default_screen_rect(),
     const int margin_width = get_default_margin_width()
   );
 
@@ -63,11 +63,6 @@ public:
   const screen_rect& get_race(const side player_side) const noexcept;
   const screen_rect& get_ready(const side player_side) const noexcept;
   const auto& get_title() const noexcept { return m_title; }
-
-  /// Get the size of the font that would fit nicely
-  int get_font_size() const noexcept { return m_font_size; }
-
-  screen_coordinate get_window_size() const noexcept { return m_window_size.get_value(); }
 
 private:
 
@@ -82,12 +77,6 @@ private:
   screen_rect m_title;
 
   std::map<side, screen_rect> m_cursor;
-
-  /// The size of the font that would fit nicely
-  int m_font_size;
-
-  /// The size of the window
-  read_only<screen_coordinate> m_window_size;
 };
 
 /// Get the rectangle of the item

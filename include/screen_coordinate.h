@@ -43,16 +43,12 @@ double calc_angle_degrees(const screen_coordinate& delta);
 /// Calculate the Euclidean distance
 double calc_distance(const screen_coordinate& a, const screen_coordinate& b) noexcept;
 
-/// Get the default screen size, where x is the width and y is the height
-///
-/// This is used mostly in testing of layouts.
-screen_coordinate get_default_screen_size() noexcept;
-
 std::string to_str(const screen_coordinate& c) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const screen_coordinate& coordinat);
 
 bool operator==(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept;
+bool operator!=(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept;
 
 screen_coordinate operator+(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept;
 screen_coordinate operator-(const screen_coordinate& lhs, const screen_coordinate& rhs) noexcept;

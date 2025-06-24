@@ -162,14 +162,15 @@ bool game_view::process_event_impl(sf::Event& event)
 void game_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  const screen_coordinate window_size(
-    event.size.width, event.size.height
+  const screen_rect w(
+    screen_coordinate(0, 0),
+    screen_coordinate(event.size.width, event.size.height)
   );
   m_layout = game_view_layout(
-    window_size,
+    w,
     get_default_margin_width()
   );
-  m_controls_bar.set_window_size(window_size);
+  m_controls_bar.set_screen_rect(w);
 }
 
 void process_event(
@@ -502,7 +503,7 @@ void draw_game_info(game_view& view)
         ? 0.5
         : static_cast<double>(piece_values[side::lhs]) / static_cast<double>(piece_values[side::lhs] + piece_values[side::rhs])
       };
-      const auto& r{layout.get_relative_piece_value()};
+      const auto& r{create_rect_inside(layout.get_relative_piece_value())};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
       const int x1{r.get_tl().get_x()};
@@ -629,8 +630,15 @@ void draw_game_info(game_view& view)
         case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
         case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
       }
-      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      // Only draw it when visible
+      if (x1 != x2)
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      }
+      if (x2 != x3)
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      }
       draw_outline(r, sf::Color::Green, 1);
     }
   }
@@ -708,8 +716,14 @@ void draw_game_info(game_view& view)
         case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
         case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
       }
-      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      if (x1 != x2) // Only drawn when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      }
+      if (x2 != x3) // Only drawn when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      }
       draw_outline(r, sf::Color::Blue, 1);
     }
   }

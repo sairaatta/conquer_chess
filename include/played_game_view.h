@@ -5,13 +5,11 @@
 
 #include "played_game_view_layout.h"
 #include "game.h"
-#include "program_state.h"
 #include "controls_bar.h"
 #include "view.h"
 
 #include <SFML/Graphics.hpp>
 
-#include <optional>
 
 /// Dialog to view a played Conquer Chess game
 class played_game_view : public view
@@ -25,9 +23,6 @@ public:
   const auto& get_game() const noexcept { return m_game; }
 
   const auto& get_layout() const noexcept { return m_layout; }
-
-  /// Set the text to a uniform style
-  void set_text_style(sf::Text& t);
 
 private:
 

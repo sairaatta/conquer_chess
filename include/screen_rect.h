@@ -14,8 +14,8 @@ class screen_rect
 {
 public:
   explicit screen_rect(
-    const screen_coordinate& top_left = screen_coordinate(),
-    const screen_coordinate& bottom_right = screen_coordinate()
+    const screen_coordinate& top_left = screen_coordinate(0, 0),
+    const screen_coordinate& bottom_right = screen_coordinate(20, 20)
   );
 
   const auto& get_tl() const noexcept { return m_top_left; }
@@ -33,7 +33,8 @@ private:
 /// @param h the height of the rectangle
 screen_rect create_centered_rect(const screen_coordinate c, const int w, const int h) noexcept;
 
-
+/// Create a rectangle that is exactly one pixel inside the given one
+screen_rect create_rect_inside(const screen_rect& r) noexcept;
 
 screen_coordinate get_center(const screen_rect& r) noexcept;
 
@@ -42,6 +43,11 @@ screen_rect get_bottom_left_corner(const screen_rect& r) noexcept;
 
 /// Get the bottom-right corner (i.e. 25% of the rect)
 screen_rect get_bottom_right_corner(const screen_rect& r) noexcept;
+
+/// Get the default screen rectangle.
+///
+/// This is used mostly in testing of layouts.
+screen_rect get_default_screen_rect() noexcept;
 
 int get_height(const screen_rect& r) noexcept;
 
@@ -80,7 +86,6 @@ void test_screen_rect();
 
 bool operator==(const screen_rect& lhs, const screen_rect& rhs) noexcept;
 bool operator!=(const screen_rect& lhs, const screen_rect& rhs) noexcept;
-//screen_rect& operator+=(screen_rect& rect, const screen_coordinate& delta) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const screen_rect& r) noexcept;
 

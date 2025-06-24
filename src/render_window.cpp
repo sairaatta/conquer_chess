@@ -2,7 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
-#include "screen_coordinate.h"
+#include "screen_rect.h"
 
 sf::RenderWindow& get_render_window() noexcept {
 
@@ -11,8 +11,8 @@ sf::RenderWindow& get_render_window() noexcept {
 
   static sf::RenderWindow window{
     sf::VideoMode(
-      get_default_screen_size().get_x(),
-      get_default_screen_size().get_y()
+      get_width(get_default_screen_rect()),
+      get_height(get_default_screen_rect())
     ),
     "Conquer Chess",
     sf::Style::Fullscreen

@@ -33,7 +33,7 @@ class square_layout
 {
 public:
 
-  square_layout(const screen_rect& square_rect = screen_rect(screen_coordinate(0, 0), screen_coordinate(1, 1)));
+  square_layout(const screen_rect& square_rect = screen_rect(screen_coordinate(0, 0), screen_coordinate(20, 20)));
 
   /// The full square
   const screen_rect& get_square() const noexcept { return m_square; }

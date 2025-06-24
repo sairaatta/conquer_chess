@@ -54,10 +54,11 @@ class about_view_layout
 {
 public:
   explicit about_view_layout(
-    const screen_coordinate& window_size = get_default_screen_size(),
+    const screen_rect& r = get_default_screen_rect(),
     const int margin_width = get_default_margin_width()
   );
 
+  /// The size of the rectangle
   const auto& get_background() const noexcept { return m_background; }
   const auto& get_contributors() const noexcept { return m_contributors; }
   const auto& get_copyright() const noexcept { return m_copyright; }
@@ -65,8 +66,6 @@ public:
   const auto& get_subtitle() const noexcept { return m_subtitle; }
   const auto& get_title() const noexcept { return m_title; }
   const auto& get_url() const noexcept { return m_url; }
-
-  screen_coordinate get_window_size() const noexcept { return m_window_size; }
 
 private:
 
@@ -77,9 +76,6 @@ private:
   screen_rect m_subtitle;
   screen_rect m_title;
   screen_rect m_url;
-
-  /// The size of the window
-  screen_coordinate m_window_size;
 };
 
 /// Get the panels in the layout

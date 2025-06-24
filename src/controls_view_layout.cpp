@@ -4,9 +4,9 @@
 #include <cmath>
 
 controls_view_layout::controls_view_layout(
-  const screen_coordinate& window_size,
+  const screen_rect& r,
   const int margin_width
-) : m_window_size{window_size}
+) : m_background{r}
 {
   const int panel_height{80};
   const int text_panel_width{200};

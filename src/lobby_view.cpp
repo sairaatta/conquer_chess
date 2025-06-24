@@ -175,23 +175,15 @@ bool lobby_view::process_event_impl(sf::Event& event)
 void lobby_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  const screen_coordinate window_size(
-    event.size.width, event.size.height
+  const screen_rect window_rect(
+    screen_coordinate(0, 0),
+    screen_coordinate(event.size.width, event.size.height)
   );
   m_layout = lobby_view_layout(
-    window_size,
+    window_rect,
     get_default_margin_width()
   );
-  m_controls_bar.set_window_size(window_size);
-}
-
-
-void lobby_view::set_text_style(sf::Text& text)
-{
-  text.setFont(get_arial_font());
-  text.setStyle(sf::Text::Bold);
-  text.setCharacterSize(m_layout.get_font_size());
-  text.setFillColor(sf::Color::Black);
+  m_controls_bar.set_screen_rect(window_rect);
 }
 
 void lobby_view::draw_impl()
@@ -243,8 +235,7 @@ void draw_color_panel(lobby_view& v, const side player_side)
 void draw_countdown(lobby_view& v, const int n_left_secs)
 {
   const screen_rect window_rect{
-    screen_coordinate(0, 0),
-    v.get_layout().get_window_size()
+    v.get_layout().get_background()
   };
   draw_huge_fancy_text(std::to_string(n_left_secs), window_rect);
 }

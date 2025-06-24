@@ -47,14 +47,14 @@ bool about_view::process_event_impl(sf::Event& event)
 void about_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
-  const screen_coordinate window_size(
-    event.size.width, event.size.height
-  );
+  const screen_coordinate br(event.size.width, event.size.height);
+
+  const screen_rect window_rect(screen_coordinate(0,0), br);
   m_layout = about_view_layout(
-    window_size,
+    window_rect,
     get_default_margin_width()
   );
-  m_controls_bar.set_window_size(window_size);
+  m_controls_bar.set_screen_rect(create_controls_bar_area(br));
 }
 
 void about_view::draw_impl()

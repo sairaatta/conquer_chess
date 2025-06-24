@@ -219,7 +219,7 @@ void test_sfml_helper()
   // set_rect, on screen_rect
   {
     sf::RectangleShape r;
-    const screen_rect screen_size{get_default_screen_size()};
+    const screen_rect screen_size{get_default_screen_rect()};
     set_rect(r, screen_size);
     assert(r.getSize().x == get_width(screen_size));
     assert(r.getSize().y == get_height(screen_size));
@@ -238,7 +238,7 @@ void test_sfml_helper()
   {
     sf::Text t;
     t.setString("X");
-    const screen_rect screen_size{get_default_screen_size()};
+    const screen_rect screen_size{get_default_screen_rect()};
     set_text_position(t, screen_size);
     assert(!t.getString().isEmpty()); // Does not test set_text_poistion at all
   }

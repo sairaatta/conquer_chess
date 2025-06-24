@@ -23,17 +23,17 @@ public:
   void set_draw_up_down(const bool b) noexcept { m_draw_up_down = b; }
   void set_draw_select(const bool b) noexcept { m_draw_select = b; }
 
-  void set_window_size(const screen_coordinate& window_size) noexcept { m_window_size = window_size; }
+  void set_screen_rect(const screen_rect& r) noexcept { m_background = r; }
 
 private:
+
+  screen_rect m_background;
 
   bool m_draw_invert{false};
   bool m_draw_left_right_increase_descrease{false};
   bool m_draw_player_controls{true};
   bool m_draw_up_down{true};
   bool m_draw_select{true};
-
-  screen_coordinate m_window_size;
 };
 
 /// At the bottom of each window, there is a bar for the controls.

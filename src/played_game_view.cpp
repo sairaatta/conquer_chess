@@ -2,10 +2,10 @@
 
 #ifndef LOGIC_ONLY
 
-#include "screen_coordinate.h"
 #include "render_window.h"
 #include "game_resources.h"
 #include "sfml_helper.h"
+#include "draw.h"
 //#include "draw.h"
 #include <cassert>
 #include <cmath>
@@ -25,18 +25,7 @@ void played_game_view::exec()
 
 bool played_game_view::process_event_impl(sf::Event& event)
 {
-  if (event.type == sf::Event::Resized)
-  {
-    // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
-    const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
-    get_render_window().setView(sf::View(visible_area));
-
-    m_layout = played_game_view_layout(
-      screen_coordinate(event.size.width, event.size.height),
-      get_default_margin_width()
-    );
-  }
-  else if (event.type == sf::Event::Closed)
+  if (event.type == sf::Event::Closed)
   {
     set_next_state(program_state::main_menu);
     return false;
@@ -57,14 +46,6 @@ bool played_game_view::process_event_impl(sf::Event& event)
     }
   }
   return false; // Do not close the window :-)
-}
-
-void played_game_view::set_text_style(sf::Text& text)
-{
-  text.setFont(get_code_squared_font());
-  //text.setStyle(sf::Text::Bold);
-  text.setCharacterSize(m_layout.get_font_size());
-  text.setFillColor(sf::Color::White);
 }
 
 void played_game_view::draw_impl()
@@ -92,11 +73,7 @@ void show_text_panel(played_game_view& v)
   std::stringstream s;
   s << to_pgn(g);
   if (s.str().empty()) s << "[none]";
-  sf::Text text;
-  text.setString(s.str().c_str());
-  v.set_text_style(text);
-  set_text_position(text, screen_rect);
-  get_render_window().draw(text);
+  draw_text(s.str(), screen_rect, 32);
 }
 
 #endif // LOGIC_ONLY

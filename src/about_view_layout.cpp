@@ -4,9 +4,9 @@
 #include <cmath>
 
 about_view_layout::about_view_layout(
-  const screen_coordinate& window_size,
+  const screen_rect& r,
   const int margin_width
-) : m_window_size{window_size}
+) : m_background{r}
 {
   const int panel_height{64};
   const int panel_width{800};
@@ -47,10 +47,6 @@ about_view_layout::about_view_layout(
   m_contributors = screen_rect(
     screen_coordinate(x2, y10),
     screen_coordinate(x3, y11)
-  );
-  m_background = screen_rect(
-    screen_coordinate(0, 0),
-    screen_coordinate(window_size.get_x(), window_size.get_y())
   );
   m_panel_outline = screen_rect(
     screen_coordinate(x1, y1),

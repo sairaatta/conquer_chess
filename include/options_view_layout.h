@@ -55,11 +55,12 @@ class options_view_layout
 {
 public:
   explicit options_view_layout(
-    const screen_coordinate& window_size = get_default_screen_size(),
+    const screen_rect& r = get_default_screen_rect(),
     const int margin_width = get_default_margin_width()
   );
 
-  /// Get a selectable item
+  const screen_rect& get_background() const noexcept { return m_background; }
+
   const screen_rect& get_selectable_rect(const options_view_item item) const noexcept;
 
   const screen_rect& get_game_speed_label() const noexcept { return m_game_speed_label; }
@@ -82,10 +83,9 @@ public:
   /// The chosen type of controller for the LHS or RHS player
   const screen_rect& get_controller_type_value(const side player_side) const noexcept;
 
-  const screen_coordinate& get_window_size() const noexcept { return m_window_size.get_value(); }
-
 private:
 
+  screen_rect m_background;
   screen_rect m_chess_board;
   screen_rect m_controls_label;
   screen_rect m_game_speed_label;
@@ -98,9 +98,6 @@ private:
   screen_rect m_sound_effects_volume_value;
   screen_rect m_starting_pos_label;
   screen_rect m_starting_pos_value;
-
-  /// The size of the window
-  read_only<screen_coordinate> m_window_size;
 };
 
 /// Get the panels in the layout

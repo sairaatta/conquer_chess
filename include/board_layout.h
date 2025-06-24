@@ -14,7 +14,11 @@
 class board_layout
 {
 public:
-  board_layout(const screen_rect& r = screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 8)));
+  /// Create the layout of a board.
+  ///
+  /// The default size is the minimum, as this makes sure
+  /// that there are enough pixels for a proper display of the pieces.
+  board_layout(const screen_rect& r = screen_rect(screen_coordinate(0, 0), screen_coordinate(20 * 8, 20 * 8)));
 
   /// Get the size of the entire board
   const screen_rect& get_board() const noexcept;

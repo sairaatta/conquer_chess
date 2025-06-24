@@ -63,7 +63,7 @@ class menu_view_layout
 {
 public:
   explicit menu_view_layout(
-    const screen_coordinate& window_size = get_default_screen_size(),
+    const screen_rect& r = get_default_screen_rect(),
     const int margin_width = get_default_margin_width()
   );
 
@@ -82,9 +82,6 @@ public:
   const auto& get_options() const noexcept { return m_options; }
   const auto& get_quit() const noexcept { return m_quit; }
 
-  screen_coordinate get_window_size() const noexcept { return m_window_size; }
-
-
 private:
 
   /// The panel around the buttons
@@ -97,9 +94,6 @@ private:
   screen_rect m_options;
   screen_rect m_about;
   screen_rect m_quit;
-
-  /// The size of the window
-  screen_coordinate m_window_size;
 };
 
 /// Get the panels in the layout

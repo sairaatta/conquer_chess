@@ -43,9 +43,6 @@ public:
   /// How long log messages are displayed
   double get_message_display_time_secs() const noexcept { return 5.0; }
 
-  /// Get the size of the screen in pixels
-  const auto& get_screen_size() const noexcept { return m_screen_size; }
-
   /// Show the debug info
   auto get_show_debug_info() const noexcept { return m_show_debug_info; }
 
@@ -95,9 +92,6 @@ private:
 
   /// The width of the margin in pixels
   int m_margin_width;
-
-  /// The size of the screen in pixels
-  screen_coordinate m_screen_size;
 
   /// The starting position
   starting_position_type m_starting_position;
