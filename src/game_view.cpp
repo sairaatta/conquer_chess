@@ -455,7 +455,6 @@ void draw_controls(
 
 void draw_game_info(game_view& view)
 {
-  //const auto game_info_rect{view.get_layout().get_game_info()};
   const game_info_layout layout(view.get_layout().get_game_info());
 
   // Background
@@ -503,7 +502,8 @@ void draw_game_info(game_view& view)
         ? 0.5
         : static_cast<double>(piece_values[side::lhs]) / static_cast<double>(piece_values[side::lhs] + piece_values[side::rhs])
       };
-      const auto& r{create_rect_inside(layout.get_relative_piece_value())};
+      const auto& r_border{layout.get_relative_piece_value()};
+      const auto& r{create_rect_inside(r_border)};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
       const int x1{r.get_tl().get_x()};
@@ -531,7 +531,7 @@ void draw_game_info(game_view& view)
       {
         draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
       }
-      draw_outline(r, sf::Color::Red, 1);
+      draw_outline(r_border, sf::Color::Red, 1);
     }
     // Absolute
     for (const side s: get_all_sides())

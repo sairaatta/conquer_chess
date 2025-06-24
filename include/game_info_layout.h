@@ -3,6 +3,7 @@
 
 #include "screen_rect.h"
 #include "side.h"
+#include "game_info_statistic.h"
 
 #include <map>
 /// The layout of the game info
@@ -45,19 +46,19 @@ public:
   const screen_rect& get_time_symbol() const noexcept { return m_time_symbol; }
 
   // Piece value
-  const screen_rect& get_relative_piece_value() const noexcept { return m_relative_piece_value; }
-  const screen_rect& get_piece_value(const side player_side) const noexcept { return m_piece_value.at(player_side); }
-  const screen_rect& get_piece_value_symbol() const noexcept { return m_piece_value_symbol; }
+  const screen_rect& get_relative_piece_value() const noexcept { return m_relative.at(game_info_statistic::value); }
+  const screen_rect& get_piece_value(const side player_side) const noexcept { return m_absolute.at(game_info_statistic::value).at(player_side); }
+  const screen_rect& get_piece_value_symbol() const noexcept { return m_symbol.at(game_info_statistic::value); }
 
   // Activity
-  const screen_rect& get_relative_f_active() const noexcept { return m_relative_f_active; }
-  const screen_rect& get_f_active(const side player_side) const noexcept { return m_f_active.at(player_side); }
-  const screen_rect& get_activity_symbol() const noexcept { return m_activity_symbol; }
+  const screen_rect& get_relative_f_active() const noexcept { return m_relative.at(game_info_statistic::activity); }
+  const screen_rect& get_f_active(const side player_side) const noexcept { return m_absolute.at(game_info_statistic::activity).at(player_side); }
+  const screen_rect& get_activity_symbol() const noexcept { return m_symbol.at(game_info_statistic::activity); }
 
   // Protectedness
-  const screen_rect& get_relative_f_protected() const noexcept { return m_relative_f_protected; }
-  const screen_rect& get_f_protected(const side player_side) const noexcept { return m_f_protected.at(player_side); }
-  const screen_rect& get_protectedness_symbol() const noexcept { return m_protectedness_symbol; }
+  const screen_rect& get_relative_f_protected() const noexcept { return m_relative.at(game_info_statistic::protectedness); }
+  const screen_rect& get_f_protected(const side player_side) const noexcept { return m_absolute.at(game_info_statistic::protectedness).at(player_side); }
+  const screen_rect& get_protectedness_symbol() const noexcept { return m_symbol.at(game_info_statistic::protectedness); }
 
 private:
 
@@ -67,20 +68,12 @@ private:
   screen_rect m_time;
   screen_rect m_time_symbol;
 
-  // Piece value
-  screen_rect m_relative_piece_value;
-  std::map<side, screen_rect> m_piece_value;
-  screen_rect m_piece_value_symbol;
+  /// Absolute value of a statistic per side
+  std::map<game_info_statistic, std::map<side, screen_rect>> m_absolute;
 
-  // Activity
-  screen_rect m_relative_f_active;
-  std::map<side, screen_rect> m_f_active;
-  screen_rect m_activity_symbol;
-
-  // Protectedness
-  screen_rect m_relative_f_protected;
-  std::map<side, screen_rect> m_f_protected;
-  screen_rect m_protectedness_symbol;
+  /// Absolute value of a statistic per side
+  std::map<game_info_statistic, screen_rect> m_relative;
+  std::map<game_info_statistic, screen_rect> m_symbol;
 };
 
 int get_height(const game_info_layout& layout) noexcept;
