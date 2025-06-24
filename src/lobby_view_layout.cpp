@@ -9,8 +9,8 @@ lobby_view_layout::lobby_view_layout(
   const int margin_width
 ) : m_background{r}
 {
-  const int w{get_height(r)};
-  const int h{get_width(r)};
+  const int w{get_width(r)};
+  const int h{get_height(r)};
 
   // Central panel
   const int n_vertical_units{5};
