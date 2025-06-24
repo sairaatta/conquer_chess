@@ -130,7 +130,7 @@ void test()
   test_replayer();
   test_screen_coordinate();
   test_screen_rect();
-  test_sfml_helper(); // HIERO
+  test_sfml_helper();
   test_side();
   test_sleep_scheduler();
   test_sleep_scheduler();

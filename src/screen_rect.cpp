@@ -180,6 +180,14 @@ bool is_in(const screen_coordinate& pos, const screen_rect& r) noexcept
 void test_screen_rect()
 {
 #ifndef NDEBUG
+  // screen_rect::get_br and screen_rect::get_tl
+  {
+    const screen_coordinate tl(1, 2);
+    const screen_coordinate br(1, 2);
+    const screen_rect r(tl, br);
+    assert(r.get_br() == br);
+    assert(r.get_tl() == tl);
+  }
   // create_centered_rect
   {
     // Easy
