@@ -156,7 +156,7 @@ void test_user_input()
   }
   // operator<<, mouse input
   {
-    const user_input i{create_press_lmb_action(side::lhs)};
+    const user_input i{create_mouse_move_action(game_coordinate(4.5, 4.5), side::lhs)};
     std::stringstream s;
     s << i;
     assert(!s.str().empty());
