@@ -523,9 +523,14 @@ void draw_game_info(game_view& view)
         case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
         case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
       }
-
-      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      if (x1 != x2) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      }
+      if (x2 != x3) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      }
       draw_outline(r, sf::Color::Red, 1);
     }
     // Absolute
@@ -552,8 +557,14 @@ void draw_game_info(game_view& view)
         case chess_color::white: rhs_bar_color = sf::Color(255, 255, 255, 128); break;
         case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
       }
-      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      if (x1 != x2) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      }
+      if (x2 != x3) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      }
       draw_outline(r, sf::Color::Red, 1);
     }
   }
@@ -602,8 +613,14 @@ void draw_game_info(game_view& view)
         case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
       }
 
-      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      if (x1 != x2) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      }
+      if (x2 != x3) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      }
       draw_outline(r, sf::Color::Green, 1);
     }
     // Absolute
@@ -688,8 +705,14 @@ void draw_game_info(game_view& view)
         case chess_color::black: rhs_bar_color = sf::Color(0, 0, 0, 128); break;
       }
 
-      draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      if (x1 != x2) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      }
+      if (x1 != x2) // Only draw when visible
+      {
+        draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      }
       draw_outline(r, sf::Color::Blue, 1);
     }
     // Absolute
