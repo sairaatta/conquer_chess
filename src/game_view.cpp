@@ -695,15 +695,20 @@ void draw_unit_health_bars(game_view& view)
 
 
     // Bar
-    const double f_health{get_f_health(piece)};
-    const auto bar_rect{
-      square_layout.get_health_bar_value(f_health)
-    };
-    const sf::Color health_color{f_health_to_color(get_f_health(piece))};
-    draw_rectangle(
-      bar_rect,
-      health_color
-    );
+    try
+    {
+      const double f_health{get_f_health(piece)};
+      const auto bar_rect{square_layout.get_health_bar_value(f_health)};
+      const sf::Color health_color{f_health_to_color(get_f_health(piece))};
+      draw_rectangle(
+        bar_rect,
+        health_color
+      );
+    }
+    catch (std::logic_error&)
+    {
+      // OK
+    }
   }
 }
 
