@@ -1031,46 +1031,33 @@ void draw_unit_health_bars(game_view& view)
 
   for (const auto& piece: game.get_pieces())
   {
-    const auto health_bar_rect{
-      square_layout(
-        bl.get_square(
-          piece.get_current_square().get_x(),
-          piece.get_current_square().get_y()
-        )
-      ).get_health_bar()
+    const auto& square_layout{
+      bl.get_square(
+        piece.get_current_square().get_x(),
+        piece.get_current_square().get_y()
+      )
+    };
+    const auto outline_rect{
+      square_layout.get_health_bar_outline()
     };
 
     // Black background
     draw_rectangle(
-      health_bar_rect,
+      outline_rect,
       sf::Color::Black
     );
 
+
     // Bar
     const double f_health{get_f_health(piece)};
-    const int dx = f_health * get_width(health_bar_rect);
-    const screen_rect bar(
-      health_bar_rect.get_tl(),
-      screen_coordinate(
-        health_bar_rect.get_tl().get_x() + dx,
-        health_bar_rect.get_br().get_y()
-      )
-    );
-
+    const auto bar_rect{
+      square_layout.get_health_bar_value(f_health)
+    };
     const sf::Color health_color{f_health_to_color(get_f_health(piece))};
     draw_rectangle(
-      health_bar_rect,
+      bar_rect,
       health_color
     );
-
-    // Black outline
-    const int outline_thickness{1};
-    draw_outline(
-      health_bar_rect,
-      sf::Color::Black,
-      outline_thickness
-    );
-
   }
 }
 

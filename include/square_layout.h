@@ -37,7 +37,13 @@ public:
 
   /// The full square
   const screen_rect& get_square() const noexcept { return m_square; }
-  const screen_rect& get_health_bar() const noexcept { return m_health_bar; }
+
+  /// The outline of the health bar
+  const screen_rect& get_health_bar_outline() const noexcept { return m_health_bar; }
+
+  /// The health bar value, a bar within the outline of the health bar
+  screen_rect get_health_bar_value(const double f) const;
+
   const screen_rect& get_piece() const noexcept { return m_piece; }
   const screen_rect& get_is_protected() const noexcept { return m_is_protected; }
 

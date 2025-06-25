@@ -1,6 +1,7 @@
 #include "screen_rect.h"
 
 #include <cassert>
+#include <cmath>
 #include <iostream>
 #include <sstream>
 
@@ -14,6 +15,24 @@ screen_rect::screen_rect(
   assert(top_left.get_x() < bottom_right.get_x());
   assert(top_left.get_y() < bottom_right.get_y());
 }
+
+screen_rect create_partial_rect_from_lhs(const screen_rect& r, const double f)
+{
+  assert(f >= 0.0);
+  assert(f <= 1.0);
+  const int width(get_width(r));
+  const double dx{f * static_cast<double>(width)};
+  const int n_pixels{static_cast<int>(std::round(dx))};
+  assert(n_pixels > 0);
+  const int x1{r.get_tl().get_x()};
+  const int y1{r.get_tl().get_y()};
+  const int x2{r.get_tl().get_x() + n_pixels};
+  const int y2{r.get_br().get_y()};
+  const screen_coordinate tl(x1, y1);
+  const screen_coordinate br(x2, y2);
+  return screen_rect(tl, br);
+}
+
 
 screen_rect create_rect_inside(const screen_rect& r) noexcept
 {
@@ -227,6 +246,14 @@ void test_screen_rect()
       assert(get_height(r) == height);
     }
   }
+  // create_partial_rect_from_lhs
+  {
+    const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
+    const screen_rect created{create_partial_rect_from_lhs(r, 0.25)};
+    const screen_rect expected(screen_coordinate(100, 200), screen_coordinate(150, 400));
+    assert(created == expected);
+  }
+
   // create_rect_inside
   {
     const screen_rect r(screen_coordinate(1, 2), screen_coordinate(11, 12));

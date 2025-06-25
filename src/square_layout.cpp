@@ -3,6 +3,7 @@
 #include "screen_coordinate.h"
 
 #include <cassert>
+#include <cmath>
 
 square_layout::square_layout(const screen_rect& r)
   : m_square(r)
@@ -45,6 +46,14 @@ square_layout::square_layout(const screen_rect& r)
   }
 }
 
+screen_rect square_layout::get_health_bar_value(const double f) const
+{
+  assert(f >= 0.0);
+  assert(f <= 1.0);
+  const auto& r{create_rect_inside(get_health_bar_outline())};
+  return create_partial_rect_from_lhs(r, f);
+}
+
 void test_piece_layout()
 {
 #ifndef NDEBUG
@@ -55,10 +64,10 @@ void test_piece_layout()
       screen_coordinate(100, 100)
     );
     const auto layout{square_layout(r)};
-    assert(layout.get_health_bar().get_tl().get_x() == 10);
-    assert(layout.get_health_bar().get_tl().get_y() == 5);
-    assert(layout.get_health_bar().get_br().get_x() == 90);
-    assert(layout.get_health_bar().get_br().get_y() == 15);
+    assert(layout.get_health_bar_outline().get_tl().get_x() == 10);
+    assert(layout.get_health_bar_outline().get_tl().get_y() == 5);
+    assert(layout.get_health_bar_outline().get_br().get_x() == 90);
+    assert(layout.get_health_bar_outline().get_br().get_y() == 15);
 
     assert(layout.get_piece().get_tl().get_x() == 10);
     assert(layout.get_piece().get_tl().get_y() == 20);

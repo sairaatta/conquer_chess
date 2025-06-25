@@ -33,6 +33,26 @@ private:
 /// @param h the height of the rectangle
 screen_rect create_centered_rect(const screen_coordinate c, const int w, const int h) noexcept;
 
+/// Create a partial rectangle, from the right hand side
+///
+///
+/// ```text
+/// Source:
+///
+/// +--------------------+
+/// |                    |
+/// +--------------------+
+///
+/// Result, for f around 0.25:
+///
+/// +---+.................
+/// |   |                .
+/// +---+.................
+///
+/// ```
+screen_rect create_partial_rect_from_lhs(const screen_rect& r, const double f);
+
+
 /// Create a rectangle that is exactly one pixel inside the given one
 screen_rect create_rect_inside(const screen_rect& r) noexcept;
 
