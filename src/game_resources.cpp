@@ -298,7 +298,7 @@ textures& game_resources::get_textures() noexcept
 
 themba_textures& game_resources::get_themba_textures() noexcept
 {
-  if (!m_textures) m_themba_textures = themba_textures();
+  if (!m_themba_textures) m_themba_textures = themba_textures();
   assert(m_themba_textures);
   return m_themba_textures.value();
 }

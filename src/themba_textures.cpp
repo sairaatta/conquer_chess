@@ -32,7 +32,7 @@ std::string themba_textures::get_filename(
 
 sf::Texture& themba_textures::get_texture(
   const int item
-) noexcept
+)
 {
   assert(item >= 1);
   assert(item < 6);

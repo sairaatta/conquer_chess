@@ -15,7 +15,7 @@ public:
     const int item
   ) const noexcept;
 
-  int get_n_textures() const noexcept
+  int get_n_textures() const
   {
     return sizeof(*this)
       / sizeof(m_textures.at(1))
@@ -26,7 +26,7 @@ public:
   /// to be used in the Options screen
   sf::Texture& get_texture(
     const int index
-  ) noexcept;
+  );
 
 private:
 
