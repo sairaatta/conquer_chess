@@ -1217,6 +1217,12 @@ void test_pieces()
     assert(get_f_protected(pieces, chess_color::white) > 0.0);
 
   }
+  // get_f_value
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    assert(get_f_value(pieces, chess_color::white) == 1.0);
+
+  }
   // get_piece_at, const
   {
     const auto pieces{get_standard_starting_pieces()};
