@@ -249,6 +249,19 @@ bool is_in(const screen_coordinate& pos, const screen_rect& r) noexcept
 void test_screen_rect()
 {
 #ifndef NDEBUG
+  // Constructor
+  {
+    bool has_thrown{false};
+    try
+    {
+      screen_rect(screen_coordinate(0,0), screen_coordinate(0,0));
+    }
+    catch (std::logic_error&)
+    {
+      has_thrown = true;
+    }
+    assert(has_thrown);
+  }
   // screen_rect::get_br and screen_rect::get_tl
   {
     const screen_coordinate tl(1, 2);
