@@ -30,6 +30,7 @@
 #include "fps_clock.h"
 #include "game_controller.h"
 #include "game_info_layout.h"
+#include "game_info_statistic.h"
 #include "game_log.h"
 #include "game_options.h"
 #include "game_rect.h"
@@ -93,6 +94,7 @@ void test()
   test_game_controller();
   test_game_coordinate();
   test_game_info_layout();
+  test_game_info_statistic();
   test_game_options();
   test_game_rect();
   test_game_speed();
