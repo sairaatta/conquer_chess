@@ -2,6 +2,7 @@
 #define SCREEN_RECT_H
 
 #include "screen_coordinate.h"
+#include "side.h"
 
 #include <iosfwd>
 
@@ -75,6 +76,13 @@ screen_rect create_partial_rect_from_lhs(const screen_rect& r, const double f);
 /// This rectangle will not overlap with \link{create_partial_rect_from_lhs}
 screen_rect create_partial_rect_from_rhs(const screen_rect& r, const double f);
 
+/// Create a partial rectangle from a certain side.
+///
+/// - `create_partial_rect_from_side(side::lhs, r, f)`
+///   is equal to `create_partial_rect_from_lhs(side::lhs, r, f)`.
+/// - `create_partial_rect_from_side(side::rhs, r, f)`
+///   is equal to `create_partial_rect_from_rhs(side::lhs, r, f)`.
+screen_rect create_partial_rect_from_side(const side s, const screen_rect& r, const double f);
 
 /// Create a rectangle that is exactly one pixel inside the given one
 screen_rect create_rect_inside(const screen_rect& r) noexcept;

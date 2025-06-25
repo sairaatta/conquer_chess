@@ -58,6 +58,16 @@ screen_rect create_partial_rect_from_rhs(const screen_rect& r, const double f)
   return screen_rect(tl, br);
 }
 
+screen_rect create_partial_rect_from_side(const side s, const screen_rect& r, const double f)
+{
+  if (s == side::lhs)
+  {
+    return create_partial_rect_from_lhs(r, f);
+  }
+  assert(s == side::rhs);
+  return create_partial_rect_from_rhs(r, f);
+}
+
 screen_rect create_rect_inside(const screen_rect& r) noexcept
 {
   const auto tl{r.get_tl() + screen_coordinate(1, 1)};
@@ -284,7 +294,22 @@ void test_screen_rect()
     const screen_rect expected(screen_coordinate(151, 200), screen_coordinate(300, 400));
     assert(created == expected);
   }
-
+  // create_partial_rect_from_side, lhs
+  {
+    const double f{0.75};
+    const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
+    const screen_rect created{create_partial_rect_from_side(side::lhs, r, f)};
+    const screen_rect expected{create_partial_rect_from_lhs(r, f)};
+    assert(created == expected);
+  }
+  // create_partial_rect_from_side, rhs
+  {
+    const double f{0.75};
+    const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
+    const screen_rect created{create_partial_rect_from_side(side::rhs, r, f)};
+    const screen_rect expected{create_partial_rect_from_rhs(r, f)};
+    assert(created == expected);
+  }
   // create_rect_inside
   {
     const screen_rect r(screen_coordinate(1, 2), screen_coordinate(11, 12));

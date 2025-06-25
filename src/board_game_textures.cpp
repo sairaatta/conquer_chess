@@ -34,7 +34,13 @@ board_game_textures::board_game_textures()
   }
 }
 
-sf::Texture& board_game_textures::get_game_info_statistic(const game_info_statistic s)
+sf::Color board_game_textures::get_outline_color(const game_info_statistic s)
+{
+  const sf::Color c{get_symbol_color(s)};
+  return sf::Color(c.r, c.g, c.b);
+}
+
+sf::Texture& board_game_textures::get_symbol(const game_info_statistic s)
 {
   switch (s)
   {
@@ -49,7 +55,7 @@ sf::Texture& board_game_textures::get_game_info_statistic(const game_info_statis
 
 }
 
-sf::Color board_game_textures::get_game_info_statistic_color(const game_info_statistic s)
+sf::Color board_game_textures::get_symbol_color(const game_info_statistic s)
 {
   switch (s)
   {
@@ -62,6 +68,17 @@ sf::Color board_game_textures::get_game_info_statistic_color(const game_info_sta
       return sf::Color(255, 0, 0, 128);
   }
 }
+
+sf::Color board_game_textures::get_bar_color(const game_info_statistic s, const chess_color c)
+{
+  const sf::Color base{get_symbol_color(s)};
+  const int hue{c == chess_color::white ? 255 : 0};
+  const int r{(base.r + hue) / 2};
+  const int g{(base.g + hue) / 2};
+  const int b{(base.b + hue) / 2};
+  return sf::Color(r, g, b, 128);
+}
+
 
 
 
