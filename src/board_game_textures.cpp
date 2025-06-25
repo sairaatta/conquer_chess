@@ -32,7 +32,37 @@ board_game_textures::board_game_textures()
       throw std::runtime_error(msg.toStdString());
     }
   }
+}
+
+sf::Texture& board_game_textures::get_game_info_statistic(const game_info_statistic s)
+{
+  switch (s)
+  {
+    case game_info_statistic::activity: return get_flag_square();
+    case game_info_statistic::protectedness: return get_shield();
+    case game_info_statistic::time: return get_hourglass();
+    default:
+    case game_info_statistic::value:
+      assert(s == game_info_statistic::value);
+      return get_dollar();
+  }
 
 }
+
+sf::Color board_game_textures::get_game_info_statistic_color(const game_info_statistic s)
+{
+  switch (s)
+  {
+    case game_info_statistic::activity: return sf::Color(0, 255, 0, 128);
+    case game_info_statistic::protectedness: return sf::Color(0, 0, 255, 128);
+    case game_info_statistic::time: return sf::Color(255, 255, 255, 128);
+    default:
+    case game_info_statistic::value:
+      assert(s == game_info_statistic::value);
+      return sf::Color(255, 0, 0, 128);
+  }
+}
+
+
 
 #endif // LOGIC_ONLY

@@ -460,14 +460,16 @@ void draw_game_info(game_view& view)
   // Background
   draw_rectangle(layout.get_background(), sf::Color(128, 128, 128, 128));
 
-  // Clock time symbol
+  // Draw all symbols
+  for (const auto s: get_all_game_info_statistics())
   {
-    const auto& r{layout.get_symbol(game_info_statistic::time)};
     draw_texture(
-      game_resources::get().get_board_game_textures().get_hourglass(),
-      r
+      game_resources::get().get_board_game_textures().get_game_info_statistic(s),
+      layout.get_symbol(s),
+      game_resources::get().get_board_game_textures().get_game_info_statistic_color(s)
     );
   }
+
   // Clock time
   {
     const auto& r{layout.get_relative(game_info_statistic::time)};
@@ -478,15 +480,6 @@ void draw_game_info(game_view& view)
     const std::string s{to_human_str(view.get_game().get_in_game_time())};
     const auto text_rect{create_centered_rect(get_center(r), 80, 48)};
     draw_text(s, text_rect, 32);
-  }
-  // Piece value symbol
-  {
-    const auto& r{layout.get_symbol(game_info_statistic::value)};
-    draw_texture(
-      game_resources::get().get_board_game_textures().get_dollar(),
-      r,
-      sf::Color(255, 0, 0, 128)
-    );
   }
   // Piece value
   {
@@ -567,16 +560,6 @@ void draw_game_info(game_view& view)
       }
       draw_outline(r, sf::Color::Red, 1);
     }
-  }
-
-  // Activity symbol
-  {
-    const auto& r{layout.get_symbol(game_info_statistic::activity)};
-    draw_texture(
-      game_resources::get().get_board_game_textures().get_flag_square(),
-      r,
-      sf::Color(0, 255, 0, 128)
-    );
   }
   // Activity
   {
@@ -659,17 +642,6 @@ void draw_game_info(game_view& view)
       draw_outline(r, sf::Color::Green, 1);
     }
   }
-
-  // Protectednes symbol
-  {
-    const auto& r{layout.get_symbol(game_info_statistic::protectedness)};
-    draw_texture(
-      game_resources::get().get_board_game_textures().get_shield(),
-      r,
-      sf::Color(0, 0, 255, 128)
-    );
-  }
-
   // Protectedness
   {
     const auto lhs_color{get_color(side::lhs)};

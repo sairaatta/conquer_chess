@@ -3,6 +3,8 @@
 
 #ifndef LOGIC_ONLY
 
+#include "game_info_statistic.h"
+
 #include <SFML/Graphics.hpp>
 
 /// The textures for the game maps.
@@ -10,6 +12,10 @@ class board_game_textures
 {
 public:
   board_game_textures();
+
+  sf::Texture& get_game_info_statistic(const game_info_statistic s);
+
+  sf::Color get_game_info_statistic_color(const game_info_statistic s);
 
   int get_n_textures() const noexcept
   {
