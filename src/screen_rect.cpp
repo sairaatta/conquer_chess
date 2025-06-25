@@ -254,7 +254,7 @@ void test_screen_rect()
     bool has_thrown{false};
     try
     {
-      screen_rect(screen_coordinate(0,0), screen_coordinate(0,0));
+      screen_rect(screen_coordinate(0, 0), screen_coordinate(0, 0));
     }
     catch (std::logic_error&)
     {

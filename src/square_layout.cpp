@@ -77,6 +77,7 @@ void test_piece_layout()
     assert(get_width(layout.get_is_protected()) < get_width(layout.get_piece()));
     assert(get_height(layout.get_is_protected()) < get_height(layout.get_piece()));
 
+    assert(get_width(layout.get_health_bar_value(0.5)) > 35);
   }
 #endif
 
