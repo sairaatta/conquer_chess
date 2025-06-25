@@ -482,21 +482,15 @@ void draw_game_info(game_view& view)
     draw_text(s, text_rect, 32);
   }
 
-  //const auto lhs_color{get_color(side::lhs)};
-  //const auto rhs_color{get_color(side::rhs)};
+  // Statistic
   std::map<game_info_statistic, std::map<side, int>> statistics;
   for (const side s: get_all_sides())
   {
     statistics[game_info_statistic::value][s] = get_total_pieces_value(view.get_game().get_pieces(), get_color(s));
   }
-  //statistics[game_info_statistic::value][side::rhs] = get_total_pieces_value(view.get_game().get_pieces(), rhs_color);
+
   // Piece value
   {
-    //const auto lhs_color{get_color(side::lhs)};
-    //const auto rhs_color{get_color(side::rhs)};
-    //std::map<side, int> piece_values;
-    //piece_values[side::lhs] = get_total_pieces_value(view.get_game().get_pieces(), lhs_color);
-    //piece_values[side::rhs] = get_total_pieces_value(view.get_game().get_pieces(), rhs_color);
     // Relative
     {
       const game_info_statistic statistic{game_info_statistic::value};
@@ -506,7 +500,7 @@ void draw_game_info(game_view& view)
         : static_cast<double>(statistics[game_info_statistic::value][side::lhs]) / static_cast<double>(statistics[game_info_statistic::value][side::lhs] + statistics[game_info_statistic::value][side::rhs])
       };
       const auto& r_border{layout.get_relative(statistic)};
-      const auto& r{create_rect_inside(r_border)};
+      const auto r{create_rect_inside(r_border)};
       for (const side s: get_all_sides())
       {
         try
@@ -532,26 +526,45 @@ void draw_game_info(game_view& view)
     {
       const game_info_statistic statistic{game_info_statistic::value};
       const double f{static_cast<double>(statistics[game_info_statistic::value][s]) / get_max_pieces_value()};
-      const auto& r{layout.get_absolute(game_info_statistic::value, s)};
-      const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
-      const int rhs_bar_width{get_width(r) - lhs_bar_width};
-      const int x1{r.get_tl().get_x()};
-      const int x2{x1 + lhs_bar_width};
-      const int x3{x2 + rhs_bar_width};
-      const int y1{r.get_tl().get_y()};
-      const int y2{r.get_br().get_y()};
-      sf::Color lhs_bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(side::lhs))};
-      sf::Color rhs_bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(side::rhs))};
+      const auto& r_border{layout.get_absolute(game_info_statistic::value, s)};
+      try
+      {
+        const auto r{create_rect_inside(r_border)};
+        const screen_rect bar_rect{create_partial_rect_from_side(side::lhs, r, f)};
+        const sf::Color bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(s))};
+        draw_rectangle(
+          bar_rect,
+          bar_color
+        );
+      }
+      catch (std::logic_error& e)
+      {
+        // OK
+      }
+      //const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
+      //const int rhs_bar_width{get_width(r) - lhs_bar_width};
+      //const int x1{r.get_tl().get_x()};
+      //const int x2{x1 + lhs_bar_width};
+      //const int x3{x2 + rhs_bar_width};
+      //const int y1{r.get_tl().get_y()};
+      //const int y2{r.get_br().get_y()};
+      //sf::Color lhs_bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(side::lhs))};
+      //sf::Color rhs_bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(side::rhs))};
 
-      if (x1 != x2) // Only draw when visible
-      {
-        draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      }
-      if (x2 != x3) // Only draw when visible
-      {
-        draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
-      }
-      draw_outline(r, sf::Color::Red, 1);
+      //if (x1 != x2) // Only draw when visible
+      //{
+      //  draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
+      //}
+      //if (x2 != x3) // Only draw when visible
+      //{
+      //  draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
+      //}
+      //draw_outline(r, sf::Color::Red, 1);
+      draw_outline(
+        r_border,
+        game_resources::get().get_board_game_textures().get_outline_color(statistic),
+        1
+      );
     }
   }
   // Activity
