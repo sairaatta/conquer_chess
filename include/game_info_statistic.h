@@ -3,6 +3,7 @@
 
 enum class game_info_statistic
 {
+  time,
   value,
   activity,
   protectedness

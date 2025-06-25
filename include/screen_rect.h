@@ -5,9 +5,9 @@
 
 #include <iosfwd>
 
-/// A rectangle on the screen.
+/// A rectangle-shaped area on the screen.
 ///
-/// A rectangle on the screen, where `(0,0), (1,2)`
+/// A rectangle-shaped area on the screen, where `(0,0), (1,2)`
 /// denotes the pixels from the top-left corner of the screen,
 /// to the second pixel to the right and the third on down.
 class screen_rect
@@ -33,7 +33,7 @@ private:
 /// @param h the height of the rectangle
 screen_rect create_centered_rect(const screen_coordinate c, const int w, const int h) noexcept;
 
-/// Create a partial rectangle, from the right hand side
+/// Create a partial rectangle, from the left hand side
 ///
 ///
 /// ```text
@@ -50,7 +50,30 @@ screen_rect create_centered_rect(const screen_coordinate c, const int w, const i
 /// +---+.................
 ///
 /// ```
+///
+/// This rectangle will not overlap with \link{create_partial_rect_from_rhs}
 screen_rect create_partial_rect_from_lhs(const screen_rect& r, const double f);
+
+/// Create a partial rectangle, from the right hand side
+///
+///
+/// ```text
+/// Source:
+///
+/// +--------------------+
+/// |                    |
+/// +--------------------+
+///
+/// Result, for f around 0.75:
+///
+/// .....+---------------+
+/// .....|               |
+/// .....+---------------+
+///
+/// ```
+///
+/// This rectangle will not overlap with \link{create_partial_rect_from_lhs}
+screen_rect create_partial_rect_from_rhs(const screen_rect& r, const double f);
 
 
 /// Create a rectangle that is exactly one pixel inside the given one

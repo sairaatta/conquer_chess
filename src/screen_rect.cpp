@@ -11,6 +11,15 @@ screen_rect::screen_rect(
 ) : m_top_left{top_left},
     m_bottom_right{bottom_right}
 {
+  if (top_left == bottom_right
+    || top_left.get_x() > bottom_right.get_x()
+    || top_left.get_y() > bottom_right.get_y()
+  ) {
+    std::stringstream msg;
+    msg << "Cannot create rectangle (" << top_left << "-" << bottom_right << ")";
+    throw std::logic_error(msg.str());
+
+  }
   assert(top_left != bottom_right);
   assert(top_left.get_x() < bottom_right.get_x());
   assert(top_left.get_y() < bottom_right.get_y());
@@ -33,6 +42,21 @@ screen_rect create_partial_rect_from_lhs(const screen_rect& r, const double f)
   return screen_rect(tl, br);
 }
 
+screen_rect create_partial_rect_from_rhs(const screen_rect& r, const double f)
+{
+  assert(f >= 0.0);
+  assert(f <= 1.0);
+  // Get the rectangle from the right-hand side
+  const screen_rect lhs(create_partial_rect_from_lhs(r, 1.0 - f));
+
+  const int x1{lhs.get_br().get_x() + 1};
+  const int y1{r.get_tl().get_y()};
+  const int x2{r.get_br().get_x()};
+  const int y2{r.get_br().get_y()};
+  const screen_coordinate tl(x1, y1);
+  const screen_coordinate br(x2, y2);
+  return screen_rect(tl, br);
+}
 
 screen_rect create_rect_inside(const screen_rect& r) noexcept
 {
@@ -251,6 +275,13 @@ void test_screen_rect()
     const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
     const screen_rect created{create_partial_rect_from_lhs(r, 0.25)};
     const screen_rect expected(screen_coordinate(100, 200), screen_coordinate(150, 400));
+    assert(created == expected);
+  }
+  // create_partial_rect_from_rhs
+  {
+    const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
+    const screen_rect created{create_partial_rect_from_rhs(r, 0.75)};
+    const screen_rect expected(screen_coordinate(151, 200), screen_coordinate(300, 400));
     assert(created == expected);
   }
 

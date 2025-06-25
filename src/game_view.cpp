@@ -462,7 +462,7 @@ void draw_game_info(game_view& view)
 
   // Clock time symbol
   {
-    const auto& r{layout.get_time_symbol()};
+    const auto& r{layout.get_symbol(game_info_statistic::time)};
     draw_texture(
       game_resources::get().get_board_game_textures().get_hourglass(),
       r
@@ -470,7 +470,7 @@ void draw_game_info(game_view& view)
   }
   // Clock time
   {
-    const auto& r{layout.get_time()};
+    const auto& r{layout.get_relative(game_info_statistic::time)};
     draw_rectangle(
       r,
       sf::Color(128, 128, 128, 128)
@@ -481,7 +481,7 @@ void draw_game_info(game_view& view)
   }
   // Piece value symbol
   {
-    const auto& r{layout.get_piece_value_symbol()};
+    const auto& r{layout.get_symbol(game_info_statistic::value)};
     draw_texture(
       game_resources::get().get_board_game_textures().get_dollar(),
       r,
@@ -502,7 +502,7 @@ void draw_game_info(game_view& view)
         ? 0.5
         : static_cast<double>(piece_values[side::lhs]) / static_cast<double>(piece_values[side::lhs] + piece_values[side::rhs])
       };
-      const auto& r_border{layout.get_relative_piece_value()};
+      const auto& r_border{layout.get_relative(game_info_statistic::value)};
       const auto& r{create_rect_inside(r_border)};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
@@ -537,7 +537,7 @@ void draw_game_info(game_view& view)
     for (const side s: get_all_sides())
     {
       const double f{static_cast<double>(piece_values[s]) / get_max_pieces_value()};
-      const auto& r{layout.get_piece_value(s)};
+      const auto& r{layout.get_absolute(game_info_statistic::value, s)};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
       const int x1{r.get_tl().get_x()};
@@ -571,7 +571,7 @@ void draw_game_info(game_view& view)
 
   // Activity symbol
   {
-    const auto& r{layout.get_activity_symbol()};
+    const auto& r{layout.get_symbol(game_info_statistic::activity)};
     draw_texture(
       game_resources::get().get_board_game_textures().get_flag_square(),
       r,
@@ -592,7 +592,7 @@ void draw_game_info(game_view& view)
         ? 0.5
         : f_active[side::lhs] / (f_active[side::lhs] + f_active[side::rhs])
       };
-      const auto& r{layout.get_relative_f_active()};
+      const auto& r{layout.get_relative(game_info_statistic::activity)};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
       const int x1{r.get_tl().get_x()};
@@ -627,7 +627,7 @@ void draw_game_info(game_view& view)
     for (const side s: get_all_sides())
     {
       const double f{f_active[s]};
-      const auto& r{layout.get_f_active(s)};
+      const auto& r{layout.get_absolute(game_info_statistic::activity, s)};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
       const int x1{r.get_tl().get_x()};
@@ -662,7 +662,7 @@ void draw_game_info(game_view& view)
 
   // Protectednes symbol
   {
-    const auto& r{layout.get_protectedness_symbol()};
+    const auto& r{layout.get_symbol(game_info_statistic::protectedness)};
     draw_texture(
       game_resources::get().get_board_game_textures().get_shield(),
       r,
@@ -684,7 +684,7 @@ void draw_game_info(game_view& view)
         ? 0.5
         : f_protected[side::lhs] / (f_protected[side::lhs] + f_protected[side::rhs])
       };
-      const auto& r{layout.get_relative_f_protected()};
+      const auto& r{layout.get_relative(game_info_statistic::protectedness)};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
       const int x1{r.get_tl().get_x()};
@@ -719,7 +719,7 @@ void draw_game_info(game_view& view)
     for (const side s: get_all_sides())
     {
       const double f{f_protected[s]};
-      const auto& r{layout.get_f_protected(s)};
+      const auto& r{layout.get_absolute(game_info_statistic::protectedness, s)};
       const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
       const int rhs_bar_width{get_width(r) - lhs_bar_width};
       const int x1{r.get_tl().get_x()};

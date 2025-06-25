@@ -41,38 +41,31 @@ public:
 
   const screen_rect& get_background() const noexcept { return m_background; }
 
-  // Time
-  const screen_rect& get_time() const noexcept { return m_time; }
-  const screen_rect& get_time_symbol() const noexcept { return m_time_symbol; }
+  /// Get the symbol for a statistic
+  const screen_rect& get_symbol(const game_info_statistic s) const { return m_symbol.at(s); }
 
-  // Piece value
-  const screen_rect& get_relative_piece_value() const noexcept { return m_relative.at(game_info_statistic::value); }
-  const screen_rect& get_piece_value(const side player_side) const noexcept { return m_absolute.at(game_info_statistic::value).at(player_side); }
-  const screen_rect& get_piece_value_symbol() const noexcept { return m_symbol.at(game_info_statistic::value); }
+  /// Get the rectangle where the relative statistics are shown.
+  ///
+  /// The rectangle for time is in here as well.
+  const screen_rect& get_relative(const game_info_statistic s) const { return m_relative.at(s); }
 
-  // Activity
-  const screen_rect& get_relative_f_active() const noexcept { return m_relative.at(game_info_statistic::activity); }
-  const screen_rect& get_f_active(const side player_side) const noexcept { return m_absolute.at(game_info_statistic::activity).at(player_side); }
-  const screen_rect& get_activity_symbol() const noexcept { return m_symbol.at(game_info_statistic::activity); }
-
-  // Protectedness
-  const screen_rect& get_relative_f_protected() const noexcept { return m_relative.at(game_info_statistic::protectedness); }
-  const screen_rect& get_f_protected(const side player_side) const noexcept { return m_absolute.at(game_info_statistic::protectedness).at(player_side); }
-  const screen_rect& get_protectedness_symbol() const noexcept { return m_symbol.at(game_info_statistic::protectedness); }
+  /// Get the rectangle where, per player, the absolute value of a statistic is shown.
+  ///
+  /// The rectangle for time is absent here.
+  const screen_rect& get_absolute(const game_info_statistic s, const side player_side) const noexcept { return m_absolute.at(s).at(player_side); }
 
 private:
 
+  /// The full rectangle
   screen_rect m_background;
-
-  // Time
-  screen_rect m_time;
-  screen_rect m_time_symbol;
 
   /// Absolute value of a statistic per side
   std::map<game_info_statistic, std::map<side, screen_rect>> m_absolute;
 
   /// Absolute value of a statistic per side
   std::map<game_info_statistic, screen_rect> m_relative;
+
+  /// Symbols for the statistics
   std::map<game_info_statistic, screen_rect> m_symbol;
 };
 
