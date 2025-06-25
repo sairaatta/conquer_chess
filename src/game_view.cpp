@@ -483,22 +483,28 @@ void draw_game_info(game_view& view)
   }
 
   // Statistic
-  std::map<game_info_statistic, std::map<side, int>> statistics;
+  std::map<game_info_statistic, std::map<side, double>> statistics;
   for (const side s: get_all_sides())
   {
-    statistics[game_info_statistic::value][s] = get_total_pieces_value(view.get_game().get_pieces(), get_color(s));
+    statistics[game_info_statistic::value][s] = get_f_value(view.get_game().get_pieces(), get_color(s));
+    statistics[game_info_statistic::activity][s] = get_f_active(view.get_game().get_pieces(), get_color(s));
+    statistics[game_info_statistic::protectedness][s] = get_f_protected(view.get_game().get_pieces(), get_color(s));
   }
 
-  // Piece value
+  for (const game_info_statistic statistic: get_all_game_info_statistics())
   {
-    // Relative
+    // Time is displayed differently
+    if (statistic == game_info_statistic::time) continue;
+
+    // Relative, the two bars against each other
     {
-      const game_info_statistic statistic{game_info_statistic::value};
       const double f{
-        statistics[game_info_statistic::value][side::lhs] + statistics[game_info_statistic::value][side::rhs] == 0
+        statistics[statistic][side::lhs] + statistics[statistic][side::rhs] == 0
         ? 0.5
-        : static_cast<double>(statistics[game_info_statistic::value][side::lhs]) / static_cast<double>(statistics[game_info_statistic::value][side::lhs] + statistics[game_info_statistic::value][side::rhs])
+        : static_cast<double>(statistics[statistic][side::lhs]) / static_cast<double>(statistics[statistic][side::lhs] + statistics[statistic][side::rhs])
       };
+      assert(f >= 0.0);
+      assert(f <= 1.0);
       const auto& r_border{layout.get_relative(statistic)};
       const auto r{create_rect_inside(r_border)};
       for (const side s: get_all_sides())
@@ -524,9 +530,10 @@ void draw_game_info(game_view& view)
     // Absolute
     for (const side s: get_all_sides())
     {
-      const game_info_statistic statistic{game_info_statistic::value};
-      const double f{static_cast<double>(statistics[game_info_statistic::value][s]) / get_max_pieces_value()};
-      const auto& r_border{layout.get_absolute(game_info_statistic::value, s)};
+      const double f{statistics[statistic][s]};
+      assert(f >= 0.0);
+      assert(f <= 1.0);
+      const auto& r_border{layout.get_absolute(statistic, s)};
       try
       {
         const auto r{create_rect_inside(r_border)};
@@ -541,25 +548,6 @@ void draw_game_info(game_view& view)
       {
         // OK
       }
-      //const int lhs_bar_width = static_cast<double>(get_width(r)) * f;
-      //const int rhs_bar_width{get_width(r) - lhs_bar_width};
-      //const int x1{r.get_tl().get_x()};
-      //const int x2{x1 + lhs_bar_width};
-      //const int x3{x2 + rhs_bar_width};
-      //const int y1{r.get_tl().get_y()};
-      //const int y2{r.get_br().get_y()};
-      //sf::Color lhs_bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(side::lhs))};
-      //sf::Color rhs_bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(side::rhs))};
-
-      //if (x1 != x2) // Only draw when visible
-      //{
-      //  draw_rectangle(screen_rect(screen_coordinate(x1, y1), screen_coordinate(x2, y2)), lhs_bar_color);
-      //}
-      //if (x2 != x3) // Only draw when visible
-      //{
-      //  draw_rectangle(screen_rect(screen_coordinate(x2, y1), screen_coordinate(x3, y2)), rhs_bar_color);
-      //}
-      //draw_outline(r, sf::Color::Red, 1);
       draw_outline(
         r_border,
         game_resources::get().get_board_game_textures().get_outline_color(statistic),
@@ -567,6 +555,7 @@ void draw_game_info(game_view& view)
       );
     }
   }
+  /*
   // Activity
   {
     const auto lhs_color{get_color(side::lhs)};
@@ -728,7 +717,7 @@ void draw_game_info(game_view& view)
       draw_outline(r, sf::Color::Blue, 1);
     }
   }
-
+  */
 
 }
 

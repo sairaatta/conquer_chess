@@ -238,6 +238,17 @@ double get_f_protected(
   return static_cast<double>(n_protected) / static_cast<double>(n_total);
 }
 
+double get_f_value(
+  const std::vector<piece>& pieces,
+  const chess_color c
+)
+{
+  const int sum_value{get_total_pieces_value(pieces, c)};
+  const int max_value{get_max_pieces_value()};
+  assert(max_value == 40);
+  return static_cast<double>(sum_value) / static_cast<double>(max_value);
+}
+
 std::vector<piece> get_kings_only_starting_pieces(
   const race white_race,
   const race black_race

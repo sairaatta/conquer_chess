@@ -12,8 +12,8 @@ screen_rect::screen_rect(
     m_bottom_right{bottom_right}
 {
   if (top_left == bottom_right
-    || top_left.get_x() > bottom_right.get_x()
-    || top_left.get_y() > bottom_right.get_y()
+    || top_left.get_x() >= bottom_right.get_x()
+    || top_left.get_y() >= bottom_right.get_y()
   ) {
     std::stringstream msg;
     msg << "Cannot create rectangle (" << top_left << "-" << bottom_right << ")";
@@ -32,7 +32,7 @@ screen_rect create_partial_rect_from_lhs(const screen_rect& r, const double f)
   const int width(get_width(r));
   const double dx{f * static_cast<double>(width)};
   const int n_pixels{static_cast<int>(std::round(dx))};
-  assert(n_pixels > 0);
+  // assert(n_pixels > 0); If this is true, the screen_rect constructor will signal this
   const int x1{r.get_tl().get_x()};
   const int y1{r.get_tl().get_y()};
   const int x2{r.get_tl().get_x() + n_pixels};
