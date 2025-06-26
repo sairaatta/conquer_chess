@@ -718,7 +718,7 @@ void test_game_controller() //!OCLINT tests may be many
       create_game_controller_with_keyboard_mouse()
     );
     assert(!is_mouse_user(c, side::lhs));
-    assert(is_mouse_user(c, side::lhs));
+    assert(is_mouse_user(c, side::rhs));
   }
   // 55: move_cursor_to
   {
