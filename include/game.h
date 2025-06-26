@@ -2,14 +2,13 @@
 #define GAME_H
 
 #include "ccfwd.h"
-#include "game_options.h"
 #include "message.h"
-//#include "lobby_options.h"
 #include "piece.h"
 #include "side.h"
 #include "piece_action_type.h"
 #include "action_history.h"
 #include "read_only.h"
+#include "starting_position_type.h"
 
 #include <iosfwd>
 #include <optional>

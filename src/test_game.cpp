@@ -4,6 +4,7 @@
 #include "piece.h"
 #include "piece_actions.h"
 #include "lobby_options.h"
+#include "game_options.h"
 
 #include <cassert>
 #include <sstream>

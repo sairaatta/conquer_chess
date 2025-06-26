@@ -2,6 +2,7 @@
 
 #include "chess_move.h"
 #include "game.h"
+#include "game_options.h"
 #include "physical_controllers.h"
 #include "piece.h"
 #include "message_type.h"

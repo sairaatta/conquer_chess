@@ -1,6 +1,7 @@
 #include "piece.h"
 
 #include "game.h"
+#include "game_options.h"
 #include "game_coordinate.h"
 #include "helper.h"
 #include "piece_type.h"

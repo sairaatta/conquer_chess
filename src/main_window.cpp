@@ -2,6 +2,7 @@
 
 #ifndef LOGIC_ONLY
 
+#include "game_options.h"
 #include "screen_rect.h"
 #include "render_window.h"
 #include "game_resources.h"
