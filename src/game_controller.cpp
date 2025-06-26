@@ -680,28 +680,16 @@ void test_game_controller() //!OCLINT tests may be many
   #ifdef FIX_ISSUE_34_A
   // collect_all_user_inputses
   {
-      const game g{create_game_with_standard_starting_position()};
+    const game g{create_game_with_standard_starting_position()};
+    use_two_keyboard_controllers();
     game_controller c{
-      create_game_controller_with_keyboard_mouse()
+      create_game_controller_with_two_keyboards()
     };
     assert(collect_all_user_inputses(g, c).empty());
+    const auto piece_actions{collect_all_piece_actions(g)};
+    assert(user_inputs.size() == piece_actions.size());
   }
   #endif // FIX_ISSUE_34
-  // collect_all_user_inputses
-  {
-    //#define FIX_ISSUE_34
-    #ifdef FIX_ISSUE_34
-    // default start
-    {
-      const game g{create_game_with_standard_starting_position()};
-      const game_controller c(create_game_controller_with_two_keyboards());
-      const auto user_inputs{collect_all_user_inputses(g, c)};
-      assert(!user_inputs.empty());
-      const auto piece_actions{collect_all_piece_actions(g)};
-      assert(user_inputs.size() == piece_actions.size());
-    }
-    #endif // FIX_ISSUE_34
-  }
   // has_mouse_controller
   {
     const game_controller g(
