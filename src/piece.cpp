@@ -1208,6 +1208,7 @@ void tick_move(
   assert(f >= 0.0);
   assert(f <= 1.0);
 
+  // Allow for duplicate squares
   const auto occupied_squares{get_occupied_squares(g)};
   const bool is_target_occupied{is_occupied(first_action.get_to(), occupied_squares)};
   const bool is_focal_piece_at_target{p.get_current_square() == first_action.get_to()};
@@ -1246,7 +1247,7 @@ void tick_move(
     if (f >= 0.5)
     {
       // If over halfway, occupy target
-      assert(!is_occupied(first_action.get_to(), get_occupied_squares(g)));
+      assert(!is_occupied(first_action.get_to(), get_unique_occupied_squares(g)));
       p.set_current_square(first_action.get_to());
       //std::clog << "Piece over halfway (" << f << "), now occupies " << p.get_current_square() << '\n';
       // Maybe cannot check, as p is not fully updated in game?

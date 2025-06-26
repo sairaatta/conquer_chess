@@ -260,6 +260,13 @@ bool can_do_promote(
   return can_promote(selected_piece);
 }
 
+void game::check_all_occupied_squares_are_unique() const
+{
+  const auto squares{get_occupied_squares(*this)};
+  assert(are_all_unique(squares));
+}
+
+
 void game::check_game_and_pieces_agree_on_the_time() const
 {
   for (const piece& p: m_pieces)
@@ -1128,6 +1135,11 @@ game get_kings_only_game() noexcept
   return create_game_with_starting_position(starting_position_type::kings_only);
 }
 
+std::vector<square> get_unique_occupied_squares(const game& g) noexcept
+{
+  return get_unique_occupied_squares(get_pieces(g));
+}
+
 std::vector<square> get_occupied_squares(const game& g) noexcept
 {
   return get_occupied_squares(get_pieces(g));
@@ -1368,6 +1380,8 @@ void game::tick(const delta_t& dt)
   check_game_and_pieces_agree_on_the_time();
   assert(count_dead_pieces(m_pieces) == 0);
 
+  check_all_occupied_squares_are_unique();
+
   // Do those piece_actions
   for (auto& p: m_pieces)
   {
@@ -1392,8 +1406,9 @@ void game::tick(const delta_t& dt)
   // Keep track of the time
   m_in_game_time += dt;
 
-  // Assume the game and its pieces agree on the time again
   check_game_and_pieces_agree_on_the_time();
+  check_all_occupied_squares_are_unique();
+
 }
 
 void unselect_all_pieces(

@@ -4,6 +4,7 @@
 #include <cassert>
 #include <numeric>
 #include <sstream>
+#include <iostream>
 
 #include "game_coordinate.h"
 #include "lobby_options.h"
@@ -281,6 +282,13 @@ std::vector<square> get_occupied_squares(const std::vector<piece>& pieces)
   {
     squares.push_back(p.get_current_square());
   }
+  return squares;
+}
+
+std::vector<square> get_unique_occupied_squares(const std::vector<piece>& pieces)
+{
+  const auto squares{get_occupied_squares(pieces)};
+  #ifndef NDEBUG
   if (!are_all_unique(squares))
   {
     std::stringstream msg;
@@ -289,8 +297,9 @@ std::vector<square> get_occupied_squares(const std::vector<piece>& pieces)
     {
       msg << p.get_color() << " " << p.get_type() << " is at " << p.get_current_square() << '\n';
     }
-    throw std::logic_error(msg.str());
+    std::cerr << msg.str();
   }
+  #endif
   assert(are_all_unique(squares));
   return squares;
 }

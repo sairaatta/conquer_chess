@@ -868,7 +868,7 @@ void test_game_functions()
   // get_occupied_squares
   {
     const game g{create_game_with_standard_starting_position()};
-    assert(get_occupied_squares(g).size() == 32);
+    assert(get_unique_occupied_squares(g).size() == 32);
   }
   // get_piece_at, const
   {

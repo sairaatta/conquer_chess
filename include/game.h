@@ -51,6 +51,14 @@ private:
   /// The central game time
   in_game_time m_in_game_time;
 
+  /// At the start (and end) of a tick,
+  /// all occupied squares must be unique.
+  /// During a tick, as this is processed per piece,
+  /// it may be that some squares are occupied twice,
+  /// because a first piece already occupies it,
+  /// where the second has not left it yet.
+  void check_all_occupied_squares_are_unique() const;
+
 
   /// Both the game and the pieces keep track of the time.
   /// game::m_t is the cenral game time,
@@ -308,7 +316,27 @@ int get_index_of_closest_piece_to(
 /// to be used in debugging
 game get_kings_only_game() noexcept;
 
-/// Get all the squares that are occupied
+/// Get all the squares that are occupied, disallowing duplicates
+///
+/// At the start and end of a tick, all occupied squares must be unique.
+/// However, when updating each piece at a time, it can be that
+/// some squares are duplicate untill all pieces are processed.
+///
+/// All squares are tested to be unique,
+/// use \link{get_occupied_squares} to
+/// allow duplicate squares.
+std::vector<square> get_unique_occupied_squares(const game& g) noexcept;
+
+/// Get all the squares that are occupied, allowing duplicates
+///
+/// At the start and end of a tick, all occupied squares must be unique.
+/// However, when updating each piece at a time, it can be that
+/// some squares are duplicate untill all pieces are processed.
+///
+/// All squares are not tested to be unique,
+/// use \link{get_unique_occupied_squares} to
+/// guarantee that all squares are unique.
+
 std::vector<square> get_occupied_squares(const game& g) noexcept;
 
 /// Get the game options

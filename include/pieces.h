@@ -125,7 +125,26 @@ std::vector<piece> get_kings_only_starting_pieces(
 /// Get the maximum piece value a color can have on a standard chessboard
 int get_max_pieces_value() noexcept;
 
-/// Get all the squares that are occupied
+/// Get all the squares that are occupied, disallowing duplicates
+///
+/// At the start and end of a tick, all occupied squares must be unique.
+/// However, when updating each piece at a time, it can be that
+/// some squares are duplicate untill all pieces are processed.
+///
+/// All squares are tested to be unique,
+/// use \link{get_occupied_squares} to
+/// allow duplicate squares.
+std::vector<square> get_unique_occupied_squares(const std::vector<piece>& pieces);
+
+/// Get all the squares that are occupied, allowing duplicates
+///
+/// At the start and end of a tick, all occupied squares must be unique.
+/// However, when updating each piece at a time, it can be that
+/// some squares are duplicate untill all pieces are processed.
+///
+/// All squares are not tested to be unique,
+/// use \link{get_unique_occupied_squares} to
+/// guarantee that all squares are unique.
 std::vector<square> get_occupied_squares(const std::vector<piece>& pieces);
 
 /// Get the piece that at that square,
