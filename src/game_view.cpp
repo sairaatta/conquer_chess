@@ -256,7 +256,6 @@ void draw_controls(
   draw_rectangle(layout.get_controls(player_side), sf::Color(128, 128, 128, 128));
   draw_navigation_controls(layout.get_navigation_controls(player_side), player_side);
 
-
   for (const auto n: get_all_action_numbers())
   {
     const screen_rect row_rect{
@@ -272,15 +271,6 @@ void draw_controls(
         physical_controllers::get().get_controller(player_side).get_key_bindings().get_key_for_action(n),
         symbol_rect
       );
-    }
-    else
-    {
-      /*
-      draw_input_prompt_symbol(
-        physical_controllers::get().get_controller(player_side).get_mouse_bindings().get_do_it_button()),
-        symbol_rect
-      );
-      */
     }
     const screen_rect text_rect{
       symbol_rect.get_tl() + screen_coordinate(64, 0),

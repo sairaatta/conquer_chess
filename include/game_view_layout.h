@@ -9,6 +9,7 @@
 #include "side.h"
 #include "board_layout.h"
 #include "game_info_layout.h"
+#include "navigation_controls_layout.h"
 #include <iosfwd>
 #include <map>
 #include <vector>
@@ -88,7 +89,7 @@ public:
   /// The area where the frame rate (in frames per seconds) is dsplayed
   const screen_rect& get_log(const side player) const noexcept;
 
-  const screen_rect& get_navigation_controls(const side player) const noexcept;
+  const navigation_controls_layout& get_navigation_controls(const side player) const noexcept;
 
   /// Information about a unit
   const screen_rect& get_unit_info(const side player) const noexcept;
@@ -102,7 +103,7 @@ private:
   std::map<side, screen_rect> m_debug;
   game_info_layout m_game_info;
   std::map<side, screen_rect> m_log;
-  std::map<side, screen_rect> m_navigation_controls;
+  std::map<side, navigation_controls_layout> m_navigation_controls;
   std::map<side, screen_rect> m_unit_info;
 };
 

@@ -143,7 +143,7 @@ void draw_controls_bar(const screen_rect& r);
 /// ```console
 /// [Picture of a mouse with all four arrows]
 /// ```
-void draw_navigation_controls(const screen_rect& r, const side p);
+void draw_navigation_controls(const navigation_controls_layout& r, const side p);
 
 /// Draw fancy text at a normal size
 void draw_normal_fancy_text(const sf::String& s, const screen_rect& sr);

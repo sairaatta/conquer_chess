@@ -22,6 +22,7 @@ class menu_view;
 class menu_view_layout;
 class message;
 class mouse_bindings;
+class navigation_controls_layout;
 class options_view;
 class options_view_layout;
 class physical_controller;

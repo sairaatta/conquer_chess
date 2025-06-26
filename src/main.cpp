@@ -43,6 +43,7 @@
 #include "lobby_view_layout.h"
 #include "menu_view_item.h"
 #include "menu_view_layout.h"
+#include "navigation_controls_layout.h"
 #include "options_view_layout.h"
 #include "pgn_string.h"
 #include "physical_controller.h"
@@ -112,6 +113,7 @@ void test()
   test_message();
   test_message_type();
   test_mouse_bindings();
+  test_navigation_controls_layout();
   test_options_view_item();
   test_options_view_layout();
   test_pgn_string();

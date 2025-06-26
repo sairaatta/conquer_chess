@@ -126,9 +126,11 @@ game_view_layout::game_view_layout(
     const int cx2{cx1 + (3 * 64)};
     const int cy1{m_controls[s].get_tl().get_y()};
     const int cy2{cy1 + (2 * 64)};
-    m_navigation_controls[s] = screen_rect(
-      screen_coordinate(cx1, cy1),
-      screen_coordinate(cx2, cy2)
+    m_navigation_controls[s] = navigation_controls_layout(
+      screen_rect(
+        screen_coordinate(cx1, cy1),
+        screen_coordinate(cx2, cy2)
+      )
     );
   }
   for (const auto n: get_all_action_numbers())
@@ -242,7 +244,7 @@ const screen_rect& game_view_layout::get_log(const side player) const noexcept
   return m_log.at(player);
 }
 
-const screen_rect& game_view_layout::get_navigation_controls(const side player) const noexcept
+const navigation_controls_layout& game_view_layout::get_navigation_controls(const side player) const noexcept
 {
   return m_navigation_controls.at(player);
 }
