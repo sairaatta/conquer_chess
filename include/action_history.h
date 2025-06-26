@@ -53,6 +53,17 @@ const piece_action& get_last_action(const action_history& history);
 
 bool has_actions(const action_history& history) noexcept;
 
+/// Can this piece (i.e. a pawn) be captured by en-passant?
+/// Only pawns can do this, e.g. e2-e4 or e7-e5
+/// For example, when at t=0.5, e2-e4 is played,
+/// from t=1.5 to t=2.5 this function will return true.
+/// Before that, the piece was moving
+/// After that, it was too long ago for en-passant
+bool is_enpassantable(
+  const action_history& action_history,
+  const in_game_time when
+);
+
 /// Combine action histories and sort these
 action_history merge_action_histories(const std::vector<action_history> histories);
 

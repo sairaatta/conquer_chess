@@ -350,7 +350,7 @@ bool has_actions(const piece& p) noexcept
 
 bool has_just_double_moved(
   const piece& p,
-  const in_game_time when
+  const in_game_time& when
 ) noexcept
 {
   return has_just_double_moved(p.get_action_history(), when);
@@ -366,18 +366,21 @@ bool is_dead(const piece& p) noexcept
   return p.get_health() <= 0.0;
 }
 
-bool is_enpassantable(const piece& p)
+bool piece::is_enpassantable(
+  const in_game_time& when
+) const
 {
-  return p.is_enpassantable();
+  return has_just_double_moved(*this, when);
 }
 
 
-bool piece::is_enpassantable() const
+bool is_enpassantable(
+  const piece& p,
+  const in_game_time& when
+)
 {
-  assert(is_pawn(*this));
-  return false;
+  return p.is_enpassantable(when);
 }
-
 
 bool is_idle(const piece& p) noexcept
 {
@@ -800,7 +803,32 @@ void test_piece()
   {
       const auto p{get_test_white_pawn()};
       assert(is_pawn(p));
-      assert(!is_enpassantable(p));
+      assert(!is_enpassantable(p, in_game_time(0.0)));
+  }
+  // is_enpassantable
+  {
+    action_history h;
+    assert(!has_just_double_moved(h, in_game_time(2.0)));
+    h.add_action(
+      in_game_time(0.5),
+      piece_action(
+        chess_color::white,
+        piece_type::pawn,
+        piece_action_type::move,
+        "e2",
+        "e4"
+      )
+    );
+    assert(!has_just_double_moved(h, in_game_time(0.0)));
+    assert(!has_just_double_moved(h, in_game_time(1.0)));
+    assert(has_just_double_moved(h, in_game_time(2.0)));
+    assert(!has_just_double_moved(h, in_game_time(3.0)));
+
+    assert(!is_enpassantable(h, in_game_time(0.0)));
+    assert(!is_enpassantable(h, in_game_time(1.0)));
+    assert(is_enpassantable(h, in_game_time(2.0)));
+    assert(!is_enpassantable(h, in_game_time(3.0)));
+
   }
   // is_idle
   {

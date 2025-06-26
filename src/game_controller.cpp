@@ -1188,7 +1188,7 @@ void test_game_controller() //!OCLINT tests may be many
     const auto pos_after{get_cursor_pos(c, side::rhs)};
     assert(pos_before != pos_after);
   }
-  // #27: a2-a3 takes 1 time unit
+  // a2-a3 takes 1 time unit
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -1213,47 +1213,49 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("a3")));
   }
-  // #27: a2-a4 takes 1 time unit, after which the pawn is en-passantable
+  // a2-a4 takes 1 time unit, after which the pawn is en-passantable
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, square("a2")));
-    assert(is_piece_at(g, square("b2")));
-    assert(!is_piece_at(g, square("a4")));
     assert(!is_piece_at(g, square("a3")));
-    assert(!is_piece_at(g, square("b3")));
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(!is_piece_at(g, square("a4")));
 
     do_select(g, c, "a2", side::lhs);
     move_cursor_to(c, "a4", side::lhs);
     assert(count_selected_units(g, chess_color::white) == 1);
-
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
-    assert(is_piece_at(g, square("a2")));
-    assert(!is_piece_at(g, square("a4")));
-    // Should take 1 time unit
     for (int i{0}; i!=4; ++i)
     {
       g.tick(delta_t(0.25));
     }
     assert(!is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("a4")));
+  }  // a2-a4 makes the pawn en-passantable
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(is_piece_at(g, square("a2")));
+    assert(!is_piece_at(g, square("a3")));
+    assert(!is_piece_at(g, square("a4")));
 
-    // Has just double moved
-    assert(has_just_double_moved(get_piece_at(g, "a4"), g.get_in_game_time()));
-    // Should take 1 time unit
+    do_select(g, c, "a2", side::lhs);
+    move_cursor_to(c, "a4", side::lhs);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
     for (int i{0}; i!=4; ++i)
     {
       g.tick(delta_t(0.25));
-      assert(has_just_double_moved(get_piece_at(g, "a4"), g.get_in_game_time()));
     }
-    // Rounding off error?
-    g.tick(delta_t(0.00001));
-    assert(!has_just_double_moved(get_piece_at(g, "a4"), g.get_in_game_time()));
+    assert(!is_piece_at(g, square("a2")));
+    assert(is_piece_at(g, square("a4")));
+    assert(has_just_double_moved(get_piece_at(g, "a4"), g.get_in_game_time()));
+    assert(is_enpassantable(get_piece_at(g, "a4"), g.get_in_game_time()));
   }
-  // #27: a2-a5 does nothing
+  // a2-a5 does nothing
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -1278,6 +1280,52 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(g, square("a2")));
     assert(!is_piece_at(g, square("a5")));
   }
+  #ifdef FIX_EN_PASSANT_CAPTURE
+  // En-passant capture
+  {
+    game g{create_game_with_starting_position(starting_position_type::before_en_passant)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(is_piece_at(g, square("g2"))); // White pawn to be captured
+    assert(is_piece_at(g, square("h4"))); // Black pawn to capture
+    assert(!is_piece_at(g, square("g3"))); // White pawn can move forward
+    assert(!is_piece_at(g, square("g4"))); // White pawn can move forward
+    assert(count_selected_units(g, chess_color::white) == 0);
+
+    // g2-g4
+    do_select(g, c, "g2", side::lhs); // White pawn
+    move_cursor_to(c, "g4", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    for (int i{0}; i!=5; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(!is_piece_at(g, square("g2")));
+    assert(is_piece_at(g, square("g4")));
+    assert(is_enpassantable(get_piece_at(g, "g4"), g.get_in_game_time()));
+
+    // h4xg3 e.p.
+    do_select(g, c, "h4", side::rhs); // Black pawn
+    move_cursor_to(c, "g3", side::rhs);
+    add_user_input(c, create_press_action_1(side::rhs));
+    c.apply_user_inputs_to_game(g);
+
+    const auto messages{collect_messages(g)};
+    // Maybe type must be start_en_passant_attack?
+    assert(messages.back().get_message_type() == message_type::start_attack);
+
+    for (int i{0}; i!=4; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    g.tick(delta_t(0.25));
+    assert(!is_piece_at(g, square("h4"))); // Black pawn has moved from here
+    assert(!is_piece_at(g, square("g4"))); // White pawn is captured
+    assert(is_piece_at(g, square("g3"))); // Black pawn has moved here
+  }
+#endif // FIX_EN_PASSANT_CAPTURE
 #ifdef FIX_CASTLING_KINGSIDE
   // castling kingside
   {

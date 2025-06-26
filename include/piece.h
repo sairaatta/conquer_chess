@@ -97,7 +97,7 @@ public:
 
   /// Can the unit be captured by en-passant?
   /// Will fail if the piece is not a pawn
-  bool is_enpassantable() const;
+  bool is_enpassantable(const in_game_time& when) const;
 
   /// Is the piece selected?
   bool is_selected() const noexcept { return m_is_selected; }
@@ -241,7 +241,7 @@ bool has_actions(const piece& p) noexcept;
 /// Only pawns can do this, e.g. e2-e4 or e7-e5
 bool has_just_double_moved(
   const piece& p,
-  const in_game_time when
+  const in_game_time& when
 ) noexcept;
 
 /// Has this piece (attempted to) move?
@@ -252,7 +252,10 @@ bool has_moved(const piece& p) noexcept;
 bool is_dead(const piece& p) noexcept;
 
 /// Can the unit be captured by en-passant?
-bool is_enpassantable(const piece& p);
+bool is_enpassantable(
+  const piece& p,
+  const in_game_time& when
+);
 
 /// Is the unit idle?
 bool is_idle(const piece& p) noexcept;

@@ -78,6 +78,14 @@ bool has_just_double_moved(
   return false;
 }
 
+bool is_enpassantable(
+  const action_history& action_history,
+  const in_game_time when
+)
+{
+  return has_just_double_moved(action_history, when);
+}
+
 action_history merge_action_histories(const std::vector<action_history> histories)
 {
   std::vector<std::pair<in_game_time, piece_action>> timed_actions;

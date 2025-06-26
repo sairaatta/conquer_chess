@@ -49,11 +49,9 @@ void test_game_class()
         assert(p.get_in_game_time() == g.get_in_game_time());
       }
     }
-    //#define FIX_ISSUE_21_A
-    #ifdef FIX_ISSUE_21_A
     // a2-a4 makes a pawn en-passantable
     {
-      game g;
+      game g{create_game_with_standard_starting_position()};
       piece& p{get_piece_at(g, "a2")};
       p.add_action(
         piece_action(
@@ -64,14 +62,36 @@ void test_game_class()
           "a4"
         )
       );
-      assert(!p.is_enpassantable());
+      assert(!p.is_enpassantable(g.get_in_game_time()));
       g.tick(delta_t(0.5));
       g.tick(delta_t(0.5));
-      assert(p.is_enpassantable());
-      assert(is_piece_at(g, square("a4")));
+      assert(p.is_enpassantable(g.get_in_game_time()));
     }
-    #endif // FIX_ISSUE_21_A
-
+    // a2-a4 makes a pawn en-passantable for one second
+    {
+      game g{create_game_with_standard_starting_position()};
+      piece& p{get_piece_at(g, "a2")};
+      p.add_action(
+        piece_action(
+          chess_color::white,
+          piece_type::pawn,
+          piece_action_type::move,
+          "a2",
+          "a4"
+        )
+      );
+      assert(!p.is_enpassantable(g.get_in_game_time()));
+      g.tick(delta_t(0.5));
+      assert(!p.is_enpassantable(g.get_in_game_time()));
+      g.tick(delta_t(0.5));
+      assert(p.is_enpassantable(g.get_in_game_time()));
+      g.tick(delta_t(0.49));
+      assert(p.is_enpassantable(g.get_in_game_time()));
+      g.tick(delta_t(0.49));
+      assert(p.is_enpassantable(g.get_in_game_time()));
+      g.tick(delta_t(0.1));
+      assert(!p.is_enpassantable(g.get_in_game_time()));
+    }
     // #27: a2-a4 takes as long as b2-b3
     {
       game g{create_game_with_standard_starting_position()};
@@ -677,8 +697,9 @@ void test_game_functions()
     #endif // FIX_ISSUE_78
     // can_do: standard stup
     {
-      game_options::get().set_starting_position(starting_position_type::standard);
-      const game g;
+      const game g{
+        create_game_with_standard_starting_position()
+      };
       // Pawns move forward
       assert(can_do(g, get_piece_at(g, "d2"), piece_action_type::move, "d4", side::lhs));
       assert(can_do(g, get_piece_at(g, "d7"), piece_action_type::move, "d5", side::rhs));
@@ -703,23 +724,6 @@ void test_game_functions()
       assert(!can_do(g, get_piece_at(g, "d1"), piece_action_type::attack, "d7", side::lhs));
       assert(!can_do(g, get_piece_at(g, "d8"), piece_action_type::attack, "d2", side::rhs));
     }
-    //#define FIX_ISSUE_21
-    #ifdef FIX_ISSUE_21
-    // can_do: en_passant
-    {
-      game g{
-        get_game_with_starting_position(starting_position_type::before_en_passant)
-      };
-      do_select_and_move_piece(g, "b7", "b5", side::rhs);
-      assert(is_piece_at(g, square("b5")));
-      do_select_and_move_piece(g, "b7", "b5", side::rhs);
-      assert(get_default_piece_action(g, c, side::lhs));
-      assert(get_default_piece_action(g, c, side::lhs).value() != piece_action_type::move);
-      assert(get_default_piece_action(g, c, side::lhs).value() != piece_action_type::attack);
-      // std::clog << g << '\n';
-      assert(get_default_piece_action(g, c, side::lhs).value() == piece_action_type::en_passant);
-    }
-    #endif // FIX_ISSUE_21
     // can_do: castling
     {
       game g{
@@ -785,34 +789,20 @@ void test_game_functions()
     }
     #endif // FIX_ISSUE_21
 
-    //#define FIX_ISSUE_21
-    #ifdef FIX_ISSUE_21
+    //#define FIX_ISSUE_21_774
+    #ifdef FIX_ISSUE_21_774
     // 21: can do en-passant after black b7-b5
     {
       game g{
-        game_options(
-          get_default_screen_size(),
-          create_mouse_keyboard_controllers(),
-          starting_position_type::before_en_passant,
-          get_default_game_speed(),
-          get_default_margin_width()
-        )
+        create_game_with_starting_position(starting_position_type::before_en_passant)
       };
-      std::clog << "==================================\n";
-      std::clog << "= START                          =\n";
-      std::clog << "==================================\n";
-      std::clog << g << '\n';
       assert(is_piece_at(g, square("b7")));
       assert(!is_piece_at(g, square("b5")));
-      do_select_and_move_keyboard_player_piece(g, "b7", "b5");
+      do_select_and_move_piece(g, "b7", "b5");
       // It takes 1 time unit to move,
       // aim at halfway to window of opportunity for en-passant
       for (int i{0}; i!=6; ++i) g.tick(delta_t(0.25));
       assert(!is_piece_at(g, square("b7")));
-      std::clog << "==================================\n";
-      std::clog << "= AFTER                          =\n";
-      std::clog << "==================================\n";
-      std::clog << g << '\n';
       assert(!is_piece_at(g, square("b7")));
       assert(is_piece_at(g, square("b5")));
       const auto actions{collect_all_piece_actions(g)};
@@ -844,7 +834,7 @@ void test_game_functions()
       assert(!is_in(c5xb6ep, actions_again));
     }
     assert(!"Progress #21");
-    #endif // FIX_ISSUE_21
+    #endif // FIX_ISSUE_21_774
   }
   // count_piece_actions: actions in pieces accumulate
   {
