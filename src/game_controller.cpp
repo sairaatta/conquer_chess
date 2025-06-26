@@ -676,9 +676,20 @@ void test_game_controller() //!OCLINT tests may be many
     add_user_input(c, create_press_action_1(side::lhs));
     assert(!is_empty(get_user_inputs(c)));
   }
+  //#define FIX_ISSUE_34_A
+  #ifdef FIX_ISSUE_34_A
   // collect_all_user_inputses
   {
-    // #define FIX_ISSUE_34
+      const game g{create_game_with_standard_starting_position()};
+    game_controller c{
+      create_game_controller_with_keyboard_mouse()
+    };
+    assert(collect_all_user_inputses(g, c).empty());
+  }
+  #endif // FIX_ISSUE_34
+  // collect_all_user_inputses
+  {
+    //#define FIX_ISSUE_34
     #ifdef FIX_ISSUE_34
     // default start
     {
