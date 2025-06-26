@@ -676,6 +676,13 @@ void test_game_controller() //!OCLINT tests may be many
     add_user_input(c, create_press_action_1(side::lhs));
     assert(!is_empty(get_user_inputs(c)));
   }
+  // count_user_inputs
+  {
+    game_controller c{
+      create_game_controller_with_keyboard_mouse()
+    };
+    assert(count_user_inputs(c) == 0);
+  }
   //#define FIX_ISSUE_34_A
   #ifdef FIX_ISSUE_34_A
   // collect_all_user_inputses
@@ -696,6 +703,22 @@ void test_game_controller() //!OCLINT tests may be many
       create_game_controller_with_two_keyboards()
     );
     assert(!has_mouse_controller(g));
+  }
+  // has_keyboard_controller
+  {
+    const game_controller g(
+      create_game_controller_with_two_keyboards()
+    );
+    assert(has_keyboard_controller(g));
+
+  }
+  // has_mouse_controller
+  {
+    const game_controller c(
+      create_game_controller_with_keyboard_mouse()
+    );
+    assert(!is_mouse_user(c, side::lhs));
+    assert(is_mouse_user(c, side::lhs));
   }
   // 55: move_cursor_to
   {
@@ -1175,6 +1198,13 @@ void test_game_controller() //!OCLINT tests may be many
     set_cursor_pos(c, pos + game_coordinate(0.1, 0.1), side::rhs);
     const auto pos_after{get_cursor_pos(c, side::rhs)};
     assert(pos_before != pos_after);
+  }
+  // get_piece_actions
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    const auto m{get_piece_actions(g, c, side::lhs)};
+    assert(!m.empty());
   }
   // a2-a3 takes 1 time unit
   {
