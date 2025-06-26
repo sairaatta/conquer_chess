@@ -76,7 +76,7 @@ sf::Color board_game_textures::get_bar_color(const game_info_statistic s, const 
   const int r{(base.r + hue) / 2};
   const int g{(base.g + hue) / 2};
   const int b{(base.b + hue) / 2};
-  return sf::Color(r, g, b, 128);
+  return sf::Color(r, g, b, 128 + 64);
 }
 
 

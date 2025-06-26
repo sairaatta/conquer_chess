@@ -355,6 +355,8 @@ void draw_game_info(game_view& view)
         try
         {
           const double f_side{s == side::lhs ? f : 1.0 - f};
+          assert(f_side >= 0.0);
+          assert(f_side <= 1.0);
           const screen_rect bar_rect{create_partial_rect_from_side(s, r, f_side)};
           const sf::Color bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(s))};
           draw_rectangle(bar_rect, bar_color);
@@ -380,11 +382,22 @@ void draw_game_info(game_view& view)
       try
       {
         const auto r{create_rect_inside(r_border)};
-        const screen_rect bar_rect{create_partial_rect_from_side(side::lhs, r, f)};
-        const sf::Color bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(s))};
+        // Start the bar at the player's side
+        const screen_rect bar_rect{create_partial_rect_from_side(s, r, f)};
+        const sf::Color bar_color{
+          game_resources::get().get_board_game_textures().get_bar_color(
+            statistic,
+            get_color(s)
+          )
+        };
         draw_rectangle(
           bar_rect,
           bar_color
+        );
+        draw_outline(
+          bar_rect,
+          game_resources::get().get_board_game_textures().get_outline_color(statistic),
+          1
         );
       }
       catch (std::logic_error& e)
