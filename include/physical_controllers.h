@@ -84,6 +84,8 @@ void use_mouse_keyboard_controllers() noexcept;
 /// - \link{use_two_keyboard_controllers}
 void use_two_keyboard_controllers() noexcept;
 
+/*
+
 /// Get the side of the controller that uses the keyboard.
 /// Assumes there is one controller that uses the keyboard
 side get_keyboard_user_player_side(const physical_controllers& controllers);
@@ -91,6 +93,7 @@ side get_keyboard_user_player_side(const physical_controllers& controllers);
 /// Get the side of the controller that uses the mouse.
 /// Assumes there is one controller that uses the mouse
 side get_mouse_user_player_side(const physical_controllers& controllers);
+*/
 
 /// Determine if there is at least one controller that use the keyboard
 bool has_keyboard_controller(const physical_controllers& controllers) noexcept;
