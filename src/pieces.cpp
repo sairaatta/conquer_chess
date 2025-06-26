@@ -273,13 +273,23 @@ int get_max_pieces_value() noexcept
   return 40;
 }
 
-std::vector<square> get_occupied_squares(const std::vector<piece>& pieces) noexcept
+std::vector<square> get_occupied_squares(const std::vector<piece>& pieces)
 {
   std::vector<square> squares;
   squares.reserve(pieces.size());
   for (const auto& p: pieces)
   {
     squares.push_back(p.get_current_square());
+  }
+  if (!are_all_unique(squares))
+  {
+    std::stringstream msg;
+    msg << "ERROR: Not all squares are unique.\n";
+    for (const auto& p: pieces)
+    {
+      msg << p.get_color() << " " << p.get_type() << " is at " << p.get_current_square() << '\n';
+    }
+    throw std::logic_error(msg.str());
   }
   assert(are_all_unique(squares));
   return squares;

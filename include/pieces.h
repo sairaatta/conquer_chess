@@ -126,7 +126,7 @@ std::vector<piece> get_kings_only_starting_pieces(
 int get_max_pieces_value() noexcept;
 
 /// Get all the squares that are occupied
-std::vector<square> get_occupied_squares(const std::vector<piece>& pieces) noexcept;
+std::vector<square> get_occupied_squares(const std::vector<piece>& pieces);
 
 /// Get the piece that at that square,
 /// will throw if there is no piece
