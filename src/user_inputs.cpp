@@ -892,6 +892,14 @@ void test_user_inputs()
     assert(get_piece_at(g, "a8").get_type() != piece_type::pawn);
     assert(get_piece_at(g, "a8").get_type() == piece_type::knight);
   }
+  // operator==
+  {
+    user_inputs a;
+    user_inputs b;
+    assert(a == b);
+    a.add(create_press_action_1(side::lhs));
+    assert(!(a == b));
+  }
 #endif // NDEBUG
 }
 
