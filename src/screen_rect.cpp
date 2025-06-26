@@ -46,16 +46,26 @@ screen_rect create_partial_rect_from_rhs(const screen_rect& r, const double f)
 {
   assert(f >= 0.0);
   assert(f <= 1.0);
-  // Get the rectangle from the right-hand side
-  const screen_rect lhs(create_partial_rect_from_lhs(r, 1.0 - f));
+  try
+  {
+    // Get the rectangle from the right-hand side
+    const screen_rect lhs(create_partial_rect_from_lhs(r, 1.0 - f));
 
-  const int x1{lhs.get_br().get_x() + 1};
-  const int y1{r.get_tl().get_y()};
-  const int x2{r.get_br().get_x()};
-  const int y2{r.get_br().get_y()};
-  const screen_coordinate tl(x1, y1);
-  const screen_coordinate br(x2, y2);
-  return screen_rect(tl, br);
+    const int x1{lhs.get_br().get_x() + 1};
+    const int y1{r.get_tl().get_y()};
+    const int x2{r.get_br().get_x()};
+    const int y2{r.get_br().get_y()};
+    const screen_coordinate tl(x1, y1);
+    const screen_coordinate br(x2, y2);
+    return screen_rect(tl, br);
+  }
+  catch (std::logic_error& e)
+  {
+    // The LHS rectangle could not be created
+    // This means the LHS rectangle was 0 pixels wide
+    // That means that this rectangle is the full rectangle wide
+  }
+  return r;
 }
 
 screen_rect create_partial_rect_from_side(const side s, const screen_rect& r, const double f)
@@ -315,12 +325,28 @@ void test_screen_rect()
     const screen_rect expected{create_partial_rect_from_lhs(r, f)};
     assert(created == expected);
   }
+  // create_partial_rect_from_side, lhs
+  {
+    const double f{1.00};
+    const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
+    const screen_rect created{create_partial_rect_from_side(side::lhs, r, f)};
+    const screen_rect expected{r};
+    assert(created == expected);
+  }
   // create_partial_rect_from_side, rhs
   {
     const double f{0.75};
     const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
     const screen_rect created{create_partial_rect_from_side(side::rhs, r, f)};
     const screen_rect expected{create_partial_rect_from_rhs(r, f)};
+    assert(created == expected);
+  }
+  // create_partial_rect_from_side, rhs
+  {
+    const double f{1.00};
+    const screen_rect r(screen_coordinate(100, 200), screen_coordinate(300, 400));
+    const screen_rect created{create_partial_rect_from_side(side::rhs, r, f)};
+    const screen_rect expected{r};
     assert(created == expected);
   }
   // create_rect_inside
