@@ -151,7 +151,7 @@ bool can_castle_kingside(
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
 
-  // can_castle_kingside will check if it is a king
+  // 'can_castle_kingside' will check if it is a king
   return can_castle_kingside(selected_piece, g);
 
 }
@@ -167,23 +167,8 @@ bool can_castle_queenside(
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
 
-  // can_castle_kingside will check if it is a king
+  // 'can_castle_kingside' will check if it is a king
   return can_castle_queenside(selected_piece, g);
-}
-
-
-bool can_do(
-  const game& g,
-  const game_controller& c,
-  const piece_action_type action,
-  const side player_side
-)
-{
-  if (action == piece_action_type::select)
-  {
-    return can_player_select_piece_at_cursor_pos(g, c, player_side);
-  }
-  return false;
 }
 
 bool can_move(
@@ -1287,7 +1272,8 @@ void test_game_controller() //!OCLINT tests may be many
     }
     assert(!is_piece_at(g, square("a2")));
     assert(is_piece_at(g, square("a4")));
-  }  // a2-a4 makes the pawn en-passantable
+  }
+  // a2-a4 makes the pawn en-passantable
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
