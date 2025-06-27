@@ -69,6 +69,7 @@ physical_controller_type get_physical_controller_type(const game_view& view, con
   return get_physical_controller(view, player_side).get_type();
 }
 
+#ifdef USE_OLD_GET_PIECE_ACTION_SYSTEM
 std::string get_controls_text(
   const game_view& view,
   const game_controller& c,
@@ -78,6 +79,8 @@ std::string get_controls_text(
 {
   return get_text_for_action(view, c, player_side, n);
 }
+#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
+
 
 double game_view::get_elapsed_time_secs() const noexcept
 {
@@ -119,6 +122,7 @@ const game_coordinate& get_cursor_pos(const game_view& view, const side player) 
   return get_cursor_pos(view.get_game_controller(), player);
 }
 
+#ifdef USE_OLD_GET_PIECE_ACTION_SYSTEM
 std::string get_text_for_action(
   const game_view& view,
   const game_controller& c,
@@ -132,6 +136,28 @@ std::string get_text_for_action(
   if (!maybe_action) return "";
   return to_human_str(maybe_action.value());
 }
+#else
+std::vector<std::string> get_controls_texts(
+  const game_view& view,
+  const game_controller& c,
+  const side player_side
+)
+{
+  const auto actions{get_piece_actions(view.get_game(), c, player_side)};
+  std::vector<std::string> texts;
+  texts.reserve(actions.size());
+  std::transform(
+    std::begin(actions),
+    std::end(actions),
+    std::back_inserter(texts),
+    [](const auto& a) { return to_str(a); }
+  );
+  assert(actions.size() == texts.size());
+  return texts;
+}
+
+#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
+
 
 const in_game_time& get_time(const game_view& v) noexcept
 {
@@ -272,15 +298,12 @@ void draw_controls(
   );
   draw_navigation_controls(layout.get_navigation_controls(), player_side);
 
+  const std::vector<std::string> texts{
+      get_controls_texts(view, view.get_game_controller(), player_side)
+  };
+
   for (const auto n: get_all_action_numbers())
   {
-    //const screen_rect row_rect{
-    //  layout.get_action_key_row(n)
-    //};
-    //const screen_rect symbol_rect{
-    //  row_rect.get_tl(),
-    //  row_rect.get_tl() + screen_coordinate(64, 64)
-    //};
     const screen_rect symbol_rect{layout.get_action_key_symbol(n)};
     if (c.get_type() == physical_controller_type::keyboard)
     {
@@ -289,17 +312,15 @@ void draw_controls(
         symbol_rect
       );
     }
-    const screen_rect text_rect{layout.get_action_key_text(n)};
-    //const screen_rect text_rect{
-    //  symbol_rect.get_tl() + screen_coordinate(64, 0),
-    //  screen_coordinate(row_rect.get_br().get_x(), symbol_rect.get_br().get_y())
-    //};
-    const std::string text{
-      get_controls_text(view, view.get_game_controller(), player_side, n)
-    };
-    if (!text.empty())
+    const int i{n.get_number() - 1};
+    assert(i >= 0);
+    if (i < static_cast<int>(texts.size()))
     {
-      draw_text(text, text_rect, 26);
+      draw_text(
+        texts[i],
+        layout.get_action_key_text(n),
+        26
+      );
     }
   }
 }
