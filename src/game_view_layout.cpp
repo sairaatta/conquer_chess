@@ -73,6 +73,8 @@ game_view_layout::game_view_layout(
       screen_coordinate(x_left, y1),
       screen_coordinate(x_right, y2)
       );
+    assert(x_left < x_right);
+    assert(y2 < y4);
     m_controls[s] = in_game_controls_layout(
       screen_rect(
         screen_coordinate(x_left, y2),
@@ -292,7 +294,7 @@ void test_game_view_layout()
     {
       for (const auto& key: get_all_action_numbers())
       {
-        assert(layout.get_controls(player).get_controls_key(key).get_br().get_x() >= 0);
+        assert(layout.get_controls(player).get_action_key_row(key).get_br().get_x() >= 0);
       }
     }
   }
@@ -380,7 +382,7 @@ void test_game_view_layout()
       {
         assert(
           is_in(
-            get_center(layout.get_controls(s).get_controls_key(n)),
+            get_center(layout.get_controls(s).get_action_key_row(n)),
             layout.get_controls(s).get_background()
           )
         );

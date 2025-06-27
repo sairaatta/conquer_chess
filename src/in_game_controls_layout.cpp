@@ -6,31 +6,84 @@
 in_game_controls_layout::in_game_controls_layout(const screen_rect& r)
   : m_background{r}
 {
-  const int x_mid{(r.get_tl().get_x() + r.get_br().get_x()) / 2};
-  const int cx1{x_mid - ((3 * 64) / 2)};
-  const int cx2{cx1 + (3 * 64)};
-  const int cy1{r.get_tl().get_y()};
-  const int cy2{cy1 + (2 * 64)};
-  m_navigation_controls = navigation_controls_layout(
-    screen_rect(
-      screen_coordinate(cx1, cy1),
-      screen_coordinate(cx2, cy2)
-    )
-  );
-  for (const auto n: get_all_action_numbers())
+  assert(r == m_background);
+  const int symbol_height{64};
+  const int symbol_width{64};
+  assert(get_width(r) > symbol_width + 2);
+  assert(get_height(r) >= symbol_height);
+
+  // Navigation controls
   {
-    m_controls_key[n] = screen_rect(
-      r.get_tl() + screen_coordinate(0 * 64, (1 + n.get_number()) * 64),
-      screen_coordinate(r.get_br().get_x(), r.get_tl().get_y() + (2 + n.get_number()) * 64)
-    );
+    const int x_mid{(r.get_tl().get_x() + r.get_br().get_x()) / 2};
+    const int x1{x_mid - ((3 * 64) / 2)};
+    const int x2{x1 + (3 * 64)};
+    const int y1{r.get_tl().get_y()};
+    const int y2{y1 + (2 * 64)};
+    assert(x1 < x2);
+    m_navigation_controls = navigation_controls_layout(
+      screen_rect(
+        screen_coordinate(x1, y1),
+        screen_coordinate(x2, y2)
+        )
+      );
+  }
+  // Keys for actions
+  {
+
+    for (const auto n: get_all_action_numbers())
+    {
+      const int x1{r.get_tl().get_x()};
+      const int x2{x1 + symbol_width};
+      const int x3{r.get_br().get_x()};
+      assert(x1 < x2);
+      assert(x2 < x3);
+
+      const int y1{r.get_tl().get_y() + ((1 + n.get_number()) * 64)};
+      const int y2{y1 + symbol_height};
+      assert(y1 < y2);
+
+      const auto row_rect{
+        screen_rect(
+          screen_coordinate(x1, y1),
+          screen_coordinate(x3, y2)
+        )
+      };
+      const screen_rect symbol_rect{
+        screen_coordinate(x1, y1),
+        screen_coordinate(x2, y2)
+      };
+      const auto text_rect{
+        screen_rect(
+          screen_coordinate(x2, y1),
+          screen_coordinate(x3, y2)
+        )
+      };
+      m_action_key_rows[n] = row_rect;
+      m_action_key_symbol[n] = symbol_rect;
+      m_action_key_text[n] = text_rect;
+    }
   }
 }
 
-const screen_rect& in_game_controls_layout::get_controls_key(
-  const action_number& key
+const screen_rect& in_game_controls_layout::get_action_key_row(
+  const action_number& n
 ) const noexcept
 {
-  return m_controls_key.at(key);
+  return m_action_key_rows.at(n);
+}
+
+const screen_rect& in_game_controls_layout::get_action_key_symbol(
+  const action_number& n
+) const noexcept
+{
+  return m_action_key_symbol.at(n);
+}
+
+const screen_rect& in_game_controls_layout::get_action_key_text(
+  const action_number& n
+) const noexcept
+{
+  return m_action_key_text.at(n);
 }
 
 void test_in_game_controls_layout()
@@ -38,10 +91,10 @@ void test_in_game_controls_layout()
 #ifndef NDEBUG
   {
     const in_game_controls_layout layout;
-    const auto r1{layout.get_controls_key(action_number(1))};
-    const auto r2{layout.get_controls_key(action_number(2))};
-    const auto r3{layout.get_controls_key(action_number(3))};
-    const auto r4{layout.get_controls_key(action_number(4))};
+    const auto r1{layout.get_action_key_row(action_number(1))};
+    const auto r2{layout.get_action_key_row(action_number(2))};
+    const auto r3{layout.get_action_key_row(action_number(3))};
+    const auto r4{layout.get_action_key_row(action_number(4))};
     assert(r1 != r2);
     assert(r1 != r3);
     assert(r1 != r4);
@@ -67,10 +120,10 @@ std::ostream& operator<<(std::ostream& os, const in_game_controls_layout& layout
 {
   std::stringstream s;
   s
-    << "Controls key 1: " << layout.get_controls_key(action_number(1)) << '\n'
-    << "Controls key 2: " << layout.get_controls_key(action_number(2)) << '\n'
-    << "Controls key 3: " << layout.get_controls_key(action_number(3)) << '\n'
-    << "Controls key 4: " << layout.get_controls_key(action_number(4)) << '\n'
+    << "Controls key 1: " << layout.get_action_key_row(action_number(1)) << '\n'
+    << "Controls key 2: " << layout.get_action_key_row(action_number(2)) << '\n'
+    << "Controls key 3: " << layout.get_action_key_row(action_number(3)) << '\n'
+    << "Controls key 4: " << layout.get_action_key_row(action_number(4)) << '\n'
   ;
 
   std::string t{s.str()};

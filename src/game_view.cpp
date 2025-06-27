@@ -274,13 +274,14 @@ void draw_controls(
 
   for (const auto n: get_all_action_numbers())
   {
-    const screen_rect row_rect{
-      layout.get_controls_key(n)
-    };
-    const screen_rect symbol_rect{
-      row_rect.get_tl(),
-      row_rect.get_tl() + screen_coordinate(64, 64)
-    };
+    //const screen_rect row_rect{
+    //  layout.get_action_key_row(n)
+    //};
+    //const screen_rect symbol_rect{
+    //  row_rect.get_tl(),
+    //  row_rect.get_tl() + screen_coordinate(64, 64)
+    //};
+    const screen_rect symbol_rect{layout.get_action_key_symbol(n)};
     if (c.get_type() == physical_controller_type::keyboard)
     {
       draw_input_prompt_symbol(
@@ -288,10 +289,11 @@ void draw_controls(
         symbol_rect
       );
     }
-    const screen_rect text_rect{
-      symbol_rect.get_tl() + screen_coordinate(64, 0),
-      screen_coordinate(row_rect.get_br().get_x(), symbol_rect.get_br().get_y())
-    };
+    const screen_rect text_rect{layout.get_action_key_text(n)};
+    //const screen_rect text_rect{
+    //  symbol_rect.get_tl() + screen_coordinate(64, 0),
+    //  screen_coordinate(row_rect.get_br().get_x(), symbol_rect.get_br().get_y())
+    //};
     const std::string text{
       get_controls_text(view, view.get_game_controller(), player_side, n)
     };

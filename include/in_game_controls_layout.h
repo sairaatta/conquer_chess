@@ -33,7 +33,7 @@
 class in_game_controls_layout
 {
 public:
-  in_game_controls_layout(const screen_rect& r = screen_rect(screen_coordinate(0, 0), screen_coordinate(1, 1)));
+  in_game_controls_layout(const screen_rect& r = screen_rect(screen_coordinate(0, 0), screen_coordinate(64 * 3, 64 * 7)));
 
   /// The background
   const screen_rect& get_background() const noexcept { return m_background; }
@@ -57,7 +57,36 @@ public:
   /// +---+----------+
   /// ```
   ///
-  const screen_rect& get_controls_key(const action_number& key) const noexcept;
+  /// @seealso
+  /// - Use \link{get_action_key_symbol} to get
+  ///   the symbol for the key for that action
+  /// - Use \link{get_action_key_text} to get
+  ///   the text of what that action does
+  const screen_rect& get_action_key_row(const action_number& n) const noexcept;
+
+  /// The symbol for the key of that action
+  ///
+  /// The `AK1` in this image:
+  ///
+  /// ```console
+  /// +---+----------+
+  /// |AK1|Text1     |
+  /// +---+----------+
+  /// ```
+  ///
+  const screen_rect& get_action_key_symbol(const action_number& n) const noexcept;
+
+  /// The text of what that action does
+  ///
+  /// The `Text1` in this image:
+  ///
+  /// ```console
+  /// +---+----------+
+  /// |AK1|Text1     |
+  /// +---+----------+
+  /// ```
+  ///
+  const screen_rect& get_action_key_text(const action_number& n) const noexcept;
 
   /// The layout for the navigational controls
 
@@ -76,8 +105,11 @@ private:
 
   screen_rect m_background;
   navigation_controls_layout m_navigation_controls;
-  std::map<action_number, screen_rect> m_controls_key;
-  std::map<action_number, screen_rect> m_keys;
+
+  /// The full row
+  std::map<action_number, screen_rect> m_action_key_rows;
+  std::map<action_number, screen_rect> m_action_key_symbol;
+  std::map<action_number, screen_rect> m_action_key_text;
 };
 
 void test_in_game_controls_layout();
