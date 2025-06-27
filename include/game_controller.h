@@ -111,16 +111,6 @@ bool can_castle_queenside(
   const side player_side
 ) noexcept;
 
-/*
-/// Can a player do a certain action?
-bool can_do(
-  const game& g,
-  const game_controller& c,
-  const piece_action_type action,
-  const side player_side
-);
-*/
-
 bool can_move(
   const game& g,
   const game_controller& c,

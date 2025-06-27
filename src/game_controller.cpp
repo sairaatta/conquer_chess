@@ -44,6 +44,110 @@ void game_controller::apply_user_inputs_to_game(
   game& g
 )
 {
+  #ifndef USE_OLD_SYSTEM
+  std::map<side, std::vector<piece_action_type>> actions;
+  actions[side::lhs] = get_piece_actions(g, *this, side::lhs);
+  actions[side::rhs] = get_piece_actions(g, *this, side::rhs);
+
+  std::map<side, std::vector<user_input>> user_inputs;
+  user_inputs[side::lhs] = {};
+  user_inputs[side::rhs] = {};
+  for (const auto& user_input: m_user_inputs.get_user_inputs())
+  {
+    user_inputs[user_input.get_player()].push_back(user_input);
+  }
+
+  for (const side s: get_all_sides())
+  {
+    for (const auto& user_input: user_inputs.at(s))
+    {
+      switch(user_input.get_user_input_type())
+      {
+        case user_input_type::press_down:
+        {
+          const auto pos{get_cursor_pos(user_input.get_player())};
+          set_cursor_pos(get_below(pos), user_input.get_player());
+        }
+        break;
+        case user_input_type::press_left:
+        {
+          const auto pos{get_cursor_pos(user_input.get_player())};
+          set_cursor_pos(get_left(pos), user_input.get_player());
+        }
+        break;
+        case user_input_type::press_right:
+        {
+          const auto pos{get_cursor_pos(user_input.get_player())};
+          set_cursor_pos(get_right(pos), user_input.get_player());
+        }
+        break;
+        case user_input_type::press_up:
+        {
+          const auto pos{get_cursor_pos(user_input.get_player())};
+          set_cursor_pos(get_above(pos), user_input.get_player());
+        }
+        break;
+        case user_input_type::mouse_move:
+        {
+          if (has_mouse_controller(*this))
+          {
+            assert(user_input.get_coordinat());
+            set_cursor_pos(user_input.get_coordinat().value(), user_input.get_player());
+            assert(get_cursor_pos(user_input.get_player()) == user_input.get_coordinat().value());
+            assert(square(get_cursor_pos(user_input.get_player())) == square(user_input.get_coordinat().value()));
+          }
+        }
+        break;
+        case user_input_type::rmb_down:
+        {
+          const auto maybe_index{
+            get_mouse_user_selector()
+          };
+          assert(maybe_index);
+          set_mouse_user_selector(
+            get_next(maybe_index.value())
+          );
+        }
+        break;
+        case user_input_type::lmb_down:
+        {
+          if (!has_mouse_controller(*this)) return;
+          //TODO: Do the selected action
+          process_press_action_1_or_lmb_down(g, *this, user_input);
+        }
+        break;
+        case user_input_type::press_action_1:
+        {
+          if (actions[s].size() < 1) continue;
+          // TODO: do the action at 'actions[s][0]' instead
+          process_press_action_1(g, *this, user_input);
+        }
+        break;
+        case user_input_type::press_action_2:
+        {
+          if (actions[s].size() < 2) continue;
+          // TODO: do the action at 'actions[s][1]' instead
+          process_press_action_2(g, *this, user_input);
+        }
+        break;
+        case user_input_type::press_action_3:
+        {
+          if (actions[s].size() < 3) continue;
+          // TODO: do the action at 'actions[s][2]' instead
+          process_press_action_3(g, *this, user_input);
+        }
+        break;
+        case user_input_type::press_action_4:
+        {
+          if (actions[s].size() < 4) continue;
+          // TODO: do the action at 'actions[s][3]' instead
+          process_press_action_4(g, *this, user_input);
+        }
+        break;
+      }
+    }
+  }
+  #else
   for (const auto& action: m_user_inputs.get_user_inputs())
   {
     if (action.get_user_input_type() == user_input_type::press_action_1)
@@ -115,6 +219,7 @@ void game_controller::apply_user_inputs_to_game(
     }
   }
   m_user_inputs = std::vector<user_input>();
+  #endif
 }
 
 bool can_attack(
@@ -132,12 +237,17 @@ bool can_attack(
 }
 
 bool can_attack_en_passant(
-  const game& /* g */,
-  const game_controller& /* c */,
-  const side // player_side
+  const game& g,
+  const game_controller& c,
+  const side player_side
 ) noexcept
 {
-  return false;
+  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  if (selected_pieces.empty()) return false;
+  assert(selected_pieces.size() == 1);
+  const auto& selected_piece{selected_pieces[0]};
+  const square cursor_square(square(c.get_cursor_pos(player_side)));
+  return can_do_en_passant(g, selected_piece, cursor_square, player_side);
 }
 
 bool can_castle_kingside(
