@@ -294,7 +294,7 @@ void test_game_view_layout()
     {
       for (const auto& key: get_all_action_numbers())
       {
-        assert(layout.get_controls(player).get_action_key_row(key).get_br().get_x() >= 0);
+        assert(layout.get_controls(player).get_action_key_text(key).get_br().get_x() >= 0);
       }
     }
   }
@@ -382,7 +382,13 @@ void test_game_view_layout()
       {
         assert(
           is_in(
-            get_center(layout.get_controls(s).get_action_key_row(n)),
+            get_center(layout.get_controls(s).get_action_key_symbol(n)),
+            layout.get_controls(s).get_background()
+          )
+        );
+        assert(
+          is_in(
+            get_center(layout.get_controls(s).get_action_key_text(n)),
             layout.get_controls(s).get_background()
           )
         );

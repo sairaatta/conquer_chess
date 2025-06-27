@@ -38,33 +38,9 @@ public:
   /// The background
   const screen_rect& get_background() const noexcept { return m_background; }
 
-  /// Get the screen area for a row for an action key.
-  ///
-  /// The square that shows:
-  ///   1. the action name, e.g. 'attack'
-  ///      Use \link{get_controls_key_name} to get the screen_rect
-  ///      for this section
-  ///   2. the action icon, e.g. an arrow that points to a cross for attack.
-  ///      Use \link{get_controls_key_icon} to get the screen_rect
-  ///      for this section
-  ///   3. the user input, e.g. 'Q' or LMB.
-  ///      Use \link{get_controls_key_input} to get the screen_rect
-  ///      for this section
-  ///
-  /// ```console
-  /// +---+----------+
-  /// |AK1|Text1     |
-  /// +---+----------+
-  /// ```
-  ///
-  /// @seealso
-  /// - Use \link{get_action_key_symbol} to get
-  ///   the symbol for the key for that action
-  /// - Use \link{get_action_key_text} to get
-  ///   the text of what that action does
-  const screen_rect& get_action_key_row(const action_number& n) const noexcept;
-
   /// The symbol for the key of that action
+  ///
+  /// For example, the symbol for the key Q or LMB.
   ///
   /// The `AK1` in this image:
   ///
@@ -77,6 +53,8 @@ public:
   const screen_rect& get_action_key_symbol(const action_number& n) const noexcept;
 
   /// The text of what that action does
+  ///
+  /// For example 'select', 'attack', etc.
   ///
   /// The `Text1` in this image:
   ///
@@ -102,12 +80,9 @@ public:
   const auto& get_navigation_controls() const noexcept { return m_navigation_controls; }
 
 private:
-
   screen_rect m_background;
   navigation_controls_layout m_navigation_controls;
 
-  /// The full row
-  std::map<action_number, screen_rect> m_action_key_rows;
   std::map<action_number, screen_rect> m_action_key_symbol;
   std::map<action_number, screen_rect> m_action_key_text;
 };

@@ -42,12 +42,6 @@ in_game_controls_layout::in_game_controls_layout(const screen_rect& r)
       const int y2{y1 + symbol_height};
       assert(y1 < y2);
 
-      const auto row_rect{
-        screen_rect(
-          screen_coordinate(x1, y1),
-          screen_coordinate(x3, y2)
-        )
-      };
       const screen_rect symbol_rect{
         screen_coordinate(x1, y1),
         screen_coordinate(x2, y2)
@@ -58,18 +52,10 @@ in_game_controls_layout::in_game_controls_layout(const screen_rect& r)
           screen_coordinate(x3, y2)
         )
       };
-      m_action_key_rows[n] = row_rect;
       m_action_key_symbol[n] = symbol_rect;
       m_action_key_text[n] = text_rect;
     }
   }
-}
-
-const screen_rect& in_game_controls_layout::get_action_key_row(
-  const action_number& n
-) const noexcept
-{
-  return m_action_key_rows.at(n);
 }
 
 const screen_rect& in_game_controls_layout::get_action_key_symbol(
@@ -89,12 +75,28 @@ const screen_rect& in_game_controls_layout::get_action_key_text(
 void test_in_game_controls_layout()
 {
 #ifndef NDEBUG
+  // get_action_key_symbol
   {
     const in_game_controls_layout layout;
-    const auto r1{layout.get_action_key_row(action_number(1))};
-    const auto r2{layout.get_action_key_row(action_number(2))};
-    const auto r3{layout.get_action_key_row(action_number(3))};
-    const auto r4{layout.get_action_key_row(action_number(4))};
+    const auto r1{layout.get_action_key_symbol(action_number(1))};
+    const auto r2{layout.get_action_key_symbol(action_number(2))};
+    const auto r3{layout.get_action_key_symbol(action_number(3))};
+    const auto r4{layout.get_action_key_symbol(action_number(4))};
+    assert(r1 != r2);
+    assert(r1 != r3);
+    assert(r1 != r4);
+    assert(r2 != r3);
+    assert(r2 != r4);
+    assert(r3 != r4);
+
+  }
+  // get_action_key_text
+  {
+    const in_game_controls_layout layout;
+    const auto r1{layout.get_action_key_text(action_number(1))};
+    const auto r2{layout.get_action_key_text(action_number(2))};
+    const auto r3{layout.get_action_key_text(action_number(3))};
+    const auto r4{layout.get_action_key_text(action_number(4))};
     assert(r1 != r2);
     assert(r1 != r3);
     assert(r1 != r4);
@@ -119,12 +121,16 @@ void test_in_game_controls_layout()
 std::ostream& operator<<(std::ostream& os, const in_game_controls_layout& layout) noexcept
 {
   std::stringstream s;
-  s
-    << "Controls key 1: " << layout.get_action_key_row(action_number(1)) << '\n'
-    << "Controls key 2: " << layout.get_action_key_row(action_number(2)) << '\n'
-    << "Controls key 3: " << layout.get_action_key_row(action_number(3)) << '\n'
-    << "Controls key 4: " << layout.get_action_key_row(action_number(4)) << '\n'
-  ;
+  for (const auto n: get_all_action_numbers())
+  {
+    s
+      << "Controls for action key " << n << ": "
+      << layout.get_action_key_symbol(action_number(1))
+      << " with text "
+      << layout.get_action_key_text(action_number(1))
+      << '\n'
+    ;
+  }
 
   std::string t{s.str()};
   assert(!t.empty());
