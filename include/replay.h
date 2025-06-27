@@ -8,6 +8,9 @@
 #include <vector>
 
 /// A replay of a regular chess match.
+///
+/// It converts a chess game in PGN notatation
+/// to a collection of chess moves.
 class replay
 {
 public:

@@ -263,16 +263,19 @@ void draw_controls(
   // Stub for keyboard only
   const auto& c{physical_controllers::get().get_controller(player_side)};
 
-  const auto& layout{view.get_layout()};
+  const auto& layout{view.get_layout().get_controls(player_side)};
 
   // Blur the entire background here
-  draw_rectangle(layout.get_controls(player_side), sf::Color(128, 128, 128, 128));
-  draw_navigation_controls(layout.get_navigation_controls(player_side), player_side);
+  draw_rectangle(
+    layout.get_background(),
+    sf::Color(128, 128, 128, 128)
+  );
+  draw_navigation_controls(layout.get_navigation_controls(), player_side);
 
   for (const auto n: get_all_action_numbers())
   {
     const screen_rect row_rect{
-      layout.get_controls_key(player_side, n)
+      layout.get_controls_key(n)
     };
     const screen_rect symbol_rect{
       row_rect.get_tl(),

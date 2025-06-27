@@ -73,9 +73,11 @@ game_view_layout::game_view_layout(
       screen_coordinate(x_left, y1),
       screen_coordinate(x_right, y2)
       );
-    m_controls[s] = screen_rect(
-      screen_coordinate(x_left, y2),
-      screen_coordinate(x_right, y4)
+    m_controls[s] = in_game_controls_layout(
+      screen_rect(
+        screen_coordinate(x_left, y2),
+        screen_coordinate(x_right, y4)
+      )
     );
   }
 
@@ -96,7 +98,7 @@ game_view_layout::game_view_layout(
     m_debug[s] = screen_rect(
       screen_coordinate(x_left, y7),
       screen_coordinate(x_right, y8)
-      );
+    );
   }
 
   // Board
@@ -118,31 +120,6 @@ game_view_layout::game_view_layout(
   assert(get_board_width(*this) == get_board_height(*this));
   assert(get_square_width(*this) == get_square_height(*this));
 
-  // Controls details
-  for (const auto s: get_all_sides())
-  {
-    const int x_mid{(m_controls[s].get_tl().get_x() + m_controls[s].get_br().get_x()) / 2};
-    const int cx1{x_mid - ((3 * 64) / 2)};
-    const int cx2{cx1 + (3 * 64)};
-    const int cy1{m_controls[s].get_tl().get_y()};
-    const int cy2{cy1 + (2 * 64)};
-    m_navigation_controls[s] = navigation_controls_layout(
-      screen_rect(
-        screen_coordinate(cx1, cy1),
-        screen_coordinate(cx2, cy2)
-      )
-    );
-  }
-  for (const auto n: get_all_action_numbers())
-  {
-    for (const auto s: get_all_sides())
-    {
-      m_controls_key[n][s] = screen_rect(
-        m_controls[s].get_tl() + screen_coordinate(0 * 64, (1 + n.get_number()) * 64),
-        screen_coordinate(m_controls[s].get_br().get_x(), m_controls[s].get_tl().get_y() + (2 + n.get_number()) * 64)
-      );
-    }
-  }
 }
 
 game_coordinate convert_to_game_coordinate(
@@ -221,17 +198,9 @@ int get_board_width(const game_view_layout& layout) noexcept
 }
 
 
-const screen_rect& game_view_layout::get_controls(const side player) const noexcept
+const in_game_controls_layout& game_view_layout::get_controls(const side player) const noexcept
 {
   return m_controls.at(player);
-}
-
-const screen_rect& game_view_layout::get_controls_key(
-  const side player,
-  const action_number& key
-) const noexcept
-{
-  return m_controls_key.at(key).at(player);
 }
 
 const screen_rect& game_view_layout::get_debug(const side player) const noexcept
@@ -246,7 +215,8 @@ const screen_rect& game_view_layout::get_log(const side player) const noexcept
 
 const navigation_controls_layout& game_view_layout::get_navigation_controls(const side player) const noexcept
 {
-  return m_navigation_controls.at(player);
+
+  return m_controls.at(player).get_navigation_controls();
 }
 
 std::vector<screen_rect> get_panels(
@@ -256,8 +226,8 @@ std::vector<screen_rect> get_panels(
   const bool show_debug_panel{game_options::get().get_show_debug_info()};
   std::vector<screen_rect> v{
     layout.get_board().get_board(),
-    layout.get_controls(side::lhs),
-    layout.get_controls(side::rhs),
+    layout.get_controls(side::lhs).get_background(),
+    layout.get_controls(side::rhs).get_background(),
     layout.get_log(side::lhs),
     layout.get_log(side::rhs),
     layout.get_unit_info(side::lhs),
@@ -322,7 +292,7 @@ void test_game_view_layout()
     {
       for (const auto& key: get_all_action_numbers())
       {
-        assert(layout.get_controls_key(player, key).get_br().get_x() >= 0);
+        assert(layout.get_controls(player).get_controls_key(key).get_br().get_x() >= 0);
       }
     }
   }
@@ -410,8 +380,8 @@ void test_game_view_layout()
       {
         assert(
           is_in(
-            get_center(layout.get_controls_key(s, n)),
-            layout.get_controls(s)
+            get_center(layout.get_controls(s).get_controls_key(n)),
+            layout.get_controls(s).get_background()
           )
         );
       }
@@ -437,10 +407,6 @@ std::ostream& operator<<(std::ostream& os, const game_view_layout& layout) noexc
     s
       << side << " units: " << layout.get_unit_info(side) << '\n'
       << side << " controls: " << layout.get_controls(side) << '\n'
-      << side << " controls key 1: " << layout.get_controls_key(side, action_number(1)) << '\n'
-      << side << " controls key 2: " << layout.get_controls_key(side, action_number(2)) << '\n'
-      << side << " controls key 3: " << layout.get_controls_key(side, action_number(3)) << '\n'
-      << side << " controls key 4: " << layout.get_controls_key(side, action_number(4)) << '\n'
       << side << " log: " << layout.get_log(side) << '\n'
       << side << " debug: " << layout.get_debug(side) << '\n'
     ;
