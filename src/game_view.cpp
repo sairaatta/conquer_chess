@@ -69,19 +69,6 @@ physical_controller_type get_physical_controller_type(const game_view& view, con
   return get_physical_controller(view, player_side).get_type();
 }
 
-#ifdef USE_OLD_GET_PIECE_ACTION_SYSTEM
-std::string get_controls_text(
-  const game_view& view,
-  const game_controller& c,
-  const side player_side,
-  const action_number& n
-)
-{
-  return get_text_for_action(view, c, player_side, n);
-}
-#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
-
-
 double game_view::get_elapsed_time_secs() const noexcept
 {
   return m_clock.getElapsedTime().asSeconds();
@@ -122,21 +109,6 @@ const game_coordinate& get_cursor_pos(const game_view& view, const side player) 
   return get_cursor_pos(view.get_game_controller(), player);
 }
 
-#ifdef USE_OLD_GET_PIECE_ACTION_SYSTEM
-std::string get_text_for_action(
-  const game_view& view,
-  const game_controller& c,
-  const side player_side,
-  const action_number& n
-)
-{
-  const auto& g{view.get_game()};
-  const auto maybe_action{get_piece_action(g, c, n, player_side)};
-
-  if (!maybe_action) return "";
-  return to_human_str(maybe_action.value());
-}
-#else
 std::vector<std::string> get_controls_texts(
   const game_view& view,
   const game_controller& c,
@@ -150,13 +122,11 @@ std::vector<std::string> get_controls_texts(
     std::begin(actions),
     std::end(actions),
     std::back_inserter(texts),
-    [](const auto& a) { return to_str(a); }
+    [](const auto& a) { return to_human_str(a); }
   );
   assert(actions.size() == texts.size());
   return texts;
 }
-
-#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
 
 
 const in_game_time& get_time(const game_view& v) noexcept

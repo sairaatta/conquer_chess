@@ -99,23 +99,12 @@ const physical_controller& get_physical_controller(const game_view& view, const 
 /// Get the controller type for a certain side
 physical_controller_type get_physical_controller_type(const game_view& view, const side player);
 
-#ifdef USE_OLD_GET_PIECE_ACTION_SYSTEM
-/// Get the controls text for a player with a controller
-std::string get_controls_text(
-  const game_view& view,
-  const game_controller& c,
-  const side player_side,
-  const action_number& n
-);
-#else
 /// Get the controls text for a player with a controller
 std::vector<std::string> get_controls_texts(
   const game_view& view,
   const game_controller& c,
   const side player_side
 );
-#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
-
 
 /// Get the last log messages for a player
 std::string get_last_log_messages(
@@ -134,19 +123,6 @@ const game_coordinate& get_cursor_pos(
   const game_view& view,
   const side player
 ) noexcept;
-
-#ifdef USE_OLD_GET_PIECE_ACTION_SYSTEM
-/// Get the text for an action, e.g.
-/// 'Q\nSelect' for a keyboard player that has nothing selected
-/// 'E\nAttack' for a keyboard player that has a piece select
-/// 'LMB\nSelect' for a mouse player that has nothing selected'
-std::string get_text_for_action(
-  const game_view& view,
-  const game_controller& c,
-  const side player_side,
-  const action_number& n
-);
-#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
 
 /// Get the time in the game
 const in_game_time& get_time(const game_view& v) noexcept;

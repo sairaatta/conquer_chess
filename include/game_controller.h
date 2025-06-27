@@ -83,6 +83,34 @@ void add_user_input(game_controller& c, const user_input& input);
 /// Add a user_inputs. These will be processed in 'game::tick'
 void add_user_inputs(game_controller& c, const user_inputs& input);
 
+/// Can the player attack?
+bool can_attack(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+) noexcept;
+
+/// Can the player do an en-passant attack?
+bool can_attack_en_passant(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+) noexcept;
+
+/// Can the player castle kingside?
+bool can_castle_kingside(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+) noexcept;
+
+/// Can the player castle queenside?
+bool can_castle_queenside(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+) noexcept;
+
 /// Can a player do a certain action?
 bool can_do(
   const game& g,
@@ -90,6 +118,12 @@ bool can_do(
   const piece_action_type action,
   const side player_side
 );
+
+bool can_move(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+) noexcept;
 
 /// Can the player select a piece at the current cursor position?
 bool can_player_select_piece_at_cursor_pos(
@@ -104,37 +138,6 @@ bool can_player_select_piece_at_cursor_pos(
   const game_controller& c,
   const side player_side
 );
-
-#ifndef USE_OLD_GET_PIECE_ACTION_SYSTEM
-bool can_attack(
-  const game& g,
-  const game_controller& c,
-  const side player_side
-) noexcept;
-
-bool can_attack_en_passant(
-  const game& g,
-  const game_controller& c,
-  const side player_side
-) noexcept;
-
-bool can_castle_kingside(
-  const game& g,
-  const game_controller& c,
-  const side player_side
-) noexcept;
-
-bool can_castle_queenside(
-  const game& g,
-  const game_controller& c,
-  const side player_side
-) noexcept;
-
-bool can_move(
-  const game& g,
-  const game_controller& c,
-  const side player_side
-) noexcept;
 
 bool can_promote(
   const game& g,
@@ -154,7 +157,6 @@ bool can_unselect(
   const game_controller& c,
   const side player_side
 ) noexcept;
-#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
 
 /// Collect all valid \link{user_input} for all players.
 ///
@@ -217,41 +219,10 @@ physical_controller_type get_physical_controller_type(
   const side player_side
 ) noexcept;
 
-#ifdef USE_OLD_GET_PIECE_ACTION_SYSTEM
-// Deprecated, as the action numbers depend on each other.
-// For example, if action key X is 'castle kingside',
-// then the next action key may be 'castle queenside'.
-// Instead, calculate all actions at the same time using get_piece_actions
-
-/// Get the type of action, if any, a player could by pressing an action key.
-///
-/// For example, pressing action 1 typically un-/selects pieces when
-/// a cursor is on a piece of the own color.
-///
-/// @seealso See \link{get_piece_actions} to obtain these for all of the
-/// action keys
-std::optional<piece_action_type> get_piece_action(
-  const game& g,
-  const game_controller& c,
-  const action_number& n,
-  const side player_side
-) noexcept;
-
-/// Get the type of action, if any, a player could by pressing an action key.
+/// Get the types of actions, if any, a player could by pressing an action key.
 ///
 /// For example, action 1 typically un-/selects pieces, where
-/// action 4 is only used to promote to a knight
-std::map<action_number, std::optional<piece_action_type>> get_piece_actions(
-  const game& g,
-  const game_controller& c,
-  const side player_side
-) noexcept;
-#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
-
-/// Get the type of action, if any, a player could by pressing an action key.
-///
-/// For example, action 1 typically un-/selects pieces, where
-/// action 4 is only used to promote to a knight
+/// action 4 is only used to promote to a knight.
 std::vector<piece_action_type> get_piece_actions(
   const game& g,
   const game_controller& c,
@@ -298,13 +269,11 @@ bool has_keyboard_controller(const game_controller& c);
 /// Is there a player that uses the mouse?
 bool has_mouse_controller(const game_controller& c);
 
-#ifndef USE_OLD_GET_PIECE_ACTION_SYSTEM
 bool is_cursor_on_selected_piece(
   const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
-#endif // USE_OLD_GET_PIECE_ACTION_SYSTEM
 
 /// The the player at that side a mouse user?
 bool is_mouse_user(const game_controller& c, const side player_side) noexcept;
