@@ -219,11 +219,24 @@ void game_view::draw_impl()
   draw_game_info(*this);
 
   // Show the sidebars: controls (with log), units, debug
-  show_sidebar(*this, side::lhs);
-  show_sidebar(*this, side::rhs);
+  for (const side s: get_all_sides())
+  {
+    // Unit portrait, name, health, etc
+    draw_unit_info(*this, s);
 
-  draw_navigation_controls(*this);
+    // Navigational controls and action keys
+    draw_controls(*this, s);
 
+    // Show the messages
+    draw_log(*this, s);
+
+    if (game_options::get().get_show_debug_info())
+    {
+      show_debug(*this, s);
+    }
+  }
+
+  // General controls
   m_controls_bar.draw();
 }
 
@@ -610,13 +623,6 @@ void draw_possible_moves(game_view& view)
   }
 }
 
-void show_sidebar(game_view& view, const side player_side)
-{
-  draw_unit_info(view, player_side);
-  draw_controls(view, player_side);
-  draw_log(view, player_side);
-  if (game_options::get().get_show_debug_info()) show_debug(view, player_side);
-}
 
 void draw_squares(game_view& view)
 {
