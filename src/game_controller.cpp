@@ -1118,7 +1118,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions.size() == 1);
     assert(actions[0] == piece_action_type::attack);
   }
-  // 53: King selected, cursor at valid king-side castling square -> king-side castle, lhs
+  // King-side castle, cursor on empty square, lhs
   {
     game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
     game_controller c{create_game_controller_with_two_keyboards()};
@@ -1129,7 +1129,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions[0] == piece_action_type::castle_kingside);
     assert(actions[1] == piece_action_type::castle_queenside);
   }
-  // 53: King selected, cursor at valid king-side castling square -> king-side castle, rhs
+  // King-side castle, cursor on empty square, rhs
   {
     game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
     game_controller c{create_game_controller_with_two_keyboards()};
@@ -1139,6 +1139,31 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions.size() == 2);
     assert(actions[0] == piece_action_type::castle_kingside);
     assert(actions[1] == piece_action_type::castle_queenside);
+  }
+
+  // King-side castle, cursor on friendly square, lhs
+  {
+    game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "e1", side::lhs);
+    move_cursor_to(c, "e2", side::lhs);
+    const auto actions{get_piece_actions(g, c, side::lhs)};
+    assert(actions.size() == 3);
+    assert(actions[0] == piece_action_type::select);
+    assert(actions[1] == piece_action_type::castle_kingside);
+    assert(actions[2] == piece_action_type::castle_queenside);
+  }
+  // King-side castle, cursor on friendly square, rhs
+  {
+    game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "e8", side::rhs);
+    move_cursor_to(c, "e7", side::rhs);
+    const auto actions{get_piece_actions(g, c, side::rhs)};
+    assert(actions.size() == 3);
+    assert(actions[0] == piece_action_type::select);
+    assert(actions[1] == piece_action_type::castle_kingside);
+    assert(actions[2] == piece_action_type::castle_queenside);
   }
   // 53: Pawns move to the square where they are promoted -> move, lhs
   {
@@ -1164,7 +1189,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions.size() == 1);
     assert(actions[0] == piece_action_type::move);
   }
-  // 53: Pawns are selected at a promotion square (cursor is there too) -> promote, lhs
+  // Selected pawns at a promotion square, empty square selected -> promote, lhs
   {
     game g{
       create_game_with_starting_position(starting_position_type::pawns_at_promotion)
@@ -1179,7 +1204,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions[2] == piece_action_type::promote_to_bishop);
     assert(actions[3] == piece_action_type::promote_to_knight);
   }
-  // 53: Pawns are selected at a promotion square (cursor is there too) -> promote, rhs
+  // Selected pawns at a promotion square, empty square selected -> promote, rhs
   {
     game g{
       create_game_with_starting_position(starting_position_type::pawns_at_promotion)
