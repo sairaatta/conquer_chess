@@ -1105,18 +1105,11 @@ void piece::tick(
       break;
     case piece_action_type::castle_kingside:
       m_is_selected = false; //
-      //#define FIX_ISSUE_3
-      #ifdef FIX_ISSUE_3
       tick_castle_kingside(*this, dt, g);
-      #else
-      #endif // FIX_ISSUE_3
       break;
     case piece_action_type::castle_queenside:
       m_is_selected = false; //
-      #ifdef FIX_ISSUE_3
       tick_castle_queenside(*this, dt, g);
-      #else
-      #endif // FIX_ISSUE_3
       break;
     case piece_action_type::promote_to_knight:
     case piece_action_type::promote_to_bishop:
@@ -1171,6 +1164,177 @@ void tick_attack(
   }
 }
 
+void tick_castle_kingside(
+  piece& p,
+  const delta_t& dt,
+  game& g
+)
+{
+  assert(!p.get_actions().empty());
+  const auto& first_action{p.get_actions()[0]};
+  assert(first_action.get_action_type() == piece_action_type::castle_kingside);
+
+  // Increase the progress of the action
+  const double new_progress{
+    p.get_current_action_progress().get() + dt.get()
+  };
+  assert(new_progress >= 0.0);
+
+  // Are we done with the action?
+  if (new_progress >= 1.0)
+  {
+    // Can this piece now be captured by en passant?
+    // Or should it be found in a piece's history ..?
+
+    // The whole goal of the operation
+    assert(p.get_current_square() == first_action.get_to());
+    p.set_current_action_progress(delta_t(0.0));
+    remove_first(p.get_actions());
+    if (p.get_actions().empty())
+    {
+      p.add_message(message_type::done);
+    }
+    return;
+  }
+
+  p.set_current_action_progress(p.get_current_action_progress() + dt);
+  const double f{std::min(1.0, new_progress)}; // The fraction of the action done
+  assert(f >= 0.0);
+  assert(f <= 1.0);
+
+  // Allow for duplicate squares
+  const auto occupied_squares{get_occupied_squares(g)};
+  const bool is_target_occupied{is_occupied(first_action.get_to(), occupied_squares)};
+  const bool is_focal_piece_at_target{p.get_current_square() == first_action.get_to()};
+
+  if (is_target_occupied)
+  {
+    if (is_focal_piece_at_target)
+    {
+      // Moving the last half
+      assert(f > 0.5);
+      //std::clog << "Piece over halfway (" << f << "), already occupies " << p.get_current_square() << '\n';
+    }
+    else
+    {
+      // Too bad, need to go back
+      p.get_actions().clear();
+      p.add_action(
+        piece_action(
+          get_piece_at(g, first_action.get_from()).get_color(),
+          get_piece_at(g, first_action.get_from()).get_type(),
+          piece_action_type::move,
+          first_action.get_to(), // Reverse
+          first_action.get_from()
+        )
+      );
+      p.set_current_action_progress(delta_t(1.0) - p.get_current_action_progress()); // Keep progress
+      p.add_message(message_type::cannot);
+      //std::clog << "I cannot" << '\n';
+      return;
+    }
+  }
+  else
+  {
+    //std::clog << "Piece not yet halfway (" << f << "), still occupied " << p.get_current_square() << '\n';
+    assert(!is_target_occupied);
+    if (f >= 0.5)
+    {
+      // If over halfway, occupy target
+      assert(!is_occupied(first_action.get_to(), get_unique_occupied_squares(g)));
+      p.set_current_square(first_action.get_to());
+      //std::clog << "Piece over halfway (" << f << "), now occupies " << p.get_current_square() << '\n';
+      // Maybe cannot check, as p is not fully updated in game?
+      // assert(is_occupied(first_action.get_to(), get_occupied_squares(g)));
+    }
+  }
+}
+
+void tick_castle_queenside(
+  piece& p,
+  const delta_t& dt,
+  game& g
+)
+{
+  assert(!p.get_actions().empty());
+  const auto& first_action{p.get_actions()[0]};
+  assert(first_action.get_action_type() == piece_action_type::castle_queenside);
+
+  // Increase the progress of the action
+  const double new_progress{
+    p.get_current_action_progress().get() + dt.get()
+  };
+  assert(new_progress >= 0.0);
+
+  // Are we done with the action?
+  if (new_progress >= 1.0)
+  {
+    // Can this piece now be captured by en passant?
+    // Or should it be found in a piece's history ..?
+
+    // The whole goal of the operation
+    assert(p.get_current_square() == first_action.get_to());
+    p.set_current_action_progress(delta_t(0.0));
+    remove_first(p.get_actions());
+    if (p.get_actions().empty())
+    {
+      p.add_message(message_type::done);
+    }
+    return;
+  }
+
+  p.set_current_action_progress(p.get_current_action_progress() + dt);
+  const double f{std::min(1.0, new_progress)}; // The fraction of the action done
+  assert(f >= 0.0);
+  assert(f <= 1.0);
+
+  // Allow for duplicate squares
+  const auto occupied_squares{get_occupied_squares(g)};
+  const bool is_target_occupied{is_occupied(first_action.get_to(), occupied_squares)};
+  const bool is_focal_piece_at_target{p.get_current_square() == first_action.get_to()};
+
+  if (is_target_occupied)
+  {
+    if (is_focal_piece_at_target)
+    {
+      // Moving the last half
+      assert(f > 0.5);
+      //std::clog << "Piece over halfway (" << f << "), already occupies " << p.get_current_square() << '\n';
+    }
+    else
+    {
+      // Too bad, need to go back
+      p.get_actions().clear();
+      p.add_action(
+        piece_action(
+          get_piece_at(g, first_action.get_from()).get_color(),
+          get_piece_at(g, first_action.get_from()).get_type(),
+          piece_action_type::move,
+          first_action.get_to(), // Reverse
+          first_action.get_from()
+        )
+      );
+      p.set_current_action_progress(delta_t(1.0) - p.get_current_action_progress()); // Keep progress
+      p.add_message(message_type::cannot);
+      //std::clog << "I cannot" << '\n';
+      return;
+    }
+  }
+  else
+  {
+    //std::clog << "Piece not yet halfway (" << f << "), still occupied " << p.get_current_square() << '\n';
+    assert(!is_target_occupied);
+    if (f >= 0.5)
+    {
+      // If over halfway, occupy target
+      assert(!is_occupied(first_action.get_to(), get_unique_occupied_squares(g)));
+      p.set_current_square(first_action.get_to());
+      //std::clog << "Piece over halfway (" << f << "), now occupies " << p.get_current_square() << '\n';
+      // Maybe cannot check, as p is not fully updated in game?
+      // assert(is_occupied(first_action.get_to(), get_occupied_squares(g)));
+    }
+  }
+}
 void tick_move(
   piece& p,
   const delta_t& dt,

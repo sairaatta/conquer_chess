@@ -4,6 +4,7 @@
 #include "ccfwd.h"
 #include "chess_color.h"
 #include "castling_type.h"
+#include "piece_action_type.h"
 
 #include <iosfwd>
 #include <random>
@@ -131,11 +132,16 @@ square get_behind(
   const chess_color color
 );
 
-/// Get the default king square.
-/// These are:
-///  * e1 for white
-///  * e8 for black
-square get_default_king_square(const chess_color player_color) noexcept;
+/// Get the file of a square, e.g. 'd' from 'd4'
+char get_file(const square& s) noexcept;
+
+/// Get the intial king square.
+///
+/// Which is:
+///  - e1 for white
+///  - e8 for black
+square get_initial_king_square(const chess_color player_color) noexcept;
+
 
 /// Get the default rook square,
 /// for a castling direction.
@@ -144,13 +150,10 @@ square get_default_king_square(const chess_color player_color) noexcept;
 ///  * a1 for white for a queenside castle
 ///  * h8 for black for a kingside castle
 ///  * a8 for black for a queenside castle
-square get_default_rook_square(
+square get_initial_rook_square(
   const chess_color player_color,
   const castling_type t
 ) noexcept;
-
-/// Get the file of a square, e.g. 'd' from 'd4'
-char get_file(const square& s) noexcept;
 
 /// Get the intermediate squares, in an inclusive way:
 /// the first square will be 'from',
@@ -160,8 +163,30 @@ std::vector<square> get_intermediate_squares(
   const square& to
 );
 
+/// Get the king target square when castling
+///
+/// Color|Castling type|Target square
+/// -----|-------------|-------------
+/// Black|Kingside     |e8 -> g8
+/// Black|Queenside    |e8 -> c8
+/// White|Kingside     |e1 -> g1
+/// White|Queenside    |e1 -> c1
+///
+square get_king_target_square(const chess_color player_color, const piece_action_type action);
+
 /// Get the rank of a square, e.g. '3' from 'e3'
 int get_rank(const square& s) noexcept;
+
+/// Get the rook target square when castling
+///
+/// Color|Castling type|Target square
+/// -----|-------------|-------------
+/// Black|Kingside     |h8 -> f8
+/// Black|Queenside    |a8 -> d8
+/// White|Kingside     |h1 -> f1
+/// White|Queenside    |a1 -> d1
+///
+square get_rook_target_square(const chess_color player_color, const piece_action_type action);
 
 /// Is the square 's' occupied?
 bool is_occupied(

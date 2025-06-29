@@ -218,9 +218,8 @@ void game_controller::apply_action_type_castle_kingside_to_game(game& g, const s
   const chess_color player_color{get_player_color(player_side)};
   const game_coordinate cursor_pos{get_cursor_pos(player_side)};
   assert(is_coordinat_on_board(cursor_pos));
-  const square cursor{square(cursor_pos)};
 
-  const square king_square{get_default_king_square(player_color)};
+  const square king_square{get_initial_king_square(player_color)};
 
   const bool is_castle_kingside{
        is_piece_at(g, king_square)
@@ -234,24 +233,27 @@ void game_controller::apply_action_type_castle_kingside_to_game(game& g, const s
   unselect_all_pieces(g, player_color);
 
   // King starts promoting
-  get_piece_at(g, get_default_king_square(player_color)).add_action(
+
+  const square king_target_square{get_king_target_square(player_color, piece_action_type::castle_kingside)};
+  get_piece_at(g, king_square).add_action(
     piece_action(
       player_color,
       piece_type::king,
       piece_action_type::castle_kingside,
-      get_default_king_square(player_color),
-      cursor
+      king_square,
+      king_target_square
     )
   );
 
   // Rook starts promoting
-  get_piece_at(g, get_default_rook_square(player_color, castling_type::king_side)).add_action(
+  const square rook_target_square{get_rook_target_square(player_color, piece_action_type::castle_kingside)};
+  get_piece_at(g, get_initial_rook_square(player_color, castling_type::king_side)).add_action(
     piece_action(
       player_color,
       piece_type::rook,
       piece_action_type::castle_kingside,
-      get_default_rook_square(player_color, castling_type::king_side),
-      cursor
+      get_initial_rook_square(player_color, castling_type::king_side),
+      rook_target_square
     )
   );
 }
@@ -262,9 +264,8 @@ void game_controller::apply_action_type_castle_queenside_to_game(game& g, const 
   const chess_color player_color{get_player_color(player_side)};
   const game_coordinate cursor_pos{get_cursor_pos(player_side)};
   assert(is_coordinat_on_board(cursor_pos));
-  const square cursor{square(cursor_pos)};
 
-  const square king_square{get_default_king_square(player_color)};
+  const square king_square{get_initial_king_square(player_color)};
 
   const bool is_castle_queenside{
        is_piece_at(g, king_square)
@@ -277,24 +278,26 @@ void game_controller::apply_action_type_castle_queenside_to_game(game& g, const 
   // Unselect all pieces
   unselect_all_pieces(g, player_color);
 
-  // King start clastling
-  get_piece_at(g, get_default_king_square(player_color)).add_action(
+  // King start castling
+  const square king_target_square{get_king_target_square(player_color, piece_action_type::castle_queenside)};
+  get_piece_at(g, get_initial_king_square(player_color)).add_action(
     piece_action(
       player_color,
       piece_type::king,
       piece_action_type::castle_queenside,
-      get_default_king_square(player_color),
-      cursor
+      get_initial_king_square(player_color),
+      king_target_square
     )
   );
   // Rook starts castling
-  get_piece_at(g, get_default_rook_square(player_color, castling_type::queen_side)).add_action(
+  const square rook_target_square{get_rook_target_square(player_color, piece_action_type::castle_queenside)};
+  get_piece_at(g, get_initial_rook_square(player_color, castling_type::queen_side)).add_action(
     piece_action(
       player_color,
       piece_type::rook,
       piece_action_type::castle_queenside,
-      get_default_rook_square(player_color, castling_type::queen_side),
-      cursor
+      get_initial_rook_square(player_color, castling_type::queen_side),
+      rook_target_square
     )
   );
 }
@@ -1698,7 +1701,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(g, square("g3"))); // Black pawn has moved here
   }
 #endif // FIX_EN_PASSANT_CAPTURE
-#ifdef FIX_CASTLING_KINGSIDE
   // castling kingside
   {
     game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
@@ -1733,12 +1735,11 @@ void test_game_controller() //!OCLINT tests may be many
       g.tick(delta_t(0.25));
     }
     assert(!is_piece_at(g, square("e1"))); // Empty
-    assert(is_piece_at(g, square("f1")));  // Rook
-    assert(is_piece_at(g, square("g1")));  // K
     assert(!is_piece_at(g, square("h1"))); // Empty
-
+    assert(is_piece_at(g, square("g1")));  // K
+    assert(is_piece_at(g, square("f1")));  // Rook
   }
-#endif // FIX_CASTLING_KINGSIDE
+//#define FIX_CASTLING_QUEENSIDE
 #ifdef FIX_CASTLING_QUEENSIDE
   // castling queenside
   {

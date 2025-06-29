@@ -304,14 +304,14 @@ square get_behind(
   return square(pawn_square.get_x() + dx, pawn_square.get_y());
 }
 
-square get_default_king_square(const chess_color player_color) noexcept
+square get_initial_king_square(const chess_color player_color) noexcept
 {
   if (player_color == chess_color::white) return square("e1");
   assert(player_color == chess_color::black);
   return square("e8");
 }
 
-square get_default_rook_square(
+square get_initial_rook_square(
   const chess_color player_color,
   const castling_type t
 ) noexcept
@@ -413,9 +413,64 @@ std::vector<square> get_intermediate_squares(
   return squares;
 }
 
+square get_king_target_square(const chess_color player_color, const piece_action_type action)
+{
+  int digit{0};
+  switch (player_color)
+  {
+    case chess_color::black: digit = 8; break;
+    default:
+    case chess_color::white:
+      assert(player_color == chess_color::white);
+      digit = 1;
+      break;
+  }
+  assert(digit);
+  std::string c{"e"};
+  switch (action)
+  {
+    case piece_action_type::castle_kingside: c = "g"; break;
+    default:
+    case piece_action_type::castle_queenside:
+      assert(action == piece_action_type::castle_queenside);
+      c = "c";
+      break;
+  }
+  const std::string s{c +  std::to_string(digit)};
+  return square(s);
+}
+
+
 int get_rank(const square& s) noexcept
 {
   return 1 + s.get_x();
+}
+
+square get_rook_target_square(const chess_color player_color, const piece_action_type action)
+{
+  int digit{0};
+  switch (player_color)
+  {
+    case chess_color::black: digit = 8; break;
+    default:
+    case chess_color::white:
+      assert(player_color == chess_color::white);
+      digit = 1;
+      break;
+  }
+  assert(digit);
+  std::string c{"e"};
+  switch (action)
+  {
+    case piece_action_type::castle_kingside: c = "f"; break;
+    default:
+    case piece_action_type::castle_queenside:
+      assert(action == piece_action_type::castle_queenside);
+      c = "d";
+      break;
+  }
+  const std::string s{c +  std::to_string(digit)};
+  return square(s);
 }
 
 square get_rotated_square(const square& position) noexcept
@@ -508,15 +563,15 @@ void test_square()
   }
   // get_default_king_square
   {
-    assert(get_default_king_square(chess_color::white) == square("e1"));
-    assert(get_default_king_square(chess_color::black) == square("e8"));
+    assert(get_initial_king_square(chess_color::white) == square("e1"));
+    assert(get_initial_king_square(chess_color::black) == square("e8"));
   }
   // get_default_rook_square
   {
-    assert(get_default_rook_square(chess_color::white, castling_type::king_side) == square("h1"));
-    assert(get_default_rook_square(chess_color::white, castling_type::queen_side) == square("a1"));
-    assert(get_default_rook_square(chess_color::black, castling_type::king_side) == square("h8"));
-    assert(get_default_rook_square(chess_color::black, castling_type::queen_side) == square("a8"));
+    assert(get_initial_rook_square(chess_color::white, castling_type::king_side) == square("h1"));
+    assert(get_initial_rook_square(chess_color::white, castling_type::queen_side) == square("a1"));
+    assert(get_initial_rook_square(chess_color::black, castling_type::king_side) == square("h8"));
+    assert(get_initial_rook_square(chess_color::black, castling_type::queen_side) == square("a8"));
   }
   // get_file
   {
@@ -581,6 +636,33 @@ void test_square()
     assert(get_intermediate_squares(square("d3"), square("h1")).size() == 3);
     assert(get_intermediate_squares(square("b4"), square("h1")).size() == 4);
   }
+  // get_king_target_square
+  {
+    // Color|Castling type|Target square
+    // -----|-------------|-------------
+    // Black|Kingside     |e8 -> g8
+    // Black|Queenside    |e8 -> c8
+    // White|Kingside     |e1 -> g1
+    // White|Queenside    |e1 -> c1
+    assert(get_king_target_square(chess_color::black, piece_action_type::castle_kingside) == square("g8"));
+    assert(get_king_target_square(chess_color::black, piece_action_type::castle_queenside) == square("c8"));
+    assert(get_king_target_square(chess_color::white, piece_action_type::castle_kingside) == square("g1"));
+    assert(get_king_target_square(chess_color::white, piece_action_type::castle_queenside) == square("c1"));
+  }
+  // get_rook_target_square
+  {
+    // Color|Castling type|Target square
+    // -----|-------------|-------------
+    // Black|Kingside     |h8 -> f8
+    // Black|Queenside    |a8 -> d8
+    // White|Kingside     |h1 -> f1
+    // White|Queenside    |a1 -> d1
+    assert(get_rook_target_square(chess_color::black, piece_action_type::castle_kingside) == square("f8"));
+    assert(get_rook_target_square(chess_color::black, piece_action_type::castle_queenside) == square("d8"));
+    assert(get_rook_target_square(chess_color::white, piece_action_type::castle_kingside) == square("f1"));
+    assert(get_rook_target_square(chess_color::white, piece_action_type::castle_queenside) == square("d1"));
+  }
+
   // get_rotated_square
   {
     assert(get_rotated_square(square("a1")) == square("h8"));

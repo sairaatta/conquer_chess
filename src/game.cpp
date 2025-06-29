@@ -178,7 +178,7 @@ bool can_do_castle_kingside(
 
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
-  const square king_square{get_default_king_square(player_color)};
+  const square king_square{get_initial_king_square(player_color)};
   if (selected_piece.get_current_square() != king_square) return false;
   return can_castle_kingside(get_piece_at(g, king_square), g);
 }
@@ -193,7 +193,7 @@ bool can_do_castle_queenside(
 
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
-  const square king_square{get_default_king_square(player_color)};
+  const square king_square{get_initial_king_square(player_color)};
   if (selected_piece.get_current_square() != king_square) return false;
   return can_castle_queenside(get_piece_at(g, king_square), g);
 }
