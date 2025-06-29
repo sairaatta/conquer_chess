@@ -1739,8 +1739,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(g, square("g1")));  // K
     assert(is_piece_at(g, square("f1")));  // Rook
   }
-//#define FIX_CASTLING_QUEENSIDE
-#ifdef FIX_CASTLING_QUEENSIDE
   // castling queenside
   {
     game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
@@ -1750,7 +1748,7 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
     assert(count_selected_units(g, chess_color::white) == 1);
 
-    add_user_input(c, create_press_action_1(side::lhs));
+    add_user_input(c, create_press_action_2(side::lhs)); // Action 1 is a king-side castle
     c.apply_user_inputs_to_game(g);
 
     assert(is_piece_at(g, square("a1")));  // Rook
@@ -1770,7 +1768,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(g, square("e1"))); // Empty
 
   }
-#endif // FIX_CASTLING_QUEENSIDE
   // WHen two pieces want to move to the same square, one will go back
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
