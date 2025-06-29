@@ -38,30 +38,6 @@ int count_user_inputs(const user_inputs& a)
   return static_cast<int>(a.get_user_inputs().size());
 }
 
-user_inputs create_control_actions(
-  const std::string& pgn_str,
-  const chess_color color,
-  const game& g
-)
-{
-  return create_control_actions(
-    chess_move(pgn_str, color),
-    g
-  );
-}
-
-user_inputs create_control_actions(
-  const chess_move& m,
-  const game& g
-)
-{
-  assert(m.get_winner().empty());
-  assert(!g.get_pieces().empty());
-
-  return user_inputs();
-}
-
-
 void do_select(
   game& g,
   game_controller& /* c */,

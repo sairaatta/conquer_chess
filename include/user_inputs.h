@@ -50,27 +50,6 @@ int count_user_inputs(const user_inputs& a);
 /// Count the total number of piece actions to be done by the game
 int count_piece_actions(const user_inputs& a);
 
-/// Create the control actions to do a PGN move from a certain
-/// game. The game is needed to determine how the cursor
-/// is moved (e.g. by mouse/keyboard, if keyboard:
-/// how many squares)
-user_inputs create_control_actions(
-  const std::string& pgn_str,
-  const chess_color color,
-  const game& g
-);
-
-/// Create the control actions to do a PGN move from a certain
-/// game. The game is needed to determine how the cursor
-/// is moved (e.g. by mouse/keyboard, if keyboard:
-/// how many squares)
-user_inputs create_control_actions(
-  const chess_move& m,
-  const game& g
-);
-
-
-
 /// Process a space, hence a square as a coordinat
 void do_select(
   game& g,
