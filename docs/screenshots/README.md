@@ -2,9 +2,13 @@
 
 ## v0.9
 
+![Game screen v0.9](20250629_2.jpg)
+
+> Protoss pieces have a shield next to a health bar
+
 ![Game screen v0.9](20250629_1.jpg)
 
-> The first second, black cannot do anything
+> During the first chess move, black cannot do anything
 
 ## v0.8
 

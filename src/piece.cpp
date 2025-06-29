@@ -23,13 +23,15 @@ piece::piece(
     m_current_action_progress{delta_t(0.0)},
     m_current_square{coordinat},
     m_has_moved{false},
-    m_health{::get_max_health(type)},
+    m_health{::get_max_health(r)},
     m_id{create_new_id()},
+    m_in_game_time{in_game_time(0.0)},
     m_is_selected{false},
     m_kill_count{0},
-    m_max_health{::get_max_health(type)},
+    m_max_health{::get_max_health(r)},
+    m_max_shield{::get_max_shield(r)},
     m_race{r},
-    m_in_game_time{in_game_time(0.0)},
+    m_shield{::get_max_shield(r)},
     m_type{type}
 {
 
@@ -117,32 +119,7 @@ void piece::add_action(const piece_action& action)
     m_actions.push_back(action);
     return;
   }
-  #ifndef TO_ATOMIC
   m_actions.push_back(action);
-  #else
-  const std::vector<piece_action> atomic_actions{
-    to_atomic(action)
-  };
-  // If the first atomic action is an invalid move,
-  // Only keep the actions that are valid
-  std::copy_if(
-    std::begin(atomic_actions),
-    std::end(atomic_actions),
-    std::back_inserter(m_actions),
-    [this](const piece_action& a)
-    {
-      if (a.get_action_type() == piece_action_type::move)
-      {
-        return can_move(m_color, m_type, a.get_from(), a.get_to());
-      }
-      else
-      {
-        assert(a.get_action_type() == piece_action_type::attack);
-        return can_attack(m_color, m_type, a.get_from(), a.get_to());
-      }
-    }
-  );
-  #endif
 }
 
 void piece::add_message(const message_type& message)
@@ -312,9 +289,27 @@ double get_f_health(const piece& p) noexcept
   return p.get_health() / p.get_max_health();
 }
 
+double get_f_shield(const piece& p) noexcept
+{
+  assert(p.get_race() == race::protoss);
+  return p.get_shield() / p.get_max_shield();
+}
+
+double piece::get_max_shield() const
+{
+  assert(m_race.get_value() == race::protoss);
+  return m_max_shield;
+}
+
 square get_occupied_square(const piece& p) noexcept
 {
   return p.get_current_square();
+}
+
+double piece::get_shield() const
+{
+  assert(m_race.get_value() == race::protoss);
+  return m_shield;
 }
 
 piece get_test_white_king() noexcept

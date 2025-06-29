@@ -80,11 +80,21 @@ public:
   /// Get the maximum health of the unit
   double get_max_health() const noexcept { return m_max_health; }
 
+  /// Get the maximum shield value of the unit
+  ///
+  /// Assume this unit is a Protoss unit
+  double get_max_shield() const;
+
   /// The things this piece wants to say
   const auto& get_messages() const noexcept { return m_messages; }
 
   /// Get the race of piece, e.g class, protoss, terran or zerg
   const auto& get_race() const noexcept { return m_race.get_value(); }
+
+  /// Get the shield value of the unit.
+  ///
+  /// Assumes this unit is a Protoss unit
+  double get_shield() const;
 
   /// Get the type of piece, e.g. king, queen, rook, bishop, knight, pawn
   const auto& get_type() const noexcept { return m_type.get_value(); }
@@ -154,6 +164,9 @@ private:
   /// The unique ID of this piece
   read_only<piece_id> m_id;
 
+  /// The in-game time (in chess moves)
+  in_game_time m_in_game_time;
+
   /// Is this piece selected?
   bool m_is_selected;
 
@@ -163,14 +176,17 @@ private:
   /// The maximum health
   double m_max_health;
 
+  /// The maximum shield, only for Protoss
+  double m_max_shield;
+
   /// The things this piece wants to say
   std::vector<message_type> m_messages;
 
   /// The race of this piece
   read_only<race> m_race;
 
-  /// The in-game time (in chess moves)
-  in_game_time m_in_game_time;
+  /// The shield value, only for Protoss
+  double m_shield;
 
   /// The type of piece, e.g. king, queen, rook, bishop, knight, pawn
   read_only<piece_type> m_type;
@@ -224,6 +240,11 @@ std::string describe_actions(const piece& p);
 
 /// Get the fraction of the health, where 1.0 denotes full health
 double get_f_health(const piece& p) noexcept;
+
+/// Get the fraction of the shield, where 1.0 denotes full shields
+///
+/// Assumes the piece is a Protoss
+double get_f_shield(const piece& p) noexcept;
 
 /// Get the square that this piece occupies now
 square get_occupied_square(const piece& p) noexcept;

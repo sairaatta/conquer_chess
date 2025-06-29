@@ -17,19 +17,31 @@ std::vector<piece_type> get_all_piece_types() noexcept
   };
 }
 
-double get_max_health(const piece_type type)
+double get_max_health(const race r)
 {
-  switch (type)
+  switch (r)
   {
-    case piece_type::bishop: return 1.0;
-    case piece_type::king: return 1.0;
-    case piece_type::knight: return 1.0;
-    case piece_type::pawn: return 1.0;
-    case piece_type::queen: return 1.0;
+    case race::classic: return 1.0;
+    case race::protoss: return 0.5;
+    case race::terran: return 0.75;
     default:
-    case piece_type::rook:
-      assert(type == piece_type::rook);
-      return 1.0;
+    case race::zerg:
+      assert(r == race::zerg);
+      return 0.5;
+  }
+}
+
+double get_max_shield(const race r)
+{
+  switch (r)
+  {
+    case race::classic: return 0.0;
+    case race::protoss: return 1.0;
+    case race::terran: return 0.0;
+    default:
+    case race::zerg:
+      assert(r == race::zerg);
+      return 0.0;
   }
 }
 
@@ -70,19 +82,18 @@ void test_piece_type()
   }
   // get_max_health
   {
-    assert(get_max_health(piece_type::king) > 0.0);
-    assert(get_max_health(piece_type::pawn) > 0.0);
-    assert(get_max_health(piece_type::rook) > 0.0);
-    assert(get_max_health(piece_type::queen) > 0.0);
-    assert(get_max_health(piece_type::bishop) > 0.0);
-    assert(get_max_health(piece_type::knight) > 0.0);
+    assert(get_max_health(race::classic) == 1.0);
+    assert(get_max_health(race::protoss) == 0.5);
+    assert(get_max_health(race::terran) == 0.75);
+    assert(get_max_health(race::zerg) == 0.5);
   }
-  // get_max_health, all
+  // get_max_shield
   {
-    for (const auto t: get_all_piece_types())
-    {
-      assert(get_max_health(t) > 0.0);
-    }
+    assert(get_max_shield(race::classic) == 0.0);
+    assert(get_max_shield(race::protoss) == 1.0);
+    assert(get_max_shield(race::terran) == 0.0);
+    assert(get_max_shield(race::zerg) == 0.0);
+
   }
   // get_piece_value
   {

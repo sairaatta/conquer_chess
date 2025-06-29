@@ -1,6 +1,7 @@
 #ifndef SQUARE_LAYOUT_H
 #define SQUARE_LAYOUT_H
 
+#include "race.h"
 #include "screen_rect.h"
 
 /// The layout of a square.
@@ -11,6 +12,8 @@
 /// +------------------+
 /// |+----------------+|
 /// || health_bar     ||
+/// ||                ||
+/// ||                ||
 /// |+----------------+|
 /// || piece          ||
 /// ||                ||
@@ -27,8 +30,33 @@
 /// +------------------+
 ///
 /// - 1: symbol to show if the piece is protected
-/// ``
-/// `
+/// ```
+///
+/// Or for a protoss piece:
+///
+/// ```text
+/// +------------------+
+/// |+----------------+|
+/// || health_bar     ||
+/// |+----------------+|
+/// || shield_bar     ||
+/// |+----------------+|
+/// || piece          ||
+/// ||                ||
+/// ||                ||
+/// ||                ||
+/// ||                ||
+/// ||                ||
+/// ||                ||
+/// ||                ||
+/// ||             +-+||
+/// ||             |1|||
+/// ||             +-+||
+/// |+----------------+|
+/// +------------------+
+///
+/// - 1: symbol to show if the piece is protected
+/// ```
 class square_layout
 {
 public:
@@ -42,7 +70,10 @@ public:
   const screen_rect& get_health_bar_outline() const noexcept { return m_health_bar; }
 
   /// The health bar value, a bar within the outline of the health bar
-  screen_rect get_health_bar_value(const double f) const;
+  screen_rect get_health_bar_value(const double f, const race r = race::classic) const;
+
+  /// The shield bar value, a bar within the lower half of the outline of the health bar
+  screen_rect get_shield_bar_value(const double f) const;
 
   const screen_rect& get_piece() const noexcept { return m_piece; }
   const screen_rect& get_is_protected() const noexcept { return m_is_protected; }

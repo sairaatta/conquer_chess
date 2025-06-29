@@ -46,12 +46,22 @@ square_layout::square_layout(const screen_rect& r)
   }
 }
 
-screen_rect square_layout::get_health_bar_value(const double f) const
+screen_rect square_layout::get_health_bar_value(const double f, const race r) const
 {
   assert(f >= 0.0);
   assert(f <= 1.0);
-  const auto& r{create_rect_inside(get_health_bar_outline())};
-  return create_partial_rect_from_lhs(r, f);
+  auto health_bar{create_rect_inside(get_health_bar_outline())};
+  if (r == race::protoss) health_bar = get_upper_half(health_bar);
+  return create_partial_rect_from_lhs(health_bar, f);
+}
+
+screen_rect square_layout::get_shield_bar_value(const double f) const
+{
+  assert(f >= 0.0);
+  assert(f <= 1.0);
+  auto shield_bar{create_rect_inside(get_health_bar_outline())};
+  shield_bar = get_lower_half(shield_bar);
+  return create_partial_rect_from_lhs(shield_bar, f);
 }
 
 void test_piece_layout()

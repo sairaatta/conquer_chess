@@ -32,6 +32,16 @@ sf::Color f_health_to_color(const double f)
   return sf::Color::Green;
 }
 
+sf::Color f_shield_to_color(const double f)
+{
+  assert(f >= 0.0);
+  assert(f <= 1.0);
+  if (f < 0.25) return sf::Color(0, 0, 255);
+  if (f < 0.50) return sf::Color(0, 0, 255);
+  if (f < 0.75) return sf::Color(0, 0, 255);
+  return sf::Color(0, 0, 255);
+}
+
 std::vector<sf::Mouse::Button> get_all_sfml_buttons() noexcept
 {
   const auto a{magic_enum::enum_values<sf::Mouse::Button>()};

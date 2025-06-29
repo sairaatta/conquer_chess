@@ -712,12 +712,12 @@ void draw_unit_health_bars(game_view& view)
       sf::Color::Black
     );
 
-
-    // Bar
     try
     {
       const double f_health{get_f_health(piece)};
-      const auto bar_rect{square_layout.get_health_bar_value(f_health)};
+
+      // Will be lower for protoss
+      const auto bar_rect{square_layout.get_health_bar_value(f_health, piece.get_race())};
       const sf::Color health_color{f_health_to_color(get_f_health(piece))};
       draw_rectangle(
         bar_rect,
@@ -728,6 +728,27 @@ void draw_unit_health_bars(game_view& view)
     {
       // OK
     }
+    if (piece.get_race() == race::protoss)
+    {
+      try
+      {
+        const double f_shield{get_f_shield(piece)};
+
+        // Will be lower for protoss
+        const auto bar_rect{square_layout.get_shield_bar_value(f_shield)};
+        const sf::Color shield_color{f_shield_to_color(get_f_shield(piece))};
+        draw_rectangle(
+          bar_rect,
+          shield_color
+        );
+      }
+      catch (std::logic_error&)
+      {
+        // OK
+      }
+
+    }
+
   }
 }
 

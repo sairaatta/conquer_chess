@@ -13,6 +13,9 @@
 /// Convert a fraction of health (i.e. a value e [0.0, 1.0] to a color
 sf::Color f_health_to_color(const double f);
 
+/// Convert a fraction of shield (i.e. a value e [0.0, 1.0] to a color
+sf::Color f_shield_to_color(const double f);
+
 /// Get all the SFML mouse buttons
 std::vector<sf::Mouse::Button> get_all_sfml_buttons() noexcept;
 

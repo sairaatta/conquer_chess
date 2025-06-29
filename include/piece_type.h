@@ -1,6 +1,8 @@
 #ifndef PIECE_TYPE_H
 #define PIECE_TYPE_H
 
+#include "race.h"
+
 #include <iosfwd>
 #include <vector>
 
@@ -19,7 +21,10 @@ enum class piece_type
 std::vector<piece_type> get_all_piece_types() noexcept;
 
 /// Get the maximum health for a piece
-double get_max_health(const piece_type type);
+double get_max_health(const race r);
+
+/// Get the maximum shield value for a piece
+double get_max_shield(const race r);
 
 /// Get the value of the pieces.
 ///
