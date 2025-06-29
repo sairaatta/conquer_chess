@@ -146,7 +146,39 @@ void sound_effects::play(const message& effect)
       }
       break;
     }
-    default:
+    case message_type::start_castling_kingside:
+    {
+      switch (piece_type)
+      {
+        case piece_type::bishop: break;
+        case piece_type::king: m_lets_rule.play(); break;
+        case piece_type::knight: break;
+        case piece_type::pawn: break;
+        case piece_type::queen: break;
+        case piece_type::rook:
+          assert(piece_type == piece_type::rook);
+          m_its_time_to_rock.play();
+          break;
+      }
+    }
+    break;
+    case message_type::start_castling_queenside:
+    {
+      switch (piece_type)
+      {
+        case piece_type::bishop: break;
+        case piece_type::king: m_lets_rule.play(); break;
+        case piece_type::knight: break;
+        case piece_type::pawn: break;
+        case piece_type::queen: break;
+        case piece_type::rook:
+          assert(piece_type == piece_type::rook);
+          m_its_time_to_rock.play();
+          break;
+      }
+    }
+    break;
+    //default:
     case message_type::start_attack:
     {
       assert(effect.get_message_type() == message_type::start_attack);
