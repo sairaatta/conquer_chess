@@ -33,23 +33,53 @@ Side |Waiting time before first move
 White|None
 Black|One chess move
 
-The effect of race
+There are multiple differences between the races.
+
+The first difference between the races is the ability to withstand
+damage:
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-Race   |Movement speed [1] |Attack speed [2]  |Effect of allies [3] |Other features
--------|-------------------|------------------|---------------------|---------------
-Classic|1                  |1                 |None                 |None
-Protoss|0.9                |1.1               |Moves faster         |Regenerating shields
-Terran |1.0                |1.0               |Heals                |Better armor
-Zerg   |1.1                |0.9               |Attacks faster       |Regenerate
+Race   |Maximum health     |Maximum shield|Other features
+-------|-------------------|--------------|------------------
+Classic|1.0                |0.0           |None
+Protoss|0.5                |0.5           |Shields regenerate :construction:
+Terran |0.75               |0.0           |None
+Zerg   |0.5                |0.0           |Health regenerates :construction:
+
+<!-- markdownlint-enable MD013 -->
+
+The second difference between the races is the ability to move and attack:
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
+
+Race   |Movement speed [1] |Attack speed [2]
+-------|-------------------|------------------
+Classic|1                  |1.0 
+Protoss|0.9                |1.1
+Terran |1.0                |1.0
+Zerg   |1.1                |0.9
 
 <!-- markdownlint-enable MD013 -->
 
 - :construction: This is under contruction
 - [1] In chess move per time unit
-- [2] In chess move per time unit
-- [3] That is, another friendly piece is protecting it
+
+The third difference between the races is the effect of a piece being
+protected by another piece:
+
+<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
+
+Race   |Effect of being protected
+-------|-------------------------
+Classic|None
+Protoss|Moves faster
+Terran |Heal
+Zerg   |Attack faster
+
+- :construction: This is under contruction
+
+<!-- markdownlint-enable MD013 -->
 
 When both players are ready, there is a countdown and the game starts.
 

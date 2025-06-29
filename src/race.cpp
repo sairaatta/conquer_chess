@@ -50,7 +50,7 @@ double get_max_shield(const race r)
   switch (r)
   {
     case race::classic: return 0.0;
-    case race::protoss: return 1.0;
+    case race::protoss: return 0.5;
     case race::terran: return 0.0;
     default:
     case race::zerg:
@@ -122,7 +122,7 @@ void test_race()
   // get_max_shield
   {
     assert(get_max_shield(race::classic) == 0.0);
-    assert(get_max_shield(race::protoss) == 1.0);
+    assert(get_max_shield(race::protoss) == 0.5);
     assert(get_max_shield(race::terran) == 0.0);
     assert(get_max_shield(race::zerg) == 0.0);
 
