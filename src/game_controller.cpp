@@ -1192,7 +1192,6 @@ void test_game_controller() //!OCLINT tests may be many
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.0));
     assert(count_selected_units(g, chess_color::white) == 0);
-    assert(get_closest_piece_to(g, to_coordinat("e4")).get_type() == piece_type::pawn);
 
     const auto msg{collect_messages(g)};
     assert(msg.at(1).get_message_type() == message_type::start_castling_kingside);
@@ -1215,7 +1214,6 @@ void test_game_controller() //!OCLINT tests may be many
     g.tick(delta_t(0.0));
 
     assert(count_selected_units(g, chess_color::white) == 0);
-    assert(get_closest_piece_to(g, to_coordinat("e4")).get_type() == piece_type::pawn);
 
     const auto msg{collect_messages(g)};
     assert(msg.at(0).get_message_type() == message_type::start_castling_queenside);
@@ -1466,7 +1464,7 @@ void test_game_controller() //!OCLINT tests may be many
     game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
     game_controller c{create_game_controller_with_two_keyboards()};
     do_select(g, c, "e1", side::lhs);
-    move_cursor_to(c, "e2", side::lhs);
+    move_cursor_to(c, "a1", side::lhs);
     const auto actions{get_piece_actions(g, c, side::lhs)};
     assert(actions.size() == 3);
     assert(actions[0] == piece_action_type::select);
@@ -1478,7 +1476,7 @@ void test_game_controller() //!OCLINT tests may be many
     game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};
     game_controller c{create_game_controller_with_two_keyboards()};
     do_select(g, c, "e8", side::rhs);
-    move_cursor_to(c, "e7", side::rhs);
+    move_cursor_to(c, "a8", side::rhs);
     const auto actions{get_piece_actions(g, c, side::rhs)};
     assert(actions.size() == 3);
     assert(actions[0] == piece_action_type::select);
@@ -1768,7 +1766,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(g, square("e1"))); // Empty
 
   }
-  // WHen two pieces want to move to the same square, one will go back
+  // When two pieces want to move to the same square, one will go back
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};

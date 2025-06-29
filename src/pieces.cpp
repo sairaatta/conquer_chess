@@ -853,6 +853,7 @@ std::vector<piece> get_pieces_ready_to_castle(
     piece(chess_color::white, piece_type::rook, square("a1"), white_race),
     piece(chess_color::white, piece_type::king, square("e1"), white_race),
     piece(chess_color::white, piece_type::rook, square("h1"), white_race),
+    #ifdef INCLUDE_PAWNS_IN_READY_TO_CASTLE
     piece(chess_color::white, piece_type::pawn, square("a2"), white_race),
     piece(chess_color::white, piece_type::pawn, square("b2"), white_race),
     piece(chess_color::white, piece_type::pawn, square("c2"), white_race),
@@ -861,9 +862,6 @@ std::vector<piece> get_pieces_ready_to_castle(
     piece(chess_color::white, piece_type::pawn, square("f2"), white_race),
     piece(chess_color::white, piece_type::pawn, square("g2"), white_race),
     piece(chess_color::white, piece_type::pawn, square("h2"), white_race),
-    piece(chess_color::black, piece_type::rook, square("a8"), black_race),
-    piece(chess_color::black, piece_type::king, square("e8"), black_race),
-    piece(chess_color::black, piece_type::rook, square("h8"), black_race),
     piece(chess_color::black, piece_type::pawn, square("a7"), black_race),
     piece(chess_color::black, piece_type::pawn, square("b7"), black_race),
     piece(chess_color::black, piece_type::pawn, square("c7"), black_race),
@@ -871,7 +869,11 @@ std::vector<piece> get_pieces_ready_to_castle(
     piece(chess_color::black, piece_type::pawn, square("e7"), black_race),
     piece(chess_color::black, piece_type::pawn, square("f7"), black_race),
     piece(chess_color::black, piece_type::pawn, square("g7"), black_race),
-    piece(chess_color::black, piece_type::pawn, square("h7"), black_race)
+    piece(chess_color::black, piece_type::pawn, square("h7"), black_race),
+    #endif // INCLUDE_PAWNS_IN_READY_TO_CASTLE
+    piece(chess_color::black, piece_type::rook, square("a8"), black_race),
+    piece(chess_color::black, piece_type::king, square("e8"), black_race),
+    piece(chess_color::black, piece_type::rook, square("h8"), black_race)
   };
 }
 
