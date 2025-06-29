@@ -167,16 +167,6 @@ bool can_unselect(
   const side player_side
 ) noexcept;
 
-/// Collect all valid \link{user_input} for all players.
-///
-/// Each \link{user_input} equals one \link{piece_action}
-/// @see use \link{collect_all_piece_actions}
-/// to get all the all \link{piece_action} from a game
-std::vector<user_inputs> collect_all_user_inputses(
-  const game& g,
-  const game_controller& c
-);
-
 /// Convert a chess move, e.g. e4,
 /// to the right user inputs
 user_inputs convert_move_to_user_inputs(

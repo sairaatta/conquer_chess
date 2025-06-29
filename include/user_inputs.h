@@ -127,12 +127,6 @@ void start_move_unit(
 /// Test this class and its free functions
 void test_user_inputs();
 
-/// Convert a 'piece_action' to a 'control_actions'
-user_inputs to_user_inputs(
-  const piece_action& pa,
-  const game_controller& c
-);
-
 std::ostream& operator<<(std::ostream& os, const user_inputs& actions) noexcept;
 bool operator==(const user_inputs& lhs, const user_inputs& rhs) noexcept;
 

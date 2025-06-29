@@ -594,21 +594,6 @@ bool can_unselect(
   return is_cursor_on_selected_piece(g, c, player_side);
 }
 
-std::vector<user_inputs> collect_all_user_inputses(
-  const game& g,
-  const game_controller& c
-)
-{
-  std::vector<user_inputs> user_inputs;
-
-  const auto piece_actions{collect_all_piece_actions(g)};
-  user_inputs.reserve(piece_actions.size());
-  for (const auto& piece_action: piece_actions) {
-    user_inputs.push_back(to_user_inputs(piece_action, c));
-  }
-  return user_inputs;
-}
-
 user_inputs convert_move_to_user_inputs(
   const game& g,
   const game_controller& c,

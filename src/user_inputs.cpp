@@ -337,31 +337,6 @@ void test_user_inputs()
 #endif // NDEBUG
 }
 
-user_inputs to_user_inputs(
-  const piece_action& pa,
-  const game_controller& c
-)
-{
-  const auto player_color{pa.get_color()};
-  const side player_side{get_player_side(player_color)};
-  const physical_controller pc{get_physical_controller(c, player_side)};
-  const user_input_type select_action_type{
-    pc.get_type() == physical_controller_type::mouse ?
-    user_input_type::lmb_down :
-    user_input_type::press_down
-  };
-
-  const user_input select(
-    select_action_type,
-    player_side,
-    to_coordinat(pa.get_from())
-  );
-
-  user_inputs v;
-  v.add(select);
-  return v;
-}
-
 bool operator==(const user_inputs& lhs, const user_inputs& rhs) noexcept
 {
   return lhs.get_user_inputs() == rhs.get_user_inputs();
