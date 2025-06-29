@@ -980,6 +980,7 @@ void game_controller::set_cursor_pos(
 
 void test_game_controller() //!OCLINT tests may be many
 {
+
   #ifndef NDEBUG // no tests in release
   // game::add_user_input
   {
@@ -997,20 +998,6 @@ void test_game_controller() //!OCLINT tests may be many
     };
     assert(count_user_inputs(c) == 0);
   }
-  //#define FIX_ISSUE_34_A
-  #ifdef FIX_ISSUE_34_A
-  // collect_all_user_inputses
-  {
-    const game g{create_game_with_standard_starting_position()};
-    use_two_keyboard_controllers();
-    game_controller c{
-      create_game_controller_with_two_keyboards()
-    };
-    assert(collect_all_user_inputses(g, c).empty());
-    const auto piece_actions{collect_all_piece_actions(g)};
-    assert(user_inputs.size() == piece_actions.size());
-  }
-  #endif // FIX_ISSUE_34
   // has_mouse_controller
   {
     const game_controller g(
@@ -1764,46 +1751,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(g, square("c1")));  // K
     assert(is_piece_at(g, square("d1")));  // Rook
     assert(!is_piece_at(g, square("e1"))); // Empty
-
-  }
-  // When two pieces want to move to the same square, one will go back
-  {
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-
-    // Start c2-c3
-    do_select(g, c, "c2", side::lhs);
-    move_cursor_to(c, "c3", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
-    add_user_input(c, create_press_action_1(side::lhs));
-    c.apply_user_inputs_to_game(g);
-
-    // Get that pawn moving
-    g.tick(delta_t(0.25));
-
-    // Start Nb1-c3
-    do_select(g, c, "b1", side::lhs);
-    move_cursor_to(c, "c3", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
-    add_user_input(c, create_press_action_1(side::lhs));
-    c.apply_user_inputs_to_game(g);
-
-    // Should take 1 time unit
-    for (int i{0}; i!=4; ++i)
-    {
-      g.tick(delta_t(0.25));
-    }
-    assert(is_piece_at(g, square("c3")));
-    assert(is_piece_at(g, square("b1")));
-    assert(!is_piece_at(g, square("c2"))); // The pawn got there first
-
-    const auto knight_messages{get_piece_at(g, "b1").get_messages()};
-    assert(knight_messages.size() == 5);
-    assert(knight_messages[0] == message_type::select);
-    assert(knight_messages[1] == message_type::start_move);
-    assert(knight_messages[2] == message_type::start_move); // ?Why twice
-    assert(knight_messages[3] == message_type::cannot);
-    assert(knight_messages[4] == message_type::done);
   }
   // A piece under attack must have decreasing health
   {
@@ -1887,12 +1834,10 @@ void test_game_controller() //!OCLINT tests may be many
     c.apply_user_inputs_to_game(g); // Will do nothing
 
     assert(is_piece_at(g, square("d1")));
-    const auto white_queen_id{get_piece_at(g, square("d1")).get_id()};
     for (int i{0}; i!=5; ++i)
     {
       g.tick(delta_t(0.25));
     }
-    const piece& p{get_piece_with_id(g, white_queen_id)};
     assert(is_piece_at(g, square("d1")));
   }
   // operator<<
@@ -1925,6 +1870,58 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!pgn.empty());
     assert(pgn == "0.00: white pawn move from e2 to e4");
   }
+  //----------------------------------------------------------------------------
+  // Moves that do not complete
+  //----------------------------------------------------------------------------
+  // When two pieces want to move to the same square, one will go back
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+
+    // Start c2-c3
+    do_select(g, c, "c2", side::lhs);
+    move_cursor_to(c, "c3", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    // Get that pawn moving
+    g.tick(delta_t(0.25));
+
+    // Start Nb1-c3
+    do_select(g, c, "b1", side::lhs);
+    move_cursor_to(c, "c3", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(is_piece_at(g, square("c3")));
+    assert(is_piece_at(g, square("b1")));
+    assert(!is_piece_at(g, square("c2"))); // The pawn got there first
+
+    const auto knight_messages{get_piece_at(g, "b1").get_messages()};
+    assert(knight_messages.size() == 5);
+    assert(knight_messages[0] == message_type::select);
+    assert(knight_messages[1] == message_type::start_move);
+    assert(knight_messages[2] == message_type::start_move); // ?Why twice
+    assert(knight_messages[3] == message_type::cannot);
+    assert(knight_messages[4] == message_type::done);
+  }
+  // When a piece is attacking a piece that is fleeing successfully,
+  // there is no capture
+  {
+
+  }
+  // When a piece is attacking the right squares, castling is interrupted
+  {
+
+  }
+
   #endif // NDEBUG // no tests in release
 }
 

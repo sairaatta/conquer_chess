@@ -805,7 +805,10 @@ void draw_unit_paths(game_view& view)
     // Draw circle at current in-progress movement
     assert(!actions.empty());
     const auto& first_action{actions[0]};
-    if (first_action.get_action_type() == piece_action_type::move)
+    if (first_action.get_action_type() == piece_action_type::move
+      || first_action.get_action_type() == piece_action_type::castle_kingside
+      || first_action.get_action_type() == piece_action_type::castle_queenside
+    )
     {
       const auto from_pixel{
         convert_to_screen_coordinate(
