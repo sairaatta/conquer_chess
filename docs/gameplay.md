@@ -25,14 +25,13 @@ The lobby is where the match is set up.
 Here the two players pick who plays which side
 and which races they use.
 
-The effect of each side is simple: white, like in regular chess, can start.
+The effect of each side is simple: white, like in regular chess, can start,
+where black has to wait one chess move.
 
 Side |Waiting time before first move
 -----|-------------------------------
 White|None
-Black|One second
-
-- :construction: This is under contruction
+Black|One chess move
 
 The effect of race
 
