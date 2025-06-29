@@ -69,13 +69,7 @@ user_inputs create_control_actions(
   const game& g
 );
 
-/// Process a left-mouse-button, hence a game_coordinate as a coordinat
-void do_select(
-  game& g,
-  game_controller& c,
-  const game_coordinate& coordinat,
-  const chess_color player_color
-);
+
 
 /// Process a space, hence a square as a coordinat
 void do_select(

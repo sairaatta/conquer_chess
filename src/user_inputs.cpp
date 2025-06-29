@@ -65,80 +65,10 @@ user_inputs create_control_actions(
 void do_select(
   game& g,
   game_controller& /* c */,
-  const game_coordinate& coordinat,
-  const chess_color player_color
-)
-{
-  // #|Has selected pieces? |Clicking on what?|Do what?
-  // -|---------------------|-----------------|----------------
-  // 1|Yes                  |Selected unit    |Unselect unit
-  // 2|Yes                  |Unselected unit  |Select unit
-  // 3|Yes                  |Empty square     |Unselect all units
-  // 4|No                   |Selected unit    |NA
-  // 5|No                   |Unselected unit  |Select unit
-  // 6|No                   |Empty square     |Nothing
-  if (has_selected_pieces(g, player_color))
-  {
-    if (is_piece_at(g, coordinat)) {
-
-      auto& piece{get_closest_piece_to(g, coordinat)};
-      if (piece.get_color() == player_color)
-      {
-        if (piece.is_selected())
-        {
-          unselect(piece); // 1
-        }
-        else
-        {
-          unselect_all_pieces(g, player_color);
-          select(piece); // 2
-        }
-      }
-    }
-    else
-    {
-      unselect_all_pieces(g, player_color); // 3
-    }
-  }
-  else
-  {
-    if (is_piece_at(g, coordinat)) {
-      auto& piece{get_closest_piece_to(g, coordinat)};
-      if (piece.get_color() == player_color)
-      {
-        if (piece.is_selected())
-        {
-          assert(!"Should never happen, as there are no selected pieces at all");
-          unselect(piece); // 4
-        }
-        else
-        {
-          select(piece); // 5
-        }
-      }
-    }
-    else
-    {
-      // 6
-    }
-  }
-}
-
-void do_select(
-  game& g,
-  game_controller& /* c */,
   const square& coordinat,
   const chess_color player_color
 )
 {
-  // #|Has selected pieces? |Clicking on what?|Do what?
-  // -|---------------------|-----------------|----------------
-  // 1|Yes                  |Selected unit    |Unselect unit
-  // 2|Yes                  |Unselected unit  |Select unit
-  // 3|Yes                  |Empty square     |Do nothing
-  // 4|No                   |Selected unit    |NA
-  // 5|No                   |Unselected unit  |Select unit
-  // 6|No                   |Empty square     |Nothing
   if (has_selected_pieces(g, player_color))
   {
     if (is_piece_at(g, coordinat)) {
@@ -146,46 +76,25 @@ void do_select(
       auto& piece{get_piece_at(g, coordinat)};
       if (piece.get_color() == player_color)
       {
-        if (piece.is_selected())
-        {
-          unselect(piece); // 1
-          assert(get_selected_pieces(g, player_color).size() == 0);
-        }
-        else
-        {
-          unselect_all_pieces(g, player_color);
-          select(piece); // 2
-          assert(get_selected_pieces(g, player_color).size() == 1);
-        }
+        assert(!piece.is_selected()); // Else this would be an unselect
+
+        unselect_all_pieces(g, player_color);
+        select(piece); // 2
+        assert(get_selected_pieces(g, player_color).size() == 1);
+
       }
-    }
-    else
-    {
-      // 3. NO! Do nothing
-      // unselect_all_pieces(g, player_color); // 3
-      assert(get_selected_pieces(g, player_color).size() == 1);
     }
   }
   else
   {
-    if (is_piece_at(g, coordinat)) {
+    if (is_piece_at(g, coordinat))
+    {
       auto& piece{get_piece_at(g, coordinat)};
       if (piece.get_color() == player_color)
       {
-        if (piece.is_selected())
-        {
-          assert(!"Should never happen, as there are no selected pieces at all");
-          unselect(piece); // 4
-        }
-        else
-        {
-          select(piece); // 5
-        }
+        assert(!piece.is_selected()); // Else would be an unselect
+        select(piece); // 5
       }
-    }
-    else
-    {
-      // 6
     }
   }
 }
