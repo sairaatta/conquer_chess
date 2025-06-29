@@ -150,7 +150,7 @@ bool game_view::process_event_impl(sf::Event& event)
       return false;
     }
   }
-  ::process_event(m_game_controller, event, m_layout);
+  ::process_event(m_game_controller, event, m_layout, m_game.get_in_game_time());
   m_game_controller.apply_user_inputs_to_game(m_game);
   return false;
 }
@@ -172,11 +172,18 @@ void game_view::process_resize_event_impl(sf::Event& event)
 void process_event(
   game_controller& c,
   const sf::Event& event,
-  const game_view_layout& layout
+  const game_view_layout& layout,
+  const in_game_time& t
 )
 {
   for (const auto s: get_all_sides())
   {
+    // Black can do nothing for one chess move
+    if (get_player_color(s) == chess_color::black
+      && t < in_game_time(1.0)
+    ) return;
+
+
     const physical_controller& p{get_physical_controller(c, s)};
     const user_inputs& inputs{p.process_input(event, s, layout)};
     for (const auto& a: inputs.get_user_inputs())
@@ -266,6 +273,8 @@ void draw_controls(
     layout.get_background(),
     sf::Color(128, 128, 128, 128)
   );
+
+
   draw_navigation_controls(layout.get_navigation_controls(), player_side);
 
   const std::vector<std::string> texts{
@@ -282,6 +291,11 @@ void draw_controls(
         symbol_rect
       );
     }
+    // Black can do nothing for one chess move
+    if (get_player_color(player_side) == chess_color::black
+      && view.get_game().get_in_game_time() < in_game_time(1.0)
+    ) continue;
+
     const int i{n.get_number() - 1};
     assert(i >= 0);
     if (i < static_cast<int>(texts.size()))

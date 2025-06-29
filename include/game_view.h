@@ -133,7 +133,8 @@ const in_game_time& get_time(const game_view& v) noexcept;
 void process_event(
   game_controller& c,
   const sf::Event& event,
-  const game_view_layout& layout
+  const game_view_layout& layout,
+  const in_game_time& t
 );
 
 
