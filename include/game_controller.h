@@ -3,6 +3,7 @@
 
 #include "ccfwd.h"
 #include "action_number.h"
+#include "piece_action_type.h"
 #include "game_coordinate.h"
 #include "side.h"
 #include "user_inputs.h"
@@ -21,6 +22,8 @@
 /// - keeps track of the cursors
 /// - moves the pieces of a \link{game}
 ///
+/// The most important member function is \link{apply_user_inputs_to_game},
+/// where the user inputs are converted to actions, which are then applied.
 class game_controller
 {
 public:
@@ -28,7 +31,7 @@ public:
   /// Add a user input. These will be processed in 'game::tick'
   void add_user_input(const user_input& a);
 
-  /// Process all actions and apply these on the game
+  /// Process all actions and apply these on the game.
   void apply_user_inputs_to_game(game& g);
 
   /// Get the a player's cursor position
@@ -70,6 +73,19 @@ private:
   /// The user inputs that need to be processed
   user_inputs m_user_inputs;
 
+  /// Apply an action type to a game
+  void apply_action_type_to_game(game& g, const piece_action_type t, const side s);
+
+  /// Apply a specific action type to a game
+  void apply_action_type_attack_to_game(game& g, const side s);
+  void apply_action_type_attack_en_passant_to_game(game& g, const side s);
+  void apply_action_type_castle_kingside_to_game(game& g, const side s);
+  void apply_action_type_castle_queenside_to_game(game& g, const side s);
+  void apply_action_type_move_to_game(game& g, const side s);
+  void apply_action_type_promote_to_game(game& g, const piece_type promote_to_type, const side s);
+  void apply_action_type_select_to_game(game& g, const side s);
+  void apply_action_type_unselect_to_game(game& g, const side s);
+
   /// Force to pick a setup of physical_controllers
   friend game_controller create_game_controller_with_keyboard_mouse();
   friend game_controller create_game_controller_with_mouse_keyboard();
@@ -82,6 +98,7 @@ void add_user_input(game_controller& c, const user_input& input);
 
 /// Add a user_inputs. These will be processed in 'game::tick'
 void add_user_inputs(game_controller& c, const user_inputs& input);
+
 
 /// Can the player attack?
 bool can_attack(
