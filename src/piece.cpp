@@ -321,12 +321,13 @@ piece get_test_white_king() noexcept
   );
 }
 
-piece get_test_white_knight() noexcept
+piece get_test_white_knight(const race r) noexcept
 {
   return piece(
     chess_color::white,
     piece_type::knight,
-    square("c3")
+    square("c3"),
+    r
   );
 }
 
@@ -397,7 +398,13 @@ bool is_pawn(const piece& p) noexcept
 void piece::receive_damage(const double damage)
 {
   assert(damage >= 0.0);
-  m_health -= damage;
+  m_shield -= damage;
+
+  if (m_shield >= 0.0) return;
+
+  const double physical_damage{-m_shield};
+  m_shield = 0.0;
+  m_health -= physical_damage;
 }
 
 void select(piece& p) noexcept
@@ -509,9 +516,35 @@ void test_piece()
     auto piece{get_test_white_knight()};
     assert(piece.get_messages().empty());
   }
-  // piece::receive_damage
+  // classic piece reduces health
   {
     auto piece{get_test_white_knight()};
+    const auto health_before{piece.get_health()};
+    piece.receive_damage(0.1);
+    const auto health_after{piece.get_health()};
+    assert(health_after < health_before);
+  }
+  // protoss piece first reduce shields
+  {
+    auto piece{get_test_white_knight(race::protoss)};
+    const auto health_before{piece.get_health()};
+    const auto shield_before{piece.get_shield()};
+    piece.receive_damage(0.1);
+    const auto health_after{piece.get_health()};
+    const auto shield_after{piece.get_shield()};
+    assert(health_after == health_before);
+    assert(shield_after < shield_before);
+  }
+  // protoss piece first reduce shields, then health
+  {
+    auto piece{get_test_white_knight(race::protoss)};
+    while (piece.get_shield() > 0.0)
+    {
+      assert(piece.get_health() == piece.get_max_health());
+      piece.receive_damage(0.1);
+    }
+    assert(piece.get_shield() == 0.0);
+
     const auto health_before{piece.get_health()};
     piece.receive_damage(0.1);
     const auto health_after{piece.get_health()};

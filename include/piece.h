@@ -253,7 +253,7 @@ square get_occupied_square(const piece& p) noexcept;
 piece get_test_white_king() noexcept;
 
 /// Create a piece to be used in testing: a white knight on c3
-piece get_test_white_knight() noexcept;
+piece get_test_white_knight(const race r = race::classic) noexcept;
 
 /// Does the piece have actions to do?
 bool has_actions(const piece& p) noexcept;
