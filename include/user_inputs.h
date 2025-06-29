@@ -114,41 +114,6 @@ void do_select_and_move_piece(
 /// See if the \link{user_inputs} holds zero elements
 bool is_empty(const user_inputs& inputs) noexcept;
 
-/// Respond to action 1
-void process_press_action_1(
-  game& g,
-  game_controller& c,
-  const user_input& action
-);
-
-/// Respond to action 1 or LMB down
-void process_press_action_1_or_lmb_down(
-  game& g,
-  game_controller& c,
-  const user_input& action
-);
-
-/// Respond to action 2
-void process_press_action_2(
-  game& g,
-  game_controller& c,
-  const user_input& action
-);
-
-/// Respond to action 3
-void process_press_action_3(
-  game& g,
-  game_controller& c,
-  const user_input& action
-);
-
-/// Respond to action 4
-void process_press_action_4(
-  game& g,
-  game_controller& c,
-  const user_input& action
-);
-
 /// Process an A or right-mouse-button down
 void start_attack(
   game& g,

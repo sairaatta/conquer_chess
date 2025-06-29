@@ -45,7 +45,6 @@ void game_controller::apply_user_inputs_to_game(
   game& g
 )
 {
-  #ifndef USE_OLD_SYSTEM
   std::map<side, std::vector<piece_action_type>> actions;
   actions[side::lhs] = get_piece_actions(g, *this, side::lhs);
   actions[side::rhs] = get_piece_actions(g, *this, side::rhs);
@@ -144,80 +143,6 @@ void game_controller::apply_user_inputs_to_game(
     }
   }
   m_user_inputs = std::vector<user_input>();
-
-  #else
-  for (const auto& action: m_user_inputs.get_user_inputs())
-  {
-    if (action.get_user_input_type() == user_input_type::press_action_1)
-    {
-      process_press_action_1(g, *this, action);
-    }
-    else if (action.get_user_input_type() == user_input_type::press_action_2)
-    {
-      process_press_action_2(g, *this, action);
-    }
-    else if (action.get_user_input_type() == user_input_type::press_action_3)
-    {
-      process_press_action_3(g, *this, action);
-    }
-    else if (action.get_user_input_type() == user_input_type::press_action_4)
-    {
-      process_press_action_4(g, *this, action);
-    }
-    else if (action.get_user_input_type() == user_input_type::press_down)
-    {
-      const auto pos{get_cursor_pos(action.get_player())};
-      set_cursor_pos(get_below(pos), action.get_player());
-    }
-    else if (action.get_user_input_type() == user_input_type::press_left)
-    {
-      const auto pos{get_cursor_pos(action.get_player())};
-      set_cursor_pos(get_left(pos), action.get_player());
-    }
-    else if (action.get_user_input_type() == user_input_type::press_right)
-    {
-      const auto pos{get_cursor_pos(action.get_player())};
-      set_cursor_pos(get_right(pos), action.get_player());
-    }
-    else if (action.get_user_input_type() == user_input_type::press_up)
-    {
-      const auto pos{get_cursor_pos(action.get_player())};
-      set_cursor_pos(get_above(pos), action.get_player());
-    }
-    else if (action.get_user_input_type() == user_input_type::mouse_move)
-    {
-      if (has_mouse_controller(*this))
-      {
-        assert(action.get_coordinat());
-        set_cursor_pos(action.get_coordinat().value(), action.get_player());
-        assert(get_cursor_pos(action.get_player()) == action.get_coordinat().value());
-        assert(square(get_cursor_pos(action.get_player())) == square(action.get_coordinat().value()));
-      }
-    }
-    #ifdef FIX_ISSUE_46
-    // Below you see that LMB selects and RMB moves
-    // Instead, the mouse controller has an active action
-    // triggered by LMB, and RMB goes to the next
-    #endif // FIX_ISSUE_46
-    else if (action.get_user_input_type() == user_input_type::lmb_down)
-    {
-      if (!has_mouse_controller(*this)) return;
-      process_press_action_1_or_lmb_down(g, *this, action);
-
-    }
-    else if (action.get_user_input_type() == user_input_type::rmb_down)
-    {
-      const auto maybe_index{
-        get_mouse_user_selector()
-      };
-      assert(maybe_index);
-      set_mouse_user_selector(
-        get_next(maybe_index.value())
-      );
-    }
-  }
-  m_user_inputs = std::vector<user_input>();
-  #endif
 }
 
 void game_controller::apply_action_type_to_game(game& g, const piece_action_type t, const side s)
@@ -1969,7 +1894,7 @@ void test_game_controller() //!OCLINT tests may be many
     // Must be captured
     assert(get_piece_at(g, square("f7")).get_color() == chess_color::white);
   }
-  // #20: A queen cannot attack over pieces
+  // A queen cannot attack over pieces
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -1978,7 +1903,7 @@ void test_game_controller() //!OCLINT tests may be many
     do_select(g, c, "d1", side::lhs);
     move_cursor_to(c, "d8", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
-    c.apply_user_inputs_to_game(g);
+    c.apply_user_inputs_to_game(g); // Will do nothing
 
     assert(is_piece_at(g, square("d1")));
     const auto white_queen_id{get_piece_at(g, square("d1")).get_id()};
@@ -1988,12 +1913,6 @@ void test_game_controller() //!OCLINT tests may be many
     }
     const piece& p{get_piece_with_id(g, white_queen_id)};
     assert(is_piece_at(g, square("d1")));
-    #ifdef BELIEVE_CANNOT_MESSAGE_IS_OBSOLETE
-    const auto queen_messages{p.get_messages()};
-    assert(queen_messages.back() == message_type::cannot);
-    const auto messages{get_piece_at(g, square("d1")).get_messages()};
-    assert(messages.back() == message_type::cannot);
-    #endif // BELIEVE_CANNOT_MESSAGE_IS_OBSOLETE
   }
   // operator<<
   {
