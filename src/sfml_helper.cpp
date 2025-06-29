@@ -36,9 +36,9 @@ sf::Color f_shield_to_color(const double f)
 {
   assert(f >= 0.0);
   assert(f <= 1.0);
-  if (f < 0.25) return sf::Color(0, 0, 255);
-  if (f < 0.50) return sf::Color(0, 0, 255);
-  if (f < 0.75) return sf::Color(0, 0, 255);
+  if (f < 0.25) return sf::Color(0, 0, 252);
+  if (f < 0.50) return sf::Color(0, 0, 253);
+  if (f < 0.75) return sf::Color(0, 0, 254);
   return sf::Color(0, 0, 255);
 }
 
@@ -183,6 +183,19 @@ void test_sfml_helper()
     const sf::Color low{f_health_to_color(3.0 * 0.125)};
     const sf::Color mid{f_health_to_color(5.0 * 0.125)};
     const sf::Color high{f_health_to_color(7.0 * 0.125)};
+    assert(lowest != low);
+    assert(lowest != mid);
+    assert(lowest != high);
+    assert(low != mid);
+    assert(low != high);
+    assert(mid != high);
+  }
+  // f_shield_to_color
+  {
+    const sf::Color lowest{f_shield_to_color(1.0 * 0.125)};
+    const sf::Color low{f_shield_to_color(3.0 * 0.125)};
+    const sf::Color mid{f_shield_to_color(5.0 * 0.125)};
+    const sf::Color high{f_shield_to_color(7.0 * 0.125)};
     assert(lowest != low);
     assert(lowest != mid);
     assert(lowest != high);

@@ -17,34 +17,6 @@ std::vector<piece_type> get_all_piece_types() noexcept
   };
 }
 
-double get_max_health(const race r)
-{
-  switch (r)
-  {
-    case race::classic: return 1.0;
-    case race::protoss: return 0.5;
-    case race::terran: return 0.75;
-    default:
-    case race::zerg:
-      assert(r == race::zerg);
-      return 0.5;
-  }
-}
-
-double get_max_shield(const race r)
-{
-  switch (r)
-  {
-    case race::classic: return 0.0;
-    case race::protoss: return 1.0;
-    case race::terran: return 0.0;
-    default:
-    case race::zerg:
-      assert(r == race::zerg);
-      return 0.0;
-  }
-}
-
 int get_piece_value(const piece_type type)
 {
   switch (type)
@@ -79,21 +51,6 @@ void test_piece_type()
     {
       assert(!to_str(t).empty());
     }
-  }
-  // get_max_health
-  {
-    assert(get_max_health(race::classic) == 1.0);
-    assert(get_max_health(race::protoss) == 0.5);
-    assert(get_max_health(race::terran) == 0.75);
-    assert(get_max_health(race::zerg) == 0.5);
-  }
-  // get_max_shield
-  {
-    assert(get_max_shield(race::classic) == 0.0);
-    assert(get_max_shield(race::protoss) == 1.0);
-    assert(get_max_shield(race::terran) == 0.0);
-    assert(get_max_shield(race::zerg) == 0.0);
-
   }
   // get_piece_value
   {

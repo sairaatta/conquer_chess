@@ -88,6 +88,24 @@ void test_piece_layout()
     assert(get_height(layout.get_is_protected()) < get_height(layout.get_piece()));
 
     assert(get_width(layout.get_health_bar_value(0.5)) > 35);
+
+    // Health bars
+    {
+      const auto r_classic{layout.get_health_bar_value(0.5, race::classic)};
+      const auto r_protoss{layout.get_health_bar_value(0.5, race::protoss)};
+      const auto r_terran{layout.get_health_bar_value(0.5, race::terran)};
+      const auto r_zerg{layout.get_health_bar_value(0.5, race::zerg)};
+      assert(r_classic != r_protoss);
+      assert(r_classic == r_terran);
+      assert(r_classic == r_zerg);
+    }
+    // Protoss health and shield bar differ
+    {
+      const auto r_health{layout.get_health_bar_value(0.5, race::protoss)};
+      const auto r_shield{layout.get_shield_bar_value(0.5)};
+      assert(r_health != r_shield);
+
+    }
   }
 #endif
 

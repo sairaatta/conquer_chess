@@ -21,14 +21,20 @@ std::vector<race> get_all_races() noexcept;
 /// The value of 1.0 is the baseline.
 double get_attack_speed(const race r) noexcept;
 
-race get_next(const race r) noexcept;
-race get_previous(const race r) noexcept;
+/// Get the maximum health for a piece
+double get_max_health(const race r);
 
+/// Get the maximum shield value for a piece
+double get_max_shield(const race r);
 
 /// Get the movement speed of a race.
 ///
 /// The value of 1.0 is the baseline.
 double get_movement_speed(const race r) noexcept;
+
+race get_next(const race r) noexcept;
+
+race get_previous(const race r) noexcept;
 
 /// Test the race functions
 void test_race();
