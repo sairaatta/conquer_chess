@@ -327,7 +327,8 @@ void tick_move(
   game& g
 );
 
-/// Convert the piece to a char
+/// Convert the piece to a FEN character
+///
 /// Type  |Character when white|Character when black
 /// ------|--------------------|--------------------
 /// bishop| b                  | B
@@ -336,7 +337,7 @@ void tick_move(
 /// pawn  | p                  | P
 /// queen | q                  | Q
 /// rook  | r                  | R
-char to_char(const piece& p) noexcept;
+char to_fen_char(const piece& p) noexcept;
 
 /// Select the piece
 void toggle_select(piece& p) noexcept;

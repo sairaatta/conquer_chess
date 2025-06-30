@@ -31,6 +31,11 @@ chess_color get_other_color(const chess_color c) noexcept
 void test_chess_color()
 {
 #ifndef NDEBUG
+  // to_fen_char
+  {
+    assert(to_fen_char(chess_color::white) == 'w');
+    assert(to_fen_char(chess_color::black) == 'b');
+  }
   // to_human_str
   {
     assert(to_human_str(chess_color::white) == "White");
@@ -75,6 +80,11 @@ std::string to_human_str(const chess_color c) noexcept
   assert(!s.empty());
   s[0] = std::toupper(s[0]);
   return s;
+}
+
+char to_fen_char(const chess_color c) noexcept
+{
+  return to_str(c)[0];
 }
 
 std::string to_str(const chess_color c) noexcept

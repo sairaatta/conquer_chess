@@ -444,6 +444,20 @@ std::vector<std::string> to_board_strs(
   const board_to_text_options& options = board_to_text_options()
 ) noexcept;
 
+/// Convert pieces to a FEN string.
+///
+/// This function does not attempt to be complete.
+/// Instead, it is used to determine a checkmate,
+/// using \url{https://github.com/Disservin/chess-library}
+std::string to_fen_str(
+  const std::vector<piece>& pieces,
+  const chess_color active_color = chess_color::white,
+  const std::string castling_availability = "KQkq",
+  const std::string en_passant_target_square = "-",
+  const int halfmove_clock = 0,
+  const int fullmove_number = 1
+);
+
 /// Convert the played game (i.e. the action_history) to pseudo-PGN notation
 /// Returns one string with newlines
 std::string to_pgn(const std::vector<piece>& pieces);

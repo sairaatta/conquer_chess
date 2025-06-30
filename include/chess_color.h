@@ -26,6 +26,14 @@ void test_chess_color();
 
 std::string to_human_str(const chess_color c) noexcept;
 
+/// Convert the color to a FEN character
+///
+/// Color|FEN character
+/// -----|-------------
+/// white|`w`
+/// black|`b`
+char to_fen_char(const chess_color c) noexcept;
+
 std::string to_str(const chess_color c) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const chess_color c) noexcept;

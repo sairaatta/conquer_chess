@@ -132,6 +132,12 @@ square create_random_square(
   std::default_random_engine& rng_engine
 );
 
+/// Get all the files, i.e. 'a' to and including 'h'
+std::vector<char> get_all_files() noexcept;
+
+/// Get all the ranks, i.e. 1 to and including 8
+std::vector<int> get_all_ranks() noexcept;
+
 /// Get the square behind a pawn.
 /// Examples:
 ///  * for white, behind e4 would be e3.

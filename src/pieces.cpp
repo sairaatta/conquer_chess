@@ -1,13 +1,15 @@
 #include "pieces.h"
 
+#include "game_coordinate.h"
+#include "lobby_options.h"
+
 #include <algorithm>
 #include <cassert>
 #include <numeric>
 #include <sstream>
 #include <optional>
+#include <regex>
 
-#include "game_coordinate.h"
-#include "lobby_options.h"
 
 std::vector<std::string> add_coordinats(
   const std::vector<std::string>& strs
@@ -1599,6 +1601,14 @@ void test_pieces()
     const auto str_with_coordinats{to_board_str(pieces, with_legend)};
     assert(str_with_coordinats.size() >= str_without_coordinats.size());
   }
+
+  // to_fen_string
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    const auto s{to_fen_str(pieces)};
+    assert(s == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  }
+
   // to_pgn
   {
     const auto pieces{get_standard_starting_pieces()};
@@ -1631,7 +1641,7 @@ std::vector<std::string> to_board_strs(
   {
     const int x{p.get_current_square().get_x()};
     const int y{p.get_current_square().get_y()};
-    board[y][x] = to_char(p);
+    board[y][x] = to_fen_char(p);
   }
   if (options.get_show_coordinats())
   {
@@ -1642,6 +1652,50 @@ std::vector<std::string> to_board_strs(
     board = add_legend(board);
   }
   return board;
+}
+
+std::string to_fen_str(
+  const std::vector<piece>& pieces,
+  const chess_color active_color,
+  const std::string castling_availability,
+  const std::string en_passant_target_square,
+  const int halfmove_clock,
+  const int fullmove_number
+)
+{
+  std::string s;
+  s.reserve(100);
+  for (const int rank: get_all_ranks())
+  {
+    for (const char file: get_all_files())
+    {
+      const square sq(file + std::to_string(rank));
+      if (is_piece_at(pieces, sq))
+      {
+        s += to_fen_char(get_piece_at(pieces, sq));
+      }
+      else
+      {
+        s += ".";
+      }
+
+    }
+    s += "/";
+  }
+  assert(s.back() == '/');
+  s.pop_back();
+
+  // Replace dots by numbers
+  s = std::regex_replace(s, std::regex("\\.{8}"), "8" );
+  assert(std::count(s.begin(), s.end(), '.') == 0);
+
+  s += std::string(" ") + to_fen_char(active_color) + " "
+    + castling_availability + " "
+    + en_passant_target_square + " "
+    + std::to_string(halfmove_clock) + " "
+    + std::to_string(fullmove_number)
+  ;
+  return s;
 }
 
 

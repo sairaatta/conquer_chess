@@ -310,6 +310,17 @@ square create_random_square(
   return square(x, y);
 }
 
+
+std::vector<char> get_all_files() noexcept
+{
+  return {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+}
+
+std::vector<int> get_all_ranks() noexcept
+{
+  return {1, 2, 3, 4, 5, 6, 7, 8};
+}
+
 square get_behind(
   const square& pawn_square,
   const chess_color color
@@ -595,6 +606,18 @@ void test_square()
     {
       create_random_square(rng_engine);
     }
+  }
+  // get_all_files
+  {
+    const std::vector<char> created = get_all_files();
+    const std::vector<char> expected = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+    assert(expected == created);
+  }
+  // get_all_ranks
+  {
+    const std::vector<int> created = get_all_ranks();
+    const std::vector<int> expected = {1, 2, 3, 4, 5, 6, 7, 8};
+    assert(expected == created);
   }
   // get_behind
   {
