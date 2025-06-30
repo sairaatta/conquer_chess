@@ -1406,11 +1406,15 @@ void test_pieces()
   }
   // is_checkmate
   {
-
+    const auto pieces{get_standard_starting_pieces()};
+    assert(!is_checkmate(pieces, chess_color::black));
+    assert(!is_checkmate(pieces, chess_color::white));
   }
   // is_king_under_attack
   {
-
+    auto pieces{get_pieces_queen_endgame()};
+    assert(!is_king_under_attack(pieces, chess_color::black));
+    assert(!is_king_under_attack(pieces, chess_color::white));
   }
   // is_piece_at, const
   {
@@ -1551,6 +1555,9 @@ void test_pieces()
     // Black attacks the white pawn at a3
     assert(is_square_attacked(pieces, square("a3"), chess_color::black));
 
+    // Black has an unproteced pawn at a6
+    assert(!is_square_attacked(pieces, square("a6"), chess_color::black));
+
     // Black's pawn at b4 is protected
     assert(is_square_attacked(pieces, square("b4"), chess_color::black));
 
@@ -1559,6 +1566,12 @@ void test_pieces()
 
     // Black cannot attack over the pawn at c2
     assert(!is_square_attacked(pieces, square("c1"), chess_color::black));
+
+    // Black's rook at d8 is protected
+    assert(is_square_attacked(pieces, square("d8"), chess_color::black));
+
+    // Black's rook at h8 is protected
+    assert(is_square_attacked(pieces, square("h8"), chess_color::black));
   }
 
   // to_board_strs
