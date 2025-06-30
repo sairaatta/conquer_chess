@@ -12,7 +12,7 @@ enum class program_state {
   lobby,
   main_menu,
   options,
-  //replay,
+  played_game,
   right_controls
 };
 

@@ -21,7 +21,7 @@
 /// lobby_view      |The lobby
 /// menu_view       |The main menu
 /// options_view    |Game settings
-/// player_game_view|View a played game
+/// played_game_view|View a played game
 class view
 {
 public:

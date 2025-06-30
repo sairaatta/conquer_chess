@@ -6,6 +6,7 @@
 #include "screen_rect.h"
 #include "render_window.h"
 #include "game_resources.h"
+#include "played_game_view.h"
 #include "lobby_options.h"
 #include "draw.h"
 
@@ -27,11 +28,13 @@ main_window::main_window()
   m_views[program_state::lobby] = std::make_unique<lobby_view>();
   m_views[program_state::main_menu] = std::make_unique<menu_view>();
   m_views[program_state::options] = std::make_unique<options_view>();
+  m_views[program_state::played_game] = std::make_unique<played_game_view>();
   m_views[program_state::right_controls] = std::make_unique<controls_view>(side::rhs);
 
   // All programs states have a view
   for (const auto s: get_all_program_states())
   {
+    // If this fails, add the view corresponding to the game to 'm_views'
     assert(m_views.find(s) != std::end(m_views));
   }
   // All programs states are inactive and have no suggested next start
