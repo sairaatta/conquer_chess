@@ -196,8 +196,9 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   test();
   #endif
   const auto args = collect_args(argc, argv);
-  if (args.size() == 1 && args[0] == "--profile")
+  if (args.size() == 2 && args[1] == "--profile")
   {
+    std::clog << "Start profiling\n";
     get_runtime_speed_profile();
   }
   else
