@@ -986,6 +986,23 @@ int get_total_pieces_value(
   return sum;
 }
 
+bool has_king(
+  const std::vector<piece>& pieces,
+  const chess_color c
+)
+{
+  bool has_king{false};
+  for (const auto& p: pieces)
+  {
+    if (p.get_color() == c && p.get_type() == piece_type::king)
+    {
+      has_king = true;
+      break;
+    }
+  }
+  return has_king;
+}
+
 bool has_piece_with_id(
   const std::vector<piece>& pieces,
   const piece_id& i
@@ -1376,6 +1393,16 @@ void test_pieces()
       assert(get_total_pieces_value(pieces, chess_color::white) == 6);
       assert(get_total_pieces_value(pieces, chess_color::black) == 0);
     }
+  }
+  // has_king
+  {
+    auto pieces{get_pieces_queen_endgame()};
+    assert(has_king(pieces, chess_color::black));
+    assert(has_king(pieces, chess_color::white));
+    assert(pieces.back().get_type() == piece_type::king);
+    assert(pieces.back().get_color() == chess_color::black);
+    pieces.pop_back();
+    assert(!has_king(pieces, chess_color::black));
   }
   // is_checkmate
   {

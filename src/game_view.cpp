@@ -45,6 +45,7 @@ void game_view::tick_impl(delta_t dt)
 {
   assert(is_active());
 
+
   const int n_logs_per_time_unit{8};
   if (static_cast<int>(m_game.get_in_game_time().get() * n_logs_per_time_unit)
     < static_cast<int>((m_game.get_in_game_time() + dt).get() * n_logs_per_time_unit))
@@ -56,16 +57,20 @@ void game_view::tick_impl(delta_t dt)
   // Disard old messages
   m_log.tick();
 
-  // Do a tick, so that one delta_t equals one second under normal game speed
-  m_game.tick(dt);
+  if (!m_game.get_winner().has_value())
+  {
 
-  // Read the pieces' messages and play their sounds
-  process_piece_messages();
+    // Do a tick, so that one delta_t equals one second under normal game speed
+    m_game.tick(dt);
+
+    // Read the pieces' messages and play their sounds
+    process_piece_messages();
+  }
 
   // Show the new state
   draw_impl();
 
-  game_resources::get().get_songs().get_wonderful_time().stop();
+  //game_resources::get().get_songs().get_wonderful_time().stop();
 }
 
 const physical_controller& get_physical_controller(const game_view& view, const side player_side)
@@ -159,8 +164,13 @@ bool game_view::process_event_impl(sf::Event& event)
       return false;
     }
   }
-  ::process_event(m_game_controller, event, m_layout, m_game.get_in_game_time());
-  m_game_controller.apply_user_inputs_to_game(m_game);
+
+  // Become unresponsive when there is a winner
+  if (!m_game.get_winner().has_value())
+  {
+    ::process_event(m_game_controller, event, m_layout, m_game.get_in_game_time());
+    m_game_controller.apply_user_inputs_to_game(m_game);
+  }
   return false;
 }
 
@@ -248,6 +258,16 @@ void game_view::draw_impl()
     }
   }
 
+  // Draw winner
+  if (m_game.get_winner().has_value())
+  {
+
+    draw_text(
+      "Winner: " + to_human_str(m_game.get_winner().value()),
+      m_layout.get_background(),
+      200
+    );
+  }
   // General controls bar
   m_controls_bar.draw();
 }
@@ -935,13 +955,13 @@ void game_view::start_impl()
   game_resources::get().get_songs().get_wonderful_time().setVolume(
     get_music_volume_as_percentage()
   );
-  game_resources::get().get_songs().get_wonderful_time().play();
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
   );
   m_game = game();
   assert(!is_active());
   set_is_active(true);
+
 }
 
 void game_view::stop_impl()

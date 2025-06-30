@@ -290,6 +290,27 @@ void game::check_game_and_pieces_agree_on_the_time() const
   }
 }
 
+void game::check_if_there_is_a_winner()
+{
+  assert(!m_winner.has_value());
+  if (is_checkmate(m_pieces, chess_color::white))
+  {
+    m_winner = chess_color::black;
+  }
+  if (is_checkmate(m_pieces, chess_color::black))
+  {
+    m_winner = chess_color::white;
+  }
+  if (!has_king(m_pieces, chess_color::white))
+  {
+    m_winner = chess_color::black;
+  }
+  if (!has_king(m_pieces, chess_color::black))
+  {
+    m_winner = chess_color::white;
+  }
+}
+
 void clear_piece_messages(game& g) noexcept
 {
   for (auto& p: g.get_pieces()) p.clear_messages();
@@ -1279,7 +1300,6 @@ void game::tick(const delta_t& dt)
     assert(t_before + dt == t_after);
   }
 
-
   // Remove dead pieces
   m_pieces.erase(
     std::remove_if(
@@ -1291,12 +1311,17 @@ void game::tick(const delta_t& dt)
   );
   assert(count_dead_pieces(m_pieces) == 0);
 
+  // Something has happened
+  if (collect_messages(*this).empty())
+  {
+    check_if_there_is_a_winner();
+  }
+
   // Keep track of the time
   m_in_game_time += dt;
 
   check_game_and_pieces_agree_on_the_time();
   check_all_occupied_squares_are_unique();
-
 }
 
 void unselect_all_pieces(

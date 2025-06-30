@@ -11,6 +11,7 @@
 
 #include <iosfwd>
 #include <vector>
+#include <optional>
 
 /// The game logic.
 ///
@@ -37,6 +38,8 @@ public:
   /// The game and pieces should agree on the in-game time.
   const auto& get_in_game_time() const noexcept { return m_in_game_time; }
 
+  const auto& get_winner() const noexcept { return m_winner; }
+
   /// Go to the next frame.
   void tick(const delta_t& dt = delta_t(1.0));
 
@@ -47,6 +50,9 @@ private:
 
   /// The central game time
   in_game_time m_in_game_time;
+
+  /// The winner, if any
+  std::optional<chess_color> m_winner;
 
   /// At the start (and end) of a tick,
   /// all occupied squares must be unique.
@@ -62,6 +68,9 @@ private:
   /// and piece::m_time is the piece's idea of what time it is.
   /// These should be equal at the start and end of a tick
   void check_game_and_pieces_agree_on_the_time() const;
+
+  /// Check if there is a winner
+  void check_if_there_is_a_winner();
 
   friend game create_game_with_starting_position(starting_position_type t) noexcept;
 };

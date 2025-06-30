@@ -325,6 +325,12 @@ int get_total_pieces_value(
   const chess_color c
 );
 
+/// Does this color still have a king?
+bool has_king(
+  const std::vector<piece>& pieces,
+  const chess_color c
+);
+
 /// Is there a piece with the ID among the pieces?
 bool has_piece_with_id(
   const std::vector<piece>& pieces,
