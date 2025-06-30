@@ -756,10 +756,15 @@ void test_piece()
     const auto p{get_test_white_king()};
     assert(p.get_health() > 0.0);
   }
-  // get_f_health
+  // get_f_shield
   {
-    const auto p{get_test_white_king()};
-    assert(get_f_health(p) == 1.0);
+    const auto p{get_test_white_knight()};
+    assert(get_f_shield(p) == 0.0);
+  }
+  // get_f_shield, protoss
+  {
+    const auto p{get_test_white_knight(race::protoss)};
+    assert(get_f_shield(p) > 0.1);
   }
   // get_max_health
   {
