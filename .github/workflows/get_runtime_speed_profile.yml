@@ -1,0 +1,40 @@
+# Build and profile the C++ code
+name: Get runtime speed profile
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: "0 0 1 * *"
+
+
+jobs:
+  get_runtime_speed_profile:
+
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+
+      - name: Run qmake
+        run: qmake "DEFINES+=LOGIC_ONLY" game.pro
+
+      - name: Run make
+        run: make --silent release
+
+      - name: Run the program
+        run: ./conquer_chess --profile
+
+      - name: Produce the gprof log
+        run: gprof conquer_chess > gprof.log
+
+      - name: Read the 100 top lines
+        run: head gprof.log -n 100
+
+      - name: Get g++ version
+        run: g++ --version
