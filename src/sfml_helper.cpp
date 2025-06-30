@@ -451,7 +451,6 @@ void test_sfml_helper()
     const sf::Color w{to_sfml_color(chess_color::white)};
     assert(b != w);
   }
-
   // to_sfml_color
   {
     const sf::Color ba{to_sfml_color(chess_color::black, piece_action_type::attack)};
@@ -464,6 +463,16 @@ void test_sfml_helper()
     assert(bm != wa);
     assert(bm != wm);
     assert(wa != wm);
+  }
+  // to_sfml_color, all must be valid
+  {
+    for (const auto c: get_all_chess_colors())
+    {
+      for (const auto t: get_all_piece_action_types())
+      {
+        assert(to_sfml_color(c, t).r >= 0);
+      }
+    }
   }
 
   // 62: to_one_char_str
@@ -566,6 +575,10 @@ sf::Color to_sfml_color(
   const piece_action_type t
 ) noexcept
 {
+  if (t == piece_action_type::select || t == piece_action_type::unselect)
+  {
+    return sf::Color::Transparent;
+  }
   if (color == chess_color::white)
   {
     if (t == piece_action_type::move
@@ -578,6 +591,7 @@ sf::Color to_sfml_color(
       return sf::Color(255 - 64, 255 - 0, 255 - 64);
     }
     assert(t == piece_action_type::attack
+      || t == piece_action_type::attack_en_passant
       || t == piece_action_type::castle_kingside
       || t == piece_action_type::castle_queenside
     );
@@ -594,6 +608,7 @@ sf::Color to_sfml_color(
     return sf::Color(128 - 64, 128 - 0, 128 - 64);
   }
   assert(t == piece_action_type::attack
+    || t == piece_action_type::attack_en_passant
     || t == piece_action_type::castle_kingside
     || t == piece_action_type::castle_queenside
   );
