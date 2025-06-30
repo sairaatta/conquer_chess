@@ -771,6 +771,13 @@ void test_piece()
     const auto p{get_test_white_king()};
     assert(get_occupied_square(p) == square("e1"));
   }
+  // get_race
+  {
+    const auto protoss_piece{get_test_white_knight(race::protoss)};
+    assert(protoss_piece.get_race() == race::protoss);
+    const auto zerg_piece{get_test_white_knight(race::zerg)};
+    assert(zerg_piece.get_race() == race::zerg);
+  }
   // get_test_white_king
   {
     const auto p{get_test_white_king()};
