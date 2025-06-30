@@ -112,7 +112,7 @@ game_view_layout::game_view_layout(
   );
 
   // Game info
-  m_game_info = screen_rect(
+  m_game_statistics = screen_rect(
     screen_coordinate(x3, y3),
     screen_coordinate(x6, y4)
   );

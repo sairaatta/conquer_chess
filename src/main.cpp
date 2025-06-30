@@ -29,7 +29,7 @@
 #include "controls_view_layout.h"
 #include "fps_clock.h"
 #include "game_controller.h"
-#include "game_info_layout.h"
+#include "game_statistics_view_layout.h"
 #include "game_statistic_type.h"
 #include "game_log.h"
 #include "game_options.h"

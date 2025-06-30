@@ -8,7 +8,7 @@
 #include "layout.h"
 #include "side.h"
 #include "board_layout.h"
-#include "game_info_layout.h"
+#include "game_statistics_view_layout.h"
 #include "navigation_controls_layout.h"
 #include "in_game_controls_layout.h"
 #include <iosfwd>
@@ -20,35 +20,35 @@
 /// The layout of the Game dialog (\link{game_view}).
 ///
 /// ```text
-///   x          x x     x x     x x          x
-///   1          2 3     4 5     6 7          8
+///   x          x x        x x      x x          x
+///   1          2 3        4 5      6 7          8
 ///
-/// +-------------------------------------------+
-/// |                                           |
-/// | +----------+ +-------------+ +----------+ | y1
-/// | | unit     | |             | | unit     | |
-/// | |          | |             | |          | |
-/// | |          | |             | |          | |
-/// | | info     | |             | | info     | |
-/// | +----------+ | board       | +----------+ | y2
-/// | | controls | |             | | controls | |
-/// | |          | |             | |          | |
-/// | |          | |             | |          | |
-/// | |          | +-------------+ |          | |
-/// | |          |                 |          | |
-/// | |          | +-------------+ |          | | y3
-/// | |          | | game_info   | |          | |
-/// | +----------+ +-------------+ +----------+ | y4
-/// |                                           |
-/// | +------------------+ +------------------+ | y5
-/// | | log              | | log              | |
-/// | +------------------+ +------------------+ | y6
-/// |                                           |
-/// | +------------------+ +------------------+ | y7
-/// | | debug            | | debug            | |
-/// | +------------------+ +------------------+ | y8
-/// |                                           |
-/// +-------------------------------------------+
+/// +-----------------------------------------------+
+/// |                                               |
+/// | +----------+ +-----------------+ +----------+ | y1
+/// | | unit     | |                 | | unit     | |
+/// | |          | |                 | |          | |
+/// | |          | |                 | |          | |
+/// | | info     | |                 | | info     | |
+/// | +----------+ | board           | +----------+ | y2
+/// | | controls | |                 | | controls | |
+/// | |          | |                 | |          | |
+/// | |          | |                 | |          | |
+/// | |          | +-----------------+ |          | |
+/// | |          |                     |          | |
+/// | |          | +-----------------+ |          | | y3
+/// | |          | | game_statistics | |          | |
+/// | +----------+ +-----------------+ +----------+ | y4
+/// |                                               |
+/// | +---------------------+ +-------------------+ | y5
+/// | | log                 | | log               | |
+/// | +---------------------+ +-------------------+ | y6
+/// |                                               |
+/// | +---------------------+ +-------------------+ | y7
+/// | | debug               | | debug             | |
+/// | +---------------------+ +-------------------+ | y8
+/// |                                               |
+/// +-----------------------------------------------+
 ///
 ///   ^          ^ ^            ^  ^          ^
 ///   |          | |            |  |          |
@@ -73,7 +73,7 @@ public:
 
   const screen_rect& get_debug(const side player) const noexcept;
 
-  const auto& get_game_info() const noexcept { return m_game_info; }
+  const auto& get_game_info() const noexcept { return m_game_statistics; }
 
   /// The area where the frame rate (in frames per seconds) is dsplayed
   const screen_rect& get_log(const side player) const noexcept;
@@ -89,7 +89,7 @@ private:
   board_layout m_board;
   std::map<side, in_game_controls_layout> m_controls;
   std::map<side, screen_rect> m_debug;
-  game_info_layout m_game_info;
+  game_statistics_view_layout m_game_statistics;
   std::map<side, screen_rect> m_log;
   std::map<side, screen_rect> m_unit_info;
 };
