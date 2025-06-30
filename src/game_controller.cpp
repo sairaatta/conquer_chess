@@ -13,13 +13,8 @@
 
 game_controller::game_controller()
   : m_lhs_cursor_pos{0.5, 4.5},
-    m_mouse_user_selector{},
     m_rhs_cursor_pos{7.5, 4.5}
 {
-  if (has_mouse_controller(physical_controllers::get()))
-  {
-    m_mouse_user_selector = action_number(1);
-  }
 
 }
 
@@ -103,13 +98,8 @@ void game_controller::apply_user_inputs_to_game(
         break;
         case user_input_type::rmb_down:
         {
-          const auto maybe_index{
-            get_mouse_user_selector()
-          };
-          assert(maybe_index);
-          set_mouse_user_selector(
-            get_next(maybe_index.value())
-          );
+          if (actions[s].size() < 2) continue;
+          apply_action_type_to_game(g, actions[s][1], s);
         }
         break;
         case user_input_type::lmb_down:
@@ -985,12 +975,6 @@ void set_cursor_pos(
   set_cursor_pos(c, to_coordinat(s), player_side);
 }
 
-void game_controller::set_mouse_user_selector(const action_number& number)
-{
-  assert(m_mouse_user_selector.has_value());
-  m_mouse_user_selector = number;
-}
-
 void game_controller::set_cursor_pos(
   const game_coordinate& pos,
   const side player_side) noexcept
@@ -1240,19 +1224,6 @@ void test_game_controller() //!OCLINT tests may be many
       create_game_controller_with_mouse_keyboard()
     );
     assert(has_mouse_controller(g));
-  }
-  // set_mouse_user_selector
-  {
-    game_controller g(
-      create_game_controller_with_keyboard_mouse()
-    );
-    const action_number n1(1);
-    g.set_mouse_user_selector(n1);
-    assert(g.get_mouse_user_selector() == n1);
-
-    const action_number n2(3);
-    g.set_mouse_user_selector(n2);
-    assert(g.get_mouse_user_selector() == n2);
   }
   // Clicking a unit once with LMB selects it
   {
@@ -1976,16 +1947,6 @@ std::ostream& operator<<(std::ostream& os, const game_controller& g) noexcept
     << "RHS cursor position: " << g.get_cursor_pos(side::rhs) << '\n'
     << "LHS player physical controller: " << get_physical_controller(g, side::lhs) << '\n'
     << "RHS player physical controller: " << get_physical_controller(g, side::rhs) << '\n'
-  ;
-  if (g.get_mouse_user_selector())
-  {
-    os << "Mouse user selector: " << g.get_mouse_user_selector().value() << '\n';
-  }
-  else
-  {
-    os << "Mouse user selector: " << "{}" << '\n';
-  }
-  os
     << "User inputs: " << g.get_user_inputs() << '\n'
   ;
   return os;

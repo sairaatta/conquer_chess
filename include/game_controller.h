@@ -37,21 +37,11 @@ public:
   /// Get the a player's cursor position
   const game_coordinate& get_cursor_pos(const side player_side) const noexcept;
 
-  /// A mouse user selects one of the four actions by using RMB
-  /// and scrollwheel. The mouse user selector stores
-  /// which of the four actions is selected.
-  /// (a keyboard user has different keys for that)
-  const auto& get_mouse_user_selector() const noexcept { return m_mouse_user_selector; }
-
   /// Get the game users' inputs
   const auto& get_user_inputs() const noexcept { return m_user_inputs; }
 
   /// Get a player's physical controller
   const physical_controller& get_physical_controller(const side player_side) const noexcept;
-
-  /// Set the selected action for the mouse user.
-  /// Assumes there is a mouse user
-  void set_mouse_user_selector(const action_number& number);
 
   /// Set a player's cursor's position
   void set_cursor_pos(const game_coordinate& pos, const side player_side) noexcept;
@@ -62,10 +52,6 @@ private:
 
   /// The in-game coordinat of the LHS user's cursor
   game_coordinate m_lhs_cursor_pos;
-
-  /// A mouse user selects one of the four actions
-  /// (a keyboard user has different keys for that)
-  std::optional<action_number> m_mouse_user_selector;
 
   /// The in-game coordinat of the RHS user's cursor
   game_coordinate m_rhs_cursor_pos;
