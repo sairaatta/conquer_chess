@@ -5,13 +5,14 @@
 
 #include "game_statistics_view_layout.h"
 #include "game.h"
+#include "game_statistics_in_time.h"
 #include "controls_bar.h"
 #include "view.h"
 
 #include <SFML/Graphics.hpp>
 
 
-/// Dialog to view a played Conquer Chess game
+/// Dialog to view a the statistics of a played Conquer Chess game
 class game_statistics_view : public view
 {
 public:
@@ -35,7 +36,7 @@ public:
   /// Run the game, until the user quits
   void tick_impl(const delta_t dt) override;
 
-  const auto& get_game() const noexcept { return m_game; }
+  const auto& get_statistics() const noexcept { return m_statistics; }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
@@ -44,7 +45,7 @@ private:
   controls_bar m_controls_bar;
 
   /// The played game
-  game m_game;
+  game_statistics_in_time m_statistics;
 
   /// The layout of this window
   game_statistics_view_layout m_layout;

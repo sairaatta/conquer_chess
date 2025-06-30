@@ -977,7 +977,7 @@ game play_random_game(const int n_turns)
 
   for (int i=0; i!=n_turns; ++i)
   {
-    c.add_user_input(create_random_user_input(rng_engine));
+    c.add_user_input(create_useful_random_user_input(rng_engine));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.1));
     if (g.get_winner().has_value()) break;

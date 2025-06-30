@@ -78,6 +78,8 @@ void game_statistics_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
+
+  m_statistics = play_random_game_to_get_statistics_in_time(1000);
 }
 
 void game_statistics_view::stop_impl()
@@ -97,9 +99,31 @@ void draw_plot_panel(game_statistics_view& v)
   #ifdef USE_SFGRAPHING
   const auto screen_rect{v.get_layout().get_text()};
 
-  std::vector<float> xAxis = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  std::vector<float> yAxis = {1, 2, 3, 4, 5, 6, 5, 6, 7, 8};
-  csrc::PlotDataSet set(xAxis, yAxis, sf::Color::Green, "Green Data", csrc::PlottingType::LINE);
+  const auto stats{v.get_statistics()};
+  std::vector<float> times;
+  std::vector<float> lhs_piece_values;
+  std::vector<float> rhs_piece_values;
+  std::vector<float> lhs_activity;
+  std::vector<float> rhs_activity;
+  std::vector<float> lhs_protectedness;
+  std::vector<float> rhs_protectedness;
+  for (const auto& s: stats.get())
+  {
+    times.push_back(s.get(game_statistic_type::time, side::lhs));
+    lhs_piece_values.push_back(s.get(game_statistic_type::value, side::lhs));
+    rhs_piece_values.push_back(s.get(game_statistic_type::value, side::rhs));
+    lhs_activity.push_back(s.get(game_statistic_type::activity, side::lhs));
+    rhs_activity.push_back(s.get(game_statistic_type::activity, side::rhs));
+    lhs_protectedness.push_back(s.get(game_statistic_type::protectedness, side::lhs));
+    rhs_protectedness.push_back(s.get(game_statistic_type::protectedness, side::rhs));
+  }
+
+  csrc::PlotDataSet lhs_piece_values_in_time(times, lhs_piece_values, sf::Color(255, 128, 128), "LHS piece value", csrc::PlottingType::LINE);
+  csrc::PlotDataSet rhs_piece_values_in_time(times, rhs_piece_values, sf::Color(255, 0, 0), "RHS piece value", csrc::PlottingType::LINE);
+  csrc::PlotDataSet lhs_activity_in_time(times, lhs_activity, sf::Color(128, 255, 128), "LHS activity", csrc::PlottingType::LINE);
+  csrc::PlotDataSet rhs_activity_in_time(times, rhs_activity, sf::Color(0, 255, 0), "RHS activity", csrc::PlottingType::LINE);
+  csrc::PlotDataSet lhs_protectedness_in_time(times, lhs_protectedness, sf::Color(128, 128, 255), "LHS protectedness", csrc::PlottingType::LINE);
+  csrc::PlotDataSet rhs_protectedness_in_time(times, rhs_protectedness, sf::Color(0, 0, 255), "RHS protectedness", csrc::PlottingType::LINE);
 
   //Position, dimension, margin, font
   csrc::SFPlot plot(
@@ -107,13 +131,27 @@ void draw_plot_panel(game_statistics_view& v)
     sf::Vector2f(get_width(screen_rect), get_height(screen_rect)),
     50,
     get_arial_font(),
-    "X Axis",
-    "Y Axis"
+    "Time (chess moves)",
+    "Fraction"
   );
-  plot.AddDataSet(set);
+  plot.AddDataSet(lhs_piece_values_in_time);
+  plot.AddDataSet(rhs_piece_values_in_time);
+  plot.AddDataSet(lhs_activity_in_time);
+  plot.AddDataSet(rhs_activity_in_time);
+  plot.AddDataSet(lhs_protectedness_in_time);
+  plot.AddDataSet(rhs_protectedness_in_time);
 
   //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
-  plot.SetupAxes(0, 10, 0, 10, 1, 1, sf::Color::White);
+  plot.SetupAxes(
+    0,
+    times.back(),
+    0,
+    1.0,
+    1.0,
+    0.1,
+    sf::Color::White
+  );
+  //plot.SetupAxes();
   plot.GenerateVertices();
   get_render_window().draw(plot);
   #else

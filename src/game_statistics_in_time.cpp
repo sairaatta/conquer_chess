@@ -1,7 +1,8 @@
 #include "game_statistics_in_time.h"
 
 #include "game.h"
-
+#include "game_controller.h"
+#include "lobby_options.h"
 #include <cassert>
 
 game_statistics_in_time::game_statistics_in_time()
@@ -11,6 +12,27 @@ game_statistics_in_time::game_statistics_in_time()
 void game_statistics_in_time::add(const game& g)
 {
   m_statistics.push_back(game_statistics(g));
+}
+
+game_statistics_in_time play_random_game_to_get_statistics_in_time(const int n_turns)
+{
+  game g{create_game_with_standard_starting_position()};
+  game_controller c{create_game_controller_with_two_keyboards()};
+  use_default_lobby_options();
+  game_statistics_in_time s;
+
+  std::random_device rd;
+  std::default_random_engine rng_engine(rd());
+
+  for (int i=0; i!=n_turns; ++i)
+  {
+    c.add_user_input(create_useful_random_user_input(rng_engine));
+    c.apply_user_inputs_to_game(g);
+    g.tick(delta_t(0.1));
+    s.add(g);
+    if (g.get_winner().has_value()) break;
+  }
+  return s;
 }
 
 void test_game_statistics_in_time()

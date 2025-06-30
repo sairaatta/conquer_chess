@@ -2,6 +2,10 @@
 
 ## v0.9
 
+![Game screen v0.9](20250630_3.jpg)
+
+> Second mock of the statistics screen
+
 ![Game screen v0.9](20250630_2.jpg)
 
 > First mock of the statistics screen

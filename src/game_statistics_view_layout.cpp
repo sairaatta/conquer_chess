@@ -8,12 +8,13 @@ game_statistics_view_layout::game_statistics_view_layout(
   const int margin_width
 ) : m_background{r}
 {
-  const int panel_height{get_height(r) - (2 * margin_width)};
-  const int panel_width{get_width(r) - (2 * margin_width)};
-  const int x1{margin_width};
+  assert(margin_width > 0);
+  const int panel_width{1200};
+  const int panel_height{800};
+  const int x1{64};
   const int x2{x1 + panel_width};
 
-  const int y1{margin_width};
+  const int y1{24};
   const int y2{y1 + panel_height};
 
   m_text = screen_rect(

@@ -17,6 +17,10 @@ private:
   std::vector<game_statistics> m_statistics;
 };
 
+/// Play a random game, used for profiling
+game_statistics_in_time play_random_game_to_get_statistics_in_time(const int n_turns = 2);
+
+
 void test_game_statistics_in_time();
 
 #endif // GAME_STATISTICS_IN_TIME_H
