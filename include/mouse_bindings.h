@@ -31,6 +31,10 @@ public:
   ) const noexcept;
   */
 
+
+  /// Get the button to do the selected action
+  const sf::Mouse::Button& get_button_for_action(const action_number& n) const;
+
   /// Get the button to do the selected action
   const sf::Mouse::Button& get_do_button() const noexcept { return m_do_button; }
 

@@ -227,8 +227,8 @@ void game_view::draw_impl()
   // Show the board: squares, unit paths, pieces, health bars
   draw_board(*this);
 
-  // Clock time
-  draw_game_info(*this);
+  // In-game statistics widget
+  draw_game_statistics_widget(*this);
 
   // Show the sidebars: controls (with log), units, debug
   for (const side s: get_all_sides())
@@ -300,6 +300,16 @@ void draw_controls(
         symbol_rect
       );
     }
+    else
+    {
+      if (n.get_number() < 3)
+      {
+        draw_input_prompt_symbol(
+          physical_controllers::get().get_controller(player_side).get_mouse_bindings().get_button_for_action(n),
+          symbol_rect
+        );
+      }
+    }
     // Black can do nothing for one chess move
     if (get_player_color(player_side) == chess_color::black
       && view.get_game().get_in_game_time() < in_game_time(1.0)
@@ -318,7 +328,7 @@ void draw_controls(
   }
 }
 
-void draw_game_info(game_view& view)
+void draw_game_statistics_widget(game_view& view)
 {
   const game_statistics_widget_layout layout(view.get_layout().get_game_info());
 

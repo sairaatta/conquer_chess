@@ -84,7 +84,12 @@ physical_controller create_right_keyboard_controller() noexcept
 
 const key_bindings& physical_controller::get_key_bindings() const
 {
-  assert(m_type == physical_controller_type::keyboard);
+  // When accidentally switching to mouse, the (inactive) keyboard keys
+  // must be shown
+  assert(
+       m_type == physical_controller_type::keyboard
+    || m_type == physical_controller_type::mouse
+  );
   return m_key_bindings;
 }
 

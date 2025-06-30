@@ -235,6 +235,7 @@ void draw_keyboard_panel(controls_view& v)
   const bool is_active{
     physical_controllers::get().get_controller(v.get_player_side()).get_type() == physical_controller_type::keyboard
   };
+
   chess_color color{chess_color::black};
   for (const auto& p: labels)
   {

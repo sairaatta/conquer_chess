@@ -11,6 +11,17 @@
 #include <optional>
 
 /// The abstract base class of all other views
+///
+/// Class name      |Descripion
+/// ----------------|-----------------
+/// about_view      |Shows contributors
+/// controls_view   |Setup the controls
+/// game_view       |Playing the game
+/// loading_view    |Loading the game
+/// lobby_view      |The lobby
+/// menu_view       |The main menu
+/// options_view    |Game settings
+/// player_game_view|View a played game
 class view
 {
 public:

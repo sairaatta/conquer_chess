@@ -154,7 +154,7 @@ void draw_board(game_view& view);
 void draw_controls(game_view& view, const side player);
 
 /// Show the game info, e.g. the time
-void draw_game_info(game_view& view);
+void draw_game_statistics_widget(game_view& view);
 
 /// Show the controls (e.g. for a unit) on-screen for a player
 void draw_navigation_controls(game_view& view);

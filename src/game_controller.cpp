@@ -91,10 +91,13 @@ void game_controller::apply_user_inputs_to_game(
         {
           if (has_mouse_controller(*this))
           {
-            assert(user_input.get_coordinat());
-            set_cursor_pos(user_input.get_coordinat().value(), user_input.get_player());
-            assert(get_cursor_pos(user_input.get_player()) == user_input.get_coordinat().value());
-            assert(square(get_cursor_pos(user_input.get_player())) == square(user_input.get_coordinat().value()));
+            if (is_coordinat_on_board(user_input.get_coordinat().value()))
+            {
+              assert(user_input.get_coordinat());
+              set_cursor_pos(user_input.get_coordinat().value(), user_input.get_player());
+              assert(get_cursor_pos(user_input.get_player()) == user_input.get_coordinat().value());
+              assert(square(get_cursor_pos(user_input.get_player())) == square(user_input.get_coordinat().value()));
+            }
           }
         }
         break;
@@ -1934,6 +1937,23 @@ void test_game_controller() //!OCLINT tests may be many
     assert(knight_messages[2] == message_type::start_move); // ?Why twice
     assert(knight_messages[3] == message_type::cannot);
     assert(knight_messages[4] == message_type::done);
+  }
+  // Moving a mouse cursor over the board does nothing
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_mouse_keyboard()};
+    c.add_user_input(create_mouse_move_action(game_coordinate(4.5, 4.5), side::lhs));
+    c.apply_user_inputs_to_game(g);
+    assert(count_selected_units(g) == 0);
+
+  }
+  // Moving a mouse cursor outside the board does no harm
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_mouse_keyboard()};
+    c.add_user_input(create_mouse_move_action(game_coordinate(94.5, -54.5), side::lhs));
+    c.apply_user_inputs_to_game(g);
+    assert(count_selected_units(g) == 0);
   }
   // When a piece is attacking a piece that is fleeing successfully,
   // there is no capture

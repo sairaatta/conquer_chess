@@ -1,6 +1,6 @@
 #include "mouse_bindings.h"
 
-//#include "action_number.h"
+#include "action_number.h"
 
 #include <cassert>
 #include <iostream>
@@ -63,6 +63,13 @@ sf::Mouse::Button mouse_bindings::get_key_for_action(const action_number& number
   return m_actions[i];
 }
 */
+
+const sf::Mouse::Button& mouse_bindings::get_button_for_action(const action_number& n) const
+{
+  if (n == action_number(1)) return get_do_button();
+  assert(n == action_number(2));
+  return get_next_button();
+}
 
 void test_mouse_bindings()
 {
