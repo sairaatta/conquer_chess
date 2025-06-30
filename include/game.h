@@ -7,11 +7,9 @@
 #include "side.h"
 #include "piece_action_type.h"
 #include "action_history.h"
-#include "read_only.h"
 #include "starting_position_type.h"
 
 #include <iosfwd>
-#include <optional>
 #include <vector>
 
 /// The game logic.
@@ -283,16 +281,6 @@ const piece& get_closest_piece_to(const game& g, const game_coordinate& coordina
 /// Get the piece that is closest to the coordinat
 piece& get_closest_piece_to(game& g, const game_coordinate& coordinat);
 
-/// Get the default, primary, most likely piece action
-/// Returns an empty optional if the current setup
-/// cannot result in an action
-std::optional<piece_action_type> get_default_piece_action(
-  const game& g,
-  const square& cursor_square,
-  const side player_side
-) noexcept;
-
-
 /// Create a game with all default settings
 /// and the default starting position
 game create_game_with_standard_starting_position() noexcept;
@@ -301,9 +289,6 @@ game create_game_with_standard_starting_position() noexcept;
 /// and a specific starting position
 game create_game_with_starting_position(starting_position_type t) noexcept;
 
-/// Get the ID of a piece at a square
-/// Will throw if there is no piece there
-read_only<piece_id> get_id(const game& g, const square& s);
 
 /// Get the index of the piece that is closest to the coordinat
 int get_index_of_closest_piece_to(
@@ -338,9 +323,6 @@ std::vector<square> get_unique_occupied_squares(const game& g) noexcept;
 
 std::vector<square> get_occupied_squares(const game& g) noexcept;
 
-/// Get the game options
-//const game_options& get_options(const game& g);
-
 /// Get the piece that at that square,
 /// will throw if there is no piece
 const piece& get_piece_at(const game& g, const square& coordinat);
@@ -356,16 +338,6 @@ piece& get_piece_at(game& g, const square& coordinat);
 /// Get the piece that at that square,
 /// will throw if there is no piece
 piece& get_piece_at(game& g, const std::string& square_str);
-
-/// Get the piece that moves
-piece& get_piece_that_moves(game& g, const chess_move& move);
-
-/// Find a piece with a certain ID
-/// Will throw if there is no piece with that ID
-piece get_piece_with_id(
-  const game& g,
-  const piece_id& i
-);
 
 /// Get the color of a player
 chess_color get_player_color(
@@ -459,12 +431,6 @@ bool is_piece_at(
   const std::string& square_str
 );
 
-/// See if there is a piece with a certain ID at a certain square
-bool piece_with_id_is_at(
-  game& g,
-  const piece_id& i,
-  const square& s
-);
 
 /// Call game::tick until all pieces are idle
 void tick_until_idle(game& g);

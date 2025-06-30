@@ -1045,78 +1045,6 @@ piece& get_closest_piece_to(
   return g.get_pieces()[get_index_of_closest_piece_to(g, coordinat)];
 }
 
-std::optional<piece_action_type> get_default_piece_action(
-  const game& g,
-  const square& cursor_square,
-  const side player_side
-) noexcept
-{
-
-  if (has_selected_pieces(g, player_side))
-  {
-    // Has selected pieces
-    const chess_color player_color{get_player_color(player_side)};
-
-    if (
-      is_piece_at(g, cursor_square)
-      && get_piece_at(g, cursor_square).get_color() == player_color
-    )
-    {
-      const piece& p{get_piece_at(g, cursor_square)};
-      if (p.is_selected())
-      {
-        if (can_promote(p))
-        {
-          return piece_action_type::promote_to_queen;
-        }
-        else
-        {
-          return piece_action_type::unselect;
-        }
-      }
-    }
-    else
-    {
-      // No own piece at cursor, maybe can move/castle/en-passant there?
-      assert(get_selected_pieces(g, player_side).size() == 1);
-      const auto selected_piece{get_selected_pieces(g, player_side)[0]};
-      if (can_do(g, selected_piece, piece_action_type::attack_en_passant, cursor_square, player_side))
-      {
-        return piece_action_type::attack_en_passant;
-      }
-      if (can_do(g, selected_piece, piece_action_type::castle_kingside, cursor_square, player_side))
-      {
-        return piece_action_type::castle_kingside;
-      }
-      if (can_do(g, selected_piece, piece_action_type::castle_queenside, cursor_square, player_side))
-      {
-        return piece_action_type::castle_queenside;
-      }
-      if (can_do(g, selected_piece, piece_action_type::move, cursor_square, player_side))
-      {
-        return piece_action_type::move;
-      }
-      if (can_do(g, selected_piece, piece_action_type::attack, cursor_square, player_side))
-      {
-        return piece_action_type::attack;
-      }
-    }
-  }
-  else
-  {
-    if (is_piece_at(g, cursor_square))
-    {
-      const piece& p{get_piece_at(g, cursor_square)};
-      const auto player_color{get_player_color(player_side)};
-      if (p.get_color() == player_color)
-      {
-        if (!p.is_selected()) return piece_action_type::select;
-      }
-    }
-  }
-  return std::optional<piece_action_type>();
-}
-
 game create_game_with_standard_starting_position() noexcept
 {
   return create_game_with_starting_position(starting_position_type::standard);
@@ -1126,12 +1054,6 @@ game create_game_with_starting_position(starting_position_type t) noexcept
 {
   game_options::get().set_starting_position(t);
   return game{};
-}
-
-read_only<piece_id> get_id(const game& g, const square& s)
-{
-  assert(is_piece_at(g, s));
-  return get_piece_at(g, s).get_id();
 }
 
 int get_index_of_closest_piece_to(
@@ -1176,42 +1098,6 @@ const std::vector<piece>& get_pieces(const game& g) noexcept
 {
   return g.get_pieces();
 }
-
-piece& get_piece_that_moves(game& g, const chess_move& move)
-{
-  assert(is_simple_move(move));
-  assert(!g.get_pieces().empty());
-  const auto& pieces{g.get_pieces()};
-  const int n_pieces{static_cast<int>(pieces.size())};
-  for (int i{0}; i!=n_pieces; ++i)
-  {
-    auto& ps{g.get_pieces()};
-    auto& piece{ps[i]};
-    if (piece.get_color() != move.get_color()) continue;
-    const auto& color{piece.get_color()};
-    assert(move.get_type().has_value());
-    if (piece.get_type() != move.get_type().value()) continue;
-    const auto& piece_type{piece.get_type()};
-    const auto& from{piece.get_current_square()};
-    assert(move.get_to().has_value());
-    const auto& to{move.get_to().value()};
-    if (can_move_on_empty_board(color, piece_type, from, to))
-    {
-      return piece;
-    }
-  }
-  assert(!"Should not get here");
-}
-
-
-piece get_piece_with_id(
-  const game& g,
-  const piece_id& i
-)
-{
-  return get_piece_with_id(g.get_pieces(), i);
-}
-
 
 chess_color get_player_color(
   const side player_side
@@ -1378,19 +1264,6 @@ bool is_piece_at(
 ) {
   return is_piece_at(g, square(square_str));
 }
-
-bool piece_with_id_is_at(
-  game& g,
-  const piece_id& i,
-  const square& s
-)
-{
-  assert(is_piece_at(g, s));
-  return get_piece_at(g, s).get_id() == i;
-}
-
-
-
 
 void game::tick(const delta_t& dt)
 {
