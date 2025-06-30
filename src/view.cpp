@@ -47,14 +47,6 @@ void view::process_resize_event(sf::Event& event)
 
 void view::set_is_active(const bool is_active)
 {
-  #ifndef NDEBUG
-  if (m_is_active == is_active)
-  {
-    std::clog << "Class " << typeid(*this).name()
-      << " attempts to again set m_is_active to "
-      << bool_to_str(is_active) << '\n';
-  }
-  #endif // NDEBUG
   assert(m_is_active != is_active);
   m_is_active = is_active;
 }

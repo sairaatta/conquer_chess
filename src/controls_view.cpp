@@ -31,7 +31,7 @@ void controls_view::change_selected()
       );
     break;
     default:
-      std::clog << "TODO\n";
+      assert(!"TODO");
   }
 }
 

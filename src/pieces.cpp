@@ -1008,7 +1008,6 @@ bool is_checkmate(
 )
 {
   const std::string fen_string{to_fen_str(pieces, player_in_checkmate)};
-  std::clog << fen_string << '\n';
   const chess::Board board(fen_string);
   const auto p = board.isGameOver();
   return p.first == chess::GameResultReason::CHECKMATE;
