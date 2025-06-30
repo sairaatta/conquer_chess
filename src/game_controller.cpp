@@ -3,6 +3,7 @@
 #include "chess_move.h"
 #include "game.h"
 #include "game_options.h"
+#include "lobby_options.h"
 #include "physical_controllers.h"
 #include "piece.h"
 #include "pieces.h"
@@ -965,6 +966,25 @@ void move_keyboard_cursor_to(
   );
 }
 
+game play_random_game(const int n_turns)
+{
+  game g{create_game_with_standard_starting_position()};
+  game_controller c{create_game_controller_with_two_keyboards()};
+  use_default_lobby_options();
+
+  std::random_device rd;
+  std::default_random_engine rng_engine(rd());
+
+  for (int i=0; i!=n_turns; ++i)
+  {
+    c.add_user_input(create_random_user_input(rng_engine));
+    c.apply_user_inputs_to_game(g);
+    g.tick(delta_t(0.1));
+    if (g.get_winner().has_value()) break;
+  }
+  return g;
+}
+
 void set_cursor_pos(
   game_controller& c,
   const game_coordinate& pos,
@@ -1068,6 +1088,11 @@ void test_game_controller() //!OCLINT tests may be many
     );
     assert(!is_mouse_user(c, side::lhs));
     assert(is_mouse_user(c, side::rhs));
+  }
+  // play_random_game
+  {
+    const int n_turns{2};
+    play_random_game(n_turns);
   }
   // 55: move_cursor_to
   {

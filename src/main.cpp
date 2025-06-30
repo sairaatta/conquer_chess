@@ -165,13 +165,42 @@ std::vector<std::string> collect_args(int argc, char **argv) {
   return v;
 }
 
+void get_runtime_speed_profile()
+{
+  #ifdef NDEBUG
+  // Do the profile here
+  const int n_turns{100000};
+  const auto g = play_random_game(n_turns);
+  std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
+  std::clog << "Winner:\n";
+  if (g.get_winner().has_value())
+  {
+    std::clog << to_str(g.get_winner().value()) << '\n';
+  }
+  else
+  {
+    std::clog << "None" << '\n';
+  }
+
+  #else
+  std::cerr << "Do not profile in debug mode\n";
+  assert(!"Do not profile in debug mode");
+  std::exit(42);
+  #endif
+
+}
+
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
   #ifndef NDEBUG
   test();
   #endif
   const auto args = collect_args(argc, argv);
-  if (args.size() == 1)
+  if (args.size() == 1 && args[0] == "--profile")
+  {
+    get_runtime_speed_profile();
+  }
+  else
   {
     #define USE_TWO_KEYBOARDS
     #ifdef USE_TWO_KEYBOARDS

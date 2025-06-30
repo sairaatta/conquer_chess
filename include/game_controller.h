@@ -2,14 +2,14 @@
 #define GAME_CONTROLLER_H
 
 #include "ccfwd.h"
-#include "action_number.h"
+//#include "action_number.h"
 #include "piece_action_type.h"
 #include "game_coordinate.h"
 #include "side.h"
 #include "user_inputs.h"
 #include "physical_controller_type.h"
 
-#include <map>
+//#include <map>
 #include <iosfwd>
 
 /// The class that acts as a controller for \link{game}.
@@ -298,6 +298,9 @@ void move_mouse_cursor_to(
   const square& s,
   const side player_side
 );
+
+/// Play a random game, used for profiling
+game play_random_game(const int n_turns = 2);
 
 /// Set the cursor's position to the target position
 void set_cursor_pos(

@@ -107,6 +107,22 @@ user_input create_random_user_input(
   );
 }
 
+user_input create_useful_random_user_input(
+  std::default_random_engine& rng_engine
+)
+{
+  const side player{create_random_side(rng_engine)};
+  std::uniform_int_distribution<int> distribution(0, 7);
+  switch (distribution(rng_engine))
+  {
+    case 0: return create_press_up_action(player);
+    case 1: return create_press_right_action(player);
+    case 2: return create_press_down_action(player);
+    case 3: return create_press_left_action(player);
+    default: return create_press_action_1(player);
+  }
+}
+
 void test_user_input()
 {
 #ifndef NDEBUG
