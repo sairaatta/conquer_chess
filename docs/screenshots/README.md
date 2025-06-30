@@ -2,6 +2,10 @@
 
 ## v0.9
 
+![Game screen v0.9](20250630_1.jpg)
+
+> A player can use the mouse
+
 ![Game screen v0.9](20250629_2.jpg)
 
 > Protoss pieces have a shield next to a health bar

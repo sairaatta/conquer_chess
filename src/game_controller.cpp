@@ -1947,7 +1947,7 @@ std::ostream& operator<<(std::ostream& os, const game_controller& g) noexcept
     << "RHS cursor position: " << g.get_cursor_pos(side::rhs) << '\n'
     << "LHS player physical controller: " << get_physical_controller(g, side::lhs) << '\n'
     << "RHS player physical controller: " << get_physical_controller(g, side::rhs) << '\n'
-    << "User inputs: " << g.get_user_inputs() << '\n'
+    << "User inputs: " << g.get_user_inputs()
   ;
   return os;
 }
