@@ -113,7 +113,14 @@ double get_f_value(
 void test_game_statistics()
 {
 #ifndef NDEBUG
-  //
+  // Calc relative
+  {
+    const game g{create_game_with_starting_position(starting_position_type::bishop_and_knight_end_game)};
+    const game_statistics s(g);
+    assert(s.calc_relative(game_statistic_type::value) == 1.0); // Black has no pieces
+    assert(s.calc_relative(game_statistic_type::activity) == 0.5);
+  }
+  // get_column_headers and flatten_to_row have an equal amount of elements
   {
     const game g{create_game_with_standard_starting_position()};
     const game_statistics s(g);
