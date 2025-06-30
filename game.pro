@@ -25,7 +25,12 @@ QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 CONFIG += debug_and_release
 CONFIG(release, debug|release) {
   DEFINES += NDEBUG
+
+  # gprof
+  QMAKE_CXXFLAGS += -pg
+  QMAKE_LFLAGS += -pg
 }
+
 CONFIG(debug, debug|release) {
   # High warning levels
   QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
@@ -42,6 +47,4 @@ CONFIG(debug, debug|release) {
 QT += core gui widgets
 
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-
-#INCLUDEPATH += ../magic_enum
 
