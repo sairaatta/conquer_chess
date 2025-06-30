@@ -1007,27 +1007,6 @@ int count_selected_units(
   return count_selected_units(g, get_player_color(player_side));
 }
 
-game create_randomly_played_game(
-  const int n_moves,
-  const int seed
-)
-{
-  // TODO: does nothing
-  game g;
-  std::default_random_engine generator(seed);
-  for (int i{0}; i!=n_moves; ++i)
-  {
-    /*
-    const user_input action{
-      create_random_user_input(generator)
-    };
-    add_user_input(c, action);
-    */
-    g.tick(delta_t(0.1));
-  }
-  return g;
-}
-
 std::vector<piece> find_pieces(
   const game& g,
   const piece_type type,

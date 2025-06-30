@@ -271,12 +271,6 @@ int count_selected_units(
   const side player_side
 );
 
-/// Create a randomly played game
-game create_randomly_played_game(
-  const int n_moves = 10,
-  const int seed = 42
-);
-
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(
   const game& g,
