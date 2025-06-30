@@ -7,107 +7,28 @@
 #include <sstream>
 
 mouse_bindings::mouse_bindings(
-  const sf::Mouse::Button do_button,
-  const sf::Mouse::Button next_button
-) : m_do_button{do_button},
-    m_next_button{next_button}
+  const sf::Mouse::Button button_1,
+  const sf::Mouse::Button button_2
+)
 {
-
+  m_buttons[action_number(1)] = button_1;
+  m_buttons[action_number(2)] = button_2;
 }
-
-/* Unsure if this is relevant for a mouse
-std::vector<user_input_type> mouse_bindings::create_actions(
-  const sf::Mouse::Button key_pressed
-) const noexcept
-{
-  if (key_pressed == get_key_for_move_up())
-  {
-    return { user_input_type::press_up };
-  }
-  else if (key_pressed == get_key_for_move_right())
-  {
-    return { user_input_type::press_right };
-  }
-  else if (key_pressed == get_key_for_move_down())
-  {
-    return { user_input_type::press_down };
-  }
-  else if (key_pressed == get_key_for_move_left())
-  {
-    return { user_input_type::press_left };
-  }
-  else if (key_pressed == get_key_for_action(action_number(1)))
-  {
-    return { user_input_type::press_action_1 };
-  }
-  else if (key_pressed == get_key_for_action(action_number(2)))
-  {
-    return { user_input_type::press_action_2 };
-  }
-  else if (key_pressed == get_key_for_action(action_number(3)))
-  {
-    return { user_input_type::press_action_3 };
-  }
-  else if (key_pressed == get_key_for_action(action_number(4)))
-  {
-    return { user_input_type::press_action_4 };
-  }
-  return {};
-
-}
-sf::Mouse::Button mouse_bindings::get_key_for_action(const action_number& number) const
-{
-  const int i{number.get_number() - 1};
-  assert(i >= 0);
-  assert(i < static_cast<int>(m_actions.size()));
-  return m_actions[i];
-}
-*/
 
 const sf::Mouse::Button& mouse_bindings::get_button_for_action(const action_number& n) const
 {
-  if (n == action_number(1)) return get_do_button();
-  assert(n == action_number(2));
-  return get_next_button();
+  return m_buttons.at(n);
 }
 
 void test_mouse_bindings()
 {
 #ifndef NDEBUG
-  // mouse_bindings::mouse_bindings
+  // get_button_for_action
   {
     const mouse_bindings k;
-    assert(k.get_do_button() == sf::Mouse::Button::Left);
-    assert(k.get_next_button() == sf::Mouse::Button::Right);
+    assert(k.get_button_for_action(action_number(1)) == sf::Mouse::Button::Left);
+    assert(k.get_button_for_action(action_number(2)) == sf::Mouse::Button::Right);
   }
-  /* Unsure if this is relevant for a mouse
-  // create_actions
-  {
-    const mouse_bindings k{create_left_keyboard_mouse_bindings()};
-    assert(!k.create_actions(k.get_key_for_move_up()).empty());
-    assert(!k.create_actions(k.get_key_for_move_right()).empty());
-    assert(!k.create_actions(k.get_key_for_move_down()).empty());
-    assert(!k.create_actions(k.get_key_for_move_left()).empty());
-    assert(!k.create_actions(k.get_key_for_action(action_number(1))).empty());
-    assert(!k.create_actions(k.get_key_for_action(action_number(2))).empty());
-    assert(!k.create_actions(k.get_key_for_action(action_number(3))).empty());
-    assert(!k.create_actions(k.get_key_for_action(action_number(4))).empty());
-    const mouse_bindings l{create_right_keyboard_mouse_bindings()};
-    assert(k.create_actions(l.get_key_for_move_up()).empty());
-    assert(k.create_actions(l.get_key_for_move_right()).empty());
-    assert(k.create_actions(l.get_key_for_move_down()).empty());
-    assert(k.create_actions(l.get_key_for_move_left()).empty());
-    assert(k.create_actions(l.get_key_for_action(action_number(1))).empty());
-    assert(k.create_actions(l.get_key_for_action(action_number(2))).empty());
-    assert(k.create_actions(l.get_key_for_action(action_number(3))).empty());
-    assert(k.create_actions(l.get_key_for_action(action_number(4))).empty());
-  }
-  // get_key_for_action
-  {
-    const mouse_bindings k{create_left_keyboard_mouse_bindings()};
-    assert(k.get_key_for_action(action_number(1)) == get_key_for_action(k, action_number(1)));
-  }
-  */
   // operator==
   {
     const mouse_bindings mbs1(sf::Mouse::Button::Left, sf::Mouse::Button::Right);
@@ -131,16 +52,16 @@ void test_mouse_bindings()
 
 bool operator==(const mouse_bindings& lhs, const mouse_bindings& rhs) noexcept
 {
-  return lhs.get_do_button() == rhs.get_do_button()
-    && lhs.get_next_button() == rhs.get_next_button()
+  return lhs.get_button_for_action(action_number(1)) == rhs.get_button_for_action(action_number(1))
+    && lhs.get_button_for_action(action_number(2)) == rhs.get_button_for_action(action_number(2))
   ;
 }
 
 std::ostream& operator<<(std::ostream& os, const mouse_bindings& mbs) noexcept
 {
   os
-    << "Button for doing it: " << mbs.get_do_button() << '\n'
-    << "Button for doing next: " << mbs.get_next_button() << '\n'
+    << "Button 1: " << mbs.get_button_for_action(action_number(1)) << '\n'
+    << "Button 2: " << mbs.get_button_for_action(action_number(2)) << '\n'
   ;
   return os;
 }
