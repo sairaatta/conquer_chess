@@ -10,13 +10,13 @@ game_statistics::game_statistics(const game& g)
 {
   for (const side s: get_all_sides())
   {
-    m_statistics[game_info_statistic::value][s] = get_f_value(g.get_pieces(), get_color(s));
-    m_statistics[game_info_statistic::activity][s] = get_f_active(g.get_pieces(), get_color(s));
-    m_statistics[game_info_statistic::protectedness][s] = get_f_protected(g.get_pieces(), get_color(s));
+    m_statistics[game_statistic_type::value][s] = get_f_value(g.get_pieces(), get_color(s));
+    m_statistics[game_statistic_type::activity][s] = get_f_active(g.get_pieces(), get_color(s));
+    m_statistics[game_statistic_type::protectedness][s] = get_f_protected(g.get_pieces(), get_color(s));
   }
 }
 
-double game_statistics::calc_relative(const game_info_statistic s) const
+double game_statistics::calc_relative(const game_statistic_type s) const
 {
   const double lhs{m_statistics.at(s).at(side::lhs)};
   const double rhs{m_statistics.at(s).at(side::rhs)};
@@ -30,7 +30,7 @@ double game_statistics::calc_relative(const game_info_statistic s) const
   return f;
 }
 
-double game_statistics::get(const game_info_statistic stat, const side s) const
+double game_statistics::get(const game_statistic_type stat, const side s) const
 {
   return m_statistics.at(stat).at(s);
 }

@@ -34,42 +34,42 @@ board_game_textures::board_game_textures()
   }
 }
 
-sf::Color board_game_textures::get_outline_color(const game_info_statistic s)
+sf::Color board_game_textures::get_outline_color(const game_statistic_type s)
 {
   const sf::Color c{get_symbol_color(s)};
   return sf::Color(c.r, c.g, c.b);
 }
 
-sf::Texture& board_game_textures::get_symbol(const game_info_statistic s)
+sf::Texture& board_game_textures::get_symbol(const game_statistic_type s)
 {
   switch (s)
   {
-    case game_info_statistic::activity: return get_flag_square();
-    case game_info_statistic::protectedness: return get_shield();
-    case game_info_statistic::time: return get_hourglass();
+    case game_statistic_type::activity: return get_flag_square();
+    case game_statistic_type::protectedness: return get_shield();
+    case game_statistic_type::time: return get_hourglass();
     default:
-    case game_info_statistic::value:
-      assert(s == game_info_statistic::value);
+    case game_statistic_type::value:
+      assert(s == game_statistic_type::value);
       return get_dollar();
   }
 
 }
 
-sf::Color board_game_textures::get_symbol_color(const game_info_statistic s)
+sf::Color board_game_textures::get_symbol_color(const game_statistic_type s)
 {
   switch (s)
   {
-    case game_info_statistic::activity: return sf::Color(0, 255, 0, 128);
-    case game_info_statistic::protectedness: return sf::Color(0, 0, 255, 128);
-    case game_info_statistic::time: return sf::Color(255, 255, 255, 128);
+    case game_statistic_type::activity: return sf::Color(0, 255, 0, 128);
+    case game_statistic_type::protectedness: return sf::Color(0, 0, 255, 128);
+    case game_statistic_type::time: return sf::Color(255, 255, 255, 128);
     default:
-    case game_info_statistic::value:
-      assert(s == game_info_statistic::value);
+    case game_statistic_type::value:
+      assert(s == game_statistic_type::value);
       return sf::Color(255, 0, 0, 128);
   }
 }
 
-sf::Color board_game_textures::get_bar_color(const game_info_statistic s, const chess_color c)
+sf::Color board_game_textures::get_bar_color(const game_statistic_type s, const chess_color c)
 {
   const sf::Color base{get_symbol_color(s)};
   const int hue{c == chess_color::white ? 255 : 0};

@@ -22,67 +22,67 @@ game_info_layout::game_info_layout(const screen_rect& r)
   const int symbol_width{square_height};
   const int symbol_height{symbol_width};
 
-  m_relative[game_info_statistic::time] = screen_rect(
+  m_relative[game_statistic_type::time] = screen_rect(
     screen_coordinate(x1, y1),
     screen_coordinate(x2 - 1, y4) // -1 to have non-overlaping rectangles
   );
-  m_symbol[game_info_statistic::time] = screen_rect(
-    m_relative[game_info_statistic::time].get_br() - screen_coordinate(symbol_width, symbol_height),
-    m_relative[game_info_statistic::time].get_br()
+  m_symbol[game_statistic_type::time] = screen_rect(
+    m_relative[game_statistic_type::time].get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_relative[game_statistic_type::time].get_br()
   );
 
   // Piece value
-  m_relative[game_info_statistic::value] = screen_rect(
+  m_relative[game_statistic_type::value] = screen_rect(
     screen_coordinate(x2, y1),
     screen_coordinate(x3 - 1, y2) // -1 to have non-overlaping rectangles
   );
-  m_absolute[game_info_statistic::value][side::lhs] = screen_rect(
+  m_absolute[game_statistic_type::value][side::lhs] = screen_rect(
     screen_coordinate(x2, y2),
     screen_coordinate(x3 - 1, y3) // -1 to have non-overlaping rectangles
   );
-  m_absolute[game_info_statistic::value][side::rhs] = screen_rect(
+  m_absolute[game_statistic_type::value][side::rhs] = screen_rect(
     screen_coordinate(x2, y3),
     screen_coordinate(x3 - 1, y4) // -1 to have non-overlaping rectangles
   );
-  m_symbol[game_info_statistic::value] = screen_rect(
-    m_absolute[game_info_statistic::value][side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
-    m_absolute[game_info_statistic::value][side::rhs].get_br()
+  m_symbol[game_statistic_type::value] = screen_rect(
+    m_absolute[game_statistic_type::value][side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_absolute[game_statistic_type::value][side::rhs].get_br()
   );
 
   // Activity
-  m_relative[game_info_statistic::activity] = screen_rect(
+  m_relative[game_statistic_type::activity] = screen_rect(
     screen_coordinate(x3, y1),
     screen_coordinate(x4 - 1, y2) // -1 to have non-overlaping rectangles
   );
-  m_absolute[game_info_statistic::activity][side::lhs] = screen_rect(
+  m_absolute[game_statistic_type::activity][side::lhs] = screen_rect(
     screen_coordinate(x3, y2),
     screen_coordinate(x4 - 1, y3) // -1 to have non-overlaping rectangles
   );
-  m_absolute[game_info_statistic::activity][side::rhs] = screen_rect(
+  m_absolute[game_statistic_type::activity][side::rhs] = screen_rect(
     screen_coordinate(x3, y3),
     screen_coordinate(x4 - 1, y4) // -1 to have non-overlaping rectangles
   );
-  m_symbol[game_info_statistic::activity] = screen_rect(
-    m_absolute[game_info_statistic::activity][side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
-    m_absolute[game_info_statistic::activity][side::rhs].get_br()
+  m_symbol[game_statistic_type::activity] = screen_rect(
+    m_absolute[game_statistic_type::activity][side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_absolute[game_statistic_type::activity][side::rhs].get_br()
   );
 
   // Protectedness
-  m_relative[game_info_statistic::protectedness] = screen_rect(
+  m_relative[game_statistic_type::protectedness] = screen_rect(
     screen_coordinate(x4, y1),
     screen_coordinate(x5, y2)
   );
-  m_absolute[game_info_statistic::protectedness][side::lhs] = screen_rect(
+  m_absolute[game_statistic_type::protectedness][side::lhs] = screen_rect(
     screen_coordinate(x4, y2),
     screen_coordinate(x5, y3)
   );
-  m_absolute[game_info_statistic::protectedness][side::rhs] = screen_rect(
+  m_absolute[game_statistic_type::protectedness][side::rhs] = screen_rect(
     screen_coordinate(x4, y3),
     screen_coordinate(x5, y4)
   );
-  m_symbol[game_info_statistic::protectedness] = screen_rect(
-    m_absolute[game_info_statistic::protectedness][side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
-    m_absolute[game_info_statistic::protectedness][side::rhs].get_br()
+  m_symbol[game_statistic_type::protectedness] = screen_rect(
+    m_absolute[game_statistic_type::protectedness][side::rhs].get_br() - screen_coordinate(symbol_width, symbol_height),
+    m_absolute[game_statistic_type::protectedness][side::rhs].get_br()
   );
 }
 
@@ -111,25 +111,25 @@ void test_game_info_layout()
     assert(layout.get_background().get_br().get_x() == 40);
     assert(layout.get_background().get_br().get_y() == 30);
 
-    assert(layout.get_background() != layout.get_relative(game_info_statistic::time));
-    assert(layout.get_background() != layout.get_relative(game_info_statistic::value));
-    assert(layout.get_background() != layout.get_relative(game_info_statistic::activity));
-    assert(layout.get_background() != layout.get_relative(game_info_statistic::protectedness));
+    assert(layout.get_background() != layout.get_relative(game_statistic_type::time));
+    assert(layout.get_background() != layout.get_relative(game_statistic_type::value));
+    assert(layout.get_background() != layout.get_relative(game_statistic_type::activity));
+    assert(layout.get_background() != layout.get_relative(game_statistic_type::protectedness));
 
-    assert(layout.get_absolute(game_info_statistic::value, side::lhs) != layout.get_absolute(game_info_statistic::value, side::rhs));
-    assert(layout.get_absolute(game_info_statistic::activity, side::lhs) != layout.get_absolute(game_info_statistic::activity, side::rhs));
-    assert(layout.get_absolute(game_info_statistic::protectedness, side::lhs) != layout.get_absolute(game_info_statistic::protectedness, side::rhs));
+    assert(layout.get_absolute(game_statistic_type::value, side::lhs) != layout.get_absolute(game_statistic_type::value, side::rhs));
+    assert(layout.get_absolute(game_statistic_type::activity, side::lhs) != layout.get_absolute(game_statistic_type::activity, side::rhs));
+    assert(layout.get_absolute(game_statistic_type::protectedness, side::lhs) != layout.get_absolute(game_statistic_type::protectedness, side::rhs));
 
     // Use the full rectangle
-    assert(layout.get_relative(game_info_statistic::time).get_tl().get_x() == layout.get_background().get_tl().get_x());
-    assert(layout.get_relative(game_info_statistic::time).get_tl().get_y() == layout.get_background().get_tl().get_y());
-    assert(layout.get_background().get_br().get_x() == layout.get_relative(game_info_statistic::protectedness).get_br().get_x());
-    assert(layout.get_background().get_br().get_y() == layout.get_absolute(game_info_statistic::protectedness, side::rhs).get_br().get_y());
+    assert(layout.get_relative(game_statistic_type::time).get_tl().get_x() == layout.get_background().get_tl().get_x());
+    assert(layout.get_relative(game_statistic_type::time).get_tl().get_y() == layout.get_background().get_tl().get_y());
+    assert(layout.get_background().get_br().get_x() == layout.get_relative(game_statistic_type::protectedness).get_br().get_x());
+    assert(layout.get_background().get_br().get_y() == layout.get_absolute(game_statistic_type::protectedness, side::rhs).get_br().get_y());
 
     // No overlapping pixels
-    assert(layout.get_relative(game_info_statistic::time).get_br().get_x() + 1 == layout.get_relative(game_info_statistic::value).get_tl().get_x());
-    assert(layout.get_relative(game_info_statistic::value).get_br().get_x() + 1 == layout.get_relative(game_info_statistic::activity).get_tl().get_x());
-    assert(layout.get_relative(game_info_statistic::activity).get_br().get_x() + 1 == layout.get_relative(game_info_statistic::protectedness).get_tl().get_x());
+    assert(layout.get_relative(game_statistic_type::time).get_br().get_x() + 1 == layout.get_relative(game_statistic_type::value).get_tl().get_x());
+    assert(layout.get_relative(game_statistic_type::value).get_br().get_x() + 1 == layout.get_relative(game_statistic_type::activity).get_tl().get_x());
+    assert(layout.get_relative(game_statistic_type::activity).get_br().get_x() + 1 == layout.get_relative(game_statistic_type::protectedness).get_tl().get_x());
 
   }
 #endif

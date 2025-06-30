@@ -3,7 +3,7 @@
 
 #include "screen_rect.h"
 #include "side.h"
-#include "game_info_statistic.h"
+#include "game_statistic_type.h"
 
 #include <map>
 /// The layout of the game info
@@ -42,17 +42,17 @@ public:
   const screen_rect& get_background() const noexcept { return m_background; }
 
   /// Get the symbol for a statistic
-  const screen_rect& get_symbol(const game_info_statistic s) const { return m_symbol.at(s); }
+  const screen_rect& get_symbol(const game_statistic_type s) const { return m_symbol.at(s); }
 
   /// Get the rectangle where the relative statistics are shown.
   ///
   /// The rectangle for time is in here as well.
-  const screen_rect& get_relative(const game_info_statistic s) const { return m_relative.at(s); }
+  const screen_rect& get_relative(const game_statistic_type s) const { return m_relative.at(s); }
 
   /// Get the rectangle where, per player, the absolute value of a statistic is shown.
   ///
   /// The rectangle for time is absent here.
-  const screen_rect& get_absolute(const game_info_statistic s, const side player_side) const noexcept { return m_absolute.at(s).at(player_side); }
+  const screen_rect& get_absolute(const game_statistic_type s, const side player_side) const noexcept { return m_absolute.at(s).at(player_side); }
 
 private:
 
@@ -60,13 +60,13 @@ private:
   screen_rect m_background;
 
   /// Absolute value of a statistic per side
-  std::map<game_info_statistic, std::map<side, screen_rect>> m_absolute;
+  std::map<game_statistic_type, std::map<side, screen_rect>> m_absolute;
 
   /// Absolute value of a statistic per side
-  std::map<game_info_statistic, screen_rect> m_relative;
+  std::map<game_statistic_type, screen_rect> m_relative;
 
   /// Symbols for the statistics
-  std::map<game_info_statistic, screen_rect> m_symbol;
+  std::map<game_statistic_type, screen_rect> m_symbol;
 };
 
 int get_height(const game_info_layout& layout) noexcept;

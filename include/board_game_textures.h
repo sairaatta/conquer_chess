@@ -3,7 +3,7 @@
 
 #ifndef LOGIC_ONLY
 
-#include "game_info_statistic.h"
+#include "game_statistic_type.h"
 #include "chess_color.h"
 
 #include <SFML/Graphics.hpp>
@@ -15,16 +15,16 @@ public:
   board_game_textures();
 
   /// Get the texture for the symbol
-  sf::Texture& get_symbol(const game_info_statistic s);
+  sf::Texture& get_symbol(const game_statistic_type s);
 
   /// Get the color for the outline of the bars
-  sf::Color get_outline_color(const game_info_statistic s);
+  sf::Color get_outline_color(const game_statistic_type s);
 
   /// Get the color for the symbol
-  sf::Color get_symbol_color(const game_info_statistic s);
+  sf::Color get_symbol_color(const game_statistic_type s);
 
   /// Get the color for the bar of the statistic
-  sf::Color get_bar_color(const game_info_statistic s, const chess_color c);
+  sf::Color get_bar_color(const game_statistic_type s, const chess_color c);
 
   int get_n_textures() const noexcept
   {

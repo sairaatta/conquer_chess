@@ -45,6 +45,13 @@ void game_view::tick_impl(delta_t dt)
 {
   assert(is_active());
 
+  const int n_logs_per_time_unit{8};
+  if (static_cast<int>(m_game.get_in_game_time().get() * n_logs_per_time_unit)
+    < static_cast<int>((m_game.get_in_game_time() + dt).get() * n_logs_per_time_unit))
+  {
+    assert(1 == 2);
+  }
+
   // Disard old messages
   m_log.tick();
 
@@ -318,7 +325,7 @@ void draw_game_info(game_view& view)
   draw_rectangle(layout.get_background(), sf::Color(128, 128, 128, 128));
 
   // Draw all symbols
-  for (const auto s: get_all_game_info_statistics())
+  for (const auto s: get_all_game_statistic_types())
   {
     draw_texture(
       game_resources::get().get_board_game_textures().get_symbol(s),
@@ -329,7 +336,7 @@ void draw_game_info(game_view& view)
 
   // Clock time
   {
-    const auto& r{layout.get_relative(game_info_statistic::time)};
+    const auto& r{layout.get_relative(game_statistic_type::time)};
     draw_rectangle(
       r,
       sf::Color(128, 128, 128, 128)
@@ -342,10 +349,10 @@ void draw_game_info(game_view& view)
   // Statistic
   const game_statistics statistics(view.get_game());
 
-  for (const game_info_statistic statistic: get_all_game_info_statistics())
+  for (const game_statistic_type statistic: get_all_game_statistic_types())
   {
     // Time is displayed differently
-    if (statistic == game_info_statistic::time) continue;
+    if (statistic == game_statistic_type::time) continue;
 
     // Relative, the two bars against each other
     {

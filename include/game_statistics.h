@@ -2,7 +2,7 @@
 #define GAME_STATISTICS_H
 
 #include "ccfwd.h"
-#include "game_info_statistic.h"
+#include "game_statistic_type.h"
 #include "chess_color.h"
 #include "side.h"
 
@@ -23,12 +23,12 @@ public:
   /// 0.0|0.5|0.0
   /// 0.5|0.0|1.0
   /// 0.5|0.5|0.5
-  double calc_relative(const game_info_statistic s) const;
+  double calc_relative(const game_statistic_type s) const;
 
-  double get(const game_info_statistic stat, const side s) const;
+  double get(const game_statistic_type stat, const side s) const;
 
 private:
-  std::map<game_info_statistic, std::map<side, double>> m_statistics;
+  std::map<game_statistic_type, std::map<side, double>> m_statistics;
 };
 
 /// Get the fraction of pieces that is doing an action
