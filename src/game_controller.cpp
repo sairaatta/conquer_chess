@@ -626,6 +626,9 @@ user_inputs convert_move_to_user_inputs(
   const chess_move& m
 )
 {
+  // The moves '0-1', or '1-0' have no user inputs
+  if (!m.get_winner().empty()) return user_inputs();
+
   const auto player_side{get_player_side(m.get_color())};
   const square from{get_from(g, m)};
 

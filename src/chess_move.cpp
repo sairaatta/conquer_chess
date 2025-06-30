@@ -47,22 +47,25 @@ bool is_capture(const std::string& s)
 
 square get_from(const game& g, const chess_move& m)
 {
+  std::optional<square> s;
   if (m.get_type().has_value())
   {
     const piece_type pt{m.get_type().value()};
     switch (pt)
     {
-      case piece_type::bishop: return get_from_for_bishop(g, m);
-      case piece_type::king: return get_from_for_king(g, m);
-      case piece_type::knight: return get_from_for_knight(g, m);
-      case piece_type::pawn: return get_from_for_pawn(g, m);
-      case piece_type::queen: return get_from_for_queen(g, m);
+      case piece_type::bishop: s = get_from_for_bishop(g, m); break;
+      case piece_type::king: s = get_from_for_king(g, m); break;
+      case piece_type::knight: s = get_from_for_knight(g, m); break;
+      case piece_type::pawn: s = get_from_for_pawn(g, m); break;
+      case piece_type::queen: s = get_from_for_queen(g, m); break;
       case piece_type::rook:
         assert(pt == piece_type::rook);
-        return get_from_for_rook(g, m);
+        s = get_from_for_rook(g, m);
+        break;
     }
   }
-  assert(!"TODO");
+  assert(s.has_value());
+  return s.value();
 }
 
 square get_from_for_bishop(const game& g, const chess_move& m)

@@ -69,10 +69,24 @@ void test_replay()
   {
     assert(split_pgn_str("1. e4").size() == 1);
   }
+  // split_pgn_str
+  {
+    assert(split_pgn_str("1. e4 e5").size() == 2);
+  }
   // replay::replay from empty string is OK
   {
     const replay r("");
     assert(get_n_moves(r) == 0);
+  }
+  // replay::replay from one move
+  {
+    const replay r("1. e4");
+    assert(get_n_moves(r) == 1);
+  }
+  // replay::replay from two moves move
+  {
+    const replay r("1. e4 e5");
+    assert(get_n_moves(r) == 2);
   }
   // replay::replay from get_scholars_mate_as_pgn_str
   {
