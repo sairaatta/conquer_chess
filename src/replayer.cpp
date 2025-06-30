@@ -81,12 +81,12 @@ void test_replayer()
     assert(is_piece_at(g, square("e2")));
     assert(!is_piece_at(g, square("e4")));
     r.do_move(c, g);
-    #define FIX_ISSUE_64_ANOTHER
+    //#define FIX_ISSUE_64_ANOTHER
     #ifdef FIX_ISSUE_64_ANOTHER
     assert(!is_piece_at(g, square("e2")));
     assert(is_piece_at(g, square("e4")));
-    #endif // FIX_ISSUE_64_ANOTHER
     assert(1 == 2);
+    #endif // FIX_ISSUE_64_ANOTHER
   }
   // 38: operator<<
   {

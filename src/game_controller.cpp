@@ -209,7 +209,32 @@ void game_controller::apply_action_type_attack_en_passant_to_game(game& g, const
 {
   assert(!g.get_pieces().empty());
   assert(!to_str(s).empty());
-  assert(!"TODO");
+
+
+  const chess_color player_color{get_player_color(s)};
+  const game_coordinate cursor_pos{get_cursor_pos(s)};
+  assert(is_coordinat_on_board(cursor_pos));
+  const square cursor{square(cursor_pos)};
+  const bool is_cursor_on_piece{is_piece_at(g, cursor)};
+  assert(!is_cursor_on_piece);
+
+
+  assert(has_selected_pieces(g, s));
+  assert(has_selected_pieces(g, player_color));
+  assert(!get_selected_pieces(g, s).empty());
+  assert(get_selected_pieces(g, s).size() == 1);
+  const auto selected_piece{get_selected_pieces(g, s)[0]};
+  const auto selected_piece_type{selected_piece.get_type()};
+  assert(selected_piece_type == piece_type::pawn);
+
+  assert(can_attack_en_passant(g, *this, s));
+
+  start_en_passant_attack(
+    g,
+    *this,
+    cursor_pos,
+    player_color
+  );
 }
 
 
@@ -1640,7 +1665,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(g, square("a2")));
     assert(!is_piece_at(g, square("a5")));
   }
-  #ifdef FIX_EN_PASSANT_CAPTURE
   // En-passant capture
   {
     game g{create_game_with_starting_position(starting_position_type::before_en_passant)};
@@ -1674,7 +1698,7 @@ void test_game_controller() //!OCLINT tests may be many
 
     const auto messages{collect_messages(g)};
     // Maybe type must be start_en_passant_attack?
-    assert(messages.back().get_message_type() == message_type::start_attack);
+    assert(messages.back().get_message_type() == message_type::start_en_passant_attack);
 
     for (int i{0}; i!=4; ++i)
     {
@@ -1685,7 +1709,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(g, square("g4"))); // White pawn is captured
     assert(is_piece_at(g, square("g3"))); // Black pawn has moved here
   }
-#endif // FIX_EN_PASSANT_CAPTURE
   // castling kingside
   {
     game g{create_game_with_starting_position(starting_position_type::ready_to_castle)};

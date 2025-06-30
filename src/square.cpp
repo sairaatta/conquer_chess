@@ -65,6 +65,21 @@ bool are_at_knights_jump_distance(const square& a, const square& b) noexcept
   return dx == dy * 2 || dy == dx * 2;
 }
 
+bool are_en_passant_capture_squares(
+  const square& attacker_square,
+  const square& target_square,
+  const chess_color player_color
+)
+{
+  const int en_passant_rank_of_attacker {
+    player_color == chess_color::black ? 4 : 5
+  };
+  if (en_passant_rank_of_attacker != get_rank(attacker_square)) return false;
+  if (!is_forward(player_color, attacker_square, target_square)) return false;
+  return are_on_adjacent_diagonal(attacker_square, target_square);
+
+}
+
 bool are_on_adjacent_diagonal(const square& a, const square& b) noexcept
 {
   return are_on_same_diagonal(a, b)
@@ -328,6 +343,19 @@ square get_initial_rook_square(
 }
 
 
+square get_en_passant_capture_square(
+  const square& attacker_square,
+  const square& target_square
+)
+{
+  assert(
+       are_en_passant_capture_squares(attacker_square, target_square, chess_color::white)
+    || are_en_passant_capture_squares(attacker_square, target_square, chess_color::black)
+  );
+  // assert(get_rank(attacker_square) == 4 || get_rank(attacker_square) == 5);
+  return square(get_file(target_square) + std::to_string(get_rank(attacker_square)));
+}
+
 char get_file(const square& s) noexcept
 {
   return 'a' + s.get_y();
@@ -522,6 +550,18 @@ void test_square()
     const square s(pos);
     assert(s.get_y() == 0);
   }
+  // are_en_passant_capture_squares
+  {
+    assert(are_en_passant_capture_squares(square("b5"), square("a6"), chess_color::white));
+    assert(are_en_passant_capture_squares(square("b5"), square("c6"), chess_color::white));
+    assert(are_en_passant_capture_squares(square("b4"), square("a3"), chess_color::black));
+    assert(are_en_passant_capture_squares(square("b4"), square("c3"), chess_color::black));
+
+    assert(!are_en_passant_capture_squares(square("b5"), square("a6"), chess_color::black)); // Wrong color
+    assert(!are_en_passant_capture_squares(square("b5"), square("b6"), chess_color::white)); // Not directly in front
+    assert(!are_en_passant_capture_squares(square("b5"), square("d6"), chess_color::white)); // Not too far away
+  }
+
   // are_on_adjacent_diagonal
   {
     assert(are_on_adjacent_diagonal(square("d1"), square("c2")));
@@ -572,6 +612,13 @@ void test_square()
     assert(get_initial_rook_square(chess_color::white, castling_type::queen_side) == square("a1"));
     assert(get_initial_rook_square(chess_color::black, castling_type::king_side) == square("h8"));
     assert(get_initial_rook_square(chess_color::black, castling_type::queen_side) == square("a8"));
+  }
+  // get_en_passant_capture_square
+  {
+    assert(get_en_passant_capture_square(square("b5"), square("a6")) == square("a5"));
+    assert(get_en_passant_capture_square(square("b5"), square("c6")) == square("c5"));
+    assert(get_en_passant_capture_square(square("b4"), square("a3")) == square("a4"));
+    assert(get_en_passant_capture_square(square("b4"), square("c3")) == square("c4"));
   }
   // get_file
   {

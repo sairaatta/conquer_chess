@@ -123,6 +123,44 @@ bool is_empty(const user_inputs& inputs) noexcept
   return inputs.get_user_inputs().empty();
 }
 
+void start_en_passant_attack(
+  game& g,
+  game_controller& /* c */,
+  const game_coordinate& coordinat,
+  const chess_color player_color
+)
+{
+  const auto actions{collect_all_piece_actions(g)};
+
+  if (count_selected_units(g, player_color) == 0) return;
+
+  for (auto& p: g.get_pieces())
+  {
+    if (p.is_selected() && p.get_color() == player_color)
+    {
+      const auto& from{p.get_current_square()};
+      const auto& to{square(coordinat)};
+      const piece_action action(
+        p.get_color(),
+        p.get_type(),
+        piece_action_type::attack_en_passant,
+        square(from),
+        square(to)
+      );
+      if (is_in(action, actions))
+      {
+        clear_actions(p);
+        p.add_action(action);
+      }
+      else
+      {
+        p.add_message(message_type::cannot);
+      }
+    }
+  }
+  unselect_all_pieces(g, player_color);
+}
+
 void start_attack(
   game& g,
   game_controller& /* c */,

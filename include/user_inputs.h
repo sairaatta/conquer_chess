@@ -95,6 +95,13 @@ void start_attack(
   const chess_color player_color
 );
 
+void start_en_passant_attack(
+  game& g,
+  game_controller& /* c */,
+  const game_coordinate& coordinat,
+  const chess_color player_color
+);
+
 /// Process an M or right-mouse-button down
 void start_move_unit(
   game& g,

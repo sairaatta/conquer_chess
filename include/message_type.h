@@ -12,6 +12,7 @@ enum class message_type
   done,
   select,
   start_attack,
+  start_en_passant_attack,
   start_castling_kingside,
   start_castling_queenside,
   start_move,

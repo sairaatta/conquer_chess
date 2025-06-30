@@ -197,6 +197,12 @@ void sound_effects::play(const message& effect)
       }
       break;
     }
+    case message_type::start_en_passant_attack:
+    {
+      assert(piece_type == piece_type::pawn);
+      m_attacking_low.play();
+      break;
+    }
   }
 }
 

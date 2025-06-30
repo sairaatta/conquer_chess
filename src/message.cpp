@@ -97,10 +97,14 @@ std::string to_str(const message& m) noexcept
       s << m.get_color() << " " << m.get_piece_type() << " starts moving";
       break;
     case message_type::start_attack:
-      assert(m.get_message_type() == message_type::start_attack);
       s << m.get_color() << " " << m.get_piece_type() << " starts attacking";
       break;
+    case message_type::start_en_passant_attack:
+      s << m.get_color() << " " << m.get_piece_type() << " starts attacking en passant";
+      break;
+    default:
     case message_type::unselect:
+      assert(m.get_message_type() == message_type::unselect);
       s << m.get_color() << " " << m.get_piece_type() << " unselected";
       break;
   }

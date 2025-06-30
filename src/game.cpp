@@ -207,15 +207,32 @@ bool can_do_en_passant(
 {
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
-  assert(is_piece_at(g, selected_piece.get_current_square()));
-  assert(get_piece_at(g, selected_piece.get_current_square()).get_color()
-    == player_color
-  );
+  const auto player_square{selected_piece.get_current_square()};
+  assert(is_piece_at(g, player_square));
+  assert(get_piece_at(g, player_square).get_color() == player_color);
   if (is_piece_at(g, cursor_square)) return false;
-  #ifdef FIX_ISSUE_21
-  assert(!"Find adjacent pieces");
-  #endif
-  return false;
+
+  if (!are_en_passant_capture_squares(
+      player_square,
+      cursor_square,
+      player_color
+    )
+  )
+  {
+    return false;
+  }
+
+  const auto en_passant_capture_square{
+    get_en_passant_capture_square(
+      player_square,
+      cursor_square
+    )
+  };
+  if (!is_piece_at(g, en_passant_capture_square)) return false;
+
+  if (get_piece_at(g, en_passant_capture_square).get_color() == player_color) return false;
+
+  return true;
 }
 
 bool can_do_move(

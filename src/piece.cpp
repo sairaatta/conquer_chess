@@ -99,6 +99,10 @@ void piece::add_action(const piece_action& action)
       this->add_message(message_type::start_attack);
     }
   }
+  else if (action.get_action_type() == piece_action_type::attack_en_passant)
+  {
+    this->add_message(message_type::start_en_passant_attack);
+  }
   else if (action.get_action_type() == piece_action_type::castle_kingside)
   {
     this->add_message(message_type::start_castling_kingside);
@@ -1121,6 +1125,9 @@ void piece::tick(
     case piece_action_type::attack:
       tick_attack(*this, dt, g);
       break;
+    case piece_action_type::attack_en_passant:
+      tick_attack_en_passant(*this, dt, g);
+      break;
     case piece_action_type::unselect:
       assert(m_is_selected);
       m_is_selected = false;
@@ -1192,6 +1199,38 @@ void tick_attack(
   }
 }
 
+void tick_attack_en_passant(
+  piece& p,
+  const delta_t& dt,
+  game& g
+)
+{
+  assert(!p.get_actions().empty());
+  const auto& first_action{p.get_actions()[0]};
+  assert(first_action.get_action_type() == piece_action_type::attack_en_passant);
+  if (!can_do_en_passant(g, p, first_action.get_to(), get_player_side(p.get_color())))
+  {
+    p.add_message(message_type::cannot);
+    remove_first(p.get_actions());
+    return;
+  }
+  const auto attack_square{
+    get_en_passant_capture_square(first_action.get_from(), first_action.get_to())
+  };
+  assert(is_piece_at(g, attack_square));
+  piece& target{get_piece_at(g, attack_square)};
+
+  assert(p.get_color() != target.get_color());
+  const auto damage{game_options::get().get_damage_per_chess_move() * dt.get()};
+  target.receive_damage(damage);
+  // Capture the piece if destroyed
+  if (is_dead(target))
+  {
+    p.increase_kill_count();
+    p.set_current_square(first_action.get_to()); // Capture
+    remove_first(p.get_actions());
+  }
+}
 void tick_castle_kingside(
   piece& p,
   const delta_t& dt,

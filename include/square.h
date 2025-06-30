@@ -62,6 +62,15 @@ bool are_all_unique(std::vector<square> squares);
 /// squares are seperated by multiple knight jumps in the same direction.
 bool are_at_knights_jump_distance(const square& a, const square& b) noexcept;
 
+/// Are these possible en-passant capture squares?
+///
+/// For example, a5xb6 (attacker square and target square respectively)
+bool are_en_passant_capture_squares(
+  const square& attacker_square,
+  const square& target_square,
+  const chess_color player_color
+);
+
 /// Are the squares adjacent on the same diagonal, e.g. d1 and e2
 bool are_on_adjacent_diagonal(const square& a, const square& b) noexcept;
 
@@ -130,6 +139,15 @@ square create_random_square(
 square get_behind(
   const square& pawn_square,
   const chess_color color
+);
+
+/// Get the square that may be captured by en-passant
+///
+/// Assumes that the squares are valid, using
+/// \link{are_en_passant_capture_squares}
+square get_en_passant_capture_square(
+  const square& attacker_square,
+  const square& target_square
 );
 
 /// Get the file of a square, e.g. 'd' from 'd4'
