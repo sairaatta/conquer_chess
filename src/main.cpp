@@ -33,6 +33,7 @@
 #include "game_info_statistic.h"
 #include "game_log.h"
 #include "game_options.h"
+#include "game_statistics.h"
 #include "game_rect.h"
 #include "game_view_layout.h"
 #include "helper.h"
@@ -100,6 +101,7 @@ void test()
   test_game_options();
   test_game_rect();
   test_game_speed();
+  test_game_statistics();
   test_game_view_layout();
   test_helper();
   test_id();

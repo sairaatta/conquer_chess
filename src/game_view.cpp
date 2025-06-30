@@ -8,6 +8,7 @@
 #include "game_options.h"
 #include "game_rect.h"
 #include "game_resources.h"
+#include "game_statistics.h"
 #include "game_view_layout.h"
 #include "game_info_layout.h"
 #include "lobby_options.h"
@@ -339,13 +340,7 @@ void draw_game_info(game_view& view)
   }
 
   // Statistic
-  std::map<game_info_statistic, std::map<side, double>> statistics;
-  for (const side s: get_all_sides())
-  {
-    statistics[game_info_statistic::value][s] = get_f_value(view.get_game().get_pieces(), get_color(s));
-    statistics[game_info_statistic::activity][s] = get_f_active(view.get_game().get_pieces(), get_color(s));
-    statistics[game_info_statistic::protectedness][s] = get_f_protected(view.get_game().get_pieces(), get_color(s));
-  }
+  const game_statistics statistics(view.get_game());
 
   for (const game_info_statistic statistic: get_all_game_info_statistics())
   {
@@ -354,11 +349,7 @@ void draw_game_info(game_view& view)
 
     // Relative, the two bars against each other
     {
-      const double f{
-        statistics[statistic][side::lhs] + statistics[statistic][side::rhs] == 0
-        ? 0.5
-        : static_cast<double>(statistics[statistic][side::lhs]) / static_cast<double>(statistics[statistic][side::lhs] + statistics[statistic][side::rhs])
-      };
+      const double f{statistics.calc_relative(statistic)};
       assert(f >= 0.0);
       assert(f <= 1.0);
       const auto& r_border{layout.get_relative(statistic)};
@@ -388,7 +379,7 @@ void draw_game_info(game_view& view)
     // Absolute
     for (const side s: get_all_sides())
     {
-      const double f{statistics[statistic][s]};
+      const double f{statistics.get(statistic, s)};
       assert(f >= 0.0);
       assert(f <= 1.0);
       const auto& r_border{layout.get_absolute(statistic, s)};

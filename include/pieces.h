@@ -97,25 +97,6 @@ int count_selected_units(
   const chess_color player
 );
 
-/// Get the fraction of pieces that is doing an action
-double get_f_active(
-  const std::vector<piece>& pieces,
-  const chess_color c
-);
-
-/// Get the fraction of pieces that is protected by another
-double get_f_protected(
-  const std::vector<piece>& pieces,
-  const chess_color c
-);
-
-/// Get the fraction of the current pieces' value from the maximum
-double get_f_value(
-  const std::vector<piece>& pieces,
-  const chess_color c
-);
-
-
 /// Get a king-versus-king starting position
 std::vector<piece> get_kings_only_starting_pieces(
   const race white_race = race::classic,
