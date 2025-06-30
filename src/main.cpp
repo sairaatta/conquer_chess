@@ -28,6 +28,7 @@
 #include "controls_view_item.h"
 #include "controls_view_layout.h"
 #include "fps_clock.h"
+#include "game.h"
 #include "game_controller.h"
 #include "game_statistics_widget_layout.h"
 #include "game_statistic_type.h"
