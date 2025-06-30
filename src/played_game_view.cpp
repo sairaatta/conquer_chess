@@ -6,7 +6,8 @@
 #include "game_resources.h"
 #include "sfml_helper.h"
 #include "draw.h"
-//#include "draw.h"
+#include "game.h"
+#include "game_controller.h"
 #include <cassert>
 #include <cmath>
 #include <fstream>
@@ -15,6 +16,7 @@
 played_game_view::played_game_view()
   : m_game{create_game_with_standard_starting_position()}
 {
+  m_game = play_random_game(1000);
   m_controls_bar.set_draw_player_controls(false);
 }
 
@@ -28,7 +30,12 @@ bool played_game_view::process_event_impl(sf::Event& event)
   else if (event.type == sf::Event::KeyPressed)
   {
     sf::Keyboard::Key key_pressed = event.key.code;
-    if (key_pressed == sf::Keyboard::Key::F2)
+    if (key_pressed == sf::Keyboard::Key::Escape)
+    {
+      set_next_state(program_state::main_menu);
+      return false;
+    }
+    else if (key_pressed == sf::Keyboard::Key::F2)
     {
       std::ofstream file("replay.pgn");
       file << to_pgn(m_game) << '\n';
@@ -88,8 +95,6 @@ void played_game_view::tick_impl(const delta_t dt)
   assert(dt.get() > 0.0);
 }
 
-
-
 void show_text_panel(played_game_view& v)
 {
   const auto& g{v.get_game()};
@@ -97,7 +102,7 @@ void show_text_panel(played_game_view& v)
   std::stringstream s;
   s << to_pgn(g);
   if (s.str().empty()) s << "[none]";
-  draw_text(s.str(), screen_rect, 32);
+  draw_text(s.str(), screen_rect, 16);
 }
 
 #endif // LOGIC_ONLY
