@@ -285,25 +285,6 @@ piece& get_piece_at(
   return *there;
 }
 
-piece get_piece_with_id(
-  const std::vector<piece>& pieces,
-  const piece_id& i
-)
-{
-  const auto there{
-    std::find_if(
-      std::begin(pieces),
-      std::end(pieces),
-      [i](const auto& p)
-      {
-        return p.get_id() == i;
-      }
-    )
-  };
-  assert(there != std::end(pieces));
-  return *there;
-}
-
 std::vector<square> get_possible_bishop_moves(
   const std::vector<piece>& pieces,
   const piece& focal_piece

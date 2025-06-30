@@ -142,13 +142,6 @@ piece& get_piece_at(
   const square& coordinat
 );
 
-/// Find a piece with a certain ID
-/// Will throw if there is no piece with that ID
-piece get_piece_with_id(
-  const std::vector<piece>& pieces,
-  const piece_id& i
-);
-
 /// Get the possible moves for a focal piece that is a bishop.
 /// This can both be a move or an attack
 std::vector<square> get_possible_bishop_moves(
