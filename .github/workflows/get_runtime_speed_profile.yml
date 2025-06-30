@@ -18,10 +18,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
 
-      - name: Run qmake
+      - name: Install SFML
+        run: sudo apt install libsfml-dev
+
+      - name: Install Codecov
+        run: sudo pip install codecov
+
+      - name: Download magic_enum
+        run: |
+          cd ..
+          git clone https://github.com/Neargye/magic_enum
+          cd -
+
+      - name: Install magic_enum
+        run: |
+          cd ../magic_enum
+          cmake .
+          make
+          cd -
+
+      - name: Download Disservin's chess library
+        run: |
+          cd ..
+          git clone https://github.com/Disservin/chess-library.git
+          cd -
+
+      - name: qmake
         run: qmake "DEFINES+=LOGIC_ONLY" game.pro
 
       - name: Run make
