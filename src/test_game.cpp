@@ -610,47 +610,6 @@ void test_game_functions()
       );
       assert(!is_in(ke8d8, actions));
     }
-    #ifdef FIX_ISSUE_78
-    // Rewrite to game test, without using the game_controller
-    // 21: can do en-passant after white g2-g4
-    {
-      game g{
-        get_game_with_starting_position(starting_position_type::before_en_passant)
-      };
-      game_controller c;
-      do_select_and_move_keyboard_player_piece(g, c, "g2", "g4");
-      // It takes 1 time unit to move,
-      // aim at halfway to window of opportunity for en-passant
-      for (int i{0}; i!=6; ++i) g.tick(delta_t(0.25));
-      const auto actions{collect_all_piece_actions(g)};
-      assert(!actions.empty());
-      assert(has_action_of_type(actions, piece_action_type::en_passant));
-
-      const piece_action h4xg3ep(
-        chess_color::black,
-        piece_type::pawn,
-        piece_action_type::en_passant,
-        square("h4"),
-        square("g3")
-      );
-      assert(is_in(h4xg3ep, actions));
-
-      const piece_action f4xg3ep(
-        chess_color::black,
-        piece_type::pawn,
-        piece_action_type::en_passant,
-        square("f4"),
-        square("g3")
-      );
-      assert(is_in(f4xg3ep, actions));
-
-      // After 1 move disappears
-      g.tick(delta_t(1.0));
-      const auto actions_again{collect_all_piece_actions(g)};
-      assert(!is_in(h4xg3ep, actions_again));
-      assert(!is_in(f4xg3ep, actions_again));
-    }
-    #endif // FIX_ISSUE_78
     // is_empty_between
     {
       const game g;
@@ -658,44 +617,6 @@ void test_game_functions()
       assert(!is_empty_between(g, "a1", "a8"));
       assert(is_empty_between(g, "d3", "d4"));
     }
-    #ifdef FIX_ISSUE_78
-    // Rewrite to game test, without using the game_controller
-    #define FIX_ISSUE_DOUBLE_MOVE_BLACK
-    #ifdef FIX_ISSUE_DOUBLE_MOVE_BLACK
-    // do_select_and_move_piece e2-e3
-    {
-      game g;
-      game_controller c;
-      assert(is_piece_at(g, "e2"));
-      do_select_and_move_piece(g, c, "e2", "e3", side::lhs);
-      assert(!is_piece_at(g, "e2"));
-    }
-    // do_select_and_move_piece e2-e4
-    {
-      game g;
-      game_controller c;
-      assert(is_piece_at(g, "e2"));
-      do_select_and_move_piece(g, c, "e2", "e4", side::lhs);
-      assert(!is_piece_at(g, "e2"));
-    }
-    // do_select_and_move_piece: e7-e6
-    {
-      game g;
-      game_controller c;
-      assert(is_piece_at(g, "e7"));
-      do_select_and_move_piece(g, c, "e7", "e6", side::rhs);
-      assert(!is_piece_at(g, "e7"));
-    }
-    // do_select_and_move_piece: e7-e5
-    {
-      game g;
-      game_controller c;
-      assert(is_piece_at(g, "e7"));
-      do_select_and_move_piece(g, c, "e7", "e5", side::rhs);
-      assert(!is_piece_at(g, "e7"));
-    }
-    #endif // FIX_ISSUE_DOUBLE_MOVE_BLACK
-    #endif // FIX_ISSUE_78
     // can_do: standard stup
     {
       const game g{
@@ -772,70 +693,6 @@ void test_game_functions()
       assert(!collect_all_piece_actions(g, chess_color::white).empty());
       assert(!collect_all_piece_actions(g, chess_color::black).empty());
     }
-    //#define FIX_ISSUE_21
-    #ifdef FIX_ISSUE_21
-    // 53: Piece selected, opponent at target square -> en_passant
-    {
-      game g{
-        get_game_with_starting_position(starting_position_type::before_en_passant)
-      };
-      // Black opens up en-passant
-      do_select_and_move_piece(g, "b7", "b5", side::rhs);
-      do_select(g, "a5", side::lhs);
-      move_cursor_to(g, "b6", side::lhs);
-      assert(get_default_piece_action(g, c, side::lhs));
-      assert(get_default_piece_action(g, c, side::lhs).value() != piece_action_type::move);
-      assert(get_default_piece_action(g, c, side::lhs).value() != piece_action_type::attack);
-      assert(get_default_piece_action(g, c, side::lhs).value() == piece_action_type::en_passant);
-    }
-    #endif // FIX_ISSUE_21
-
-    //#define FIX_ISSUE_21_774
-    #ifdef FIX_ISSUE_21_774
-    // 21: can do en-passant after black b7-b5
-    {
-      game g{
-        create_game_with_starting_position(starting_position_type::before_en_passant)
-      };
-      assert(is_piece_at(g, square("b7")));
-      assert(!is_piece_at(g, square("b5")));
-      do_select_and_move_piece(g, "b7", "b5");
-      // It takes 1 time unit to move,
-      // aim at halfway to window of opportunity for en-passant
-      for (int i{0}; i!=6; ++i) g.tick(delta_t(0.25));
-      assert(!is_piece_at(g, square("b7")));
-      assert(!is_piece_at(g, square("b7")));
-      assert(is_piece_at(g, square("b5")));
-      const auto actions{collect_all_piece_actions(g)};
-      assert(!actions.empty());
-      assert(has_action_of_type(actions, piece_action_type::en_passant));
-
-      const piece_action a5xb6ep(
-        chess_color::white,
-        piece_type::pawn,
-        piece_action_type::en_passant,
-        square("a5"),
-        square("b6")
-      );
-      assert(is_in(a5xb6ep, actions));
-
-      const piece_action c5xb6ep(
-        chess_color::white,
-        piece_type::pawn,
-        piece_action_type::en_passant,
-        square("c5"),
-        square("b6")
-      );
-      assert(is_in(c5xb6ep, actions));
-
-      // After 1 move disappears
-      g.tick(delta_t(1.0));
-      const auto actions_again{collect_all_piece_actions(g)};
-      assert(!is_in(a5xb6ep, actions_again));
-      assert(!is_in(c5xb6ep, actions_again));
-    }
-    assert(!"Progress #21");
-    #endif // FIX_ISSUE_21_774
   }
   // count_piece_actions: actions in pieces accumulate
   {
