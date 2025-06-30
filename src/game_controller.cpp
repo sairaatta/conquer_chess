@@ -40,9 +40,9 @@ void game_controller::apply_user_inputs_to_game(
   game& g
 )
 {
-  std::map<side, std::vector<piece_action_type>> actions;
-  actions[side::lhs] = get_piece_actions(g, *this, side::lhs);
-  actions[side::rhs] = get_piece_actions(g, *this, side::rhs);
+  //std::map<side, std::vector<piece_action_type>> actions;
+  //actions[side::lhs] = get_piece_actions(g, *this, side::lhs);
+  //actions[side::rhs] = get_piece_actions(g, *this, side::rhs);
 
   std::map<side, std::vector<user_input>> user_inputs;
   user_inputs[side::lhs] = {};
@@ -56,6 +56,8 @@ void game_controller::apply_user_inputs_to_game(
   {
     for (const auto& user_input: user_inputs.at(s))
     {
+      // Need to update every input
+      const auto actions = get_piece_actions(g, *this, s);
       switch(user_input.get_user_input_type())
       {
         case user_input_type::press_down:
@@ -98,41 +100,45 @@ void game_controller::apply_user_inputs_to_game(
         break;
         case user_input_type::rmb_down:
         {
-          if (actions[s].size() < 2) continue;
-          apply_action_type_to_game(g, actions[s][1], s);
+          if (actions.size() < 2) continue;
+          apply_action_type_to_game(g, actions[1], s);
         }
         break;
         case user_input_type::lmb_down:
         {
-          if (actions[s].size() < 1) continue;
-          apply_action_type_to_game(g, actions[s][0], s);
+          if (actions.size() < 1) continue;
+          apply_action_type_to_game(g, actions[0], s);
         }
         break;
         case user_input_type::press_action_1:
         {
-          if (actions[s].size() < 1) continue;
-          apply_action_type_to_game(g, actions[s][0], s);
+          if (actions.size() < 1)
+          {
+            continue;
+          }
+          apply_action_type_to_game(g, actions[0], s);
         }
         break;
         case user_input_type::press_action_2:
         {
-          if (actions[s].size() < 2) continue;
-          apply_action_type_to_game(g, actions[s][1], s);
+          if (actions.size() < 2) continue;
+          apply_action_type_to_game(g, actions[1], s);
         }
         break;
         case user_input_type::press_action_3:
         {
-          if (actions[s].size() < 3) continue;
-          apply_action_type_to_game(g, actions[s][2], s);
+          if (actions.size() < 3) continue;
+          apply_action_type_to_game(g, actions[2], s);
         }
         break;
         case user_input_type::press_action_4:
         {
-          if (actions[s].size() < 4) continue;
-          apply_action_type_to_game(g, actions[s][3], s);
+          if (actions.size() < 4) continue;
+          apply_action_type_to_game(g, actions[3], s);
         }
         break;
       }
+      g.tick(delta_t(0.0));
     }
   }
   m_user_inputs = std::vector<user_input>();
@@ -423,7 +429,6 @@ void game_controller::apply_action_type_select_to_game(game& g, const side playe
   assert(is_coordinat_on_board(cursor_pos));
   const square cursor{square(cursor_pos)};
 
-  // true for promotions, false for castling
   const bool is_cursor_on_piece{is_piece_at(g, cursor)};
   const bool is_cursor_on_friendly_piece{
     is_cursor_on_piece && get_piece_at(g, cursor).get_color() == player_color
@@ -1003,6 +1008,34 @@ void test_game_controller() //!OCLINT tests may be many
     add_user_input(c, create_press_action_1(side::lhs));
     assert(!is_empty(get_user_inputs(c)));
   }
+  // convert_move_to_user_inputs
+  {
+    const auto g{create_game_with_standard_starting_position()};
+    const auto c{create_game_controller_with_two_keyboards()};
+    const auto cursor_pos{square(c.get_cursor_pos(side::lhs))};
+    assert(cursor_pos == square("e1"));
+    const chess_move m("e4", chess_color::white);
+    const auto user_inputs{
+      convert_move_to_user_inputs(g, c, m)
+    };
+    // Move cursor from e1 to e2
+    assert(user_inputs.get_user_inputs().at(0).get_user_input_type() == user_input_type::press_right);
+
+    // Select the pawn at e2
+    assert(user_inputs.get_user_inputs().at(1).get_user_input_type() == user_input_type::press_action_1);
+
+    // Move cursor from e2 to e3
+    assert(user_inputs.get_user_inputs().at(2).get_user_input_type() == user_input_type::press_right);
+
+    // Move cursor from e3 to e4
+    assert(user_inputs.get_user_inputs().at(3).get_user_input_type() == user_input_type::press_right);
+
+    // Select the target square at e4
+    assert(user_inputs.get_user_inputs().at(4).get_user_input_type() == user_input_type::press_action_1);
+
+    assert(user_inputs.get_user_inputs().size() == 5);
+  }
+
   // count_user_inputs
   {
     game_controller c{
@@ -1837,6 +1870,35 @@ void test_game_controller() //!OCLINT tests may be many
     }
     assert(is_piece_at(g, square("d1")));
   }
+  #define FIX_DETECT_MATE
+  #ifdef FIX_DETECT_MATE
+  // Detect mate
+  {
+    game g{create_game_with_starting_position(starting_position_type::before_scholars_mate)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    assert(is_piece_at(g, square("h5"))); // White queen
+    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(!is_checkmate(g.get_pieces(), chess_color::white));
+    assert(!is_checkmate(g.get_pieces(), chess_color::black));
+
+    // h5xf7#
+    do_select(g, c, "h5", side::lhs); // White queen
+    move_cursor_to(c, "f7", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    for (int i{0}; i!=5; ++i)
+    {
+      g.tick(delta_t(0.25));
+    }
+    assert(!is_piece_at(g, square("h5")));
+    assert(is_piece_at(g, square("f7")));
+    assert(!is_checkmate(g.get_pieces(), chess_color::white));
+    assert(is_checkmate(g.get_pieces(), chess_color::black));
+  }
+  #endif // FIX_DETECT_MATE
+
   // operator<<
   {
     std::stringstream s;
@@ -1867,6 +1929,23 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!pgn.empty());
     assert(pgn == "0.00: white pawn move from e2 to e4");
   }
+  // Moving a mouse cursor over the board does nothing
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_mouse_keyboard()};
+    c.add_user_input(create_mouse_move_action(game_coordinate(4.5, 4.5), side::lhs));
+    c.apply_user_inputs_to_game(g);
+    assert(count_selected_units(g) == 0);
+  }
+  // Moving a mouse cursor outside the board does no harm
+  {
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_mouse_keyboard()};
+    c.add_user_input(create_mouse_move_action(game_coordinate(94.5, -54.5), side::lhs));
+    c.apply_user_inputs_to_game(g);
+    assert(count_selected_units(g) == 0);
+  }
+
   //----------------------------------------------------------------------------
   // Moves that do not complete
   //----------------------------------------------------------------------------
@@ -1908,23 +1987,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(knight_messages[2] == message_type::start_move); // ?Why twice
     assert(knight_messages[3] == message_type::cannot);
     assert(knight_messages[4] == message_type::done);
-  }
-  // Moving a mouse cursor over the board does nothing
-  {
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_mouse_keyboard()};
-    c.add_user_input(create_mouse_move_action(game_coordinate(4.5, 4.5), side::lhs));
-    c.apply_user_inputs_to_game(g);
-    assert(count_selected_units(g) == 0);
-
-  }
-  // Moving a mouse cursor outside the board does no harm
-  {
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_mouse_keyboard()};
-    c.add_user_input(create_mouse_move_action(game_coordinate(94.5, -54.5), side::lhs));
-    c.apply_user_inputs_to_game(g);
-    assert(count_selected_units(g) == 0);
   }
   // When a piece is attacking a piece that is fleeing successfully,
   // there is no capture

@@ -1113,7 +1113,6 @@ void piece::tick(
     return;
   }
   const auto action_type{m_actions[0].get_action_type()};
-  //std::clog << get_color() << " " << get_type() << " going to " << action_type << '\n';
   if (!has_actions(m_action_history)
     || get_last_action(m_action_history) != m_actions[0]
   )

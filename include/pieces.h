@@ -97,6 +97,12 @@ int count_selected_units(
   const chess_color player
 );
 
+/// Get the square where the king of that color is
+square get_current_king_square(
+  const std::vector<piece>& pieces,
+  const chess_color c
+);
+
 /// Get a king-versus-king starting position
 std::vector<piece> get_kings_only_starting_pieces(
   const race white_race = race::classic,
@@ -325,6 +331,18 @@ bool has_piece_with_id(
   const piece_id& i
 );
 
+/// Determine if the player is mated
+bool is_checkmate(
+  const std::vector<piece>& pieces,
+  const chess_color player_in_checkmate
+);
+
+/// Determine if the king of the player is under attack
+bool is_king_under_attack(
+  const std::vector<piece>& pieces,
+  const chess_color player_color
+);
+
 /// Determine if there is a piece at the coordinat
 bool is_piece_at(
   const std::vector<piece>& pieces,
@@ -345,7 +363,28 @@ bool is_piece_looking_at_square(
   const square& target_square
 );
 
-/// Determine if the square is protected by (another) piece of a certain color
+/// Determine if the square is attacked by (another) piece of a certain color.
+///
+/// If the square is empty, it will determine if an enemy piece
+/// is looking at this square.
+///
+/// If the square is occupied, it will determine if an enemy piece
+/// is looking at that piece.
+/// That piece can be of any color.
+bool is_square_attacked(
+  const std::vector<piece>& pieces,
+  const square& s,
+  const chess_color attacker_color
+);
+
+/// Determine if the square is protected by (another) piece of a certain color.
+///
+/// If the square is empty, it will determine if a friendly piece
+/// is looking at this square.
+///
+/// If the square is occupied, it will determine if a friendly piece
+/// is looking at that piece.
+/// This function will assume that the square is occupied by a friendly piece.
 bool is_square_protected(
   const std::vector<piece>& pieces,
   const square& s,

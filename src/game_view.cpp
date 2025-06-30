@@ -248,7 +248,7 @@ void game_view::draw_impl()
     }
   }
 
-  // General controls
+  // General controls bar
   m_controls_bar.draw();
 }
 

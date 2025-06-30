@@ -18,7 +18,7 @@ replayer::replayer(const replay& r)
 
 void replayer::do_move(
   game_controller& c,
-  const game& g
+  game& g
 )
 {
   // Do one move per chess move
@@ -32,10 +32,15 @@ void replayer::do_move(
 
   // Do the move
   const auto& move{m_replay.get_moves().at(move_index)};
-  //std::clog << g.get_in_game_time() << ": replayer doing " << move << '\n';
   const auto inputs{convert_move_to_user_inputs(g, c, move)};
-  //std::clog << g.get_in_game_time() << ": replayer doing inputs:\n" << user_inputs(inputs) << '\n';
   add_user_inputs(c, inputs);
+  c.apply_user_inputs_to_game(g);
+
+  // Use a safe margin
+  for (int i=0; i!=5; ++i)
+  {
+    g.tick(delta_t(0.25));
+  }
 }
 
 int get_n_moves(const replayer& r) noexcept
@@ -81,12 +86,8 @@ void test_replayer()
     assert(is_piece_at(g, square("e2")));
     assert(!is_piece_at(g, square("e4")));
     r.do_move(c, g);
-    //#define FIX_ISSUE_64_ANOTHER
-    #ifdef FIX_ISSUE_64_ANOTHER
     assert(!is_piece_at(g, square("e2")));
     assert(is_piece_at(g, square("e4")));
-    assert(1 == 2);
-    #endif // FIX_ISSUE_64_ANOTHER
   }
   // 38: operator<<
   {

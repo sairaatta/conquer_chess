@@ -4,7 +4,7 @@
 #include <cassert>
 #include <numeric>
 #include <sstream>
-#include <iostream>
+#include <optional>
 
 #include "game_coordinate.h"
 #include "lobby_options.h"
@@ -202,6 +202,25 @@ int count_selected_units(
         && piece.get_color() == player;
     }
   );
+}
+
+square get_current_king_square(
+  const std::vector<piece>& pieces,
+  const chess_color c
+)
+{
+  assert(!pieces.empty());
+  std::optional<square> s;
+  for (const auto& p: pieces)
+  {
+    if (p.get_color() == c && p.get_type() == piece_type::king)
+    {
+      s = p.get_current_square();
+      break;
+    }
+  }
+  assert(s.has_value());
+  return s.value();
 }
 
 std::vector<piece> get_kings_only_starting_pieces(
@@ -974,6 +993,25 @@ bool has_piece_with_id(
   return there != std::end(pieces);
 }
 
+bool is_checkmate(
+  const std::vector<piece>& pieces,
+  const chess_color player_in_checkmate
+)
+{
+  if (!is_king_under_attack(pieces, player_in_checkmate)) return false;
+  return true;
+}
+
+bool is_king_under_attack(
+  const std::vector<piece>& pieces,
+  const chess_color player_color
+)
+{
+  const square king_square{get_current_king_square(pieces, player_color)};
+  const chess_color opponent_color{get_other_color(player_color)};
+  return is_square_attacked(pieces, king_square, opponent_color);
+}
+
 bool is_piece_at(
   const std::vector<piece>& pieces,
   const game_coordinate& coordinat,
@@ -1055,6 +1093,29 @@ bool is_piece_looking_at_square(
     if (is_piece_at(pieces, s)) return false;
   }
   return true;
+}
+
+bool is_square_attacked(
+  const std::vector<piece>& pieces,
+  const square& s,
+  const chess_color attacker_color
+)
+{
+  for (const auto& p: pieces)
+  {
+    if (p.get_color() != attacker_color) continue;
+
+    if (p.get_current_square() == s)
+    {
+      // Sure, the attacker can be here
+      continue;
+    }
+    if (is_piece_looking_at_square(pieces, p.get_current_square(), s))
+    {
+      return true;
+    }
+  }
+  return false;
 }
 
 bool is_square_protected(
@@ -1149,6 +1210,12 @@ void test_pieces()
     const auto n_black{count_selected_units(pieces, chess_color::black)};
     const auto n_white{count_selected_units(pieces, chess_color::white)};
     assert(n_total == n_black + n_white);
+  }
+  // get_current_king_square
+  {
+    const auto pieces{get_standard_starting_pieces()};
+    assert(get_current_king_square(pieces, chess_color::black) == square("e8"));
+    assert(get_current_king_square(pieces, chess_color::white) == square("e1"));
   }
   // get_piece_at, const
   {
@@ -1299,10 +1366,13 @@ void test_pieces()
       assert(get_total_pieces_value(pieces, chess_color::black) == 0);
     }
   }
-  // has_piece_with_id
+  // is_checkmate
   {
-    const auto pieces{get_starting_pieces(starting_position_type::kings_only)};
-    //has_piece_with_id(pieces, )
+
+  }
+  // is_king_under_attack
+  {
+
   }
   // is_piece_at, const
   {
@@ -1433,6 +1503,26 @@ void test_pieces()
 
     }
   }
+  // is_square_attacked
+  {
+    const auto pieces{get_pieces_kasparov_vs_topalov()};
+
+    // Black attacks the empty square at a2
+    assert(is_square_attacked(pieces, square("a2"), chess_color::black));
+
+    // Black attacks the white pawn at a3
+    assert(is_square_attacked(pieces, square("a3"), chess_color::black));
+
+    // Black's pawn at b4 is protected
+    assert(is_square_attacked(pieces, square("b4"), chess_color::black));
+
+    // Black cannot attacks the pawn at c2
+    assert(is_square_attacked(pieces, square("c2"), chess_color::black));
+
+    // Black cannot attack over the pawn at c2
+    assert(!is_square_attacked(pieces, square("c1"), chess_color::black));
+  }
+
   // to_board_strs
   {
     const auto pieces{get_standard_starting_pieces()};

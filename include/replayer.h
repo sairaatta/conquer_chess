@@ -16,7 +16,7 @@ public:
   /// Do a move or do nothing
   void do_move(
     game_controller& c,
-    const game& g
+    game& g
   );
 
   /// Get the last time a move was done
