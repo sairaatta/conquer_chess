@@ -170,7 +170,7 @@ void get_runtime_speed_profile()
 {
   #ifdef NDEBUG
   // Do the profile here
-  const int n_turns{100000};
+  const int n_turns{1000000};
   const auto g = play_random_game(n_turns);
   std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
   std::clog << "Winner:\n";
