@@ -126,6 +126,7 @@ void test_replayer()
   }
   // replayer can do two moves
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(replay("1. e4 e5"));
     assert(get_n_moves(r) == 2);
@@ -142,6 +143,7 @@ void test_replayer()
   }
   // replayer can do three moves
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(replay("1. e4 e5 2. Qh5"));
     assert(get_n_moves(r) == 3);
@@ -159,6 +161,7 @@ void test_replayer()
   }
   // replayer can do four moves
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(replay("1. e4 e5 2. Qh5 Nc6"));
     assert(get_n_moves(r) == 4);
@@ -177,6 +180,7 @@ void test_replayer()
   }
   // replayer can do five moves
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4"));
     assert(get_n_moves(r) == 5);
@@ -196,6 +200,7 @@ void test_replayer()
   }
   // replayer can do six moves
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
 
     replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6"));
@@ -216,6 +221,7 @@ void test_replayer()
   }
   // replayer can do seven moves
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7#"));
     assert(get_n_moves(r) == 7);
@@ -237,6 +243,7 @@ void test_replayer()
   }
   // replayer can do seven moves with score
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0"));
     assert(get_n_moves(r) == 8);
@@ -250,11 +257,11 @@ void test_replayer()
     r.do_move(c, g); // Bf1-c4
     r.do_move(c, g); // Ng8-f6
     r.do_move(c, g); // Qh5xf7#
-
     r.do_move(c, g); // 1-0, which is ignored
   }
   // replayer can do seven moves with score and conclude checkmate
   {
+    // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0"));
     assert(get_n_moves(r) == 8);
@@ -270,6 +277,22 @@ void test_replayer()
     r.do_move(c, g); // Qh5xf7#
     r.do_move(c, g); // 1-0, which is ignored
     assert(is_checkmate(g.get_pieces(), chess_color::black));
+  }
+  // replayer can do fools mate and conclude checkmate
+  {
+    // Fools's mate
+    // 1. f3 e6 2. g4 Qh4#
+    replayer r(replay("1. f3 e6 2. g4 Qh4#"));
+    assert(get_n_moves(r) == 4);
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+
+    r.do_move(c, g); // e2-e4
+    r.do_move(c, g); // e7-e5
+    r.do_move(c, g); // Qd1-h5
+    r.do_move(c, g); // Nb8-c6
+    assert(is_checkmate(g.get_pieces(), chess_color::black));
+    assert(1 == 2);
   }
 
   // operator<<

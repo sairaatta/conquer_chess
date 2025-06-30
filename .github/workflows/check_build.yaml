@@ -34,6 +34,12 @@ jobs:
           make
           cd -
 
+      - name: Download Disservin's chess library
+        run: |
+          cd ..
+          git clone https://github.com/Disservin/chess-library.git
+          cd -
+
       - name: qmake
         run: qmake "DEFINES+=LOGIC_ONLY" game.pro
 
