@@ -8,7 +8,7 @@
 #include "layout.h"
 #include "side.h"
 #include "board_layout.h"
-#include "game_statistics_view_layout.h"
+#include "game_statistics_widget_layout.h"
 #include "navigation_controls_layout.h"
 #include "in_game_controls_layout.h"
 #include <iosfwd>
@@ -89,7 +89,7 @@ private:
   board_layout m_board;
   std::map<side, in_game_controls_layout> m_controls;
   std::map<side, screen_rect> m_debug;
-  game_statistics_view_layout m_game_statistics;
+  game_statistics_widget_layout m_game_statistics;
   std::map<side, screen_rect> m_log;
   std::map<side, screen_rect> m_unit_info;
 };

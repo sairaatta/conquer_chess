@@ -1,8 +1,8 @@
-#include "game_statistics_view_layout.h"
+#include "game_statistics_widget_layout.h"
 
 #include <cassert>
 
-game_statistics_view_layout::game_statistics_view_layout(const screen_rect& r)
+game_statistics_widget_layout::game_statistics_widget_layout(const screen_rect& r)
   : m_background(r)
 {
   const int square_width{get_width(r)};
@@ -86,12 +86,12 @@ game_statistics_view_layout::game_statistics_view_layout(const screen_rect& r)
   );
 }
 
-int get_height(const game_statistics_view_layout& layout) noexcept
+int get_height(const game_statistics_widget_layout& layout) noexcept
 {
   return get_height(layout.get_background());
 }
 
-int get_width(const game_statistics_view_layout& layout) noexcept
+int get_width(const game_statistics_widget_layout& layout) noexcept
 {
   return get_width(layout.get_background());
 }
@@ -105,7 +105,7 @@ void test_game_info_layout()
       screen_coordinate(0, 0),
       screen_coordinate(40, 30)
     );
-    const auto layout{game_statistics_view_layout(r)};
+    const auto layout{game_statistics_widget_layout(r)};
     assert(layout.get_background().get_tl().get_x() == 0);
     assert(layout.get_background().get_tl().get_y() == 0);
     assert(layout.get_background().get_br().get_x() == 40);

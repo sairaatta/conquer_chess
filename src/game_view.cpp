@@ -10,7 +10,7 @@
 #include "game_resources.h"
 #include "game_statistics.h"
 #include "game_view_layout.h"
-#include "game_statistics_view_layout.h"
+#include "game_statistics_widget_layout.h"
 #include "lobby_options.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
@@ -320,7 +320,7 @@ void draw_controls(
 
 void draw_game_info(game_view& view)
 {
-  const game_statistics_view_layout layout(view.get_layout().get_game_info());
+  const game_statistics_widget_layout layout(view.get_layout().get_game_info());
 
   // Background
   draw_rectangle(layout.get_background(), sf::Color(128, 128, 128, 128));

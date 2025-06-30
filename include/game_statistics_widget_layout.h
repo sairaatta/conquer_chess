@@ -1,12 +1,14 @@
-#ifndef GAME_STATISTICS_VIEW_LAYOUT_H
-#define GAME_STATISTICS_VIEW_LAYOUT_H
+#ifndef GAME_STATISTICS_WIDGET_LAYOUT_H
+#define GAME_STATISTICS_WIDGET_LAYOUT_H
 
 #include "screen_rect.h"
 #include "side.h"
 #include "game_statistic_type.h"
 
 #include <map>
-/// The layout for displaying the game statistics
+/// The layout of the widget that displays the in-game statistics.
+///
+/// Use \link{game_statistics_view_layout} for the game statistics screen.
 ///
 /// ```text
 /// x                       .x.                      .x.                      .x.                       x
@@ -33,11 +35,11 @@
 /// - .: a one-pixel difference
 /// ```
 ///
-class game_statistics_view_layout
+class game_statistics_widget_layout
 {
 public:
 
-  game_statistics_view_layout(const screen_rect& square_rect = screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 4)));
+  game_statistics_widget_layout(const screen_rect& square_rect = screen_rect(screen_coordinate(0, 0), screen_coordinate(8, 4)));
 
   const screen_rect& get_background() const noexcept { return m_background; }
 
@@ -69,10 +71,10 @@ private:
   std::map<game_statistic_type, screen_rect> m_symbol;
 };
 
-int get_height(const game_statistics_view_layout& layout) noexcept;
+int get_height(const game_statistics_widget_layout& layout) noexcept;
 
-int get_width(const game_statistics_view_layout& layout) noexcept;
+int get_width(const game_statistics_widget_layout& layout) noexcept;
 
 void test_game_info_layout();
 
-#endif // GAME_STATISTICS_VIEW_LAYOUT_H
+#endif // GAME_STATISTICS_WIDGET_LAYOUT_H
