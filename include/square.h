@@ -138,6 +138,9 @@ std::vector<char> get_all_files() noexcept;
 /// Get all the ranks, i.e. 1 to and including 8
 std::vector<int> get_all_ranks() noexcept;
 
+/// Get all the ranks in reversed order, i.e. 8 to and including 1
+std::vector<int> get_all_ranks_in_reversed_order() noexcept;
+
 /// Get the square behind a pawn.
 /// Examples:
 ///  * for white, behind e4 would be e3.

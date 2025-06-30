@@ -321,6 +321,13 @@ std::vector<int> get_all_ranks() noexcept
   return {1, 2, 3, 4, 5, 6, 7, 8};
 }
 
+std::vector<int> get_all_ranks_in_reversed_order() noexcept
+{
+  auto v = get_all_ranks();
+  std::reverse(std::begin(v), std::end(v));
+  return v;
+}
+
 square get_behind(
   const square& pawn_square,
   const chess_color color
@@ -617,6 +624,12 @@ void test_square()
   {
     const std::vector<int> created = get_all_ranks();
     const std::vector<int> expected = {1, 2, 3, 4, 5, 6, 7, 8};
+    assert(expected == created);
+  }
+  // get_all_ranks_in_reversed_order
+  {
+    const std::vector<int> created = get_all_ranks_in_reversed_order();
+    const std::vector<int> expected = {8, 7, 6, 5, 4, 3, 2, 1};
     assert(expected == created);
   }
   // get_behind

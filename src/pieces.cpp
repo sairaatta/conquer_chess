@@ -3,6 +3,13 @@
 #include "game_coordinate.h"
 #include "lobby_options.h"
 
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
+#include "../chess-library/include/chess.hpp"
+#pragma GCC diagnostic pop
+
 #include <algorithm>
 #include <cassert>
 #include <numeric>
@@ -1000,8 +1007,11 @@ bool is_checkmate(
   const chess_color player_in_checkmate
 )
 {
-  if (!is_king_under_attack(pieces, player_in_checkmate)) return false;
-  return true;
+  const std::string fen_string{to_fen_str(pieces, player_in_checkmate)};
+  std::clog << fen_string << '\n';
+  const chess::Board board(fen_string);
+  const auto p = board.isGameOver();
+  return p.first == chess::GameResultReason::CHECKMATE;
 }
 
 bool is_king_under_attack(
@@ -1665,7 +1675,10 @@ std::string to_fen_str(
 {
   std::string s;
   s.reserve(100);
-  for (const int rank: get_all_ranks())
+
+  // FEN starts from rank 8 and moves backwards
+  const auto ranks = get_all_ranks_in_reversed_order();
+  for (const int rank: ranks)
   {
     for (const char file: get_all_files())
     {
@@ -1687,6 +1700,13 @@ std::string to_fen_str(
 
   // Replace dots by numbers
   s = std::regex_replace(s, std::regex("\\.{8}"), "8" );
+  s = std::regex_replace(s, std::regex("\\.{7}"), "7" );
+  s = std::regex_replace(s, std::regex("\\.{6}"), "6" );
+  s = std::regex_replace(s, std::regex("\\.{5}"), "5" );
+  s = std::regex_replace(s, std::regex("\\.{4}"), "4" );
+  s = std::regex_replace(s, std::regex("\\.{3}"), "3" );
+  s = std::regex_replace(s, std::regex("\\.{2}"), "2" );
+  s = std::regex_replace(s, std::regex("\\.{1}"), "1" );
   assert(std::count(s.begin(), s.end(), '.') == 0);
 
   s += std::string(" ") + to_fen_char(active_color) + " "

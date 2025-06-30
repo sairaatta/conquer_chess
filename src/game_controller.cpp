@@ -1873,8 +1873,6 @@ void test_game_controller() //!OCLINT tests may be many
     }
     assert(is_piece_at(g, square("d1")));
   }
-  #define FIX_DETECT_MATE
-  #ifdef FIX_DETECT_MATE
   // Detect mate
   {
     game g{create_game_with_starting_position(starting_position_type::before_scholars_mate)};
@@ -1897,11 +1895,10 @@ void test_game_controller() //!OCLINT tests may be many
     }
     assert(!is_piece_at(g, square("h5")));
     assert(is_piece_at(g, square("f7")));
-    assert(!is_checkmate(g.get_pieces(), chess_color::white));
+    assert(get_piece_at(g, square("f7")).get_type() == piece_type::queen);
     assert(is_checkmate(g.get_pieces(), chess_color::black));
+    assert(!is_checkmate(g.get_pieces(), chess_color::white));
   }
-  #endif // FIX_DETECT_MATE
-
   // operator<<
   {
     std::stringstream s;

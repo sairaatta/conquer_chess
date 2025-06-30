@@ -884,18 +884,19 @@ void test_piece()
   }
   // to_char
   {
-    assert(to_fen_char(piece(chess_color::black, piece_type::bishop, "e4")) == 'B');
-    assert(to_fen_char(piece(chess_color::black, piece_type::king, "e4")) == 'K');
-    assert(to_fen_char(piece(chess_color::black, piece_type::knight, "e4")) == 'N');
-    assert(to_fen_char(piece(chess_color::black, piece_type::pawn, "e4")) == 'P');
-    assert(to_fen_char(piece(chess_color::black, piece_type::queen, "e4")) == 'Q');
-    assert(to_fen_char(piece(chess_color::black, piece_type::rook, "e4")) == 'R');
-    assert(to_fen_char(piece(chess_color::white, piece_type::bishop, "e4")) == 'b');
-    assert(to_fen_char(piece(chess_color::white, piece_type::king, "e4")) == 'k');
-    assert(to_fen_char(piece(chess_color::white, piece_type::knight, "e4")) == 'n');
-    assert(to_fen_char(piece(chess_color::white, piece_type::pawn, "e4")) == 'p');
-    assert(to_fen_char(piece(chess_color::white, piece_type::queen, "e4")) == 'q');
-    assert(to_fen_char(piece(chess_color::white, piece_type::rook, "e4")) == 'r');
+    assert(to_fen_char(piece(chess_color::white, piece_type::bishop, "e4")) == 'B');
+    assert(to_fen_char(piece(chess_color::white, piece_type::king, "e4")) == 'K');
+    assert(to_fen_char(piece(chess_color::white, piece_type::knight, "e4")) == 'N');
+    assert(to_fen_char(piece(chess_color::white, piece_type::pawn, "e4")) == 'P');
+    assert(to_fen_char(piece(chess_color::white, piece_type::queen, "e4")) == 'Q');
+    assert(to_fen_char(piece(chess_color::white, piece_type::rook, "e4")) == 'R');
+
+    assert(to_fen_char(piece(chess_color::black, piece_type::bishop, "e4")) == 'b');
+    assert(to_fen_char(piece(chess_color::black, piece_type::king, "e4")) == 'k');
+    assert(to_fen_char(piece(chess_color::black, piece_type::knight, "e4")) == 'n');
+    assert(to_fen_char(piece(chess_color::black, piece_type::pawn, "e4")) == 'p');
+    assert(to_fen_char(piece(chess_color::black, piece_type::queen, "e4")) == 'q');
+    assert(to_fen_char(piece(chess_color::black, piece_type::rook, "e4")) == 'r');
   }
 
   // toggle_select
@@ -1510,7 +1511,7 @@ char to_fen_char(const piece& p) noexcept
       c = 'R';
       break;
   }
-  if (p.get_color() == chess_color::white)
+  if (p.get_color() == chess_color::black)
   {
     c = std::tolower(c);
   }

@@ -278,7 +278,6 @@ void test_replayer()
     r.do_move(c, g); // 1-0, which is ignored
     assert(is_checkmate(g.get_pieces(), chess_color::black));
   }
-  #ifdef FIX_REPLAYER_CAN_DETECT_FOOLS_MATE
   // replayer can do fools mate and conclude checkmate
   {
     // Fools's mate
@@ -292,10 +291,63 @@ void test_replayer()
     r.do_move(c, g); // e7-e5
     r.do_move(c, g); // Qd1-h5
     r.do_move(c, g); // Nb8-c6
-    assert(is_checkmate(g.get_pieces(), chess_color::black));
-    assert(1 == 2);
+    assert(is_checkmate(g.get_pieces(), chess_color::white));
+    assert(!is_checkmate(g.get_pieces(), chess_color::black));
   }
-  #endif // FIX_REPLAYER_CAN_DETECT_FOOLS_MATE
+  // to_fen_string
+  {
+    // Scholar's mate
+    // 1. e4 c5 Nf3
+    replayer r(replay("1. e4 c5 2. Nf3"));
+    assert(get_n_moves(r) == 3);
+    game g{create_game_with_starting_position(starting_position_type::standard)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+
+    const auto s1{to_fen_str(g.get_pieces())};
+    assert(s1 == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+
+    r.do_move(c, g); // e2-e4
+
+    const auto s2{
+      to_fen_str(
+        g.get_pieces(),
+        chess_color::black,
+        "KQkq",
+        "e3",
+        0,
+        1
+      )
+    };
+    assert(s2 == "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1");
+
+    r.do_move(c, g); // c5
+
+    const auto s3{
+      to_fen_str(
+        g.get_pieces(),
+        chess_color::white,
+        "KQkq",
+        "c6",
+        0,
+        2
+      )
+    };
+    assert(s3 == "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2");
+
+    r.do_move(c, g); // Nf3
+
+    const auto s4{
+      to_fen_str(
+        g.get_pieces(),
+        chess_color::black,
+        "KQkq",
+        "-",
+        1,
+        2
+      )
+    };
+    assert(s4 == "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2");
+  }
 
   // operator<<
   {
