@@ -1,6 +1,11 @@
-#include "played_game_view.h"
+#include "game_statistics_view.h"
 
 #ifndef LOGIC_ONLY
+
+#ifdef USE_SFGRAPHING
+// From https://github.com/jerr-it/SFGraphing
+#include "../SFGraphing/include/SFGraphing/SFPlot.h"
+#endif
 
 #include "render_window.h"
 #include "game_resources.h"
@@ -13,13 +18,12 @@
 #include <fstream>
 #include <sstream>
 
-played_game_view::played_game_view()
-  : m_game{create_game_with_standard_starting_position()}
+game_statistics_view::game_statistics_view()
 {
-  m_controls_bar.set_draw_player_controls(false);
+
 }
 
-bool played_game_view::process_event_impl(sf::Event& event)
+bool game_statistics_view::process_event_impl(sf::Event& event)
 {
   if (event.type == sf::Event::Closed)
   {
@@ -34,23 +38,17 @@ bool played_game_view::process_event_impl(sf::Event& event)
       set_next_state(program_state::main_menu);
       return false;
     }
-    else if (key_pressed == sf::Keyboard::Key::F2)
-    {
-      std::ofstream file("replay.pgn");
-      file << to_pgn(m_game) << '\n';
-      play_sound_effect(message(message_type::done, chess_color::white, piece_type::king));
-    }
   }
   return false; // Do not close the window :-)
 }
 
-void played_game_view::process_resize_event_impl(sf::Event& event)
+void game_statistics_view::process_resize_event_impl(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
   const screen_coordinate br(event.size.width, event.size.height);
 
   const screen_rect window_rect(screen_coordinate(0,0), br);
-  m_layout = played_game_view_layout(
+  m_layout = game_statistics_view_layout(
     window_rect,
     get_default_margin_width()
   );
@@ -58,14 +56,14 @@ void played_game_view::process_resize_event_impl(sf::Event& event)
 }
 
 
-void played_game_view::draw_impl()
+void game_statistics_view::draw_impl()
 {
   draw_layout_panels(*this);
-  show_text_panel(*this);
+  draw_plot_panel(*this);
   m_controls_bar.draw();
 }
 
-void draw_layout_panels(played_game_view& v)
+void draw_layout_panels(game_statistics_view& v)
 {
   for (const auto& screen_rect: get_panels(v.get_layout()))
   {
@@ -76,33 +74,56 @@ void draw_layout_panels(played_game_view& v)
   }
 }
 
-void played_game_view::start_impl()
+void game_statistics_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
-  m_game = play_random_game(100);
 }
 
-void played_game_view::stop_impl()
+void game_statistics_view::stop_impl()
 {
   assert(is_active());
   clear_next_state();
   set_is_active(false);
 }
 
-void played_game_view::tick_impl(const delta_t dt)
+void game_statistics_view::tick_impl(const delta_t dt)
 {
   assert(dt.get() > 0.0);
 }
 
-void show_text_panel(played_game_view& v)
+void draw_plot_panel(game_statistics_view& v)
 {
+  #ifdef USE_SFGRAPHING
+  const auto screen_rect{v.get_layout().get_text()};
+
+  std::vector<float> xAxis = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  std::vector<float> yAxis = {1, 2, 3, 4, 5, 6, 5, 6, 7, 8};
+  csrc::PlotDataSet set(xAxis, yAxis, sf::Color::Green, "Green Data", csrc::PlottingType::LINE);
+
+  //Position, dimension, margin, font
+  csrc::SFPlot plot(
+    sf::Vector2f(screen_rect.get_tl().get_x(), screen_rect.get_tl().get_y()),
+    sf::Vector2f(get_width(screen_rect), get_height(screen_rect)),
+    50,
+    get_arial_font(),
+    "X Axis",
+    "Y Axis"
+  );
+  plot.AddDataSet(set);
+
+  //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
+  plot.SetupAxes(0, 10, 0, 10, 1, 1, sf::Color::White);
+  plot.GenerateVertices();
+  get_render_window().draw(plot);
+  #else
   const auto& g{v.get_game()};
   const auto screen_rect{v.get_layout().get_text()};
   std::stringstream s;
   s << to_pgn(g);
   if (s.str().empty()) s << "[none]";
   draw_text(s.str(), screen_rect, 16);
+  #endif
 }
 
 #endif // LOGIC_ONLY

@@ -46,5 +46,11 @@ CONFIG(debug, debug|release) {
 # Qt5
 QT += core gui widgets
 
+# SFML
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
+# SFGraphing
+DEFINES += USE_SFGRAPHING
+SOURCES += $$PWD/../SFGraphing/src/*.cpp
+INCLUDEPATH += $$PWD/../SFGraphing/include
+HEADERS += $$PWD/../SFGraphing/include/SFGraphing

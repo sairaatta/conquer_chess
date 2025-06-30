@@ -1449,7 +1449,7 @@ void tick_move(
     if (is_focal_piece_at_target)
     {
       // Moving the last half
-      assert(f > 0.5);
+      assert(f >= 0.5);
     }
     else
     {

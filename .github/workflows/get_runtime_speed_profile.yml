@@ -47,6 +47,13 @@ jobs:
           git clone https://github.com/Disservin/chess-library.git
           cd -
 
+      # From https://github.com/jerr-it/SFGraphing
+      - name: Download Jerrit Gläsker's SFGraphing library
+        run: |
+          cd ..
+          git clone https://github.com/richelbilderbeek/SFGraphing -b patch-1
+          cd -
+
       - name: qmake
         run: qmake "DEFINES+=LOGIC_ONLY" game.pro
 

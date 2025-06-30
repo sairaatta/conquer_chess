@@ -1,0 +1,42 @@
+#include "game_statistics_view_layout.h"
+
+#include <cassert>
+#include <cmath>
+
+game_statistics_view_layout::game_statistics_view_layout(
+  const screen_rect& r,
+  const int margin_width
+) : m_background{r}
+{
+  const int panel_height{get_height(r) - (2 * margin_width)};
+  const int panel_width{get_width(r) - (2 * margin_width)};
+  const int x1{margin_width};
+  const int x2{x1 + panel_width};
+
+  const int y1{margin_width};
+  const int y2{y1 + panel_height};
+
+  m_text = screen_rect(
+    screen_coordinate(x1, y1),
+    screen_coordinate(x2, y2)
+  );
+}
+
+std::vector<screen_rect> get_panels(const game_statistics_view_layout& layout)
+{
+  return
+  {
+    layout.get_text()
+  };
+}
+
+void test_game_statistics_view_layout()
+{
+  #ifndef NDEBUG
+  // get_panels
+  {
+    const game_statistics_view_layout layout;
+    assert(!get_panels(layout).empty());
+  }
+  #endif
+}

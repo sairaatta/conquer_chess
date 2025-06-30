@@ -9,6 +9,7 @@
 #include "played_game_view.h"
 #include "lobby_options.h"
 #include "draw.h"
+#include "game_statistics_view.h"
 
 #include <cassert>
 #include <cmath>
@@ -30,6 +31,7 @@ main_window::main_window()
   m_views[program_state::options] = std::make_unique<options_view>();
   m_views[program_state::played_game] = std::make_unique<played_game_view>();
   m_views[program_state::right_controls] = std::make_unique<controls_view>(side::rhs);
+  m_views[program_state::statistics] = std::make_unique<game_statistics_view>();
 
   // All programs states have a view
   for (const auto s: get_all_program_states())
