@@ -32,12 +32,12 @@
 #include <sstream>
 
 game_view::game_view(
-) : m_log{game_options::get().get_message_display_time_secs()}
+) : m_log{game_options::get().get_message_display_time_secs()},
+    m_statistics_output_file("tmp.txt")
 {
   m_controls_bar.set_draw_up_down(false);
   m_controls_bar.set_draw_select(false);
   m_controls_bar.set_draw_player_controls(false);
-
 }
 
 
@@ -49,7 +49,8 @@ void game_view::tick_impl(delta_t dt)
   if (static_cast<int>(m_game.get_in_game_time().get() * n_logs_per_time_unit)
     < static_cast<int>((m_game.get_in_game_time() + dt).get() * n_logs_per_time_unit))
   {
-    assert(1 == 2);
+    m_statistics_output_file.add_to_file(m_game);
+    m_statistics_in_time.add(m_game);
   }
 
   // Disard old messages

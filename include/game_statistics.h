@@ -31,6 +31,24 @@ private:
   std::map<game_statistic_type, std::map<side, double>> m_statistics;
 };
 
+/// Put the values in a row, to be saved to a file
+///
+/// ```console
+/// time, value_lhs, value_rhs, activity_lhs, activity_rhs, protectedness_lhs, protectedness_rhs
+/// ```
+///
+/// @seealso \link{get_column_headers} gets the column headers
+std::vector<double> flatten_to_row(const game_statistics& s);
+
+/// Put the values in a row, to be saved to a file
+///
+/// ```console
+/// time, value_lhs, value_rhs, activity_lhs, activity_rhs, protectedness_lhs, protectedness_rhs
+/// ```
+///
+/// @seealso \link{flatten_to_row} gets the values in a row
+std::vector<std::string> get_column_headers() noexcept;
+
 /// Get the fraction of pieces that is doing an action
 double get_f_active(
   const std::vector<piece>& pieces,
@@ -48,6 +66,7 @@ double get_f_value(
   const std::vector<piece>& pieces,
   const chess_color c
 );
+
 
 void test_game_statistics();
 

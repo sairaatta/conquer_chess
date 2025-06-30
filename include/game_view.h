@@ -10,7 +10,8 @@
 #include "game_log.h"
 #include "game_controller.h"
 #include "game_view_layout.h"
-//#include "program_state.h"
+#include "game_statistics_output_file.h"
+#include "game_statistics_in_time.h"
 #include "view.h"
 
 #include <SFML/Graphics.hpp>
@@ -74,8 +75,13 @@ private:
   /// The game logic
   game_view_layout m_layout;
 
-  /// The text log
+  /// The in-game text log
   game_log m_log;
+
+  game_statistics_output_file m_statistics_output_file;
+
+  game_statistics_in_time m_statistics_in_time;
+
 
   /// Play the new sound effects
   void play_pieces_sound_effects();

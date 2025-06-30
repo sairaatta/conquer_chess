@@ -36,6 +36,8 @@
 #include "game_statistics.h"
 #include "game_rect.h"
 #include "game_view_layout.h"
+#include "game_statistics_in_time.h"
+#include "game_statistics_output_file.h"
 #include "helper.h"
 #include "in_game_time.h"
 #include "in_game_controls_layout.h"
@@ -81,6 +83,8 @@ void test()
   test_about();
   test_about_view_layout();
   test_action_history();
+  test_game_statistics_output_file();
+  test_game_statistics_in_time();
   test_action_number();
   test_board_layout();
   test_board_to_text_options();

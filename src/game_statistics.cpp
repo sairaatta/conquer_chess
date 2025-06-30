@@ -10,6 +10,7 @@ game_statistics::game_statistics(const game& g)
 {
   for (const side s: get_all_sides())
   {
+    m_statistics[game_statistic_type::time][s] = g.get_in_game_time().get();
     m_statistics[game_statistic_type::value][s] = get_f_value(g.get_pieces(), get_color(s));
     m_statistics[game_statistic_type::activity][s] = get_f_active(g.get_pieces(), get_color(s));
     m_statistics[game_statistic_type::protectedness][s] = get_f_protected(g.get_pieces(), get_color(s));
@@ -30,9 +31,36 @@ double game_statistics::calc_relative(const game_statistic_type s) const
   return f;
 }
 
+std::vector<double> flatten_to_row(const game_statistics& s)
+{
+  return
+  {
+    s.get(game_statistic_type::time, side::lhs),
+    s.get(game_statistic_type::value, side::lhs),
+    s.get(game_statistic_type::value, side::rhs),
+    s.get(game_statistic_type::activity, side::lhs),
+    s.get(game_statistic_type::activity, side::rhs),
+    s.get(game_statistic_type::protectedness, side::lhs),
+    s.get(game_statistic_type::protectedness, side::rhs)
+  };
+}
+
 double game_statistics::get(const game_statistic_type stat, const side s) const
 {
   return m_statistics.at(stat).at(s);
+}
+
+std::vector<std::string> get_column_headers() noexcept
+{
+  return {
+    "time",
+    "value_lhs",
+    "value_rhs",
+    "activity_lhs",
+    "activity_rhs",
+    "protectedness_lhs",
+    "protectedness_rhs"
+  };
 }
 
 double get_f_active(
@@ -85,6 +113,19 @@ double get_f_value(
 void test_game_statistics()
 {
 #ifndef NDEBUG
+  //
+  {
+    const game g{create_game_with_standard_starting_position()};
+    const game_statistics s(g);
+    const auto values{flatten_to_row(s)};
+    const auto headers{get_column_headers()};
+    assert(values.size() == headers.size());
+  }
+  // get_column_headers
+  {
+    const auto headers{get_column_headers()};
+    assert(!headers.empty());
+  }
   // get_f_active
   {
     const auto pieces{get_standard_starting_pieces()};
