@@ -2,21 +2,19 @@
 
 #ifndef LOGIC_ONLY
 
-#ifdef USE_SFGRAPHING
-// From https://github.com/jerr-it/SFGraphing
-#include "../SFGraphing/include/SFGraphing/SFPlot.h"
-#endif
-
 #include "render_window.h"
 #include "game_resources.h"
 #include "sfml_helper.h"
-#include "draw.h"
-#include "game.h"
-#include "game_controller.h"
+//#include "draw.h"
+//#include "game.h"
+//#include "game_controller.h"
 #include <cassert>
 #include <cmath>
-#include <fstream>
-#include <sstream>
+//#include <fstream>
+//#include <sstream>
+
+// From https://github.com/jerr-it/SFGraphing
+#include "../SFGraphing/include/SFGraphing/SFPlot.h"
 
 game_statistics_view::game_statistics_view()
 {
@@ -48,10 +46,7 @@ void game_statistics_view::process_resize_event_impl(sf::Event& event)
   const screen_coordinate br(event.size.width, event.size.height);
 
   const screen_rect window_rect(screen_coordinate(0,0), br);
-  m_layout = game_statistics_view_layout(
-    window_rect,
-    get_default_margin_width()
-  );
+  m_layout = game_statistics_view_layout(window_rect);
   m_controls_bar.set_screen_rect(create_controls_bar_area(br));
 }
 
@@ -96,7 +91,6 @@ void game_statistics_view::tick_impl(const delta_t dt)
 
 void draw_plot_panel(game_statistics_view& v)
 {
-  #ifdef USE_SFGRAPHING
   const auto screen_rect{v.get_layout().get_text()};
 
   const auto stats{v.get_statistics()};
@@ -129,7 +123,7 @@ void draw_plot_panel(game_statistics_view& v)
   csrc::SFPlot plot(
     sf::Vector2f(screen_rect.get_tl().get_x(), screen_rect.get_tl().get_y()),
     sf::Vector2f(get_width(screen_rect), get_height(screen_rect)),
-    50,
+    32,
     get_arial_font(),
     "Time (chess moves)",
     "Fraction"
@@ -142,26 +136,16 @@ void draw_plot_panel(game_statistics_view& v)
   plot.AddDataSet(rhs_protectedness_in_time);
 
   //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
-  plot.SetupAxes(
-    0,
-    times.back(),
-    0,
-    1.0,
-    1.0,
-    0.1,
-    sf::Color::White
-  );
-  //plot.SetupAxes();
+  const double xmin{0.0};
+  const double xmax{times.back()};
+  const double ymin{0.0};
+  const double ymax{1.0};
+  const double tick_x{1.0};
+  const double tick_y{1.0};
+  plot.SetupAxes(xmin, xmax, ymin, ymax, tick_x, tick_y, sf::Color::White);
   plot.GenerateVertices();
   get_render_window().draw(plot);
-  #else
-  const auto& g{v.get_game()};
-  const auto screen_rect{v.get_layout().get_text()};
-  std::stringstream s;
-  s << to_pgn(g);
-  if (s.str().empty()) s << "[none]";
-  draw_text(s.str(), screen_rect, 16);
-  #endif
 }
 
 #endif // LOGIC_ONLY
+

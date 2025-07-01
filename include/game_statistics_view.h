@@ -4,7 +4,6 @@
 #ifndef LOGIC_ONLY
 
 #include "game_statistics_view_layout.h"
-#include "game.h"
 #include "game_statistics_in_time.h"
 #include "controls_bar.h"
 #include "view.h"

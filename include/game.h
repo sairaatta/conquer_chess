@@ -247,6 +247,11 @@ std::vector<piece_action> collect_all_rook_actions(
 /// Get all the sound effects to be processed
 std::vector<message> collect_messages(const game& g) noexcept;
 
+/// See if there are messages
+///
+/// @seealso \link{collect_messages} to get the complete message
+std::vector<message_type> collect_message_types(const game& g) noexcept;
+
 /// Count the total number of actions to be done by pieces of both players
 int count_piece_actions(const game& g);
 

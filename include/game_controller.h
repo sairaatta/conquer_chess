@@ -300,7 +300,7 @@ void move_mouse_cursor_to(
 );
 
 /// Play a random game, used for profiling
-game play_random_game(const int n_turns = 2);
+game play_random_game(const int n_turns = 2, const int seed = 42);
 
 /// Set the cursor's position to the target position
 void set_cursor_pos(

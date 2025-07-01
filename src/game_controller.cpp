@@ -966,19 +966,20 @@ void move_keyboard_cursor_to(
   );
 }
 
-game play_random_game(const int n_turns)
+game play_random_game(const int n_turns, const int seed)
 {
   game g{create_game_with_standard_starting_position()};
   game_controller c{create_game_controller_with_two_keyboards()};
   use_default_lobby_options();
 
-  std::random_device rd;
-  std::default_random_engine rng_engine(rd());
+  std::default_random_engine rng_engine(seed);
 
   for (int i=0; i!=n_turns; ++i)
   {
-    c.add_user_input(create_useful_random_user_input(rng_engine));
+    const auto user_input{create_useful_random_user_input(rng_engine)};
+    c.add_user_input(user_input);
     c.apply_user_inputs_to_game(g);
+    assert(c.get_user_inputs().get_user_inputs().empty());
     g.tick(delta_t(0.1));
     if (g.get_winner().has_value()) break;
   }
@@ -1970,6 +1971,49 @@ void test_game_controller() //!OCLINT tests may be many
     c.apply_user_inputs_to_game(g);
     assert(count_selected_units(g) == 0);
   }
+  //----------------------------------------------------------------------------
+  // Things that cannot be done during a move
+  //----------------------------------------------------------------------------
+  #ifdef FIX_MOVING_QUEEN_CAN_BE_SELECTED
+  // When a piece is moving, it can be selected
+  {
+    game g{create_game_with_starting_position(starting_position_type::queen_end_game)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+
+    // Start Qd1 d2
+    do_select(g, c, "d1", side::lhs);
+    assert(get_piece_at(g, square("d1")).is_selected());
+
+    move_cursor_to(c, "d2", side::lhs);
+    assert(count_selected_units(g, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    // Unselected, because of move
+    assert(!get_piece_at(g, square("d1")).is_selected());
+
+    // Get the queen moving
+    g.tick(delta_t(0.01));
+    assert(is_piece_at(g, square("d1")));
+    assert(!get_piece_at(g, square("d1")).is_selected());
+
+    // Select the queen
+    move_cursor_to(c, "d1", side::lhs);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game(g);
+    assert(is_piece_at(g, square("d1")));
+    assert(get_piece_at(g, square("d1")).is_selected()); //
+
+    g.tick(delta_t(0.01));
+
+    assert(is_piece_at(g, square("d1")));
+    assert(get_piece_at(g, square("d1")).is_selected());
+
+
+    assert(1 == 2);
+
+  }
+  #endif // FIX_MOVING_QUEEN_CAN_BE_SELECTED
 
   //----------------------------------------------------------------------------
   // Moves that do not complete

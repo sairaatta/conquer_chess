@@ -36,8 +36,7 @@ class game_statistics_view_layout
 {
 public:
   explicit game_statistics_view_layout(
-    const screen_rect& r = get_default_screen_rect(),
-    const int margin_width = get_default_margin_width()
+    const screen_rect& r = get_default_screen_rect()
   );
 
   /// The full screen area of this layout

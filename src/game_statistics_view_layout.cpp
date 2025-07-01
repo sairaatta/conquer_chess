@@ -3,12 +3,8 @@
 #include <cassert>
 #include <cmath>
 
-game_statistics_view_layout::game_statistics_view_layout(
-  const screen_rect& r,
-  const int margin_width
-) : m_background{r}
+game_statistics_view_layout::game_statistics_view_layout(const screen_rect& r) : m_background{r}
 {
-  assert(margin_width > 0);
   const int panel_width{1200};
   const int panel_height{800};
   const int x1{64};

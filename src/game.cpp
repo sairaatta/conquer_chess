@@ -1166,6 +1166,21 @@ std::vector<message> collect_messages(const game& g) noexcept
   return effects;
 }
 
+std::vector<message_type> collect_message_types(const game& g) noexcept
+{
+  const auto& pieces{g.get_pieces()};
+  std::vector<message_type> v;
+  for (const auto& piece: pieces)
+  {
+    const auto& es{piece.get_messages()};
+    std::copy(
+      std::begin(es),
+      std::end(es),
+      std::back_inserter(v)
+    );
+  }
+  return v;
+}
 const piece& get_piece_at(const game& g, const square& coordinat)
 {
   return get_piece_at(g.get_pieces(), coordinat);
@@ -1291,7 +1306,7 @@ void game::tick(const delta_t& dt)
   assert(count_dead_pieces(m_pieces) == 0);
 
   // Something has happened
-  if (collect_messages(*this).empty())
+  if (collect_message_types(*this).empty())
   {
     check_if_there_is_a_winner();
   }

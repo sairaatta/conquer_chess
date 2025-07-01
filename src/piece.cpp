@@ -1420,8 +1420,6 @@ void tick_move(
   // Are we done with the action?
   if (new_progress >= 1.0)
   {
-    // Can this piece now be captured by en passant?
-    // Or should it be found in a piece's history ..?
 
     // The whole goal of the operation
     assert(p.get_current_square() == first_action.get_to());
