@@ -41,6 +41,7 @@
 #include "game_statistics_output_file.h"
 #include "helper.h"
 #include "in_game_time.h"
+#include "game_statistics_view_layout.h"
 #include "in_game_controls_layout.h"
 #include "key_bindings.h"
 #include "lobby_options.h"
@@ -104,6 +105,7 @@ void test()
   test_game_info_layout();
   test_game_statistic_type();
   test_game_options();
+  test_game_statistics_view_layout();
   test_game_rect();
   test_game_speed();
   test_game_statistics();

@@ -6,7 +6,7 @@
 
 #include <vector>
 
-/// The layout of a 'Played game' dialog.
+/// The layout of viewing the statistics after a game dialog.
 ///
 /// ```text
 ///   x          x
@@ -15,7 +15,7 @@
 /// +--------------+
 /// |              |
 /// | +----------+ | y1
-/// | | text     | |
+/// | | plot     | |
 /// | |          | |
 /// | |          | |
 /// | |          | |
@@ -42,15 +42,14 @@ public:
   /// The full screen area of this layout
   const auto& get_background() const noexcept { return m_background; }
 
-  const auto& get_text() const noexcept { return m_text; }
+  const auto& get_plot() const noexcept { return m_plot; }
 
 private:
 
   screen_rect m_background;
-  screen_rect m_text;
+  screen_rect m_plot;
 };
 
-/// Get the panels in the layout
 std::vector<screen_rect> get_panels(const game_statistics_view_layout& layout);
 
 /// Test the game_statistics_view_layout class

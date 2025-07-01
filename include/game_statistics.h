@@ -13,6 +13,7 @@ class game_statistics
 {
 public:
   game_statistics(const game& g);
+  game_statistics(const std::map<game_statistic_type, std::map<side, double>>& s);
 
   /// Calculate the relative value between the two players for a statistic,
   /// where 0.5 denotes 'equally much'.
@@ -30,6 +31,9 @@ public:
 private:
   std::map<game_statistic_type, std::map<side, double>> m_statistics;
 };
+
+/// Create a game statistics to be used in testing
+game_statistics create_test_game_statistics();
 
 /// Put the values in a row, to be saved to a file
 ///

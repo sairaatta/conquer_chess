@@ -13,7 +13,7 @@ game_statistics_view_layout::game_statistics_view_layout(const screen_rect& r) :
   const int y1{24};
   const int y2{y1 + panel_height};
 
-  m_text = screen_rect(
+  m_plot = screen_rect(
     screen_coordinate(x1, y1),
     screen_coordinate(x2, y2)
   );
@@ -23,7 +23,7 @@ std::vector<screen_rect> get_panels(const game_statistics_view_layout& layout)
 {
   return
   {
-    layout.get_text()
+    layout.get_plot()
   };
 }
 
@@ -34,6 +34,8 @@ void test_game_statistics_view_layout()
   {
     const game_statistics_view_layout layout;
     assert(!get_panels(layout).empty());
+    assert(get_width(layout.get_background()) > 0);
+    assert(get_width(layout.get_plot()) > 0);
   }
   #endif
 }

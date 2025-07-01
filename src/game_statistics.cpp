@@ -17,6 +17,13 @@ game_statistics::game_statistics(const game& g)
   }
 }
 
+game_statistics::game_statistics(const std::map<game_statistic_type, std::map<side, double>>& s)
+  : m_statistics{s}
+{
+  // Check if all relevant values are in
+  // assert(!flatten_to_row(s).empty());
+}
+
 double game_statistics::calc_relative(const game_statistic_type s) const
 {
   const double lhs{m_statistics.at(s).at(side::lhs)};
@@ -29,6 +36,19 @@ double game_statistics::calc_relative(const game_statistic_type s) const
   assert(f >= 0.0);
   assert(f <= 1.0);
   return f;
+}
+
+game_statistics create_test_game_statistics()
+{
+  std::map<game_statistic_type, std::map<side, double>> s;
+  s[game_statistic_type::time][side::lhs] = 0.0;
+  s[game_statistic_type::value][side::lhs] = 1.0;
+  s[game_statistic_type::value][side::rhs] = 1.0;
+  s[game_statistic_type::activity][side::lhs] = 0.0;
+  s[game_statistic_type::activity][side::rhs] = 0.0;
+  s[game_statistic_type::protectedness][side::lhs] = 14.0 / 16.0;
+  s[game_statistic_type::protectedness][side::rhs] = 14.0 / 16.0;
+  return game_statistics(s);
 }
 
 std::vector<double> flatten_to_row(const game_statistics& s)

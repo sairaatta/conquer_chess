@@ -14,6 +14,23 @@ void game_statistics_in_time::add(const game& g)
   m_statistics.push_back(game_statistics(g));
 }
 
+void game_statistics_in_time::add(const game_statistics& s)
+{
+  m_statistics.push_back(s);
+}
+
+game_statistics_in_time create_test_game_statistics_in_time()
+{
+  auto s = create_test_game_statistics();
+  game_statistics_in_time t;
+
+  for (int i=0; i!=100; ++i)
+  {
+    t.add(s);
+  }
+  return t;
+}
+
 game_statistics_in_time play_random_game_to_get_statistics_in_time(const int n_turns)
 {
   game g{create_game_with_standard_starting_position()};
@@ -44,6 +61,11 @@ void test_game_statistics_in_time()
     const game g{create_game_with_standard_starting_position()};
     s.add(g);
     assert(s.get().size() == 1);
+  }
+  // create_test_game_statistics_in_time
+  {
+    const game_statistics_in_time s{create_test_game_statistics_in_time()};
+    assert(!s.get().empty());
   }
   #endif
 

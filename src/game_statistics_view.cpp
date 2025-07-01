@@ -74,7 +74,7 @@ void game_statistics_view::start_impl()
   assert(!is_active());
   set_is_active(true);
 
-  m_statistics = play_random_game_to_get_statistics_in_time(1000);
+  m_statistics = create_test_game_statistics_in_time();
 }
 
 void game_statistics_view::stop_impl()
@@ -91,7 +91,7 @@ void game_statistics_view::tick_impl(const delta_t dt)
 
 void draw_plot_panel(game_statistics_view& v)
 {
-  const auto screen_rect{v.get_layout().get_text()};
+  const auto screen_rect{v.get_layout().get_plot()};
 
   const auto stats{v.get_statistics()};
   std::vector<float> times;
