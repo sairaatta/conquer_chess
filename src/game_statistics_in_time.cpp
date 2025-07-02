@@ -67,6 +67,12 @@ void test_game_statistics_in_time()
     const game_statistics_in_time s{create_test_game_statistics_in_time()};
     assert(!s.get().empty());
   }
+  // play_random_game_to_get_statistics_in_time
+  {
+    const int n{2};
+    const auto g{play_random_game_to_get_statistics_in_time(n)};
+    assert(n == static_cast<int>(g.get().size()));
+  }
   #endif
 
 }
