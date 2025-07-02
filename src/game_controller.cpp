@@ -372,31 +372,16 @@ void game_controller::apply_action_type_move_to_game(game& g, const side player_
 void game_controller::apply_action_type_promote_to_game(game& g, const piece_type promote_to_type, const side player_side)
 {
   const chess_color player_color{get_player_color(player_side)};
-  const game_coordinate cursor_pos{get_cursor_pos(player_side)};
-  assert(is_coordinat_on_board(cursor_pos));
-  const square cursor{square(cursor_pos)};
 
-  // true for promotions, false for castling
-  const bool is_cursor_on_piece{is_piece_at(g, cursor)};
-  const bool is_cursor_on_friendly_piece{
-    is_cursor_on_piece && get_piece_at(g, cursor).get_color() == player_color
-  };
-  const bool is_cursor_on_selected_piece_of_own_color{
-    is_cursor_on_friendly_piece && get_piece_at(g, cursor).is_selected()
-  };
+  assert(has_selected_pieces(g, player_side));
+  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  assert(selected_pieces.size() == 1);
+  const auto selected_square{selected_pieces[0].get_current_square()};
+  assert(can_promote(get_piece_at(g, selected_square)));
 
-  const bool can_selected_piece_promote{
-    is_cursor_on_selected_piece_of_own_color
-      && can_promote(get_piece_at(g, cursor))
-  };
-  const bool is_promotion{
-    is_cursor_on_selected_piece_of_own_color && can_selected_piece_promote
-  };
-
-  assert(is_cursor_on_friendly_piece);
-  const auto& p{get_piece_at(g, cursor)};
+  auto& p{get_piece_at(g, selected_square)};
   assert(p.is_selected());
-  assert (can_promote(p));
+  assert(can_promote(p));
 
   piece_action_type pat{piece_action_type::attack_en_passant};
   switch (promote_to_type)
@@ -412,13 +397,13 @@ void game_controller::apply_action_type_promote_to_game(game& g, const piece_typ
   }
 
   assert(is_promotion);
-  get_piece_at(g, cursor).add_action(
+  p.add_action(
     piece_action(
       player_color,
       promote_to_type,
       pat,
-      cursor,
-      cursor
+      selected_square,
+      selected_square
     )
   );
 }
@@ -1584,6 +1569,74 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions[1] == piece_action_type::promote_to_rook);
     assert(actions[2] == piece_action_type::promote_to_bishop);
     assert(actions[3] == piece_action_type::promote_to_knight);
+  }
+  // Promote to queen, from black pawn at h1
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "h1", side::rhs);
+    move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
+    const auto actions{get_piece_actions(g, c, side::rhs)};
+    assert(actions.size() == 4);
+    assert(actions[0] == piece_action_type::promote_to_queen);
+    assert(actions[1] == piece_action_type::promote_to_rook);
+    assert(actions[2] == piece_action_type::promote_to_bishop);
+    assert(actions[3] == piece_action_type::promote_to_knight);
+    c.add_user_input(create_press_action_1(side::rhs));
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::pawn);
+    c.apply_user_inputs_to_game(g);
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::queen);
+  }
+  // Promote to rook, from black pawn at h1
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "h1", side::rhs);
+    move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
+    const auto actions{get_piece_actions(g, c, side::rhs)};
+    assert(actions.size() == 4);
+    assert(actions[0] == piece_action_type::promote_to_queen);
+    assert(actions[1] == piece_action_type::promote_to_rook);
+    assert(actions[2] == piece_action_type::promote_to_bishop);
+    assert(actions[3] == piece_action_type::promote_to_knight);
+    c.add_user_input(create_press_action_2(side::rhs));
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::pawn);
+    c.apply_user_inputs_to_game(g);
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::rook);
+  }
+  // Promote to bishop, from black pawn at h1
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "h1", side::rhs);
+    move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
+    const auto actions{get_piece_actions(g, c, side::rhs)};
+    assert(actions.size() == 4);
+    assert(actions[0] == piece_action_type::promote_to_queen);
+    assert(actions[1] == piece_action_type::promote_to_rook);
+    assert(actions[2] == piece_action_type::promote_to_bishop);
+    assert(actions[3] == piece_action_type::promote_to_knight);
+    c.add_user_input(create_press_action_3(side::rhs));
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::pawn);
+    c.apply_user_inputs_to_game(g);
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::bishop);
+  }
+  // Promote to bishop, from black pawn at h1
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "h1", side::rhs);
+    move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
+    const auto actions{get_piece_actions(g, c, side::rhs)};
+    assert(actions.size() == 4);
+    assert(actions[0] == piece_action_type::promote_to_queen);
+    assert(actions[1] == piece_action_type::promote_to_rook);
+    assert(actions[2] == piece_action_type::promote_to_bishop);
+    assert(actions[3] == piece_action_type::promote_to_knight);
+    c.add_user_input(create_press_action_4(side::rhs));
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::pawn);
+    c.apply_user_inputs_to_game(g);
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::knight);
   }
   // get_cursor_pos
   {
