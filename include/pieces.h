@@ -3,6 +3,7 @@
 
 /// @file Functions to work on collections of pieces
 
+#include "ccfwd.h"
 #include "board_to_text_options.h"
 #include "piece.h"
 #include "starting_position_type.h"
@@ -96,6 +97,13 @@ int count_selected_units(
   const std::vector<piece>& pieces,
   const chess_color player
 );
+
+
+std::vector<piece> create_pieces_from_fen_string(const fen_string& s);
+
+/// Create the pieces as set up from the global game settings
+std::vector<piece> create_pieces_from_settings();
+
 
 /// Get the square where the king of that color is
 square get_current_king_square(

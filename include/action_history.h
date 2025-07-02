@@ -10,6 +10,9 @@
 
 /// The collected in-game times of actions,
 /// in chrononical order.
+///
+/// With the time and the full piece action, one can perfectly replay
+/// a game.
 class action_history
 {
 public:
@@ -24,6 +27,8 @@ public:
   /// in chrononical order
   const auto& get_timed_actions() const noexcept { return m_timed_actions; }
 
+  const auto& get_moves() const noexcept { return m_timed_actions; }
+
 private:
 
   /// The history of actions (i.e when they started), in chrononical order
@@ -37,6 +42,12 @@ std::vector<piece_action> collect_actions_in_timespan(
   const in_game_time from,
   const in_game_time to
 );
+
+/// Create an action history from a PGN string
+action_history create_action_history_from_pgn(const pgn_game_string& s);
+
+/// Get the number of moves in the action history
+int get_n_piece_actions(const action_history& r) noexcept;
 
 /// Has this piece (i.e. a pawn) just finish a double move forward last time unit?
 /// Only pawns can do this, e.g. e2-e4 or e7-e5
@@ -71,6 +82,8 @@ action_history merge_action_histories(const std::vector<action_history> historie
 void test_action_history();
 
 std::string to_str(const action_history& history) noexcept;
+
+bool operator==(const action_history& lhs, const action_history& rhs) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const action_history& history) noexcept;
 

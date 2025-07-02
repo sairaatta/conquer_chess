@@ -2,7 +2,8 @@
 
 #include "game_coordinate.h"
 #include "lobby_options.h"
-
+#include "fen_string.h"
+#include "game_options.h"
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wshadow"
@@ -59,12 +60,12 @@ std::vector<std::string> add_legend(
   std::vector<std::string> text_with_legend{strs};
   text_with_legend[0] += " Type  |White|Black";
   text_with_legend[1] += " ------|-----|-----";
-  text_with_legend[2] += " bishop| b   | B   ";
-  text_with_legend[3] += " king  | k   | K   ";
-  text_with_legend[4] += " knight| n   | N   ";
-  text_with_legend[5] += " pawn  | p   | P   ";
-  text_with_legend[6] += " queen | q   | Q   ";
-  text_with_legend[7] += " rook  | r   | R   ";
+  text_with_legend[2] += " bishop| B   | b   ";
+  text_with_legend[3] += " king  | K   | k   ";
+  text_with_legend[4] += " knight| N   | n   ";
+  text_with_legend[5] += " pawn  | P   | p   ";
+  text_with_legend[6] += " queen | Q   | q   ";
+  text_with_legend[7] += " rook  | R   | r   ";
   return text_with_legend;
 }
 
@@ -210,6 +211,65 @@ int count_selected_units(
       return piece.is_selected()
         && piece.get_color() == player;
     }
+  );
+}
+
+std::vector<piece> create_pieces_from_fen_string(const fen_string& fen_str)
+{
+  const std::string s{fen_str.get()};
+  assert(!s.empty());
+
+  std::vector<piece> pieces;
+
+  int square_index{0}; // a8, a7, a6, etc...
+  int str_index{0};
+  while(1)
+  {
+    const char c{s[str_index]};
+    if (c >= '1' && c <= '8')
+    {
+      const int n_skips = static_cast<int>(c - '1');
+      assert(n_skips >= 0 && n_skips <= 8);
+      square_index += n_skips;
+      ++str_index;
+      ++square_index;
+    }
+    else if (c == '/')
+    {
+      // Move to the next
+      ++str_index;
+    }
+    else if (c == ' ')
+    {
+      // Done!
+      break;
+    }
+    else
+    {
+      const piece_type type{to_piece_type(std::toupper(c))};
+      const chess_color color{std::isupper(c) ? chess_color::white : chess_color::black };
+      const char file_char = 'a' + (square_index % 8);
+      const std::string file_str{file_char};
+      const int rank{8 - (square_index / 8)}; // FEN strings start from above
+      assert(rank >= 1 && rank <= 8);
+      const square sq(file_str + std::to_string(rank));
+      const piece p(color, type, sq);
+      pieces.push_back(p);
+      ++str_index;
+      ++square_index;
+    }
+  }
+  assert(!pieces.empty());
+  assert(pieces.size() <= 32);
+  return pieces;
+}
+
+std::vector<piece> create_pieces_from_settings()
+{
+  return get_starting_pieces(
+    get_starting_position(),
+    get_race_of_side(side::lhs),
+    get_race_of_side(side::rhs)
   );
 }
 
@@ -1238,6 +1298,21 @@ void test_pieces()
     const auto n_black{count_selected_units(pieces, chess_color::black)};
     const auto n_white{count_selected_units(pieces, chess_color::white)};
     assert(n_total == n_black + n_white);
+  }
+  // create_pieces_from_fen_string
+  {
+    const auto pieces{create_pieces_from_fen_string(get_fen_string_wikipedia_0())};
+    assert(pieces.size() == 32);
+    //std::clog << to_board_str(pieces, board_to_text_options(true, true)) << '\n';
+    assert(is_piece_at(pieces, square("a1")));
+    assert(is_piece_at(pieces, square("h1")));
+    assert(is_piece_at(pieces, square("a8")));
+    assert(is_piece_at(pieces, square("h8")));
+
+    assert(get_piece_at(pieces, square("a1")).get_type() == piece_type::rook);
+    assert(get_piece_at(pieces, square("a1")).get_color() == chess_color::white);
+    assert(get_piece_at(pieces, square("d8")).get_type() == piece_type::queen);
+    assert(get_piece_at(pieces, square("d8")).get_color() == chess_color::black);
   }
   // get_current_king_square
   {

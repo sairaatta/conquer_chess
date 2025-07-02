@@ -6,7 +6,6 @@
 #include "pieces.h"
 #include "chess_color.h"
 #include "lobby_options.h"
-
 #include <cassert>
 #include <cmath>
 #include <algorithm>
@@ -17,14 +16,8 @@
 #error 'game' must know nothing about 'game_controller'
 #endif
 
-game::game()
-  : m_pieces{
-      get_starting_pieces(
-        get_starting_position(),
-        get_race_of_side(side::lhs),
-        get_race_of_side(side::rhs)
-      )
-    },
+game::game(const std::vector<piece>& pieces)
+  : m_pieces{pieces},
     m_in_game_time{0.0}
 {
 
@@ -1047,6 +1040,13 @@ piece& get_closest_piece_to(
   return g.get_pieces()[get_index_of_closest_piece_to(g, coordinat)];
 }
 
+game create_game_from_fen_string(const fen_string& s) noexcept
+{
+  const game g(create_pieces_from_fen_string(s));
+  assert(!g.get_pieces().empty());
+  return g;
+}
+
 game create_game_with_standard_starting_position() noexcept
 {
   return create_game_with_starting_position(starting_position_type::standard);
@@ -1340,6 +1340,24 @@ void tick_until_idle(game& g)
     ++cnt;
     assert(cnt < 1000);
   }
+}
+
+fen_string to_fen_string(const game& g)
+{
+  const int move_number = g.get_in_game_time().get(); // Round down
+  const chess_color active_color{move_number % 2 == 0 ? chess_color::white : chess_color::black};
+  const std::string castling_availability{"KQkq"};
+  const std::string en_passant_target_square{"-"};
+  const int halfmove_number{0};
+  const int fullmove_number{move_number + 1};
+  return to_fen_str(
+    g.get_pieces(),
+    active_color,
+    castling_availability,
+    en_passant_target_square,
+    halfmove_number,
+    fullmove_number
+  );
 }
 
 std::string to_pgn(const game& g)

@@ -1,13 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
 
+
 #include "ccfwd.h"
 #include "message.h"
 #include "piece.h"
+#include "pieces.h"
 #include "side.h"
 #include "piece_action_type.h"
 #include "action_history.h"
 #include "starting_position_type.h"
+#include "fen_string.h"
 
 #include <iosfwd>
 #include <vector>
@@ -26,7 +29,7 @@
 class game
 {
 public:
-  explicit game();
+  explicit game(const std::vector<piece>& pieces = create_pieces_from_settings());
 
   /// Get all the pieces
   auto& get_pieces() noexcept { return m_pieces; }
@@ -276,6 +279,18 @@ int count_selected_units(
   const side player_side
 );
 
+/// Create a game from a FEN string
+game create_game_from_fen_string(const fen_string& s) noexcept;
+
+/// Create a game with all default settings
+/// and the default starting position
+game create_game_with_standard_starting_position() noexcept;
+
+/// Create a game with all default settings
+/// and a specific starting position
+game create_game_with_starting_position(starting_position_type t) noexcept;
+
+
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(
   const game& g,
@@ -289,13 +304,6 @@ const piece& get_closest_piece_to(const game& g, const game_coordinate& coordina
 /// Get the piece that is closest to the coordinat
 piece& get_closest_piece_to(game& g, const game_coordinate& coordinat);
 
-/// Create a game with all default settings
-/// and the default starting position
-game create_game_with_standard_starting_position() noexcept;
-
-/// Create a game with all default settings
-/// and a specific starting position
-game create_game_with_starting_position(starting_position_type t) noexcept;
 
 
 /// Get the index of the piece that is closest to the coordinat
@@ -443,12 +451,14 @@ bool is_piece_at(
 /// Call game::tick until all pieces are idle
 void tick_until_idle(game& g);
 
+/// Convert the game's position to a FEN string
+fen_string to_fen_string(const game& g);
+
 /// Convert the played game to pseudo-PGN notation.
 ///
 /// Returns one string with newlines.
 /// An example string can be: '0: white pawn move from e2 to e4',
 /// where the '0' denotes the starting time of the move
-
 std::string to_pgn(const game& g);
 
 /// Unselect all pieces of a certain color

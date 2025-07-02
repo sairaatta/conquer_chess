@@ -603,7 +603,7 @@ bool can_unselect(
 }
 
 user_inputs convert_move_to_user_inputs(
-  const game& g,
+  const game& ,
   const game_controller& c,
   const chess_move& m
 )
@@ -612,7 +612,9 @@ user_inputs convert_move_to_user_inputs(
   if (!m.get_winner().empty()) return user_inputs();
 
   const auto player_side{get_player_side(m.get_color())};
-  const square from{get_from(g, m)};
+
+  assert(m.get_from().has_value());
+  const square from{m.get_from().value()};
 
   user_inputs inputs;
   // Move the cursor to piece's square
@@ -1010,7 +1012,7 @@ void test_game_controller() //!OCLINT tests may be many
     const auto c{create_game_controller_with_two_keyboards()};
     const auto cursor_pos{square(c.get_cursor_pos(side::lhs))};
     assert(cursor_pos == square("e1"));
-    const chess_move m("e4", chess_color::white);
+    const chess_move m(pgn_move_string("e4"));
     const auto user_inputs{
       convert_move_to_user_inputs(g, c, m)
     };

@@ -1,10 +1,11 @@
 #ifndef CHESS_MOVE_H
 #define CHESS_MOVE_H
 
-
 #include "castling_type.h"
 #include "piece_type.h"
 #include "square.h"
+#include "pgn_move_string.h"
+#include "fen_string.h"
 
 #include <string>
 #include <vector>
@@ -20,8 +21,14 @@
 class chess_move
 {
 public:
-  /// Need to now the player's color, e.g. for 'O-O-O' or '1-0'
-  explicit chess_move(std::string pgn_str, const chess_color color);
+  /// Moves always happen on a board
+  explicit chess_move(
+    const pgn_move_string& pgn_str,
+    const fen_string& fen_str = create_fen_string_of_standard_starting_position()
+  );
+
+  /// The type of action this move is
+  const auto& get_action_type() const noexcept { return m_action_type; }
 
   /// Get the castling type.
   /// Will be empty if this move is not a promotion
@@ -29,6 +36,11 @@ public:
 
   /// Get the color of the player that did this move
   const auto& get_color() const noexcept { return m_color; };
+
+  /// Get the source/from square, e.g. 'b1' in 'Pc3'.
+  ///
+  /// Result will be empty when winning (e.g. '1-0')
+  const auto& get_from() const noexcept { return m_from; }
 
   /// Get the original PGN string back
   const auto& get_pgn_str() const noexcept { return m_pgn_str; }
@@ -45,7 +57,7 @@ public:
 
   /// The type of chess piece.
   /// Result will be empty when castling (e.g. 'O-O') or winning (e.g. '1-0')
-  const auto& get_type() const noexcept { return m_type; }
+  const auto& get_piece_type() const noexcept { return m_piece_type; }
 
   /// Get the winner.
   ///  * If this is empty, the game is still on-going.
@@ -59,15 +71,22 @@ public:
 
 private:
 
+  /// The type of action a pieces does, if any
+  ///
+  /// For example, winning the game is not an action
+  std::optional<piece_action_type> m_action_type;
+
   /// The type of castling. Empty if move is not a castling
   std::optional<castling_type> m_castling_type;
 
   chess_color m_color;
 
+  std::optional<square> m_from;
+
   bool m_is_capture;
 
   /// The original PGN string
-  std::string m_pgn_str;
+  pgn_move_string m_pgn_str;
 
   /// The type of piece a pawn promotes into.
   /// Empty if move is not a promotion
@@ -75,7 +94,7 @@ private:
 
   std::optional<square> m_to;
 
-  std::optional<piece_type> m_type;
+  std::optional<piece_type> m_piece_type;
 
   /// Can be
   ///  * No winner yet: empty
@@ -85,50 +104,31 @@ private:
 
 };
 
-/// Get the square the piece doing the move came from.
+/// Get the square the piece doing the move came from, if any.
+///
 /// Even with, e.g., castling, it is the king at e1 that
 /// needed to be selected to do that move
-square get_from(const game& g, const chess_move& m);
+std::optional<square> get_from(const fen_string& s, const pgn_move_string& m);
 
 /// Get the square the bishop doing the move came from.
-square get_from_for_bishop(const game& g, const chess_move& m);
+square get_from_for_bishop(const fen_string& s, const pgn_move_string& m);
 
 /// Get the square the king doing the move came from.
 /// Even with, e.g., castling for white, it is the king at e1 that
 /// needed to be selected to do that move
-square get_from_for_king(const game& g, const chess_move& m);
+square get_from_for_king(const fen_string& s, const pgn_move_string& m);
 
 /// Get the square the knight doing the move came from.
-square get_from_for_knight(const game& g, const chess_move& m);
+square get_from_for_knight(const fen_string& s, const pgn_move_string& m);
 
 /// Get the square the pawn doing the move came from.
-square get_from_for_pawn(const game& g, const chess_move& m);
+square get_from_for_pawn(const fen_string& s, const pgn_move_string& m);
 
 /// Get the square the queen doing the move came from.
-square get_from_for_queen(const game& g, const chess_move& m);
+square get_from_for_queen(const fen_string& s, const pgn_move_string& m);
 
 /// Get the square the rook doing the move came from.
-square get_from_for_rook(const game& g, const chess_move& m);
-
-/// Get the square from a string
-/// E.g. 'Nc3' will result in 'c3'
-square get_square(const std::string& pgn_str);
-
-/// Get a piece type for a string
-/// E.g. 'Nc3' will result in a knight, 'e4' will result in a pawn
-piece_type get_piece_type(const std::string& pgn_str);
-
-/// Get the type the piece is promoted to.
-/// Will be empty if this is no promotion
-std::optional<piece_type> get_promotion_type(const std::string& pgn_str);
-
-/// Get the winner from a notation.
-/// Assumes a win ('1-0' or '0-1') or a draw ('1/2-1/2').
-std::vector<chess_color> get_winner(const std::string& pgn_str);
-
-/// Conclude if the move is a capture from a PGN string
-/// E.g. 'Nxc3' will result in true
-bool is_capture(const std::string& pgn_str);
+square get_from_for_rook(const fen_string& s, const pgn_move_string& m);
 
 /// Get if the move is a capture
 bool is_capture(const chess_move& move) noexcept;

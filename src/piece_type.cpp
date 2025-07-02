@@ -90,7 +90,8 @@ piece_type to_piece_type(const char c)
     case 'R': return piece_type::rook;
     default:
     case ' ':
-      assert(c == ' ');
+    case 'P':
+      assert(c == ' ' || c == 'P');
       return piece_type::pawn;
   }
 }

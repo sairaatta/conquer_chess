@@ -3,7 +3,8 @@
 
 #include "ccfwd.h"
 #include "in_game_time.h"
-#include "replay.h"
+
+#include "action_history.h"
 
 #include <iosfwd>
 
@@ -11,19 +12,18 @@
 class replayer
 {
 public:
-  explicit replayer(const replay& r = replay());
+  explicit replayer(const action_history& r = action_history());
 
-  /// Do a move or do nothing
+  /// Do a move or do nothing, for 1 time unit
   void do_move(
     game_controller& c,
     game& g
   );
 
+  const auto& get_action_history() const noexcept { return m_action_history; }
+
   /// Get the last time a move was done
   const auto& get_last_time() const noexcept { return m_last_time; }
-
-  /// Get the play that is replayed
-  const auto& get_replay() const noexcept { return m_replay; }
 
 private:
 
@@ -31,7 +31,7 @@ private:
   in_game_time m_last_time;
 
   /// A replay
-  replay m_replay;
+  action_history m_action_history;
 };
 
 game get_played_scholars_mate();

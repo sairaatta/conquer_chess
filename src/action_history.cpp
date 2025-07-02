@@ -1,10 +1,18 @@
 #include "action_history.h"
 
 #include "delta_t.h"
+#include "game_controller.h"
+#include "pgn_game_string.h"
+#include "chess_move.h"
+#include "pgn_game_string.h"
+#include "pieces.h"
+#include "game.h"
+
 
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <regex>
 #include <sstream>
 
 action_history::action_history(
@@ -28,6 +36,43 @@ void action_history::add_action(const in_game_time& in_game_time, const piece_ac
   m_timed_actions.push_back(std::make_pair(in_game_time, action));
 }
 
+action_history create_action_history_from_pgn(const pgn_game_string& s)
+{
+  action_history h;
+
+  const auto move_strs{split_pgn_str(s)};
+  const int n_moves = move_strs.size();
+  game g{create_game_with_standard_starting_position()};
+  for (int i{0}; i!=n_moves; ++i)
+  {
+    const in_game_time t(i);
+    const fen_string fen_str{to_fen_string(g)};
+    const chess_move m(move_strs[i], fen_str);
+    const chess_color piece_color{m.get_color()};
+    const std::optional<piece_type> pt{m.get_piece_type()};
+    const std::optional<piece_action_type> at{m.get_action_type()};
+    if (pt.has_value() && at.has_value()) // A win is not a piece action
+    {
+      const square& from{m.get_from().value()};
+      const square& to{m.get_to().value()};
+      const piece_action pa(
+        piece_color,
+        pt.value(),
+        at.value(),
+        from,
+        to
+      );
+      h.add_action(t, pa);
+      get_piece_at(g, from).add_action(pa);
+    }
+    for (int ticker{0}; ticker!=4; ++ticker)
+    {
+      g.tick(delta_t(0.25));
+    }
+  }
+  return h;
+}
+
 std::vector<piece_action> collect_actions_in_timespan(
   const action_history& history,
   const in_game_time from,
@@ -48,6 +93,11 @@ const piece_action& get_last_action(const action_history& history)
 {
   assert(has_actions(history));
   return history.get_timed_actions().back().second;
+}
+
+int get_n_piece_actions(const action_history& r) noexcept
+{
+  return r.get_timed_actions().size();
 }
 
 bool has_actions(const action_history& history) noexcept
@@ -113,6 +163,36 @@ void test_action_history()
     const action_history h;
     assert(h.get_timed_actions().empty());
   }
+  // create_action_history_from_pgn from empty string is OK
+  {
+    const action_history r(create_action_history_from_pgn(pgn_game_string("")));
+    assert(get_n_piece_actions(r) == 0);
+  }
+  // create_action_history_from_pgn from one action
+  {
+    const action_history r(create_action_history_from_pgn(pgn_game_string("1. e4")));
+    assert(get_n_piece_actions(r) == 1);
+  }
+  // create_action_history_from_pgn from two actions
+  {
+    const action_history r(create_action_history_from_pgn(pgn_game_string("1. e4 e5")));
+    assert(get_n_piece_actions(r) == 2);
+  }
+  // create_action_history_from_pgn from get_scholars_mate_as_pgn_str
+  {
+    const action_history r(create_action_history_from_pgn(get_scholars_mate_as_pgn_str()));
+    const int n_piece_actions{get_n_piece_actions(r)};
+    assert(n_piece_actions == 7); // Winning is not a piece action
+  }
+  //#define FIX_COMPLEX_PGN_20250702
+  #ifdef FIX_COMPLEX_PGN_20250702
+  // create_action_history_from_pgn from get_replay_1_as_pgn_str
+  {
+    // It is a complex PGN
+    const action_history r(create_action_history_from_pgn(get_replay_1_as_pgn_str()));
+    assert(get_n_piece_actions(r) > 8);
+  }
+  #endif // FIX_COMPLEX_PGN_20250702
   // merge_action_histories
   {
     const action_history a{
@@ -134,6 +214,14 @@ void test_action_history()
       == c.get_timed_actions().size()
     );
   }
+  // operator==
+  {
+    const action_history a(create_action_history_from_pgn(pgn_game_string("1. e4")));
+    const action_history b(create_action_history_from_pgn(pgn_game_string("1. e4")));
+    const action_history c(create_action_history_from_pgn(pgn_game_string("1. e4 e5")));
+    assert(a == b);
+    assert(!(a == c));
+  }
   // operator<<
   {
     std::stringstream s;
@@ -147,7 +235,7 @@ void test_action_history()
     s << h;
     assert(!s.str().empty());
   }
-#endif
+#endif // NDEBUG
 }
 
 std::string to_str(const action_history& history) noexcept
@@ -160,6 +248,11 @@ std::string to_str(const action_history& history) noexcept
   std::string t{s.str()};
   if (!t.empty()) t.pop_back();
   return t;
+}
+
+bool operator==(const action_history& lhs, const action_history& rhs) noexcept
+{
+  return lhs.get_timed_actions() == rhs.get_timed_actions();
 }
 
 std::ostream& operator<<(std::ostream& os, const action_history& history) noexcept

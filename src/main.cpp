@@ -40,6 +40,7 @@
 #include "game_statistics_in_time.h"
 #include "game_statistics_output_file.h"
 #include "helper.h"
+#include "fen_string.h"
 #include "in_game_time.h"
 #include "game_statistics_view_layout.h"
 #include "in_game_controls_layout.h"
@@ -51,7 +52,8 @@
 #include "menu_view_layout.h"
 #include "navigation_controls_layout.h"
 #include "options_view_layout.h"
-#include "pgn_string.h"
+#include "pgn_move_string.h"
+#include "pgn_game_string.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
 #include "piece_actions.h"
@@ -82,6 +84,8 @@
 void test()
 {
 #ifndef NDEBUG
+  test_pgn_move_string();
+
   test_about();
   test_about_view_layout();
   test_action_history();
@@ -107,6 +111,7 @@ void test()
   test_game_options();
   test_game_statistics_view_layout();
   test_game_rect();
+  test_fen_string();
   test_game_speed();
   test_game_statistics();
   test_game_view_layout();
@@ -127,7 +132,8 @@ void test()
   test_navigation_controls_layout();
   test_options_view_item();
   test_options_view_layout();
-  test_pgn_string();
+  test_pgn_game_string();
+  test_pgn_move_string();
   test_physical_controller_type();
   test_physical_controllers();
   test_piece();
@@ -141,11 +147,9 @@ void test()
   test_program_state();
   test_race();
   test_read_only();
-  test_replay();
   test_replayer();
   test_screen_coordinate();
   test_screen_rect();
-  test_pgn_string();
   test_sfml_helper();
   test_side();
   test_sleep_scheduler();
