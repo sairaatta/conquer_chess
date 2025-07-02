@@ -27,6 +27,7 @@ class options_view;
 class options_view_layout;
 class physical_controller;
 class physical_controllers;
+class pgn_string;
 class piece;
 class piece_action;
 class replay;

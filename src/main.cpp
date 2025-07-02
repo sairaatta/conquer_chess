@@ -145,6 +145,7 @@ void test()
   test_replayer();
   test_screen_coordinate();
   test_screen_rect();
+  test_pgn_string();
   test_sfml_helper();
   test_side();
   test_sleep_scheduler();

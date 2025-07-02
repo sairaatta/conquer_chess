@@ -1,10 +1,11 @@
 #ifndef REPLAY_H
 #define REPLAY_H
 
+#include "ccfwd.h"
 #include "chess_move.h"
+#include "pgn_string.h"
 
 #include <iosfwd>
-#include <string>
 #include <vector>
 
 /// A replay of a regular chess match.
@@ -16,7 +17,7 @@ class replay
 public:
   /// @param pgn_str a string of PGN notation in one line,
   /// e.g.
-  explicit replay(const std::string& pgn_str);
+  explicit replay(const pgn_string& pgn_str = pgn_string());
 
   const auto& get_moves() const noexcept { return m_moves; }
 
@@ -29,15 +30,7 @@ private:
 /// Get the number of moves in the replay
 int get_n_moves(const replay& r) noexcept;
 
-std::string get_replay_1_as_pgn_str() noexcept;
-
-std::string get_scholars_mate_as_pgn_str() noexcept;
-
 replay get_replay_1() noexcept;
-
-/// Split the PGN string into its moves
-/// E.g. '1. e4 e5 2. Nc3' will be split into {'e4', 'e5', 'Nc3'}
-std::vector<std::string> split_pgn_str(const std::string pgn_str);
 
 /// Test this class and its free functions
 void test_replay();

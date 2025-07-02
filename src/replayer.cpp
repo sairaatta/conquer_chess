@@ -78,7 +78,7 @@ void test_replayer()
   }
   // replayer can forward a pawn two squares forward
   {
-    replayer r(replay("1. e4"));
+    replayer r(replay(pgn_string("1. e4")));
     assert(get_n_moves(r) == 1);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -90,7 +90,7 @@ void test_replayer()
   }
   // replayer can forward a pawn one square
   {
-    replayer r(replay("1. e3"));
+    replayer r(replay(pgn_string("1. e3")));
     assert(get_n_moves(r) == 1);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -102,7 +102,7 @@ void test_replayer()
   }
   // replayer can do Na3
   {
-    replayer r(replay("1. Na3"));
+    replayer r(replay(pgn_string("1. Na3")));
     assert(get_n_moves(r) == 1);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -114,7 +114,7 @@ void test_replayer()
   }
   // replayer can do Nc3
   {
-    replayer r(replay("1. Nc3"));
+    replayer r(replay(pgn_string("1. Nc3")));
     assert(get_n_moves(r) == 1);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -128,7 +128,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(replay("1. e4 e5"));
+    replayer r(replay(pgn_string("1. e4 e5")));
     assert(get_n_moves(r) == 2);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -145,7 +145,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(replay("1. e4 e5 2. Qh5"));
+    replayer r(replay(pgn_string("1. e4 e5 2. Qh5")));
     assert(get_n_moves(r) == 3);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -163,7 +163,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(replay("1. e4 e5 2. Qh5 Nc6"));
+    replayer r(replay(pgn_string("1. e4 e5 2. Qh5 Nc6")));
     assert(get_n_moves(r) == 4);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -182,7 +182,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4"));
+    replayer r(replay(pgn_string("1. e4 e5 2. Qh5 Nc6 3. Bc4")));
     assert(get_n_moves(r) == 5);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -203,7 +203,7 @@ void test_replayer()
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
 
-    replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6"));
+    replayer r(replay(pgn_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6")));
     assert(get_n_moves(r) == 6);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -223,7 +223,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7#"));
+    replayer r(replay(pgn_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7#")));
     assert(get_n_moves(r) == 7);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -245,7 +245,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0"));
+    replayer r(replay(pgn_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 8);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -263,7 +263,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(replay("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0"));
+    replayer r(replay(pgn_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 8);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -282,7 +282,7 @@ void test_replayer()
   {
     // Fools's mate
     // 1. f3 e6 2. g4 Qh4#
-    replayer r(replay("1. f3 e6 2. g4 Qh4#"));
+    replayer r(replay(pgn_string("1. f3 e6 2. g4 Qh4#")));
     assert(get_n_moves(r) == 4);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -298,7 +298,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 c5 Nf3
-    replayer r(replay("1. e4 c5 2. Nf3"));
+    replayer r(replay(pgn_string("1. e4 c5 2. Nf3")));
     assert(get_n_moves(r) == 3);
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};

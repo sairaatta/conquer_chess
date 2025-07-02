@@ -11,7 +11,7 @@
 class replayer
 {
 public:
-  explicit replayer(const replay& r = replay(""));
+  explicit replayer(const replay& r = replay());
 
   /// Do a move or do nothing
   void do_move(
