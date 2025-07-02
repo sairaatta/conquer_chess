@@ -787,6 +787,42 @@ std::vector<piece_action_type> get_piece_actions(
 
 }
 
+std::vector<square> get_possible_moves(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+)
+{
+  const auto maybe_selected_square{c.get_selected_square(player_side)};
+  if (!maybe_selected_square.has_value()) return {};
+  const square selected_square{maybe_selected_square.value()};
+  assert(is_piece_at(g, selected_square));
+  const auto& focal_piece{get_piece_at(g, selected_square)};
+  return get_possible_moves(g.get_pieces(), focal_piece);
+}
+
+std::vector<piece> get_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const chess_color player_color
+)
+{
+  return get_selected_pieces(g, c, get_player_side(player_color));
+}
+
+std::vector<piece> get_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+)
+{
+  const auto maybe_selected_square{c.get_selected_square(player_side)};
+  if (!maybe_selected_square.has_value()) return {};
+  const square selected_square{maybe_selected_square.value()};
+  if (!is_piece_at(g, selected_square)) return {};
+  return { get_piece_at(g, selected_square) };
+}
+
 
 const std::optional<square>& game_controller::get_selected_square(const side s) const noexcept
 {
@@ -911,6 +947,23 @@ bool has_mouse_controller(const game_controller& c)
   ;
 }
 
+bool has_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const chess_color player_color
+)
+{
+  return !get_selected_pieces(g, c, player_color).empty();
+}
+
+bool has_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+)
+{
+  return !get_selected_pieces(g, c, player_side).empty();
+}
 
 bool is_cursor_on_selected_piece(
   const game& g,

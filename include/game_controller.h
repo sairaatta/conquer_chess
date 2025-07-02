@@ -297,20 +297,17 @@ bool has_mouse_controller(const game_controller& c);
 /// @param g a game
 /// @param player the color of the player, which is white for player 1
 /// @see use 'get_selected_pieces' to get all the selected pieces
-bool has_selected_pieces(const game& g, const game_controller& c, const chess_color player);
-
-/// See if there is at least 1 piece selected
 bool has_selected_pieces(
   const game& g,
   const game_controller& c,
-  const side player_side
+  const chess_color player_color
 );
 
 /// See if there is at least 1 piece selected
 bool has_selected_pieces(
   const game& g,
   const game_controller& c,
-  const chess_color player_color
+  const side player_side
 );
 
 bool is_cursor_on_selected_piece(
