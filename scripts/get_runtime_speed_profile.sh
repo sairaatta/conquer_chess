@@ -27,12 +27,14 @@ fi
 
 cd build/Desktop-Release
 
+echo "Starting the program. Close the program when done."
 # Run the program, do not use the '--profile' flag
 ./conquer_chess
 
-#  Produce the gprof log
+echo "Writing the gprof log to 'gprof.log'."
 gprof conquer_chess > gprof.log
 
-# Read the 100 top lines
-head gprof.log -n 100
+echo "Read the 20 top lines of 'gprof.log'" 
+head gprof.log -n 20
 
+echo "Speed profile is in 'gprof.log' (as shown above)"
