@@ -976,15 +976,6 @@ void set_cursor_pos(
   c.set_cursor_pos(pos, player_side);
 }
 
-void set_cursor_pos(
-  game_controller& c,
-  const square& s,
-  const side player_side
-) noexcept
-{
-  set_cursor_pos(c, to_coordinat(s), player_side);
-}
-
 void game_controller::set_cursor_pos(
   const game_coordinate& pos,
   const side player_side) noexcept

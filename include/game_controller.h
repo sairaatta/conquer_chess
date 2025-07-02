@@ -309,13 +309,6 @@ void set_cursor_pos(
   const side player_side
 ) noexcept;
 
-/// Set the cursor's position to the target square
-void set_cursor_pos(
-  game_controller& c,
-  const square& s,
-  const side player_side
-) noexcept;
-
 /// Test this class and its free functions
 void test_game_controller();
 
