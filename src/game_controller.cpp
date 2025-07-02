@@ -1566,7 +1566,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions[2] == piece_action_type::promote_to_bishop);
     assert(actions[3] == piece_action_type::promote_to_knight);
   }
-  // Promote to queen, from black pawn at h1
+  // Promote to queen, from black pawn at h1, using keyboard
   {
     game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
     game_controller c{create_game_controller_with_two_keyboards()};
@@ -1583,7 +1583,24 @@ void test_game_controller() //!OCLINT tests may be many
     c.apply_user_inputs_to_game(g);
     assert(get_piece_at(g, square("h1")).get_type() == piece_type::queen);
   }
-  // Promote to rook, from black pawn at h1
+  // Promote to queen, from black pawn at h1, using mouse
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_keyboard_mouse()};
+    do_select(g, c, "h1", side::rhs);
+    move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
+    const auto actions{get_piece_actions(g, c, side::rhs)};
+    assert(actions.size() == 4);
+    assert(actions[0] == piece_action_type::promote_to_queen);
+    assert(actions[1] == piece_action_type::promote_to_rook);
+    assert(actions[2] == piece_action_type::promote_to_bishop);
+    assert(actions[3] == piece_action_type::promote_to_knight);
+    c.add_user_input(create_press_lmb_action(side::rhs));
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::pawn);
+    c.apply_user_inputs_to_game(g);
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::queen);
+  }
+  // Promote to rook, from black pawn at h1, using keyboard
   {
     game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
     game_controller c{create_game_controller_with_two_keyboards()};
@@ -1596,6 +1613,23 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions[2] == piece_action_type::promote_to_bishop);
     assert(actions[3] == piece_action_type::promote_to_knight);
     c.add_user_input(create_press_action_2(side::rhs));
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::pawn);
+    c.apply_user_inputs_to_game(g);
+    assert(get_piece_at(g, square("h1")).get_type() == piece_type::rook);
+  }
+  // Promote to rook, from black pawn at h1, using mouse
+  {
+    game g{create_game_with_starting_position(starting_position_type::pawns_at_promotion)};
+    game_controller c{create_game_controller_with_two_keyboards()};
+    do_select(g, c, "h1", side::rhs);
+    move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
+    const auto actions{get_piece_actions(g, c, side::rhs)};
+    assert(actions.size() == 4);
+    assert(actions[0] == piece_action_type::promote_to_queen);
+    assert(actions[1] == piece_action_type::promote_to_rook);
+    assert(actions[2] == piece_action_type::promote_to_bishop);
+    assert(actions[3] == piece_action_type::promote_to_knight);
+    c.add_user_input(create_press_rmb_action(side::rhs));
     assert(get_piece_at(g, square("h1")).get_type() == piece_type::pawn);
     c.apply_user_inputs_to_game(g);
     assert(get_piece_at(g, square("h1")).get_type() == piece_type::rook);
