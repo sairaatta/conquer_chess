@@ -84,13 +84,9 @@
 void test()
 {
 #ifndef NDEBUG
-  test_pgn_move_string();
-
   test_about();
   test_about_view_layout();
   test_action_history();
-  test_game_statistics_output_file();
-  test_game_statistics_in_time();
   test_action_number();
   test_board_layout();
   test_board_to_text_options();
@@ -102,18 +98,20 @@ void test()
   test_controls_view_item();
   test_controls_view_layout();
   test_delta_t();
+  test_fen_string();
   test_fps_clock();
   test_game();
   test_game_controller();
   test_game_coordinate();
   test_game_info_layout();
-  test_game_statistic_type();
   test_game_options();
-  test_game_statistics_view_layout();
   test_game_rect();
-  test_fen_string();
   test_game_speed();
+  test_game_statistic_type();
   test_game_statistics();
+  test_game_statistics_in_time();
+  test_game_statistics_output_file();
+  test_game_statistics_view_layout();
   test_game_view_layout();
   test_helper();
   test_id();

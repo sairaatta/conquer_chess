@@ -65,10 +65,16 @@ void test_pgn_game_string()
   // split_pgn_str
   {
     assert(split_pgn_str(pgn_game_string("1. e4")).size() == 1);
-  }
-  // split_pgn_str
-  {
     assert(split_pgn_str(pgn_game_string("1. e4 e5")).size() == 2);
+  }
+  // operator==
+  {
+    const auto a{get_scholars_mate_as_pgn_str()};
+    const auto b{get_scholars_mate_as_pgn_str()};
+    const auto c{get_replay_1_as_pgn_str()};
+    assert(a == b);
+    assert(!(a == c));
+
   }
   #endif
 }

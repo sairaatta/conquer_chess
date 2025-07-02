@@ -78,6 +78,19 @@ void test_pgn_move_string()
     assert(get_piece_type(pgn_move_string("e4")).value() == piece_type::pawn);
     assert(get_piece_type(pgn_move_string("e3")).value() == piece_type::pawn);
   }
+  //get_square
+  {
+    assert(get_square(pgn_move_string("Nc3")).value() == square("c3"));
+    assert(get_square(pgn_move_string("e4")).value() == square("e4"));
+    assert(!get_square(pgn_move_string("1-0")).has_value());
+  }
+  // get_to
+  {
+    assert(get_to(pgn_move_string("Bxh6")).value() == square("h6"));
+    assert(get_to(pgn_move_string("gxh6")).value() == square("h6"));
+    assert(get_to(pgn_move_string("Qe8#")).value() == square("e8"));
+    assert(!get_to(pgn_move_string("1-0")).has_value());
+  }
   // operator==
   {
     const std::string s{"e4"};

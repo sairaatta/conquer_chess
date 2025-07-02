@@ -80,7 +80,7 @@ void played_game_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
-  m_game = play_random_game(100);
+  m_game = play_random_game(10);
 }
 
 void played_game_view::stop_impl()

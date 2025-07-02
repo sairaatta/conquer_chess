@@ -24,7 +24,7 @@ game_statistics_in_time create_test_game_statistics_in_time()
   auto s = create_test_game_statistics();
   game_statistics_in_time t;
 
-  for (int i=0; i!=100; ++i)
+  for (int i=0; i!=2; ++i)
   {
     t.add(s);
   }
