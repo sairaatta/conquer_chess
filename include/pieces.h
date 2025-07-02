@@ -87,6 +87,7 @@ int count_piece_actions(
   const chess_color player
 );
 
+/*
 /// Count the number of selected units for both players
 int count_selected_units(
   const std::vector<piece>& pieces
@@ -97,6 +98,7 @@ int count_selected_units(
   const std::vector<piece>& pieces,
   const chess_color player
 );
+*/
 
 
 std::vector<piece> create_pieces_from_fen_string(const fen_string& s);
@@ -205,6 +207,7 @@ std::vector<square> get_possible_rook_moves(
   const piece& focal_piece
 );
 
+/*
 /// Get all the selected pieces
 /// @param player the color of the player, which is white for player 1
 /// @see use 'has_selected_piece' to see if there is at least 1 piece selected
@@ -212,6 +215,7 @@ std::vector<piece> get_selected_pieces(
   const std::vector<piece>& pieces,
   const chess_color player
 );
+*/
 
 /// Get all the pieces in the starting position
 std::vector<piece> get_standard_starting_pieces(
@@ -470,10 +474,12 @@ std::string to_fen_str(
 /// Returns one string with newlines
 std::string to_pgn(const std::vector<piece>& pieces);
 
+/*
 /// Unselect all pieces of a certain color
 void unselect_all_pieces(
   std::vector<piece>& pieces,
   const chess_color color
 );
+*/
 
 #endif // PIECES_H

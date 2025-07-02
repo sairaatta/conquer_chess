@@ -757,34 +757,7 @@ void test_game_functions()
     }
     use_default_lobby_options();
   }
-  // get_possible_moves
-  {
-    // No moves when nothing selected
-    {
-      const game g{create_game_with_standard_starting_position()};
-      assert(get_possible_moves(g, side::lhs).empty());
-      assert(get_possible_moves(g, side::rhs).empty());
-    }
-    // Knight at b1 has four moves when selected (two regular, and two moves beyond)
-    {
-      game g{create_game_with_standard_starting_position()};
-      const std::vector<square> moves{get_possible_moves(g, side::lhs)};
-      assert(moves.empty());
-      auto& piece{get_piece_at(g, square("b1"))};
-      assert(piece.get_type() == piece_type::knight);
-      piece.set_selected(true);
-      assert(get_possible_moves(g, side::lhs).size() == 4);
-    }
-    // Pawn at e2 has four moves when selected
-    {
-      game g{create_game_with_standard_starting_position()};
-      const std::vector<square> moves{get_possible_moves(g, side::lhs)};
-      assert(moves.empty());
-      auto& piece{get_piece_at(g, square("e2"))};
-      piece.set_selected(true);
-      assert(get_possible_moves(g, side::lhs).size() == 4);
-    }
-  }
+
   // is_empty
   {
     const game g{create_game_with_standard_starting_position()};

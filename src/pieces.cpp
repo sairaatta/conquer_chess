@@ -184,6 +184,7 @@ int count_piece_actions(
   );
 }
 
+/*
 int count_selected_units(
   const std::vector<piece>& pieces
 )
@@ -213,6 +214,7 @@ int count_selected_units(
     }
   );
 }
+*/
 
 std::vector<piece> create_pieces_from_fen_string(const fen_string& fen_str)
 {
@@ -645,6 +647,7 @@ std::vector<square> get_possible_rook_moves(
 }
 
 
+/*
 std::vector<piece> get_selected_pieces(
   const std::vector<piece>& all_pieces,
   const chess_color player
@@ -664,6 +667,7 @@ std::vector<piece> get_selected_pieces(
   assert(pieces.size() < 2);
   return pieces;
 }
+*/
 
 std::vector<piece> get_pieces_before_en_passant(
   const race white_race,
@@ -1275,14 +1279,6 @@ void test_pieces()
       assert(count_dead_pieces(pieces) == 1);
     }
   }
-  // count_selected_units
-  {
-    const auto pieces{get_standard_starting_pieces()};
-    const auto n_total{count_selected_units(pieces)};
-    const auto n_black{count_selected_units(pieces, chess_color::black)};
-    const auto n_white{count_selected_units(pieces, chess_color::white)};
-    assert(n_total == n_black + n_white);
-  }
   // create_pieces_from_fen_string
   {
     const auto pieces{create_pieces_from_fen_string(get_fen_string_wikipedia_0())};
@@ -1825,6 +1821,7 @@ std::string to_pgn(const std::vector<piece>& pieces)
   return s.str();
 }
 
+/*
 void unselect_all_pieces(
   std::vector<piece>& pieces,
   const chess_color color
@@ -1835,3 +1832,4 @@ void unselect_all_pieces(
     if (piece.get_color() == color) unselect(piece);
   }
 }
+*/

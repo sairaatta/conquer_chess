@@ -638,11 +638,12 @@ void draw_pieces(game_view& view)
 void draw_possible_moves(game_view& view)
 {
   const auto& g{view.get_game()};
+  const auto& c{view.get_game_controller()};
   const auto& layout{view.get_layout()};
   const auto actions{collect_all_piece_actions(g)};
   for (const auto& action: actions)
   {
-    if (!get_piece_at(g, action.get_from()).is_selected()) continue;
+    if (!is_selected(get_piece_at(g, action.get_from()), c)) continue;
     sf::RectangleShape rectangle;
     set_rect(
       rectangle,
@@ -916,9 +917,10 @@ void draw_unit_info(game_view& view, const side player_side)
 {
   const auto& layout{view.get_layout()};
   const auto& r{layout.get_unit_info(player_side)};
+  const auto& c{view.get_game_controller()};
   const auto player_color{get_player_color(player_side)};
 
-  const auto selected_pieces{get_selected_pieces(view.get_game(), player_color)};
+  const auto selected_pieces{get_selected_pieces(view.get_game(), c, player_color)};
   if (selected_pieces.empty()) return;
   assert(selected_pieces.size() == 1);
   const auto& piece{selected_pieces[0]};

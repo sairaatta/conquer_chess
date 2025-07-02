@@ -16,6 +16,8 @@ game_controller::game_controller()
 {
   m_cursor_pos[side::lhs] = game_coordinate(0.5, 4.5);
   m_cursor_pos[side::rhs] = game_coordinate(7.5, 4.5);
+  m_selected_square[side::lhs] = {};
+  m_selected_square[side::rhs] = {};
 }
 
 void game_controller::add_user_input(const user_input& a)
@@ -149,7 +151,7 @@ void game_controller::apply_action_type_to_game(game& g, const piece_action_type
     case piece_action_type::castle_kingside: apply_action_type_castle_kingside_to_game(g, s); break;
     case piece_action_type::castle_queenside: apply_action_type_castle_queenside_to_game(g, s); break;
     case piece_action_type::move:
-      assert(has_selected_pieces(g, s)); // ???
+      assert(has_selected_pieces(g, *this, s));
       apply_action_type_move_to_game(g, s);
       break;
     case piece_action_type::promote_to_bishop: apply_action_type_promote_to_game(g, piece_type::bishop, s); break;
@@ -175,11 +177,12 @@ void game_controller::apply_action_type_attack_to_game(game& g, const side s)
 
   assert(is_cursor_on_enemy_piece);
 
-  assert(has_selected_pieces(g, s));
-  assert(has_selected_pieces(g, player_color));
-  assert(!get_selected_pieces(g, s).empty());
-  assert(get_selected_pieces(g, s).size() == 1);
-  const auto selected_piece{get_selected_pieces(g, s)[0]};
+  assert(m_selected_square.at(s).has_value());
+  //assert(has_selected_pieces(g, s));
+  //assert(has_selected_pieces(g, player_color));
+  assert(!get_selected_pieces(g, *this, s).empty());
+  assert(get_selected_pieces(g, *this, s).size() == 1);
+  const auto selected_piece{get_selected_pieces(g, *this, s)[0]};
   const auto selected_piece_type{selected_piece.get_type()};
   const auto selected_piece_square{selected_piece.get_current_square()};
 
@@ -214,11 +217,11 @@ void game_controller::apply_action_type_attack_en_passant_to_game(game& g, const
   assert(!is_cursor_on_piece);
 
 
-  assert(has_selected_pieces(g, s));
-  assert(has_selected_pieces(g, player_color));
-  assert(!get_selected_pieces(g, s).empty());
-  assert(get_selected_pieces(g, s).size() == 1);
-  const auto selected_piece{get_selected_pieces(g, s)[0]};
+  assert(has_selected_pieces(g, *this, s));
+  assert(has_selected_pieces(g, *this, player_color));
+  assert(!get_selected_pieces(g, *this, s).empty());
+  assert(get_selected_pieces(g, *this, s).size() == 1);
+  const auto selected_piece{get_selected_pieces(g, *this, s)[0]};
   const auto selected_piece_type{selected_piece.get_type()};
   assert(selected_piece_type == piece_type::pawn);
 
@@ -244,13 +247,13 @@ void game_controller::apply_action_type_castle_kingside_to_game(game& g, const s
   const bool is_castle_kingside{
        is_piece_at(g, king_square)
     && get_piece_at(g, king_square).get_color() == player_color
-    && get_piece_at(g, king_square).is_selected()
+    // && get_piece_at(g, king_square).is_selected()
     && can_castle_kingside(get_piece_at(g, king_square), g)
   };
   assert(is_castle_kingside);
 
   // Unselect all pieces
-  unselect_all_pieces(g, player_color);
+  //unselect_all_pieces(g, player_color);
 
   // King starts promoting
 
@@ -290,13 +293,13 @@ void game_controller::apply_action_type_castle_queenside_to_game(game& g, const 
   const bool is_castle_queenside{
        is_piece_at(g, king_square)
     && get_piece_at(g, king_square).get_color() == player_color
-    && get_piece_at(g, king_square).is_selected()
+    // && get_piece_at(g, king_square).is_selected()
     && can_castle_queenside(get_piece_at(g, king_square), g)
   };
   assert(is_castle_queenside);
 
   // Unselect all pieces
-  unselect_all_pieces(g, player_color);
+  //unselect_all_pieces(g, player_color);
 
   // King start castling
   const square king_target_square{get_king_target_square(player_color, piece_action_type::castle_queenside)};
@@ -325,7 +328,7 @@ void game_controller::apply_action_type_castle_queenside_to_game(game& g, const 
 
 void game_controller::apply_action_type_move_to_game(game& g, const side player_side)
 {
-  assert(has_selected_pieces(g, player_side)); // ???
+  assert(has_selected_pieces(g, *this, player_side)); // ???
 
   const chess_color player_color{get_player_color(player_side)};
   const game_coordinate cursor_pos{get_cursor_pos(player_side)};
@@ -337,11 +340,11 @@ void game_controller::apply_action_type_move_to_game(game& g, const side player_
   };
 
   assert(!is_cursor_on_friendly_piece);
-  assert(has_selected_pieces(g, player_side));
-  assert(has_selected_pieces(g, player_color));
-  assert(!get_selected_pieces(g, player_side).empty());
-  assert(get_selected_pieces(g, player_side).size() == 1);
-  const auto selected_piece{get_selected_pieces(g, player_side)[0]};
+  assert(has_selected_pieces(g, *this, player_side));
+  assert(has_selected_pieces(g, *this, player_color));
+  assert(!get_selected_pieces(g, *this, player_side).empty());
+  assert(get_selected_pieces(g, *this, player_side).size() == 1);
+  const auto selected_piece{get_selected_pieces(g, *this, player_side)[0]};
   const auto selected_piece_type{selected_piece.get_type()};
   const auto selected_piece_square{selected_piece.get_current_square()};
 
@@ -364,18 +367,22 @@ void game_controller::apply_action_type_move_to_game(game& g, const side player_
 }
 
 
-void game_controller::apply_action_type_promote_to_game(game& g, const piece_type promote_to_type, const side player_side)
+void game_controller::apply_action_type_promote_to_game(
+  game& g,
+  const piece_type promote_to_type,
+  const side player_side
+)
 {
   const chess_color player_color{get_player_color(player_side)};
 
-  assert(has_selected_pieces(g, player_side));
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  assert(has_selected_pieces(g, *this, player_side));
+  const auto selected_pieces{get_selected_pieces(g, *this, player_side)};
   assert(selected_pieces.size() == 1);
   const auto selected_square{selected_pieces[0].get_current_square()};
   assert(can_promote(get_piece_at(g, selected_square)));
 
   auto& p{get_piece_at(g, selected_square)};
-  assert(p.is_selected());
+  //assert(p.is_selected());
   assert(can_promote(p));
 
   piece_action_type pat{piece_action_type::attack_en_passant};
@@ -417,9 +424,9 @@ void game_controller::apply_action_type_select_to_game(game& g, const side playe
 
   assert(is_cursor_on_friendly_piece);
   const auto& p{get_piece_at(g, cursor)};
-  assert(!p.is_selected());
+  //assert(!p.is_selected());
 
-  unselect_all_pieces(g, player_color);
+  //unselect_all_pieces(g, player_color);
   get_piece_at(g, cursor).add_action(
     piece_action(
       player_color,
@@ -446,7 +453,7 @@ void game_controller::apply_action_type_unselect_to_game(game& g, const side pla
 
   assert(is_cursor_on_friendly_piece);
   const auto& p{get_piece_at(g, cursor)};
-  assert(p.is_selected());
+  //assert(p.is_selected());
   assert(!can_promote(p));
 
   get_piece_at(g, cursor).add_action(
@@ -470,7 +477,7 @@ bool can_attack(
   const side player_side
 ) noexcept
 {
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  const auto selected_pieces{get_selected_pieces(g, c, player_side)};
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
@@ -484,7 +491,7 @@ bool can_attack_en_passant(
   const side player_side
 ) noexcept
 {
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  const auto selected_pieces{get_selected_pieces(g, c, player_side)};
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
@@ -494,11 +501,11 @@ bool can_attack_en_passant(
 
 bool can_castle_kingside(
   const game& g,
-  const game_controller& /* c */,
+  const game_controller& c,
   const side player_side
 ) noexcept
 {
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  const auto selected_pieces{get_selected_pieces(g, c, player_side)};
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
@@ -510,11 +517,11 @@ bool can_castle_kingside(
 
 bool can_castle_queenside(
   const game& g,
-  const game_controller& /* c */,
+  const game_controller& c,
   const side player_side
 ) noexcept
 {
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  const auto selected_pieces{get_selected_pieces(g, c, player_side)};
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
@@ -529,7 +536,7 @@ bool can_move(
   const side player_side
 ) noexcept
 {
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  const auto selected_pieces{get_selected_pieces(g, c, player_side)};
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
@@ -551,10 +558,16 @@ bool can_player_select_piece_at_cursor_pos(
     return false;
   }
   const auto& piece{get_closest_piece_to(g, cursor_pos)};
-  const bool is_piece_already_selected{piece.is_selected()};
-  const bool does_player_own_that_piece{piece.get_color() == cursor_color};
+  //const bool is_piece_already_selected{piece.is_selected()};
+  const bool is_piece_already_selected{
+    c.get_selected_square(get_player_side(cursor_color)) == piece.get_current_square()
+  };
 
-  return !is_piece_already_selected && does_player_own_that_piece;
+  // Cannot select a selected piece
+  if (is_piece_already_selected) return false;
+
+  const bool does_player_own_that_piece{piece.get_color() == cursor_color};
+  return does_player_own_that_piece;
 }
 
 bool can_player_select_piece_at_cursor_pos(
@@ -570,11 +583,11 @@ bool can_player_select_piece_at_cursor_pos(
 
 bool can_promote(
   const game& g,
-  const game_controller& /* c */,
+  const game_controller& c,
   const side player_side
 ) noexcept
 {
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  const auto selected_pieces{get_selected_pieces(g, c, player_side)};
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
@@ -645,6 +658,11 @@ user_inputs convert_move_to_user_inputs(
     inputs.add(i);
   }
   return inputs;
+}
+
+int count_selected_units(const game_controller& c, const chess_color player_color)
+{
+  return c.get_selected_square(get_player_side(player_color)).has_value();
 }
 
 int count_user_inputs(const game_controller& c) noexcept
@@ -769,6 +787,11 @@ std::vector<piece_action_type> get_piece_actions(
 
 }
 
+
+const std::optional<square>& game_controller::get_selected_square(const side s) const noexcept
+{
+  return m_selected_square.at(s);
+}
 
 user_input get_user_input_to_do_action_1(
   const game_controller& c,
@@ -895,13 +918,23 @@ bool is_cursor_on_selected_piece(
   const side player_side
 ) noexcept
 {
-  if (!has_selected_pieces(g, player_side)) return false;
+  if (!has_selected_pieces(g, c, player_side)) return false;
   const auto& cursor_coordinate{c.get_cursor_pos(player_side)};
   const square cursor_square(cursor_coordinate);
-  const auto selected_pieces{get_selected_pieces(g, player_side)};
+  const auto selected_pieces{get_selected_pieces(g, c, player_side)};
   assert(selected_pieces.size() == 1);
   const auto piece_square{selected_pieces[0].get_current_square()};
   return cursor_square == piece_square;
+}
+
+bool is_selected(const piece& p, const game_controller& c)
+{
+  const chess_color player_color{p.get_color()};
+  const auto player_side{get_player_side(player_color)};
+  const auto maybe_selected_square{c.get_selected_square(player_side)};
+  if (!maybe_selected_square.has_value()) return false;
+  const square piece_square{p.get_current_square()};
+  return maybe_selected_square.value() == piece_square;
 }
 
 bool is_mouse_user(const game_controller& c, const side player_side) noexcept
@@ -980,6 +1013,14 @@ void game_controller::set_cursor_pos(
   const side player_side) noexcept
 {
   m_cursor_pos[player_side] = pos;
+}
+
+void game_controller::set_selected_square(
+  const side s,
+  const std::optional<square>& selected_square
+) noexcept
+{
+  m_selected_square[s] = selected_square;
 }
 
 void test_game_controller() //!OCLINT tests may be many
@@ -1076,11 +1117,11 @@ void test_game_controller() //!OCLINT tests may be many
     };
     const auto white_king{find_pieces(g, piece_type::king, chess_color::white).at(0)};
     set_cursor_pos(c, to_coordinat(white_king.get_current_square()), side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
   }
   // 60: selectedness is transferred, for white
   {
@@ -1089,17 +1130,17 @@ void test_game_controller() //!OCLINT tests may be many
       create_game_controller_with_keyboard_mouse()
     };
     move_cursor_to(c, "e1", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.01));
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     move_cursor_to(c, "d1", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
     g.tick(delta_t(0.01));
-    assert(count_selected_units(g, chess_color::white) != 2);
-    assert(count_selected_units(g, chess_color::white) != 0);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) != 2);
+    assert(count_selected_units(c, chess_color::white) != 0);
+    assert(count_selected_units(c, chess_color::white) == 1);
   }
   // 60: selectedness is transferred, for black
   {
@@ -1109,19 +1150,19 @@ void test_game_controller() //!OCLINT tests may be many
     };
     move_cursor_to(c, "e8", side::rhs);
     assert(get_cursor_square(c, side::rhs) == square("e8"));
-    assert(count_selected_units(g, chess_color::black) == 0);
+    assert(count_selected_units(c, chess_color::black) == 0);
     add_user_input(c, create_press_action_1(side::rhs));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.01));
-    assert(count_selected_units(g, chess_color::black) == 1);
+    assert(count_selected_units(c, chess_color::black) == 1);
     assert(get_physical_controller_type(c, side::rhs) == physical_controller_type::keyboard);
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_action_1(side::rhs));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.01));
-    assert(count_selected_units(g, chess_color::black) != 2);
-    assert(count_selected_units(g, chess_color::black) != 0);
-    assert(count_selected_units(g, chess_color::black) == 1);
+    assert(count_selected_units(c, chess_color::black) != 2);
+    assert(count_selected_units(c, chess_color::black) != 0);
+    assert(count_selected_units(c, chess_color::black) == 1);
   }
   // Selecting a unit twice with action 1 selects and unselects it
   {
@@ -1129,27 +1170,27 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{
       create_game_controller_with_keyboard_mouse()
     };
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
     move_cursor_to(c, "e1", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::white) != 2);
-    assert(count_selected_units(g, chess_color::white) != 0);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) != 2);
+    assert(count_selected_units(c, chess_color::white) != 0);
+    assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
   }
   // Cannot select two units
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_two_keyboards()};
     do_select(g, c, "d2", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     do_select(g, c, "e2", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
   }
   // Keyboard: can move pawn forward
   {
@@ -1158,22 +1199,22 @@ void test_game_controller() //!OCLINT tests may be many
       create_game_controller_with_keyboard_mouse()
     };
     move_cursor_to(c, "e2", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     assert(collect_messages(g).at(0).get_message_type() == message_type::select);
     move_cursor_to(c, "e4", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
 
-    assert(has_selected_pieces(g, side::lhs));
+    assert(has_selected_pieces(g, c, side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.25)); // Moves it to e3, unselects piece
     g.tick(delta_t(0.25)); // Moves it to e3, unselects piece
     g.tick(delta_t(0.25)); // Moves it to e3, unselects piece
     g.tick(delta_t(0.25)); // Moves it to e3, unselects piece
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
     assert(get_closest_piece_to(g, to_coordinat("e3")).get_type() == piece_type::pawn);
     const auto messages{collect_messages(g)};
     const auto message{messages.at(1)};
@@ -1184,11 +1225,11 @@ void test_game_controller() //!OCLINT tests may be many
     game g = create_game_with_starting_position(starting_position_type::pawn_all_out_assault);
     game_controller c{create_game_controller_with_keyboard_mouse()};
     move_cursor_to(c, "e4", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.01));
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     assert(collect_messages(g).at(0).get_message_type() == message_type::select);
     move_cursor_to(c, "e3", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -1196,7 +1237,7 @@ void test_game_controller() //!OCLINT tests may be many
     g.tick(delta_t(0.01)); // Ignores invalid action, adds sound effect
 
     // No effect, so unit stays selected
-    //assert(count_selected_units(g, chess_color::white) == 0);
+    //assert(count_selected_units(c, chess_color::white) == 0);
 
     assert(get_closest_piece_to(g, to_coordinat("e4")).get_type() == piece_type::pawn);
 
@@ -1209,13 +1250,13 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_keyboard_mouse()};
     do_select(g, c, "e1", side::lhs);
     g.tick(delta_t(0.0));
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     assert(collect_messages(g).at(0).get_message_type() == message_type::select);
     move_cursor_to(c, "g1", side::lhs); // Cursor must not be on king
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.0));
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
 
     const auto msg{collect_messages(g)};
     assert(msg.at(1).get_message_type() == message_type::start_castling_kingside);
@@ -1229,7 +1270,7 @@ void test_game_controller() //!OCLINT tests may be many
     do_select(g, c, "e1", side::lhs);
 
     g.tick(delta_t(0.0));
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     assert(collect_messages(g).at(0).get_message_type() == message_type::select);
     move_cursor_to(c, "g1", side::lhs); // Cursor must not be on king
 
@@ -1237,7 +1278,7 @@ void test_game_controller() //!OCLINT tests may be many
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.0));
 
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
 
     const auto msg{collect_messages(g)};
     assert(msg.at(0).get_message_type() == message_type::start_castling_queenside);
@@ -1254,27 +1295,27 @@ void test_game_controller() //!OCLINT tests may be many
   {
     game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(count_selected_units(g, chess_color::black) == 0);
+    assert(count_selected_units(c, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::black) == 1);
+    assert(count_selected_units(c, chess_color::black) == 1);
   }
   // Clicking a unit twice with LMB selects and unselects it
   {
     game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(count_selected_units(g, chess_color::black) == 0);
+    assert(count_selected_units(c, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::black) == 1);
+    assert(count_selected_units(c, chess_color::black) == 1);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::black) == 0);
+    assert(count_selected_units(c, chess_color::black) == 0);
   }
   // 60: selectedness is transferred
   // Clicking a unit with LMB,
@@ -1282,18 +1323,18 @@ void test_game_controller() //!OCLINT tests may be many
   {
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(count_selected_units(g, chess_color::black) == 0);
+    assert(count_selected_units(c, chess_color::black) == 0);
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
     g.tick();
-    assert(count_selected_units(g, chess_color::black) == 1);
+    assert(count_selected_units(c, chess_color::black) == 1);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     g.tick();
-    assert(count_selected_units(g, chess_color::black) != 2);
-    assert(count_selected_units(g, chess_color::black) != 0);
-    assert(count_selected_units(g, chess_color::black) == 1);
+    assert(count_selected_units(c, chess_color::black) != 2);
+    assert(count_selected_units(c, chess_color::black) != 0);
+    assert(count_selected_units(c, chess_color::black) == 1);
   }
   // Ke8e7 works by LMB, LMB
   {
@@ -1679,11 +1720,11 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, square("a2")));
     assert(!is_piece_at(g, square("a3")));
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
 
     do_select(g, c, "a2", side::lhs);
     move_cursor_to(c, "a3", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
 
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -1708,7 +1749,7 @@ void test_game_controller() //!OCLINT tests may be many
 
     do_select(g, c, "a2", side::lhs);
     move_cursor_to(c, "a4", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
@@ -1747,11 +1788,11 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(g, square("a2")));
     assert(!is_piece_at(g, square("a5")));
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
 
     do_select(g, c, "a2", side::lhs);
     move_cursor_to(c, "a5", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
 
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
@@ -1774,12 +1815,12 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(g, square("h4"))); // Black pawn to capture
     assert(!is_piece_at(g, square("g3"))); // White pawn can move forward
     assert(!is_piece_at(g, square("g4"))); // White pawn can move forward
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
 
     // g2-g4
     do_select(g, c, "g2", side::lhs); // White pawn
     move_cursor_to(c, "g4", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
@@ -1821,7 +1862,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(white_rook.get_messages().size() == 0);
 
     do_select(g, c, "e1", side::lhs);
-    assert(white_king.is_selected());
+    //assert(white_king.is_selected());
 
     move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
 
@@ -1855,7 +1896,7 @@ void test_game_controller() //!OCLINT tests may be many
 
     do_select(g, c, "e1", side::lhs);
     move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
 
     add_user_input(c, create_press_action_2(side::lhs)); // Action 1 is a king-side castle
     c.apply_user_inputs_to_game(g);
@@ -1969,14 +2010,14 @@ void test_game_controller() //!OCLINT tests may be many
     game g{create_game_with_starting_position(starting_position_type::before_scholars_mate)};
     game_controller c{create_game_controller_with_two_keyboards()};
     assert(is_piece_at(g, square("h5"))); // White queen
-    assert(count_selected_units(g, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
     assert(!is_checkmate(g.get_pieces(), chess_color::white));
     assert(!is_checkmate(g.get_pieces(), chess_color::black));
 
     // h5xf7#
     do_select(g, c, "h5", side::lhs); // White queen
     move_cursor_to(c, "f7", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
@@ -1989,6 +2030,37 @@ void test_game_controller() //!OCLINT tests may be many
     assert(get_piece_at(g, square("f7")).get_type() == piece_type::queen);
     assert(is_checkmate(g.get_pieces(), chess_color::black));
     assert(!is_checkmate(g.get_pieces(), chess_color::white));
+  }
+  // get_possible_moves
+  {
+    // No moves when nothing selected
+    {
+      const game g{create_game_with_standard_starting_position()};
+      game_controller c{create_game_controller_with_two_keyboards()};
+      assert(get_possible_moves(g, c, side::lhs).empty());
+      assert(get_possible_moves(g, c, side::rhs).empty());
+    }
+    // Knight at b1 has four moves when selected (two regular, and two moves beyond)
+    {
+      game g{create_game_with_standard_starting_position()};
+      game_controller c{create_game_controller_with_two_keyboards()};
+      const std::vector<square> moves{get_possible_moves(g, c, side::lhs)};
+      assert(moves.empty());
+      auto& piece{get_piece_at(g, square("b1"))};
+      assert(piece.get_type() == piece_type::knight);
+      piece.set_selected(true);
+      assert(get_possible_moves(g, c, side::lhs).size() == 4);
+    }
+    // Pawn at e2 has four moves when selected
+    {
+      game g{create_game_with_standard_starting_position()};
+      game_controller c{create_game_controller_with_two_keyboards()};
+      const std::vector<square> moves{get_possible_moves(g, c, side::lhs)};
+      assert(moves.empty());
+      auto& piece{get_piece_at(g, square("e2"))};
+      piece.set_selected(true);
+      assert(get_possible_moves(g, c, side::lhs).size() == 4);
+    }
   }
   // operator<<
   {
@@ -2026,7 +2098,8 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_mouse_keyboard()};
     c.add_user_input(create_mouse_move_action(game_coordinate(4.5, 4.5), side::lhs));
     c.apply_user_inputs_to_game(g);
-    assert(count_selected_units(g) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::black) == 0);
   }
   // Moving a mouse cursor outside the board does no harm
   {
@@ -2034,7 +2107,8 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_mouse_keyboard()};
     c.add_user_input(create_mouse_move_action(game_coordinate(94.5, -54.5), side::lhs));
     c.apply_user_inputs_to_game(g);
-    assert(count_selected_units(g) == 0);
+    assert(count_selected_units(c, chess_color::white) == 0);
+    assert(count_selected_units(c, chess_color::black) == 0);
   }
   //----------------------------------------------------------------------------
   // Things that cannot be done during a move
@@ -2050,7 +2124,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(get_piece_at(g, square("d1")).is_selected());
 
     move_cursor_to(c, "d2", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
@@ -2091,7 +2165,7 @@ void test_game_controller() //!OCLINT tests may be many
     // Start c2-c3
     do_select(g, c, "c2", side::lhs);
     move_cursor_to(c, "c3", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 
@@ -2101,7 +2175,7 @@ void test_game_controller() //!OCLINT tests may be many
     // Start Nb1-c3
     do_select(g, c, "b1", side::lhs);
     move_cursor_to(c, "c3", side::lhs);
-    assert(count_selected_units(g, chess_color::white) == 1);
+    assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
 

@@ -106,8 +106,6 @@ public:
   /// Will fail if the piece is not a pawn
   bool is_enpassantable(const in_game_time& when) const;
 
-  /// Is the piece selected?
-  bool is_selected() const noexcept { return m_is_selected; }
 
   /// Receive damage
   /// @param damage a positive value
@@ -161,6 +159,8 @@ private:
   /// The in-game time (in chess moves)
   in_game_time m_in_game_time;
 
+  /// Is the piece selected?
+  bool is_selected() const noexcept { return m_is_selected; }
   /// Is this piece selected?
   bool m_is_selected;
 
@@ -282,7 +282,7 @@ bool is_on_starting_rank(const chess_color c, const square& q) noexcept;
 bool is_pawn(const piece& p) noexcept;
 
 /// Select the piece
-void select(piece& p) noexcept;
+//void select(piece& p) noexcept;
 
 /// Test this class and its free functions
 void test_piece();
@@ -334,10 +334,12 @@ void tick_move(
 char to_fen_char(const piece& p) noexcept;
 
 /// Select the piece
+/*
 void toggle_select(piece& p) noexcept;
 
 /// Unselect the piece
 void unselect(piece& p) noexcept;
+*/
 
 bool operator==(const piece& lhs, const piece& rhs) noexcept;
 bool operator!=(const piece& lhs, const piece& rhs) noexcept;

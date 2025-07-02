@@ -165,7 +165,7 @@ bool can_do_castle_kingside(
   const side player_side
 )
 {
-  if (!selected_piece.is_selected()) return false;
+  //if (!selected_piece.is_selected()) return false;
 
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
@@ -180,7 +180,7 @@ bool can_do_castle_queenside(
   const side player_side
 )
 {
-  if (!selected_piece.is_selected()) return false;
+  //if (!selected_piece.is_selected()) return false;
 
   const auto player_color{get_player_color(player_side)};
   assert(player_color == selected_piece.get_color());
@@ -981,6 +981,7 @@ int count_piece_actions(
   return count_piece_actions(g.get_pieces(), player);
 }
 
+/*
 int count_selected_units(
   const game& g
 )
@@ -1003,6 +1004,7 @@ int count_selected_units(
 {
   return count_selected_units(g, get_player_color(player_side));
 }
+*/
 
 std::vector<piece> find_pieces(
   const game& g,
@@ -1115,6 +1117,7 @@ side get_player_side(const chess_color& color) noexcept
   return side::rhs;
 }
 
+/*
 std::vector<square> get_possible_moves(
   const game& g,
   const side player
@@ -1129,7 +1132,8 @@ std::vector<square> get_possible_moves(
     selected_piece
   );
 }
-
+*/
+/*
 std::vector<piece> get_selected_pieces(
   const game& g,
   const chess_color player
@@ -1145,6 +1149,7 @@ std::vector<piece> get_selected_pieces(
 {
   return get_selected_pieces(g.get_pieces(), get_player_color(player));
 }
+*/
 
 std::vector<message> collect_messages(const game& g) noexcept
 {
@@ -1211,6 +1216,7 @@ const in_game_time& get_time(const game& g) noexcept
   return g.get_in_game_time();
 }
 
+/*
 bool has_selected_pieces(const game& g, const chess_color player)
 {
   return !get_selected_pieces(g, player).empty();
@@ -1220,6 +1226,7 @@ bool has_selected_pieces(const game& g, const side player)
 {
   return !get_selected_pieces(g, player).empty();
 }
+*/
 
 bool is_empty(const game& g, const square& s) noexcept
 {
@@ -1322,6 +1329,7 @@ void game::tick(const delta_t& dt)
   check_all_occupied_squares_are_unique();
 }
 
+/*
 void unselect_all_pieces(
   game& g,
   const chess_color color
@@ -1329,6 +1337,7 @@ void unselect_all_pieces(
 {
   return unselect_all_pieces(g.get_pieces(), color);
 }
+*/
 
 
 void tick_until_idle(game& g)

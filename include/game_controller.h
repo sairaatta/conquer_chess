@@ -37,6 +37,9 @@ public:
   /// Get the a player's cursor position
   const game_coordinate& get_cursor_pos(const side player_side) const noexcept;
 
+  /// Get the selected squares, if any
+  const std::optional<square>& get_selected_square(const side s) const noexcept;
+
   /// Get the game users' inputs
   const auto& get_user_inputs() const noexcept { return m_user_inputs; }
 
@@ -46,12 +49,18 @@ public:
   /// Set a player's cursor's position
   void set_cursor_pos(const game_coordinate& pos, const side player_side) noexcept;
 
+  /// Set the selected square, if any
+  void set_selected_square(const side s, const std::optional<square>& selected_square) noexcept;
+
 private:
   // Use a friend instead
   game_controller();
 
   /// The in-game coordinat of the LHS user's cursor
   std::map<side, game_coordinate> m_cursor_pos;
+
+  /// The selected squares, if any
+  std::map<side, std::optional<square>> m_selected_square;
 
   /// The user inputs that need to be processed
   user_inputs m_user_inputs;
@@ -158,6 +167,11 @@ user_inputs convert_move_to_user_inputs(
   const chess_move& move
 );
 
+/// Count the number of selected units.
+///
+/// As one can only select one unit, this is either zero or one.
+int count_selected_units(const game_controller& c, const chess_color player_color);
+
 /// Count the total number of \link{user_input}s
 /// to be done by the \link{game_controller}.
 int count_user_inputs(const game_controller& c) noexcept;
@@ -211,6 +225,34 @@ std::vector<piece_action_type> get_piece_actions(
   const side player_side
 ) noexcept;
 
+/// Get the possible moves for a player's selected pieces
+/// Will be empty if no pieces are selected
+std::vector<square> get_possible_moves(
+  const game& g,
+  const game_controller& c,
+  const side player
+);
+
+/// Get all the selected pieces
+/// @param g a game
+/// @param player the color of the player, which is white for player 1
+/// @see use 'has_selected_piece' to see if there is at least 1 piece selected
+std::vector<piece> get_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const chess_color player
+);
+
+/// Get all the selected pieces
+/// @param g a game
+/// @param side the side of the player, which is white for player 1
+/// @see use 'has_selected_piece' to see if there is at least 1 piece selected
+std::vector<piece> get_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const side player
+);
+
 /// Create the user inputs to do action_1 at the square at the cursor
 user_input get_user_input_to_do_action_1(
   const game_controller& c,
@@ -251,11 +293,34 @@ bool has_keyboard_controller(const game_controller& c);
 /// Is there a player that uses the mouse?
 bool has_mouse_controller(const game_controller& c);
 
+/// See if there is at least 1 piece selected
+/// @param g a game
+/// @param player the color of the player, which is white for player 1
+/// @see use 'get_selected_pieces' to get all the selected pieces
+bool has_selected_pieces(const game& g, const game_controller& c, const chess_color player);
+
+/// See if there is at least 1 piece selected
+bool has_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const side player_side
+);
+
+/// See if there is at least 1 piece selected
+bool has_selected_pieces(
+  const game& g,
+  const game_controller& c,
+  const chess_color player_color
+);
+
 bool is_cursor_on_selected_piece(
   const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
+
+/// Determine if the piece is selected
+bool is_selected(const piece& p, const game_controller& c);
 
 /// The the player at that side a mouse user?
 bool is_mouse_user(const game_controller& c, const side player_side) noexcept;

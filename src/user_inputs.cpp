@@ -40,23 +40,25 @@ int count_user_inputs(const user_inputs& a)
 
 void do_select(
   game& g,
-  game_controller& /* c */,
+  game_controller& c,
   const square& coordinat,
   const chess_color player_color
 )
 {
-  if (has_selected_pieces(g, player_color))
+  if (has_selected_pieces(g, c, player_color))
   {
     if (is_piece_at(g, coordinat)) {
 
       auto& piece{get_piece_at(g, coordinat)};
       if (piece.get_color() == player_color)
       {
-        assert(!piece.is_selected()); // Else this would be an unselect
+        assert(c.get_selected_square(get_player_side(player_color)) != piece.get_current_square()); // Else this would be an unselect
 
-        unselect_all_pieces(g, player_color);
-        select(piece); // 2
-        assert(get_selected_pieces(g, player_color).size() == 1);
+        //unselect_all_pieces(g, player_color);
+        c.set_selected_square(get_player_side(player_color), piece.get_current_square());
+        //select(piece); // 2
+        //assert(get_selected_pieces(g, player_color).size() == 1);
+
 
       }
     }
@@ -68,8 +70,9 @@ void do_select(
       auto& piece{get_piece_at(g, coordinat)};
       if (piece.get_color() == player_color)
       {
-        assert(!piece.is_selected()); // Else would be an unselect
-        select(piece); // 5
+        //assert(!piece.is_selected()); // Else would be an unselect
+        //select(piece); // 5
+        c.set_selected_square(get_player_side(player_color), piece.get_current_square());
       }
     }
   }
@@ -125,18 +128,18 @@ bool is_empty(const user_inputs& inputs) noexcept
 
 void start_en_passant_attack(
   game& g,
-  game_controller& /* c */,
+  game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 )
 {
   const auto actions{collect_all_piece_actions(g)};
 
-  if (count_selected_units(g, player_color) == 0) return;
+  if (count_selected_units(c, player_color) == 0) return;
 
   for (auto& p: g.get_pieces())
   {
-    if (p.is_selected() && p.get_color() == player_color)
+    if (is_selected(p, c) && p.get_color() == player_color)
     {
       const auto& from{p.get_current_square()};
       const auto& to{square(coordinat)};
@@ -158,23 +161,23 @@ void start_en_passant_attack(
       }
     }
   }
-  unselect_all_pieces(g, player_color);
+  //unselect_all_pieces(g, player_color);
 }
 
 void start_attack(
   game& g,
-  game_controller& /* c */,
+  game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 )
 {
   const auto actions{collect_all_piece_actions(g)};
 
-  if (count_selected_units(g, player_color) == 0) return;
+  if (count_selected_units(c, player_color) == 0) return;
 
   for (auto& p: g.get_pieces())
   {
-    if (p.is_selected() && p.get_color() == player_color)
+    if (is_selected(p, c) && p.get_color() == player_color)
     {
       const auto& from{p.get_current_square()};
       const auto& to{square(coordinat)};
@@ -196,21 +199,21 @@ void start_attack(
       }
     }
   }
-  unselect_all_pieces(g, player_color);
+  //unselect_all_pieces(g, player_color);
 }
 
 void start_move_unit(
   game& g,
-  game_controller& /* c */,
+  game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 )
 {
-  if (count_selected_units(g, player_color) == 0) return;
+  if (count_selected_units(c, player_color) == 0) return;
 
   for (auto& p: g.get_pieces())
   {
-    if (p.is_selected() && p.get_color() == player_color)
+    if (is_selected(p, c) && p.get_color() == player_color)
     {
 
       const auto& from{p.get_current_square()};
@@ -232,7 +235,7 @@ void start_move_unit(
       }
     }
   }
-  unselect_all_pieces(g, player_color);
+  //unselect_all_pieces(g, player_color);
 }
 
 void test_user_inputs()
@@ -317,19 +320,20 @@ void test_user_inputs()
     game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     move_cursor_to(c, "e2", side::lhs);
-    assert(!get_piece_at(g, "e2").is_selected());
+
+    assert(!is_selected(get_piece_at(g, "e2"), c));
     const user_input input{get_user_input_to_select(c, side::lhs)};
     add_user_input(c, input);
     c.apply_user_inputs_to_game(g);
     g.tick(delta_t(0.0));
-    assert(get_piece_at(g, "e2").is_selected());
+    assert(is_selected(get_piece_at(g, "e2"), c));
   }
   // do_select
   {
     game g{create_game_with_standard_starting_position()};
     game_controller c{create_game_controller_with_keyboard_mouse()};
     do_select(g, c, "e2", side::lhs);
-    assert(get_piece_at(g, "e2").is_selected());
+    assert(is_selected(get_piece_at(g, "e2"), c));
   }
   // do_select_and_move_piece
   {

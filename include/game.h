@@ -264,6 +264,7 @@ int count_piece_actions(
   const chess_color player
 );
 
+/*
 /// Count the number of selected units in total
 int count_selected_units(const game& g);
 
@@ -278,6 +279,7 @@ int count_selected_units(
   const game& g,
   const side player_side
 );
+*/
 
 /// Create a game from a FEN string
 game create_game_from_fen_string(const fen_string& s) noexcept;
@@ -363,13 +365,16 @@ chess_color get_player_color(
 /// Get the side of a player
 side get_player_side(const chess_color& color) noexcept;
 
+/*
 /// Get the possible moves for a player's selected pieces
 /// Will be empty if no pieces are selected
 std::vector<square> get_possible_moves(
   const game& g,
   const side player
 );
+*/
 
+/*
 /// Get all the selected pieces
 /// @param g a game
 /// @param player the color of the player, which is white for player 1
@@ -387,6 +392,7 @@ std::vector<piece> get_selected_pieces(
   const game& g,
   const side player
 );
+*/
 
 /// Get all the pieces
 std::vector<piece>& get_pieces(game& g) noexcept;
@@ -397,6 +403,7 @@ const std::vector<piece>& get_pieces(const game& g) noexcept;
 /// Get the time in the game
 const in_game_time& get_time(const game& g) noexcept;
 
+/*
 /// See if there is at least 1 piece selected
 /// @param g a game
 /// @param player the color of the player, which is white for player 1
@@ -405,6 +412,7 @@ bool has_selected_pieces(const game& g, const chess_color player);
 
 /// See if there is at least 1 piece selected
 bool has_selected_pieces(const game& g, const side player);
+*/
 
 /// Is the square empty?
 bool is_empty(const game& g, const square& s) noexcept;
@@ -461,11 +469,13 @@ fen_string to_fen_string(const game& g);
 /// where the '0' denotes the starting time of the move
 std::string to_pgn(const game& g);
 
+/*
 /// Unselect all pieces of a certain color
 void unselect_all_pieces(
   game& g,
   const chess_color color
 );
+*/
 
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept;
 

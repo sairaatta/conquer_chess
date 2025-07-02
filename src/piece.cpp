@@ -899,6 +899,7 @@ void test_piece()
   }
 
   // toggle_select
+  /*
   {
     auto p{get_test_white_king()};
     assert(!p.is_selected());
@@ -907,6 +908,7 @@ void test_piece()
     toggle_select(p);
     assert(!p.is_selected());
   }
+  */
   // A pawn for the lhs player can move right
   {
     piece p(
@@ -1503,10 +1505,12 @@ char to_fen_char(const piece& p) noexcept
   return c;
 }
 
+/*
 void toggle_select(piece& p) noexcept
 {
   p.set_selected(!p.is_selected());
 }
+*/
 
 void unselect(piece& p) noexcept
 {
@@ -1519,7 +1523,7 @@ bool operator==(const piece& lhs, const piece& rhs) noexcept
     && lhs.get_color() == rhs.get_color()
     && lhs.get_health() == rhs.get_health()
     && lhs.get_actions() == rhs.get_actions()
-    && lhs.is_selected() == rhs.is_selected()
+    //&& lhs.is_selected() == rhs.is_selected()
     && lhs.get_current_square() == rhs.get_current_square()
     && lhs.get_max_health() == rhs.get_max_health()
   ;
@@ -1537,8 +1541,7 @@ std::ostream& operator<<(std::ostream& os, const piece& p) noexcept
     << p.get_color()
     << p.get_current_square()
     << p.get_health()
-    //<< p.get_id()
-    << p.is_selected()
+    //<< p.is_selected()
     << p.get_kill_count()
     << p.get_max_health()
     << to_str(p.get_messages())
