@@ -41,10 +41,6 @@ void game_controller::apply_user_inputs_to_game(
   game& g
 )
 {
-  //std::map<side, std::vector<piece_action_type>> actions;
-  //actions[side::lhs] = get_piece_actions(g, *this, side::lhs);
-  //actions[side::rhs] = get_piece_actions(g, *this, side::rhs);
-
   std::map<side, std::vector<user_input>> user_inputs;
   user_inputs[side::lhs] = {};
   user_inputs[side::rhs] = {};
