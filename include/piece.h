@@ -5,7 +5,6 @@
 #include "action_history.h"
 #include "delta_t.h"
 #include "chess_color.h"
-#include "piece_id.h"
 #include "piece_type.h"
 #include "piece_action.h"
 #include "message_type.h"
@@ -68,8 +67,6 @@ public:
   /// Get the health of the unit
   double get_health() const noexcept { return m_health; }
 
-  /// Get the ID of the piece
-  const auto& get_id() const noexcept { return m_id.get_value(); }
 
   /// Get the in-game time according to this piece
   const auto& get_in_game_time() const noexcept { return m_in_game_time; }
@@ -160,9 +157,6 @@ private:
 
   /// The health
   double m_health;
-
-  /// The unique ID of this piece
-  read_only<piece_id> m_id;
 
   /// The in-game time (in chess moves)
   in_game_time m_in_game_time;

@@ -24,7 +24,6 @@ piece::piece(
     m_current_square{coordinat},
     m_has_moved{false},
     m_health{::get_max_health(r)},
-    m_id{create_new_id()},
     m_in_game_time{in_game_time(0.0)},
     m_is_selected{false},
     m_kill_count{0},
@@ -1538,7 +1537,7 @@ std::ostream& operator<<(std::ostream& os, const piece& p) noexcept
     << p.get_color()
     << p.get_current_square()
     << p.get_health()
-    << p.get_id()
+    //<< p.get_id()
     << p.is_selected()
     << p.get_kill_count()
     << p.get_max_health()

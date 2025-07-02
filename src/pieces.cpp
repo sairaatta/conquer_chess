@@ -379,7 +379,7 @@ std::vector<square> get_possible_bishop_moves(
 )
 {
   assert(!pieces.empty());
-  assert(has_piece_with_id(pieces, focal_piece.get_id()));
+  //assert(has_piece_with_id(pieces, focal_piece.get_id()));
   assert(focal_piece.get_type() == piece_type::bishop);
   const int x{focal_piece.get_current_square().get_x()};
   const int y{focal_piece.get_current_square().get_y()};
@@ -417,7 +417,7 @@ std::vector<square> get_possible_king_moves(
 )
 {
   assert(!pieces.empty());
-  assert(has_piece_with_id(pieces, focal_piece.get_id()));
+  //assert(has_piece_with_id(pieces, focal_piece.get_id()));
   assert(focal_piece.get_type() == piece_type::king);
   const int x{focal_piece.get_current_square().get_x()};
   const int y{focal_piece.get_current_square().get_y()};
@@ -454,7 +454,7 @@ std::vector<square> get_possible_knight_moves(
 )
 {
   assert(!pieces.empty());
-  assert(has_piece_with_id(pieces, focal_piece.get_id()));
+  //assert(has_piece_with_id(pieces, focal_piece.get_id()));
   assert(focal_piece.get_type() == piece_type::knight);
   const int x{focal_piece.get_current_square().get_x()};
   const int y{focal_piece.get_current_square().get_y()};
@@ -495,7 +495,7 @@ std::vector<square> get_possible_moves(
 )
 {
   assert(!pieces.empty());
-  assert(has_piece_with_id(pieces, focal_piece.get_id()));
+  //assert(has_piece_with_id(pieces, focal_piece.get_id()));
   switch (focal_piece.get_type())
   {
     case piece_type::king: return get_possible_king_moves(pieces, focal_piece);
@@ -516,7 +516,7 @@ std::vector<square> get_possible_pawn_moves(
 )
 {
   assert(!pieces.empty());
-  assert(has_piece_with_id(pieces, focal_piece.get_id()));
+  //assert(has_piece_with_id(pieces, focal_piece.get_id()));
   assert(focal_piece.get_type() == piece_type::pawn);
   const int x{focal_piece.get_current_square().get_x()};
   const int y{focal_piece.get_current_square().get_y()};
@@ -569,7 +569,7 @@ std::vector<square> get_possible_queen_moves(
 )
 {
   assert(!pieces.empty());
-  assert(has_piece_with_id(pieces, focal_piece.get_id()));
+  //assert(has_piece_with_id(pieces, focal_piece.get_id()));
   assert(focal_piece.get_type() == piece_type::queen);
   const int x{focal_piece.get_current_square().get_x()};
   const int y{focal_piece.get_current_square().get_y()};
@@ -612,7 +612,7 @@ std::vector<square> get_possible_rook_moves(
 )
 {
   assert(!pieces.empty());
-  assert(has_piece_with_id(pieces, focal_piece.get_id()));
+  //assert(has_piece_with_id(pieces, focal_piece.get_id()));
   assert(focal_piece.get_type() == piece_type::rook);
   const int x{focal_piece.get_current_square().get_x()};
   const int y{focal_piece.get_current_square().get_y()};
@@ -1061,22 +1061,6 @@ bool has_king(
     }
   }
   return has_king;
-}
-
-bool has_piece_with_id(
-  const std::vector<piece>& pieces,
-  const piece_id& i
-)
-{
-  assert(!pieces.empty());
-  const auto there{
-    std::find_if(
-      std::begin(pieces),
-      std::end(pieces),
-      [i](const auto& piece) { return piece.get_id() == i; }
-    )
-  };
-  return there != std::end(pieces);
 }
 
 bool is_checkmate(

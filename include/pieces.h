@@ -339,12 +339,6 @@ bool has_king(
   const chess_color c
 );
 
-/// Is there a piece with the ID among the pieces?
-bool has_piece_with_id(
-  const std::vector<piece>& pieces,
-  const piece_id& i
-);
-
 /// Determine if the player is mated
 bool is_checkmate(
   const std::vector<piece>& pieces,
