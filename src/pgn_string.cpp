@@ -47,6 +47,21 @@ void test_pgn_string()
   {
     const pgn_string s;
   }
+  {
+    const std::string s{"1. e4"};
+    const pgn_string t(s);
+    assert(t.get() == s);
+  }
+  // get_replay_1_as_pgn_str
+  {
+    const pgn_string s{get_replay_1_as_pgn_str()};
+    assert(!s.get().empty());
+  }
+  // get_scholars_mate_as_pgn_str
+  {
+    const pgn_string s{get_scholars_mate_as_pgn_str()};
+    assert(!s.get().empty());
+  }
   // split_pgn_str
   {
     assert(split_pgn_str(pgn_string("1. e4")).size() == 1);
