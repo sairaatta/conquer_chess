@@ -3,10 +3,10 @@
 
 #include "game.h"
 #include "game_controller.h"
-#include "pieces.h"
+//#include "pieces.h"
 #include <cassert>
 
-#include <sstream>
+//#include <sstream>
 
 replayer::replayer(const replay& r)
   : m_last_time{-1.0},
