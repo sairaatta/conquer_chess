@@ -34,6 +34,8 @@ private:
   replay m_replay;
 };
 
+game get_played_scholars_mate();
+
 /// Get the number of moves in the replay
 int get_n_moves(const replayer& r) noexcept;
 

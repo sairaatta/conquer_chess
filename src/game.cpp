@@ -11,7 +11,7 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
-#include <random>
+//#include <random>
 
 #ifdef GAME_CONTROLLER_H
 #error 'game' must know nothing about 'game_controller'
@@ -292,7 +292,11 @@ void game::check_game_and_pieces_agree_on_the_time() const
 
 void game::check_if_there_is_a_winner()
 {
-  assert(!m_winner.has_value());
+  if (m_winner.has_value())
+  {
+    // We already have a winner
+    return;
+  }
   if (is_checkmate(m_pieces, chess_color::white))
   {
     m_winner = chess_color::black;
@@ -1306,7 +1310,7 @@ void game::tick(const delta_t& dt)
   assert(count_dead_pieces(m_pieces) == 0);
 
   // Something has happened
-  if (collect_message_types(*this).empty())
+  if (!collect_message_types(*this).empty())
   {
     check_if_there_is_a_winner();
   }

@@ -47,6 +47,27 @@ int get_n_moves(const replayer& r) noexcept
   return get_n_moves(r.get_replay());
 }
 
+game get_played_scholars_mate()
+{
+  // Scholar's mate
+  // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
+  replayer r(replay(pgn_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
+  assert(get_n_moves(r) == 8);
+  game g{create_game_with_starting_position(starting_position_type::standard)};
+  game_controller c{create_game_controller_with_keyboard_mouse()};
+
+  r.do_move(c, g); // e2-e4
+  r.do_move(c, g); // e7-e5
+  r.do_move(c, g); // Qd1-h5
+  r.do_move(c, g); // Nb8-c6
+  r.do_move(c, g); // Bf1-c4
+  r.do_move(c, g); // Ng8-f6
+  r.do_move(c, g); // Qh5xf7#
+  r.do_move(c, g); // 1-0, which is ignored
+  assert(is_checkmate(g.get_pieces(), chess_color::black));
+  return g;
+}
+
 void test_replayer()
 {
 #ifndef NDEBUG
@@ -293,6 +314,12 @@ void test_replayer()
     r.do_move(c, g); // Nb8-c6
     assert(is_checkmate(g.get_pieces(), chess_color::white));
     assert(!is_checkmate(g.get_pieces(), chess_color::black));
+  }
+  // get_played_scholars_mate
+  {
+    const auto g{get_played_scholars_mate()};
+    assert(is_checkmate(g.get_pieces(), chess_color::black));
+    assert(g.get_winner().value() == chess_color::white);
   }
   // to_fen_string
   {
