@@ -5,7 +5,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
+#include <map>
 
 user_input::user_input(
   const user_input_type type,
@@ -153,6 +153,31 @@ void test_user_input()
       const auto i{create_random_user_input(rng_engine)};
       if (i.get_user_input_type() == user_input_type::mouse_move) break;
     }
+  }
+  // create_useful_random_user_input
+  {
+    std::default_random_engine rng_engine(42);
+    std::map<user_input_type, bool> tally;
+    tally[user_input_type::press_up] = false;
+    tally[user_input_type::press_right] = false;
+    tally[user_input_type::press_down] = false;
+    tally[user_input_type::press_left] = false;
+    tally[user_input_type::press_action_1] = false;
+
+    int i{0};
+    for (i = 0; i!=1000; ++i)
+    {
+      const auto user_input{create_useful_random_user_input(rng_engine)};
+      tally[user_input.get_user_input_type()] = true;
+
+      if (tally[user_input_type::press_up]
+        && tally[user_input_type::press_right]
+        && tally[user_input_type::press_down]
+        && tally[user_input_type::press_left]
+        && tally[user_input_type::press_action_1]
+      ) break;
+    }
+    assert(i < 1000);
   }
   // operator==
   {
