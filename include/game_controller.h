@@ -9,7 +9,7 @@
 #include "user_inputs.h"
 #include "physical_controller_type.h"
 
-//#include <map>
+#include <map>
 #include <iosfwd>
 
 /// The class that acts as a controller for \link{game}.
@@ -51,10 +51,7 @@ private:
   game_controller();
 
   /// The in-game coordinat of the LHS user's cursor
-  game_coordinate m_lhs_cursor_pos;
-
-  /// The in-game coordinat of the RHS user's cursor
-  game_coordinate m_rhs_cursor_pos;
+  std::map<side, game_coordinate> m_cursor_pos;
 
   /// The user inputs that need to be processed
   user_inputs m_user_inputs;

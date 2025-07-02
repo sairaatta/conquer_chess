@@ -13,10 +13,9 @@
 #include <sstream>
 
 game_controller::game_controller()
-  : m_lhs_cursor_pos{0.5, 4.5},
-    m_rhs_cursor_pos{7.5, 4.5}
 {
-
+  m_cursor_pos[side::lhs] = game_coordinate(0.5, 4.5);
+  m_cursor_pos[side::rhs] = game_coordinate(7.5, 4.5);
 }
 
 void game_controller::add_user_input(const user_input& a)
@@ -673,9 +672,7 @@ game_controller create_game_controller_with_two_keyboards()
 
 const game_coordinate& game_controller::get_cursor_pos(const side player) const noexcept
 {
-  if (player == side::lhs) return m_lhs_cursor_pos;
-  assert(player == side::rhs);
-  return m_rhs_cursor_pos;
+  return m_cursor_pos.at(player);
 }
 
 const game_coordinate& get_cursor_pos(
@@ -982,15 +979,7 @@ void game_controller::set_cursor_pos(
   const game_coordinate& pos,
   const side player_side) noexcept
 {
-  if (player_side == side::lhs)
-  {
-    m_lhs_cursor_pos = pos;
-  }
-  else
-  {
-    assert(player_side == side::rhs);
-    m_rhs_cursor_pos = pos;
-  }
+  m_cursor_pos[player_side] = pos;
 }
 
 void test_game_controller() //!OCLINT tests may be many
