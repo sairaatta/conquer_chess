@@ -461,9 +461,8 @@ void game_controller::apply_action_type_unselect_to_game(game& g, const side pla
 
   assert(is_cursor_on_friendly_piece);
   auto& p{get_piece_at(g, cursor)};
-  assert(!can_promote(p));
 
-  get_piece_at(g, cursor).add_action(
+  p.add_action(
     piece_action(
       player_color,
       p.get_type(),
@@ -472,14 +471,9 @@ void game_controller::apply_action_type_unselect_to_game(game& g, const side pla
       cursor
     )
   );
-
   assert(this->get_selected_piece_id(player_side).value() == p.get_id());
   this->set_selected_piece_id(player_side, {} );
 }
-
-
-
-
 
 bool can_attack(
   const game& g,

@@ -175,8 +175,8 @@ void get_runtime_speed_profile()
 {
   #ifdef NDEBUG
   // Do the profile here
-  const int n_turns{1000000};
-  const auto g = play_random_game(n_turns);
+  const int n_turns{100000};
+  const auto g = play_random_game(n_turns, 42);
   std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
   std::clog << "Winner:\n";
   if (g.get_winner().has_value())
@@ -200,6 +200,12 @@ int main(int argc, char **argv) //!OCLINT tests may be long
 {
   #ifndef NDEBUG
   test();
+
+  std::clog << "Running random game\n";
+  const int n_turns{100000};
+  const auto g = play_random_game(n_turns, 1);
+  std::clog << "Done\n";
+
   #endif
   const auto args = collect_args(argc, argv);
   if (args.size() == 2 && args[1] == "--profile")
