@@ -34,7 +34,6 @@ public:
   /// Get the race of a player side
   race get_race(const side player_side) const noexcept;
 
-
   /// Set the chess color of a player.
   void set_color(const chess_color color, const side player_side) noexcept;
 
@@ -56,6 +55,9 @@ private:
 
   /// The selected race, as given by the players
   std::map<side, race> m_race;
+
+  /// To use the constructor
+  friend void test_lobby_options();
 };
 
 void use_default_lobby_options() noexcept;

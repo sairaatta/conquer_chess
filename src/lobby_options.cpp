@@ -49,12 +49,6 @@ race lobby_options::get_race(const side player_side) const noexcept
 race get_race_of_color(const chess_color c) noexcept
 {
   return lobby_options::get().get_race(c);
-  /*
-  const auto& options{lobby_options::get()};
-  if (options.get_color(side::lhs) == c) return options.get_race(side::lhs);
-  assert(options.get_color(side::rhs) == c);
-  return options.get_race(side::rhs);
-  */
 }
 
 race get_race_of_side(const side player_side) noexcept
@@ -76,6 +70,30 @@ void lobby_options::set_race(const race r, const side player_side) noexcept
 void test_lobby_options()
 {
   #ifndef NDEBUG
+  // default construction
+  {
+    const lobby_options lo;
+    assert(lo.get_color(side::lhs) == chess_color::white);
+    assert(lo.get_color(side::rhs) == chess_color::black);
+    assert(lo.get_race(side::lhs) == race::classic);
+    assert(lo.get_race(side::rhs) == race::classic);
+    assert(lo.get_race(chess_color::white) == race::classic);
+    assert(lo.get_race(chess_color::black) == race::classic);
+  }
+  // constructor, complex setting
+  {
+    const chess_color lhs_color{chess_color::black};
+    const race lhs_race{race::protoss};
+    const race rhs_race{race::zerg};
+
+    const lobby_options lo(lhs_color, lhs_race, rhs_race);
+    assert(lo.get_color(side::lhs) == chess_color::black);
+    assert(lo.get_color(side::rhs) == chess_color::white);
+    assert(lo.get_race(side::lhs) == race::protoss);
+    assert(lo.get_race(side::rhs) == race::zerg);
+    assert(lo.get_race(chess_color::white) == race::zerg);
+    assert(lo.get_race(chess_color::black) == race::protoss);
+  }
   // get_color and set_color
   {
     use_default_lobby_options();
