@@ -26,7 +26,6 @@ piece::piece(
     m_health{::get_max_health(r)},
     m_id{create_new_id()},
     m_in_game_time{in_game_time(0.0)},
-    m_is_selected{false},
     m_kill_count{0},
     m_max_health{::get_max_health(r)},
     m_max_shield{::get_max_shield(r)},
@@ -53,12 +52,10 @@ void piece::add_action(const piece_action& action)
   assert(action.get_color() == m_color.get_value());
   if (action.get_action_type() == piece_action_type::select)
   {
-    assert(!m_is_selected);
     this->add_message(message_type::select);
   }
   else if (action.get_action_type() == piece_action_type::unselect)
   {
-    assert(m_is_selected);
     this->add_message(message_type::unselect);
   }
   else if (action.get_action_type() == piece_action_type::move)
@@ -421,15 +418,6 @@ void select(piece& p) noexcept
 void piece::set_current_action_progress(const delta_t& t) noexcept
 {
   m_current_action_progress = t;
-}
-
-void piece::set_selected(const bool is_selected) noexcept
-{
-  if (!m_is_selected && is_selected)
-  {
-    add_message(message_type::select);
-  }
-  m_is_selected = is_selected;
 }
 
 void test_piece()
@@ -1130,7 +1118,6 @@ void piece::tick(
   {
     case piece_action_type::move:
       m_has_moved = true; // Whatever happens, this piece has tried to move
-      m_is_selected = false; //
       tick_move(*this, dt, g);
       break;
     case piece_action_type::attack:
@@ -1140,21 +1127,21 @@ void piece::tick(
       tick_attack_en_passant(*this, dt, g);
       break;
     case piece_action_type::unselect:
-      assert(m_is_selected);
-      m_is_selected = false;
+      //assert(m_is_selected);
+      //m_is_selected = false;
       remove_first(m_actions);
       break;
     case piece_action_type::select:
-      assert(!m_is_selected);
-      m_is_selected = true;
+      //assert(!m_is_selected);
+      //m_is_selected = true;
       remove_first(m_actions);
       break;
     case piece_action_type::castle_kingside:
-      m_is_selected = false; //
+      //m_is_selected = false; //
       tick_castle_kingside(*this, dt, g);
       break;
     case piece_action_type::castle_queenside:
-      m_is_selected = false; //
+      //m_is_selected = false; //
       tick_castle_queenside(*this, dt, g);
       break;
     case piece_action_type::promote_to_knight:

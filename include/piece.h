@@ -166,13 +166,6 @@ private:
   /// The in-game time (in chess moves)
   in_game_time m_in_game_time;
 
-  /// Is the piece selected?
-  bool is_selected() const noexcept { return m_is_selected; }
-  /// Is this piece selected?
-  bool m_is_selected;
-  /// Set the selectedness of the piece
-  void set_selected(bool is_selected) noexcept;
-
   /// The number of pieces killed by this one
   int m_kill_count;
 
