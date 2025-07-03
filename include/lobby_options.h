@@ -15,6 +15,13 @@
 class lobby_options
 {
 public:
+  lobby_options(
+    const chess_color lhs_color = chess_color::white,
+    const race lhs_race = race::classic,
+    const race rhs_race = race::classic
+  );
+
+  /*
   /// This class is a Singleton
   lobby_options(const lobby_options&) = delete;
   lobby_options& operator=(const lobby_options&) = delete;
@@ -24,6 +31,7 @@ public:
     static lobby_options r;
     return r;
   }
+  */
 
   /// Get the chess color of a player
   chess_color get_color(const side player_side) const noexcept;
@@ -34,6 +42,9 @@ public:
   /// Get the race of a player side
   race get_race(const side player_side) const noexcept;
 
+  /// Get the side of a player color
+  side get_side(const chess_color player_color) const noexcept;
+
   /// Set the chess color of a player.
   void set_color(const chess_color color, const side player_side) noexcept;
 
@@ -42,11 +53,6 @@ public:
 
 private:
 
-  lobby_options(
-    const chess_color lhs_color = chess_color::white,
-    const race lhs_race = race::classic,
-    const race rhs_race = race::classic
-  );
 
   /// The selected colors.
   ///
@@ -60,6 +66,7 @@ private:
   friend void test_lobby_options();
 };
 
+/*
 void use_default_lobby_options() noexcept;
 
 chess_color get_color(const side player_side) noexcept;
@@ -69,6 +76,8 @@ race get_race_of_color(const chess_color c) noexcept;
 
 /// Get the chess color of a player
 race get_race_of_side(const side player_side) noexcept;
+
+*/
 
 /// Test this class and its free functions
 void test_lobby_options();

@@ -16,23 +16,27 @@ lobby_options::lobby_options(
   m_race[side::rhs] = rhs_race;
 }
 
+/*
 void use_default_lobby_options() noexcept
 {
   lobby_options::get().set_color(chess_color::white, side::lhs);
   lobby_options::get().set_race(race::classic, side::lhs);
   lobby_options::get().set_race(race::classic, side::rhs);
 }
-
+*/
 chess_color lobby_options::get_color(const side player_side) const noexcept
 {
   return m_color.at(player_side);
 }
+
+/*
 
 chess_color get_color(const side player_side) noexcept
 {
   const auto& options{lobby_options::get()};
   return options.get_color(player_side);
 }
+*/
 
 race lobby_options::get_race(const chess_color player_color) const noexcept
 {
@@ -46,14 +50,11 @@ race lobby_options::get_race(const side player_side) const noexcept
   return m_race.at(player_side);
 }
 
-race get_race_of_color(const chess_color c) noexcept
+side lobby_options::get_side(const chess_color player_color) const noexcept
 {
-  return lobby_options::get().get_race(c);
-}
-
-race get_race_of_side(const side player_side) noexcept
-{
-  return lobby_options::get().get_race(player_side);
+  if (get_color(side::lhs) == player_color) return side::lhs;
+  assert(get_color(side::rhs) == player_color);
+  return side::rhs;
 }
 
 void lobby_options::set_color(const chess_color color, const side player_side) noexcept
@@ -79,6 +80,9 @@ void test_lobby_options()
     assert(lo.get_race(side::rhs) == race::classic);
     assert(lo.get_race(chess_color::white) == race::classic);
     assert(lo.get_race(chess_color::black) == race::classic);
+    assert(lo.get_side(chess_color::white) == side::lhs);
+    assert(lo.get_side(chess_color::black) == side::rhs);
+
   }
   // constructor, complex setting
   {
@@ -93,11 +97,12 @@ void test_lobby_options()
     assert(lo.get_race(side::rhs) == race::zerg);
     assert(lo.get_race(chess_color::white) == race::zerg);
     assert(lo.get_race(chess_color::black) == race::protoss);
+    assert(lo.get_side(chess_color::white) == side::rhs);
+    assert(lo.get_side(chess_color::black) == side::lhs);
   }
   // get_color and set_color
   {
-    use_default_lobby_options();
-    auto& options{lobby_options::get()};
+    lobby_options options;
     options.set_color(chess_color::white, side::lhs);
     assert(options.get_color(side::lhs) == chess_color::white);
     options.set_color(chess_color::black, side::lhs);
@@ -109,8 +114,7 @@ void test_lobby_options()
   }
   // get_race and set_race
   {
-    use_default_lobby_options();
-    auto& options{lobby_options::get()};
+    lobby_options options;
     options.set_race(race::protoss, side::lhs);
     assert(options.get_race(side::lhs) == race::protoss);
     options.set_race(race::zerg, side::lhs);
@@ -122,21 +126,19 @@ void test_lobby_options()
   }
   // get_race_of_side
   {
-    use_default_lobby_options();
-    auto& options{lobby_options::get()};
+    lobby_options options;
     options.set_race(race::protoss, side::lhs);
-    assert(get_race_of_side(side::lhs) == race::protoss);
+    assert(options.get_race(side::lhs) == race::protoss);
     options.set_race(race::zerg, side::lhs);
-    assert(get_race_of_side(side::lhs) == race::zerg);
+    assert(options.get_race(side::lhs) == race::zerg);
     options.set_race(race::protoss, side::rhs);
-    assert(get_race_of_side(side::rhs) == race::protoss);
+    assert(options.get_race(side::rhs) == race::protoss);
     options.set_race(race::zerg, side::rhs);
-    assert(get_race_of_side(side::rhs) == race::zerg);
+    assert(options.get_race(side::rhs) == race::zerg);
   }
   // 76: set_color ensures the other player has the other color
   {
-    use_default_lobby_options();
-    auto& options{lobby_options::get()};
+    lobby_options options;
     options.set_color(chess_color::white, side::lhs);
     assert(options.get_color(side::lhs) == chess_color::white);
     assert(options.get_color(side::rhs) == chess_color::black);
@@ -152,25 +154,23 @@ void test_lobby_options()
   }
   // ::get_color
   {
-    use_default_lobby_options();
-    assert(get_color(side::lhs) == chess_color::white);
-    assert(get_color(side::rhs) == chess_color::black);
+    lobby_options options;
+    assert(options.get_color(side::lhs) == chess_color::white);
+    assert(options.get_color(side::rhs) == chess_color::black);
   }
   // get_race_of_color
   {
-    use_default_lobby_options();
-    auto& options{lobby_options::get()};
-    assert(get_color(side::lhs) == chess_color::white);
-    assert(get_color(side::rhs) == chess_color::black);
-    assert(get_race_of_color(chess_color::white) == options.get_race(side::lhs));
-    assert(get_race_of_color(chess_color::black) == options.get_race(side::rhs));
+    lobby_options options;
+    assert(options.get_color(side::lhs) == chess_color::white);
+    assert(options.get_color(side::rhs) == chess_color::black);
+    assert(options.get_race(chess_color::white) == options.get_race(side::lhs));
+    assert(options.get_race(chess_color::black) == options.get_race(side::rhs));
     assert(options.get_race(chess_color::white) == options.get_race(side::lhs));
     assert(options.get_race(chess_color::black) == options.get_race(side::rhs));
   }
   // operator<<
   {
-    use_default_lobby_options();
-    auto& options{lobby_options::get()};
+    lobby_options options;
     std::stringstream s;
     s << options;
     assert(!s.str().empty());

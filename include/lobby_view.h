@@ -5,6 +5,7 @@
 
 #include "controls_bar.h"
 #include "program_state.h"
+#include "lobby_options.h"
 #include "lobby_view_layout.h"
 #include "lobby_view_item.h"
 #include "view.h"
@@ -22,6 +23,8 @@ public:
   void draw_impl() override;
 
   bool get_dog_mode() const noexcept { return m_dog_mode; }
+
+  const auto& get_lobby_options() const noexcept { return m_lobby_options; }
 
   /// Get the selected item of a player
   lobby_view_item get_selected(const side player_side) const noexcept;
@@ -74,6 +77,9 @@ private:
 
   /// The selected item for RHS
   lobby_view_item m_rhs_cursor;
+
+  /// The lobby options worked on
+  lobby_options m_lobby_options;
 
   /// Is RHS ready to start?
   bool m_rhs_start;

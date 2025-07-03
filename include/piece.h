@@ -129,7 +129,8 @@ public:
   /// @see use 'add_action' to add an action to be processed
   void tick(
     const delta_t& dt,
-    game& g
+    game& g,
+    const lobby_options& lo
   );
 
 private:
@@ -293,13 +294,15 @@ void test_piece();
 void tick_attack(
   piece& p,
   const delta_t& dt,
-  game& g
+  game& g,
+  const lobby_options& lo
 );
 
 void tick_attack_en_passant(
   piece& p,
   const delta_t& dt,
-  game& g
+  game& g,
+  const lobby_options& lo
 );
 
 /// Process a tick, when the current action is a castling to kingside

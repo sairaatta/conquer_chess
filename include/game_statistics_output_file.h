@@ -12,7 +12,7 @@ class game_statistics_output_file
 public:
   game_statistics_output_file(const std::string& filename);
 
-  void add_to_file(const game& g);
+  void add_to_file(const game_controller& g);
 
 private:
 

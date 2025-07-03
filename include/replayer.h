@@ -21,7 +21,7 @@ class replayer
 public:
   explicit replayer(
     const action_history& r = action_history(),
-    const game_controller& c = create_game_controller_with_user_settings(create_game_with_user_settings())
+    const game_controller& c = game_controller()
   );
 
   /// Do a move or do nothing, for 1 time unit

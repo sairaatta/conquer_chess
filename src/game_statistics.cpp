@@ -3,17 +3,18 @@
 #include "game.h"
 #include "lobby_options.h"
 #include "pieces.h"
+#include "game_controller.h"
 
 #include <cassert>
 
-game_statistics::game_statistics(const game& g)
+game_statistics::game_statistics(const game_controller& c)
 {
   for (const side s: get_all_sides())
   {
-    m_statistics[game_statistic_type::time][s] = g.get_in_game_time().get();
-    m_statistics[game_statistic_type::value][s] = get_f_value(g.get_pieces(), get_color(s));
-    m_statistics[game_statistic_type::activity][s] = get_f_active(g.get_pieces(), get_color(s));
-    m_statistics[game_statistic_type::protectedness][s] = get_f_protected(g.get_pieces(), get_color(s));
+    m_statistics[game_statistic_type::time][s] = get_in_game_time(c).get();
+    m_statistics[game_statistic_type::value][s] = get_f_value(c.get_game().get_pieces(), c.get_lobby_options().get_color(s));
+    m_statistics[game_statistic_type::activity][s] = get_f_active(c.get_game().get_pieces(), c.get_lobby_options().get_color(s));
+    m_statistics[game_statistic_type::protectedness][s] = get_f_protected(c.get_game().get_pieces(), c.get_lobby_options().get_color(s));
   }
 }
 
@@ -135,15 +136,19 @@ void test_game_statistics()
 #ifndef NDEBUG
   // Calc relative
   {
-    const game g{create_game_with_starting_position(starting_position_type::bishop_and_knight_end_game)};
-    const game_statistics s(g);
+    game_controller c{
+      game(get_pieces_bishop_and_knight_end_game()),
+      lobby_options()
+    };
+    //const game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::bishop_and_knight_end_game))};
+    const game_statistics s(c);
     assert(s.calc_relative(game_statistic_type::value) == 1.0); // Black has no pieces
     assert(s.calc_relative(game_statistic_type::activity) == 0.5);
   }
   // get_column_headers and flatten_to_row have an equal amount of elements
   {
-    const game g{create_game_with_standard_starting_position()};
-    const game_statistics s(g);
+    const game_controller c{create_game_controller_with_two_keyboards()};
+    const game_statistics s(c);
     const auto values{flatten_to_row(s)};
     const auto headers{get_column_headers()};
     assert(values.size() == headers.size());

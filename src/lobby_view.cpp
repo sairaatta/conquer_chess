@@ -77,20 +77,19 @@ bool lobby_view::process_event_impl(sf::Event& event)
     }
     else if (key_pressed == sf::Keyboard::Key::Q)
     {
-      auto& lo{lobby_options::get()};
       switch (m_lhs_cursor)
       {
         case lobby_view_item::color:
-          lo.set_color(
-            get_next(lo.get_color(side::lhs)),
+          m_lobby_options.set_color(
+            get_next(m_lobby_options.get_color(side::lhs)),
             side::lhs
           );
           m_lhs_start = false;
           m_rhs_start = false;
           break;
         case lobby_view_item::race:
-          lo.set_race(
-            get_next(lo.get_race(side::lhs)),
+          m_lobby_options.set_race(
+            get_next(m_lobby_options.get_race(side::lhs)),
             side::lhs
           );
           m_lhs_start = false;
@@ -131,16 +130,16 @@ bool lobby_view::process_event_impl(sf::Event& event)
       switch (m_rhs_cursor)
       {
         case lobby_view_item::color:
-          lobby_options::get().set_color(
-            get_next(lobby_options::get().get_color(side::rhs)),
+          m_lobby_options.set_color(
+            get_next(m_lobby_options.get_color(side::rhs)),
             side::rhs
           );
           m_lhs_start = false;
           m_rhs_start = false;
           break;
         case lobby_view_item::race:
-          lobby_options::get().set_race(
-            get_next(lobby_options::get().get_race(side::rhs)),
+          m_lobby_options.set_race(
+            get_next(m_lobby_options.get_race(side::rhs)),
             side::rhs
           );
           m_lhs_start = false;
@@ -224,12 +223,12 @@ void draw_color_panel(lobby_view& v, const side player_side)
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
     &game_resources::get().get_lobby_menu_textures().get_color(
-      get_color(player_side)
+      v.get_lobby_options().get_color(player_side)
     )
   );
   get_render_window().draw(rectangle);
 
-  draw_fancy_text(to_human_str(get_color(player_side)), screen_rect, 64, 60);
+  draw_fancy_text(to_human_str(v.get_lobby_options().get_color(player_side)), screen_rect, 64, 60);
 }
 
 void draw_countdown(lobby_view& v, const int n_left_secs)
@@ -247,7 +246,7 @@ void draw_race_panel(lobby_view& v, const side player_side)
   set_rect(rectangle, screen_rect);
   rectangle.setTexture(
     &game_resources::get().get_lobby_menu_textures().get_head(
-      get_race_of_side(player_side)
+      v.get_lobby_options().get_race(player_side)
     )
   );
   get_render_window().draw(rectangle);
@@ -257,7 +256,7 @@ void draw_race_panel(lobby_view& v, const side player_side)
   const auto text_rect{
     get_lower_half(screen_rect)
   };
-  const std::string s{to_human_str(get_race_of_side(player_side))};
+  const std::string s{to_human_str(v.get_lobby_options().get_race(player_side))};
   draw_fancy_text(s, text_rect, 64, 60);
 }
 
@@ -273,8 +272,8 @@ void draw_background(lobby_view& v)
 
 void draw_king_portrait(lobby_view& v, const side player_side)
 {
-  const auto player_color{get_color(player_side)};
-  const auto player_race{get_race_of_side(player_side)};
+  const auto player_color{v.get_lobby_options().get_color(player_side)};
+  const auto player_race{v.get_lobby_options().get_race(player_side)};
   if (!v.get_dog_mode())
   {
     draw_texture(

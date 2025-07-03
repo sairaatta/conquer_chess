@@ -103,9 +103,10 @@ int count_selected_units(
 
 std::vector<piece> create_pieces_from_fen_string(const fen_string& s);
 
+/*
 /// Create the pieces as set up from the global game settings
 std::vector<piece> create_pieces_from_settings();
-
+*/
 
 /// Get the square where the king of that color is
 square get_current_king_square(
@@ -114,7 +115,7 @@ square get_current_king_square(
 );
 
 /// Get a king-versus-king starting position
-std::vector<piece> get_kings_only_starting_pieces(
+std::vector<piece> get_pieces_kings_only(
   const race white_race = race::classic,
   const race black_race = race::classic
 ) noexcept;
@@ -217,12 +218,12 @@ std::vector<piece> get_selected_pieces(
 );
 */
 
+
 /// Get all the pieces in the starting position
 std::vector<piece> get_standard_starting_pieces(
   const race white_race = race::classic,
   const race black_race = race::classic
 ) noexcept;
-
 
 /// Create a setup of pieces in which en passant becomes possible
 /// in the next move
@@ -317,16 +318,18 @@ std::vector<piece> get_pieces_ready_to_not_castle(
   const race black_race = race::classic
 ) noexcept;
 
+/*
 /// Get all the pieces in the starting position type
 std::vector<piece> get_starting_pieces(
   const starting_position_type spt
 ) noexcept;
+*/
 
 /// Get all the pieces in the starting position type
 std::vector<piece> get_starting_pieces(
-  const starting_position_type t,
-  const race white_race,
-  const race black_race
+  const starting_position_type t = starting_position_type::standard,
+  const race white_race = race::classic,
+  const race black_race = race::classic
 ) noexcept;
 
 /// Get the total value of all (non-king) chess pieces.

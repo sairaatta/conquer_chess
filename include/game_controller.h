@@ -6,6 +6,7 @@
 #include "piece_action_type.h"
 #include "game_coordinate.h"
 #include "game.h"
+#include "lobby_options.h"
 #include "side.h"
 #include "user_inputs.h"
 #include "physical_controller_type.h"
@@ -35,6 +36,7 @@
 class game_controller
 {
 public:
+  explicit game_controller(const game& g = game(), const lobby_options& lo = lobby_options());
 
   /// Add a user input. These will be processed in 'game::tick'
   void add_user_input(const user_input& a);
@@ -50,6 +52,9 @@ public:
 
   /// Get the game
   game& get_game() noexcept { return m_game; }
+
+  /// Get the game
+  const auto& get_lobby_options() const noexcept { return m_lobby_options; }
 
   /// Get the selected squares, if any
   const std::optional<piece_id>& get_selected_piece_id(const side s) const noexcept;
@@ -70,14 +75,15 @@ public:
   void tick(const delta_t& dt = delta_t(1.0));
 
 private:
-  // Use a friend instead
-  explicit game_controller(const game& g);
 
   /// The in-game coordinat of the LHS user's cursor
   std::map<side, game_coordinate> m_cursor_pos;
 
   /// The game it controls
   game m_game;
+
+  /// The options as set in the lobby: sides, colors, races
+  lobby_options m_lobby_options;
 
   /// The selected squares, if any
   std::map<side, std::optional<piece_id>> m_selected_piece_id;
@@ -225,6 +231,11 @@ std::vector<piece> find_pieces(
 );
 */
 
+chess_color get_color(
+  const game_controller& c,
+  const side s
+);
+
 /// Get the a player's cursor position
 const game_coordinate& get_cursor_pos(
   const game_controller& c,
@@ -331,6 +342,8 @@ user_input get_user_input_to_select(
   const game_controller& c,
   const side player_side
 );
+
+const std::optional<chess_color>& get_winner(const game_controller& c) noexcept;
 
 /// Is there a player that uses the keyboard?
 bool has_keyboard_controller(const game_controller& c);

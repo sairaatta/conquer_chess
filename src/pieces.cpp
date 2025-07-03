@@ -266,6 +266,7 @@ std::vector<piece> create_pieces_from_fen_string(const fen_string& fen_str)
   return pieces;
 }
 
+/*
 std::vector<piece> create_pieces_from_settings()
 {
   return get_starting_pieces(
@@ -274,6 +275,7 @@ std::vector<piece> create_pieces_from_settings()
     get_race_of_side(side::rhs)
   );
 }
+*/
 
 square get_current_king_square(
   const std::vector<piece>& pieces,
@@ -294,7 +296,7 @@ square get_current_king_square(
   return s.value();
 }
 
-std::vector<piece> get_kings_only_starting_pieces(
+std::vector<piece> get_pieces_kings_only(
   const race white_race,
   const race black_race
 ) noexcept
@@ -983,6 +985,7 @@ std::vector<piece> get_standard_starting_pieces(
   };
 }
 
+/*
 std::vector<piece> get_starting_pieces(
   const starting_position_type spt
 ) noexcept
@@ -993,6 +996,7 @@ std::vector<piece> get_starting_pieces(
     get_race_of_color(chess_color::black)
   );
 }
+*/
 
 std::vector<piece> get_starting_pieces(
   const starting_position_type t,
@@ -1011,7 +1015,7 @@ std::vector<piece> get_starting_pieces(
     case starting_position_type::kasparov_vs_topalov:
       return get_pieces_kasparov_vs_topalov(white_race, black_race);
     case starting_position_type::kings_only:
-      return get_kings_only_starting_pieces(white_race, black_race);
+      return get_pieces_kings_only(white_race, black_race);
     case starting_position_type::pawn_all_out_assault:
       return get_pieces_pawn_all_out_assault(white_race, black_race);
     case starting_position_type::pawns_at_promotion:

@@ -12,7 +12,7 @@
 class game_statistics
 {
 public:
-  game_statistics(const game& g);
+  game_statistics(const game_controller& c);
   game_statistics(const std::map<game_statistic_type, std::map<side, double>>& s);
 
   /// Calculate the relative value between the two players for a statistic,

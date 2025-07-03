@@ -34,7 +34,10 @@ private:
 
   std::map<program_state, std::unique_ptr<view>> m_views;
 
-  //about_view m_about_view;
+  /// The lobby options used throughout the game.
+  ///
+  /// Will only be updated by the lobby screen
+  lobby_options m_lobby_options;
 
   /// Sleeps to achieve a frame rate of 50-60 frames per second
   sleep_scheduler m_sleep_scheduler;

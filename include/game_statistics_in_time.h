@@ -9,7 +9,7 @@ class game_statistics_in_time
 public:
   game_statistics_in_time();
 
-  void add(const game& g);
+  void add(const game_controller& c);
   void add(const game_statistics& s);
 
   const auto& get() const noexcept { return m_statistics; }

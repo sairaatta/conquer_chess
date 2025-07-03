@@ -178,9 +178,9 @@ void main_window::show_debug_info()
   draw_text(
     std::to_string(fps) + std::string(" FPS, ")
     + to_str(m_program_state) + ", "
-    + to_str(lobby_options::get().get_race(side::lhs))
+    + to_str(m_lobby_options.get_race(side::lhs))
     + std::string(" vs ")
-    + to_str(lobby_options::get().get_race(side::rhs)),
+    + to_str(m_lobby_options.get_race(side::rhs)),
     debug_rect,
     16
   );

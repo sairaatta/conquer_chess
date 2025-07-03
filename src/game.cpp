@@ -69,68 +69,15 @@ bool can_castle_queenside(const piece& p, const game& g) noexcept
   return true;
 }
 
-#ifdef BELIEVE_DEAD_CODE
-bool can_do(
-  const game& g,
-  const piece& selected_piece,
-  const piece_action_type action,
-  const square& cursor_square,
-  const side player_side
-)
-{
-  switch (action)
-  {
-    case piece_action_type::attack_en_passant:
-      return can_do_en_passant(g, selected_piece, cursor_square, player_side);
-    case piece_action_type::attack:
-      return can_do_attack(g, selected_piece, cursor_square, player_side);
-    case piece_action_type::castle_kingside:
-      return can_do_castle_kingside(g, selected_piece, player_side);
-    case piece_action_type::castle_queenside:
-      return can_do_castle_queenside(g, selected_piece, player_side);
-    case piece_action_type::move:
-      return can_do_move(g, selected_piece, cursor_square, player_side);
-    case piece_action_type::promote_to_bishop:
-    case piece_action_type::promote_to_knight:
-    case piece_action_type::promote_to_queen:
-    case piece_action_type::promote_to_rook:
-      return can_do_promote(selected_piece, player_side);
-    case piece_action_type::select:
-      assert(!"No idea yet");
-      return false;
-    case piece_action_type::unselect:
-      assert(!"No idea yet");
-      return true;
-  }
-  assert(!"Should not get here");
-}
-
-bool can_do(const game& g,
-  const piece& selected_piece,
-  const piece_action_type action,
-  const std::string& cursor_square_str,
-  const side player_side
-)
-{
-  return can_do(
-    g,
-    selected_piece,
-    action,
-    square(cursor_square_str),
-    player_side
-  );
-}
-#endif // BELIEVE_DEAD_CODE
-
-
 bool can_do_attack(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 )
 {
-  const auto player_color{get_player_color(player_side)};
+  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   // Is it theoretically possible, e.g. on an empty board?
   if (
@@ -165,12 +112,13 @@ bool can_do_attack(
 bool can_do_castle_kingside(
   const game& g,
   const piece& selected_piece,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 )
 {
   //if (!selected_piece.is_selected()) return false;
 
-  const auto player_color{get_player_color(player_side)};
+  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_initial_king_square(player_color)};
   if (selected_piece.get_current_square() != king_square) return false;
@@ -180,12 +128,13 @@ bool can_do_castle_kingside(
 bool can_do_castle_queenside(
   const game& g,
   const piece& selected_piece,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 )
 {
   //if (!selected_piece.is_selected()) return false;
 
-  const auto player_color{get_player_color(player_side)};
+  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_initial_king_square(player_color)};
   if (selected_piece.get_current_square() != king_square) return false;
@@ -196,10 +145,11 @@ bool can_do_en_passant(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 )
 {
-  const auto player_color{get_player_color(player_side)};
+  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const auto player_square{selected_piece.get_current_square()};
   assert(is_piece_at(g, player_square));
@@ -233,10 +183,11 @@ bool can_do_move(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 )
 {
-  const auto player_color{get_player_color(player_side)};
+  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   // Is it theoretically possible, e.g. on an empty board?
   if (
@@ -263,10 +214,11 @@ bool can_do_move(
 
 bool can_do_promote(
   const piece& selected_piece,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 )
 {
-  const auto player_color{get_player_color(player_side)};
+  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   return can_promote(selected_piece);
 }
@@ -1064,10 +1016,12 @@ game create_game_with_starting_position(starting_position_type t) noexcept
   return game{};
 }
 
+/*
 game create_game_with_user_settings() noexcept
 {
   return game(create_pieces_from_settings());
 }
+*/
 
 int get_index_of_closest_piece_to(
   const game& g,
@@ -1132,6 +1086,7 @@ piece& get_piece_with_id(game& g, const piece_id& id)
   assert(!"Should never get here");
 }
 
+/*
 chess_color get_player_color(
   const side player_side
 ) noexcept
@@ -1145,7 +1100,7 @@ side get_player_side(const chess_color& color) noexcept
   assert(get_player_color(side::rhs) == color);
   return side::rhs;
 }
-
+*/
 /*
 std::vector<square> get_possible_moves(
   const game& g,
@@ -1319,21 +1274,21 @@ bool is_piece_at(
   return is_piece_at(g, square(square_str));
 }
 
-void game::tick(const delta_t& dt)
+void game::tick(const delta_t& dt, const lobby_options& lo)
 {
   // Ensure the tick size is limited to its maximum
   const delta_t max_tick(0.25);
   delta_t to_do(dt);
   while (to_do > max_tick)
   {
-    this->tick_impl(max_tick);
+    this->tick_impl(max_tick, lo);
     to_do = to_do - max_tick;
   }
   // The last bit
-  this->tick_impl(to_do);
+  this->tick_impl(to_do, lo);
 }
 
-void game::tick_impl(const delta_t& dt)
+void game::tick_impl(const delta_t& dt, const lobby_options& lo)
 {
   assert(dt <= delta_t(0.25));
 
@@ -1346,7 +1301,7 @@ void game::tick_impl(const delta_t& dt)
   for (auto& p: m_pieces)
   {
     const auto t_before = p.get_in_game_time();
-    p.tick(dt, *this);
+    p.tick(dt, *this, lo);
     const auto t_after = p.get_in_game_time();
     assert(t_before + dt == t_after);
   }
@@ -1385,18 +1340,18 @@ void unselect_all_pieces(
 }
 */
 
-void tick(game& g, const delta_t dt)
+void tick(game& g, const delta_t dt, const lobby_options& lo)
 {
-  g.tick(dt);
+  g.tick(dt, lo);
 }
 
 
-void tick_until_idle(game& g)
+void tick_until_idle(game& g, const lobby_options& lo)
 {
   int cnt{0};
   while (!is_idle(g))
   {
-    g.tick(delta_t(0.1));
+    g.tick(delta_t(0.1), lo);
     ++cnt;
     assert(cnt < 1000);
   }

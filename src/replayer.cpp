@@ -77,12 +77,13 @@ game_statistics_in_time extract_game_statistics_in_time(
   game_statistics_in_time s;
   replayer r(
     r_original.get_action_history(),
-    create_game_controller_with_user_settings(create_game_with_user_settings())
+    game_controller()
+    //create_game_controller_with_user_settings(create_game_with_user_settings())
   );
   assert(get_in_game_time(r) == in_game_time(0.0));
   while (!r.is_done())
   {
-    s.add(r.get_game());
+    s.add(r.get_game_controller());
     r.do_move(dt);
   }
   return s;

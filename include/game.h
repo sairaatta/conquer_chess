@@ -29,7 +29,7 @@
 class game
 {
 public:
-  explicit game(const std::vector<piece>& pieces = create_pieces_from_settings());
+  explicit game(const std::vector<piece>& pieces = get_standard_starting_pieces());
 
   /// Get all the pieces
   auto& get_pieces() noexcept { return m_pieces; }
@@ -48,7 +48,7 @@ public:
   /// The maximum timestep is 0.25 chess moves.
   /// Use the global `tick` function for timesteps
   /// longer than 0.25 chess moves.
-  void tick(const delta_t& dt);
+  void tick(const delta_t& dt, const lobby_options& lo);
 
 private:
 
@@ -82,7 +82,7 @@ private:
   /// Go to the next frame.
   ///
   /// The maximum timestep is 0.25 chess moves.
-  void tick_impl(const delta_t& dt);
+  void tick_impl(const delta_t& dt, const lobby_options& lo);
 
   friend game create_game_with_starting_position(starting_position_type t) noexcept;
 };
@@ -93,32 +93,6 @@ bool can_castle_kingside(const piece& p, const game& g) noexcept;
 /// Can this piece castle queenside?
 bool can_castle_queenside(const piece& p, const game& g) noexcept;
 
-#ifdef BELIEVE_DEAD_CODE
-bool can_do(
-  const game& g,
-  const piece& selected_piece,
-  const piece_action_type action,
-  const square& cursor_square,
-  const side player_side
-);
-
-/// Can an action be done?
-bool can_do(const game& g,
-  const piece& selected_piece,
-  const piece_action_type action,
-  const square& cursor_square,
-  const side player_side
-);
-
-/// Can an action be done?
-bool can_do(const game& g,
-  const piece& selected_piece,
-  const piece_action_type action,
-  const std::string& cursor_square_str,
-  const side player_side
-);
-#endif // BELIEVE_DEAD_CODE
-
 /// Can a piece_action_type::attack action be done?
 /// This is not an en-passant
 /// @see use \link{can_do_en_passant} for an piece_action_type::en_passant
@@ -126,21 +100,24 @@ bool can_do_attack(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 );
 
 /// Can a piece_action_type::castle_kingside action be done?
 bool can_do_castle_kingside(
   const game& g,
   const piece& selected_piece,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 );
 
 /// Can a piece_action_type::castle_queenside action be done?
 bool can_do_castle_queenside(
   const game& g,
   const piece& selected_piece,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 );
 
 /// Can a piece_action_type::en_passant action be done?
@@ -150,7 +127,8 @@ bool can_do_en_passant(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 );
 
 /// Can a piece_action_type::move action be done?
@@ -158,13 +136,15 @@ bool can_do_move(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 );
 
 /// Can a piece_action_type::promote_to_bishop action be done?
 bool can_do_promote(
   const piece& selected_piece,
-  const side player_side
+  const side player_side,
+  const lobby_options& lo
 );
 
 /// Clear the sound effects to be processed,
@@ -286,8 +266,10 @@ game create_game_with_standard_starting_position() noexcept;
 /// and a specific starting position
 game create_game_with_starting_position(starting_position_type t) noexcept;
 
+/*
 /// Create a game with the settings as defined by the user
 game create_game_with_user_settings() noexcept;
+*/
 
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(
@@ -361,6 +343,7 @@ const piece& get_piece_with_id(const game& g, const piece_id& id);
 /// Assumes that the piece is on the board
 piece& get_piece_with_id(game& g, const piece_id& id);
 
+/*
 /// Get the color of a player
 chess_color get_player_color(
   const side player
@@ -368,6 +351,7 @@ chess_color get_player_color(
 
 /// Get the side of a player
 side get_player_side(const chess_color& color) noexcept;
+*/
 
 /*
 /// Get the possible moves for a player's selected pieces
@@ -457,10 +441,10 @@ bool is_piece_at(
 /// Call game::tick safely.
 ///
 /// That is, with a maximum delta t of 0.25
-void tick(game& g, const delta_t dt = delta_t(1.0));
+void tick(game& g, const delta_t dt, const lobby_options& lo);
 
 /// Call game::tick until all pieces are idle
-void tick_until_idle(game& g);
+void tick_until_idle(game& g, const lobby_options& lo);
 
 /// Convert the game's position to a FEN string
 fen_string to_fen_string(const game& g);

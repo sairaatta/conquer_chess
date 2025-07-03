@@ -47,20 +47,20 @@ void game_view::tick_impl(delta_t dt)
 {
   assert(is_active());
 
-  const game& g{m_game_controller.get_game()};
+  //const game& g{m_game_controller.get_game()};
 
   const int n_logs_per_time_unit{8};
-  if (static_cast<int>(g.get_in_game_time().get() * n_logs_per_time_unit)
-    < static_cast<int>((g.get_in_game_time() + dt).get() * n_logs_per_time_unit))
+  if (static_cast<int>(get_in_game_time(m_game_controller).get() * n_logs_per_time_unit)
+    < static_cast<int>((get_in_game_time(m_game_controller) + dt).get() * n_logs_per_time_unit))
   {
-    m_statistics_output_file.add_to_file(g);
-    m_statistics_in_time.add(g);
+    m_statistics_output_file.add_to_file(m_game_controller);
+    m_statistics_in_time.add(m_game_controller);
   }
 
   // Disard old messages
   m_log.tick();
 
-  if (!g.get_winner().has_value())
+  if (!get_winner(m_game_controller).has_value())
   {
 
     // Do a tick, so that one delta_t equals one second under normal game speed
@@ -99,7 +99,7 @@ std::string get_last_log_messages(
 {
   return get_last_log_messages(
     view.get_log(),
-    get_player_color(player)
+    view.get_game_controller().get_lobby_options().get_color(player)
   );
 }
 
@@ -200,7 +200,7 @@ void process_event(
   for (const auto s: get_all_sides())
   {
     // Black can do nothing for one chess move
-    if (get_player_color(s) == chess_color::black
+    if (c.get_lobby_options().get_color(s) == chess_color::black
       && t < in_game_time(1.0)
     ) return;
 
@@ -337,7 +337,7 @@ void draw_controls(
       }
     }
     // Black can do nothing for one chess move
-    if (get_player_color(player_side) == chess_color::black
+    if (view.get_game_controller().get_lobby_options().get_color(player_side) == chess_color::black
       && view.get_game().get_in_game_time() < in_game_time(1.0)
     ) continue;
 
@@ -384,7 +384,7 @@ void draw_game_statistics_widget(game_view& view)
   }
 
   // Statistic
-  const game_statistics statistics(view.get_game());
+  const game_statistics statistics(view.get_game_controller());
 
   for (const game_statistic_type statistic: get_all_game_statistic_types())
   {
@@ -406,7 +406,12 @@ void draw_game_statistics_widget(game_view& view)
           assert(f_side >= 0.0);
           assert(f_side <= 1.0);
           const screen_rect bar_rect{create_partial_rect_from_side(s, r, f_side)};
-          const sf::Color bar_color{game_resources::get().get_board_game_textures().get_bar_color(statistic, get_color(s))};
+          const sf::Color bar_color{
+            game_resources::get().get_board_game_textures().get_bar_color(
+              statistic,
+              view.get_game_controller().get_lobby_options().get_color(s)
+            )
+          };
           draw_rectangle(bar_rect, bar_color);
         }
         catch (std::logic_error& e)
@@ -435,7 +440,7 @@ void draw_game_statistics_widget(game_view& view)
         const sf::Color bar_color{
           game_resources::get().get_board_game_textures().get_bar_color(
             statistic,
-            get_color(s)
+            view.get_game_controller().get_lobby_options().get_color(s)
           )
         };
         draw_rectangle(
@@ -557,7 +562,7 @@ void draw_background(game_view& view)
 {
   const auto& layout{view.get_layout()};
   draw_texture(
-    get_map_texture(get_race_of_color(chess_color::white)),
+    get_map_texture(view.get_game_controller().get_lobby_options().get_race(chess_color::white)),
     screen_rect(layout.get_background())
   );
 }
@@ -717,7 +722,7 @@ void draw_cursor(
   const auto old_fill_color = s.getFillColor();
   const auto old_outline_color = s.getOutlineColor();
   const auto old_thickness = s.getOutlineThickness();
-  const auto player_color{get_color(player)};
+  const auto player_color{view.get_game_controller().get_lobby_options().get_color(player)};
   s.setOutlineColor(to_sfml_color(player_color));
   s.setFillColor(sf::Color::Transparent);
   const bool valid{would_be_valid(view, player_color)};
@@ -934,7 +939,7 @@ void draw_unit_info(game_view& view, const side player_side)
   const auto& layout{view.get_layout()};
   const auto& r{layout.get_unit_info(player_side)};
   const auto& c{view.get_game_controller()};
-  const auto player_color{get_player_color(player_side)};
+  const auto player_color{view.get_game_controller().get_lobby_options().get_color(player_side)};
 
   const auto selected_pieces{get_selected_pieces(c, player_color)};
   if (selected_pieces.empty()) return;
@@ -976,9 +981,7 @@ void game_view::start_impl()
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
   );
-  m_game_controller = create_game_controller_with_user_settings(
-    create_game_with_user_settings()
-  );
+  m_game_controller = game_controller();
   assert(!is_active());
   set_is_active(true);
 

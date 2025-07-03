@@ -1,6 +1,7 @@
 #include "game_statistics_output_file.h"
 
 #include "game.h"
+#include "game_controller.h"
 #include "game_statistics.h"
 
 #include <cassert>
@@ -14,9 +15,9 @@ game_statistics_output_file::game_statistics_output_file(const std::string& file
   f << get_column_headers_as_str() << '\n';
 }
 
-void game_statistics_output_file::add_to_file(const game& g)
+void game_statistics_output_file::add_to_file(const game_controller& c)
 {
-  const game_statistics s(g);
+  const game_statistics s(c);
   std::ofstream f(m_filename, std::ios::app);
   f << to_comma_seperated_str(flatten_to_row(s)) << '\n';
 }
@@ -37,8 +38,8 @@ void test_game_statistics_output_file()
     game_statistics_output_file f(filename);
     assert(std::filesystem::exists(filename));
 
-    const game g{create_game_with_standard_starting_position()};
-    f.add_to_file(g);
+    const game_controller c{create_game_controller_with_two_keyboards()};
+    f.add_to_file(c);
   }
   // column_headers_to_str
   {

@@ -42,11 +42,11 @@ action_history create_action_history_from_pgn(const pgn_game_string& s)
 
   const auto move_strs{split_pgn_str(s)};
   const int n_moves = move_strs.size();
-  game g{create_game_with_standard_starting_position()};
+  game_controller c;
   for (int i{0}; i!=n_moves; ++i)
   {
     const in_game_time t(i);
-    const fen_string fen_str{to_fen_string(g)};
+    const fen_string fen_str{to_fen_string(c.get_game())};
     const chess_move m(move_strs[i], fen_str);
     const chess_color piece_color{m.get_color()};
     const std::optional<piece_type> pt{m.get_piece_type()};
@@ -63,9 +63,9 @@ action_history create_action_history_from_pgn(const pgn_game_string& s)
         to
       );
       h.add_action(t, pa);
-      get_piece_at(g, from).add_action(pa);
+      get_piece_at(c.get_game(), from).add_action(pa);
     }
-    tick(g);
+    c.tick();
   }
   return h;
 }

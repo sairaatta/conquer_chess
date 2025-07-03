@@ -53,7 +53,7 @@ void test_game_class()
       {
         assert(p.get_in_game_time() == g.get_in_game_time());
       }
-      g.tick(delta_t(0.1));
+      g.tick(delta_t(0.1), lobby_options());
       for (const piece& p: g.get_pieces())
       {
         assert(p.get_in_game_time() == g.get_in_game_time());
@@ -73,8 +73,8 @@ void test_game_class()
         )
       );
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.5));
-      tick(g, delta_t(0.5));
+      tick(g, delta_t(0.5), lobby_options());
+      tick(g, delta_t(0.5), lobby_options());
       assert(p.is_enpassantable(g.get_in_game_time()));
     }
     // a2-a4 makes a pawn en-passantable for one second
@@ -91,15 +91,15 @@ void test_game_class()
         )
       );
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.5));
+      tick(g, delta_t(0.5), lobby_options());
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.5));
+      tick(g, delta_t(0.5), lobby_options());
       assert(p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.49));
+      tick(g, delta_t(0.49), lobby_options());
       assert(p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.49));
+      tick(g, delta_t(0.49), lobby_options());
       assert(p.is_enpassantable(g.get_in_game_time()));
-      g.tick(delta_t(0.1));
+      g.tick(delta_t(0.1), lobby_options());
       assert(!p.is_enpassantable(g.get_in_game_time()));
     }
     // #27: a2-a4 takes as long as b2-b3
@@ -127,21 +127,20 @@ void test_game_class()
       );
       for (int i{0}; i!=5; ++i)
       {
-        g.tick(delta_t(0.25));
+        g.tick(delta_t(0.25), lobby_options());
         const bool at_start_1{first_pawn.get_current_square() == square("a2")};
         const bool at_start_2{second_pawn.get_current_square() == square("b2")};
         const bool at_goal_1{first_pawn.get_current_square() == square("a4")};
         const bool at_goal_2{second_pawn.get_current_square() == square("b3")};
         assert(at_start_1 == at_start_2);
-        assert(at_goal_1== at_goal_2);
+        assert(at_goal_1 == at_goal_2);
       }
       assert(is_piece_at(g, square("a4")));
       assert(is_piece_at(g, square("b3")));
     }
     // A piece under attack has decreasing health
     {
-      game_options::get().set_starting_position(starting_position_type::bishop_and_knight_end_game);
-      game g;
+      game g(get_pieces_bishop_and_knight_end_game());
       // Let the white knight at c4
       // attack the black king at d2
       const square from{"c4"};
@@ -161,7 +160,7 @@ void test_game_class()
           to
         )
       );
-      tick(g, delta_t(0.5));
+      tick(g, delta_t(0.5), lobby_options());
       const double health_after{get_piece_at(g, to).get_health()};
       assert(health_after < health_before);
     }
@@ -182,17 +181,13 @@ void test_game_class()
           to
         )
       );
-      g.tick(delta_t(0.5));
+      g.tick(delta_t(0.5), lobby_options());
       const double health_after{get_piece_at(g, to).get_health()};
       assert(health_after == health_before);
     }
     // When a piece is killed, the queen attacker moves to that square
     {
-      game_options::get().set_starting_position(
-        starting_position_type::before_scholars_mate
-      );
-      game g;
-
+      game g(get_pieces_before_scholars_mate());
       const square from{"h5"}; // White queen
       const square to{"f7"};   // Black pawn
       piece& attacker{get_piece_at(g, from)};
@@ -210,7 +205,7 @@ void test_game_class()
         && get_piece_at(g, to).get_color() == chess_color::black
       )
       {
-        g.tick(delta_t(0.1));
+        g.tick(delta_t(0.1), lobby_options());
         ++cnt;
         assert(cnt < 1000);
       }
@@ -232,7 +227,7 @@ void test_game_class()
           to
         )
       );
-      g.tick(delta_t(0.1));
+      g.tick(delta_t(0.1), lobby_options());
       const auto messages{get_piece_at(g, from).get_messages()};
       assert(!messages.empty());
       assert(messages.back() == message_type::cannot);
@@ -247,19 +242,13 @@ void test_game_functions()
 #ifndef NDEBUG // no tests in release
   // can_castle_kingside
   {
-    const game g{
-      create_game_with_starting_position(
-        starting_position_type::ready_to_castle
-      )
-    };
+    const game g(get_pieces_ready_to_castle());
     assert(can_castle_kingside(get_piece_at(g, "e1"), g));
     assert(can_castle_kingside(get_piece_at(g, "e8"), g));
   }
   // can_castle_queenside
   {
-    const game g{
-      create_game_with_starting_position(starting_position_type::ready_to_castle)
-    };
+    const game g(get_pieces_ready_to_castle());
     assert(can_castle_queenside(get_piece_at(g, "e1"), g));
     assert(can_castle_queenside(get_piece_at(g, "e8"), g));
   }
@@ -269,7 +258,7 @@ void test_game_functions()
     auto& white_queen{get_piece_at(g, "d1")};
     //white_queen.set_selected(true);
     // Wrong file
-    assert(!can_do_attack(g, white_queen, square("c8"), side::lhs));
+    assert(!can_do_attack(g, white_queen, square("c8"), side::lhs, lobby_options()));
   }
   // can_do_attack: Qd1 cannot attack d2, as this is a friendly piece
   {
@@ -277,34 +266,28 @@ void test_game_functions()
     auto& white_queen{get_piece_at(g, "d1")};
     //white_queen.set_selected(true);
     // Cannot attack own pieces
-    assert(!can_do_attack(g, white_queen, square("d2"), side::lhs));
+    assert(!can_do_attack(g, white_queen, square("d2"), side::lhs, lobby_options()));
   }
   // can_do_promote: a pawn can promote at last rank
   {
-    game g{
-      create_game_with_starting_position(starting_position_type::pawns_at_promotion)
-    };
+    game g(get_pieces_pawns_at_promotion());
     auto& white_pawn{get_piece_at(g, "a8")};
     //white_pawn.set_selected(true);
-    assert(can_do_promote(white_pawn, side::lhs));
+    assert(can_do_promote(white_pawn, side::lhs, lobby_options()));
   }
   // can_do_castle_kingside
   {
-    game g{
-      create_game_with_starting_position(starting_position_type::ready_to_castle)
-    };
+    game g(get_pieces_ready_to_castle());
     auto& white_king{get_piece_at(g, "e1")};
     //white_king.set_selected(true);
-    assert(can_do_castle_kingside(g, white_king, side::lhs));
+    assert(can_do_castle_kingside(g, white_king, side::lhs, lobby_options()));
   }
   // can_do_castle_queenside
   {
-    game g{
-      create_game_with_starting_position(starting_position_type::ready_to_castle)
-    };
+    game g(get_pieces_ready_to_castle());
     auto& white_king{get_piece_at(g, "e1")};
     //white_king.set_selected(true);
-    assert(can_do_castle_queenside(g, white_king, side::lhs));
+    assert(can_do_castle_queenside(g, white_king, side::lhs, lobby_options()));
   }
 
   // collect_all_piece_actions
@@ -355,11 +338,9 @@ void test_game_functions()
       );
       assert(is_in(nb8c6, actions));
     }
-    // #28: pawns can attack diagonally
+    // pawns can attack diagonally
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::pawn_all_out_assault)
-      };
+      const game g(get_pieces_pawn_all_out_assault());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action e4xf5(
@@ -381,9 +362,7 @@ void test_game_functions()
     }
     // kings only
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::kings_only)
-      };
+      const game g(get_pieces_kings_only());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action ke1e2(
@@ -405,9 +384,7 @@ void test_game_functions()
     }
     // kings and queens only
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::queen_end_game)
-      };
+      const game g(get_pieces_queen_endgame());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action qd1d5(
@@ -429,9 +406,7 @@ void test_game_functions()
     }
     // Kasparov versus Topalov
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::kasparov_vs_topalov)
-      };
+      const game g(get_pieces_kasparov_vs_topalov());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action ka4xa3(
@@ -445,9 +420,7 @@ void test_game_functions()
     }
     // pawn all-out assault
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::pawn_all_out_assault)
-      };
+      const game g(get_pieces_pawn_all_out_assault());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action ra1a3(
@@ -469,9 +442,7 @@ void test_game_functions()
     }
     // pawns nearly near promotion
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::pawns_nearly_near_promotion)
-      };
+      const game g(get_pieces_pawns_nearly_near_promotion());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action a6a7(
@@ -493,9 +464,7 @@ void test_game_functions()
     }
     // pawn at promotion
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::pawns_at_promotion)
-      };
+      const game g(get_pieces_pawns_at_promotion());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action a8isq(
@@ -517,9 +486,7 @@ void test_game_functions()
     }
     // ready to castle
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::ready_to_castle)
-      };
+      const game g(get_pieces_ready_to_castle());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action wcks(
@@ -557,9 +524,7 @@ void test_game_functions()
     }
     // cannot castle through check
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::ready_to_not_castle)
-      };
+      const game g(get_pieces_ready_to_not_castle());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action wcks(
@@ -597,9 +562,7 @@ void test_game_functions()
     }
     // cannot move into check
     {
-      const game g{
-        create_game_with_starting_position(starting_position_type::ready_to_not_castle)
-      };
+      const game g(get_pieces_ready_to_not_castle());
       const auto actions{collect_all_piece_actions(g)};
       assert(!actions.empty());
       const piece_action ke1d1(
@@ -626,66 +589,6 @@ void test_game_functions()
       assert(!is_empty_between(g, "a1", "a8"));
       assert(is_empty_between(g, "d3", "d4"));
     }
-    #ifdef BELIEVE_DEAD_CODE
-    // can_do: standard stup
-    {
-      const game g{
-        create_game_with_standard_starting_position()
-      };
-      // Pawns move forward
-      assert(can_do(g, get_piece_at(g, "d2"), piece_action_type::move, "d4", side::lhs));
-      assert(can_do(g, get_piece_at(g, "d7"), piece_action_type::move, "d5", side::rhs));
-      // Pawns do not move backwards
-      assert(!can_do(g, get_piece_at(g, "d2"), piece_action_type::move, "d1", side::lhs));
-      assert(!can_do(g, get_piece_at(g, "d7"), piece_action_type::move, "d8", side::rhs));
-      // Knights can jump
-      assert(can_do(g, get_piece_at(g, "b1"), piece_action_type::move, "c3", side::lhs));
-      assert(can_do(g, get_piece_at(g, "b8"), piece_action_type::move, "c6", side::rhs));
-      // Bishops cannot move over other pieces
-      assert(!can_do(g, get_piece_at(g, "c1"), piece_action_type::move, "a3", side::lhs));
-      assert(!can_do(g, get_piece_at(g, "c8"), piece_action_type::move, "a6", side::rhs));
-    }
-    // can_do: attack
-    {
-      const game g{
-        create_game_with_starting_position(starting_position_type::queen_end_game)
-      };
-      assert(!can_do(g, get_piece_at(g, "d1"), piece_action_type::move, "d8", side::lhs));
-      assert(can_do(g, get_piece_at(g, "d1"), piece_action_type::attack, "d8", side::lhs));
-      assert(can_do(g, get_piece_at(g, "d8"), piece_action_type::attack, "d1", side::rhs));
-      assert(!can_do(g, get_piece_at(g, "d1"), piece_action_type::attack, "d7", side::lhs));
-      assert(!can_do(g, get_piece_at(g, "d8"), piece_action_type::attack, "d2", side::rhs));
-    }
-    // can_do: castling
-    {
-      game g{
-        create_game_with_starting_position(starting_position_type::ready_to_castle)
-      };
-      auto& white_king{get_piece_at(g, "e1")};
-      auto& black_king{get_piece_at(g, "e8")};
-      //white_king.set_selected(true);
-      //black_king.set_selected(true);
-      const std::string s{"e4"}; // Irrelevant
-      assert(can_do(g, white_king, piece_action_type::castle_kingside, s, side::lhs));
-      assert(can_do(g, black_king, piece_action_type::castle_kingside, s, side::rhs));
-      assert(can_do(g, white_king, piece_action_type::castle_queenside, s, side::lhs));
-      assert(can_do(g, black_king, piece_action_type::castle_queenside, s, side::rhs));
-    }
-    // can_do: promote
-    {
-      const game g{
-        create_game_with_starting_position(starting_position_type::pawns_at_promotion)
-      };
-      assert(can_do(g, get_piece_at(g, "a8"), piece_action_type::promote_to_queen, "a8", side::lhs));
-      assert(can_do(g, get_piece_at(g, "a8"), piece_action_type::promote_to_rook, "a8", side::lhs));
-      assert(can_do(g, get_piece_at(g, "a8"), piece_action_type::promote_to_bishop, "a8", side::lhs));
-      assert(can_do(g, get_piece_at(g, "a8"), piece_action_type::promote_to_knight, "a8", side::lhs));
-      assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_queen, "h1", side::rhs));
-      assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_rook, "h1", side::rhs));
-      assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_bishop, "h1", side::rhs));
-      assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_knight, "h1", side::rhs));
-    }
-    #endif // BELIEVE_DEAD_CODE
     // clear_piece_messages
     {
       game g{create_game_with_standard_starting_position()};
@@ -707,7 +610,7 @@ void test_game_functions()
   }
   // count_piece_actions: actions in pieces accumulate
   {
-    game g{create_game_with_starting_position(starting_position_type::kings_only)};
+    game g(get_pieces_kings_only());
     get_pieces(g).at(0).add_action(
       piece_action(
         chess_color::white,
@@ -751,24 +654,6 @@ void test_game_functions()
     assert(piece.get_type() == piece_type::king);
     //piece.set_selected(true); // Just needs to compile
   }
-  // get_player_side
-  {
-    use_default_lobby_options();
-    // default
-    {
-      const game g{create_game_with_standard_starting_position()};
-      assert(get_player_side(chess_color::white) == side::lhs);
-      assert(get_player_side(chess_color::black) == side::rhs);
-    }
-    lobby_options::get().set_color(chess_color::black, side::lhs);
-    {
-      const game g{create_game_with_standard_starting_position()};
-      assert(get_player_side(chess_color::white) == side::rhs);
-      assert(get_player_side(chess_color::black) == side::lhs);
-    }
-    use_default_lobby_options();
-  }
-
   // is_empty
   {
     const game g{create_game_with_standard_starting_position()};
@@ -802,7 +687,7 @@ void test_game_functions()
   // tick_until_idle
   {
     game g{create_game_with_standard_starting_position()};
-    tick_until_idle(g);
+    tick_until_idle(g, lobby_options());
     assert(is_idle(g));
   }
   // to_pgn
