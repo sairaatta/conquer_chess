@@ -20,7 +20,7 @@ game::game(const std::vector<piece>& pieces)
   : m_pieces{pieces},
     m_in_game_time{0.0}
 {
-
+  check_if_there_is_a_winner();
 }
 
 bool can_castle_kingside(const piece& p, const game& g) noexcept
@@ -295,15 +295,15 @@ void game::check_if_there_is_a_winner()
   {
     m_winner = chess_color::black;
   }
-  if (!has_king(m_pieces, chess_color::black))
+  else if (!has_king(m_pieces, chess_color::black))
   {
     m_winner = chess_color::white;
   }
-  if (is_checkmate(m_pieces, chess_color::white))
+  else if (is_checkmate(m_pieces, chess_color::white))
   {
     m_winner = chess_color::black;
   }
-  if (is_checkmate(m_pieces, chess_color::black))
+  else if (is_checkmate(m_pieces, chess_color::black))
   {
     m_winner = chess_color::white;
   }

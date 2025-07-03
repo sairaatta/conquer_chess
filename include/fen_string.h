@@ -44,6 +44,19 @@ fen_string create_fen_string_with_starting_position(
 /// Extract the color from a FEN string
 chess_color get_color(const fen_string& s);
 
+/// Get a FEN string for a game that is over: white has no king anymore
+fen_string get_fen_string_game_over_white_no_king() noexcept;
+
+/// Get a FEN string for a game that is over: black has no king anymore
+fen_string get_fen_string_game_over_black_no_king() noexcept;
+
+/// Get a FEN string for a game that is over: white is in checkmate
+fen_string get_fen_string_game_over_white_checkmate() noexcept;
+
+/// Get a FEN string for a game that is over: black is in checkmate
+fen_string get_fen_string_game_over_black_checkmate() noexcept;
+
+
 /// Get an FEN string for a position when doing a scholar's mate.
 ///
 /// This is the initial position.

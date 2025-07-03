@@ -13,6 +13,15 @@
 #error 'game' must know nothing about 'game_controller'
 #endif
 
+void test_game() //!OCLINT tests may be many
+{
+#ifndef NDEBUG // no tests in release
+  test_game_class();
+  test_game_functions();
+  test_game_scenarios();
+#endif // no tests in release
+}
+
 /// Test the game class
 void test_game_class()
 {
@@ -812,12 +821,3 @@ void test_game_functions()
 #endif // NDEBUG // no tests in release
 }
 
-void test_game() //!OCLINT tests may be many
-{
-
-#ifndef NDEBUG // no tests in release
-  test_game_class();
-  test_game_functions();
-  test_game_scenarios();
-#endif // no tests in release
-}

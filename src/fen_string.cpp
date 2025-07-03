@@ -44,6 +44,30 @@ chess_color get_color(const fen_string& s)
   return chess_color::black;
 }
 
+/// Get a FEN string for a game that is over: white has no king anymore
+fen_string get_fen_string_game_over_white_no_king() noexcept
+{
+  return fen_string("4k3/8/8/8/8/8/8/8 w - - 0 1");
+}
+
+/// Get a FEN string for a game that is over: black has no king anymore
+fen_string get_fen_string_game_over_black_no_king() noexcept
+{
+  return fen_string("8/8/8/8/8/8/8/4K3 b - - 0 1");
+}
+
+/// Get a FEN string for a game that is over: white is in checkmate
+fen_string get_fen_string_game_over_white_checkmate() noexcept
+{
+  return fen_string("8/8/8/8/8/4k3/4q3/4K3 w - - 0 1");
+}
+
+/// Get a FEN string for a game that is over: black is in checkmate
+fen_string get_fen_string_game_over_black_checkmate() noexcept
+{
+  return fen_string("4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1");
+}
+
 fen_string get_fen_string_wikipedia_0() noexcept
 {
   return fen_string("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
