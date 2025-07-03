@@ -107,16 +107,14 @@ bool can_do_attack(
 bool can_do_castle_kingside(
   const game& g,
   const piece& selected_piece,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 );
 
 /// Can a piece_action_type::castle_queenside action be done?
 bool can_do_castle_queenside(
   const game& g,
   const piece& selected_piece,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 );
 
 /// Can a piece_action_type::en_passant action be done?

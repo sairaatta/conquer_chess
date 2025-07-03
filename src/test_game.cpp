@@ -273,21 +273,21 @@ void test_game_functions()
     game g(get_pieces_pawns_at_promotion());
     auto& white_pawn{get_piece_at(g, "a8")};
     //white_pawn.set_selected(true);
-    assert(can_do_promote(white_pawn, lobby_options().get_color(side::lhs)));
+    assert(can_do_promote(white_pawn, chess_color::white));
   }
   // can_do_castle_kingside
   {
     game g(get_pieces_ready_to_castle());
     auto& white_king{get_piece_at(g, "e1")};
     //white_king.set_selected(true);
-    assert(can_do_castle_kingside(g, white_king, side::lhs, lobby_options()));
+    assert(can_do_castle_kingside(g, white_king, chess_color::white));
   }
   // can_do_castle_queenside
   {
     game g(get_pieces_ready_to_castle());
     auto& white_king{get_piece_at(g, "e1")};
     //white_king.set_selected(true);
-    assert(can_do_castle_queenside(g, white_king, side::lhs, lobby_options()));
+    assert(can_do_castle_queenside(g, white_king, chess_color::white));
   }
 
   // collect_all_piece_actions

@@ -110,13 +110,9 @@ bool can_do_attack(
 bool can_do_castle_kingside(
   const game& g,
   const piece& selected_piece,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 )
 {
-  //if (!selected_piece.is_selected()) return false;
-
-  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_initial_king_square(player_color)};
   if (selected_piece.get_current_square() != king_square) return false;
@@ -126,13 +122,9 @@ bool can_do_castle_kingside(
 bool can_do_castle_queenside(
   const game& g,
   const piece& selected_piece,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 )
 {
-  //if (!selected_piece.is_selected()) return false;
-
-  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const square king_square{get_initial_king_square(player_color)};
   if (selected_piece.get_current_square() != king_square) return false;
