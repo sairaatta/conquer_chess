@@ -93,6 +93,7 @@ bool can_castle_kingside(const piece& p, const game& g) noexcept;
 /// Can this piece castle queenside?
 bool can_castle_queenside(const piece& p, const game& g) noexcept;
 
+#ifdef BELIEVE_DEAD_CODE
 bool can_do(
   const game& g,
   const piece& selected_piece,
@@ -116,6 +117,7 @@ bool can_do(const game& g,
   const std::string& cursor_square_str,
   const side player_side
 );
+#endif // BELIEVE_DEAD_CODE
 
 /// Can a piece_action_type::attack action be done?
 /// This is not an en-passant

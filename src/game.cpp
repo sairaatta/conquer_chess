@@ -69,6 +69,7 @@ bool can_castle_queenside(const piece& p, const game& g) noexcept
   return true;
 }
 
+#ifdef BELIEVE_DEAD_CODE
 bool can_do(
   const game& g,
   const piece& selected_piece,
@@ -119,6 +120,8 @@ bool can_do(const game& g,
     player_side
   );
 }
+#endif // BELIEVE_DEAD_CODE
+
 
 bool can_do_attack(
   const game& g,

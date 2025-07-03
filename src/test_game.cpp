@@ -626,6 +626,7 @@ void test_game_functions()
       assert(!is_empty_between(g, "a1", "a8"));
       assert(is_empty_between(g, "d3", "d4"));
     }
+    #ifdef BELIEVE_DEAD_CODE
     // can_do: standard stup
     {
       const game g{
@@ -684,6 +685,7 @@ void test_game_functions()
       assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_bishop, "h1", side::rhs));
       assert(can_do(g, get_piece_at(g, "h1"), piece_action_type::promote_to_knight, "h1", side::rhs));
     }
+    #endif // BELIEVE_DEAD_CODE
     // clear_piece_messages
     {
       game g{create_game_with_standard_starting_position()};
