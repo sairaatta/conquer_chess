@@ -179,11 +179,9 @@ bool can_do_move(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 )
 {
-  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   // Is it theoretically possible, e.g. on an empty board?
   if (
