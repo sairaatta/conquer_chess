@@ -1313,6 +1313,22 @@ bool is_piece_at(
 
 void game::tick(const delta_t& dt)
 {
+  // Ensure the tick size is limited to its maximum
+  const delta_t max_tick(0.25);
+  delta_t to_do(dt);
+  while (to_do > max_tick)
+  {
+    this->tick_impl(max_tick);
+    to_do = to_do - max_tick;
+  }
+  // The last bit
+  this->tick_impl(to_do);
+}
+
+void game::tick_impl(const delta_t& dt)
+{
+  assert(dt <= delta_t(0.25));
+
   check_game_and_pieces_agree_on_the_time();
   assert(count_dead_pieces(m_pieces) == 0);
 
@@ -1360,6 +1376,11 @@ void unselect_all_pieces(
   return unselect_all_pieces(g.get_pieces(), color);
 }
 */
+
+void tick(game& g, const delta_t dt)
+{
+  g.tick(dt);
+}
 
 
 void tick_until_idle(game& g)

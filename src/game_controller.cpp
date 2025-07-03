@@ -1208,8 +1208,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(count_selected_units(c, chess_color::white) == 0);
     c.apply_user_inputs_to_game(g);
     assert(count_selected_units(c, chess_color::white) == 1);
-    g.tick();
-    assert(count_selected_units(c, chess_color::white) == 1);
   }
   // 60: selectedness is transferred, for white
   {
@@ -1295,7 +1293,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(count_selected_units(c, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
+    tick(g);
     assert(count_selected_units(c, chess_color::white) == 1);
     assert(collect_messages(g).at(0).get_message_type() == message_type::select);
     move_cursor_to(c, "e4", side::lhs);
@@ -1388,7 +1386,8 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
+    assert(count_selected_units(c, chess_color::black) == 1);
+    g.tick(delta_t(0.0));
     assert(count_selected_units(c, chess_color::black) == 1);
   }
   // Clicking a unit twice with LMB selects and unselects it
@@ -1399,11 +1398,11 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
+    g.tick(delta_t(0.0));
     assert(count_selected_units(c, chess_color::black) == 1);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
+    g.tick(delta_t(0.0));
     assert(count_selected_units(c, chess_color::black) == 0);
   }
   // 60: selectedness is transferred
@@ -1416,11 +1415,11 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
+    g.tick(delta_t(0.0));
     assert(count_selected_units(c, chess_color::black) == 1);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
-    g.tick();
+    g.tick(delta_t(0.0));
     assert(count_selected_units(c, chess_color::black) != 2);
     assert(count_selected_units(c, chess_color::black) != 0);
     assert(count_selected_units(c, chess_color::black) == 1);
@@ -1432,7 +1431,7 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
+    g.tick(delta_t(0.0));
     assert(count_piece_actions(g, chess_color::black) == 0);
     move_cursor_to(c, "e7", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));

@@ -47,7 +47,4 @@ bool operator==(const replayer& lhs, const replayer& rhs) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const replayer& r) noexcept;
 
-#ifdef UNDERSTAND_THE_PURPOSE_OF_REPLAYER
-#endif // UNDERSTAND_THE_PURPOSE_OF_REPLAYER
-
 #endif // REPLAYER_H

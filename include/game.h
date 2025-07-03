@@ -44,7 +44,11 @@ public:
   const auto& get_winner() const noexcept { return m_winner; }
 
   /// Go to the next frame.
-  void tick(const delta_t& dt = delta_t(1.0));
+  ///
+  /// The maximum timestep is 0.25 chess moves.
+  /// Use the global `tick` function for timesteps
+  /// longer than 0.25 chess moves.
+  void tick(const delta_t& dt);
 
 private:
 
@@ -74,6 +78,11 @@ private:
 
   /// Check if there is a winner
   void check_if_there_is_a_winner();
+
+  /// Go to the next frame.
+  ///
+  /// The maximum timestep is 0.25 chess moves.
+  void tick_impl(const delta_t& dt);
 
   friend game create_game_with_starting_position(starting_position_type t) noexcept;
 };
@@ -458,6 +467,10 @@ bool is_piece_at(
   const std::string& square_str
 );
 
+/// Call game::tick safely.
+///
+/// That is, with a maximum delta t of 0.25
+void tick(game& g, const delta_t dt = delta_t(1.0));
 
 /// Call game::tick until all pieces are idle
 void tick_until_idle(game& g);

@@ -64,8 +64,8 @@ void test_game_class()
         )
       );
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      g.tick(delta_t(0.5));
-      g.tick(delta_t(0.5));
+      tick(g, delta_t(0.5));
+      tick(g, delta_t(0.5));
       assert(p.is_enpassantable(g.get_in_game_time()));
     }
     // a2-a4 makes a pawn en-passantable for one second
@@ -82,13 +82,13 @@ void test_game_class()
         )
       );
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      g.tick(delta_t(0.5));
+      tick(g, delta_t(0.5));
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      g.tick(delta_t(0.5));
+      tick(g, delta_t(0.5));
       assert(p.is_enpassantable(g.get_in_game_time()));
-      g.tick(delta_t(0.49));
+      tick(g, delta_t(0.49));
       assert(p.is_enpassantable(g.get_in_game_time()));
-      g.tick(delta_t(0.49));
+      tick(g, delta_t(0.49));
       assert(p.is_enpassantable(g.get_in_game_time()));
       g.tick(delta_t(0.1));
       assert(!p.is_enpassantable(g.get_in_game_time()));
@@ -152,7 +152,7 @@ void test_game_class()
           to
         )
       );
-      g.tick(delta_t(0.5));
+      tick(g, delta_t(0.5));
       const double health_after{get_piece_at(g, to).get_health()};
       assert(health_after < health_before);
     }

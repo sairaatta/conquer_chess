@@ -65,10 +65,7 @@ action_history create_action_history_from_pgn(const pgn_game_string& s)
       h.add_action(t, pa);
       get_piece_at(g, from).add_action(pa);
     }
-    for (int ticker{0}; ticker!=4; ++ticker)
-    {
-      g.tick(delta_t(0.25));
-    }
+    tick(g);
   }
   return h;
 }
