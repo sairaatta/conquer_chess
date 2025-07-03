@@ -188,7 +188,7 @@ void show_sidebar(game_view& view, const side player_side);
 void draw_squares(game_view& view);
 
 /// Show the highlighted square under the cursor on-screen for a player
-void draw_square_under_cursor(
+void draw_cursor(
   game_view& view,
   const side player
 );

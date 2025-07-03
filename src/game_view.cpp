@@ -279,12 +279,17 @@ void draw_board(game_view& view)
   {
     show_occupied_squares(view);
   }
-  draw_square_under_cursor(view, side::lhs);
-  draw_square_under_cursor(view, side::rhs);
   draw_possible_moves(view);
   draw_unit_paths(view);
   draw_pieces(view);
+
+  // Cursor goes over the pieces, under the health bar
+  draw_cursor(view, side::lhs);
+  draw_cursor(view, side::rhs);
+
   draw_unit_health_bars(view);
+
+
 }
 
 void draw_controls(
@@ -679,7 +684,7 @@ void draw_squares(game_view& view)
   draw_squares(view.get_layout().get_board().get_board());
 }
 
-void draw_square_under_cursor(
+void draw_cursor(
   game_view& view,
   const side player
 )

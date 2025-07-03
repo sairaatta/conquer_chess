@@ -84,8 +84,6 @@
 void test()
 {
 #ifndef NDEBUG
-  test_piece_action();
-
   test_about();
   test_about_view_layout();
   test_action_history();
@@ -201,9 +199,6 @@ void get_runtime_speed_profile()
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
   #ifndef NDEBUG
-  //const int n_turns{1000000};
-  //const auto g = play_random_game(n_turns, 42);
-
   test();
   #endif
   const auto args = collect_args(argc, argv);
