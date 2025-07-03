@@ -1,6 +1,8 @@
 #ifndef GAME_STATISTICS_VIEW_H
 #define GAME_STATISTICS_VIEW_H
 
+#ifdef NO_GAME_STATISTICS_VIEW
+
 #ifndef LOGIC_ONLY
 
 #include "game_statistics_view_layout.h"
@@ -57,5 +59,8 @@ void draw_layout_panels(game_statistics_view& v);
 void draw_plot_panel(game_statistics_view& v);
 
 #endif // LOGIC_ONLY
+
+#endif // NO_GAME_STATISTICS_VIEW
+
 
 #endif // GAME_STATISTICS_VIEW_H

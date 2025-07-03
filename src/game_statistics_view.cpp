@@ -1,5 +1,7 @@
 #include "game_statistics_view.h"
 
+#ifdef NO_GAME_STATISTICS_VIEW
+
 #ifndef LOGIC_ONLY
 
 #include "render_window.h"
@@ -148,4 +150,6 @@ void draw_plot_panel(game_statistics_view& v)
 }
 
 #endif // LOGIC_ONLY
+
+#endif // NO_GAME_STATISTICS_VIEW
 

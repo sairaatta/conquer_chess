@@ -213,9 +213,6 @@ void get_runtime_speed_profile()
 
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
-  std::clog << "Start playing a standard random game\n";
-  play_standard_random_game();
-
   #ifndef NDEBUG
   test();
   #endif
