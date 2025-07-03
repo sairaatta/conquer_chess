@@ -132,7 +132,7 @@ std::vector<screen_rect> get_panels(const options_view_layout& layout)
     layout.get_sound_effects_volume_value(),
     layout.get_starting_pos_label(),
     layout.get_starting_pos_value(),
-    layout.get_chess_board(),
+    layout.get_chess_board().get_board(),
     layout.get_controls_label(),
     layout.get_controller_type_value(side::lhs),
     layout.get_controller_type_value(side::rhs)

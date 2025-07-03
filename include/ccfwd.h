@@ -4,6 +4,7 @@
 /// @file Forward declarations
 class action_history;
 class action_number;
+class board_layout;
 class chess_move;
 class delta_t;
 class fen_string;

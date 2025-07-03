@@ -5,7 +5,8 @@
 #include "layout.h"
 #include "options_view_item.h"
 #include "side.h"
-#include "read_only.h"
+#include "board_layout.h"
+//#include "read_only.h"
 
 #include <vector>
 
@@ -75,7 +76,7 @@ public:
   const screen_rect& get_starting_pos_label() const noexcept { return m_starting_pos_label; }
   const screen_rect& get_starting_pos_value() const noexcept { return m_starting_pos_value; }
 
-  const screen_rect& get_chess_board() const noexcept { return m_chess_board; }
+  const board_layout& get_chess_board() const noexcept { return m_chess_board; }
 
   /// The word 'Controls'
   const screen_rect& get_controls_label() const noexcept { return m_controls_label; }
@@ -86,7 +87,7 @@ public:
 private:
 
   screen_rect m_background;
-  screen_rect m_chess_board;
+  board_layout m_chess_board;
   screen_rect m_controls_label;
   screen_rect m_game_speed_label;
   screen_rect m_game_speed_value;

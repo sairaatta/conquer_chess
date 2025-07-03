@@ -6,6 +6,8 @@
 #include "screen_coordinate.h"
 
 #include "draw.h"
+#include "draw_board.h"
+#include "board_layout.h"
 #include "lobby_options.h"
 #include "game_options.h"
 #include "game_resources.h"
@@ -357,11 +359,7 @@ void draw_ready_panel(lobby_view& v, const side player_side)
 void draw_lobby_title(lobby_view& v)
 {
   const auto screen_rect{v.get_layout().get_title()};
-  draw_squares(screen_rect, true);
-  //draw_texture(
-  //  game_resources::get().get_map_textures().get_map(race::classic),
-  //  screen_rect
-  //);
+  draw_squares(board_layout(screen_rect), true);
   draw_fancy_text("Lobby", screen_rect, 120, 116);
 
 }

@@ -2,6 +2,10 @@
 
 ## v0.9
 
+![Game screen v0.9](20250703_3.jpg)
+
+> The replays screen shows both statistics and board
+
 ![Game screen v0.9](20250703_2.jpg)
 
 > A mouse player cannot castle queenside if a piece is selected.

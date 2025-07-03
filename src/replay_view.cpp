@@ -6,6 +6,7 @@
 #include "game_resources.h"
 #include "sfml_helper.h"
 #include "draw.h"
+#include "draw_board.h"
 #include "game.h"
 #include "game_controller.h"
 #include <cassert>
@@ -20,6 +21,8 @@ replay_view::replay_view()
   : m_replayer{get_played_scholars_mate()}
 {
   m_controls_bar.set_draw_player_controls(false);
+
+  m_statistics = extract_game_statistics_in_time(m_replayer, delta_t(0.2));
 }
 
 bool replay_view::process_event_impl(sf::Event& event)
@@ -87,20 +90,20 @@ void replay_view::tick_impl(const delta_t dt)
 void draw_board(replay_view& v)
 {
   const auto& g{v.get_game()};
-  const auto screen_rect{v.get_layout().get_statistics()};
-  std::stringstream s;
-  s << to_pgn(g);
-  if (s.str().empty()) s << "[none]";
-  draw_text(s.str(), screen_rect, 16, sf::Color::White);
+  const board_layout& layout{v.get_layout().get_board()};
+
+  const bool semi_transparent{false};
+  draw_squares(layout, semi_transparent);
+  //TODO: draw_unit_paths(layout);
+  draw_pieces(g.get_pieces(), layout);
+
+  draw_unit_health_bars(g, layout);
+  //assert(!"TODO");
 }
 
 void draw_statistics(replay_view& v)
 {
   const auto screen_rect{v.get_layout().get_statistics()};
-
-  const game_statistics_in_time stats(
-    extract_game_statistics_in_time(v.get_replayer(), delta_t(0.2))
-  );
 
   std::vector<float> times;
   std::vector<float> lhs_piece_values;
@@ -109,7 +112,7 @@ void draw_statistics(replay_view& v)
   std::vector<float> rhs_activity;
   std::vector<float> lhs_protectedness;
   std::vector<float> rhs_protectedness;
-  for (const auto& s: stats.get())
+  for (const auto& s: v.get_statistics().get())
   {
     times.push_back(s.get(game_statistic_type::time, side::lhs));
     lhs_piece_values.push_back(s.get(game_statistic_type::value, side::lhs));

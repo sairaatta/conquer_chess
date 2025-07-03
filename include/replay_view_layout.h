@@ -2,9 +2,9 @@
 #define REPLAY_VIEW_LAYOUT_H
 
 #include "screen_rect.h"
-#include "layout.h"
+#include "board_layout.h"
 
-#include <vector>
+//#include <vector>
 
 /// The layout of a 'Played game' dialog.
 ///
@@ -52,7 +52,7 @@ public:
 private:
 
   screen_rect m_background;
-  screen_rect m_board;
+  board_layout m_board;
   screen_rect m_statistics;
 };
 

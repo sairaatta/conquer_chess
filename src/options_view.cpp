@@ -3,6 +3,7 @@
 #ifndef LOGIC_ONLY
 
 #include "draw.h"
+#include "draw_board.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
 #include "physical_controller_type.h"
@@ -224,7 +225,7 @@ bool options_view::process_event_impl(sf::Event& event)
     const auto mouse_screen_pos{
       screen_coordinate(event.mouseMove.x, event.mouseMove.y)
     };
-    if (is_in(mouse_screen_pos, m_layout.get_chess_board())) set_selected(options_view_item::starting_position);
+    if (is_in(mouse_screen_pos, m_layout.get_chess_board().get_board())) set_selected(options_view_item::starting_position);
     else if (is_in(mouse_screen_pos, m_layout.get_game_speed_value())) set_selected(options_view_item::game_speed);
     else if (is_in(mouse_screen_pos, m_layout.get_controller_type_value(side::lhs))) set_selected(options_view_item::left_controls);
     else if (is_in(mouse_screen_pos, m_layout.get_music_volume_value())) set_selected(options_view_item::music_volume);

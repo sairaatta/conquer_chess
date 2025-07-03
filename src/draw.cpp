@@ -365,61 +365,7 @@ void draw_physical_controller_symbol(const physical_controller_type& t, const sc
   );
 }
 
-void draw_pieces(
-  const std::vector<piece>& pieces,
-  const screen_rect& rect
-)
-{
-  const board_layout layout(rect);
-  for (const auto& piece: pieces)
-  {
-    const auto square_rect{
-      layout.get_square(
-        piece.get_current_square().get_x(),
-        piece.get_current_square().get_y()
-      )
-    };
-    /// +------------------+
-    /// |+----------------+|
-    /// || Health         ||
-    /// |+----------------+|
-    /// ||Player          ||
-    /// ||                ||
-    /// ||                ||
-    /// ||                ||
-    /// |+----------------+|
-    /// +------------------+
-    ///
-    const auto piece_rect{square_layout(square_rect).get_piece()};
-    // Transparency effect when moving
-    sf::Color fill_color{sf::Color::Transparent};
-    if (!piece.get_actions().empty()
-      && piece.get_actions()[0].get_action_type() == piece_action_type::move
-    )
-    {
-      const double f{piece.get_current_action_progress().get()};
-      int alpha{0};
-      if (f < 0.5)
-      {
-        alpha = 255 - static_cast<int>(f * 255.0);
-      }
-      else
-      {
-        alpha = static_cast<int>(f * 255.0);
-      }
-      fill_color = sf::Color(255, 255, 255, alpha);
-    }
-    draw_texture(
-      get_piece_texture(
-        piece.get_race(),
-        piece.get_color(),
-        piece.get_type()
-      ),
-      piece_rect,
-      fill_color
-    );
-  }
-}
+
 
 void draw_quit_button(const screen_rect& sr)
 {
@@ -508,32 +454,6 @@ void draw_sound_effects_volume_value(const screen_rect& sr)
   std::stringstream s;
   s << get_sound_effects_volume() << " %";
   draw_normal_text(s.str(), sr);
-}
-
-void draw_squares(
-  const screen_rect& r,
-  const bool semi_transparent
-)
-{
-  const board_layout layout(r);
-
-  for (int x = 0; x != 8; ++x)
-  {
-    for (int y = 0; y != 8; ++y)
-    {
-      const chess_color c{(x + y) % 2 == 0 ? chess_color::black : chess_color::white };
-      const screen_rect square_rect{layout.get_square(x, y).get_square()};
-      auto& t{game_resources::get().get_textures()};
-      if (semi_transparent)
-      {
-        draw_texture(t.get_semitransparent_square(c), square_rect);
-      }
-      else
-      {
-        draw_texture(t.get_square(c), square_rect);
-      }
-    }
-  }
 }
 
 void draw_start_button(const screen_rect& sr)

@@ -43,12 +43,17 @@ public:
   /// The played game
   const auto& get_replayer() const noexcept { return m_replayer; }
 
+  const auto& get_statistics() const noexcept { return m_statistics; }
+
 private:
 
   controls_bar m_controls_bar;
 
   /// The played game
   replayer m_replayer;
+
+  /// Costly to extract from replayer
+  game_statistics_in_time m_statistics;
 
   /// The layout of this window
   replay_view_layout m_layout;

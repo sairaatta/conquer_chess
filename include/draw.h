@@ -174,12 +174,6 @@ void draw_outline(
 /// Draw the fancy physical controller symbol
 void draw_physical_controller_symbol(const physical_controller_type& t, const screen_rect& sr);
 
-/// Draw the pieces
-void draw_pieces(
-  const std::vector<piece>& pieces,
-  const screen_rect& rect
-);
-
 /// Draw a Quit menu button on the main window
 void draw_quit_button(const screen_rect& sr);
 
@@ -191,12 +185,6 @@ void draw_sound_effects_volume_label(const screen_rect& sr);
 
 /// The button that shows the value of the music
 void draw_sound_effects_volume_value(const screen_rect& sr);
-
-/// Draw the squares of a chessboard at the window target rectangle's location
-void draw_squares(
-  const screen_rect& rect,
-  const bool semi_transparent = true
-);
 
 /// Draw a Start menu button on the main window
 void draw_start_button(const screen_rect& sr);
