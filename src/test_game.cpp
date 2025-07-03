@@ -685,7 +685,7 @@ void test_game_functions()
     // collect_action_history
     {
       const game g{create_game_with_standard_starting_position()};
-      assert(collect_action_history(g).get_timed_actions().empty());
+      assert(collect_action_history(g).get().empty());
     }
     // collect_all_piece_actions, for a color
     {

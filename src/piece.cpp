@@ -396,6 +396,11 @@ bool is_pawn(const piece& p) noexcept
   return p.get_type() == piece_type::pawn;
 }
 
+bool is_selected(const piece& p)
+{
+  return is_piece_selected(p.get_action_history());
+}
+
 void piece::receive_damage(const double damage)
 {
   assert(damage >= 0.0);
@@ -407,13 +412,6 @@ void piece::receive_damage(const double damage)
   m_shield = 0.0;
   m_health -= physical_damage;
 }
-
-/*
-void select(piece& p) noexcept
-{
-  p.set_selected(true);
-}
-*/
 
 void piece::set_current_action_progress(const delta_t& t) noexcept
 {
@@ -497,13 +495,13 @@ void test_piece()
   // piece::get_action_history, const
   {
     const auto piece{get_test_white_knight()};
-    assert(piece.get_action_history().get_timed_actions().empty());
+    assert(piece.get_action_history().get().empty());
   }
   // piece::get_action_history, non-const
   {
     auto piece{get_test_white_knight()};
     auto& history{piece.get_action_history()};
-    assert(history.get_timed_actions().empty());
+    assert(history.get().empty());
   }
   // piece::get_messages
   {

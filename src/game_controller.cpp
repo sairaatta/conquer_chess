@@ -424,14 +424,30 @@ void game_controller::apply_action_type_select_to_game(
   const bool is_cursor_on_friendly_piece{
     is_cursor_on_piece && get_piece_at(g, cursor).get_color() == player_color
   };
-
   assert(is_cursor_on_friendly_piece);
-  auto& p{get_piece_at(g, cursor)};
 
-  p.add_action(
+  // Unselect the old piece
+  if (m_selected_piece_id[player_side].has_value())
+  {
+    auto& previously_selected_piece{get_piece_with_id(g, m_selected_piece_id[player_side].value())};
+    assert(previously_selected_piece.get_color() == player_color);
+    previously_selected_piece.add_action(
+      piece_action(
+        player_color,
+        previously_selected_piece.get_type(),
+        piece_action_type::unselect,
+        previously_selected_piece.get_current_square(),
+        previously_selected_piece.get_current_square()
+      )
+    );
+  }
+
+  auto& newly_selected_piece{get_piece_at(g, cursor)};
+
+  newly_selected_piece.add_action(
     piece_action(
       player_color,
-      p.get_type(),
+      newly_selected_piece.get_type(),
       piece_action_type::select,
       cursor,
       cursor
@@ -440,10 +456,10 @@ void game_controller::apply_action_type_select_to_game(
 
   assert(
        !this->get_selected_piece_id(player_side).has_value()
-    ||  this->get_selected_piece_id(player_side).value() != p.get_id()
+    ||  this->get_selected_piece_id(player_side).value() != newly_selected_piece.get_id()
   );
 
-  this->set_selected_piece_id(player_side, p.get_id());
+  this->set_selected_piece_id(player_side, newly_selected_piece.get_id());
 }
 
 
@@ -1203,17 +1219,26 @@ void test_game_controller() //!OCLINT tests may be many
     };
     move_cursor_to(c, "e1", side::lhs);
     assert(count_selected_units(c, chess_color::white) == 0);
+    assert(!is_selected(get_piece_at(g, "e1")));
+
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
-    g.tick(delta_t(0.01));
+    g.tick(delta_t(0.0));
+
     assert(count_selected_units(c, chess_color::white) == 1);
+    assert(is_selected(get_piece_at(g, "e1")));
+
     move_cursor_to(c, "d1", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
-    g.tick(delta_t(0.01));
+    c.apply_user_inputs_to_game(g);
+    g.tick(delta_t(0.0));
+
     assert(count_selected_units(c, chess_color::white) != 2);
     assert(count_selected_units(c, chess_color::white) != 0);
     assert(count_selected_units(c, chess_color::white) == 1);
-  }
+    assert(is_selected(get_piece_at(g, "d1")));
+    assert(!is_selected(get_piece_at(g, "e1")));
+ }
   // 60: selectedness is transferred, for black
   {
     game g{create_game_with_standard_starting_position()};
@@ -1246,11 +1271,9 @@ void test_game_controller() //!OCLINT tests may be many
     move_cursor_to(c, "e1", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
     assert(count_selected_units(c, chess_color::white) == 1);
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game(g);
-    g.tick();
     assert(count_selected_units(c, chess_color::white) == 0);
   }
   // Cannot select two units
@@ -2010,7 +2033,7 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{create_game_controller_with_keyboard_mouse()};
     const double health_before{get_piece_at(g, square("e1")).get_health()};
 
-    assert(get_piece_at(g, square("d2")).get_action_history().get_timed_actions().empty());
+    assert(get_piece_at(g, square("d2")).get_action_history().get().empty());
 
     do_select(g, c, "d1", side::lhs);
     move_cursor_to(c, "e1", side::lhs);
@@ -2020,7 +2043,7 @@ void test_game_controller() //!OCLINT tests may be many
     g.tick(delta_t(0.1));
     const double health_after{get_piece_at(g, square("d2")).get_health()};
     assert(health_after == health_before);
-    assert(get_piece_at(g, square("d2")).get_action_history().get_timed_actions().empty());
+    assert(get_piece_at(g, square("d2")).get_action_history().get().empty());
   }
   // When a piece is killed, the queen attacker moves to that square
   {

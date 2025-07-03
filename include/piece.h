@@ -283,8 +283,8 @@ bool is_on_starting_rank(const chess_color c, const square& q) noexcept;
 /// Is the piece a pawn?
 bool is_pawn(const piece& p) noexcept;
 
-/// Select the piece
-//void select(piece& p) noexcept;
+/// Determine from the action history if the piece is selected
+bool is_selected(const piece& p);
 
 /// Test this class and its free functions
 void test_piece();

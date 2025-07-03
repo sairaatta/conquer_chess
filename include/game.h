@@ -361,6 +361,10 @@ piece& get_piece_at(game& g, const std::string& square_str);
 /// Assumes that the piece is on the board
 const piece& get_piece_with_id(const game& g, const piece_id& id);
 
+/// Get the piece with a certain ID.
+/// Assumes that the piece is on the board
+piece& get_piece_with_id(game& g, const piece_id& id);
+
 /// Get the color of a player
 chess_color get_player_color(
   const side player

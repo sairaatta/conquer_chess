@@ -81,7 +81,7 @@ std::vector<piece_action> collect_actions_in_timespan(
 {
   assert(from < to);
   std::vector<piece_action> actions;
-  for (const auto& p: history.get_timed_actions())
+  for (const auto& p: history.get())
   {
     const in_game_time& t{p.first};
     if (t >= from && t <= to) actions.push_back(p.second);
@@ -92,17 +92,17 @@ std::vector<piece_action> collect_actions_in_timespan(
 const piece_action& get_last_action(const action_history& history)
 {
   assert(has_actions(history));
-  return history.get_timed_actions().back().second;
+  return history.get().back().second;
 }
 
 int get_n_piece_actions(const action_history& r) noexcept
 {
-  return r.get_timed_actions().size();
+  return r.get().size();
 }
 
 bool has_actions(const action_history& history) noexcept
 {
-  return !history.get_timed_actions().empty();
+  return !history.get().empty();
 }
 
 bool has_just_double_moved(
@@ -136,12 +136,31 @@ bool is_enpassantable(
   return has_just_double_moved(action_history, when);
 }
 
+bool is_piece_selected(const action_history& h)
+{
+  bool is_selected{false};
+  for (const auto& a: h.get())
+  {
+    if (a.second.get_action_type() == piece_action_type::select)
+    {
+      assert(!is_selected);
+      is_selected = true;
+    }
+    else if (a.second.get_action_type() == piece_action_type::unselect)
+    {
+      assert(is_selected);
+      is_selected = false;
+    }
+  }
+  return is_selected;
+}
+
 action_history merge_action_histories(const std::vector<action_history> histories)
 {
   std::vector<std::pair<in_game_time, piece_action>> timed_actions;
   for (const auto& history: histories)
   {
-    const auto tas{history.get_timed_actions()};
+    const auto tas{history.get()};
     std::copy(std::begin(tas), std::end(tas), std::back_inserter(timed_actions));
   }
   std::sort(
@@ -161,7 +180,7 @@ void test_action_history()
   // upon construction there are timed actions
   {
     const action_history h;
-    assert(h.get_timed_actions().empty());
+    assert(h.get().empty());
   }
   // create_action_history_from_pgn from empty string is OK
   {
@@ -210,8 +229,8 @@ void test_action_history()
     };
     const auto c{merge_action_histories( { a, b } ) };
     assert(
-      a.get_timed_actions().size() + b.get_timed_actions().size()
-      == c.get_timed_actions().size()
+      a.get().size() + b.get().size()
+      == c.get().size()
     );
   }
   // operator==
@@ -241,7 +260,7 @@ void test_action_history()
 std::string to_str(const action_history& history) noexcept
 {
   std::stringstream s;
-  for (const auto& timed_action: history.get_timed_actions())
+  for (const auto& timed_action: history.get())
   {
     s << to_human_str(timed_action.first) << ": " << timed_action.second << '\n';
   }
@@ -252,7 +271,7 @@ std::string to_str(const action_history& history) noexcept
 
 bool operator==(const action_history& lhs, const action_history& rhs) noexcept
 {
-  return lhs.get_timed_actions() == rhs.get_timed_actions();
+  return lhs.get() == rhs.get();
 }
 
 std::ostream& operator<<(std::ostream& os, const action_history& history) noexcept

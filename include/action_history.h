@@ -25,9 +25,7 @@ public:
 
   /// Get the collected in-game times of actions,
   /// in chrononical order
-  const auto& get_timed_actions() const noexcept { return m_timed_actions; }
-
-  const auto& get_moves() const noexcept { return m_timed_actions; }
+  const auto& get() const noexcept { return m_timed_actions; }
 
 private:
 
@@ -74,6 +72,10 @@ bool is_enpassantable(
   const action_history& action_history,
   const in_game_time when
 );
+
+
+/// Is this piece selected, according to its action history
+bool is_piece_selected(const action_history& h);
 
 /// Combine action histories and sort these
 action_history merge_action_histories(const std::vector<action_history> histories);

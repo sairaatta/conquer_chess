@@ -1113,6 +1113,16 @@ const piece& get_piece_with_id(const game& g, const piece_id& id)
   assert(!"Should never get here");
 }
 
+piece& get_piece_with_id(game& g, const piece_id& id)
+{
+  assert(has_piece_with_id(g, id));
+  for (auto& p: g.get_pieces())
+  {
+    if (p.get_id() == id) return p;
+  }
+  assert(!"Should never get here");
+}
+
 chess_color get_player_color(
   const side player_side
 ) noexcept
