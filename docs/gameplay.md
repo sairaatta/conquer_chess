@@ -101,10 +101,19 @@ Moving a piece takes one chess move (as per regular chess):
 it takes just as long to move a pawn one square forward,
 as to move a queen accross the board.
 
+If two pieces attempt to move to the same square (due to realtime speed),
+the earlier piece will arrive at that square,
+where the later piece will go back to its original square.
+
 Capturing a piece takes one chess move (as per regular chess):
 when a piece starts attacking, it will take one time unit
 to lower the health of the attacked piece to zero.
 When the health of the attacked piece reaches zero,
 the attacker instantaneously moves to the square of the
 captured piece.
+
+If multiple pieces attack the same square (due to realtime speed),
+the attacked piece will lose health faster.
+:construction: It is the first attacker that will move to the square.
+
 

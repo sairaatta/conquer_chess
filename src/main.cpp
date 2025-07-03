@@ -171,23 +171,37 @@ std::vector<std::string> collect_args(int argc, char **argv) {
   return v;
 }
 
+void play_standard_random_game()
+{
+  try
+  {
+    const int n_turns{100000};
+    const auto g = play_random_game(n_turns, 42);
+    std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
+    std::clog << "Winner:\n";
+    if (g.get_winner().has_value())
+    {
+      std::clog << to_str(g.get_winner().value()) << '\n';
+    }
+    else
+    {
+      std::clog << "None" << '\n';
+    }
+  }
+  catch (std::exception& e)
+  {
+    std::cerr
+      << "ERROR! Exception thrown: \n"
+      << e.what() << '\n'
+    ;
+  }
+}
+
 void get_runtime_speed_profile()
 {
   #ifdef NDEBUG
   // Do the profile here
-  const int n_turns{100000};
-  const auto g = play_random_game(n_turns, 42);
-  std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
-  std::clog << "Winner:\n";
-  if (g.get_winner().has_value())
-  {
-    std::clog << to_str(g.get_winner().value()) << '\n';
-  }
-  else
-  {
-    std::clog << "None" << '\n';
-  }
-
+  play_standard_random_game()
   #else
   std::cerr << "Do not profile in debug mode\n";
   assert(!"Do not profile in debug mode");
@@ -201,12 +215,15 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   #ifndef NDEBUG
   test();
 
-  std::clog << "Running random game\n";
-  const int n_turns{100000};
-  const auto g = play_random_game(n_turns, 1);
-  std::clog << "Done\n";
-
+  const bool do_play_random_game{false};
+  if (do_play_random_game)
+  {
+    std::clog << "Running random game\n";
+    play_standard_random_game();
+    std::clog << "Done\n";
+  }
   #endif
+
   const auto args = collect_args(argc, argv);
   if (args.size() == 2 && args[1] == "--profile")
   {

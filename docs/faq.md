@@ -90,42 +90,58 @@ with a maximum of 1 mouse user.
 
 The keyboard has 4 action keys.
 
-The first action key has a default action, which is the one expected.
-If there are multiple actions, using another action key triggers the other actions.
+The game shows what each key does in a certain context.
 
-<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
+???- question "Are 4 action keys enough?"
 
-| When                                              | Action key 1     | Action key 2    | Action key 3      | Action key 4      |
-| ------------------------------------------------- | ---------------- | --------------- | ----------------- | ----------------- |
-| Nothing selected                                  | .                | .               | .                 | .                 |
-| Nothing selected, cursor at square with own piece | Select           | .               | .                 | .                 |
-| Piece selected, cursor at the selected piece      | Unselect         | .               | .                 | .                 |
-| Piece selected, cursor at valid target square     | Move             | .               | .                 | .                 |
-| Piece selected, cursor at valid target opponent   | Attack           | .               | .                 | .                 |
-| King selected, cursor at valid castling square    | Castle           | .               | .                 | .                 |
-| Pawn in promotion selected                        | Promote to queen | Promote to rook | Promote to bishop | Promote to knight |
+    Almost always yes.
 
-<!-- markdownlint-enable MD013 -->
+    It is possible to have 5 possible actions,
+    for example, when the cursor is on a selected pawn
+    that is ready to promote. 
+    The actions will be:
+
+    - Unselect
+    - Promote to queen
+    - Promote to rook
+    - Promote to bishop
+    - Promote to rook
+
+    The fifth action, hence, cannot be chosen.
 
 ### Mouse controls
 
-The mouse has a default action, triggered by the Left Mouse Button ('LMB').
-If there are multiple actions, clicking Right Mouse Button ('RMB')
-changes to another action.
+The mouse has 2 action buttons.
 
-<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
+The game shows what each button does in a certain context.
 
-| When                                              | LMB default      | Other options, if any                                 |
-| ------------------------------------------------- | ---------------- | ----------------------------------------------------- |
-| Nothing selected                                  | .                | .                                                     |
-| Nothing selected, cursor at square with own piece | Select           | .                                                     |
-| Piece selected, cursor at the selected piece      | Unselect         | .                                                     |
-| Piece selected, cursor at valid target square     | Move             | .                                                     |
-| Piece selected, cursor at valid target opponent   | Attack           | .                                                     |
-| King selected, cursor at valid castling square    | Castle           | .                                                     |
-| Pawn in promotion selected                        | Promote to queen | Promote to rook, promote to bishop, promote to knight |
+???- question "Are 2 action keys enough?"
 
-<!-- markdownlint-enable MD013 -->
+    Almost always yes.
+
+    It is possible to have 3 possible actions,
+    for example, when the cursor is on a selected king
+    that can castle both king- and queenside.
+    The actions will be:
+
+    - Unselect
+    - Castle kingside
+    - Castle queenside
+
+    The third action, hence, cannot be chosen.
+    This can be solved by moving the cursor to an empty square.
+
+    It is possible to have 5 possible actions,
+    for example, when the cursor is on a selected pawn
+    that is ready to promote. The actions will be:
+
+    - Unselect
+    - Promote to queen
+    - Promote to rook
+    - Promote to bishop
+    - Promote to rook
+
+    The fifth action, hence, cannot be chosen.
 
 ## Technical
 
