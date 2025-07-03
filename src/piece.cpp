@@ -1133,7 +1133,7 @@ void piece::tick(
       tick_move(*this, dt, g);
       break;
     case piece_action_type::attack:
-      tick_attack(*this, dt, g, lo);
+      tick_attack(*this, dt, g);
       break;
     case piece_action_type::attack_en_passant:
       tick_attack_en_passant(*this, dt, g, lo);
@@ -1182,8 +1182,7 @@ void piece::tick(
 void tick_attack(
   piece& p,
   const delta_t& dt,
-  game& g,
-  const lobby_options& /* lo */
+  game& g
 )
 {
   assert(!p.get_actions().empty());

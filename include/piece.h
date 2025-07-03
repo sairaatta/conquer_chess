@@ -294,8 +294,7 @@ void test_piece();
 void tick_attack(
   piece& p,
   const delta_t& dt,
-  game& g,
-  const lobby_options& lo
+  game& g
 );
 
 void tick_attack_en_passant(
