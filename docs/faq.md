@@ -94,6 +94,10 @@ The game shows what each key does in a certain context.
 
     Almost always yes.
 
+    ![Game screen v0.9](20250703_1.jpg)
+
+    > A keyboard player cannot promote to a knight if a piece is selected. 
+
     It is possible to have 5 possible actions,
     for example, when the cursor is on a selected pawn
     that is ready to promote. 
@@ -117,6 +121,10 @@ The game shows what each button does in a certain context.
 
     Almost always yes.
 
+    ![Game screen v0.9](20250703_2.jpg)
+
+    > A mouse player cannot castle queenside if a piece is selected. 
+
     It is possible to have 3 possible actions,
     for example, when the cursor is on a selected king
     that can castle both king- and queenside.
@@ -129,7 +137,7 @@ The game shows what each button does in a certain context.
     The third action, hence, cannot be chosen.
     This can be solved by moving the cursor to an empty square.
 
-    It is possible to have 5 possible actions,
+    Additionally, it is possible to have 5 possible actions,
     for example, when the cursor is on a selected pawn
     that is ready to promote. The actions will be:
 
