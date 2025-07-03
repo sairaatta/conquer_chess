@@ -120,8 +120,6 @@ public:
   /// Set the current/occupied square
   void set_current_square(const square& s) noexcept { m_current_square = s; }
 
-  /// Set the selectedness of the piece
-  void set_selected(bool is_selected) noexcept;
 
   /// Do one frame of movement, resulting in a piece movement of 1 * delta_t
   /// @param delta_t the fraction of a full move that is done, where
@@ -160,6 +158,9 @@ private:
   double m_health;
 
   /// The piece its ID
+  ///
+  /// A piece needs an ID, so that the `game_controller` can keep
+  /// track of a piece that is moving.
   piece_id m_id;
 
   /// The in-game time (in chess moves)
@@ -169,6 +170,8 @@ private:
   bool is_selected() const noexcept { return m_is_selected; }
   /// Is this piece selected?
   bool m_is_selected;
+  /// Set the selectedness of the piece
+  void set_selected(bool is_selected) noexcept;
 
   /// The number of pieces killed by this one
   int m_kill_count;

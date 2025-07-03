@@ -50,22 +50,6 @@ int count_user_inputs(const user_inputs& a);
 /// Count the total number of piece actions to be done by the game
 int count_piece_actions(const user_inputs& a);
 
-/// Process a space, hence a square as a coordinat
-void do_select(
-  game& g,
-  game_controller& c,
-  const square& coordinat,
-  const chess_color player_color
-);
-
-/// Select a piece
-void do_select(
-  game& g,
-  game_controller& c,
-  const std::string& square_str,
-  const chess_color player_color
-);
-
 /// Select a piece
 void do_select(
   game& g,

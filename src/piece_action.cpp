@@ -125,6 +125,27 @@ void test_piece_action()
     const piece_action b(chess_color::white, piece_type::king, piece_action_type::move, square("e2"), square("e4"));
     assert(!to_str(piece_action(b)).empty());
   }
+  // to_str, move a white pawn
+  {
+    const piece_action pa(chess_color::white, piece_type::pawn, piece_action_type::move, "e2", "e4");
+    const auto created{to_str(pa)};
+    const std::string expected{"white pawn moves from e2 to e4"};
+    assert(created == expected);
+  }
+  // to_str, select a white pawn
+  {
+    const piece_action pa(chess_color::white, piece_type::pawn, piece_action_type::select, "e2", "e2");
+    const auto created{to_str(pa)};
+    const std::string expected{"white pawn selected at e2"};
+    assert(created == expected);
+  }
+  // to_str, unselect a black pawn
+  {
+    const piece_action pa(chess_color::black, piece_type::pawn, piece_action_type::unselect, "e7", "e7");
+    const auto created{to_str(pa)};
+    const std::string expected{"black pawn unselected at e7"};
+    assert(created == expected);
+  }
   // to_str on std::vector<piece_action>
   {
     std::vector<piece_action> v;
@@ -387,7 +408,7 @@ std::string to_str(const piece_action& a) noexcept
       s << a.get_color() << " " << a.get_piece_type() << " " << a.get_action_type() << " en-passant from " << a.get_from() << " to " << a.get_to();
       break;
     case piece_action_type::move:
-      s << a.get_color() << " " << a.get_piece_type() << " " << a.get_action_type() << " from " << a.get_from() << " to " << a.get_to();
+      s << a.get_color() << " " << a.get_piece_type() << " moves from " << a.get_from() << " to " << a.get_to();
      break;
     case piece_action_type::promote_to_bishop:
       assert(a.get_piece_type() == piece_type::pawn || a.get_piece_type() == piece_type::bishop);
@@ -407,11 +428,11 @@ std::string to_str(const piece_action& a) noexcept
      break;
     case piece_action_type::select:
       assert(a.get_from() == a.get_to());
-      s << a.get_color() << " " << a.get_piece_type() << " is " << a.get_action_type() << " at " << a.get_from();
+      s << a.get_color() << " " << a.get_piece_type() << " selected at " << a.get_from();
      break;
     case piece_action_type::unselect:
       assert(a.get_from() == a.get_to());
-      s << a.get_color() << " " << a.get_piece_type() << " is " << a.get_action_type() << " at " << a.get_from();
+      s << a.get_color() << " " << a.get_piece_type() << " unselected at " << a.get_from();
      break;
   }
   return s.str();

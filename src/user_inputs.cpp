@@ -41,61 +41,13 @@ int count_user_inputs(const user_inputs& a)
 void do_select(
   game& g,
   game_controller& c,
-  const square& coordinat,
-  const chess_color player_color
-)
-{
-  if (has_selected_pieces(g, c, player_color))
-  {
-    if (is_piece_at(g, coordinat)) {
-
-      auto& piece{get_piece_at(g, coordinat)};
-      if (piece.get_color() == player_color)
-      {
-        assert(c.get_selected_square(get_player_side(player_color)) != piece.get_current_square()); // Else this would be an unselect
-
-        //unselect_all_pieces(g, player_color);
-        c.set_selected_square(get_player_side(player_color), piece.get_current_square());
-        //select(piece); // 2
-        //assert(get_selected_pieces(g, player_color).size() == 1);
-
-
-      }
-    }
-  }
-  else
-  {
-    if (is_piece_at(g, coordinat))
-    {
-      auto& piece{get_piece_at(g, coordinat)};
-      if (piece.get_color() == player_color)
-      {
-        //assert(!piece.is_selected()); // Else would be an unselect
-        //select(piece); // 5
-        c.set_selected_square(get_player_side(player_color), piece.get_current_square());
-      }
-    }
-  }
-}
-
-void do_select(
-  game& g,
-  game_controller& c,
-  const std::string& square_str,
-  const chess_color player_color
-)
-{
-  do_select(g, c, square(square_str), player_color);
-}
-
-void do_select(
-  game& g,
-  game_controller& c,
   const std::string& square_str,
   const side player_side
 )
 {
-  do_select(g, c, square_str, get_player_color(player_side));
+  move_cursor_to(c, square_str, player_side);
+  add_user_input(c, create_press_action_1(player_side));
+  c.apply_user_inputs_to_game(g);
 }
 
 void do_select_and_move_piece(

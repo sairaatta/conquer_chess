@@ -258,7 +258,7 @@ void test_game_functions()
   {
     game g{create_game_with_standard_starting_position()};
     auto& white_queen{get_piece_at(g, "d1")};
-    white_queen.set_selected(true);
+    //white_queen.set_selected(true);
     // Wrong file
     assert(!can_do_attack(g, white_queen, square("c8"), side::lhs));
   }
@@ -266,7 +266,7 @@ void test_game_functions()
   {
     game g{create_game_with_standard_starting_position()};
     auto& white_queen{get_piece_at(g, "d1")};
-    white_queen.set_selected(true);
+    //white_queen.set_selected(true);
     // Cannot attack own pieces
     assert(!can_do_attack(g, white_queen, square("d2"), side::lhs));
   }
@@ -276,7 +276,7 @@ void test_game_functions()
       create_game_with_starting_position(starting_position_type::pawns_at_promotion)
     };
     auto& white_pawn{get_piece_at(g, "a8")};
-    white_pawn.set_selected(true);
+    //white_pawn.set_selected(true);
     assert(can_do_promote(white_pawn, side::lhs));
   }
   // can_do_castle_kingside
@@ -285,7 +285,7 @@ void test_game_functions()
       create_game_with_starting_position(starting_position_type::ready_to_castle)
     };
     auto& white_king{get_piece_at(g, "e1")};
-    white_king.set_selected(true);
+    //white_king.set_selected(true);
     assert(can_do_castle_kingside(g, white_king, side::lhs));
   }
   // can_do_castle_queenside
@@ -294,7 +294,7 @@ void test_game_functions()
       create_game_with_starting_position(starting_position_type::ready_to_castle)
     };
     auto& white_king{get_piece_at(g, "e1")};
-    white_king.set_selected(true);
+    //white_king.set_selected(true);
     assert(can_do_castle_queenside(g, white_king, side::lhs));
   }
 
@@ -653,8 +653,8 @@ void test_game_functions()
       };
       auto& white_king{get_piece_at(g, "e1")};
       auto& black_king{get_piece_at(g, "e8")};
-      white_king.set_selected(true);
-      black_king.set_selected(true);
+      //white_king.set_selected(true);
+      //black_king.set_selected(true);
       const std::string s{"e4"}; // Irrelevant
       assert(can_do(g, white_king, piece_action_type::castle_kingside, s, side::lhs));
       assert(can_do(g, black_king, piece_action_type::castle_kingside, s, side::rhs));
@@ -738,7 +738,7 @@ void test_game_functions()
     game g{create_game_with_standard_starting_position()};
     auto& piece{get_piece_at(g, square("e1"))};
     assert(piece.get_type() == piece_type::king);
-    piece.set_selected(true); // Just needs to compile
+    //piece.set_selected(true); // Just needs to compile
   }
   // get_player_side
   {

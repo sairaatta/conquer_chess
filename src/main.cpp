@@ -84,6 +84,8 @@
 void test()
 {
 #ifndef NDEBUG
+  test_piece_action();
+
   test_about();
   test_about_view_layout();
   test_action_history();

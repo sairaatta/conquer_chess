@@ -357,6 +357,10 @@ piece& get_piece_at(game& g, const square& coordinat);
 /// will throw if there is no piece
 piece& get_piece_at(game& g, const std::string& square_str);
 
+/// Get the piece with a certain ID.
+/// Assumes that the piece is on the board
+const piece& get_piece_with_id(const game& g, const piece_id& id);
+
 /// Get the color of a player
 chess_color get_player_color(
   const side player
@@ -403,16 +407,11 @@ const std::vector<piece>& get_pieces(const game& g) noexcept;
 /// Get the time in the game
 const in_game_time& get_time(const game& g) noexcept;
 
-/*
-/// See if there is at least 1 piece selected
-/// @param g a game
-/// @param player the color of the player, which is white for player 1
-/// @see use 'get_selected_pieces' to get all the selected pieces
-bool has_selected_pieces(const game& g, const chess_color player);
-
-/// See if there is at least 1 piece selected
-bool has_selected_pieces(const game& g, const side player);
-*/
+/// Determine if there is a piece at the coordinat
+bool has_piece_with_id(
+  const game& g,
+  const piece_id& id
+);
 
 /// Is the square empty?
 bool is_empty(const game& g, const square& s) noexcept;

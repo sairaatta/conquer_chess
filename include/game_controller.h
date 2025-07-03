@@ -38,7 +38,7 @@ public:
   const game_coordinate& get_cursor_pos(const side player_side) const noexcept;
 
   /// Get the selected squares, if any
-  const std::optional<square>& get_selected_square(const side s) const noexcept;
+  const std::optional<piece_id>& get_selected_piece_id(const side s) const noexcept;
 
   /// Get the game users' inputs
   const auto& get_user_inputs() const noexcept { return m_user_inputs; }
@@ -50,7 +50,7 @@ public:
   void set_cursor_pos(const game_coordinate& pos, const side player_side) noexcept;
 
   /// Set the selected square, if any
-  void set_selected_square(const side s, const std::optional<square>& selected_square) noexcept;
+  void set_selected_piece_id(const side s, const std::optional<piece_id>& selected_piece_id) noexcept;
 
 private:
   // Use a friend instead
@@ -60,7 +60,7 @@ private:
   std::map<side, game_coordinate> m_cursor_pos;
 
   /// The selected squares, if any
-  std::map<side, std::optional<square>> m_selected_square;
+  std::map<side, std::optional<piece_id>> m_selected_piece_id;
 
   /// The user inputs that need to be processed
   user_inputs m_user_inputs;

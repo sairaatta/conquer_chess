@@ -1103,6 +1103,16 @@ const std::vector<piece>& get_pieces(const game& g) noexcept
   return g.get_pieces();
 }
 
+const piece& get_piece_with_id(const game& g, const piece_id& id)
+{
+  assert(has_piece_with_id(g, id));
+  for (const auto& p: g.get_pieces())
+  {
+    if (p.get_id() == id) return p;
+  }
+  assert(!"Should never get here");
+}
+
 chess_color get_player_color(
   const side player_side
 ) noexcept
@@ -1216,17 +1226,18 @@ const in_game_time& get_time(const game& g) noexcept
   return g.get_in_game_time();
 }
 
-/*
-bool has_selected_pieces(const game& g, const chess_color player)
+bool has_piece_with_id(
+  const game& g,
+  const piece_id& id
+)
 {
-  return !get_selected_pieces(g, player).empty();
+  for (const auto& p: g.get_pieces())
+  {
+    if (p.get_id() == id) return true;
+  }
+  return false;
 }
 
-bool has_selected_pieces(const game& g, const side player)
-{
-  return !get_selected_pieces(g, player).empty();
-}
-*/
 
 bool is_empty(const game& g, const square& s) noexcept
 {

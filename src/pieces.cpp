@@ -1309,7 +1309,7 @@ void test_pieces()
   {
     auto pieces{get_standard_starting_pieces()};
     auto& piece{get_piece_at(pieces, square("d1"))};
-    piece.set_selected(true); // Just needs to compile
+    piece.set_current_square(square("e1")); // Just needs to compile
   }
   // get_pieces_before_scholars_mate
   {
@@ -1820,16 +1820,3 @@ std::string to_pgn(const std::vector<piece>& pieces)
   s << history;
   return s.str();
 }
-
-/*
-void unselect_all_pieces(
-  std::vector<piece>& pieces,
-  const chess_color color
-)
-{
-  for (auto& piece: pieces)
-  {
-    if (piece.get_color() == color) unselect(piece);
-  }
-}
-*/

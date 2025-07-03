@@ -411,10 +411,12 @@ void piece::receive_damage(const double damage)
   m_health -= physical_damage;
 }
 
+/*
 void select(piece& p) noexcept
 {
   p.set_selected(true);
 }
+*/
 
 void piece::set_current_action_progress(const delta_t& t) noexcept
 {
@@ -1511,12 +1513,12 @@ void toggle_select(piece& p) noexcept
 {
   p.set_selected(!p.is_selected());
 }
-*/
 
 void unselect(piece& p) noexcept
 {
   p.set_selected(false);
 }
+ */
 
 bool operator==(const piece& lhs, const piece& rhs) noexcept
 {
