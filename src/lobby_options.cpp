@@ -9,11 +9,11 @@ lobby_options::lobby_options(
   const race lhs_race,
   const race rhs_race
 )
-  : m_lhs_color{lhs_color},
-    m_lhs_race{lhs_race},
-    m_rhs_race{rhs_race}
 {
-
+  m_color[side::lhs] = lhs_color;
+  m_color[side::rhs] = get_other_color(lhs_color);
+  m_race[side::lhs] = lhs_race;
+  m_race[side::rhs] = rhs_race;
 }
 
 void use_default_lobby_options() noexcept
@@ -25,12 +25,7 @@ void use_default_lobby_options() noexcept
 
 chess_color lobby_options::get_color(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_color;
-  }
-  assert(player_side == side::rhs);
-  return get_other_color(m_lhs_color);
+  return m_color.at(player_side);
 }
 
 chess_color get_color(const side player_side) noexcept
@@ -39,22 +34,27 @@ chess_color get_color(const side player_side) noexcept
   return options.get_color(player_side);
 }
 
+race lobby_options::get_race(const chess_color player_color) const noexcept
+{
+  if (get_color(side::lhs) == player_color) return get_race(side::lhs);
+  assert(get_color(side::rhs) == player_color);
+  return get_race(side::rhs);
+}
+
 race lobby_options::get_race(const side player_side) const noexcept
 {
-  if (player_side == side::lhs)
-  {
-    return m_lhs_race;
-  }
-  assert(player_side == side::rhs);
-  return m_rhs_race;
+  return m_race.at(player_side);
 }
 
 race get_race_of_color(const chess_color c) noexcept
 {
+  return lobby_options::get().get_race(c);
+  /*
   const auto& options{lobby_options::get()};
   if (options.get_color(side::lhs) == c) return options.get_race(side::lhs);
   assert(options.get_color(side::rhs) == c);
   return options.get_race(side::rhs);
+  */
 }
 
 race get_race_of_side(const side player_side) noexcept
@@ -64,28 +64,13 @@ race get_race_of_side(const side player_side) noexcept
 
 void lobby_options::set_color(const chess_color color, const side player_side) noexcept
 {
-  if (player_side == side::lhs)
-  {
-    m_lhs_color = color;
-  }
-  else
-  {
-    assert(player_side == side::rhs);
-    m_lhs_color = get_other_color(color);
-  }
+  m_color[player_side] = color;
+  m_color[get_other_side(player_side)] = get_other_color(color);
 }
 
 void lobby_options::set_race(const race r, const side player_side) noexcept
 {
-  if (player_side == side::lhs)
-  {
-    m_lhs_race = r;
-  }
-  else
-  {
-    assert(player_side == side::rhs);
-    m_rhs_race = r;
-  }
+  m_race[player_side] = r;
 }
 
 void test_lobby_options()
@@ -161,6 +146,8 @@ void test_lobby_options()
     assert(get_color(side::rhs) == chess_color::black);
     assert(get_race_of_color(chess_color::white) == options.get_race(side::lhs));
     assert(get_race_of_color(chess_color::black) == options.get_race(side::rhs));
+    assert(options.get_race(chess_color::white) == options.get_race(side::lhs));
+    assert(options.get_race(chess_color::black) == options.get_race(side::rhs));
   }
   // operator<<
   {

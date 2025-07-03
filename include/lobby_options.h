@@ -6,6 +6,7 @@
 #include "side.h"
 
 #include <iosfwd>
+#include <map>
 
 /// The options that are set in the lobby.
 ///
@@ -27,10 +28,14 @@ public:
   /// Get the chess color of a player
   chess_color get_color(const side player_side) const noexcept;
 
-  /// Get the chess color of a player
+  /// Get the race of a player color
+  race get_race(const chess_color player_color) const noexcept;
+
+  /// Get the race of a player side
   race get_race(const side player_side) const noexcept;
 
-  /// Get the chess color of a player
+
+  /// Set the chess color of a player.
   void set_color(const chess_color color, const side player_side) noexcept;
 
   /// Get the chess color of a player
@@ -44,13 +49,13 @@ private:
     const race rhs_race = race::classic
   );
 
-  /// The selected color for the LHS.
-  /// RHS has the other color
-  chess_color m_lhs_color;
+  /// The selected colors.
+  ///
+  /// The LHS is given by the player, the RHS is concluded
+  std::map<side, chess_color> m_color;
 
-  /// The selected race
-  race m_lhs_race;
-  race m_rhs_race;
+  /// The selected race, as given by the players
+  std::map<side, race> m_race;
 };
 
 void use_default_lobby_options() noexcept;

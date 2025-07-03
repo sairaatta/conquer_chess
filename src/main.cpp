@@ -84,6 +84,8 @@
 void test()
 {
 #ifndef NDEBUG
+  test_lobby_options();
+  assert(!"Yay");
 
   test_about();
   test_about_view_layout();
