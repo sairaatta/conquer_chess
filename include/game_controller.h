@@ -25,6 +25,13 @@
 ///
 /// The most important member function is \link{apply_user_inputs_to_game},
 /// where the user inputs are converted to actions, which are then applied.
+///
+/// Use one of these functions to create a game_controller:
+///
+/// - create_game_controller_with_keyboard_mouse
+/// - create_game_controller_with_mouse_keyboard
+/// - create_game_controller_with_two_keyboards
+/// - create_game_controller_with_user_settings
 class game_controller
 {
 public:
@@ -235,6 +242,10 @@ square get_cursor_square(
   const game_controller& c,
   const side player_side
 );
+
+const in_game_time& get_in_game_time(
+  const game_controller& c
+) noexcept;
 
 /// Get the physical controllers
 const physical_controller& get_physical_controller(

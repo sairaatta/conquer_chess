@@ -747,6 +747,13 @@ square get_cursor_square(
   return square(cursor_pos);
 }
 
+const in_game_time& get_in_game_time(
+  const game_controller& c
+) noexcept
+{
+  return c.get_game().get_in_game_time();
+}
+
 const physical_controller& game_controller::get_physical_controller(const side player_side) const noexcept
 {
   return physical_controllers::get().get_controller(player_side);

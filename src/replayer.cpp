@@ -9,27 +9,30 @@
 #include <sstream>
 
 replayer::replayer(
-  const action_history& r
-) : m_index{0},
-    m_action_history{r}
+  const action_history& r,
+  const game_controller& c
+) :
+    m_action_history{r},
+    m_game_controller{c},
+    m_index{0}
 {
 
 }
 
 
-void replayer::do_move(
-  game_controller& /* c */,
-  game& g,
-  const delta_t& dt
-)
+void replayer::do_move(const delta_t& dt)
 {
+
+  auto& c{m_game_controller};
+  const auto& g{c.get_game()};
+
   // All moves are done
   if (m_index == static_cast<int>(m_action_history.get().size()))
   {
     // Do nothing, except forward the time
     for (int i=0; i!=4; ++i)
     {
-      g.tick(delta_t(dt.get() / 4.0));
+      c.tick(delta_t(dt.get() / 4.0));
     }
     return;
   }
@@ -38,24 +41,24 @@ void replayer::do_move(
   while (1)
   {
     const in_game_time next_action_time{m_action_history.get()[m_index].first};
-    if (next_action_time > g.get_in_game_time() + dt_to_do)
+    if (next_action_time > get_in_game_time(c) + dt_to_do)
     {
       // Do nothing, except forward the time
       for (int i=0; i!=4; ++i)
       {
-        g.tick(delta_t(dt_to_do.get() / 4.0));
+        c.tick(delta_t(dt_to_do.get() / 4.0));
       }
       return;
     }
 
     // Forward to the next move
     const delta_t forward_time{next_action_time - g.get_in_game_time()};
-    g.tick(forward_time);
+    c.tick(forward_time);
     dt_to_do = dt_to_do - forward_time;
 
     // Make the piece do the action retrieved from history
     const piece_action& next_action{m_action_history.get()[m_index].second};
-    get_piece_at(g, next_action.get_from()).add_action(next_action);
+    get_piece_at(c, next_action.get_from()).add_action(next_action);
 
     ++m_index;
 
@@ -64,11 +67,18 @@ void replayer::do_move(
       // Tick away the last time
       for (int i=0; i!=4; ++i)
       {
-        g.tick(delta_t(dt_to_do.get() / 4.0));
+        c.tick(delta_t(dt_to_do.get() / 4.0));
       }
       return;
     }
   }
+}
+
+const in_game_time& get_in_game_time(
+  const replayer& r
+) noexcept
+{
+  return r.get_game().get_in_game_time();
 }
 
 int get_n_moves(const replayer& r) noexcept
@@ -80,21 +90,32 @@ game get_played_scholars_mate()
 {
   // Scholar's mate
   // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-  replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
+  replayer r(
+    create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")),
+    create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))
+  );
   assert(get_n_moves(r) == 7);
-  game g{create_game_with_starting_position(starting_position_type::standard)};
-  game_controller c{create_game_controller_with_keyboard_mouse()};
 
-  r.do_move(c, g); // e2-e4
-  r.do_move(c, g); // e7-e5
-  r.do_move(c, g); // Qd1-h5
-  r.do_move(c, g); // Nb8-c6
-  r.do_move(c, g); // Bf1-c4
-  r.do_move(c, g); // Ng8-f6
-  r.do_move(c, g); // Qh5xf7#
-  r.do_move(c, g); // 1-0, which is ignored
-  assert(is_checkmate(g.get_pieces(), chess_color::black));
-  return g;
+  r.do_move(); // e2-e4
+  r.do_move(); // e7-e5
+  r.do_move(); // Qd1-h5
+  r.do_move(); // Nb8-c6
+  r.do_move(); // Bf1-c4
+  r.do_move(); // Ng8-f6
+  r.do_move(); // Qh5xf7#
+  r.do_move(); // 1-0, which is ignored
+  assert(is_checkmate(r.get_game().get_pieces(), chess_color::black));
+  return r.get_game();
+}
+
+bool is_piece_at(const replayer& r, const square& coordinate)
+{
+  return is_piece_at(r.get_game(), coordinate);
+}
+
+bool is_piece_at(const replayer& r, const std::string& square_str)
+{
+  return is_piece_at(r.get_game(), square_str);
 }
 
 void test_replayer()
@@ -109,73 +130,73 @@ void test_replayer()
   // replayer::do_move on empty replay does nothing
   {
     replayer r;
-    game g;
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g;
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(r.get_index() == 0);
-    assert(g.get_in_game_time() == in_game_time(0.0));
-    r.do_move(c, g);
+    assert(get_in_game_time(r) == in_game_time(0.0));
+    r.do_move();
     assert(r.get_index() == 0);
-    assert(g.get_in_game_time() == in_game_time(1.0));
+    assert(get_in_game_time(r) == in_game_time(1.0));
   }
   // replayer::do_move does not increase last_time in 0.1 interval
   {
     replayer r;
-    game g;
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    r.do_move(c, g);
+    //game g;
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
+    r.do_move();
     assert(r.get_index() == 0);
-    g.tick(delta_t(0.1));
-    r.do_move(c, g);
+    r.do_move(delta_t(0.1));
     assert(r.get_index() == 0);
   }
   // replayer can forward a pawn two squares forward
   {
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4")));
+    replayer r(
+      create_action_history_from_pgn(pgn_game_string("1. e4")),
+      create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))
+    );
     assert(get_n_moves(r) == 1);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(is_piece_at(g, square("e2")));
-    assert(!is_piece_at(g, square("e4")));
-    r.do_move(c, g);
-    assert(g.get_in_game_time() == in_game_time(1.0));
-    assert(!is_piece_at(g, square("e2")));
-    assert(is_piece_at(g, square("e4")));
+    assert(is_piece_at(r, square("e2")));
+    assert(!is_piece_at(r, square("e4")));
+    r.do_move();
+    assert(get_in_game_time(r) == in_game_time(1.0));
+    assert(!is_piece_at(r, square("e2")));
+    assert(is_piece_at(r, square("e4")));
   }
   // replayer can forward a pawn one square
   {
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e3")));
     assert(get_n_moves(r) == 1);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(is_piece_at(g, square("e2")));
-    assert(!is_piece_at(g, square("e3")));
-    r.do_move(c, g);
-    assert(!is_piece_at(g, square("e2")));
-    assert(is_piece_at(g, square("e3")));
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(is_piece_at(r, square("e2")));
+    assert(!is_piece_at(r, square("e3")));
+    r.do_move();
+    assert(!is_piece_at(r, square("e2")));
+    assert(is_piece_at(r, square("e3")));
   }
   // replayer can do Na3
   {
     replayer r(create_action_history_from_pgn(pgn_game_string("1. Na3")));
     assert(get_n_moves(r) == 1);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(is_piece_at(g, square("b1")));
-    assert(!is_piece_at(g, square("a3")));
-    r.do_move(c, g);
-    assert(!is_piece_at(g, square("b1")));
-    assert(is_piece_at(g, square("a3")));
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(is_piece_at(r, square("b1")));
+    assert(!is_piece_at(r, square("a3")));
+    r.do_move();
+    assert(!is_piece_at(r, square("b1")));
+    assert(is_piece_at(r, square("a3")));
   }
   // replayer can do Nc3
   {
     replayer r(create_action_history_from_pgn(pgn_game_string("1. Nc3")));
     assert(get_n_moves(r) == 1);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(is_piece_at(g, square("b1")));
-    assert(!is_piece_at(g, square("c3")));
-    r.do_move(c, g);
-    assert(!is_piece_at(g, square("b1")));
-    assert(is_piece_at(g, square("c3")));
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
+    assert(is_piece_at(r, square("b1")));
+    assert(!is_piece_at(r, square("c3")));
+    r.do_move();
+    assert(!is_piece_at(r, square("b1")));
+    assert(is_piece_at(r, square("c3")));
   }
   // replayer can do two moves
   {
@@ -183,16 +204,16 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5")));
     assert(get_n_moves(r) == 2);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
+    r.do_move(); // e2-e4
 
-    assert(is_piece_at(g, square("e7")));
-    assert(!is_piece_at(g, square("e5")));
-    r.do_move(c, g); // e7-e5
-    assert(!is_piece_at(g, square("e7")));
-    assert(is_piece_at(g, square("e5")));
+    assert(is_piece_at(r, square("e7")));
+    assert(!is_piece_at(r, square("e5")));
+    r.do_move(); // e7-e5
+    assert(!is_piece_at(r, square("e7")));
+    assert(is_piece_at(r, square("e5")));
   }
   // replayer can do three moves
   {
@@ -200,17 +221,17 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5")));
     assert(get_n_moves(r) == 3);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
 
-    assert(is_piece_at(g, square("d1")));
-    assert(!is_piece_at(g, square("h5")));
-    r.do_move(c, g); // Qd1-h5
-    assert(!is_piece_at(g, square("d1")));
-    assert(is_piece_at(g, square("h5")));
+    assert(is_piece_at(r, square("d1")));
+    assert(!is_piece_at(r, square("h5")));
+    r.do_move(); // Qd1-h5
+    assert(!is_piece_at(r, square("d1")));
+    assert(is_piece_at(r, square("h5")));
   }
   // replayer can do four moves
   {
@@ -218,18 +239,18 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6")));
     assert(get_n_moves(r) == 4);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
-    r.do_move(c, g); // Qd1-h5
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
+    r.do_move(); // Qd1-h5
 
-    assert(is_piece_at(g, square("b8")));
-    assert(!is_piece_at(g, square("c6")));
-    r.do_move(c, g); // Nb8-c6
-    assert(!is_piece_at(g, square("b8")));
-    assert(is_piece_at(g, square("c6")));
+    assert(is_piece_at(r, square("b8")));
+    assert(!is_piece_at(r, square("c6")));
+    r.do_move(); // Nb8-c6
+    assert(!is_piece_at(r, square("b8")));
+    assert(is_piece_at(r, square("c6")));
   }
   // replayer can do five moves
   {
@@ -237,19 +258,19 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4")));
     assert(get_n_moves(r) == 5);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
-    r.do_move(c, g); // Qd1-h5
-    r.do_move(c, g); // Nb8-c6
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
+    r.do_move(); // Qd1-h5
+    r.do_move(); // Nb8-c6
 
-    assert(is_piece_at(g, square("f1")));
-    assert(!is_piece_at(g, square("c4")));
-    r.do_move(c, g); // Bf1-c4
-    assert(!is_piece_at(g, square("f1")));
-    assert(is_piece_at(g, square("c4")));
+    assert(is_piece_at(r, square("f1")));
+    assert(!is_piece_at(r, square("c4")));
+    r.do_move(); // Bf1-c4
+    assert(!is_piece_at(r, square("f1")));
+    assert(is_piece_at(r, square("c4")));
   }
   // replayer can do six moves
   {
@@ -258,19 +279,19 @@ void test_replayer()
 
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6")));
     assert(get_n_moves(r) == 6);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
-    r.do_move(c, g); // Qd1-h5
-    r.do_move(c, g); // Nb8-c6
-    r.do_move(c, g); // Bf1-c4
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
+    r.do_move(); // Qd1-h5
+    r.do_move(); // Nb8-c6
+    r.do_move(); // Bf1-c4
 
-    assert(is_piece_at(g, square("g8")));
-    assert(!is_piece_at(g, square("f6")));
-    r.do_move(c, g); // Ng8-f6
-    assert(!is_piece_at(g, square("g8")));
-    assert(is_piece_at(g, square("f6")));
+    assert(is_piece_at(r, square("g8")));
+    assert(!is_piece_at(r, square("f6")));
+    r.do_move(); // Ng8-f6
+    assert(!is_piece_at(r, square("g8")));
+    assert(is_piece_at(r, square("f6")));
   }
   // replayer can do seven moves
   {
@@ -281,18 +302,18 @@ void test_replayer()
     game g{create_game_with_starting_position(starting_position_type::standard)};
     game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
-    r.do_move(c, g); // Qd1-h5
-    r.do_move(c, g); // Nb8-c6
-    r.do_move(c, g); // Bf1-c4
-    r.do_move(c, g); // Ng8-f6
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
+    r.do_move(); // Qd1-h5
+    r.do_move(); // Nb8-c6
+    r.do_move(); // Bf1-c4
+    r.do_move(); // Ng8-f6
 
-    assert(is_piece_at(g, square("h5")));
-    assert(is_piece_at(g, square("f7"))); // The piece to be captures
-    r.do_move(c, g); // Qh5xf7#
-    assert(!is_piece_at(g, square("h5")));
-    assert(is_piece_at(g, square("f7")));
+    assert(is_piece_at(r, square("h5")));
+    assert(is_piece_at(r, square("f7"))); // The piece to be captures
+    r.do_move(); // Qh5xf7#
+    assert(!is_piece_at(r, square("h5")));
+    assert(is_piece_at(r, square("f7")));
   }
   // replayer can do seven moves with score
   {
@@ -300,17 +321,17 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 7);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
-    r.do_move(c, g); // Qd1-h5
-    r.do_move(c, g); // Nb8-c6
-    r.do_move(c, g); // Bf1-c4
-    r.do_move(c, g); // Ng8-f6
-    r.do_move(c, g); // Qh5xf7#
-    r.do_move(c, g); // 1-0, which is ignored
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
+    r.do_move(); // Qd1-h5
+    r.do_move(); // Nb8-c6
+    r.do_move(); // Bf1-c4
+    r.do_move(); // Ng8-f6
+    r.do_move(); // Qh5xf7#
+    r.do_move(); // 1-0, which is ignored
   }
   // replayer can do seven moves with score and conclude checkmate
   {
@@ -318,18 +339,18 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 7);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
-    r.do_move(c, g); // Qd1-h5
-    r.do_move(c, g); // Nb8-c6
-    r.do_move(c, g); // Bf1-c4
-    r.do_move(c, g); // Ng8-f6
-    r.do_move(c, g); // Qh5xf7#
-    r.do_move(c, g); // 1-0, which is ignored
-    assert(is_checkmate(g.get_pieces(), chess_color::black));
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
+    r.do_move(); // Qd1-h5
+    r.do_move(); // Nb8-c6
+    r.do_move(); // Bf1-c4
+    r.do_move(); // Ng8-f6
+    r.do_move(); // Qh5xf7#
+    r.do_move(); // 1-0, which is ignored
+    assert(is_checkmate(r.get_game().get_pieces(), chess_color::black));
   }
   // replayer can do fools mate and conclude checkmate
   {
@@ -337,15 +358,15 @@ void test_replayer()
     // 1. f3 e6 2. g4 Qh4#
     replayer r(create_action_history_from_pgn(pgn_game_string("1. f3 e6 2. g4 Qh4#")));
     assert(get_n_moves(r) == 4);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    //game g{create_game_with_starting_position(starting_position_type::standard)};
+    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    r.do_move(c, g); // e2-e4
-    r.do_move(c, g); // e7-e5
-    r.do_move(c, g); // Qd1-h5
-    r.do_move(c, g); // Nb8-c6
-    assert(is_checkmate(g.get_pieces(), chess_color::white));
-    assert(!is_checkmate(g.get_pieces(), chess_color::black));
+    r.do_move(); // e2-e4
+    r.do_move(); // e7-e5
+    r.do_move(); // Qd1-h5
+    r.do_move(); // Nb8-c6
+    assert(is_checkmate(r.get_game().get_pieces(), chess_color::white));
+    assert(!is_checkmate(r.get_game().get_pieces(), chess_color::black));
   }
   // get_played_scholars_mate
   {
@@ -357,19 +378,20 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 c5 Nf3
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 c5 2. Nf3")));
+    replayer r(
+      create_action_history_from_pgn(pgn_game_string("1. e4 c5 2. Nf3")),
+      create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))
+    );
     assert(get_n_moves(r) == 3);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
 
-    const auto s1{to_fen_str(g.get_pieces())};
+    const auto s1{to_fen_str(r.get_game().get_pieces())};
     assert(s1 == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 
-    r.do_move(c, g); // e2-e4
+    r.do_move(); // e2-e4
 
     const auto s2{
       to_fen_str(
-        g.get_pieces(),
+        r.get_game().get_pieces(),
         chess_color::black,
         "KQkq",
         "e3",
@@ -379,11 +401,11 @@ void test_replayer()
     };
     assert(s2 == "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1");
 
-    r.do_move(c, g); // c5
+    r.do_move(); // c5
 
     const auto s3{
       to_fen_str(
-        g.get_pieces(),
+        r.get_game().get_pieces(),
         chess_color::white,
         "KQkq",
         "c6",
@@ -393,11 +415,11 @@ void test_replayer()
     };
     assert(s3 == "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2");
 
-    r.do_move(c, g); // Nf3
+    r.do_move(); // Nf3
 
     const auto s4{
       to_fen_str(
-        g.get_pieces(),
+        r.get_game().get_pieces(),
         chess_color::black,
         "KQkq",
         "-",

@@ -4,7 +4,7 @@
 #ifndef LOGIC_ONLY
 
 #include "played_game_view_layout.h"
-#include "game.h"
+#include "game_controller.h"
 #include "controls_bar.h"
 #include "view.h"
 
@@ -35,7 +35,7 @@ public:
   /// Run the game, until the user quits
   void tick_impl(const delta_t dt) override;
 
-  const auto& get_game() const noexcept { return m_game; }
+  const auto& get_game() const noexcept { return m_game_controller.get_game(); }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
@@ -44,7 +44,7 @@ private:
   controls_bar m_controls_bar;
 
   /// The played game
-  game m_game;
+  game_controller m_game_controller;
 
   /// The layout of this window
   played_game_view_layout m_layout;

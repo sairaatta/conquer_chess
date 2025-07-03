@@ -14,7 +14,7 @@
 #include <sstream>
 
 played_game_view::played_game_view()
-  : m_game{create_game_with_standard_starting_position()}
+  : m_game_controller{create_game_controller_with_user_settings(create_game_with_standard_starting_position())}
 {
   m_controls_bar.set_draw_player_controls(false);
 }
@@ -37,7 +37,7 @@ bool played_game_view::process_event_impl(sf::Event& event)
     else if (key_pressed == sf::Keyboard::Key::F2)
     {
       std::ofstream file("replay.pgn");
-      file << to_pgn(m_game) << '\n';
+      file << to_pgn(m_game_controller.get_game()) << '\n';
       play_sound_effect(message(message_type::done, chess_color::white, piece_type::king));
     }
   }
@@ -80,7 +80,7 @@ void played_game_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
-  m_game = play_random_game(10);
+  m_game_controller.get_game() = play_random_game(10);
 }
 
 void played_game_view::stop_impl()
