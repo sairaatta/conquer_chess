@@ -52,7 +52,6 @@ int count_piece_actions(const user_inputs& a);
 
 /// Select a piece
 void do_select(
-  game& g,
   game_controller& c,
   const std::string& square_str,
   const side player_side
@@ -60,7 +59,6 @@ void do_select(
 
 /// Select a piece and move it to a target square
 void do_select_and_move_piece(
-  game& g,
   game_controller& c,
   const std::string& from_square_str,
   const std::string& to_square_str,

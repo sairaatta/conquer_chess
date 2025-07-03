@@ -1064,6 +1064,11 @@ game create_game_with_starting_position(starting_position_type t) noexcept
   return game{};
 }
 
+game create_game_with_user_settings() noexcept
+{
+  return game(create_pieces_from_settings());
+}
+
 int get_index_of_closest_piece_to(
   const game& g,
   const game_coordinate& coordinat

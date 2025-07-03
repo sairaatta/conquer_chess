@@ -275,23 +275,6 @@ int count_piece_actions(
   const chess_color player
 );
 
-/*
-/// Count the number of selected units in total
-int count_selected_units(const game& g);
-
-/// Count the number of selected units of a player
-int count_selected_units(
-  const game& g,
-  const chess_color player
-);
-
-/// Count the number of selected units of a player side
-int count_selected_units(
-  const game& g,
-  const side player_side
-);
-*/
-
 /// Create a game from a FEN string
 game create_game_from_fen_string(const fen_string& s) noexcept;
 
@@ -303,6 +286,8 @@ game create_game_with_standard_starting_position() noexcept;
 /// and a specific starting position
 game create_game_with_starting_position(starting_position_type t) noexcept;
 
+/// Create a game with the settings as defined by the user
+game create_game_with_user_settings() noexcept;
 
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(

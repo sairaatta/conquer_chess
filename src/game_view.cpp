@@ -33,7 +33,8 @@
 #include <sstream>
 
 game_view::game_view(
-) : m_log{game_options::get().get_message_display_time_secs()},
+) : m_game_controller{create_game_controller_with_two_keyboards()},
+    m_log{game_options::get().get_message_display_time_secs()},
     m_statistics_output_file("tmp.txt")
 {
   m_controls_bar.set_draw_up_down(false);
@@ -46,23 +47,24 @@ void game_view::tick_impl(delta_t dt)
 {
   assert(is_active());
 
+  const game& g{m_game_controller.get_game()};
 
   const int n_logs_per_time_unit{8};
-  if (static_cast<int>(m_game.get_in_game_time().get() * n_logs_per_time_unit)
-    < static_cast<int>((m_game.get_in_game_time() + dt).get() * n_logs_per_time_unit))
+  if (static_cast<int>(g.get_in_game_time().get() * n_logs_per_time_unit)
+    < static_cast<int>((g.get_in_game_time() + dt).get() * n_logs_per_time_unit))
   {
-    m_statistics_output_file.add_to_file(m_game);
-    m_statistics_in_time.add(m_game);
+    m_statistics_output_file.add_to_file(g);
+    m_statistics_in_time.add(g);
   }
 
   // Disard old messages
   m_log.tick();
 
-  if (!m_game.get_winner().has_value())
+  if (!g.get_winner().has_value())
   {
 
     // Do a tick, so that one delta_t equals one second under normal game speed
-    m_game.tick(dt);
+    m_game_controller.tick(dt);
 
     // Read the pieces' messages and play their sounds
     process_piece_messages();
@@ -113,7 +115,7 @@ const std::vector<piece>& get_pieces(const game_view& v) noexcept
 
 void game_view::play_pieces_sound_effects()
 {
-  for (const auto& sound_effect: collect_messages(m_game))
+  for (const auto& sound_effect: collect_messages(m_game_controller.get_game()))
   {
     game_resources::get().get_sound_effects().play(sound_effect);
   }
@@ -125,12 +127,11 @@ const game_coordinate& get_cursor_pos(const game_view& view, const side player) 
 }
 
 std::vector<std::string> get_controls_texts(
-  const game_view& view,
   const game_controller& c,
   const side player_side
 )
 {
-  const auto actions{get_piece_actions(view.get_game(), c, player_side)};
+  const auto actions{get_piece_actions(c, player_side)};
   std::vector<std::string> texts;
   texts.reserve(actions.size());
   std::transform(
@@ -167,10 +168,10 @@ bool game_view::process_event_impl(sf::Event& event)
   }
 
   // Become unresponsive when there is a winner
-  if (!m_game.get_winner().has_value())
+  if (!m_game_controller.get_game().get_winner().has_value())
   {
-    ::process_event(m_game_controller, event, m_layout, m_game.get_in_game_time());
-    m_game_controller.apply_user_inputs_to_game(m_game);
+    ::process_event(m_game_controller, event, m_layout, m_game_controller.get_game().get_in_game_time());
+    m_game_controller.apply_user_inputs_to_game();
   }
   return false;
 }
@@ -215,7 +216,7 @@ void process_event(
 
 void game_view::process_piece_messages()
 {
-  for (const auto& piece_message: collect_messages(m_game))
+  for (const auto& piece_message: collect_messages(m_game_controller.get_game()))
   {
     m_log.add_message(piece_message);
   }
@@ -223,7 +224,7 @@ void game_view::process_piece_messages()
   // Play the new sounds to be played
   play_pieces_sound_effects();
 
-  clear_piece_messages(m_game);
+  clear_piece_messages(m_game_controller.get_game());
 }
 
 void game_view::draw_impl()
@@ -259,11 +260,11 @@ void game_view::draw_impl()
   }
 
   // Draw winner
-  if (m_game.get_winner().has_value())
+  if (m_game_controller.get_game().get_winner().has_value())
   {
 
     draw_text(
-      "Winner: " + to_human_str(m_game.get_winner().value()),
+      "Winner: " + to_human_str(m_game_controller.get_game().get_winner().value()),
       m_layout.get_background(),
       200
     );
@@ -312,7 +313,7 @@ void draw_controls(
   draw_navigation_controls(layout.get_navigation_controls(), player_side);
 
   const std::vector<std::string> texts{
-      get_controls_texts(view, view.get_game_controller(), player_side)
+      get_controls_texts(view.get_game_controller(), player_side)
   };
 
   for (const auto n: get_all_action_numbers())
@@ -935,7 +936,7 @@ void draw_unit_info(game_view& view, const side player_side)
   const auto& c{view.get_game_controller()};
   const auto player_color{get_player_color(player_side)};
 
-  const auto selected_pieces{get_selected_pieces(view.get_game(), c, player_color)};
+  const auto selected_pieces{get_selected_pieces(c, player_color)};
   if (selected_pieces.empty()) return;
   assert(selected_pieces.size() == 1);
   const auto& piece{selected_pieces[0]};
@@ -975,7 +976,9 @@ void game_view::start_impl()
   game_resources::get().get_sound_effects().set_master_volume(
     game_options::get().get_sound_effects_volume()
   );
-  m_game = game();
+  m_game_controller = create_game_controller_with_user_settings(
+    create_game_with_user_settings()
+  );
   assert(!is_active());
   set_is_active(true);
 
@@ -1001,9 +1004,8 @@ bool would_be_valid(
   chess_color player_color
 )
 {
-  const auto& game{view.get_game()};
   const auto& c{view.get_game_controller()};
-  return can_player_select_piece_at_cursor_pos(game, c, player_color);
+  return can_player_select_piece_at_cursor_pos(c, player_color);
 }
 
 #endif // LOGIC_ONLY

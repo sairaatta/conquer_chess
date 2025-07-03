@@ -37,9 +37,9 @@ public:
   /// The the elapsed time in seconds
   double get_elapsed_time_secs() const noexcept;
 
-  auto& get_game() noexcept { return m_game; }
+  auto& get_game() noexcept { return m_game_controller.get_game(); }
 
-  const auto& get_game() const noexcept { return m_game; }
+  const auto& get_game() const noexcept { return m_game_controller.get_game(); }
 
   const auto& get_game_controller() const noexcept { return m_game_controller; }
 
@@ -65,9 +65,6 @@ private:
   sf::Clock m_clock;
 
   controls_bar m_controls_bar;
-
-  /// The game logic
-  game m_game;
 
   /// The game controller, interacts with game
   game_controller m_game_controller;
@@ -107,7 +104,6 @@ physical_controller_type get_physical_controller_type(const game_view& view, con
 
 /// Get the controls text for a player with a controller
 std::vector<std::string> get_controls_texts(
-  const game_view& view,
   const game_controller& c,
   const side player_side
 );

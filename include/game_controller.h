@@ -5,6 +5,7 @@
 //#include "action_number.h"
 #include "piece_action_type.h"
 #include "game_coordinate.h"
+#include "game.h"
 #include "side.h"
 #include "user_inputs.h"
 #include "physical_controller_type.h"
@@ -32,10 +33,16 @@ public:
   void add_user_input(const user_input& a);
 
   /// Process all actions and apply these on the game.
-  void apply_user_inputs_to_game(game& g);
+  void apply_user_inputs_to_game();
 
   /// Get the a player's cursor position
   const game_coordinate& get_cursor_pos(const side player_side) const noexcept;
+
+  /// Get the game
+  const game& get_game() const noexcept { return m_game; }
+
+  /// Get the game
+  game& get_game() noexcept { return m_game; }
 
   /// Get the selected squares, if any
   const std::optional<piece_id>& get_selected_piece_id(const side s) const noexcept;
@@ -52,12 +59,18 @@ public:
   /// Set the selected square, if any
   void set_selected_piece_id(const side s, const std::optional<piece_id>& selected_piece_id) noexcept;
 
+  /// Make the game go forward
+  void tick(const delta_t& dt = delta_t(1.0));
+
 private:
   // Use a friend instead
-  game_controller();
+  explicit game_controller(const game& g);
 
   /// The in-game coordinat of the LHS user's cursor
   std::map<side, game_coordinate> m_cursor_pos;
+
+  /// The game it controls
+  game m_game;
 
   /// The selected squares, if any
   std::map<side, std::optional<piece_id>> m_selected_piece_id;
@@ -79,9 +92,10 @@ private:
   void apply_action_type_unselect_to_game(game& g, const side s);
 
   /// Force to pick a setup of physical_controllers
-  friend game_controller create_game_controller_with_keyboard_mouse();
-  friend game_controller create_game_controller_with_mouse_keyboard();
-  friend game_controller create_game_controller_with_two_keyboards();
+  friend game_controller create_game_controller_with_keyboard_mouse(const game& g);
+  friend game_controller create_game_controller_with_mouse_keyboard(const game& g);
+  friend game_controller create_game_controller_with_two_keyboards(const game& g);
+  friend game_controller create_game_controller_with_user_settings(const game& g);
   friend class game_view;
 };
 
@@ -94,71 +108,63 @@ void add_user_inputs(game_controller& c, const user_inputs& input);
 
 /// Can the player attack?
 bool can_attack(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 /// Can the player do an en-passant attack?
 bool can_attack_en_passant(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 /// Can the player castle kingside?
 bool can_castle_kingside(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 /// Can the player castle queenside?
 bool can_castle_queenside(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 bool can_move(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 /// Can the player select a piece at the current cursor position?
 bool can_player_select_piece_at_cursor_pos(
-  const game& g,
   const game_controller& c,
   const chess_color cursor_color
 );
 
 /// Can the player select a piece at the current cursor position?
 bool can_player_select_piece_at_cursor_pos(
-  const game& g,
   const game_controller& c,
   const side player_side
 );
 
 bool can_promote(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 
 bool can_select(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
 bool can_unselect(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
+/// Get all the sound effects to be processed
+std::vector<message> collect_messages(const game_controller& g) noexcept;
 
 ///Collect all the piece IDs of the selected pieces, if any
 std::vector<piece_id> collect_selected_piece_ids(const game_controller& c);
@@ -166,28 +172,51 @@ std::vector<piece_id> collect_selected_piece_ids(const game_controller& c);
 /// Convert a chess move, e.g. e4,
 /// to the right user inputs
 user_inputs convert_move_to_user_inputs(
-  const game& g,
   const game_controller& c,
   const chess_move& move
+);
+
+/// Count the total number of actions to be done by pieces of both players
+int count_piece_actions(const game_controller& g);
+
+/// Count the total number of actions to be done by pieces of a player
+int count_piece_actions(
+  const game_controller& g,
+  const chess_color player
 );
 
 /// Count the number of selected units.
 ///
 /// As one can only select one unit, this is either zero or one.
-int count_selected_units(const game_controller& c, const chess_color player_color);
+int count_selected_units(
+  const game_controller& c,
+  const chess_color player_color
+);
 
 /// Count the total number of \link{user_input}s
 /// to be done by the \link{game_controller}.
 int count_user_inputs(const game_controller& c) noexcept;
 
 /// Create a game controller when the players use a keyboard and a mouse
-game_controller create_game_controller_with_keyboard_mouse();
+game_controller create_game_controller_with_keyboard_mouse(const game& g = create_game_with_standard_starting_position());
 
 /// Create a game controller when the players use a mouse and a keyboard
-game_controller create_game_controller_with_mouse_keyboard();
+game_controller create_game_controller_with_mouse_keyboard(const game& g = create_game_with_standard_starting_position());
 
 /// Create a game controller when the players use two keyboards
-game_controller create_game_controller_with_two_keyboards();
+game_controller create_game_controller_with_two_keyboards(const game& g = create_game_with_standard_starting_position());
+
+/// Create a game controller with the user settings
+game_controller create_game_controller_with_user_settings(const game& g = create_game_with_standard_starting_position());
+
+/// Find zero, one or more chess pieces of the specified type and color
+/*
+std::vector<piece> find_pieces(
+  const game_controller& c,
+  const piece_type type,
+  const chess_color color
+);
+*/
 
 /// Get the a player's cursor position
 const game_coordinate& get_cursor_pos(
@@ -224,15 +253,18 @@ physical_controller_type get_physical_controller_type(
 /// For example, action 1 typically un-/selects pieces, where
 /// action 4 is only used to promote to a knight.
 std::vector<piece_action_type> get_piece_actions(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
+const piece& get_piece_at(const game_controller& c, const std::string& square_str);
+const piece& get_piece_at(const game_controller& c, const square& s);
+piece& get_piece_at(game_controller& c, const std::string& square_str);
+piece& get_piece_at(game_controller& c, const square& s);
+
 /// Get the possible moves for a player's selected pieces
 /// Will be empty if no pieces are selected
 std::vector<square> get_possible_moves(
-  const game& g,
   const game_controller& c,
   const side player
 );
@@ -242,7 +274,6 @@ std::vector<square> get_possible_moves(
 /// @param player the color of the player, which is white for player 1
 /// @see use 'has_selected_piece' to see if there is at least 1 piece selected
 std::vector<piece> get_selected_pieces(
-  const game& g,
   const game_controller& c,
   const chess_color player
 );
@@ -252,7 +283,6 @@ std::vector<piece> get_selected_pieces(
 /// @param side the side of the player, which is white for player 1
 /// @see use 'has_selected_piece' to see if there is at least 1 piece selected
 std::vector<piece> get_selected_pieces(
-  const game& g,
   const game_controller& c,
   const side player
 );
@@ -302,26 +332,38 @@ bool has_mouse_controller(const game_controller& c);
 /// @param player the color of the player, which is white for player 1
 /// @see use 'get_selected_pieces' to get all the selected pieces
 bool has_selected_pieces(
-  const game& g,
   const game_controller& c,
   const chess_color player_color
 );
 
 /// See if there is at least 1 piece selected
 bool has_selected_pieces(
-  const game& g,
   const game_controller& c,
   const side player_side
 );
 
 bool is_cursor_on_selected_piece(
-  const game& g,
   const game_controller& c,
   const side player_side
 ) noexcept;
 
+/// Determine if there is a piece at the coordinat
+bool is_piece_at(
+  const game_controller& g,
+  const square& coordinat
+);
+
+/// Determine if there is a piece at the coordinat
+bool is_piece_at(
+  const game_controller& g,
+  const std::string& square_str
+);
+
 /// Determine if the piece is selected
-bool is_selected(const piece& p, const game_controller& c);
+bool is_selected(
+  const piece& p,
+  const game_controller& c
+);
 
 /// The the player at that side a mouse user?
 bool is_mouse_user(const game_controller& c, const side player_side) noexcept;

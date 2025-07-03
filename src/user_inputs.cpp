@@ -39,7 +39,6 @@ int count_user_inputs(const user_inputs& a)
 }
 
 void do_select(
-  game& g,
   game_controller& c,
   const std::string& square_str,
   const side player_side
@@ -47,30 +46,25 @@ void do_select(
 {
   move_cursor_to(c, square_str, player_side);
   add_user_input(c, create_press_action_1(player_side));
-  c.apply_user_inputs_to_game(g);
+  c.apply_user_inputs_to_game();
 }
 
 void do_select_and_move_piece(
-  game& g,
   game_controller& c,
   const std::string& from_square_str,
   const std::string& to_square_str,
   const side player_side
 )
 {
-  do_select(g, c, from_square_str, player_side);
+  do_select(c, from_square_str, player_side);
   move_cursor_to(c, to_square_str, player_side);
   add_user_input(
     c,
     get_user_input_to_select(c, player_side)
   );
   user_inputs inputs{c.get_user_inputs()};
-  c.apply_user_inputs_to_game(g);
-  g.tick(delta_t(0.0));
-  for (int i{0}; i!=2; ++i)
-  {
-    g.tick(delta_t(0.5));
-  }
+  c.apply_user_inputs_to_game();
+  c.tick();
 }
 
 bool is_empty(const user_inputs& inputs) noexcept
@@ -200,41 +194,37 @@ void test_user_inputs()
   }
   // Move up does something
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_up_action(side::lhs));
-    c.apply_user_inputs_to_game(g);
+    c.apply_user_inputs_to_game();
     const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
   // Move right does something
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_right_action(side::lhs));
-    c.apply_user_inputs_to_game(g);
+    c.apply_user_inputs_to_game();
     const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
   // Move down does something
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_down_action(side::lhs));
-    c.apply_user_inputs_to_game(g);
+    c.apply_user_inputs_to_game();
     const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
   // Move left does something
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_left_action(side::lhs));
-    c.apply_user_inputs_to_game(g);
+    c.apply_user_inputs_to_game();
     const game_coordinate after{get_cursor_pos(c, side::lhs)};
     assert(before != after);
   }
@@ -255,46 +245,42 @@ void test_user_inputs()
   }
   // 64: move white's cursor to e2
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
     assert(square(get_cursor_pos(c, side::lhs)) != square("e2"));
     auto inputs{
       get_user_inputs_to_move_cursor_to(c, square("e2"), side::lhs)
     };
     assert(!is_empty(inputs));
     add_user_inputs(c, inputs);
-    c.apply_user_inputs_to_game(g);
-    g.tick(delta_t(0.0));
+    c.apply_user_inputs_to_game();
+    c.tick(delta_t(0.0));
     assert(square(get_cursor_pos(c, side::lhs)) == square("e2"));
   }
-  // 64: move white's cursor to e2 and select the pawn
+  // move white's cursor to e2 and select the pawn
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
     move_cursor_to(c, "e2", side::lhs);
 
-    assert(!is_selected(get_piece_at(g, "e2"), c));
+    assert(!is_selected(get_piece_at(c.get_game(), "e2"), c));
     const user_input input{get_user_input_to_select(c, side::lhs)};
     add_user_input(c, input);
-    c.apply_user_inputs_to_game(g);
-    g.tick(delta_t(0.0));
-    assert(is_selected(get_piece_at(g, "e2"), c));
+    c.apply_user_inputs_to_game();
+    c.tick(delta_t(0.0));
+    assert(is_selected(get_piece_at(c.get_game(), "e2"), c));
   }
   // do_select
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    do_select(g, c, "e2", side::lhs);
-    assert(is_selected(get_piece_at(g, "e2"), c));
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    do_select(c, "e2", side::lhs);
+    assert(is_selected(get_piece_at(c.get_game(), "e2"), c));
   }
   // do_select_and_move_piece
   {
-    game g{create_game_with_standard_starting_position()};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(is_piece_at(g, "e2"));
-    do_select_and_move_piece(g, c, "e2", "e4", side::lhs);
-    assert(!is_piece_at(g, "e2"));
-    assert(is_piece_at(g, "e4"));
+    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    assert(is_piece_at(c, "e2"));
+    do_select_and_move_piece(c, "e2", "e4", side::lhs);
+    assert(!is_piece_at(c, "e2"));
+    assert(is_piece_at(c, "e4"));
   }
   // operator==
   {
