@@ -260,11 +260,6 @@ game create_game_with_standard_starting_position() noexcept;
 /// and a specific starting position
 game create_game_with_starting_position(starting_position_type t) noexcept;
 
-/*
-/// Create a game with the settings as defined by the user
-game create_game_with_user_settings() noexcept;
-*/
-
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(
   const game& g,
@@ -286,10 +281,11 @@ int get_index_of_closest_piece_to(
   const game_coordinate& coordinat
 );
 
+/*
 /// Create a game in which it is only a king versus a king,
 /// to be used in debugging
 game get_kings_only_game() noexcept;
-
+*/
 /// Get all the squares that are occupied, disallowing duplicates
 ///
 /// At the start and end of a tick, all occupied squares must be unique.

@@ -434,7 +434,7 @@ void test_piece()
       assert(piece.get_messages().empty());
       assert(is_idle(piece));
       piece.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::move, square("c3"), square("d5")));
-      game g{get_kings_only_game()};
+      game g(get_pieces_kings_only());
       piece.tick(delta_t(0.1), g);
       assert(!piece.get_actions().empty()); // Yep, let's start moving
       assert(!piece.get_messages().empty());
@@ -447,7 +447,7 @@ void test_piece()
       assert(piece.get_messages().empty());
       assert(is_idle(piece));
       piece.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::move, square("c3"), square("h8")));
-      game g{get_kings_only_game()};
+      game g(get_pieces_kings_only());
       piece.tick(delta_t(0.1), g);
       assert(piece.get_actions().empty()); // Nope, cannot do that
       assert(!piece.get_messages().empty());
@@ -460,7 +460,7 @@ void test_piece()
       assert(piece.get_messages().empty());
       assert(is_idle(piece));
       piece.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::attack, square("c3"), square("d4")));
-      game g{get_kings_only_game()};
+      game g(get_pieces_kings_only());
       piece.tick(delta_t(0.1), g);
       assert(piece.get_actions().empty()); // Nope, cannot do that
       assert(!piece.get_messages().empty());
@@ -1054,7 +1054,7 @@ void test_piece()
     assert(p.get_current_square() == square("e1"));
     p.add_action(piece_action(chess_color::white, piece_type::king, piece_action_type::attack, square("e2"), square("e3")));
     assert(has_actions(p));
-    game g{get_kings_only_game()};
+    game g(get_pieces_kings_only());
     p.tick(delta_t(1.0), g);
   }
   // A piece stops attacking when the attacked piece moves away
@@ -1083,7 +1083,7 @@ void test_piece()
     assert(p.get_current_square() == square("c3"));
     p.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::move, square("c3"), square("e4")));
     assert(has_actions(p));
-    game g{get_kings_only_game()};
+    game g(get_pieces_kings_only());
     p.tick(delta_t(0.1), g);
     assert(has_actions(p));
     assert(get_occupied_square(p) == square("c3"));

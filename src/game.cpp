@@ -989,23 +989,17 @@ game create_game_from_fen_string(const fen_string& s) noexcept
   return g;
 }
 
+
 game create_game_with_standard_starting_position() noexcept
 {
-  return create_game_with_starting_position(starting_position_type::standard);
+  return game(get_standard_starting_pieces());
 }
 
 game create_game_with_starting_position(starting_position_type t) noexcept
 {
-  game_options::get().set_starting_position(t);
-  return game{};
+  return game(get_starting_pieces(t));
 }
 
-/*
-game create_game_with_user_settings() noexcept
-{
-  return game(create_pieces_from_settings());
-}
-*/
 
 int get_index_of_closest_piece_to(
   const game& g,
@@ -1020,10 +1014,12 @@ int get_index_of_closest_piece_to(
   return index;
 }
 
+/*
 game get_kings_only_game() noexcept
 {
   return create_game_with_starting_position(starting_position_type::kings_only);
 }
+*/
 
 std::vector<square> get_unique_occupied_squares(const game& g) noexcept
 {
