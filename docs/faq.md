@@ -96,11 +96,11 @@ The game shows what each key does in a certain context.
 
     ![Game screen v0.9](screenshots/20250703_1.jpg)
 
-    > A keyboard player cannot promote to a knight if a piece is selected. 
+    > A keyboard player cannot promote to a knight if a piece is selected.
 
     It is possible to have 5 possible actions,
     for example, when the cursor is on a selected pawn
-    that is ready to promote. 
+    that is ready to promote.
     The actions will be:
 
     - Unselect
@@ -123,7 +123,7 @@ The game shows what each button does in a certain context.
 
     ![Game screen v0.9](screenshots/20250703_2.jpg)
 
-    > A mouse player cannot castle queenside if a piece is selected. 
+    > A mouse player cannot castle queenside if a piece is selected.
 
     It is possible to have 3 possible actions,
     for example, when the cursor is on a selected king
@@ -151,6 +151,14 @@ The game shows what each button does in a certain context.
 
 ## Technical
 
+### How did you generate the FEN strings
+
+I often used <https://www.365chess.com/analysis_board.php>.
+
+
 ### How is the user input handled?
 
 See [architecture](architecture/README.md)
+
+
+
