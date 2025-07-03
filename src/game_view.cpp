@@ -11,6 +11,7 @@
 #include "game_statistics.h"
 #include "game_view_layout.h"
 #include "game_statistics_widget_layout.h"
+#include "helper.h"
 #include "lobby_options.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
@@ -232,7 +233,6 @@ void game_view::draw_impl()
 
   // Show the layout of the screen: board and sidebars
   show_layout(*this);
-
 
   // Show the board: squares, unit paths, pieces, health bars
   draw_board(*this);
@@ -586,6 +586,11 @@ void draw_pieces(game_view& view)
 {
   const auto& game{view.get_game()};
   const board_layout layout(view.get_layout().get_board());
+
+  const auto selected_piece_ids{collect_selected_piece_ids(view.get_game_controller())};
+
+
+
   for (const auto& piece: game.get_pieces())
   {
     const int x{piece.get_current_square().get_x()};
@@ -612,6 +617,7 @@ void draw_pieces(game_view& view)
     }
 
     const screen_rect sprite_rect(square_layout.get_piece());
+
     draw_texture(
       get_piece_texture(
         piece.get_race(),
@@ -622,9 +628,13 @@ void draw_pieces(game_view& view)
       fill_color
     );
 
+    if (is_present_in(piece.get_id(), selected_piece_ids))
+    {
+      draw_outline(sprite_rect, to_sfml_color(piece.get_color()), 5);
+    }
+
     // Show the piece is proteced
-    const bool is_piece_protected{is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color())};
-    if (is_piece_protected)
+    if (is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color()))
     {
       draw_texture(
         game_resources::get().get_board_game_textures().get_shield(),

@@ -159,6 +159,10 @@ bool can_unselect(
   const side player_side
 ) noexcept;
 
+
+///Collect all the piece IDs of the selected pieces, if any
+std::vector<piece_id> collect_selected_piece_ids(const game_controller& c);
+
 /// Convert a chess move, e.g. e4,
 /// to the right user inputs
 user_inputs convert_move_to_user_inputs(

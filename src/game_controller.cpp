@@ -624,6 +624,19 @@ bool can_unselect(
   return is_cursor_on_selected_piece(g, c, player_side);
 }
 
+std::vector<piece_id> collect_selected_piece_ids(const game_controller& c)
+{
+  std::vector<piece_id> v;
+  for (const side s: get_all_sides())
+  {
+    if (c.get_selected_piece_id(s).has_value())
+    {
+      v.push_back(c.get_selected_piece_id(s).value());
+    }
+  }
+  return v;
+}
+
 user_inputs convert_move_to_user_inputs(
   const game& ,
   const game_controller& c,
