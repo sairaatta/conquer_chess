@@ -82,7 +82,6 @@ game_statistics_in_time extract_game_statistics_in_time(
   assert(get_in_game_time(r) == in_game_time(0.0));
   while (!r.is_done())
   {
-    std::clog << r.get_game().get_in_game_time() << '\n';
     s.add(r.get_game());
     r.do_move(dt);
   }

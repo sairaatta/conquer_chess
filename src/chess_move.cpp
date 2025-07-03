@@ -169,13 +169,10 @@ square get_from_for_queen(const fen_string& s, const pgn_move_string& m)
   const auto g{create_game_from_fen_string(s)};
   assert(!g.get_pieces().empty());
 
-  //std::clog << to_board_str(g.get_pieces(), board_to_text_options(true, true)) << '\n';
 
   const auto pieces{
     find_pieces(g, piece_type::queen, get_color(s))
   };
-
-  //std::clog << to_board_str(pieces, board_to_text_options(true, true)) << '\n';
 
   assert(!pieces.empty());
   assert(get_to(m).has_value());

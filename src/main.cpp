@@ -176,7 +176,7 @@ void play_standard_random_game()
 {
   try
   {
-    const int n_turns{1000000};
+    const int n_turns{8123}; // Move after is trouble
     const auto g = play_random_game(n_turns, 42);
     std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
     std::clog << "Winner:\n";
@@ -213,6 +213,9 @@ void get_runtime_speed_profile()
 
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
+  std::clog << "Start playing a standard random game\n";
+  play_standard_random_game();
+
   #ifndef NDEBUG
   test();
   #endif

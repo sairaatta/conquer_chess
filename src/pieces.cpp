@@ -1283,7 +1283,6 @@ void test_pieces()
   {
     const auto pieces{create_pieces_from_fen_string(get_fen_string_wikipedia_0())};
     assert(pieces.size() == 32);
-    //std::clog << to_board_str(pieces, board_to_text_options(true, true)) << '\n';
     assert(is_piece_at(pieces, square("a1")));
     assert(is_piece_at(pieces, square("h1")));
     assert(is_piece_at(pieces, square("a8")));

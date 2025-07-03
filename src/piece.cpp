@@ -1155,7 +1155,7 @@ void piece::tick(
         || first_action.get_action_type() == piece_action_type::promote_to_rook
         || first_action.get_action_type() == piece_action_type::promote_to_queen
       );
-      assert(get_type() == piece_type::pawn);
+      assert(this->get_type() == piece_type::pawn);
       add_message(message_type::done);
       m_type = first_action.get_piece_type();
       remove_first(m_actions);
