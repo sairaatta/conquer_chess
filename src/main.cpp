@@ -214,14 +214,6 @@ int main(int argc, char **argv) //!OCLINT tests may be long
 {
   #ifndef NDEBUG
   test();
-
-  const bool do_play_random_game{false};
-  if (do_play_random_game)
-  {
-    std::clog << "Running random game\n";
-    play_standard_random_game();
-    std::clog << "Done\n";
-  }
   #endif
 
   const auto args = collect_args(argc, argv);
