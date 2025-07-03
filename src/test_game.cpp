@@ -258,7 +258,7 @@ void test_game_functions()
     auto& white_queen{get_piece_at(g, "d1")};
     //white_queen.set_selected(true);
     // Wrong file
-    assert(!can_do_attack(g, white_queen, square("c8"), side::lhs, lobby_options()));
+    assert(!can_do_attack(g, white_queen, square("c8"), lobby_options().get_color(side::lhs)));
   }
   // can_do_attack: Qd1 cannot attack d2, as this is a friendly piece
   {
@@ -266,7 +266,7 @@ void test_game_functions()
     auto& white_queen{get_piece_at(g, "d1")};
     //white_queen.set_selected(true);
     // Cannot attack own pieces
-    assert(!can_do_attack(g, white_queen, square("d2"), side::lhs, lobby_options()));
+    assert(!can_do_attack(g, white_queen, square("d2"), lobby_options().get_color(side::lhs)));
   }
   // can_do_promote: a pawn can promote at last rank
   {

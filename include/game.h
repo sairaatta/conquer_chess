@@ -100,8 +100,7 @@ bool can_do_attack(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 );
 
 /// Can a piece_action_type::castle_kingside action be done?

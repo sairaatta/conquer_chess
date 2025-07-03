@@ -1183,13 +1183,14 @@ void tick_attack(
   piece& p,
   const delta_t& dt,
   game& g,
-  const lobby_options& lo
+  const lobby_options& /* lo */
 )
 {
   assert(!p.get_actions().empty());
   const auto& first_action{p.get_actions()[0]};
   assert(first_action.get_action_type() == piece_action_type::attack);
-  if (!can_do_attack(g, p, first_action.get_to(), lo.get_side(p.get_color()), lo))
+
+  if (!can_do_attack(g, p, first_action.get_to(), p.get_color()))
   {
     p.add_message(message_type::cannot);
     remove_first(p.get_actions());

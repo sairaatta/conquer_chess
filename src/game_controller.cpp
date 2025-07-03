@@ -503,7 +503,7 @@ bool can_attack(
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
   const square cursor_square(square(c.get_cursor_pos(player_side)));
-  return can_do_attack(c.get_game(), selected_piece, cursor_square, player_side, c.get_lobby_options());
+  return can_do_attack(c.get_game(), selected_piece, cursor_square, lobby_options().get_color(player_side));
 }
 
 bool can_attack_en_passant(
