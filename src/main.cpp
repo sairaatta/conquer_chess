@@ -201,7 +201,7 @@ void get_runtime_speed_profile()
 {
   #ifdef NDEBUG
   // Do the profile here
-  play_standard_random_game()
+  play_standard_random_game();
   #else
   std::cerr << "Do not profile in debug mode\n";
   assert(!"Do not profile in debug mode");

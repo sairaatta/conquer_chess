@@ -63,9 +63,7 @@ these are the differences:
 - Multiple pieces can attack the same opponents piece
 - When a piece is destroyed,
   the piece that killed it will instantaneous go to that square
-- Castling can only be done when (1) the king has not moved,
-  (2) the desired rook has not moved, (3) there are no pieces
-  in the way. Castling cannnot take place through check and into check
+- Castling rules are the same to regular chess.
 - A pawn can attack by en-passant, for a limited amount of time
 
 ### Where did you get you example games from?
