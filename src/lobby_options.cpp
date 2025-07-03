@@ -16,27 +16,10 @@ lobby_options::lobby_options(
   m_race[side::rhs] = rhs_race;
 }
 
-/*
-void use_default_lobby_options() noexcept
-{
-  lobby_options::get().set_color(chess_color::white, side::lhs);
-  lobby_options::get().set_race(race::classic, side::lhs);
-  lobby_options::get().set_race(race::classic, side::rhs);
-}
-*/
 chess_color lobby_options::get_color(const side player_side) const noexcept
 {
   return m_color.at(player_side);
 }
-
-/*
-
-chess_color get_color(const side player_side) noexcept
-{
-  const auto& options{lobby_options::get()};
-  return options.get_color(player_side);
-}
-*/
 
 race lobby_options::get_race(const chess_color player_color) const noexcept
 {

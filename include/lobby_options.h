@@ -21,18 +21,6 @@ public:
     const race rhs_race = race::classic
   );
 
-  /*
-  /// This class is a Singleton
-  lobby_options(const lobby_options&) = delete;
-  lobby_options& operator=(const lobby_options&) = delete;
-  lobby_options(lobby_options&&) = delete;
-  lobby_options& operator=(lobby_options&&) = delete;
-  static auto& get(){
-    static lobby_options r;
-    return r;
-  }
-  */
-
   /// Get the chess color of a player
   chess_color get_color(const side player_side) const noexcept;
 
@@ -65,19 +53,6 @@ private:
   /// To use the constructor
   friend void test_lobby_options();
 };
-
-/*
-void use_default_lobby_options() noexcept;
-
-chess_color get_color(const side player_side) noexcept;
-
-/// Get the race of a color
-race get_race_of_color(const chess_color c) noexcept;
-
-/// Get the chess color of a player
-race get_race_of_side(const side player_side) noexcept;
-
-*/
 
 /// Test this class and its free functions
 void test_lobby_options();
