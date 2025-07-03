@@ -175,7 +175,7 @@ void play_standard_random_game()
 {
   try
   {
-    const int n_turns{100000};
+    const int n_turns{1000000};
     const auto g = play_random_game(n_turns, 42);
     std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
     std::clog << "Winner:\n";
