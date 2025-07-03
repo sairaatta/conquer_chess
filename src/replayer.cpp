@@ -10,7 +10,7 @@
 
 replayer::replayer(
   const action_history& r
-) : m_last_time{-1.0},
+) : m_index{0},
     m_action_history{r}
 {
 
@@ -18,32 +18,47 @@ replayer::replayer(
 
 
 void replayer::do_move(
-  game_controller& c,
-  game& g
+  game_controller& /* c */,
+  game& g,
+  const delta_t& dt
 )
 {
-  // Do one move per chess move
-  if (g.get_in_game_time() - m_last_time < delta_t(1.0)) return;
-
-  m_last_time = g.get_in_game_time();
-
-  /*
-
-  const int move_index{static_cast<int>(m_last_time.get())};
-  if (move_index >= get_n_moves(m_replay)) return;
-
-  // Do the move
-  const auto& move{m_replay.get_moves().at(move_index)};
-  const auto inputs{convert_move_to_user_inputs(g, c, move)};
-  add_user_inputs(c, inputs);
-  */
-  c.apply_user_inputs_to_game(g);
-  /*
-  for (int i=0; i!=4; ++i)
+  // All moves are done
+  if (m_index == static_cast<int>(m_action_history.get().size()))
   {
-    g.tick(delta_t(0.25));
+    // Do nothing, except forward the time
+    for (int i=0; i!=4; ++i)
+    {
+      g.tick(delta_t(dt.get() / 4.0));
+    }
+    return;
   }
-  */
+
+  delta_t dt_to_do(dt);
+  while (m_index < static_cast<int>(m_action_history.get().size()))
+  {
+    const in_game_time next_action_time{m_action_history.get()[m_index].first};
+    if (next_action_time > g.get_in_game_time() + dt_to_do)
+    {
+      // Do nothing, except forward the time
+      for (int i=0; i!=4; ++i)
+      {
+        g.tick(delta_t(dt_to_do.get() / 4.0));
+      }
+      return;
+    }
+
+    // Forward to the next move
+    const delta_t forward_time{next_action_time - g.get_in_game_time()};
+    g.tick(forward_time);
+    dt_to_do = dt_to_do - forward_time;
+
+    // Make the piece do the action retrieved from history
+    const piece_action& next_action{m_action_history.get()[m_index].second};
+    get_piece_at(g, next_action.get_from()).add_action(next_action);
+
+    ++m_index;
+  }
 }
 
 int get_n_moves(const replayer& r) noexcept
@@ -79,16 +94,16 @@ void test_replayer()
   {
     const replayer r;
     assert(get_n_moves(r) == 0);
-    assert(r.get_last_time() == in_game_time(-1.0));
+    assert(r.get_index() == 0);
   }
   // replayer::do_move on empty replay does nothing
   {
     replayer r;
     game g;
     game_controller c{create_game_controller_with_keyboard_mouse()};
-    assert(r.get_last_time() == in_game_time(-1.0));
+    assert(r.get_index() == 0);
     r.do_move(c, g);
-    assert(r.get_last_time() == in_game_time(0.0));
+    assert(r.get_index() == 0);
   }
   // replayer::do_move does not increase last_time in 0.1 interval
   {
@@ -96,10 +111,10 @@ void test_replayer()
     game g;
     game_controller c{create_game_controller_with_keyboard_mouse()};
     r.do_move(c, g);
-    assert(r.get_last_time() == in_game_time(0.0));
+    assert(r.get_index() == 0);
     g.tick(delta_t(0.1));
     r.do_move(c, g);
-    assert(r.get_last_time() == in_game_time(0.0));
+    assert(r.get_index() == 0);
   }
   // replayer can forward a pawn two squares forward
   //#define FIX_REPLAYER_USING_ACTION_HISTORY
@@ -402,20 +417,16 @@ void test_replayer()
 bool operator==(const replayer& lhs, const replayer& rhs) noexcept
 {
   return lhs.get_action_history() == rhs.get_action_history()
-    && lhs.get_last_time() == rhs.get_last_time()
+    && lhs.get_index() == rhs.get_index()
   ;
 }
 
 std::ostream& operator<<(std::ostream& os, const replayer& r) noexcept
 {
   os
-    << "Last time: " << r.get_last_time() << '\n'
+    << "Last time: " << r.get_index() << '\n'
     << "Action history: " << r.get_action_history()
   ;
   return os;
 
 }
-
-#ifdef UNDERSTAND_THE_PURPOSE_OF_REPLAYER
-
-#endif // UNDERSTAND_THE_PURPOSE_OF_REPLAYER

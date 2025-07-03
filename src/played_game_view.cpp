@@ -102,7 +102,7 @@ void show_text_panel(played_game_view& v)
   std::stringstream s;
   s << to_pgn(g);
   if (s.str().empty()) s << "[none]";
-  draw_text(s.str(), screen_rect, 16);
+  draw_text(s.str(), screen_rect, 16, sf::Color::White);
 }
 
 #endif // LOGIC_ONLY

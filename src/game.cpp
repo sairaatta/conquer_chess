@@ -290,19 +290,20 @@ void game::check_if_there_is_a_winner()
     // We already have a winner
     return;
   }
-  if (is_checkmate(m_pieces, chess_color::white))
-  {
-    m_winner = chess_color::black;
-  }
-  if (is_checkmate(m_pieces, chess_color::black))
-  {
-    m_winner = chess_color::white;
-  }
+  // Do the non-chess things first
   if (!has_king(m_pieces, chess_color::white))
   {
     m_winner = chess_color::black;
   }
   if (!has_king(m_pieces, chess_color::black))
+  {
+    m_winner = chess_color::white;
+  }
+  if (is_checkmate(m_pieces, chess_color::white))
+  {
+    m_winner = chess_color::black;
+  }
+  if (is_checkmate(m_pieces, chess_color::black))
   {
     m_winner = chess_color::white;
   }

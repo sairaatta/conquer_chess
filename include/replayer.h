@@ -2,6 +2,7 @@
 #define REPLAYER_H
 
 #include "ccfwd.h"
+#include "delta_t.h"
 #include "in_game_time.h"
 
 #include "action_history.h"
@@ -17,18 +18,18 @@ public:
   /// Do a move or do nothing, for 1 time unit
   void do_move(
     game_controller& c,
-    game& g
+    game& g,
+    const delta_t& dt = delta_t(1.0)
   );
 
   const auto& get_action_history() const noexcept { return m_action_history; }
 
-  /// Get the last time a move was done
-  const auto& get_last_time() const noexcept { return m_last_time; }
+  const auto& get_index() const noexcept { return m_index; };
 
 private:
 
-  /// The last time a move was done
-  in_game_time m_last_time;
+  /// The index of the next move to do in m_action_history
+  int m_index;
 
   /// A replay
   action_history m_action_history;
