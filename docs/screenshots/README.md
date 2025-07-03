@@ -4,11 +4,11 @@
 
 ![Game screen v0.9](20250703_2.jpg)
 
-> A mouse player cannot castle queenside if a piece is selected. 
+> A mouse player cannot castle queenside if a piece is selected.
 
 ![Game screen v0.9](20250703_1.jpg)
 
-> A keyboard player cannot promote to a knight if a piece is selected. 
+> A keyboard player cannot promote to a knight if a piece is selected.
 
 ![Game screen v0.9](20250630_3.jpg)
 

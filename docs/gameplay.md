@@ -55,7 +55,7 @@ The second difference between the races is the ability to move and attack:
 
 Race   |Movement speed [1] |Attack speed [2]
 -------|-------------------|------------------
-Classic|1                  |1.0 
+Classic|1                  |1.0
 Protoss|0.9                |1.1
 Terran |1.0                |1.0
 Zerg   |1.1                |0.9
@@ -115,5 +115,4 @@ captured piece.
 If multiple pieces attack the same square (due to realtime speed),
 the attacked piece will lose health faster.
 :construction: It is the first attacker that will move to the square.
-
 
