@@ -160,5 +160,3 @@ I often used <https://www.365chess.com/analysis_board.php>.
 
 See [architecture](architecture/README.md)
 
-
-
