@@ -316,6 +316,12 @@ void test_chess_move()
     const pgn_move_string m("Kf1");
     assert(get_from(g, m).value() == square("e1"));
   }
+  // get_from, castling
+  {
+    const fen_string g{create_fen_string_with_starting_position(starting_position_type::ready_to_castle)};
+    const pgn_move_string m("O-O");
+    assert(!get_from(g, m).has_value());
+  }
   // is_capture
   // is_castling
   {

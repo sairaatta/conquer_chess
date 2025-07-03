@@ -84,7 +84,8 @@ void game_controller::apply_user_inputs_to_game(
         break;
         case user_input_type::mouse_move:
         {
-          if (has_mouse_controller(*this))
+          assert(has_mouse_controller(*this));
+          //if (has_mouse_controller(*this))
           {
             if (is_coordinat_on_board(user_input.get_coordinat().value()))
             {
@@ -1163,6 +1164,21 @@ void test_game_controller() //!OCLINT tests may be many
       create_game_controller_with_two_keyboards()
     );
     assert(!has_mouse_controller(g));
+  }
+  // Moving the mouse
+  {
+    game g{create_game_with_standard_starting_position()};
+    game_controller c{create_game_controller_with_mouse_keyboard()};
+    c.add_user_input(create_mouse_move_action(game_coordinate(0.5, 0.5), side::lhs));
+    c.apply_user_inputs_to_game(g);
+    assert(c.get_cursor_pos(side::lhs) == game_coordinate(0.5, 0.5));
+
+    // Does nothing
+    c.add_user_input(create_mouse_move_action(game_coordinate(314.15, 42.00), side::lhs));
+    c.apply_user_inputs_to_game(g);
+
+    // Cursor is still the old position
+    assert(c.get_cursor_pos(side::lhs) == game_coordinate(0.5, 0.5));
   }
   // has_keyboard_controller
   {
