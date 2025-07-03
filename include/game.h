@@ -140,8 +140,7 @@ bool can_do_move(
 /// Can a piece_action_type::promote_to_bishop action be done?
 bool can_do_promote(
   const piece& selected_piece,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 );
 
 /// Clear the sound effects to be processed,

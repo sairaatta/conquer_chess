@@ -273,7 +273,7 @@ void test_game_functions()
     game g(get_pieces_pawns_at_promotion());
     auto& white_pawn{get_piece_at(g, "a8")};
     //white_pawn.set_selected(true);
-    assert(can_do_promote(white_pawn, side::lhs, lobby_options()));
+    assert(can_do_promote(white_pawn, lobby_options().get_color(side::lhs)));
   }
   // can_do_castle_kingside
   {

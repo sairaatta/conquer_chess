@@ -208,11 +208,9 @@ bool can_do_move(
 
 bool can_do_promote(
   const piece& selected_piece,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 )
 {
-  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   return can_promote(selected_piece);
 }
