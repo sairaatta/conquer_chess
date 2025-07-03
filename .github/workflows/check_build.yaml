@@ -65,6 +65,9 @@ jobs:
       - name: Measure codecov 3
         run: bash <(curl -s https://codecov.io/bash)
 
+      - name: play a standard random game
+        run: ./conquer_chess --play_standard_random_game
+
       - name: clean for release build
         run: make clean
 

@@ -230,6 +230,11 @@ int main(int argc, char **argv) //!OCLINT tests may be long
     std::clog << "Start profiling\n";
     get_runtime_speed_profile();
   }
+  if (args.size() == 2 && args[1] == "--play_standard_random_game")
+  {
+    std::clog << "Start playing a standard random game\n";
+    play_standard_random_game();
+  }
   else
   {
     #define USE_TWO_KEYBOARDS
