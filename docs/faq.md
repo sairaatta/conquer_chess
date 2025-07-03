@@ -94,7 +94,7 @@ The game shows what each key does in a certain context.
 
     Almost always yes.
 
-    ![Game screen v0.9](20250703_1.jpg)
+    ![Game screen v0.9](screenshots/20250703_1.jpg)
 
     > A keyboard player cannot promote to a knight if a piece is selected. 
 
@@ -121,7 +121,7 @@ The game shows what each button does in a certain context.
 
     Almost always yes.
 
-    ![Game screen v0.9](20250703_2.jpg)
+    ![Game screen v0.9](screenshots/20250703_2.jpg)
 
     > A mouse player cannot castle queenside if a piece is selected. 
 
