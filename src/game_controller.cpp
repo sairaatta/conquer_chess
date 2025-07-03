@@ -138,7 +138,7 @@ void game_controller::apply_user_inputs_to_game()
         }
         break;
       }
-      g.tick(delta_t(0.0), m_lobby_options);
+      g.tick(delta_t(0.0));
     }
   }
   m_user_inputs = std::vector<user_input>();
@@ -516,7 +516,7 @@ bool can_attack_en_passant(
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
   const square cursor_square(square(c.get_cursor_pos(player_side)));
-  return can_do_en_passant(c.get_game(), selected_piece, cursor_square, player_side, c.get_lobby_options());
+  return can_do_en_passant(c.get_game(), selected_piece, cursor_square, c.get_lobby_options().get_color(player_side));
 }
 
 bool can_castle_kingside(
@@ -2291,7 +2291,7 @@ void test_game_controller() //!OCLINT tests may be many
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game();
 
-    tick_until_idle(c.get_game(), lobby_options());
+    tick_until_idle(c.get_game());
     const std::string pgn{to_pgn(c.get_game())};
     assert(!pgn.empty());
     assert(pgn == "0.00: white pawn selected at e2\n0.00: white pawn moves from e2 to e4");
@@ -2412,7 +2412,7 @@ void test_game_controller() //!OCLINT tests may be many
 
 void game_controller::tick(const delta_t& dt)
 {
-  m_game.tick(dt, m_lobby_options);
+  m_game.tick(dt);
 }
 
 std::ostream& operator<<(std::ostream& os, const game_controller& g) noexcept

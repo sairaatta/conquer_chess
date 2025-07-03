@@ -129,8 +129,7 @@ public:
   /// @see use 'add_action' to add an action to be processed
   void tick(
     const delta_t& dt,
-    game& g,
-    const lobby_options& lo
+    game& g
   );
 
 private:
@@ -300,8 +299,7 @@ void tick_attack(
 void tick_attack_en_passant(
   piece& p,
   const delta_t& dt,
-  game& g,
-  const lobby_options& lo
+  game& g
 );
 
 /// Process a tick, when the current action is a castling to kingside
@@ -336,14 +334,6 @@ void tick_move(
 /// queen | q                  | Q
 /// rook  | r                  | R
 char to_fen_char(const piece& p) noexcept;
-
-/// Select the piece
-/*
-void toggle_select(piece& p) noexcept;
-
-/// Unselect the piece
-void unselect(piece& p) noexcept;
-*/
 
 bool operator==(const piece& lhs, const piece& rhs) noexcept;
 bool operator!=(const piece& lhs, const piece& rhs) noexcept;

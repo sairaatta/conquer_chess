@@ -435,7 +435,7 @@ void test_piece()
       assert(is_idle(piece));
       piece.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::move, square("c3"), square("d5")));
       game g{get_kings_only_game()};
-      piece.tick(delta_t(0.1), g, lobby_options());
+      piece.tick(delta_t(0.1), g);
       assert(!piece.get_actions().empty()); // Yep, let's start moving
       assert(!piece.get_messages().empty());
       assert(piece.get_messages().at(0) == message_type::start_move);
@@ -448,7 +448,7 @@ void test_piece()
       assert(is_idle(piece));
       piece.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::move, square("c3"), square("h8")));
       game g{get_kings_only_game()};
-      piece.tick(delta_t(0.1), g, lobby_options());
+      piece.tick(delta_t(0.1), g);
       assert(piece.get_actions().empty()); // Nope, cannot do that
       assert(!piece.get_messages().empty());
       assert(piece.get_messages().at(0) == message_type::cannot);
@@ -461,7 +461,7 @@ void test_piece()
       assert(is_idle(piece));
       piece.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::attack, square("c3"), square("d4")));
       game g{get_kings_only_game()};
-      piece.tick(delta_t(0.1), g, lobby_options());
+      piece.tick(delta_t(0.1), g);
       assert(piece.get_actions().empty()); // Nope, cannot do that
       assert(!piece.get_messages().empty());
       assert(piece.get_messages().at(0) == message_type::cannot);
@@ -489,7 +489,7 @@ void test_piece()
       assert(!p.has_moved());
       p.add_action(piece_action(chess_color::white, piece_type::pawn, piece_action_type::move, square("e2"), square("e4")));
       game g;
-      p.tick(delta_t(0.01), g, lobby_options());
+      p.tick(delta_t(0.01), g);
       assert(p.has_moved());
     }
   }
@@ -912,7 +912,7 @@ void test_piece()
     game g;
     while (p.get_current_square() == square("e2"))
     {
-      p.tick(delta_t(0.1), g, lobby_options());
+      p.tick(delta_t(0.1), g);
       ++n_ticks;
       assert(n_ticks < 1000);
     }
@@ -951,7 +951,7 @@ void test_piece()
     game g;
     while (p.get_current_square() == square("e7"))
     {
-      p.tick(delta_t(0.1), g, lobby_options());
+      p.tick(delta_t(0.1), g);
       ++n_ticks;
       assert(n_ticks < 1000);
     }
@@ -969,11 +969,11 @@ void test_piece()
     int n_ticks{0};
     game g = create_game_with_starting_position(starting_position_type::before_scholars_mate);
     assert(count_piece_actions(p) == 1);
-    p.tick(delta_t(0.1), g, lobby_options());
+    p.tick(delta_t(0.1), g);
     assert(count_piece_actions(p) == 1);
     while (p.get_current_square() == square("h5"))
     {
-      p.tick(delta_t(0.1), g, lobby_options());
+      p.tick(delta_t(0.1), g);
       assert(count_piece_actions(p) == 1);
       ++n_ticks;
       assert(n_ticks < 100);
@@ -999,7 +999,7 @@ void test_piece()
     assert(!p.get_actions().empty());
     game g;
     assert(count_piece_actions(p) == 1);
-    p.tick(delta_t(0.1), g, lobby_options());
+    p.tick(delta_t(0.1), g);
     assert(p.get_type() == piece_type::queen);
   }
   // operator==
@@ -1036,11 +1036,11 @@ void test_piece()
     assert(has_actions(p));
     //game g{get_kings_only_game()};
     game g(get_pieces_kings_only());
-    p.tick(delta_t(0.1), g, lo);
+    p.tick(delta_t(0.1), g);
     assert(has_actions(p));
     for (int i{0}; i != 10; ++i)
     {
-      p.tick(delta_t(0.1), g, lo);
+      p.tick(delta_t(0.1), g);
     }
     assert(!has_actions(p));
     const auto final_square{p.get_current_square()};
@@ -1055,7 +1055,7 @@ void test_piece()
     p.add_action(piece_action(chess_color::white, piece_type::king, piece_action_type::attack, square("e2"), square("e3")));
     assert(has_actions(p));
     game g{get_kings_only_game()};
-    p.tick(delta_t(1.0), g, lobby_options());
+    p.tick(delta_t(1.0), g);
   }
   // A piece stops attacking when the attacked piece moves away
   {
@@ -1070,8 +1070,8 @@ void test_piece()
     assert(has_actions(white_queen));
     for (int i{0}; i != 10; ++i)
     {
-      white_queen.tick(delta_t(0.1), g, lo);
-      black_queen.tick(delta_t(0.1), g, lo);
+      white_queen.tick(delta_t(0.1), g);
+      black_queen.tick(delta_t(0.1), g);
     }
     // Black queen is shot, but survives
     assert(get_f_health(black_queen) < 1.0);
@@ -1084,12 +1084,12 @@ void test_piece()
     p.add_action(piece_action(chess_color::white, piece_type::knight, piece_action_type::move, square("c3"), square("e4")));
     assert(has_actions(p));
     game g{get_kings_only_game()};
-    p.tick(delta_t(0.1), g, lobby_options());
+    p.tick(delta_t(0.1), g);
     assert(has_actions(p));
     assert(get_occupied_square(p) == square("c3"));
     for (int i{0}; i != 30; ++i) // It is quite a travel
     {
-      p.tick(delta_t(0.1), g, lobby_options());
+      p.tick(delta_t(0.1), g);
       assert(get_occupied_square(p) != square("d3"));
       assert(get_occupied_square(p) != square("d4"));
     }
@@ -1108,8 +1108,7 @@ void test_piece()
 
 void piece::tick(
   const delta_t& dt,
-  game& g,
-  const lobby_options& lo
+  game& g
 )
 {
   if (m_actions.empty())
@@ -1136,24 +1135,18 @@ void piece::tick(
       tick_attack(*this, dt, g);
       break;
     case piece_action_type::attack_en_passant:
-      tick_attack_en_passant(*this, dt, g, lo);
+      tick_attack_en_passant(*this, dt, g);
       break;
     case piece_action_type::unselect:
-      //assert(m_is_selected);
-      //m_is_selected = false;
       remove_first(m_actions);
       break;
     case piece_action_type::select:
-      //assert(!m_is_selected);
-      //m_is_selected = true;
       remove_first(m_actions);
       break;
     case piece_action_type::castle_kingside:
-      //m_is_selected = false; //
       tick_castle_kingside(*this, dt, g);
       break;
     case piece_action_type::castle_queenside:
-      //m_is_selected = false; //
       tick_castle_queenside(*this, dt, g);
       break;
     case piece_action_type::promote_to_knight:
@@ -1213,14 +1206,13 @@ void tick_attack(
 void tick_attack_en_passant(
   piece& p,
   const delta_t& dt,
-  game& g,
-  const lobby_options& lo
+  game& g
 )
 {
   assert(!p.get_actions().empty());
   const auto& first_action{p.get_actions()[0]};
   assert(first_action.get_action_type() == piece_action_type::attack_en_passant);
-  if (!can_do_en_passant(g, p, first_action.get_to(), lo.get_side(p.get_color()), lo))
+  if (!can_do_en_passant(g, p, first_action.get_to(), p.get_color()))
   {
     p.add_message(message_type::cannot);
     remove_first(p.get_actions());

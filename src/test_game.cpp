@@ -53,7 +53,7 @@ void test_game_class()
       {
         assert(p.get_in_game_time() == g.get_in_game_time());
       }
-      g.tick(delta_t(0.1), lobby_options());
+      g.tick(delta_t(0.1));
       for (const piece& p: g.get_pieces())
       {
         assert(p.get_in_game_time() == g.get_in_game_time());
@@ -73,8 +73,8 @@ void test_game_class()
         )
       );
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.5), lobby_options());
-      tick(g, delta_t(0.5), lobby_options());
+      tick(g, delta_t(0.5));
+      tick(g, delta_t(0.5));
       assert(p.is_enpassantable(g.get_in_game_time()));
     }
     // a2-a4 makes a pawn en-passantable for one second
@@ -91,15 +91,15 @@ void test_game_class()
         )
       );
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.5), lobby_options());
+      tick(g, delta_t(0.5));
       assert(!p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.5), lobby_options());
+      tick(g, delta_t(0.5));
       assert(p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.49), lobby_options());
+      tick(g, delta_t(0.49));
       assert(p.is_enpassantable(g.get_in_game_time()));
-      tick(g, delta_t(0.49), lobby_options());
+      tick(g, delta_t(0.49));
       assert(p.is_enpassantable(g.get_in_game_time()));
-      g.tick(delta_t(0.1), lobby_options());
+      g.tick(delta_t(0.1));
       assert(!p.is_enpassantable(g.get_in_game_time()));
     }
     // #27: a2-a4 takes as long as b2-b3
@@ -127,7 +127,7 @@ void test_game_class()
       );
       for (int i{0}; i!=5; ++i)
       {
-        g.tick(delta_t(0.25), lobby_options());
+        g.tick(delta_t(0.25));
         const bool at_start_1{first_pawn.get_current_square() == square("a2")};
         const bool at_start_2{second_pawn.get_current_square() == square("b2")};
         const bool at_goal_1{first_pawn.get_current_square() == square("a4")};
@@ -160,7 +160,7 @@ void test_game_class()
           to
         )
       );
-      tick(g, delta_t(0.5), lobby_options());
+      tick(g, delta_t(0.5));
       const double health_after{get_piece_at(g, to).get_health()};
       assert(health_after < health_before);
     }
@@ -181,7 +181,7 @@ void test_game_class()
           to
         )
       );
-      g.tick(delta_t(0.5), lobby_options());
+      g.tick(delta_t(0.5));
       const double health_after{get_piece_at(g, to).get_health()};
       assert(health_after == health_before);
     }
@@ -205,7 +205,7 @@ void test_game_class()
         && get_piece_at(g, to).get_color() == chess_color::black
       )
       {
-        g.tick(delta_t(0.1), lobby_options());
+        g.tick(delta_t(0.1));
         ++cnt;
         assert(cnt < 1000);
       }
@@ -227,7 +227,7 @@ void test_game_class()
           to
         )
       );
-      g.tick(delta_t(0.1), lobby_options());
+      g.tick(delta_t(0.1));
       const auto messages{get_piece_at(g, from).get_messages()};
       assert(!messages.empty());
       assert(messages.back() == message_type::cannot);
@@ -687,7 +687,7 @@ void test_game_functions()
   // tick_until_idle
   {
     game g{create_game_with_standard_starting_position()};
-    tick_until_idle(g, lobby_options());
+    tick_until_idle(g);
     assert(is_idle(g));
   }
   // to_pgn

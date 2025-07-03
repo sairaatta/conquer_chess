@@ -143,11 +143,9 @@ bool can_do_en_passant(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 )
 {
-  const auto player_color{lo.get_color(player_side)};
   assert(player_color == selected_piece.get_color());
   const auto player_square{selected_piece.get_current_square()};
   assert(is_piece_at(g, player_square));
@@ -1272,21 +1270,21 @@ bool is_piece_at(
   return is_piece_at(g, square(square_str));
 }
 
-void game::tick(const delta_t& dt, const lobby_options& lo)
+void game::tick(const delta_t& dt)
 {
   // Ensure the tick size is limited to its maximum
   const delta_t max_tick(0.25);
   delta_t to_do(dt);
   while (to_do > max_tick)
   {
-    this->tick_impl(max_tick, lo);
+    this->tick_impl(max_tick);
     to_do = to_do - max_tick;
   }
   // The last bit
-  this->tick_impl(to_do, lo);
+  this->tick_impl(to_do);
 }
 
-void game::tick_impl(const delta_t& dt, const lobby_options& lo)
+void game::tick_impl(const delta_t& dt)
 {
   assert(dt <= delta_t(0.25));
 
@@ -1299,7 +1297,7 @@ void game::tick_impl(const delta_t& dt, const lobby_options& lo)
   for (auto& p: m_pieces)
   {
     const auto t_before = p.get_in_game_time();
-    p.tick(dt, *this, lo);
+    p.tick(dt, *this);
     const auto t_after = p.get_in_game_time();
     assert(t_before + dt == t_after);
   }
@@ -1338,18 +1336,18 @@ void unselect_all_pieces(
 }
 */
 
-void tick(game& g, const delta_t dt, const lobby_options& lo)
+void tick(game& g, const delta_t dt)
 {
-  g.tick(dt, lo);
+  g.tick(dt);
 }
 
 
-void tick_until_idle(game& g, const lobby_options& lo)
+void tick_until_idle(game& g)
 {
   int cnt{0};
   while (!is_idle(g))
   {
-    g.tick(delta_t(0.1), lo);
+    g.tick(delta_t(0.1));
     ++cnt;
     assert(cnt < 1000);
   }

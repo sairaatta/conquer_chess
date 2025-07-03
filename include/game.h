@@ -48,7 +48,7 @@ public:
   /// The maximum timestep is 0.25 chess moves.
   /// Use the global `tick` function for timesteps
   /// longer than 0.25 chess moves.
-  void tick(const delta_t& dt, const lobby_options& lo);
+  void tick(const delta_t& dt);
 
 private:
 
@@ -82,7 +82,7 @@ private:
   /// Go to the next frame.
   ///
   /// The maximum timestep is 0.25 chess moves.
-  void tick_impl(const delta_t& dt, const lobby_options& lo);
+  void tick_impl(const delta_t& dt);
 
   friend game create_game_with_starting_position(starting_position_type t) noexcept;
 };
@@ -126,8 +126,7 @@ bool can_do_en_passant(
   const game& g,
   const piece& selected_piece,
   const square& cursor_square,
-  const side player_side,
-  const lobby_options& lo
+  const chess_color player_color
 );
 
 /// Can a piece_action_type::move action be done?
@@ -440,10 +439,10 @@ bool is_piece_at(
 /// Call game::tick safely.
 ///
 /// That is, with a maximum delta t of 0.25
-void tick(game& g, const delta_t dt, const lobby_options& lo);
+void tick(game& g, const delta_t dt);
 
 /// Call game::tick until all pieces are idle
-void tick_until_idle(game& g, const lobby_options& lo);
+void tick_until_idle(game& g);
 
 /// Convert the game's position to a FEN string
 fen_string to_fen_string(const game& g);

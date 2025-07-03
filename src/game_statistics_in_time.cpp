@@ -44,7 +44,7 @@ game_statistics_in_time play_random_game_to_get_statistics_in_time(const int n_t
   {
     c.add_user_input(create_useful_random_user_input(rng_engine));
     c.apply_user_inputs_to_game();
-    g.tick(delta_t(0.1), c.get_lobby_options());
+    g.tick(delta_t(0.1));
     s.add(c);
     if (g.get_winner().has_value()) break;
   }
