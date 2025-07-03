@@ -216,12 +216,7 @@ bool menu_view::process_event_impl(sf::Event& event)
     else if (key_pressed == sf::Keyboard::Key::F2)
     {
       // Developer shortcut
-      set_next_state(program_state::played_game);
-    }
-    else if (key_pressed == sf::Keyboard::Key::F5)
-    {
-      // Developer shortcut
-      set_next_state(program_state::statistics);
+      set_next_state(program_state::replay);
     }
   }
   if (event.type == sf::Event::MouseMoved)

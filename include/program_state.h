@@ -12,9 +12,8 @@ enum class program_state {
   lobby,
   main_menu,
   options,
-  played_game,
-  right_controls,
-  statistics
+  replay,
+  right_controls
 };
 
 /// Get all the message_type values

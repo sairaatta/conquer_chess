@@ -1,10 +1,11 @@
-#ifndef PLAYED_GAME_VIEW_H
-#define PLAYED_GAME_VIEW_H
+#ifndef REPLAY_VIEW_H
+#define REPLAY_VIEW_H
 
 #ifndef LOGIC_ONLY
 
-#include "played_game_view_layout.h"
-#include "game_controller.h"
+#include "replay_view_layout.h"
+//#include "game_controller.h"
+#include "replayer.h"
 #include "controls_bar.h"
 #include "view.h"
 
@@ -12,10 +13,10 @@
 
 
 /// Dialog to view a played Conquer Chess game
-class played_game_view : public view
+class replay_view : public view
 {
 public:
-  played_game_view();
+  replay_view();
 
   /// Draw the menu on the main window
   void draw_impl() override;
@@ -35,27 +36,31 @@ public:
   /// Run the game, until the user quits
   void tick_impl(const delta_t dt) override;
 
-  const auto& get_game() const noexcept { return m_game_controller.get_game(); }
+  const auto& get_game() const noexcept { return m_replayer.get_game(); }
 
   const auto& get_layout() const noexcept { return m_layout; }
+
+  /// The played game
+  const auto& get_replayer() const noexcept { return m_replayer; }
 
 private:
 
   controls_bar m_controls_bar;
 
   /// The played game
-  game_controller m_game_controller;
+  replayer m_replayer;
 
   /// The layout of this window
-  played_game_view_layout m_layout;
+  replay_view_layout m_layout;
 };
 
-/// Show where the panels will be drawn
-void draw_layout_panels(played_game_view& v);
+/// Draw the board
+void draw_board(replay_view& v);
 
-/// Show where the panels will be drawn
-void show_text_panel(played_game_view& v);
+/// Draw the statistics
+void draw_statistics(replay_view& v);
+
 
 #endif // LOGIC_ONLY
 
-#endif // PLAYED_GAME_VIEW_H
+#endif // REPLAY_VIEW_H

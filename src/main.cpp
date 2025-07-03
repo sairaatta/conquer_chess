@@ -60,7 +60,7 @@
 #include "piece_id.h"
 #include "square_layout.h"
 #include "pieces.h"
-#include "played_game_view_layout.h"
+#include "replay_view_layout.h"
 #include "program_state.h"
 #include "race.h"
 #include "read_only.h"
@@ -84,6 +84,7 @@
 void test()
 {
 #ifndef NDEBUG
+
   test_about();
   test_about_view_layout();
   test_action_history();
@@ -141,7 +142,7 @@ void test()
   test_piece_layout();
   test_piece_type();
   test_pieces();
-  test_played_game_view_layout();
+  test_replay_view_layout();
   test_program_state();
   test_race();
   test_read_only();

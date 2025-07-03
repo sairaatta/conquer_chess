@@ -5,8 +5,8 @@
 #include "delta_t.h"
 #include "in_game_time.h"
 #include "game_controller.h"
-
 #include "action_history.h"
+#include "game_statistics_in_time.h"
 
 #include <iosfwd>
 
@@ -33,7 +33,13 @@ public:
   /// Get the current state of the game
   const auto& get_game() const noexcept { return m_game_controller.get_game(); }
 
+  /// Get the current state of the game
+  const auto& get_game_controller() const noexcept { return m_game_controller; }
+
+  /// The index of the next move to do in the action history
   const auto& get_index() const noexcept { return m_index; };
+
+  bool is_done() const noexcept;
 
 private:
 
@@ -45,11 +51,16 @@ private:
 
   /// The index of the next move to do in m_action_history
   int m_index;
-
-
-
 };
 
+/// Extract the game statistics over time
+///
+/// @param r a replayer
+/// @param dt the interval at which the statistics are extracted
+game_statistics_in_time extract_game_statistics_in_time(
+  const replayer& r,
+  const delta_t& dt
+);
 
 const in_game_time& get_in_game_time(
   const replayer& r
@@ -58,7 +69,7 @@ const in_game_time& get_in_game_time(
 /// Get the number of moves in the replay
 int get_n_moves(const replayer& r) noexcept;
 
-game get_played_scholars_mate();
+replayer get_played_scholars_mate();
 
 /// Determine if there is a piece at the coordinat
 bool is_piece_at(

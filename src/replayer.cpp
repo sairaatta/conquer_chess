@@ -23,55 +23,70 @@ replayer::replayer(
 void replayer::do_move(const delta_t& dt)
 {
 
-  auto& c{m_game_controller};
-  const auto& g{c.get_game()};
+  const auto& g{m_game_controller.get_game()};
 
   // All moves are done
   if (m_index == static_cast<int>(m_action_history.get().size()))
   {
-    // Do nothing, except forward the time
-    for (int i=0; i!=4; ++i)
-    {
-      c.tick(delta_t(dt.get() / 4.0));
-    }
+    m_game_controller.tick(dt);
     return;
   }
 
   delta_t dt_to_do(dt);
   while (1)
   {
+    assert(m_index < static_cast<int>(m_action_history.get().size()));
+
     const in_game_time next_action_time{m_action_history.get()[m_index].first};
-    if (next_action_time > get_in_game_time(c) + dt_to_do)
+    if (next_action_time > get_in_game_time(m_game_controller) + dt_to_do)
     {
-      // Do nothing, except forward the time
-      for (int i=0; i!=4; ++i)
-      {
-        c.tick(delta_t(dt_to_do.get() / 4.0));
-      }
+      // Just pass the time in the timestep, without any action
+      // but passing the time
+      m_game_controller.tick(dt_to_do);
       return;
     }
 
     // Forward to the next move
-    const delta_t forward_time{next_action_time - g.get_in_game_time()};
-    c.tick(forward_time);
+    double forward_time_raw{next_action_time.get() - g.get_in_game_time().get()};
+    assert(forward_time_raw >= -0.00000001);
+    const delta_t forward_time{std::max(forward_time_raw, 0.0)};
+    m_game_controller.tick(forward_time);
     dt_to_do = dt_to_do - forward_time;
 
     // Make the piece do the action retrieved from history
-    const piece_action& next_action{m_action_history.get()[m_index].second};
-    get_piece_at(c, next_action.get_from()).add_action(next_action);
+    const piece_action& next_action{m_action_history.get().at(m_index).second};
+    get_piece_at(m_game_controller, next_action.get_from()).add_action(next_action);
 
     ++m_index;
 
     if (m_index == static_cast<int>(m_action_history.get().size()))
     {
       // Tick away the last time
-      for (int i=0; i!=4; ++i)
-      {
-        c.tick(delta_t(dt_to_do.get() / 4.0));
-      }
+      m_game_controller.tick(dt_to_do);
+      assert(this->is_done());
       return;
     }
   }
+}
+
+game_statistics_in_time extract_game_statistics_in_time(
+  const replayer& r_original,
+  const delta_t& dt
+)
+{
+  game_statistics_in_time s;
+  replayer r(
+    r_original.get_action_history(),
+    create_game_controller_with_user_settings(create_game_with_user_settings())
+  );
+  assert(get_in_game_time(r) == in_game_time(0.0));
+  while (!r.is_done())
+  {
+    std::clog << r.get_game().get_in_game_time() << '\n';
+    s.add(r.get_game());
+    r.do_move(dt);
+  }
+  return s;
 }
 
 const in_game_time& get_in_game_time(
@@ -86,7 +101,7 @@ int get_n_moves(const replayer& r) noexcept
   return get_n_piece_actions(r.get_action_history());
 }
 
-game get_played_scholars_mate()
+replayer get_played_scholars_mate()
 {
   // Scholar's mate
   // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
@@ -105,7 +120,14 @@ game get_played_scholars_mate()
   r.do_move(); // Qh5xf7#
   r.do_move(); // 1-0, which is ignored
   assert(is_checkmate(r.get_game().get_pieces(), chess_color::black));
-  return r.get_game();
+  return r;
+}
+
+bool replayer::is_done() const noexcept
+{
+  assert(m_index >= 0);
+  assert(m_index <= static_cast<int>(m_action_history.get().size()));
+  return m_index == static_cast<int>(m_action_history.get().size());
 }
 
 bool is_piece_at(const replayer& r, const square& coordinate)
@@ -218,11 +240,8 @@ void test_replayer()
   // replayer can do three moves
   {
     // Scholar's mate
-    // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5")));
     assert(get_n_moves(r) == 3);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
@@ -368,11 +387,17 @@ void test_replayer()
     assert(is_checkmate(r.get_game().get_pieces(), chess_color::white));
     assert(!is_checkmate(r.get_game().get_pieces(), chess_color::black));
   }
+  // extract_game_statistics_in_time
+  {
+    const auto r = get_played_scholars_mate();
+    const auto statistics = extract_game_statistics_in_time(r, delta_t(0.2));
+    assert(!statistics.get().empty());
+  }
   // get_played_scholars_mate
   {
-    const auto g{get_played_scholars_mate()};
-    assert(is_checkmate(g.get_pieces(), chess_color::black));
-    assert(g.get_winner().value() == chess_color::white);
+    const auto r{get_played_scholars_mate()};
+    assert(is_checkmate(r.get_game().get_pieces(), chess_color::black));
+    assert(r.get_game().get_winner().value() == chess_color::white);
   }
   // to_fen_string
   {
