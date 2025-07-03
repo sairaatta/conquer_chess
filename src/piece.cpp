@@ -24,6 +24,7 @@ piece::piece(
     m_current_square{coordinat},
     m_has_moved{false},
     m_health{::get_max_health(r)},
+    m_id{create_new_id()},
     m_in_game_time{in_game_time(0.0)},
     m_is_selected{false},
     m_kill_count{0},
