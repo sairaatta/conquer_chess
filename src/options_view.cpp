@@ -7,12 +7,13 @@
 #include "physical_controller.h"
 #include "physical_controllers.h"
 #include "physical_controller_type.h"
+#include "game_controller.h"
 #include "options_view.h"
 #include "physical_controllers.h"
 #include "game_resources.h"
 #include "screen_coordinate.h"
 #include "game_options.h"
-#include "pieces.h"
+//#include "pieces.h"
 #include "physical_controllers.h"
 #include "sfml_helper.h"
 #include "options_view.h"
@@ -356,8 +357,9 @@ void draw_game_speed(options_view& v)
 
 void draw_pieces(options_view& view)
 {
+  game_controller c;
   draw_pieces(
-    get_starting_pieces(game_options::get().get_starting_position()),
+    c,
     view.get_layout().get_chess_board()
   );
 }

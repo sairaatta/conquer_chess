@@ -5,15 +5,11 @@
 #include "game_statistics_widget.h"
 #include "render_window.h"
 #include "game_resources.h"
-//#include "sfml_helper.h"
-//#include "draw.h"
 #include "draw_board.h"
 #include "game.h"
-//#include "game_controller.h"
 #include <cassert>
 #include <cmath>
 #include <fstream>
-//#include <sstream>
 
 // From https://github.com/jerr-it/SFGraphing
 #include "../SFGraphing/include/SFGraphing/SFPlot.h"
@@ -98,13 +94,14 @@ void replay_view::tick_impl(const delta_t dt)
 
 void draw_board(replay_view& v)
 {
+
   const auto& g{v.get_game()};
   const board_layout& layout{v.get_layout().get_board()};
 
   const bool semi_transparent{false};
   draw_squares(layout, semi_transparent);
   draw_unit_paths(g.get_pieces(), layout);
-  draw_pieces(g.get_pieces(), layout);
+  draw_pieces(v.get_replayer().get_game_controller(), layout);
   draw_unit_health_bars(g, layout);
 }
 

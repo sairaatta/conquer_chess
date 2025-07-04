@@ -7,9 +7,7 @@
 #include "chess_color.h"
 #include "options_view_layout.h"
 #include "options_view_item.h"
-//#include "read_only.h"
 #include "physical_controllers.h"
-//#include "physical_controller_type.h"
 #include "controls_bar.h"
 #include "view.h"
 

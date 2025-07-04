@@ -11,7 +11,7 @@
 
 /// Draw the pieces
 void draw_pieces(
-  const std::vector<piece>& pieces,
+  const game_controller& c,
   const board_layout& layout
 );
 

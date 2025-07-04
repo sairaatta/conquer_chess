@@ -5,7 +5,8 @@
 #include "board_layout.h"
 #include "draw.h"
 #include "game.h"
-#include "game_coordinate.h"
+#include "helper.h"
+#include "game_controller.h"
 #include "game_resources.h"
 #include "screen_coordinate.h"
 #include "sfml_helper.h"
@@ -13,32 +14,22 @@
 #include <cassert>
 
 void draw_pieces(
-  const std::vector<piece>& pieces,
+  const game_controller& c,
   const board_layout& layout
 )
 {
-  for (const auto& piece: pieces)
+  const auto& game{c.get_game()};
+
+  const auto selected_piece_ids{collect_selected_piece_ids(c)};
+
+  for (const auto& piece: game.get_pieces())
   {
-    const auto square_rect{
-      layout.get_square(
-        piece.get_current_square().get_x(),
-        piece.get_current_square().get_y()
-      )
-    };
-    /// +------------------+
-    /// |+----------------+|
-    /// || Health         ||
-    /// |+----------------+|
-    /// ||Player          ||
-    /// ||                ||
-    /// ||                ||
-    /// ||                ||
-    /// |+----------------+|
-    /// +------------------+
-    ///
-    const auto piece_rect{square_layout(square_rect).get_piece()};
+    const int x{piece.get_current_square().get_x()};
+    const int y{piece.get_current_square().get_y()};
+    const square_layout& square_layout(layout.get_square(x, y));
+
     // Transparency effect when moving
-    sf::Color fill_color{sf::Color::Transparent};
+    sf::Color fill_color = sf::Color::Transparent;
     if (!piece.get_actions().empty()
       && piece.get_actions()[0].get_action_type() == piece_action_type::move
     )
@@ -55,15 +46,33 @@ void draw_pieces(
       }
       fill_color = sf::Color(255, 255, 255, alpha);
     }
+
+    const screen_rect sprite_rect(square_layout.get_piece());
+
     draw_texture(
       get_piece_texture(
         piece.get_race(),
         piece.get_color(),
         piece.get_type()
       ),
-      piece_rect,
+      sprite_rect,
       fill_color
     );
+
+    if (is_present_in(piece.get_id(), selected_piece_ids))
+    {
+      draw_outline(sprite_rect, to_sfml_color(piece.get_color()), 5);
+    }
+
+    // Show the piece is proteced
+    if (is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color()))
+    {
+      draw_texture(
+        game_resources::get().get_board_game_textures().get_shield(),
+        square_layout.get_is_protected(),
+        sf::Color::Blue
+      );
+    }
   }
 }
 

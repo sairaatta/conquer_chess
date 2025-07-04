@@ -499,65 +499,11 @@ void show_occupied_squares(game_view& view)
 
 void draw_pieces(game_view& view)
 {
-  const auto& game{view.get_game()};
-  const board_layout layout(view.get_layout().get_board());
+  draw_pieces(
+    view.get_game_controller(),
+    view.get_layout().get_board()
+  );
 
-  const auto selected_piece_ids{collect_selected_piece_ids(view.get_game_controller())};
-
-
-
-  for (const auto& piece: game.get_pieces())
-  {
-    const int x{piece.get_current_square().get_x()};
-    const int y{piece.get_current_square().get_y()};
-    const square_layout& square_layout(layout.get_square(x, y));
-
-    // Transparency effect when moving
-    sf::Color fill_color = sf::Color::Transparent;
-    if (!piece.get_actions().empty()
-      && piece.get_actions()[0].get_action_type() == piece_action_type::move
-    )
-    {
-      const double f{piece.get_current_action_progress().get()};
-      int alpha{0};
-      if (f < 0.5)
-      {
-        alpha = 255 - static_cast<int>(f * 255.0);
-      }
-      else
-      {
-        alpha = static_cast<int>(f * 255.0);
-      }
-      fill_color = sf::Color(255, 255, 255, alpha);
-    }
-
-    const screen_rect sprite_rect(square_layout.get_piece());
-
-    draw_texture(
-      get_piece_texture(
-        piece.get_race(),
-        piece.get_color(),
-        piece.get_type()
-      ),
-      sprite_rect,
-      fill_color
-    );
-
-    if (is_present_in(piece.get_id(), selected_piece_ids))
-    {
-      draw_outline(sprite_rect, to_sfml_color(piece.get_color()), 5);
-    }
-
-    // Show the piece is proteced
-    if (is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color()))
-    {
-      draw_texture(
-        game_resources::get().get_board_game_textures().get_shield(),
-        square_layout.get_is_protected(),
-        sf::Color::Blue
-      );
-    }
-  }
 }
 
 void draw_possible_moves(game_view& view)
