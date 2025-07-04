@@ -5,15 +5,9 @@
 
 #include "ccfwd.h"
 #include "sleep_scheduler.h"
-#include "about_view.h"
 #include "program_state.h"
-#include "loading_view.h"
-#include "lobby_view.h"
-#include "game_view.h"
-#include "menu_view.h"
-#include "controls_view.h"
-#include "options_view.h"
-#include "loading_view.h"
+#include "lobby_options.h"
+#include "replay.h"
 #include "view.h"
 
 #include <SFML/Graphics.hpp>
@@ -38,6 +32,9 @@ private:
   ///
   /// Will only be updated by the lobby screen
   lobby_options m_lobby_options;
+
+  /// The replay of the last game
+  replay m_replay;
 
   /// Sleeps to achieve a frame rate of 50-60 frames per second
   sleep_scheduler m_sleep_scheduler;
@@ -71,17 +68,6 @@ private:
   /// for example, load textures, move pieces, etc.
   void tick();
 
-  /*
-  void tick_about();
-  void tick_game();
-  void tick_left_controls();
-  void tick_loading();
-  void tick_lobby();
-  void tick_main_menu();
-  void tick_options();
-  void tick_replay();
-  void tick_right_controls();
-  */
 };
 
 #endif // LOGIC_ONLY

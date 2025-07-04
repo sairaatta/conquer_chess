@@ -41,6 +41,9 @@ std::vector<piece_action> collect_actions_in_timespan(
   const in_game_time to
 );
 
+/// Create an action history from a game
+action_history create_action_history_from_game(const game& g);
+
 /// Create an action history from a PGN string
 action_history create_action_history_from_pgn(const pgn_game_string& s);
 

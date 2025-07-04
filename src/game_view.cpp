@@ -11,13 +11,10 @@
 #include "game_resources.h"
 #include "game_statistics_widget.h"
 #include "game_view_layout.h"
-//#include "game_statistics_widget_layout.h"
-#include "helper.h"
 #include "lobby_options.h"
 #include "physical_controller.h"
 #include "physical_controllers.h"
-#include "square_layout.h"
-#include "pieces.h"
+#include "replay.h"
 #include "render_window.h"
 #include "physical_controller.h"
 #include "screen_coordinate.h"
@@ -112,7 +109,15 @@ const game_view_layout& get_layout(const game_view& v) noexcept
 
 const std::vector<piece>& get_pieces(const game_view& v) noexcept
 {
-  return get_pieces(v.get_game());
+  return get_pieces(v.get_game_controller().get_game());
+}
+
+replay game_view::get_replay() const
+{
+  return replay(
+    create_action_history_from_game(m_game_controller.get_game()),
+    m_game_controller
+  );
 }
 
 void game_view::play_pieces_sound_effects()

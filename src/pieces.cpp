@@ -279,17 +279,6 @@ std::vector<piece> create_pieces_from_fen_string(const fen_string& fen_str)
   return pieces;
 }
 
-/*
-std::vector<piece> create_pieces_from_settings()
-{
-  return get_starting_pieces(
-    get_starting_position(),
-    get_race_of_side(side::lhs),
-    get_race_of_side(side::rhs)
-  );
-}
-*/
-
 square get_current_king_square(
   const std::vector<piece>& pieces,
   const chess_color c

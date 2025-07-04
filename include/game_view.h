@@ -37,8 +37,6 @@ public:
   /// The the elapsed time in seconds
   double get_elapsed_time_secs() const noexcept;
 
-  auto& get_game() noexcept { return m_game_controller.get_game(); }
-
   const auto& get_game() const noexcept { return m_game_controller.get_game(); }
 
   const auto& get_game_controller() const noexcept { return m_game_controller; }
@@ -49,6 +47,8 @@ public:
   const auto& get_log() const noexcept { return m_log; }
 
   const auto& get_physical_controllers() const noexcept { return m_pc; }
+
+  [[nodiscard]] replay get_replay() const;
 
   /// Process all events
   /// @return if the user wants to quit

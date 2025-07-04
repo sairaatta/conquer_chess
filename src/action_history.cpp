@@ -36,6 +36,16 @@ void action_history::add_action(const in_game_time& in_game_time, const piece_ac
   m_timed_actions.push_back(std::make_pair(in_game_time, action));
 }
 
+action_history create_action_history_from_game(const game& g)
+{
+  std::vector<action_history> v;
+  for (const auto& p: g.get_pieces())
+  {
+    v.push_back(p.get_action_history());
+  }
+  return merge_action_histories(v);
+}
+
 action_history create_action_history_from_pgn(const pgn_game_string& s)
 {
   action_history h;

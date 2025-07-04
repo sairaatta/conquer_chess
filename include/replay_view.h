@@ -26,6 +26,8 @@ public:
   /// Process a resize event
   void process_resize_event_impl(sf::Event& event) override;
 
+  void set_replay(const replay& r);
+
   /// Prepare this window for being shown
   void start_impl() override;
 
@@ -35,12 +37,12 @@ public:
   /// Run the game, until the user quits
   void tick_impl(const delta_t dt) override;
 
-  const auto& get_game() const noexcept { return m_replayer.get_game(); }
+  const auto& get_game() const noexcept { return m_replay.get_game(); }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
   /// The played game
-  const auto& get_replayer() const noexcept { return m_replayer; }
+  const auto& get_replayer() const noexcept { return m_replay; }
 
   const auto& get_statistics() const noexcept { return m_statistics; }
 
@@ -49,7 +51,7 @@ private:
   controls_bar m_controls_bar;
 
   /// The played game
-  replay m_replayer;
+  replay m_replay;
 
   /// Costly to extract from replayer
   game_statistics_in_time m_statistics;

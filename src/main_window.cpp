@@ -2,13 +2,20 @@
 
 #ifndef LOGIC_ONLY
 
-#include "game_options.h"
-#include "screen_rect.h"
-#include "render_window.h"
-#include "game_resources.h"
-#include "replay_view.h"
-#include "lobby_options.h"
+#include "about_view.h"
+#include "controls_view.h"
 #include "draw.h"
+#include "game_options.h"
+#include "game_resources.h"
+#include "game_view.h"
+#include "loading_view.h"
+#include "lobby_options.h"
+#include "lobby_view.h"
+#include "menu_view.h"
+#include "options_view.h"
+#include "render_window.h"
+#include "replay_view.h"
+#include "screen_rect.h"
 
 #include <cassert>
 #include <cmath>
@@ -30,6 +37,8 @@ main_window::main_window()
   m_views[program_state::options] = std::make_unique<options_view>();
   m_views[program_state::replay] = std::make_unique<replay_view>();
   m_views[program_state::right_controls] = std::make_unique<controls_view>(side::rhs);
+
+  m_replay = get_played_scholars_mate();
 
   // All programs states have a view
   for (const auto s: get_all_program_states())
@@ -129,6 +138,17 @@ void main_window::process_resize_event(sf::Event& event)
 
 void main_window::set_new_state(const program_state s)
 {
+  // Respond to the old state closing
+  {
+    // Get the replay of the last game
+    if (m_program_state == program_state::game)
+    {
+      const auto p{dynamic_cast<game_view*>(m_views[program_state::game].get())};
+      assert(p);
+      m_replay = p->get_replay();
+    }
+  }
+
   assert(m_program_state != s);
 
   assert(m_views[m_program_state]->is_active());
@@ -136,6 +156,17 @@ void main_window::set_new_state(const program_state s)
   m_views[m_program_state]->stop();
   assert(!m_views[m_program_state]->is_active());
   assert(!m_views[m_program_state]->get_next_state().has_value());
+
+  // Respond to the new state starting
+  {
+    // Get the replay of the last game
+    if (s == program_state::replay)
+    {
+      const auto p{dynamic_cast<replay_view*>(m_views[program_state::replay].get())};
+      assert(p);
+      p->set_replay(m_replay);
+    }
+  }
 
   // Start the new state
   m_program_state = s;

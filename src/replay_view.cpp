@@ -15,12 +15,8 @@
 #include "../SFGraphing/include/SFGraphing/SFPlot.h"
 
 replay_view::replay_view()
-  : m_replayer{get_played_scholars_mate()}
 {
   m_controls_bar.set_draw_player_controls(false);
-
-  m_statistics = extract_game_statistics_in_time(m_replayer, delta_t(0.02));
-  m_replayer.reset();
 }
 
 bool replay_view::process_event_impl(sf::Event& event)
@@ -41,7 +37,7 @@ bool replay_view::process_event_impl(sf::Event& event)
     else if (key_pressed == sf::Keyboard::Key::F2)
     {
       std::ofstream file("replay.pgn");
-      file << to_pgn(m_replayer.get_game()) << '\n';
+      file << to_pgn(m_replay.get_game()) << '\n';
       play_sound_effect(message(message_type::done, chess_color::white, piece_type::king));
     }
   }
@@ -65,16 +61,23 @@ void replay_view::draw_impl()
   draw_statistics(*this);
   draw_game_statistics_widget(
     this->m_layout.get_statistics_widget(),
-    this->m_replayer.get_game_controller()
+    this->m_replay.get_game_controller()
   );
   m_controls_bar.draw();
+}
+
+void replay_view::set_replay(const replay& r)
+{
+  m_replay = r;
+  m_statistics = extract_game_statistics_in_time(m_replay, delta_t(0.02));
+  m_replay.reset();
 }
 
 void replay_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
-  m_replayer.reset();
+  m_replay.reset();
 }
 
 void replay_view::stop_impl()
@@ -89,15 +92,13 @@ void replay_view::tick_impl(const delta_t dt)
   assert(dt.get() > 0.0);
 
   // Replay the game :-)
-  m_replayer.do_move(dt);
+  m_replay.do_move(dt);
 }
 
 void draw_board(replay_view& v)
 {
-
   const auto& g{v.get_game()};
   const board_layout& layout{v.get_layout().get_board()};
-
   const bool semi_transparent{false};
   draw_squares(layout, semi_transparent);
   draw_unit_paths(g.get_pieces(), layout);
@@ -107,7 +108,11 @@ void draw_board(replay_view& v)
 
 void draw_statistics(replay_view& v)
 {
+  // An empty replay
+  if (v.get_statistics().get().empty()) return;
+
   const auto screen_rect{v.get_layout().get_statistics()};
+
 
   std::vector<float> times;
   std::vector<float> lhs_piece_values;
@@ -158,6 +163,7 @@ void draw_statistics(replay_view& v)
   plot.AddDataSet(vertical_bar_at_current_time);
 
   //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
+  assert(!times.empty());
   const double xmin{0.0};
   const double xmax{times.back()};
   const double ymin{0.0};

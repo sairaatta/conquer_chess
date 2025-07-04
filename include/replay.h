@@ -16,11 +16,14 @@
 ///
 /// Use 'do_move' to go forward in time.
 ///
+/// @param h the \link{action_history},
+///   as can be created by, e.g. \link{create_action_history_from_pgn}
+///   or \link{create_action_history_from_game}
 class replay
 {
 public:
   explicit replay(
-    const action_history& r = action_history(),
+    const action_history& h = action_history(),
     const game_controller& c = game_controller()
   );
 
