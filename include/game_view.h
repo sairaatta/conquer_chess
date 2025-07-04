@@ -6,7 +6,7 @@
 #include "ccfwd.h"
 #include "controls_bar.h"
 #include "physical_controller.h"
-#include "game.h"
+//#include "game.h"
 #include "game_log.h"
 #include "game_controller.h"
 #include "game_view_layout.h"

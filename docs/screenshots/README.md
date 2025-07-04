@@ -2,7 +2,11 @@
 
 ## v0.9
 
-![Game screen v0.9](20250703_3.jpg)
+![Replay screen v0.9](20250704_1.jpg)
+
+> The replays screen shows the game statistics widget too
+
+![Replay screen v0.9](20250703_3.jpg)
 
 > The replays screen shows both statistics and board
 

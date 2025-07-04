@@ -2,17 +2,18 @@
 
 #ifndef LOGIC_ONLY
 
+#include "game_statistics_widget.h"
 #include "render_window.h"
 #include "game_resources.h"
-#include "sfml_helper.h"
-#include "draw.h"
+//#include "sfml_helper.h"
+//#include "draw.h"
 #include "draw_board.h"
 #include "game.h"
-#include "game_controller.h"
+//#include "game_controller.h"
 #include <cassert>
 #include <cmath>
 #include <fstream>
-#include <sstream>
+//#include <sstream>
 
 // From https://github.com/jerr-it/SFGraphing
 #include "../SFGraphing/include/SFGraphing/SFPlot.h"
@@ -66,6 +67,10 @@ void replay_view::draw_impl()
 {
   draw_board(*this);
   draw_statistics(*this);
+  draw_game_statistics_widget(
+    this->m_layout.get_statistics_widget(),
+    this->m_replayer.get_game_controller()
+  );
   m_controls_bar.draw();
 }
 
@@ -125,12 +130,21 @@ void draw_statistics(replay_view& v)
     rhs_protectedness.push_back(s.get(game_statistic_type::protectedness, side::rhs));
   }
 
+  #ifdef KEEP_LEGEND_TEXT
   csrc::PlotDataSet lhs_piece_values_in_time(times, lhs_piece_values, sf::Color(255, 128, 128), "LHS piece value", csrc::PlottingType::LINE);
   csrc::PlotDataSet rhs_piece_values_in_time(times, rhs_piece_values, sf::Color(255, 0, 0), "RHS piece value", csrc::PlottingType::LINE);
   csrc::PlotDataSet lhs_activity_in_time(times, lhs_activity, sf::Color(128, 255, 128), "LHS activity", csrc::PlottingType::LINE);
   csrc::PlotDataSet rhs_activity_in_time(times, rhs_activity, sf::Color(0, 255, 0), "RHS activity", csrc::PlottingType::LINE);
   csrc::PlotDataSet lhs_protectedness_in_time(times, lhs_protectedness, sf::Color(128, 128, 255), "LHS protectedness", csrc::PlottingType::LINE);
   csrc::PlotDataSet rhs_protectedness_in_time(times, rhs_protectedness, sf::Color(0, 0, 255), "RHS protectedness", csrc::PlottingType::LINE);
+  #else
+  csrc::PlotDataSet lhs_piece_values_in_time(times, lhs_piece_values, sf::Color(255, 128, 128), "", csrc::PlottingType::LINE);
+  csrc::PlotDataSet rhs_piece_values_in_time(times, rhs_piece_values, sf::Color(255, 0, 0), "", csrc::PlottingType::LINE);
+  csrc::PlotDataSet lhs_activity_in_time(times, lhs_activity, sf::Color(128, 255, 128), "", csrc::PlottingType::LINE);
+  csrc::PlotDataSet rhs_activity_in_time(times, rhs_activity, sf::Color(0, 255, 0), "", csrc::PlottingType::LINE);
+  csrc::PlotDataSet lhs_protectedness_in_time(times, lhs_protectedness, sf::Color(128, 128, 255), "", csrc::PlottingType::LINE);
+  csrc::PlotDataSet rhs_protectedness_in_time(times, rhs_protectedness, sf::Color(0, 0, 255), "", csrc::PlottingType::LINE);
+  #endif
 
   //Position, dimension, margin, font
   csrc::SFPlot plot(

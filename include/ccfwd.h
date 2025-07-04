@@ -14,6 +14,7 @@ class game_coordinate;
 class game_options;
 class game_rect;
 class game_resources;
+class game_statistics_widget_layout;
 class game_view;
 class game_view_layout;
 class in_game_time;

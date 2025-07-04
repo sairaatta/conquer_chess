@@ -79,10 +79,18 @@ game_statistics_in_time extract_game_statistics_in_time(
   replayer r(
     r_original.get_action_history().get_value(),
     game_controller()
-    //create_game_controller_with_user_settings(create_game_with_user_settings())
   );
   assert(get_in_game_time(r) == in_game_time(0.0));
   while (!r.is_done())
+  {
+    s.add(r.get_game_controller());
+    r.do_move(dt);
+  }
+
+  // Add the tail
+  assert(dt.get() != 0.0);
+  const int n{2 * (1 + static_cast<int>((1.0 / dt.get())))};
+  for (int i{0}; i!=n; ++i)
   {
     s.add(r.get_game_controller());
     r.do_move(dt);

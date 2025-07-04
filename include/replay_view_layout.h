@@ -3,37 +3,31 @@
 
 #include "screen_rect.h"
 #include "board_layout.h"
+#include "game_statistics_widget_layout.h"
 
 //#include <vector>
 
 /// The layout of a 'Played game' dialog.
 ///
 /// ```text
-///   x          x
-///   1          2
+///   x          x x           x4
+///   1          2 3
 ///
-/// +--------------+
-/// |              |
-/// | +----------+ | y1
-/// | |          | |
-/// | | board    | |
-/// | |          | |
-/// | |          | |
-/// | +----------+ | y2
-/// |              |
-/// | +----------+ | y3
-/// | |          | |
-/// | |statistics| |
-/// | |          | |
-/// | |          | |
-/// | +----------+ | y4
-/// |              |
-/// +--------------+
+/// +-----------------------------+
+/// |                             |
+/// | +----------+ +------------+ | y1
+/// | |          | |            | |
+/// | | board    | | statistics | |
+/// | |          | |            | |
+/// | |          | |            | |
+/// | +----------+ +------------+ | y2
+/// |                             |
+/// | +-------------------------+ | y3
+/// | | statistics width        | |
+/// | +-------------------------+ | y4
+/// |                             |
+/// +-----------------------------+
 ///
-///   ^          ^
-///   |          |
-///   +----------+
-///    panel_width
 /// ```text
 class replay_view_layout
 {
@@ -49,11 +43,14 @@ public:
 
   const auto& get_statistics() const noexcept { return m_statistics; }
 
+  const auto& get_statistics_widget() const noexcept { return m_statistics_widget; }
+
 private:
 
   screen_rect m_background;
   board_layout m_board;
   screen_rect m_statistics;
+  game_statistics_widget_layout m_statistics_widget;
 };
 
 /// Test the replay_view_layout class
