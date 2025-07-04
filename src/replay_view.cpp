@@ -98,7 +98,7 @@ void draw_board(replay_view& v)
 
   const bool semi_transparent{false};
   draw_squares(layout, semi_transparent);
-  //TODO: draw_unit_paths(layout);
+  draw_unit_paths(g.get_pieces(), layout);
   draw_pieces(g.get_pieces(), layout);
   draw_unit_health_bars(g, layout);
 }

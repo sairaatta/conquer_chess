@@ -27,6 +27,12 @@ void draw_unit_health_bars(
   const board_layout& layout
 );
 
+/// Show the paths the units are taking on-screen
+void draw_unit_paths(
+  const std::vector<piece>& pieces,
+  const board_layout& layout
+);
+
 #endif // LOGIC_ONLY
 
 #endif // DRAW_BOARD_H

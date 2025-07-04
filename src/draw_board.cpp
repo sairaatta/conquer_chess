@@ -5,8 +5,12 @@
 #include "board_layout.h"
 #include "draw.h"
 #include "game.h"
+#include "game_coordinate.h"
 #include "game_resources.h"
+#include "screen_coordinate.h"
 #include "sfml_helper.h"
+#include "render_window.h"
+#include <cassert>
 
 void draw_pieces(
   const std::vector<piece>& pieces,
@@ -146,7 +150,182 @@ void draw_unit_health_bars(
       }
 
     }
+  }
+}
 
+void draw_unit_paths(
+  const std::vector<piece>& pieces,
+  const board_layout& layout
+)
+{
+  for (const auto& piece: pieces)
+  {
+    if (is_idle(piece)) continue;
+
+    const auto square_piece{
+      layout.get_square(
+        piece.get_current_square().get_x(),
+        piece.get_current_square().get_y()
+      ).get_square()
+    };
+    const auto piece_pixel{get_center(square_piece)};
+
+    const auto& actions{piece.get_actions()};
+    for (const auto& action: actions)
+    {
+
+      const auto square_from{
+        layout.get_square(action.get_from().get_x(), action.get_from().get_y()).get_square()
+      };
+      const auto square_to{
+        layout.get_square(action.get_to().get_x(), action.get_to().get_y()).get_square()
+      };
+      const auto from_pixel{get_center(square_from)};
+      const auto to_pixel{get_center(square_to)};
+      /*
+      const auto from_pixel{
+        convert_to_screen_coordinate(
+          to_coordinat(action.get_from()),
+          layout
+        )
+      };
+      const auto to_pixel{
+        convert_to_screen_coordinate(
+          to_coordinat(action.get_to()),
+          layout
+        )
+      };
+      */
+      const auto center_pixel{(to_pixel + from_pixel) / 2.0};
+      const double length{calc_distance(from_pixel, to_pixel)};
+      const double angle_degrees{calc_angle_degrees(center_pixel, to_pixel)};
+      sf::RectangleShape rect;
+      assert(get_width(square_piece) == get_width(square_to));
+      assert(get_width(square_from) == get_width(square_to));
+      const double max_square_height{static_cast<double>(get_width(square_piece))};
+      const double height{std::max(2.0, max_square_height * 0.05)};
+      rect.setSize(sf::Vector2f(length, height));
+      rect.setOrigin(length / 2, height / 2);
+      rect.setPosition(
+        center_pixel.get_x(),
+        center_pixel.get_y()
+      );
+      rect.rotate(-angle_degrees);
+      rect.setOutlineColor(to_sfml_color(get_other_color(piece.get_color())));
+      rect.setOutlineThickness(2);
+      rect.setFillColor(to_sfml_color(piece.get_color()));
+      get_render_window().draw(rect);
+    }
+
+
+
+    // Collect all the coordinats for the path
+    std::vector<screen_coordinate> coordinats;
+    coordinats.reserve(piece.get_actions().size() + 1); // +1 for current position
+
+
+    coordinats.push_back(piece_pixel);
+    /*
+    coordinats.push_back(
+      convert_to_screen_coordinate(
+        to_coordinat(piece.get_current_square()),
+        layout
+      )
+    );
+    */
+    std::transform(
+      std::begin(actions),
+      std::end(actions),
+      std::back_inserter(coordinats),
+      [layout](const auto& user_input)
+      {
+        const auto square_to{
+          layout.get_square(user_input.get_to().get_x(), user_input.get_to().get_y()).get_square()
+        };
+        const auto to_pixel{get_center(square_to)};
+        return to_pixel;
+        /*
+        return convert_to_screen_coordinate(
+          to_coordinat(user_input.get_to()),
+          layout
+        );
+        */
+      }
+    );
+
+    // Draw circles at the subgoals
+    sf::CircleShape circle;
+    for (const auto coordinat: coordinats)
+    {
+      const double full_diameter{static_cast<double>(get_width(square_piece))};
+      const double diameter{0.25 * full_diameter};
+      const double radius{diameter / 2.0};
+      const double half_radius{radius/ 2.0};
+      circle.setPosition(
+        sf::Vector2f(
+          coordinat.get_x() - half_radius,
+          coordinat.get_y() - half_radius
+        )
+      );
+      circle.setFillColor(to_sfml_color(piece.get_color()));
+      circle.setRadius(radius);
+      circle.setOrigin(half_radius, half_radius);
+      get_render_window().draw(circle);
+    }
+
+    // Draw circle at current in-progress movement
+    assert(!actions.empty());
+    const auto& first_action{actions[0]};
+    if (first_action.get_action_type() == piece_action_type::move
+      || first_action.get_action_type() == piece_action_type::castle_kingside
+      || first_action.get_action_type() == piece_action_type::castle_queenside
+    )
+    {
+      const auto square_from{
+        layout.get_square(first_action.get_from().get_x(), first_action.get_from().get_y()).get_square()
+      };
+      const auto square_to{
+        layout.get_square(first_action.get_to().get_x(), first_action.get_to().get_y()).get_square()
+      };
+      const auto from_pixel{get_center(square_from)};
+      const auto to_pixel{get_center(square_to)};
+      /*
+      const auto from_pixel{
+        convert_to_screen_coordinate(
+          to_coordinat(first_action.get_from()),
+          layout
+        )
+      };
+      const auto to_pixel{
+        convert_to_screen_coordinate(
+          to_coordinat(first_action.get_to()),
+          layout
+        )
+      };
+      */
+      const auto f{piece.get_current_action_progress().get()};
+      assert(f >= 0.0);
+      assert(f <= 1.0);
+      const auto delta_pixel{to_pixel - from_pixel};
+      const auto now_pixel{from_pixel + (delta_pixel * f)};
+
+      const double full_diameter{static_cast<double>(get_width(square_piece))};
+      const double diameter{0.25 * full_diameter};
+      const double radius{diameter / 2.0};
+      const double half_radius{radius/ 2.0};
+      circle.setPosition(
+        sf::Vector2f(
+          now_pixel.get_x() - half_radius,
+          now_pixel.get_y() - half_radius
+        )
+      );
+      circle.setOutlineColor(to_sfml_color(get_other_color(piece.get_color())));
+      circle.setOutlineThickness(std::max(2.0, radius / 10.0));
+      circle.setFillColor(to_sfml_color(piece.get_color()));
+      circle.setRadius(radius);
+      circle.setOrigin(half_radius, half_radius);
+      get_render_window().draw(circle);
+    }
   }
 }
 
