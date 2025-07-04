@@ -6,7 +6,6 @@
 #include "message.h"
 #include "piece.h"
 #include "pieces.h"
-//#include "piece_action_type.h"
 #include "action_history.h"
 #include "starting_position_type.h"
 #include "fen_string.h"
@@ -332,45 +331,6 @@ const piece& get_piece_with_id(const game& g, const piece_id& id);
 /// Assumes that the piece is on the board
 piece& get_piece_with_id(game& g, const piece_id& id);
 
-/*
-/// Get the color of a player
-chess_color get_player_color(
-  const side player
-) noexcept;
-
-/// Get the side of a player
-side get_player_side(const chess_color& color) noexcept;
-*/
-
-/*
-/// Get the possible moves for a player's selected pieces
-/// Will be empty if no pieces are selected
-std::vector<square> get_possible_moves(
-  const game& g,
-  const side player
-);
-*/
-
-/*
-/// Get all the selected pieces
-/// @param g a game
-/// @param player the color of the player, which is white for player 1
-/// @see use 'has_selected_piece' to see if there is at least 1 piece selected
-std::vector<piece> get_selected_pieces(
-  const game& g,
-  const chess_color player
-);
-
-/// Get all the selected pieces
-/// @param g a game
-/// @param side the side of the player, which is white for player 1
-/// @see use 'has_selected_piece' to see if there is at least 1 piece selected
-std::vector<piece> get_selected_pieces(
-  const game& g,
-  const side player
-);
-*/
-
 /// Get all the pieces
 std::vector<piece>& get_pieces(game& g) noexcept;
 
@@ -444,14 +404,6 @@ fen_string to_fen_string(const game& g);
 /// An example string can be: '0: white pawn move from e2 to e4',
 /// where the '0' denotes the starting time of the move
 std::string to_pgn(const game& g);
-
-/*
-/// Unselect all pieces of a certain color
-void unselect_all_pieces(
-  game& g,
-  const chess_color color
-);
-*/
 
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept;
 

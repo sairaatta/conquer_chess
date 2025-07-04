@@ -932,31 +932,6 @@ int count_piece_actions(
   return count_piece_actions(g.get_pieces(), player);
 }
 
-/*
-int count_selected_units(
-  const game& g
-)
-{
-  return count_selected_units(g.get_pieces());
-}
-
-int count_selected_units(
-  const game& g,
-  const chess_color player
-)
-{
-  return count_selected_units(g.get_pieces(), player);
-}
-
-int count_selected_units(
-  const game& g,
-  const side player_side
-)
-{
-  return count_selected_units(g, get_player_color(player_side));
-}
-*/
-
 std::vector<piece> find_pieces(
   const game& g,
   const piece_type type,
@@ -1025,13 +1000,6 @@ int get_index_of_closest_piece_to(
   return index;
 }
 
-/*
-game get_kings_only_game() noexcept
-{
-  return create_game_with_starting_position(starting_position_type::kings_only);
-}
-*/
-
 std::vector<square> get_unique_occupied_squares(const game& g) noexcept
 {
   return get_unique_occupied_squares(get_pieces(g));
@@ -1076,55 +1044,6 @@ piece& get_piece_with_id(game& g, const piece_id& id)
   }
   assert(!"Should never get here");
 }
-
-/*
-chess_color get_player_color(
-  const side player_side
-) noexcept
-{
-  return get_color(player_side);
-}
-
-side get_player_side(const chess_color& color) noexcept
-{
-  if (get_player_color(side::lhs) == color) return side::lhs;
-  assert(get_player_color(side::rhs) == color);
-  return side::rhs;
-}
-*/
-/*
-std::vector<square> get_possible_moves(
-  const game& g,
-  const side player
-)
-{
-  const auto selected_pieces{get_selected_pieces(g, player)};
-  if (selected_pieces.empty()) return {};
-  assert(selected_pieces.size() == 1);
-  const auto& selected_piece{selected_pieces[0]};
-  return get_possible_moves(
-    get_pieces(g),
-    selected_piece
-  );
-}
-*/
-/*
-std::vector<piece> get_selected_pieces(
-  const game& g,
-  const chess_color player
-)
-{
-  return get_selected_pieces(g.get_pieces(), player);
-}
-
-std::vector<piece> get_selected_pieces(
-  const game& g,
-  const side player
-)
-{
-  return get_selected_pieces(g.get_pieces(), get_player_color(player));
-}
-*/
 
 std::vector<message> collect_messages(const game& g) noexcept
 {
@@ -1320,16 +1239,6 @@ void game::tick_impl(const delta_t& dt)
   check_game_and_pieces_agree_on_the_time();
   check_all_occupied_squares_are_unique();
 }
-
-/*
-void unselect_all_pieces(
-  game& g,
-  const chess_color color
-)
-{
-  return unselect_all_pieces(g.get_pieces(), color);
-}
-*/
 
 void tick(game& g, const delta_t dt)
 {
