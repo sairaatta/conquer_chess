@@ -16,7 +16,8 @@
 ///
 /// This can be thought of as a virtual person that plays the game for you.
 ///
-/// This class:
+///
+/// This class does:
 ///
 /// - deals with \link{user_input}
 /// - keeps track of the cursors
@@ -24,17 +25,15 @@
 ///
 /// The most important member function is \link{apply_user_inputs_to_game},
 /// where the user inputs are converted to actions, which are then applied.
-///
-/// Helper functions to create a game controller:
-///
-/// - create_game_controller_with_keyboard_mouse
-/// - create_game_controller_with_mouse_keyboard
-/// - create_game_controller_with_two_keyboards
-/// - create_game_controller_with_user_settings
+/// @param g a (state of a) \link{game} to play on
+/// @param lo a \link{lobby_options} to know who is who, e.g.. who is white
 class game_controller
 {
 public:
-  explicit game_controller(const game& g = game(), const lobby_options& lo = lobby_options());
+  explicit game_controller(
+    const game& g = game(),
+    const lobby_options& lo = lobby_options()
+  );
 
   /// Add a user input. These will be processed in 'game::tick'
   void add_user_input(const user_input& a);
@@ -102,11 +101,6 @@ private:
   void apply_action_type_select_to_game(game& g, const side s);
   void apply_action_type_unselect_to_game(game& g, const side s);
 
-  /// Force to pick a setup of physical_controllers
-  //friend game_controller create_game_controller_with_keyboard_mouse(const game& g);
-  //friend game_controller create_game_controller_with_mouse_keyboard(const game& g);
-  //friend game_controller create_game_controller_with_two_keyboards(const game& g);
-  //friend game_controller create_game_controller_with_user_settings(const game& g);
   friend class game_view;
 };
 

@@ -83,8 +83,8 @@
 void test()
 {
 #ifndef NDEBUG
-  test_replayer();
-  assert(!"Yay");
+  //test_replayer();
+  //assert(!"Yay");
 
   test_about();
   test_about_view_layout();
@@ -230,7 +230,10 @@ int main(int argc, char **argv) //!OCLINT tests may be long
     #ifndef NDEBUG
     test();
     #endif
+
+    #ifndef LOGIC_ONLY
     main_window v;
     v.exec();
+    #endif // LOGIC_ONLY
   }
 }

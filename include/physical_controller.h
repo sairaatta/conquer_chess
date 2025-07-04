@@ -19,9 +19,9 @@ class physical_controller
 {
 public:
   explicit physical_controller(
-    const physical_controller_type type,
-    const key_bindings& kbs,
-    const mouse_bindings& mbs
+    const physical_controller_type type = physical_controller_type::keyboard,
+    const key_bindings& kbs = create_left_keyboard_key_bindings(),
+    const mouse_bindings& mbs = mouse_bindings()
   );
 
   /// Get the key bindings, if this is a keyboard

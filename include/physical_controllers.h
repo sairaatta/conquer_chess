@@ -5,6 +5,7 @@
 #include "physical_controller.h"
 
 #include <vector>
+#include <map>
 
 /// The physical controllers used by all players.
 class physical_controllers
@@ -24,14 +25,14 @@ public:
   physical_controller& get_controller(const side player_side) noexcept;
 
   /// Get the physical controllers
-  const std::vector<physical_controller>& get_controllers() const noexcept;
+  const auto& get_controllers() const noexcept { return m_physical_controllers; }
 
   /// Set a controller
   void set(const side player_side, const physical_controller& controller);
 
 private:
 
-  std::vector<physical_controller> m_physical_controllers;
+  std::map<side, physical_controller> m_physical_controllers;
 };
 
 /// Count the number of controllers that use the keyboard
@@ -72,17 +73,6 @@ physical_controllers create_mouse_keyboard_controllers() noexcept;
 /// - \link{use_mouse_keyboard_controllers}
 /// - \link{create_two_keyboard_controllers}
 physical_controllers create_two_keyboard_controllers() noexcept;
-
-/*
-
-/// Get the side of the controller that uses the keyboard.
-/// Assumes there is one controller that uses the keyboard
-side get_keyboard_user_player_side(const physical_controllers& controllers);
-
-/// Get the side of the controller that uses the mouse.
-/// Assumes there is one controller that uses the mouse
-side get_mouse_user_player_side(const physical_controllers& controllers);
-*/
 
 /// Determine if there is at least one controller that use the keyboard
 bool has_keyboard_controller(const physical_controllers& controllers) noexcept;
