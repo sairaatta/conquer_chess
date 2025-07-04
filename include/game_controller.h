@@ -103,10 +103,10 @@ private:
   void apply_action_type_unselect_to_game(game& g, const side s);
 
   /// Force to pick a setup of physical_controllers
-  friend game_controller create_game_controller_with_keyboard_mouse(const game& g);
-  friend game_controller create_game_controller_with_mouse_keyboard(const game& g);
-  friend game_controller create_game_controller_with_two_keyboards(const game& g);
-  friend game_controller create_game_controller_with_user_settings(const game& g);
+  //friend game_controller create_game_controller_with_keyboard_mouse(const game& g);
+  //friend game_controller create_game_controller_with_mouse_keyboard(const game& g);
+  //friend game_controller create_game_controller_with_two_keyboards(const game& g);
+  //friend game_controller create_game_controller_with_user_settings(const game& g);
   friend class game_view;
 };
 

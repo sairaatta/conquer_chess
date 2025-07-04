@@ -14,7 +14,8 @@ replayer::replayer(
 ) :
     m_action_history{r},
     m_game_controller{c},
-    m_index{0}
+    m_index{0},
+    m_initial_game_controller{c}
 {
 
 }
@@ -26,7 +27,7 @@ void replayer::do_move(const delta_t& dt)
   const auto& g{m_game_controller.get_game()};
 
   // All moves are done
-  if (m_index == static_cast<int>(m_action_history.get().size()))
+  if (m_index == static_cast<int>(m_action_history.get_value().get().size()))
   {
     m_game_controller.tick(dt);
     return;
@@ -35,9 +36,9 @@ void replayer::do_move(const delta_t& dt)
   delta_t dt_to_do(dt);
   while (1)
   {
-    assert(m_index < static_cast<int>(m_action_history.get().size()));
+    assert(m_index < static_cast<int>(m_action_history.get_value().get().size()));
 
-    const in_game_time next_action_time{m_action_history.get()[m_index].first};
+    const in_game_time next_action_time{m_action_history.get_value().get()[m_index].first};
     if (next_action_time > get_in_game_time(m_game_controller) + dt_to_do)
     {
       // Just pass the time in the timestep, without any action
@@ -54,12 +55,12 @@ void replayer::do_move(const delta_t& dt)
     dt_to_do = dt_to_do - forward_time;
 
     // Make the piece do the action retrieved from history
-    const piece_action& next_action{m_action_history.get().at(m_index).second};
+    const piece_action& next_action{m_action_history.get_value().get().at(m_index).second};
     get_piece_at(m_game_controller, next_action.get_from()).add_action(next_action);
 
     ++m_index;
 
-    if (m_index == static_cast<int>(m_action_history.get().size()))
+    if (m_index == static_cast<int>(m_action_history.get_value().get().size()))
     {
       // Tick away the last time
       m_game_controller.tick(dt_to_do);
@@ -76,7 +77,7 @@ game_statistics_in_time extract_game_statistics_in_time(
 {
   game_statistics_in_time s;
   replayer r(
-    r_original.get_action_history(),
+    r_original.get_action_history().get_value(),
     game_controller()
     //create_game_controller_with_user_settings(create_game_with_user_settings())
   );
@@ -98,7 +99,7 @@ const in_game_time& get_in_game_time(
 
 int get_n_moves(const replayer& r) noexcept
 {
-  return get_n_piece_actions(r.get_action_history());
+  return get_n_piece_actions(r.get_action_history().get_value());
 }
 
 replayer get_played_scholars_mate()
@@ -126,8 +127,8 @@ replayer get_played_scholars_mate()
 bool replayer::is_done() const noexcept
 {
   assert(m_index >= 0);
-  assert(m_index <= static_cast<int>(m_action_history.get().size()));
-  return m_index == static_cast<int>(m_action_history.get().size());
+  assert(m_index <= static_cast<int>(m_action_history.get_value().get().size()));
+  return m_index == static_cast<int>(m_action_history.get_value().get().size());
 }
 
 bool is_piece_at(const replayer& r, const square& coordinate)
@@ -140,6 +141,12 @@ bool is_piece_at(const replayer& r, const std::string& square_str)
   return is_piece_at(r.get_game(), square_str);
 }
 
+void replayer::reset() noexcept
+{
+  m_game_controller = m_initial_game_controller.get_value();
+  m_index = 0;
+}
+
 void test_replayer()
 {
 #ifndef NDEBUG
@@ -148,27 +155,26 @@ void test_replayer()
     const replayer r;
     assert(get_n_moves(r) == 0);
     assert(r.get_index() == 0);
+    assert(r.is_done());
   }
   // replayer::do_move on empty replay does nothing
   {
     replayer r;
-    //game g;
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(r.get_index() == 0);
     assert(get_in_game_time(r) == in_game_time(0.0));
     r.do_move();
     assert(r.get_index() == 0);
     assert(get_in_game_time(r) == in_game_time(1.0));
+    assert(r.is_done());
   }
   // replayer::do_move does not increase last_time in 0.1 interval
   {
     replayer r;
-    //game g;
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
     r.do_move();
     assert(r.get_index() == 0);
     r.do_move(delta_t(0.1));
     assert(r.get_index() == 0);
+    assert(r.is_done());
   }
   // replayer can forward a pawn two squares forward
   {
@@ -183,42 +189,40 @@ void test_replayer()
     assert(get_in_game_time(r) == in_game_time(1.0));
     assert(!is_piece_at(r, square("e2")));
     assert(is_piece_at(r, square("e4")));
+    assert(r.is_done());
   }
   // replayer can forward a pawn one square
   {
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e3")));
     assert(get_n_moves(r) == 1);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(r, square("e2")));
     assert(!is_piece_at(r, square("e3")));
     r.do_move();
     assert(!is_piece_at(r, square("e2")));
     assert(is_piece_at(r, square("e3")));
+    assert(r.is_done());
   }
   // replayer can do Na3
   {
     replayer r(create_action_history_from_pgn(pgn_game_string("1. Na3")));
     assert(get_n_moves(r) == 1);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(r, square("b1")));
     assert(!is_piece_at(r, square("a3")));
     r.do_move();
     assert(!is_piece_at(r, square("b1")));
     assert(is_piece_at(r, square("a3")));
+    assert(r.is_done());
   }
   // replayer can do Nc3
   {
     replayer r(create_action_history_from_pgn(pgn_game_string("1. Nc3")));
     assert(get_n_moves(r) == 1);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(r, square("b1")));
     assert(!is_piece_at(r, square("c3")));
     r.do_move();
     assert(!is_piece_at(r, square("b1")));
     assert(is_piece_at(r, square("c3")));
+    assert(r.is_done());
   }
   // replayer can do two moves
   {
@@ -231,9 +235,13 @@ void test_replayer()
 
     assert(is_piece_at(r, square("e7")));
     assert(!is_piece_at(r, square("e5")));
+    //TODO
+    //assert(!r.is_done());
+
     r.do_move(); // e7-e5
     assert(!is_piece_at(r, square("e7")));
     assert(is_piece_at(r, square("e5")));
+    assert(r.is_done());
   }
   // replayer can do three moves
   {
@@ -454,7 +462,7 @@ void test_replayer()
 
 bool operator==(const replayer& lhs, const replayer& rhs) noexcept
 {
-  return lhs.get_action_history() == rhs.get_action_history()
+  return lhs.get_action_history().get_value() == rhs.get_action_history().get_value()
     && lhs.get_index() == rhs.get_index()
   ;
 }
@@ -463,7 +471,7 @@ std::ostream& operator<<(std::ostream& os, const replayer& r) noexcept
 {
   os
     << "Last time: " << r.get_index() << '\n'
-    << "Action history: " << r.get_action_history()
+    << "Action history: " << r.get_action_history().get_value()
   ;
   return os;
 

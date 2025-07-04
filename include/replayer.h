@@ -39,18 +39,27 @@ public:
   /// The index of the next move to do in the action history
   const auto& get_index() const noexcept { return m_index; };
 
+  /// Get the current state of the game
+  const auto& get_initial_game_controller() const noexcept { return m_initial_game_controller.get_value(); }
+
   bool is_done() const noexcept;
+
+  /// Rewind back to the start
+  void reset() noexcept;
 
 private:
 
   /// The history of actions, from a replay
-  action_history m_action_history;
+  read_only<action_history> m_action_history;
 
   /// The current state of the game
   game_controller m_game_controller;
 
   /// The index of the next move to do in m_action_history
   int m_index;
+
+  /// The initial state of the game controller
+  read_only<game_controller> m_initial_game_controller;
 };
 
 /// Extract the game statistics over time

@@ -83,8 +83,8 @@
 void test()
 {
 #ifndef NDEBUG
-  test_lobby_options();
-  //assert(!"Yay");
+  test_replayer();
+  assert(!"Yay");
 
   test_about();
   test_about_view_layout();
@@ -177,7 +177,7 @@ void play_standard_random_game()
 {
   try
   {
-    const int n_turns{8123}; // Move after is trouble
+    const int n_turns{10000};
     const auto g = play_random_game(n_turns, 42);
     std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
     std::clog << "Winner:\n";
@@ -214,32 +214,23 @@ void get_runtime_speed_profile()
 
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
-  #ifndef NDEBUG
-  test();
-  #endif
-
   const auto args = collect_args(argc, argv);
   if (args.size() == 2 && args[1] == "--profile")
   {
     std::clog << "Start profiling\n";
     get_runtime_speed_profile();
   }
-  if (args.size() == 2 && args[1] == "--play_standard_random_game")
+  else if (args.size() == 2 && args[1] == "--play_standard_random_game")
   {
     std::clog << "Start playing a standard random game\n";
     play_standard_random_game();
   }
   else
   {
-    #define USE_TWO_KEYBOARDS
-    #ifdef USE_TWO_KEYBOARDS
-    create_two_keyboard_controllers();
-    #else
-    use_keyboard_mouse_controllers();
+    #ifndef NDEBUG
+    test();
     #endif
-    #ifndef LOGIC_ONLY
     main_window v;
     v.exec();
-    #endif // LOGIC_ONLY
   }
 }
