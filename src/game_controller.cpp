@@ -951,44 +951,10 @@ user_inputs get_user_inputs_to_move_cursor_to(
   }
 }
 
-user_input get_user_input_to_select(
-  const side player_side,
-  const physical_controller_type t
-)
-{
-  if (t == physical_controller_type::keyboard)
-  {
-    return create_press_action_1(player_side);
-  }
-  else
-  {
-    assert(t == physical_controller_type::mouse);
-    return create_press_lmb_action(player_side);
-  }
-}
-
 const std::optional<chess_color>& get_winner(const game_controller& c) noexcept
 {
   return c.get_game().get_winner();
 }
-
-/*
-bool has_keyboard_controller(const game_controller& c)
-{
-  return
-       c.get_physical_controller(side::lhs).get_type() == physical_controller_type::keyboard
-    || c.get_physical_controller(side::rhs).get_type() == physical_controller_type::keyboard
-  ;
-}
-
-bool has_mouse_controller(const game_controller& c)
-{
-  return
-       c.get_physical_controller(side::lhs).get_type() == physical_controller_type::mouse
-    || c.get_physical_controller(side::rhs).get_type() == physical_controller_type::mouse
-  ;
-}
-*/
 
 bool has_selected_pieces(
   const game_controller& c,

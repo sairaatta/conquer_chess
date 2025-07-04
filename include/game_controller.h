@@ -300,12 +300,6 @@ user_inputs get_user_inputs_to_move_cursor_to(
   const physical_controller_type t
 );
 
-/// Create the user inputs to select the square at the cursor
-user_input get_user_input_to_select(
-  const side player_side,
-  const physical_controller_type t
-);
-
 const std::optional<chess_color>& get_winner(const game_controller& c) noexcept;
 
 /// See if there is at least 1 piece selected

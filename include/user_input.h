@@ -54,12 +54,6 @@ private:
   side m_player;
 };
 
-/// Create the user inputs to do action_1 at the square at the cursor
-user_input get_user_input_to_do_action_1(
-  const side player_side,
-  const physical_controller_type t
-);
-
 /// The only `user_input` with a coordinat
 user_input create_mouse_move_action(
   const game_coordinate& coordinat,
@@ -97,6 +91,18 @@ user_input create_random_user_input(
 /// Less random, more likely to be useful
 user_input create_useful_random_user_input(
   std::default_random_engine& rng_engine
+);
+
+/// Create the user inputs to do action_1 at the square at the cursor
+user_input get_user_input_to_do_action_1(
+  const side player_side,
+  const physical_controller_type t
+);
+
+/// Create the user inputs to select the square at the cursor
+user_input get_user_input_to_select(
+  const side player_side,
+  const physical_controller_type t
 );
 
 /// Test the 'control_action' class and its free functions
