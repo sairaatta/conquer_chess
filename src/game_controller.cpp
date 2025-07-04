@@ -4,7 +4,6 @@
 #include "game.h"
 #include "game_options.h"
 #include "lobby_options.h"
-#include "physical_controllers.h"
 #include "piece.h"
 #include "pieces.h"
 #include "message_type.h"
@@ -12,12 +11,10 @@
 #include <cassert>
 #include <sstream>
 
-/*
 #ifdef PHYSICAL_CONTROLLERS_H
-#error 'pieces' must know nothing about 'physical_controllers'
+#error 'pieces' must know nothing about 'physical_controllers'.
 #error Instead, it is the other way around...
 #endif
-*/
 
 game_controller::game_controller(const game& g, const lobby_options& lo)
   : m_game{g},
@@ -880,21 +877,6 @@ std::vector<piece> get_selected_pieces(
 const std::optional<piece_id>& game_controller::get_selected_piece_id(const side s) const noexcept
 {
   return m_selected_piece_id.at(s);
-}
-
-user_input get_user_input_to_do_action_1(
-  const side player_side,
-  const physical_controller_type t
-)
-{
-  if (t == physical_controller_type::keyboard)
-  {
-    return create_press_action_1(player_side);
-  }
-  else
-  {
-    return create_press_lmb_action(player_side);
-  }
 }
 
 const user_inputs& get_user_inputs(const game_controller& c) noexcept

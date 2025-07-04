@@ -16,17 +16,6 @@ public:
       create_default_mouse_controller()
     }
   );
-  /*
-  /// This class is a Singleton
-  physical_controllers(const physical_controllers&) = delete;
-  physical_controllers& operator=(const physical_controllers&) = delete;
-  physical_controllers(physical_controllers &&) = delete;
-  physical_controllers& operator=(physical_controllers&&) = delete;
-  static auto& get(){
-    static physical_controllers r;
-    return r;
-  }
-  */
 
   /// Get the controller of a player
   const physical_controller& get_controller(const side player_side) const noexcept;

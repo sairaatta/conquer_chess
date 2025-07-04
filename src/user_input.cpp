@@ -123,6 +123,21 @@ user_input create_useful_random_user_input(
   }
 }
 
+user_input get_user_input_to_do_action_1(
+  const side player_side,
+  const physical_controller_type t
+)
+{
+  if (t == physical_controller_type::keyboard)
+  {
+    return create_press_action_1(player_side);
+  }
+  else
+  {
+    return create_press_lmb_action(player_side);
+  }
+}
+
 void test_user_input()
 {
 #ifndef NDEBUG

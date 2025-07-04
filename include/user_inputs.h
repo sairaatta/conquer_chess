@@ -67,6 +67,7 @@ void do_select_and_move_piece(
 );
 
 
+
 /// See if the \link{user_inputs} holds zero elements
 bool is_empty(const user_inputs& inputs) noexcept;
 

@@ -6,7 +6,7 @@
 #include "user_input_type.h"
 #include "game_coordinate.h"
 #include "side.h"
-
+#include "physical_controller_type.h"
 #include <SFML/Window/Event.hpp>
 
 #include <iosfwd>
@@ -53,6 +53,12 @@ private:
 
   side m_player;
 };
+
+/// Create the user inputs to do action_1 at the square at the cursor
+user_input get_user_input_to_do_action_1(
+  const side player_side,
+  const physical_controller_type t
+);
 
 /// The only `user_input` with a coordinat
 user_input create_mouse_move_action(
