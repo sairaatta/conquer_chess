@@ -1,7 +1,6 @@
 #ifndef ABOUT_VIEW_LAYOUT_H
 #define ABOUT_VIEW_LAYOUT_H
 
-#include "about_view_item.h"
 #include "screen_rect.h"
 #include "layout.h"
 

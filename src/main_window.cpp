@@ -9,7 +9,6 @@
 #include "replay_view.h"
 #include "lobby_options.h"
 #include "draw.h"
-#include "game_statistics_view.h"
 
 #include <cassert>
 #include <cmath>

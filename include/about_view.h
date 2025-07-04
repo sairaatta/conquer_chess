@@ -5,7 +5,6 @@
 
 #include "view.h"
 #include "about_view_layout.h"
-#include "about_view_item.h"
 #include "controls_bar.h"
 #include "view.h"
 
