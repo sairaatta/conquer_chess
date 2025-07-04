@@ -1,5 +1,7 @@
 #include "game_statistics_widget.h"
 
+#ifndef LOGIC_ONLY
+
 #include "draw.h"
 #include "game_resources.h"
 #include "game_statistics_widget_layout.h"
@@ -120,3 +122,5 @@ void draw_game_statistics_widget(
     }
   }
 }
+
+#endif // LOGIC_ONLY
