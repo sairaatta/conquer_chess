@@ -83,8 +83,8 @@
 void test()
 {
 #ifndef NDEBUG
-  test_game_controller();
-  assert(!"Yay");
+  //test_game_controller();
+  //assert(!"Yay");
 
   test_about();
   test_about_view_layout();

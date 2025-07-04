@@ -1,14 +1,11 @@
 #include "user_inputs.h"
 
-#include "chess_move.h"
 #include "game.h"
 #include "game_controller.h"
 #include "square.h"
 #include "game_coordinate.h"
 #include "piece.h"
-#include "pieces.h"
 #include "piece_actions.h"
-#include "physical_controller.h"
 
 #include <cassert>
 #include <iostream>
@@ -75,7 +72,7 @@ bool is_empty(const user_inputs& inputs) noexcept
 
 void start_en_passant_attack(
   game& g,
-  game_controller& c,
+  const game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 )
@@ -108,12 +105,11 @@ void start_en_passant_attack(
       }
     }
   }
-  //unselect_all_pieces(g, player_color);
 }
 
 void start_attack(
   game& g,
-  game_controller& c,
+  const game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 )
@@ -146,12 +142,11 @@ void start_attack(
       }
     }
   }
-  //unselect_all_pieces(g, player_color);
 }
 
 void start_move_unit(
   game& g,
-  game_controller& c,
+  const game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 )
@@ -182,7 +177,6 @@ void start_move_unit(
       }
     }
   }
-  //unselect_all_pieces(g, player_color);
 }
 
 void test_user_inputs()

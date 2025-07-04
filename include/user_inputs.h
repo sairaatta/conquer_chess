@@ -5,7 +5,6 @@
 
 #include "chess_color.h"
 #include "user_input.h"
-#include "piece_action.h"
 #include "physical_controller_type.h"
 #include <iostream>
 #include <vector>
@@ -33,7 +32,7 @@ public:
   /// Add a new user input
   void add(const user_input& input);
 
-  const auto& get_user_inputs() const noexcept { return m_user_inputs; }
+  [[nodiscard]] const auto& get_user_inputs() const noexcept { return m_user_inputs; }
 
 private:
 
@@ -45,10 +44,10 @@ void add(user_inputs& current, const user_inputs& to_be_added);
 
 /// Count the total number of control actions to be done by the game,
 /// which should be zero after each tick
-int count_user_inputs(const user_inputs& a);
+[[nodiscard]] int count_user_inputs(const user_inputs& a);
 
 /// Count the total number of piece actions to be done by the game
-int count_piece_actions(const user_inputs& a);
+[[nodiscard]] int count_piece_actions(const user_inputs& a);
 
 /// Select a piece
 void do_select(
@@ -66,22 +65,20 @@ void do_select_and_move_piece(
   const physical_controller_type t
 );
 
-
-
 /// See if the \link{user_inputs} holds zero elements
-bool is_empty(const user_inputs& inputs) noexcept;
+[[nodiscard]] bool is_empty(const user_inputs& inputs) noexcept;
 
 /// Process an A or right-mouse-button down
 void start_attack(
   game& g,
-  game_controller& c,
+  const game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 );
 
 void start_en_passant_attack(
   game& g,
-  game_controller& /* c */,
+  const game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 );
@@ -89,7 +86,7 @@ void start_en_passant_attack(
 /// Process an M or right-mouse-button down
 void start_move_unit(
   game& g,
-  game_controller& c,
+  const game_controller& c,
   const game_coordinate& coordinat,
   const chess_color player_color
 );
@@ -98,7 +95,7 @@ void start_move_unit(
 void test_user_inputs();
 
 std::ostream& operator<<(std::ostream& os, const user_inputs& actions) noexcept;
-bool operator==(const user_inputs& lhs, const user_inputs& rhs) noexcept;
-bool operator!=(const user_inputs& lhs, const user_inputs& rhs) noexcept;
+[[nodiscard]] bool operator==(const user_inputs& lhs, const user_inputs& rhs) noexcept;
+[[nodiscard]] bool operator!=(const user_inputs& lhs, const user_inputs& rhs) noexcept;
 
 #endif // USER_INPUTS_H
