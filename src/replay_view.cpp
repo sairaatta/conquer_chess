@@ -23,6 +23,7 @@ replay_view::replay_view()
   m_controls_bar.set_draw_player_controls(false);
 
   m_statistics = extract_game_statistics_in_time(m_replayer, delta_t(0.2));
+  m_replayer.reset();
 }
 
 bool replay_view::process_event_impl(sf::Event& event)
@@ -72,7 +73,7 @@ void replay_view::start_impl()
 {
   assert(!is_active());
   set_is_active(true);
-  m_replayer = get_played_scholars_mate();
+  m_replayer.reset();
 }
 
 void replay_view::stop_impl()
@@ -85,6 +86,9 @@ void replay_view::stop_impl()
 void replay_view::tick_impl(const delta_t dt)
 {
   assert(dt.get() > 0.0);
+
+  // Replay the game :-)
+  m_replayer.do_move(dt);
 }
 
 void draw_board(replay_view& v)
@@ -96,9 +100,7 @@ void draw_board(replay_view& v)
   draw_squares(layout, semi_transparent);
   //TODO: draw_unit_paths(layout);
   draw_pieces(g.get_pieces(), layout);
-
   draw_unit_health_bars(g, layout);
-  //assert(!"TODO");
 }
 
 void draw_statistics(replay_view& v)

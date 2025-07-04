@@ -4,7 +4,6 @@
 #ifndef LOGIC_ONLY
 
 #include "replay_view_layout.h"
-//#include "game_controller.h"
 #include "replayer.h"
 #include "controls_bar.h"
 #include "view.h"
