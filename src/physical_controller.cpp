@@ -494,9 +494,16 @@ void test_controller()
     assert(!(a == d));
     assert(d == e);
   }
-  // operator<<
+  // operator<<, keyboard
   {
     const physical_controller c{create_left_keyboard_controller()};
+    std::stringstream s;
+    s << c;
+    assert(!s.str().empty());
+  }
+  // operator<<, keyboard
+  {
+    const physical_controller c{create_default_mouse_controller()};
     std::stringstream s;
     s << c;
     assert(!s.str().empty());
@@ -527,7 +534,6 @@ bool operator!=(const physical_controller& lhs, const physical_controller& rhs) 
 std::ostream& operator<<(std::ostream& os, const physical_controller& c) noexcept
 {
   os << "Type: " << c.get_type() << '\n';
-
 
   if (c.get_type() == physical_controller_type::keyboard)
   {

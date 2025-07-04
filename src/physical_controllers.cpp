@@ -43,13 +43,6 @@ int count_n_controllers(const physical_controllers& controllers) noexcept
   return controllers.get_controllers().size();
 }
 
-#ifdef BELIEVE_DEAD_CODE
-void use_default_controllers() noexcept
-{
-  create_two_keyboard_controllers();
-}
-#endif
-
 physical_controllers create_keyboard_mouse_controllers() noexcept
 {
   return physical_controllers(
@@ -74,31 +67,11 @@ physical_controllers create_two_keyboard_controllers() noexcept
 const physical_controller& physical_controllers::get_controller(const side player_side) const noexcept
 {
   return m_physical_controllers.at(player_side);
-  /*
-  if (player_side == side::lhs)
-  {
-    assert(count_n_controllers(m_physical_controllers) >= 1);
-    return m_physical_controllers[0];
-  }
-  assert(player_side == side::rhs);
-  assert(count_n_controllers(m_physical_controllers) >= 2);
-  return m_physical_controllers[1];
-  */
 }
 
 physical_controller& physical_controllers::get_controller(const side player_side) noexcept
 {
   return m_physical_controllers.at(player_side);
-  /*
-  if (player_side == side::lhs)
-  {
-    assert(count_n_controllers(m_physical_controllers) >= 1);
-    return m_physical_controllers[0];
-  }
-  assert(player_side == side::rhs);
-  assert(count_n_controllers(m_physical_controllers) >= 2);
-  return m_physical_controllers[1];
-  */
 }
 
 bool has_keyboard_controller(const physical_controllers& controllers) noexcept
@@ -114,17 +87,6 @@ bool has_mouse_controller(const physical_controllers& controllers) noexcept
 void physical_controllers::set(const side player_side, const physical_controller& controller)
 {
   m_physical_controllers[player_side] = controller;
-  /*
-  if (player_side == side::lhs)
-  {
-    assert(m_physical_controllers.size() >= 1);
-    m_physical_controllers[0] = controller;
-    return;
-  }
-  assert(player_side == side::rhs);
-  assert(m_physical_controllers.size() >= 2);
-  m_physical_controllers[1] = controller;
-  */
 }
 
 void test_physical_controllers()

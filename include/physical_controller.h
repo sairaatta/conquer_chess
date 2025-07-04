@@ -25,16 +25,16 @@ public:
   );
 
   /// Get the key bindings, if this is a keyboard
-  const key_bindings& get_key_bindings() const;
+  [[nodiscard]] const key_bindings& get_key_bindings() const;
 
   /// Get the mouse bindings, if this is a mouse
-  const mouse_bindings& get_mouse_bindings() const;
+  [[nodiscard]] const mouse_bindings& get_mouse_bindings() const;
 
-  const physical_controller_type& get_type() const noexcept { return m_type; }
+  [[nodiscard]] const physical_controller_type& get_type() const noexcept { return m_type; }
 
   /// Process the input for this controller.
   /// Returns an an empty vector if this controller is uneffected by the event
-  user_inputs process_input(
+  [[nodiscard]] user_inputs process_input(
     const sf::Event& event,
     const side player_side,
     const game_view_layout& layout
@@ -74,40 +74,39 @@ private:
 
 /// Create a default keyboard controller,
 /// which is the left keyboard controller
-physical_controller create_default_keyboard_controller() noexcept;
+[[nodiscard]] physical_controller create_default_keyboard_controller() noexcept;
 
 /// Create a mouse controller
-physical_controller create_default_mouse_controller() noexcept;
+[[nodiscard]] physical_controller create_default_mouse_controller() noexcept;
 
 /// Create an sf::Event with type sf::Event::KeyPressed
-sf::Event create_key_pressed_event(const sf::Keyboard::Key k);
+[[nodiscard]] sf::Event create_key_pressed_event(const sf::Keyboard::Key k);
 
 /// Create a keyboard controller
 /// for a user at the left side of the keyboard
-physical_controller create_left_keyboard_controller() noexcept;
+[[nodiscard]] physical_controller create_left_keyboard_controller() noexcept;
 
 /// Create an sf::Event with type sf::Event::MouseButtonPressed
-sf::Event create_mouse_button_pressed_event(
+[[nodiscard]] sf::Event create_mouse_button_pressed_event(
   const screen_coordinate& cursor_pos,
   const sf::Mouse::Button mouse_button
 );
 
 /// Create an sf::Event with type sf::Event::MouseMoved
-sf::Event create_mouse_moved_event(const screen_coordinate& cursor_pos);
-
+[[nodiscard]] sf::Event create_mouse_moved_event(const screen_coordinate& cursor_pos);
 
 /// Create a keyboard controller
 /// for a user at the right side of the keyboard
-physical_controller create_right_keyboard_controller() noexcept;
+[[nodiscard]] physical_controller create_right_keyboard_controller() noexcept;
 
 /// Get the key for a action 1, 2, 3 or 4 for a controller
-sf::Keyboard::Key get_key_for_action(const physical_controller& c, const action_number& action);
+[[nodiscard]] sf::Keyboard::Key get_key_for_action(const physical_controller& c, const action_number& action);
 
 /// Get the text for action 1, 2, 3 or 4, e.g.
 /// 'Q\nSelect' for a keyboard player that has nothing selected
 /// 'E\nAttack' for a keyboard player that has a piece select
 /// 'LMB\nSelect' for a mouse player that has nothing selected'
-std::string get_text_for_action(
+[[nodiscard]] std::string get_text_for_action(
   const physical_controller& c,
   const bool has_selected_units,
   const bool is_promoting_pawn,
@@ -119,8 +118,8 @@ std::string get_text_for_action(
 /// Test this class and its free functions
 void test_controller();
 
-bool operator==(const physical_controller& lhs, const physical_controller& rhs) noexcept;
-bool operator!=(const physical_controller& lhs, const physical_controller& rhs) noexcept;
+[[nodiscard]] bool operator==(const physical_controller& lhs, const physical_controller& rhs) noexcept;
+[[nodiscard]] bool operator!=(const physical_controller& lhs, const physical_controller& rhs) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const physical_controller& c) noexcept;
 
