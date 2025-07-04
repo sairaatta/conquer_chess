@@ -163,7 +163,7 @@ void draw_statistics(replay_view& v)
   const double ymin{0.0};
   const double ymax{1.0};
   const double tick_x{1.0};
-  const double tick_y{1.0};
+  const double tick_y{0.1};
   plot.SetupAxes(xmin, xmax, ymin, ymax, tick_x, tick_y, sf::Color::White);
   plot.GenerateVertices();
   get_render_window().draw(plot);
