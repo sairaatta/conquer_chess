@@ -1,5 +1,7 @@
 #include "draw_board.h"
 
+#ifndef LOGIC_ONLY
+
 #include "board_layout.h"
 #include "draw.h"
 #include "game.h"
@@ -147,3 +149,5 @@ void draw_unit_health_bars(
 
   }
 }
+
+#endif // LOGIC_ONLY

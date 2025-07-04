@@ -1,6 +1,8 @@
 #ifndef DRAW_BOARD_H
 #define DRAW_BOARD_H
 
+#ifndef LOGIC_ONLY
+
 #include "ccfwd.h"
 
 #include "piece.h"
@@ -24,5 +26,7 @@ void draw_unit_health_bars(
   const game& g,
   const board_layout& layout
 );
+
+#endif // LOGIC_ONLY
 
 #endif // DRAW_BOARD_H

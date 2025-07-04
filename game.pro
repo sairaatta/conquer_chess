@@ -6,7 +6,7 @@
 
 # On GHA, this DEFINE is added by the .yaml script
 #
-# DEFINES += LOGIC_ONLY
+#DEFINES += LOGIC_ONLY
 
 
 # All files are in here, the rest are just settings
