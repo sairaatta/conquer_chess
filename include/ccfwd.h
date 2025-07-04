@@ -35,7 +35,7 @@ class physical_controllers;
 class piece;
 class piece_action;
 class piece_id;
-class replayer;
+class replay;
 class screen_coordinate;
 class screen_rect;
 class sound_effects;

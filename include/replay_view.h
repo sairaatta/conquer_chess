@@ -4,7 +4,7 @@
 #ifndef LOGIC_ONLY
 
 #include "replay_view_layout.h"
-#include "replayer.h"
+#include "replay.h"
 #include "controls_bar.h"
 #include "view.h"
 
@@ -49,7 +49,7 @@ private:
   controls_bar m_controls_bar;
 
   /// The played game
-  replayer m_replayer;
+  replay m_replayer;
 
   /// Costly to extract from replayer
   game_statistics_in_time m_statistics;

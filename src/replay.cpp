@@ -1,4 +1,4 @@
-#include "replayer.h"
+#include "replay.h"
 
 #include "game.h"
 #include "game_controller.h"
@@ -8,7 +8,7 @@
 
 #include <sstream>
 
-replayer::replayer(
+replay::replay(
   const action_history& r,
   const game_controller& c
 ) :
@@ -21,7 +21,7 @@ replayer::replayer(
 }
 
 
-void replayer::do_move(const delta_t& dt)
+void replay::do_move(const delta_t& dt)
 {
 
   const auto& g{m_game_controller.get_game()};
@@ -71,12 +71,12 @@ void replayer::do_move(const delta_t& dt)
 }
 
 game_statistics_in_time extract_game_statistics_in_time(
-  const replayer& r_original,
+  const replay& r_original,
   const delta_t& dt
 )
 {
   game_statistics_in_time s;
-  replayer r(
+  replay r(
     r_original.get_action_history().get_value(),
     game_controller()
   );
@@ -99,22 +99,22 @@ game_statistics_in_time extract_game_statistics_in_time(
 }
 
 const in_game_time& get_in_game_time(
-  const replayer& r
+  const replay& r
 ) noexcept
 {
   return r.get_game().get_in_game_time();
 }
 
-int get_n_moves(const replayer& r) noexcept
+int get_n_moves(const replay& r) noexcept
 {
   return get_n_piece_actions(r.get_action_history().get_value());
 }
 
-replayer get_played_scholars_mate()
+replay get_played_scholars_mate()
 {
   // Scholar's mate
   // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-  replayer r(
+  replay r(
     create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")),
     game_controller()
   );
@@ -132,24 +132,24 @@ replayer get_played_scholars_mate()
   return r;
 }
 
-bool replayer::is_done() const noexcept
+bool replay::is_done() const noexcept
 {
   assert(m_index >= 0);
   assert(m_index <= static_cast<int>(m_action_history.get_value().get().size()));
   return m_index == static_cast<int>(m_action_history.get_value().get().size());
 }
 
-bool is_piece_at(const replayer& r, const square& coordinate)
+bool is_piece_at(const replay& r, const square& coordinate)
 {
   return is_piece_at(r.get_game(), coordinate);
 }
 
-bool is_piece_at(const replayer& r, const std::string& square_str)
+bool is_piece_at(const replay& r, const std::string& square_str)
 {
   return is_piece_at(r.get_game(), square_str);
 }
 
-void replayer::reset() noexcept
+void replay::reset() noexcept
 {
   m_game_controller = m_initial_game_controller.get_value();
   m_index = 0;
@@ -160,14 +160,14 @@ void test_replayer()
 #ifndef NDEBUG
   // replayer contructor
   {
-    const replayer r;
+    const replay r;
     assert(get_n_moves(r) == 0);
     assert(r.get_index() == 0);
     assert(r.is_done());
   }
   // replayer::do_move on empty replay does nothing
   {
-    replayer r;
+    replay r;
     assert(r.get_index() == 0);
     assert(get_in_game_time(r) == in_game_time(0.0));
     r.do_move();
@@ -177,7 +177,7 @@ void test_replayer()
   }
   // replayer::do_move does not increase last_time in 0.1 interval
   {
-    replayer r;
+    replay r;
     r.do_move();
     assert(r.get_index() == 0);
     r.do_move(delta_t(0.1));
@@ -186,7 +186,7 @@ void test_replayer()
   }
   // replayer can forward a pawn two squares forward
   {
-    replayer r(
+    replay r(
       create_action_history_from_pgn(pgn_game_string("1. e4")),
       game_controller()
     );
@@ -201,7 +201,7 @@ void test_replayer()
   }
   // replayer can forward a pawn one square
   {
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e3")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e3")));
     assert(get_n_moves(r) == 1);
     assert(is_piece_at(r, square("e2")));
     assert(!is_piece_at(r, square("e3")));
@@ -212,7 +212,7 @@ void test_replayer()
   }
   // replayer can do Na3
   {
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. Na3")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. Na3")));
     assert(get_n_moves(r) == 1);
     assert(is_piece_at(r, square("b1")));
     assert(!is_piece_at(r, square("a3")));
@@ -223,7 +223,7 @@ void test_replayer()
   }
   // replayer can do Nc3
   {
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. Nc3")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. Nc3")));
     assert(get_n_moves(r) == 1);
     assert(is_piece_at(r, square("b1")));
     assert(!is_piece_at(r, square("c3")));
@@ -236,7 +236,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5")));
     assert(get_n_moves(r) == 2);
 
     r.do_move(); // e2-e4
@@ -254,7 +254,7 @@ void test_replayer()
   // replayer can do three moves
   {
     // Scholar's mate
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5")));
     assert(get_n_moves(r) == 3);
 
     r.do_move(); // e2-e4
@@ -270,7 +270,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6")));
     assert(get_n_moves(r) == 4);
 
     r.do_move(); // e2-e4
@@ -287,7 +287,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4")));
     assert(get_n_moves(r) == 5);
 
     r.do_move(); // e2-e4
@@ -305,7 +305,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6")));
     assert(get_n_moves(r) == 6);
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
@@ -323,7 +323,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7#")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7#")));
     assert(get_n_moves(r) == 7);
 
     r.do_move(); // e2-e4
@@ -343,7 +343,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 7);
 
     r.do_move(); // e2-e4
@@ -359,7 +359,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 7);
 
     r.do_move(); // e2-e4
@@ -376,7 +376,7 @@ void test_replayer()
   {
     // Fools's mate
     // 1. f3 e6 2. g4 Qh4#
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. f3 e6 2. g4 Qh4#")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. f3 e6 2. g4 Qh4#")));
     assert(get_n_moves(r) == 4);
     //game g{create_game_with_starting_position(starting_position_type::standard)};
     //game_controller c{create_game_controller_with_keyboard_mouse()};
@@ -404,7 +404,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 c5 Nf3
-    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 c5 2. Nf3")));
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 c5 2. Nf3")));
     assert(get_n_moves(r) == 3);
 
     const auto s1{to_fen_str(r.get_game().get_pieces())};
@@ -454,28 +454,28 @@ void test_replayer()
   }
   // operator<<
   {
-    const replayer r;
+    const replay r;
     std::stringstream s;
     s << r;
     assert(!s.str().empty());
   }
   // operator==
   {
-    const replayer a;
-    const replayer b;
+    const replay a;
+    const replay b;
     assert(a == b);
   }
 #endif // NDEBUG
 }
 
-bool operator==(const replayer& lhs, const replayer& rhs) noexcept
+bool operator==(const replay& lhs, const replay& rhs) noexcept
 {
   return lhs.get_action_history().get_value() == rhs.get_action_history().get_value()
     && lhs.get_index() == rhs.get_index()
   ;
 }
 
-std::ostream& operator<<(std::ostream& os, const replayer& r) noexcept
+std::ostream& operator<<(std::ostream& os, const replay& r) noexcept
 {
   os
     << "Last time: " << r.get_index() << '\n'

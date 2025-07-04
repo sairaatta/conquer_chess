@@ -1,5 +1,5 @@
-#ifndef REPLAYER_H
-#define REPLAYER_H
+#ifndef REPLAY_H
+#define REPLAY_H
 
 #include "ccfwd.h"
 #include "delta_t.h"
@@ -12,14 +12,14 @@
 
 /// A replay.
 ///
-/// A replayer plays a game again by playing the action history of a game.
+/// A replay plays a game again by playing the action history of a game.
 ///
 /// Use 'do_move' to go forward in time.
 ///
-class replayer
+class replay
 {
 public:
-  explicit replayer(
+  explicit replay(
     const action_history& r = action_history(),
     const game_controller& c = game_controller()
   );
@@ -67,36 +67,36 @@ private:
 /// @param r a replayer
 /// @param dt the interval at which the statistics are extracted
 game_statistics_in_time extract_game_statistics_in_time(
-  const replayer& r,
+  const replay& r,
   const delta_t& dt
 );
 
 const in_game_time& get_in_game_time(
-  const replayer& r
+  const replay& r
 ) noexcept;
 
 /// Get the number of moves in the replay
-int get_n_moves(const replayer& r) noexcept;
+int get_n_moves(const replay& r) noexcept;
 
-replayer get_played_scholars_mate();
+replay get_played_scholars_mate();
 
 /// Determine if there is a piece at the coordinat
 bool is_piece_at(
-  const replayer& r,
+  const replay& r,
   const square& coordinat
 );
 
 /// Determine if there is a piece at the coordinat
 bool is_piece_at(
-  const replayer& r,
+  const replay& r,
   const std::string& square_str
 );
 
 /// Test this class and its free functions
 void test_replayer();
 
-bool operator==(const replayer& lhs, const replayer& rhs) noexcept;
+bool operator==(const replay& lhs, const replay& rhs) noexcept;
 
-std::ostream& operator<<(std::ostream& os, const replayer& r) noexcept;
+std::ostream& operator<<(std::ostream& os, const replay& r) noexcept;
 
-#endif // REPLAYER_H
+#endif // REPLAY_H

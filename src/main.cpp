@@ -64,7 +64,7 @@
 #include "program_state.h"
 #include "race.h"
 #include "read_only.h"
-#include "replayer.h"
+#include "replay.h"
 #include "screen_coordinate.h"
 #include "sfml_helper.h"
 #include "sleep_scheduler.h"
