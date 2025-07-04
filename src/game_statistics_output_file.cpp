@@ -38,7 +38,7 @@ void test_game_statistics_output_file()
     game_statistics_output_file f(filename);
     assert(std::filesystem::exists(filename));
 
-    const game_controller c{create_game_controller_with_two_keyboards()};
+    const game_controller c;
     f.add_to_file(c);
   }
   // column_headers_to_str

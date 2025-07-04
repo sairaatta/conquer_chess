@@ -87,11 +87,13 @@ void draw_panel(
   draw_normal_text(panel_text, panel_position);
 }
 
+/*
 physical_controller_type get_physical_controller_type(
   const side player)
 {
   return physical_controllers::get().get_controller(player).get_type();
 }
+*/
 
 bool options_view::process_event_impl(sf::Event& event)
 {
@@ -328,7 +330,7 @@ void draw_bottom_row(options_view& v, const side player_side)
 {
   const auto& layout{v.get_layout()};
   const auto sr{layout.get_controller_type_value(player_side)};
-  const physical_controller_type t{get_physical_controller_type(player_side)};
+  const physical_controller_type t{v.get_physical_controllers().get_controller(player_side).get_type()};
   draw_fancy_physical_controller_label(t, sr);
   const sf::Keyboard::Key k{
     player_side == side::lhs ? sf::Keyboard::Key::Num1 : sf::Keyboard::Key::Num2

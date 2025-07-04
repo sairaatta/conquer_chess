@@ -186,7 +186,8 @@ std::vector<piece_id> collect_selected_piece_ids(const game_controller& c);
 /// to the right user inputs
 user_inputs convert_move_to_user_inputs(
   const game_controller& c,
-  const chess_move& move
+  const chess_move& move,
+  const physical_controller_type t
 );
 
 /// Count the total number of actions to be done by pieces of both players
@@ -210,6 +211,7 @@ int count_selected_units(
 /// to be done by the \link{game_controller}.
 int count_user_inputs(const game_controller& c) noexcept;
 
+/*
 /// Create a game controller when the players use a keyboard and a mouse
 game_controller create_game_controller_with_keyboard_mouse(const game& g = create_game_with_standard_starting_position());
 
@@ -221,14 +223,6 @@ game_controller create_game_controller_with_two_keyboards(const game& g = create
 
 /// Create a game controller with the user settings
 game_controller create_game_controller_with_user_settings(const game& g = create_game_with_standard_starting_position());
-
-/// Find zero, one or more chess pieces of the specified type and color
-/*
-std::vector<piece> find_pieces(
-  const game_controller& c,
-  const piece_type type,
-  const chess_color color
-);
 */
 
 chess_color get_color(
@@ -258,17 +252,13 @@ const in_game_time& get_in_game_time(
   const game_controller& c
 ) noexcept;
 
+/*
 /// Get the physical controllers
 const physical_controller& get_physical_controller(
   const game_controller& c,
   const side player_side
 ) noexcept;
-
-/// Get the physical controller type
-physical_controller_type get_physical_controller_type(
-  const game_controller& c,
-  const side player_side
-) noexcept;
+*/
 
 /// Get the types of actions, if any, a player could by pressing an action key.
 ///
@@ -311,8 +301,8 @@ std::vector<piece> get_selected_pieces(
 
 /// Create the user inputs to do action_1 at the square at the cursor
 user_input get_user_input_to_do_action_1(
-  const game_controller& c,
-  const side player_side
+  const side player_side,
+  const physical_controller_type t
 );
 
 /// Get the game users' inputs
@@ -327,29 +317,33 @@ user_inputs get_user_inputs_to_move_cursor_from_to(
   const game_controller& c,
   const square& from,
   const square& to,
-  const side player_side
+  const side player_side,
+  const physical_controller_type t
 );
 
 /// Create the user inputs to move the cursor to a target square
 user_inputs get_user_inputs_to_move_cursor_to(
   const game_controller& c,
   const square& to,
-  const side player_side
+  const side player_side,
+  const physical_controller_type t
 );
 
 /// Create the user inputs to select the square at the cursor
 user_input get_user_input_to_select(
-  const game_controller& c,
-  const side player_side
+  const side player_side,
+  const physical_controller_type t
 );
 
 const std::optional<chess_color>& get_winner(const game_controller& c) noexcept;
 
+/*
 /// Is there a player that uses the keyboard?
 bool has_keyboard_controller(const game_controller& c);
 
 /// Is there a player that uses the mouse?
 bool has_mouse_controller(const game_controller& c);
+*/
 
 /// See if there is at least 1 piece selected
 /// @param g a game
@@ -389,9 +383,10 @@ bool is_selected(
   const game_controller& c
 );
 
+/*
 /// The the player at that side a mouse user?
 bool is_mouse_user(const game_controller& c, const side player_side) noexcept;
-
+*/
 
 /// Put the cursor (i.e. the selector, not the mouse pointer)
 /// at the desired square

@@ -10,7 +10,9 @@
 
 #include <cassert>
 
-controls_bar::controls_bar() : m_background{get_default_screen_rect()}
+controls_bar::controls_bar(const physical_controllers& pc)
+  : m_background{get_default_screen_rect()},
+    m_pc{pc}
 {
 
 }
@@ -133,7 +135,7 @@ void controls_bar::draw()
   {
     for (const auto player_side: { side::lhs, side::rhs })
     {
-      const auto& c{physical_controllers::get().get_controller(player_side)};
+      const auto& c{m_pc.get_controller(player_side)};
 
       if (player_side == side::rhs) x = get_width(m_background) / 2;
 

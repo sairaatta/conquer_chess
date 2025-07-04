@@ -34,7 +34,7 @@
 #include <sstream>
 
 game_view::game_view(
-) : m_game_controller{create_game_controller_with_two_keyboards()},
+) : m_game_controller{},
     m_log{game_options::get().get_message_display_time_secs()},
     m_statistics_output_file("tmp.txt")
 {
@@ -79,7 +79,8 @@ void game_view::tick_impl(delta_t dt)
 
 const physical_controller& get_physical_controller(const game_view& view, const side player_side)
 {
-  return get_physical_controller(view.get_game_controller(), player_side);
+  return view.get_physical_controllers().get_controller(player_side);
+  //return get_physical_controller(view.get_physical_controllers(), player_side);
 }
 
 physical_controller_type get_physical_controller_type(const game_view& view, const side player_side)
@@ -171,7 +172,7 @@ bool game_view::process_event_impl(sf::Event& event)
   // Become unresponsive when there is a winner
   if (!m_game_controller.get_game().get_winner().has_value())
   {
-    ::process_event(m_game_controller, event, m_layout, m_game_controller.get_game().get_in_game_time());
+    ::process_event(m_game_controller, m_pc, event, m_layout, m_game_controller.get_game().get_in_game_time());
     m_game_controller.apply_user_inputs_to_game();
   }
   return false;
@@ -193,6 +194,7 @@ void game_view::process_resize_event_impl(sf::Event& event)
 
 void process_event(
   game_controller& c,
+  const physical_controllers& pc,
   const sf::Event& event,
   const game_view_layout& layout,
   const in_game_time& t
@@ -206,7 +208,7 @@ void process_event(
     ) return;
 
 
-    const physical_controller& p{get_physical_controller(c, s)};
+    const physical_controller& p{pc.get_controller(s)};
     const user_inputs& inputs{p.process_input(event, s, layout)};
     for (const auto& a: inputs.get_user_inputs())
     {
@@ -300,7 +302,7 @@ void draw_controls(
 )
 {
   // Stub for keyboard only
-  const auto& c{physical_controllers::get().get_controller(player_side)};
+  const auto& c{ view.get_physical_controllers().get_controller(player_side)};
 
   const auto& layout{view.get_layout().get_controls(player_side)};
 
@@ -311,7 +313,11 @@ void draw_controls(
   );
 
 
-  draw_navigation_controls(layout.get_navigation_controls(), player_side);
+  draw_navigation_controls(
+    view.get_physical_controllers(),
+    layout.get_navigation_controls(),
+    player_side
+  );
 
   const std::vector<std::string> texts{
       get_controls_texts(view.get_game_controller(), player_side)
@@ -323,7 +329,7 @@ void draw_controls(
     if (c.get_type() == physical_controller_type::keyboard)
     {
       draw_input_prompt_symbol(
-        physical_controllers::get().get_controller(player_side).get_key_bindings().get_key_for_action(n),
+        view.get_physical_controllers().get_controller(player_side).get_key_bindings().get_key_for_action(n),
         symbol_rect
       );
     }
@@ -332,7 +338,7 @@ void draw_controls(
       if (n.get_number() < 3)
       {
         draw_input_prompt_symbol(
-          physical_controllers::get().get_controller(player_side).get_mouse_bindings().get_button_for_action(n),
+          view.get_physical_controllers().get_controller(player_side).get_mouse_bindings().get_button_for_action(n),
           symbol_rect
         );
       }
@@ -472,6 +478,7 @@ void draw_navigation_controls(game_view& view)
   for (const auto s: get_all_sides())
   {
     draw_navigation_controls(
+      view.get_physical_controllers(),
       view.get_layout().get_navigation_controls(s),
       s
     );

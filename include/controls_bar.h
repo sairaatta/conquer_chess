@@ -3,6 +3,8 @@
 
 #ifndef LOGIC_ONLY
 
+#include "ccfwd.h"
+#include "physical_controllers.h"
 #include "screen_rect.h"
 
 // The bar at the bottom of the screen
@@ -10,7 +12,7 @@ class controls_bar
 {
 public:
 
-  controls_bar();
+  controls_bar(const physical_controllers& pc = physical_controllers());
 
   void draw();
 
@@ -34,6 +36,8 @@ private:
   bool m_draw_player_controls{true};
   bool m_draw_up_down{true};
   bool m_draw_select{true};
+
+  physical_controllers m_pc;
 };
 
 /// At the bottom of each window, there is a bar for the controls.

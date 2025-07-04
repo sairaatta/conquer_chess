@@ -31,6 +31,8 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
+  const auto& get_physical_controllers() const noexcept { return m_pc; }
+
   /// The player we are setting up the controls of
   side get_player_side() const { return m_player_side; }
 
@@ -58,6 +60,9 @@ private:
 
   /// The layout of this window
   controls_view_layout m_layout;
+
+  /// The physical controllers being edited by this dialog
+  physical_controllers m_pc;
 
   /// The player we are setting up the controls of
   side m_player_side;

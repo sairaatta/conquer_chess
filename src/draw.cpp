@@ -268,9 +268,13 @@ void draw_music_volume_value(const screen_rect& sr)
   draw_normal_text(s.str(), sr);
 }
 
-void draw_navigation_controls(const navigation_controls_layout& layout, const side p)
+void draw_navigation_controls(
+  const physical_controllers& pc,
+  const navigation_controls_layout& layout,
+  const side p
+)
 {
-  const auto& c{physical_controllers::get().get_controller(p)};
+  const auto& c{pc.get_controller(p)};
   switch (c.get_type())
   {
     case physical_controller_type::keyboard:

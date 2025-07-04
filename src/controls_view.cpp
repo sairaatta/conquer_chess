@@ -26,8 +26,8 @@ void controls_view::change_selected()
   switch (m_selected)
   {
     case controls_view_item::type:
-      physical_controllers::get().get_controller(m_player_side).set_type(
-        get_next(physical_controllers::get().get_controller(m_player_side).get_type())
+      m_pc.get_controller(m_player_side).set_type(
+        get_next(m_pc.get_controller(m_player_side).get_type())
       );
     break;
     default:
@@ -58,26 +58,26 @@ void controls_view::tick_impl(const delta_t)
   assert(is_active());
 }
 
-sf::Keyboard::Key  get_key_for_action_1(const controls_view& v)
+sf::Keyboard::Key get_key_for_action_1(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side())
+  return v.get_physical_controllers().get_controller(v.get_player_side())
     .get_key_bindings().get_key_for_action(action_number(1))
   ;
 }
 
 sf::Keyboard::Key get_key_for_action_2(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(2));
+  return v.get_physical_controllers().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(2));
 }
 
 sf::Keyboard::Key get_key_for_action_3(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(3));
+  return v.get_physical_controllers().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(3));
 }
 
 sf::Keyboard::Key  get_key_for_action_4(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(4));
+  return v.get_physical_controllers().get_controller(v.get_player_side()).get_key_bindings().get_key_for_action(action_number(4));
 }
 
 sf::Mouse::Button get_button_for_do(const controls_view& /* v */)
@@ -87,20 +87,20 @@ sf::Mouse::Button get_button_for_do(const controls_view& /* v */)
 
 sf::Keyboard::Key get_key_for_move_down(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_down();
+  return v.get_physical_controllers().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_down();
 }
 
 sf::Keyboard::Key get_key_for_move_left(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_left();
+  return v.get_physical_controllers().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_left();
 }
 sf::Keyboard::Key get_key_for_move_right(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_right();
+  return v.get_physical_controllers().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_right();
 }
 sf::Keyboard::Key get_key_for_move_up(const controls_view& v)
 {
-  return physical_controllers::get().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_up();
+  return v.get_physical_controllers().get_controller(v.get_player_side()).get_key_bindings().get_key_for_move_up();
 }
 
 sf::Mouse::Button get_button_for_next(const controls_view& /* v */)
@@ -233,7 +233,7 @@ void draw_keyboard_panel(controls_view& v)
     std::make_pair(layout.get_action_4_label(), "4")
   };
   const bool is_active{
-    physical_controllers::get().get_controller(v.get_player_side()).get_type() == physical_controller_type::keyboard
+    v.get_physical_controllers().get_controller(v.get_player_side()).get_type() == physical_controller_type::keyboard
   };
 
   chess_color color{chess_color::black};
@@ -275,7 +275,7 @@ void draw_mouse_panel(controls_view& v)
     std::make_pair(layout.get_next_label(), "next")
   };
   const bool is_active{
-    physical_controllers::get().get_controller(v.get_player_side()).get_type() == physical_controller_type::mouse
+    v.get_physical_controllers().get_controller(v.get_player_side()).get_type() == physical_controller_type::mouse
   };
   chess_color color{chess_color::black};
   for (const auto& p: labels)
@@ -333,7 +333,7 @@ void draw_type_panel(controls_view& v)
     is_active
   );
   const auto type{
-    physical_controllers::get().get_controller(v.get_player_side()).get_type()
+    v.get_physical_controllers().get_controller(v.get_player_side()).get_type()
   };
   draw_texture(
     game_resources::get().get_physical_controller_textures().get_symbol(type),

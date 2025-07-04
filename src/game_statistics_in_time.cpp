@@ -33,8 +33,10 @@ game_statistics_in_time create_test_game_statistics_in_time()
 
 game_statistics_in_time play_random_game_to_get_statistics_in_time(const int n_turns)
 {
-  game g{create_game_with_standard_starting_position()};
-  game_controller c{create_game_controller_with_two_keyboards()};
+  game_controller c(
+    create_game_with_standard_starting_position(),
+    lobby_options()
+  );
   game_statistics_in_time s;
 
   std::random_device rd;
@@ -44,9 +46,9 @@ game_statistics_in_time play_random_game_to_get_statistics_in_time(const int n_t
   {
     c.add_user_input(create_useful_random_user_input(rng_engine));
     c.apply_user_inputs_to_game();
-    g.tick(delta_t(0.1));
+    c.tick(delta_t(0.1));
     s.add(c);
-    if (g.get_winner().has_value()) break;
+    if (get_winner(c).has_value()) break;
   }
   return s;
 }
@@ -57,11 +59,7 @@ void test_game_statistics_in_time()
   {
     game_statistics_in_time s;
     assert(s.get().size() == 0);
-    const game_controller c{
-      create_game_controller_with_two_keyboards(
-        create_game_with_standard_starting_position()
-      )
-    };
+    const game_controller c;
     s.add(c);
     assert(s.get().size() == 1);
   }

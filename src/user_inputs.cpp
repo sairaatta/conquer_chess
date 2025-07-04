@@ -53,14 +53,15 @@ void do_select_and_move_piece(
   game_controller& c,
   const std::string& from_square_str,
   const std::string& to_square_str,
-  const side player_side
+  const side player_side,
+  const physical_controller_type t
 )
 {
   do_select(c, from_square_str, player_side);
   move_cursor_to(c, to_square_str, player_side);
   add_user_input(
     c,
-    get_user_input_to_select(c, player_side)
+    get_user_input_to_select(player_side, t)
   );
   user_inputs inputs{c.get_user_inputs()};
   c.apply_user_inputs_to_game();
@@ -194,7 +195,7 @@ void test_user_inputs()
   }
   // Move up does something
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_up_action(side::lhs));
     c.apply_user_inputs_to_game();
@@ -203,7 +204,7 @@ void test_user_inputs()
   }
   // Move right does something
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_right_action(side::lhs));
     c.apply_user_inputs_to_game();
@@ -212,7 +213,7 @@ void test_user_inputs()
   }
   // Move down does something
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_down_action(side::lhs));
     c.apply_user_inputs_to_game();
@@ -221,7 +222,7 @@ void test_user_inputs()
   }
   // Move left does something
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     const game_coordinate before{get_cursor_pos(c, side::lhs)};
     c.add_user_input(create_press_left_action(side::lhs));
     c.apply_user_inputs_to_game();
@@ -245,10 +246,10 @@ void test_user_inputs()
   }
   // 64: move white's cursor to e2
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     assert(square(get_cursor_pos(c, side::lhs)) != square("e2"));
     auto inputs{
-      get_user_inputs_to_move_cursor_to(c, square("e2"), side::lhs)
+      get_user_inputs_to_move_cursor_to(c, square("e2"), side::lhs, physical_controller_type::keyboard)
     };
     assert(!is_empty(inputs));
     add_user_inputs(c, inputs);
@@ -258,11 +259,11 @@ void test_user_inputs()
   }
   // move white's cursor to e2 and select the pawn
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     move_cursor_to(c, "e2", side::lhs);
 
     assert(!is_selected(get_piece_at(c.get_game(), "e2"), c));
-    const user_input input{get_user_input_to_select(c, side::lhs)};
+    const user_input input{get_user_input_to_select(side::lhs, physical_controller_type::keyboard)};
     add_user_input(c, input);
     c.apply_user_inputs_to_game();
     c.tick(delta_t(0.0));
@@ -270,15 +271,15 @@ void test_user_inputs()
   }
   // do_select
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     do_select(c, "e2", side::lhs);
     assert(is_selected(get_piece_at(c.get_game(), "e2"), c));
   }
   // do_select_and_move_piece
   {
-    game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    game_controller c;
     assert(is_piece_at(c, "e2"));
-    do_select_and_move_piece(c, "e2", "e4", side::lhs);
+    do_select_and_move_piece(c, "e2", "e4", side::lhs, physical_controller_type::keyboard);
     assert(!is_piece_at(c, "e2"));
     assert(is_piece_at(c, "e4"));
   }

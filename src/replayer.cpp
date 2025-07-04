@@ -107,7 +107,7 @@ replayer get_played_scholars_mate()
   // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
   replayer r(
     create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")),
-    create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))
+    game_controller()
   );
   assert(get_n_moves(r) == 7);
 
@@ -174,7 +174,7 @@ void test_replayer()
   {
     replayer r(
       create_action_history_from_pgn(pgn_game_string("1. e4")),
-      create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))
+      game_controller()
     );
     assert(get_n_moves(r) == 1);
     assert(is_piece_at(r, square("e2")));
@@ -226,8 +226,6 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5")));
     assert(get_n_moves(r) == 2);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
     r.do_move(); // e2-e4
 
@@ -258,8 +256,6 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6")));
     assert(get_n_moves(r) == 4);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
@@ -277,8 +273,6 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4")));
     assert(get_n_moves(r) == 5);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
@@ -295,11 +289,8 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
-
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6")));
     assert(get_n_moves(r) == 6);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
     r.do_move(); // Qd1-h5
@@ -318,8 +309,6 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7#")));
     assert(get_n_moves(r) == 7);
-    game g{create_game_with_starting_position(starting_position_type::standard)};
-    game_controller c{create_game_controller_with_keyboard_mouse()};
 
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
@@ -340,8 +329,6 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 7);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
@@ -358,8 +345,6 @@ void test_replayer()
     // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
     replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0")));
     assert(get_n_moves(r) == 7);
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
 
     r.do_move(); // e2-e4
     r.do_move(); // e7-e5
@@ -403,10 +388,7 @@ void test_replayer()
   {
     // Scholar's mate
     // 1. e4 c5 Nf3
-    replayer r(
-      create_action_history_from_pgn(pgn_game_string("1. e4 c5 2. Nf3")),
-      create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))
-    );
+    replayer r(create_action_history_from_pgn(pgn_game_string("1. e4 c5 2. Nf3")));
     assert(get_n_moves(r) == 3);
 
     const auto s1{to_fen_str(r.get_game().get_pieces())};

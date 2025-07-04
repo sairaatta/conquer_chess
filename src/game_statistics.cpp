@@ -147,7 +147,7 @@ void test_game_statistics()
   }
   // get_column_headers and flatten_to_row have an equal amount of elements
   {
-    const game_controller c{create_game_controller_with_two_keyboards()};
+    const game_controller c;
     const game_statistics s(c);
     const auto values{flatten_to_row(s)};
     const auto headers{get_column_headers()};

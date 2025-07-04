@@ -234,7 +234,7 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   {
     #define USE_TWO_KEYBOARDS
     #ifdef USE_TWO_KEYBOARDS
-    use_two_keyboard_controllers();
+    create_two_keyboard_controllers();
     #else
     use_keyboard_mouse_controllers();
     #endif

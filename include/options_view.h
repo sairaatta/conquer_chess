@@ -7,7 +7,9 @@
 #include "chess_color.h"
 #include "options_view_layout.h"
 #include "options_view_item.h"
-#include "physical_controller_type.h"
+//#include "read_only.h"
+#include "physical_controllers.h"
+//#include "physical_controller_type.h"
 #include "controls_bar.h"
 #include "view.h"
 
@@ -23,6 +25,8 @@ public:
   void draw_impl() override;
 
   const auto& get_layout() const noexcept { return m_layout; }
+
+  const auto& get_physical_controllers() const noexcept { return m_pc; }
 
   options_view_item get_selected() const noexcept { return m_selected; }
 
@@ -49,6 +53,9 @@ private:
 
   options_view_layout m_layout;
 
+  /// The physical controllers to display this window
+  physical_controllers m_pc;
+
   /// The selected item
   options_view_item m_selected;
 
@@ -69,7 +76,9 @@ void draw_panel(
   const chess_color color
 );
 
+/*
 physical_controller_type get_physical_controller_type(const side player);
+*/
 
 /// Show the bottom part
 void draw_background(options_view& v);

@@ -6,7 +6,7 @@
 #include "chess_color.h"
 #include "user_input.h"
 #include "piece_action.h"
-
+#include "physical_controller_type.h"
 #include <iostream>
 #include <vector>
 
@@ -62,7 +62,8 @@ void do_select_and_move_piece(
   game_controller& c,
   const std::string& from_square_str,
   const std::string& to_square_str,
-  const side player_side
+  const side player_side,
+  const physical_controller_type t
 );
 
 

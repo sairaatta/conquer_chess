@@ -1,6 +1,9 @@
 #ifndef PHYSICAL_CONTROLLER_TYPE_H
 #define PHYSICAL_CONTROLLER_TYPE_H
 
+#include "ccfwd.h"
+#include "side.h"
+
 #include <iosfwd>
 #include <string>
 #include <vector>
@@ -21,6 +24,14 @@ std::vector<physical_controller_type> get_all_physical_controller_types() noexce
 /// Get the next controller type,
 /// i.e. when the player presses right
 physical_controller_type get_next(const physical_controller_type t) noexcept;
+
+/// Get the physical controller type
+// TODO: remove this, a game controller has nothing to do with a physical
+// game controller
+physical_controller_type get_physical_controller_type(
+  const game_controller& c,
+  const side player_side
+) noexcept;
 
 /// Get the previous controller type,
 /// i.e. when the player presses left

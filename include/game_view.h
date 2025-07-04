@@ -48,6 +48,8 @@ public:
   /// Get the text log, i.e. things pieces have to say
   const auto& get_log() const noexcept { return m_log; }
 
+  const auto& get_physical_controllers() const noexcept { return m_pc; }
+
   /// Process all events
   /// @return if the user wants to quit
   bool process_event_impl(sf::Event& event) override;
@@ -74,6 +76,8 @@ private:
 
   /// The in-game text log
   game_log m_log;
+
+  physical_controllers m_pc;
 
   game_statistics_output_file m_statistics_output_file;
 
@@ -134,6 +138,7 @@ const in_game_time& get_time(const game_view& v) noexcept;
 /// sf::Event -> controllers -> control_action
 void process_event(
   game_controller& c,
+  const physical_controllers& pc,
   const sf::Event& event,
   const game_view_layout& layout,
   const in_game_time& t
@@ -147,7 +152,10 @@ void draw_background(game_view& view);
 void draw_board(game_view& view);
 
 /// Show the controls (e.g. for a unit) on-screen for a player
-void draw_controls(game_view& view, const side player);
+void draw_controls(
+  game_view& view,
+  const side player
+);
 
 /// Show the game info, e.g. the time
 void draw_game_statistics_widget(game_view& view);

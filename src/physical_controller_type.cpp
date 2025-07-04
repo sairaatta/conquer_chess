@@ -16,6 +16,16 @@ std::vector<physical_controller_type> get_all_physical_controller_types() noexce
   return v;
 }
 
+/*
+physical_controller_type get_physical_controller_type(
+  const game_controller& c,
+  const side player
+) noexcept
+{
+  return get_physical_controller(c, player).get_type();
+}
+*/
+
 physical_controller_type get_next(const physical_controller_type item) noexcept
 {
   const auto v{get_all_physical_controller_types()};
