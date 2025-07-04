@@ -5,7 +5,6 @@
 #include "square.h"
 #include "pieces.h"
 #include "chess_color.h"
-#include "lobby_options.h"
 #include <cassert>
 #include <cmath>
 #include <algorithm>
@@ -14,7 +13,19 @@
 
 #ifdef GAME_CONTROLLER_H
 #error 'game' must know nothing about 'game_controller'
+#error Instead, it is the other way around...
 #endif
+
+#ifdef LOBBY_OPTIONS_H
+#error 'game' must know nothing about 'lobby_options'
+#error Instead, all player sides (e.g. LHS) need to be converted to colors (e.g. white)
+#endif
+
+#ifdef SIDE_H
+#error 'game' must know nothing about 'side'
+#error This is managed by 'lobby_options'.
+#endif
+
 
 game::game(const std::vector<piece>& pieces)
   : m_pieces{pieces},

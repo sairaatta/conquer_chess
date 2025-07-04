@@ -1,9 +1,7 @@
 #include "pieces.h"
 
 #include "game_coordinate.h"
-#include "lobby_options.h"
 #include "fen_string.h"
-#include "game_options.h"
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wshadow"
@@ -17,6 +15,21 @@
 #include <sstream>
 #include <optional>
 #include <regex>
+
+#ifdef GAME_CONTROLLER_H
+#error 'pieces' must know nothing about 'game_controller'
+#error Instead, it is the other way around...
+#endif
+
+#ifdef LOBBY_OPTIONS_H
+#error 'pieces' must know nothing about 'lobby_options'
+#error Instead, all player sides (e.g. LHS) need to be converted to colors (e.g. white)
+#endif
+
+#ifdef SIDE_H
+#error 'pieces' must know nothing about 'side'
+#error This is managed by 'lobby_options'.
+#endif
 
 
 std::vector<std::string> add_coordinats(

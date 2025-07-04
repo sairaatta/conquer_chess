@@ -4,15 +4,28 @@
 #include "game_options.h"
 #include "game_coordinate.h"
 #include "helper.h"
-#include "lobby_options.h"
 #include "piece_type.h"
 #include "square.h"
 
 #include <algorithm>
 #include <cassert>
-//#include <iostream>
 #include <iterator>
 #include <sstream>
+
+#ifdef GAME_CONTROLLER_H
+#error 'pieces' must know nothing about 'game_controller'
+#error Instead, it is the other way around...
+#endif
+
+#ifdef LOBBY_OPTIONS_H
+#error 'pieces' must know nothing about 'lobby_options'
+#error Instead, all player sides (e.g. LHS) need to be converted to colors (e.g. white)
+#endif
+
+#ifdef SIDE_H
+#error 'pieces' must know nothing about 'side'
+#error This is managed by 'lobby_options'.
+#endif
 
 piece::piece(
   const chess_color color,
@@ -1020,7 +1033,6 @@ void test_piece()
   }
   // A pieces moves until it arrives
   {
-    const lobby_options lo;
     piece p{get_test_white_king()}; // A white king
     assert(p.get_type() == piece_type::king);
     assert(p.get_current_square() == square("e1"));
@@ -1034,7 +1046,6 @@ void test_piece()
       )
     );
     assert(has_actions(p));
-    //game g{get_kings_only_game()};
     game g(get_pieces_kings_only());
     p.tick(delta_t(0.1), g);
     assert(has_actions(p));
@@ -1060,8 +1071,6 @@ void test_piece()
   // A piece stops attacking when the attacked piece moves away
   {
     game g(get_pieces_queen_endgame());
-    const lobby_options lo;
-    //game g{create_game_with_starting_position(starting_position_type::queen_end_game)};
     piece& white_queen{get_piece_at(g, square("d1"))};
     piece& black_queen{get_piece_at(g, square("d8"))};
     white_queen.add_action(piece_action(chess_color::white, piece_type::queen, piece_action_type::attack, square("d1"), square("d8")));
