@@ -96,7 +96,7 @@ bool is_piece_at(
 );
 
 /// Test this class and its free functions
-void test_replayer();
+void test_replay();
 
 bool operator==(const replay& lhs, const replay& rhs) noexcept;
 

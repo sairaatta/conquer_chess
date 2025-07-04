@@ -83,7 +83,7 @@
 void test()
 {
 #ifndef NDEBUG
-  //test_game_controller();
+  //test_replay();
   //assert(!"Yay");
 
   test_about();
@@ -147,7 +147,7 @@ void test()
   test_program_state();
   test_race();
   test_read_only();
-  test_replayer();
+  test_replay();
   test_screen_coordinate();
   test_screen_rect();
   test_sfml_helper();

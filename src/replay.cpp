@@ -13,7 +13,7 @@ replay::replay(
   const game_controller& c
 ) :
     m_action_history{r},
-    m_game_controller{c},
+    m_game_controller{game_controller(game(), c.get_lobby_options())},
     m_index{0},
     m_initial_game_controller{c}
 {
@@ -62,9 +62,11 @@ void replay::do_move(const delta_t& dt)
 
     if (m_index == static_cast<int>(m_action_history.get_value().get().size()))
     {
-      // Tick away the last time
+      // Tick away the last time.
       m_game_controller.tick(dt_to_do);
-      assert(this->is_done());
+
+      // Need another second to finish the moves
+      // assert(this->is_done());
       return;
     }
   }
@@ -135,8 +137,29 @@ replay get_played_scholars_mate()
 bool replay::is_done() const noexcept
 {
   assert(m_index >= 0);
-  assert(m_index <= static_cast<int>(m_action_history.get_value().get().size()));
-  return m_index == static_cast<int>(m_action_history.get_value().get().size());
+  const int n_moves{get_n_moves(*this)};
+  assert(m_index <= n_moves);
+  const bool has_started_last_move{
+    m_index == n_moves
+  };
+  if (!has_started_last_move)
+  {
+    return false;
+  }
+  if (m_action_history.get_value().get().empty())
+  {
+    return true;
+  }
+  const in_game_time last_move_start{
+    m_action_history.get_value().get().back().first
+  };
+  const in_game_time last_move_end{
+    last_move_start + delta_t(1.0)
+  };
+  const in_game_time current_time{
+    this->get_game().get_in_game_time()
+  };
+  return current_time >= last_move_end;
 }
 
 bool is_piece_at(const replay& r, const square& coordinate)
@@ -155,9 +178,24 @@ void replay::reset() noexcept
   m_index = 0;
 }
 
-void test_replayer()
+void test_replay()
 {
 #ifndef NDEBUG
+  // replayer can replay the game it replayed exactly
+  {
+    const game g{play_random_game(2, 42)};
+    const auto action_history_1{collect_action_history(g)};
+
+    replay r(
+      action_history_1,
+      game_controller()
+    );
+
+    while (!r.is_done()) { r.do_move(); }
+
+    const auto action_history_2{collect_action_history(r.get_game())};
+    assert(action_history_1 == action_history_2);
+  }
   // replayer contructor
   {
     const replay r;
@@ -243,12 +281,14 @@ void test_replayer()
 
     assert(is_piece_at(r, square("e7")));
     assert(!is_piece_at(r, square("e5")));
-    //TODO
-    //assert(!r.is_done());
+    assert(get_in_game_time(r) == in_game_time(1.0));
+
+    assert(!r.is_done());
 
     r.do_move(); // e7-e5
     assert(!is_piece_at(r, square("e7")));
     assert(is_piece_at(r, square("e5")));
+    assert(get_in_game_time(r) == in_game_time(2.0));
     assert(r.is_done());
   }
   // replayer can do three moves
@@ -258,13 +298,20 @@ void test_replayer()
     assert(get_n_moves(r) == 3);
 
     r.do_move(); // e2-e4
+
+    assert(!r.is_done());
+
     r.do_move(); // e7-e5
 
     assert(is_piece_at(r, square("d1")));
     assert(!is_piece_at(r, square("h5")));
+    assert(!r.is_done());
+
     r.do_move(); // Qd1-h5
+
     assert(!is_piece_at(r, square("d1")));
     assert(is_piece_at(r, square("h5")));
+    assert(r.is_done());
   }
   // replayer can do four moves
   {
