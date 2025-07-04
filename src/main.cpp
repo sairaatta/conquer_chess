@@ -83,7 +83,7 @@
 void test()
 {
 #ifndef NDEBUG
-  //test_replay();
+  //test_game_controller();
   //assert(!"Yay");
 
   test_about();
@@ -177,9 +177,14 @@ void play_standard_random_game()
 {
   try
   {
-    const int n_turns{10000};
+    const int n_turns{8123};
     const auto g = play_random_game(n_turns, 42);
-    std::clog << "Final board:\n" << to_board_str(g.get_pieces()) << '\n';
+    std::clog
+      << "Final board:\n"
+      << to_board_str(g.get_pieces()) << '\n'
+      << "As FEN:\n"
+      << to_fen_string(g).get() << '\n'
+    ;
     std::clog << "Winner:\n";
     if (g.get_winner().has_value())
     {

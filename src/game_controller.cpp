@@ -1065,10 +1065,19 @@ void test_game_controller() //!OCLINT tests may be many
     add_user_input(c, create_press_action_1(side::lhs));
     assert(!is_empty(get_user_inputs(c)));
   }
-  // collect_selected_piece_ids
+  // collect_selected_piece_ids, no selected pieces
+  {
+    const game_controller c;
+    assert(collect_selected_piece_ids(c).empty());
+  }
+  // collect_selected_piece_ids, select the piece at the cursor
   {
     game_controller c;
-    assert(collect_selected_piece_ids(c).empty());
+    c.add_user_input(
+      create_press_action_1(side::lhs)
+    );
+    c.apply_user_inputs_to_game();
+    assert(!collect_selected_piece_ids(c).empty());
   }
   // convert_move_to_user_inputs
   {
