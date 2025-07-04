@@ -19,13 +19,13 @@ public:
   );
 
   /// Get the controller of a player
-  const physical_controller& get_controller(const side player_side) const noexcept;
+  [[nodiscard]] const physical_controller& get_controller(const side player_side) const noexcept;
 
   /// Get the controller of a player
-  physical_controller& get_controller(const side player_side) noexcept;
+  [[nodiscard]] physical_controller& get_controller(const side player_side) noexcept;
 
   /// Get the physical controllers
-  const auto& get_controllers() const noexcept { return m_physical_controllers; }
+  [[nodiscard]] const auto& get_controllers() const noexcept { return m_physical_controllers; }
 
   /// Set a controller
   void set(const side player_side, const physical_controller& controller);
@@ -36,13 +36,13 @@ private:
 };
 
 /// Count the number of controllers that use the keyboard
-int count_keyboard_controllers(const physical_controllers& controllers) noexcept;
+[[nodiscard]] int count_keyboard_controllers(const physical_controllers& controllers) noexcept;
 
 /// Count the number of controllers that use the keyboard
-int count_mouse_controllers(const physical_controllers& controllers) noexcept;
+[[nodiscard]] int count_mouse_controllers(const physical_controllers& controllers) noexcept;
 
 /// Count the number of controllers
-int count_n_controllers(const physical_controllers& controllers) noexcept;
+[[nodiscard]] int count_n_controllers(const physical_controllers& controllers) noexcept;
 
 /// Get two controllers,
 /// where LHS player uses keyboard,
@@ -52,7 +52,7 @@ int count_n_controllers(const physical_controllers& controllers) noexcept;
 /// - \link{create_keyboard_mouse_controllers}
 /// - \link{use_mouse_keyboard_controllers}
 /// - \link{use_two_keyboard_controllers}
-physical_controllers create_keyboard_mouse_controllers() noexcept;
+[[nodiscard]] physical_controllers create_keyboard_mouse_controllers() noexcept;
 
 /// Get two controllers,
 /// where LHS player uses mouse,
@@ -62,7 +62,7 @@ physical_controllers create_keyboard_mouse_controllers() noexcept;
 /// - \link{use_keyboard_mouse_controllers}
 /// - \link{create_mouse_keyboard_controllers}
 /// - \link{use_two_keyboard_controllers}
-physical_controllers create_mouse_keyboard_controllers() noexcept;
+[[nodiscard]] physical_controllers create_mouse_keyboard_controllers() noexcept;
 
 /// Get two keyboard controllers.
 /// @see use \link{create_default_controllers}
@@ -72,13 +72,13 @@ physical_controllers create_mouse_keyboard_controllers() noexcept;
 /// - \link{use_keyboard_mouse_controllers}
 /// - \link{use_mouse_keyboard_controllers}
 /// - \link{create_two_keyboard_controllers}
-physical_controllers create_two_keyboard_controllers() noexcept;
+[[nodiscard]] physical_controllers create_two_keyboard_controllers() noexcept;
 
 /// Determine if there is at least one controller that use the keyboard
-bool has_keyboard_controller(const physical_controllers& controllers) noexcept;
+[[nodiscard]] bool has_keyboard_controller(const physical_controllers& controllers) noexcept;
 
 /// Determine if there is at least one controller that use the mouse
-bool has_mouse_controller(const physical_controllers& controllers) noexcept;
+[[nodiscard]] bool has_mouse_controller(const physical_controllers& controllers) noexcept;
 
 /// Test this class and its free functions
 void test_physical_controllers();
