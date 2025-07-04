@@ -695,32 +695,6 @@ int count_user_inputs(const game_controller& c) noexcept
   return count_user_inputs(c.get_user_inputs());
 }
 
-/*
-game_controller create_game_controller_with_keyboard_mouse(const game& g)
-{
-  use_keyboard_mouse_controllers();
-  return game_controller(g);
-}
-
-game_controller create_game_controller_with_mouse_keyboard(const game& g)
-{
-  use_mouse_keyboard_controllers();
-  return game_controller(g);
-}
-
-game_controller create_game_controller_with_two_keyboards(const game& g)
-{
-  use_two_keyboard_controllers();
-  return game_controller(g);
-}
-*/
-
-game_controller create_game_controller_with_user_settings(const game& g)
-{
-  return game_controller(g);
-}
-
-
 const game_coordinate& game_controller::get_cursor_pos(const side player) const noexcept
 {
   return m_cursor_pos.at(player);
@@ -817,16 +791,6 @@ std::vector<piece_action_type> get_piece_actions(
     actions.push_back(piece_action_type::promote_to_knight);
   }
   return actions;
-}
-
-const piece& get_piece_at(const game_controller& c, const std::string& square_str)
-{
-  return get_piece_at(c.get_game(), square_str);
-}
-
-const piece& get_piece_at(const game_controller& c, const square& s)
-{
-  return get_piece_at(c.get_game(), s);
 }
 
 piece& get_piece_at(game_controller& c, const std::string& square_str)
@@ -1019,16 +983,6 @@ bool is_selected(const piece& p, const game_controller& c)
   return maybe_selected_piece_id.value() == piece_id;
 }
 
-/*
-bool is_mouse_user(const game_controller& c, const side player_side) noexcept
-{
-  return c.get_physical_controller(player_side).get_type()
-    == physical_controller_type::mouse
-  ;
-}
-*/
-
-
 void move_cursor_to(
   game_controller& c,
   const std::string& square_str,
@@ -1111,6 +1065,11 @@ void test_game_controller() //!OCLINT tests may be many
     add_user_input(c, create_press_action_1(side::lhs));
     assert(!is_empty(get_user_inputs(c)));
   }
+  // collect_selected_piece_ids
+  {
+    game_controller c;
+    assert(collect_selected_piece_ids(c).empty());
+  }
   // convert_move_to_user_inputs
   {
     const game_controller c;
@@ -1143,15 +1102,23 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c;
     assert(count_user_inputs(c) == 0);
   }
-  #ifdef FIX_WHERE_TO_PUT_PHYSICAL_CONTROLLERS
-  // has_mouse_controller
+  // get_user_inputs_to_move_cursor_from_to
   {
-    const game_controller g(
-      create_game_controller_with_two_keyboards()
-    );
-    assert(!has_mouse_controller(g));
+    game_controller c;
+    const auto keyboard_inputs{
+      get_user_inputs_to_move_cursor_from_to(
+        c, square("e2"), square("e4"), side::lhs,
+        physical_controller_type::keyboard
+      )
+    };
+    const auto mouse_inputs{
+      get_user_inputs_to_move_cursor_from_to(
+        c, square("e2"), square("e4"), side::lhs,
+        physical_controller_type::mouse
+      )
+    };
+    assert(keyboard_inputs != mouse_inputs);
   }
-  #endif
   // Moving the mouse
   {
     game_controller c;
@@ -1166,24 +1133,7 @@ void test_game_controller() //!OCLINT tests may be many
     // Cursor is still the old position
     assert(c.get_cursor_pos(side::lhs) == game_coordinate(0.5, 0.5));
   }
-  #ifdef FIX_WHERE_TO_PUT_PHYSICAL_CONTROLLERS
-  // has_keyboard_controller
-  {
-    const game_controller g(
-      create_game_controller_with_two_keyboards()
-    );
-    assert(has_keyboard_controller(g));
 
-  }
-  // has_mouse_controller
-  {
-    const game_controller c(
-      create_game_controller_with_keyboard_mouse()
-    );
-    assert(!is_mouse_user(c, side::lhs));
-    assert(is_mouse_user(c, side::rhs));
-  }
-  #endif // FIX_WHERE_TO_PUT_PHYSICAL_CONTROLLERS
   // play_random_game
   {
     const int n_turns{2};

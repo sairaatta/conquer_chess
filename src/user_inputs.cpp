@@ -283,13 +283,15 @@ void test_user_inputs()
     assert(!is_piece_at(c, "e2"));
     assert(is_piece_at(c, "e4"));
   }
-  // operator==
+  // operator== and operator!=
   {
     user_inputs a;
     const user_inputs b;
     assert(a == b);
+    assert(!(a != b));
     a.add(create_press_action_1(side::lhs));
     assert(!(a == b));
+    assert(a != b);
   }
 #endif // NDEBUG
 }
@@ -297,6 +299,11 @@ void test_user_inputs()
 bool operator==(const user_inputs& lhs, const user_inputs& rhs) noexcept
 {
   return lhs.get_user_inputs() == rhs.get_user_inputs();
+}
+
+bool operator!=(const user_inputs& lhs, const user_inputs& rhs) noexcept
+{
+  return !(lhs == rhs);
 }
 
 std::ostream& operator<<(std::ostream& os, const user_inputs& actions) noexcept

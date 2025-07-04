@@ -239,8 +239,6 @@ std::vector<piece_action_type> get_piece_actions(
   const side player_side
 ) noexcept;
 
-const piece& get_piece_at(const game_controller& c, const std::string& square_str);
-const piece& get_piece_at(const game_controller& c, const square& s);
 piece& get_piece_at(game_controller& c, const std::string& square_str);
 piece& get_piece_at(game_controller& c, const square& s);
 

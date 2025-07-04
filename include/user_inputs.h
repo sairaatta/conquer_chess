@@ -99,5 +99,6 @@ void test_user_inputs();
 
 std::ostream& operator<<(std::ostream& os, const user_inputs& actions) noexcept;
 bool operator==(const user_inputs& lhs, const user_inputs& rhs) noexcept;
+bool operator!=(const user_inputs& lhs, const user_inputs& rhs) noexcept;
 
 #endif // USER_INPUTS_H
