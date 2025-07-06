@@ -507,9 +507,11 @@ void show_occupied_squares(game_view& view)
 
 void draw_pieces(game_view& view)
 {
+  const bool indicate_protectedness{true};
   draw_pieces(
     view.get_game_controller(),
-    view.get_layout().get_board()
+    view.get_layout().get_board(),
+    indicate_protectedness
   );
 
 }

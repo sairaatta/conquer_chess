@@ -102,7 +102,12 @@ void draw_board(replay_view& v)
   const bool semi_transparent{false};
   draw_squares(layout, semi_transparent);
   draw_unit_paths(g.get_pieces(), layout);
-  draw_pieces(v.get_replayer().get_game_controller(), layout);
+  const bool indicate_protectedness{true};
+  draw_pieces(
+    v.get_replayer().get_game_controller(),
+    layout,
+    indicate_protectedness
+  );
   draw_unit_health_bars(g, layout);
 }
 

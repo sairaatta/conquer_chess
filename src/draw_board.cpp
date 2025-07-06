@@ -15,7 +15,8 @@
 
 void draw_pieces(
   const game_controller& c,
-  const board_layout& layout
+  const board_layout& layout,
+  const bool indicate_protectedness
 )
 {
   const auto& game{c.get_game()};
@@ -65,8 +66,9 @@ void draw_pieces(
     }
 
     // Show the piece is proteced
-    if (is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color()))
-    {
+    if (indicate_protectedness
+      && is_square_protected(game.get_pieces(), piece.get_current_square(), piece.get_color())
+    ) {
       draw_texture(
         game_resources::get().get_board_game_textures().get_shield(),
         square_layout.get_is_protected(),

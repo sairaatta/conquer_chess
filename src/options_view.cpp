@@ -357,10 +357,14 @@ void draw_game_speed(options_view& v)
 
 void draw_pieces(options_view& view)
 {
-  game_controller c;
+  game_controller c(
+    create_game_with_starting_position(get_starting_position(view.get_game_options()))
+  );
+  const bool indicate_protectedness{false};
   draw_pieces(
     c,
-    view.get_layout().get_chess_board()
+    view.get_layout().get_chess_board(),
+    indicate_protectedness
   );
 }
 

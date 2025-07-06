@@ -12,7 +12,8 @@
 /// Draw the pieces
 void draw_pieces(
   const game_controller& c,
-  const board_layout& layout
+  const board_layout& layout,
+  const bool indicate_protectedness
 );
 
 /// Draw the squares of a chessboard at the window target rectangle's location
