@@ -568,7 +568,8 @@ bool can_player_select_piece_at_cursor_pos(
   const auto& cursor_pos{
     get_cursor_pos(c, c.get_lobby_options().get_side(cursor_color))
   };
-  if (!is_piece_at(c.get_game(), cursor_pos, game_options::get().get_click_distance()))
+  const double click_distance{get_default_click_distance()};
+  if (!is_piece_at(c.get_game(), cursor_pos, click_distance))
   {
     return false;
   }
@@ -2234,6 +2235,7 @@ void test_game_controller() //!OCLINT tests may be many
   //----------------------------------------------------------------------------
   // Things that cannot be done during a move
   //----------------------------------------------------------------------------
+
   #ifdef FIX_MOVING_QUEEN_CAN_BE_SELECTED
   // When a piece is moving, it can be selected
   {

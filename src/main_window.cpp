@@ -65,7 +65,7 @@ main_window::main_window()
   }
 
   // Use all defaults
-  game_options::get().reset();
+  m_game_options.reset();
 }
 
 void main_window::exec()
@@ -111,8 +111,8 @@ bool main_window::process_event(sf::Event& event)
     sf::Keyboard::Key key_pressed = event.key.code;
     if (key_pressed == sf::Keyboard::Key::F3)
     {
-      game_options::get().set_show_debug_info(
-        !game_options::get().get_show_debug_info()
+      m_game_options.set_show_debug_info(
+        !m_game_options.get_show_debug_info()
       );
       return false; // Done. Do not close the program
     }
@@ -185,7 +185,7 @@ void main_window::show()
 
   m_views[m_program_state]->draw();
 
-  if (game_options::get().get_show_debug_info()) {
+  if (m_game_options.get_show_debug_info()) {
     show_debug_info();
   }
 
@@ -219,7 +219,7 @@ void main_window::show_debug_info()
 void main_window::tick()
 {
   const double dt_raw{
-    get_speed_multiplier(game_options::get().get_game_speed())
+    get_speed_multiplier(m_game_options.get_game_speed())
       / m_sleep_scheduler.get_fps()
   };
   // For the first frames, dt_raw may be too big

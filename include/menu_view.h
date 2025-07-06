@@ -6,6 +6,7 @@
 #include "ccfwd.h"
 #include "menu_view_layout.h"
 #include "menu_view_item.h"
+#include "game_options.h"
 #include "controls_bar.h"
 #include "view.h"
 
@@ -57,6 +58,8 @@ private:
   int m_background_image_index;
 
   controls_bar m_controls_bar;
+
+  game_options m_game_options;
 
   /// The layout of this window
   menu_view_layout m_layout;

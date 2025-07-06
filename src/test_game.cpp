@@ -33,11 +33,6 @@ void test_game_class()
   ////////////////////////////////////////////////////////////////////////////
   // Member functions
   ////////////////////////////////////////////////////////////////////////////
-  // game::get_game_options
-  {
-    const game g{create_game_with_standard_starting_position()};
-    assert(game_options::get().get_margin_width() >= 0);
-  }
   // game::get_time
   {
     game g{create_game_with_standard_starting_position()};
@@ -166,7 +161,6 @@ void test_game_class()
     }
     // Cannot attack a piece of one's own color
     {
-      game_options::get().set_starting_position(starting_position_type::standard);
       game g;
       const square from{"e1"}; // White king
       const square to{"d1"};   // White queen
@@ -631,11 +625,6 @@ void test_game_functions()
       )
     );
     assert(count_piece_actions(g, chess_color::white) == 2);
-  }
-  // do_show_selected
-  {
-    const game g{create_game_with_starting_position(starting_position_type::kings_only)};
-    assert(do_show_selected() || !do_show_selected());
   }
   // get_occupied_squares
   {

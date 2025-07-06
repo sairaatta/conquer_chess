@@ -5,6 +5,7 @@
 #include "screen_rect.h"
 #include "game_coordinate.h"
 #include "screen_coordinate.h"
+#include "game_options.h"
 #include "layout.h"
 #include "side.h"
 #include "board_layout.h"
@@ -89,6 +90,7 @@ private:
   board_layout m_board;
   std::map<side, in_game_controls_layout> m_controls;
   std::map<side, screen_rect> m_debug;
+  game_options m_game_options;
   game_statistics_widget_layout m_game_statistics;
   std::map<side, screen_rect> m_log;
   std::map<side, screen_rect> m_unit_info;
@@ -131,7 +133,10 @@ double get_square_height(const game_view_layout& layout) noexcept;
 double get_square_width(const game_view_layout& layout) noexcept;
 
 /// Get the panels in the layout
-std::vector<screen_rect> get_panels(const game_view_layout& layout);
+std::vector<screen_rect> get_panels(
+  const game_view_layout& layout,
+  const bool show_debug_panel
+);
 
 /// Test the game_view_layout class
 void test_game_view_layout();

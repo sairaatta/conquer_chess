@@ -1010,10 +1010,12 @@ std::vector<square> get_occupied_squares(const game& g) noexcept
   return get_occupied_squares(get_pieces(g));
 }
 
+/*
 const game_options& get_options(const game&)
 {
   return game_options::get();
 }
+*/
 
 std::vector<piece>& get_pieces(game& g) noexcept
 {

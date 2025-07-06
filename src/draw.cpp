@@ -154,10 +154,13 @@ void draw_game_speed_icon(const screen_rect& sr)
   }
 }
 
-void draw_game_speed_value(const screen_rect& sr)
+void draw_game_speed_value(
+  const screen_rect& sr,
+  const game_speed speed
+)
 {
   draw_chessboard_strip_texture(chess_color::black, sr);
-  draw_normal_text(to_human_str(game_options::get().get_game_speed()), sr);
+  draw_normal_text(to_human_str(speed), sr);
 
 }
 
@@ -260,11 +263,14 @@ void draw_music_volume_label(const screen_rect& sr)
   }
 }
 
-void draw_music_volume_value(const screen_rect& sr)
+void draw_music_volume_value(
+  const screen_rect& sr,
+  const volume v
+)
 {
   draw_texture(get_strip_texture(chess_color::white), sr);
   std::stringstream s;
-  s << get_music_volume() << " %";
+  s << v << " %";
   draw_normal_text(s.str(), sr);
 }
 
@@ -451,12 +457,15 @@ void draw_sound_effects_volume_label(const screen_rect& sr)
   }
 }
 
-void draw_sound_effects_volume_value(const screen_rect& sr)
+void draw_sound_effects_volume_value(
+  const screen_rect& sr,
+  const volume v
+)
 {
   draw_chessboard_strip_texture(chess_color::black, sr);
 
   std::stringstream s;
-  s << get_sound_effects_volume() << " %";
+  s << v << " %";
   draw_normal_text(s.str(), sr);
 }
 
@@ -521,13 +530,16 @@ void draw_starting_position_label(const screen_rect& sr)
   }
 }
 
-void draw_starting_position_value(const screen_rect& sr)
+void draw_starting_position_value(
+  const screen_rect& sr,
+  const starting_position_type t
+)
 {
   draw_texture(
     get_strip_texture(chess_color::white),
     sr
   );
-  draw_normal_text(to_human_str(get_starting_position()), sr);
+  draw_normal_text(to_human_str(t), sr);
 }
 
 void draw_text(

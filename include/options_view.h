@@ -7,6 +7,7 @@
 #include "chess_color.h"
 #include "options_view_layout.h"
 #include "options_view_item.h"
+#include "game_options.h"
 #include "physical_controllers.h"
 #include "controls_bar.h"
 #include "view.h"
@@ -21,6 +22,8 @@ public:
 
   /// Draw the menu on the main window
   void draw_impl() override;
+
+  const auto& get_game_options() const noexcept { return m_game_options; }
 
   const auto& get_layout() const noexcept { return m_layout; }
 
@@ -49,6 +52,8 @@ private:
 
   controls_bar m_controls_bar;
 
+  game_options m_game_options;
+
   options_view_layout m_layout;
 
   /// The physical controllers to display this window
@@ -73,10 +78,6 @@ void draw_panel(
   const std::string panel_text,
   const chess_color color
 );
-
-/*
-physical_controller_type get_physical_controller_type(const side player);
-*/
 
 /// Show the bottom part
 void draw_background(options_view& v);

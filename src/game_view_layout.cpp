@@ -222,10 +222,10 @@ const navigation_controls_layout& game_view_layout::get_navigation_controls(cons
 }
 
 std::vector<screen_rect> get_panels(
-  const game_view_layout& layout
+  const game_view_layout& layout,
+  const bool show_debug_panel
 )
 {
-  const bool show_debug_panel{game_options::get().get_show_debug_info()};
   std::vector<screen_rect> v{
     layout.get_board().get_board(),
     layout.get_controls(side::lhs).get_background(),
@@ -263,7 +263,7 @@ void test_game_view_layout()
   #ifndef NDEBUG
   {
     const game_view_layout layout;
-    assert(!get_panels(layout).empty());
+    assert(!get_panels(layout, false).empty());
   }
   {
     const game_view_layout layout;

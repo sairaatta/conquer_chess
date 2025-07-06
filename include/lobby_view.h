@@ -4,7 +4,8 @@
 #ifndef LOGIC_ONLY
 
 #include "controls_bar.h"
-#include "program_state.h"
+//#include "program_state.h"
+#include "game_options.h"
 #include "lobby_options.h"
 #include "lobby_view_layout.h"
 #include "lobby_view_item.h"
@@ -65,6 +66,9 @@ private:
 
   /// Yes, dog mode
   bool m_dog_mode{false};
+
+  /// The game options
+  game_options m_game_options;
 
   /// The layout of this window
   lobby_view_layout m_layout;

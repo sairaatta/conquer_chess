@@ -27,6 +27,11 @@
 #error This is managed by 'lobby_options'.
 #endif
 
+#ifdef GAME_OPTION_H
+#error 'pieces' must know nothing about 'game_option'
+#error This is managed by 'lobby_options'.
+#endif
+
 piece::piece(
   const chess_color color,
   const piece_type type,
@@ -1201,7 +1206,8 @@ void tick_attack(
   piece& target{get_piece_at(g, first_action.get_to())};
 
   assert(p.get_color() != target.get_color());
-  const auto damage{game_options::get().get_damage_per_chess_move() * dt.get()};
+  const double damage_per_chess_move{1.0};
+  const auto damage{damage_per_chess_move * dt.get()};
   target.receive_damage(damage);
   // Capture the piece if destroyed
   if (is_dead(target))
@@ -1234,7 +1240,8 @@ void tick_attack_en_passant(
   piece& target{get_piece_at(g, attack_square)};
 
   assert(p.get_color() != target.get_color());
-  const auto damage{game_options::get().get_damage_per_chess_move() * dt.get()};
+  const double damage_per_chess_move{1.0};
+  const auto damage{damage_per_chess_move * dt.get()};
   target.receive_damage(damage);
   // Capture the piece if destroyed
   if (is_dead(target))

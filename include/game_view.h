@@ -41,6 +41,8 @@ public:
 
   const auto& get_game_controller() const noexcept { return m_game_controller; }
 
+  const auto& get_game_options() const noexcept { return m_game_options; }
+
   const auto& get_layout() const noexcept { return m_layout; }
 
   /// Get the text log, i.e. things pieces have to say
@@ -67,6 +69,8 @@ private:
   sf::Clock m_clock;
 
   controls_bar m_controls_bar;
+
+  game_options m_game_options;
 
   /// The game controller, interacts with game
   game_controller m_game_controller;
@@ -149,7 +153,10 @@ void process_event(
 void draw_background(game_view& view);
 
 /// Show the board: squares, unit paths, pieces, health bars
-void draw_board(game_view& view);
+void draw_board(
+  game_view& view,
+  const bool show_occupied
+);
 
 /// Show the controls (e.g. for a unit) on-screen for a player
 void draw_controls(

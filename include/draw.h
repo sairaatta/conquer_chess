@@ -11,7 +11,9 @@
 #include "ccfwd.h"
 #include "chess_color.h"
 #include "side.h"
+#include "game_speed.h"
 #include "physical_controller_type.h"
+#include "starting_position_type.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -49,7 +51,10 @@ void draw_fancy_text(
 void draw_game_speed_icon(const screen_rect& sr);
 
 /// The button that shows the value for the game speed
-void draw_game_speed_value(const screen_rect& sr);
+void draw_game_speed_value(
+  const screen_rect& sr,
+  const game_speed speed
+);
 
 /// Draw fancy text at a huge size
 void draw_huge_fancy_text(const sf::String& s, const screen_rect& sr);
@@ -117,7 +122,10 @@ void draw_input_prompt_symbol_on_background(
 void draw_music_volume_label(const screen_rect& sr);
 
 /// The button that shows the value of the music
-void draw_music_volume_value(const screen_rect& sr);
+void draw_music_volume_value(
+  const screen_rect& sr,
+  const volume v
+);
 
 /// Draw a controls bar for a menu where there is navigation required.
 ///
@@ -188,7 +196,10 @@ void draw_rectangle(const screen_rect& sr, const sf::Color& fill_color = sf::Col
 void draw_sound_effects_volume_label(const screen_rect& sr);
 
 /// The button that shows the value of the music
-void draw_sound_effects_volume_value(const screen_rect& sr);
+void draw_sound_effects_volume_value(
+  const screen_rect& sr,
+  const volume v
+);
 
 /// Draw a Start menu button on the main window
 void draw_start_button(const screen_rect& sr);
@@ -197,7 +208,10 @@ void draw_start_button(const screen_rect& sr);
 void draw_starting_position_label(const screen_rect& sr);
 
 /// A fancy label that shows the value of the starting position
-void draw_starting_position_value(const screen_rect& sr);
+void draw_starting_position_value(
+  const screen_rect& sr,
+  const starting_position_type t
+);
 
 
 /// Draw the text on the main window.

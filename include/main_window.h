@@ -6,6 +6,7 @@
 #include "ccfwd.h"
 #include "sleep_scheduler.h"
 #include "program_state.h"
+#include "game_options.h"
 #include "lobby_options.h"
 #include "replay.h"
 #include "view.h"
@@ -27,6 +28,8 @@ public:
 private:
 
   std::map<program_state, std::unique_ptr<view>> m_views;
+
+  game_options m_game_options;
 
   /// The lobby options used throughout the game.
   ///

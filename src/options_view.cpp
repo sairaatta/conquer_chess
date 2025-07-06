@@ -34,10 +34,10 @@ void options_view::decrease_selected()
 {
   switch (m_selected)
   {
-    case options_view_item::game_speed: decrease_game_speed(); break;
-    case options_view_item::music_volume: decrease_music_volume(); break;
-    case options_view_item::sound_effects_volume: decrease_sound_effects_volume(); break;
-    case options_view_item::starting_position: decrease_starting_position(); break;
+    case options_view_item::game_speed: decrease_game_speed(m_game_options); break;
+    case options_view_item::music_volume: decrease_music_volume(m_game_options); break;
+    case options_view_item::sound_effects_volume: decrease_sound_effects_volume(m_game_options); break;
+    case options_view_item::starting_position: decrease_starting_position(m_game_options); break;
     case options_view_item::left_controls:
     {
       set_next_state(program_state::left_controls);
@@ -56,10 +56,10 @@ void options_view::increase_selected()
 {
   switch (m_selected)
   {
-    case options_view_item::game_speed: increase_game_speed(); break;
-    case options_view_item::music_volume: increase_music_volume(); break;
-    case options_view_item::sound_effects_volume: increase_sound_effects_volume(); break;
-    case options_view_item::starting_position: increase_starting_position(); break;
+    case options_view_item::game_speed: increase_game_speed(m_game_options); break;
+    case options_view_item::music_volume: increase_music_volume(m_game_options); break;
+    case options_view_item::sound_effects_volume: increase_sound_effects_volume(m_game_options); break;
+    case options_view_item::starting_position: increase_starting_position(m_game_options); break;
     case options_view_item::left_controls:
     {
       set_next_state(program_state::left_controls);
@@ -115,11 +115,11 @@ bool options_view::process_event_impl(sf::Event& event)
     {
       if (is_shift_pressed())
       {
-        decrease_game_speed();
+        decrease_game_speed(m_game_options);
       }
       else
       {
-        increase_game_speed();
+        increase_game_speed(m_game_options);
       }
       return false;
     }
@@ -127,11 +127,11 @@ bool options_view::process_event_impl(sf::Event& event)
     {
       if (is_shift_pressed())
       {
-        decrease_music_volume();
+        decrease_music_volume(m_game_options);
       }
       else
       {
-        increase_music_volume();
+        increase_music_volume(m_game_options);
       }
       return false;
     }
@@ -144,11 +144,11 @@ bool options_view::process_event_impl(sf::Event& event)
     {
       if (is_shift_pressed())
       {
-        decrease_sound_effects_volume();
+        decrease_sound_effects_volume(m_game_options);
       }
       else
       {
-        increase_sound_effects_volume();
+        increase_sound_effects_volume(m_game_options);
       }
       return false;
     }
@@ -156,11 +156,11 @@ bool options_view::process_event_impl(sf::Event& event)
     {
       if (is_shift_pressed())
       {
-        decrease_starting_position();
+        decrease_starting_position(m_game_options);
       }
       else
       {
-        increase_starting_position();
+        increase_starting_position(m_game_options);
       }
       return false;
     }
@@ -351,7 +351,7 @@ void draw_game_speed(options_view& v)
 {
   const auto& layout = v.get_layout();
   draw_game_speed_icon(layout.get_game_speed_label());
-  draw_game_speed_value(layout.get_game_speed_value());
+  draw_game_speed_value(layout.get_game_speed_value(), v.get_game_options().get_game_speed());
 }
 
 
@@ -368,19 +368,19 @@ void draw_starting_position(options_view& v)
 {
   const auto& layout = v.get_layout();
   draw_starting_position_label(layout.get_starting_pos_label());
-  draw_starting_position_value(layout.get_starting_pos_value());
+  draw_starting_position_value(layout.get_starting_pos_value(), get_starting_position(v.get_game_options()));
 }
 
 void draw_top(options_view& v)
 {
-  assert(!to_str(get_starting_position()).empty());
+  assert(!to_str(get_starting_position(v.get_game_options())).empty());
 
   draw_game_speed(v);
   draw_music_volume(v);
   draw_sound_effects_volume(v);
   draw_starting_position(v);
 
-  assert(!to_str(get_starting_position()).empty());
+  assert(!to_str(get_starting_position(v.get_game_options())).empty());
 }
 
 
@@ -399,7 +399,7 @@ void draw_music_volume(options_view& v)
 {
   const auto& layout = v.get_layout();
   draw_music_volume_label(layout.get_music_volume_label());
-  draw_music_volume_value(layout.get_music_volume_value());
+  draw_music_volume_value(layout.get_music_volume_value(), v.get_game_options().get_music_volume());
 }
 
 void draw_selected_panel(options_view& v)
@@ -411,7 +411,7 @@ void draw_sound_effects_volume(options_view& v)
 {
   const auto& layout = v.get_layout();
   draw_sound_effects_volume_label(layout.get_sound_effects_volume_label());
-  draw_sound_effects_volume_value(layout.get_sound_effects_volume_value());
+  draw_sound_effects_volume_value(layout.get_sound_effects_volume_value(), v.get_game_options().get_sound_effects_volume());
 }
 
 void options_view::start_impl()

@@ -367,10 +367,10 @@ void draw_lobby_title(lobby_view& v)
 void lobby_view::start_impl()
 {
   game_resources::get().get_songs().get_soothing().setVolume(
-    get_music_volume_as_percentage()
+    get_music_volume_as_percentage(m_game_options)
   );
   game_resources::get().get_sound_effects().set_master_volume(
-    game_options::get().get_sound_effects_volume()
+    m_game_options.get_sound_effects_volume()
   );
   game_resources::get().get_songs().get_soothing().play();
   if (m_clock.has_value())

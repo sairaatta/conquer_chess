@@ -285,10 +285,10 @@ void menu_view::start_impl()
 {
   get_render_window().setTitle("Conquer Chess: Main Menu");
   game_resources::get().get_songs().get_bliss().setVolume(
-    get_music_volume_as_percentage()
+    get_music_volume_as_percentage(m_game_options)
   );
   game_resources::get().get_sound_effects().set_master_volume(
-    game_options::get().get_sound_effects_volume()
+    m_game_options.get_sound_effects_volume()
   );
   game_resources::get().get_songs().get_bliss().play();
   assert(!is_active());

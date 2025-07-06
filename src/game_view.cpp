@@ -32,7 +32,7 @@
 
 game_view::game_view(
 ) : m_game_controller{},
-    m_log{game_options::get().get_message_display_time_secs()},
+    m_log{get_default_message_display_time_secs()},
     m_statistics_output_file("tmp.txt")
 {
   m_controls_bar.set_draw_up_down(false);
@@ -244,7 +244,7 @@ void game_view::draw_impl()
   show_layout(*this);
 
   // Show the board: squares, unit paths, pieces, health bars
-  draw_board(*this);
+  draw_board(*this, m_game_options.get_show_occupied());
 
   // In-game statistics widget
   draw_game_statistics_widget(*this);
@@ -261,7 +261,7 @@ void game_view::draw_impl()
     // Show the messages
     draw_log(*this, s);
 
-    if (game_options::get().get_show_debug_info())
+    if (m_game_options.get_show_debug_info())
     {
       show_debug(*this, s);
     }
@@ -281,10 +281,13 @@ void game_view::draw_impl()
   m_controls_bar.draw();
 }
 
-void draw_board(game_view& view)
+void draw_board(
+  game_view& view,
+  const bool show_occupied
+)
 {
   draw_squares(view);
-  if (game_options::get().get_show_occupied())
+  if (show_occupied)
   {
     show_occupied_squares(view);
   }
@@ -440,7 +443,7 @@ void game_view::show_mouse_cursor()
 void show_layout(game_view& view)
 {
   const auto& layout{view.get_layout()};
-  for (const auto& panel: get_panels(layout))
+  for (const auto& panel: get_panels(layout, view.get_game_options().get_show_debug_info()))
   {
     sf::RectangleShape rectangle;
     set_rect(rectangle, panel);
@@ -479,7 +482,7 @@ void draw_background(game_view& view)
 
 void show_occupied_squares(game_view& view)
 {
-  assert(game_options::get().get_show_occupied());
+  assert(view.get_game_options().get_show_occupied());
   const auto& pieces{get_pieces(view)};
   for (const auto& piece: pieces)
   {
@@ -654,10 +657,10 @@ void game_view::start_impl()
 {
   m_clock.restart();
   game_resources::get().get_songs().get_wonderful_time().setVolume(
-    get_music_volume_as_percentage()
+    get_music_volume_as_percentage(m_game_options)
   );
   game_resources::get().get_sound_effects().set_master_volume(
-    game_options::get().get_sound_effects_volume()
+    get_sound_effects_volume(m_game_options)
   );
   m_game_controller = game_controller();
   assert(!is_active());

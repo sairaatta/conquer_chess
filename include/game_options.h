@@ -17,15 +17,8 @@
 class game_options
 {
 public:
-  /// This class is a Singleton
-  game_options(const game_options&) = delete;
-  game_options& operator=(const game_options&) = delete;
-  game_options(game_options &&) = delete;
-  game_options& operator=(game_options&&) = delete;
-  static auto& get() {
-    static game_options r;
-    return r;
-  }
+
+  game_options();
 
   /// Get the distance the mouse must be maximally in
   /// for a click to connect to a piece
@@ -36,9 +29,6 @@ public:
 
   /// Get the game speed
   auto get_game_speed() const noexcept { return m_game_speed; }
-
-  /// Get the width of the margin in pixels
-  auto get_margin_width() const noexcept { return m_margin_width; }
 
   /// How long log messages are displayed
   double get_message_display_time_secs() const noexcept { return 5.0; }
@@ -81,7 +71,6 @@ public:
 
 private:
 
-  game_options();
 
   /// Get the distance the mouse must be maximally in
   /// for a click to connect to a piece
@@ -89,12 +78,6 @@ private:
 
   /// The game speed
   game_speed m_game_speed;
-
-  /// The width of the margin in pixels
-  int m_margin_width;
-
-  /// The starting position
-  starting_position_type m_starting_position;
 
   /// Music volume
   volume m_music_volume;
@@ -109,28 +92,31 @@ private:
   /// Sound effects volume
   volume m_sound_effects_volume;
 
+  /// The starting position
+  starting_position_type m_starting_position;
 };
 
 /// Decrease the game speed
-void decrease_game_speed() noexcept;
+void decrease_game_speed(game_options& g) noexcept;
 
 /// Decrease the music volume
-void decrease_music_volume() noexcept;
+void decrease_music_volume(game_options& g) noexcept;
 
 /// Decrease the sound effects volume
-void decrease_sound_effects_volume() noexcept;
+void decrease_sound_effects_volume(game_options& g) noexcept;
 
-/// Decrease the starting position.
-///
-/// Or: get the previous one.
-void decrease_starting_position() noexcept;
+/// Decrease the sound effects volume
+void decrease_starting_position(game_options& g) noexcept;
 
 /// Are selected squares shown on-screen?
-bool do_show_selected() noexcept;
+bool do_show_selected(const game_options& g) noexcept;
 
 /// The default pixels distance for the mouse
 /// for a click to connect to a piece.
 constexpr double get_default_click_distance() noexcept { return 0.5; }
+
+/// How long log messages are displayed
+constexpr double get_default_message_display_time_secs() noexcept { return 5.0; }
 
 /// The default music volume.
 ///
@@ -143,30 +129,28 @@ volume get_default_music_volume() noexcept;
 volume get_default_sound_effects_volume() noexcept;
 
 /// Get the music volume
-const volume& get_music_volume() noexcept;
+const volume& get_music_volume(const game_options& g) noexcept;
 
 /// Get the music volume as a percentage
-double get_music_volume_as_percentage() noexcept;
+double get_music_volume_as_percentage(const game_options& g) noexcept;
 
 /// Get the sound effects volume
-const volume& get_sound_effects_volume() noexcept;
+const volume& get_sound_effects_volume(const game_options& g) noexcept;
 
 /// Get the starting position
-starting_position_type get_starting_position() noexcept;
+starting_position_type get_starting_position(const game_options& g) noexcept;
 
 /// Increase the game speed
-void increase_game_speed() noexcept;
+void increase_game_speed(game_options& g) noexcept;
 
 /// Increase the music volume
-void increase_music_volume() noexcept;
+void increase_music_volume(game_options& g) noexcept;
 
 /// Increase the sound effects volume
-void increase_sound_effects_volume() noexcept;
+void increase_sound_effects_volume(game_options& g) noexcept;
 
-/// Increase the starting position.
-///
-/// Or: get the next one.
-void increase_starting_position() noexcept;
+/// Increase the starting position
+void increase_starting_position(game_options& g) noexcept;
 
 /// Test this class and its free functions
 void test_game_options();
