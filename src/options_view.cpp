@@ -111,6 +111,12 @@ bool options_view::process_event_impl(sf::Event& event)
       set_next_state(program_state::main_menu);
       return false;
     }
+    if (key_pressed == sf::Keyboard::Key::Return)
+    {
+      m_has_accepted = true;
+      set_next_state(program_state::main_menu);
+      return false;
+    }
     if (key_pressed == sf::Keyboard::Key::G)
     {
       if (is_shift_pressed())

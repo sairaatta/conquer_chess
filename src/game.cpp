@@ -1,6 +1,6 @@
 #include "game.h"
 
-#include "game_options.h"
+//#include "game_options.h"
 #include "piece_actions.h"
 #include "square.h"
 #include "pieces.h"
@@ -981,9 +981,13 @@ game create_game_with_standard_starting_position() noexcept
   return game(get_standard_starting_pieces());
 }
 
-game create_game_with_starting_position(starting_position_type t) noexcept
+game create_game_with_starting_position(
+  starting_position_type t,
+  const race lhs_race,
+  const race rhs_race
+) noexcept
 {
-  return game(get_starting_pieces(t));
+  return game(get_starting_pieces(t, lhs_race, rhs_race));
 }
 
 
@@ -1257,6 +1261,17 @@ void tick_until_idle(game& g)
     ++cnt;
     assert(cnt < 1000);
   }
+}
+
+std::string to_board_str(
+  const game& c,
+  const board_to_text_options& options
+) noexcept
+{
+  return to_board_str(
+    c.get_pieces(),
+    options
+  );
 }
 
 fen_string to_fen_string(const game& g)

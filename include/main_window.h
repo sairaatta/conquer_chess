@@ -25,6 +25,8 @@ public:
   /// Run the window, until the user quits
   void exec();
 
+  const auto& get_program_state() const noexcept { return m_program_state; }
+
 private:
 
   std::map<program_state, std::unique_ptr<view>> m_views;
@@ -54,6 +56,7 @@ private:
 
   void process_resize_event(sf::Event& event);
 
+
   /// The program reaches a new state.
   ///
   /// Stop the current window and start the new
@@ -72,6 +75,8 @@ private:
   void tick();
 
 };
+
+void test_main_window();
 
 #endif // LOGIC_ONLY
 

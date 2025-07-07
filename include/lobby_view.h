@@ -20,6 +20,8 @@ class lobby_view : public view
 public:
   lobby_view();
 
+
+
   /// Show the menu on-screen
   void draw_impl() override;
 
@@ -35,6 +37,7 @@ public:
 
   const auto& get_layout() const noexcept { return m_layout; }
 
+  bool has_accepted() const noexcept { return m_has_accepted; }
 
   /// Process all events
   /// @return if the user wants to quit
@@ -64,11 +67,13 @@ private:
   /// How long the countdown will take
   const int m_countdown_secs{3};
 
-  /// Yes, dog mode
+  /// Yes, a type-of-canine mode
   bool m_dog_mode{false};
 
   /// The game options
   game_options m_game_options;
+
+  bool m_has_accepted{false};
 
   /// The layout of this window
   lobby_view_layout m_layout;

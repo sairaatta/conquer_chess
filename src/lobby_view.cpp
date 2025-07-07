@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <iostream>
 
 lobby_view::lobby_view()
   : m_lhs_cursor{lobby_view_item::color},
@@ -35,6 +36,7 @@ void lobby_view::tick_impl(const delta_t)
     if (m_clock.value().getElapsedTime().asSeconds() > m_countdown_secs)
     {
       // Store to the lobby options, as these settings are accepted
+      m_has_accepted = true;
 
       // Move on
       set_next_state(program_state::game);
@@ -153,17 +155,11 @@ bool lobby_view::process_event_impl(sf::Event& event)
       }
       game_resources::get().get_sound_effects().play_hide();
     }
-    else if (key_pressed == sf::Keyboard::Key::Q)
-    {
-      set_next_state(program_state::main_menu);
-      return false;
-    }
   }
   if (m_lhs_start && m_rhs_start && !m_clock.has_value())
   {
     m_clock = sf::Clock();
     game_resources::get().get_sound_effects().play_countdown();
-
   }
   else if (!(m_lhs_start && m_rhs_start) && m_clock.has_value())
   {
@@ -382,6 +378,7 @@ void lobby_view::start_impl()
   m_rhs_cursor = lobby_view_item::color;
   m_lhs_start = false;
   m_rhs_start = false;
+  m_has_accepted = false;
   assert(!is_active());
   set_is_active(true);
 }

@@ -140,12 +140,36 @@ void main_window::set_new_state(const program_state s)
 {
   // Respond to the old state closing
   {
-    // Get the replay of the last game
+    // Get the replay of a played game
     if (m_program_state == program_state::game)
     {
       const auto p{dynamic_cast<game_view*>(m_views[program_state::game].get())};
       assert(p);
       m_replay = p->get_replay();
+    }
+    // Get the lobby options
+    else if (m_program_state == program_state::lobby)
+    {
+      const auto p{dynamic_cast<lobby_view*>(m_views[program_state::lobby].get())};
+      assert(p);
+      if (p->has_accepted())
+      {
+        m_lobby_options = p->get_lobby_options();
+      }
+      else
+      {
+
+      }
+    }
+    // Get the game options
+    else if (m_program_state == program_state::options)
+    {
+      const auto p{dynamic_cast<options_view*>(m_views[program_state::options].get())};
+      assert(p);
+      if (p->has_accepted())
+      {
+          m_game_options = p->get_game_options();
+      }
     }
   }
 
@@ -159,8 +183,23 @@ void main_window::set_new_state(const program_state s)
 
   // Respond to the new state starting
   {
-    // Get the replay of the last game
-    if (s == program_state::replay)
+    // Re-/set the game options
+    if (s == program_state::game)
+    {
+      const auto p{dynamic_cast<game_view*>(m_views[program_state::game].get())};
+      assert(p);
+      p->set_game_options(m_game_options);
+      p->set_lobby_options(m_lobby_options);
+    }
+    // Re-/set the game options
+    else if (s == program_state::options)
+    {
+      const auto p{dynamic_cast<options_view*>(m_views[program_state::options].get())};
+      assert(p);
+      p->set_game_options(m_game_options);
+    }
+    // Set the replay of the last game
+    else if (s == program_state::replay)
     {
       const auto p{dynamic_cast<replay_view*>(m_views[program_state::replay].get())};
       assert(p);
@@ -214,6 +253,17 @@ void main_window::show_debug_info()
     debug_rect,
     16
   );
+}
+
+void test_main_window()
+{
+  #ifndef NDEBUG
+  {
+    main_window w;
+    assert(w.get_program_state() == program_state::loading);
+  }
+
+  #endif // NDEBUG
 }
 
 void main_window::tick()

@@ -59,6 +59,10 @@ public:
   /// Process a resize events
   void process_resize_event_impl(sf::Event& event) override;
 
+  void set_game_options(const game_options& go) noexcept { m_game_options = go; }
+
+  void set_lobby_options(const lobby_options& lo) noexcept;
+
   void start_impl() override;
 
   void stop_impl() override;
@@ -77,6 +81,8 @@ private:
 
   /// The game logic
   game_view_layout m_layout;
+
+  lobby_options m_lobby_options;
 
   /// The in-game text log
   game_log m_log;

@@ -31,12 +31,25 @@ public:
 
   options_view_item get_selected() const noexcept { return m_selected; }
 
+  /// Has the user accepted these settings?
+  ///
+  /// This is signalled by how this window is closed:
+  /// - Enter: yes, accept
+  /// - Escape: no, reject, keep old game options
+  bool has_accepted() const noexcept { return m_has_accepted; }
+
   /// Process all events
   /// @return if the user wants to quit
   bool process_event_impl(sf::Event& event) override;
 
   /// Process a resize event
   void process_resize_event_impl(sf::Event& event) override;
+
+  /// Set the game options.
+  ///
+  /// This is used by the main window, that holds the game options
+  /// that are used in the rest of the game.
+  void set_game_options(const game_options& go) noexcept { m_game_options = go; }
 
   /// Select an item.
   /// Play a sound when the selected item changes
@@ -49,6 +62,8 @@ public:
   void tick_impl(const delta_t dt) override;
 
 private:
+
+  bool m_has_accepted{false};
 
   controls_bar m_controls_bar;
 

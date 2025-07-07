@@ -381,6 +381,11 @@ void set_cursor_pos(
 /// Test this class and its free functions
 void test_game_controller();
 
+std::string to_board_str(
+  const game_controller& c,
+  const board_to_text_options& options = board_to_text_options()
+) noexcept;
+
 std::ostream& operator<<(std::ostream& os, const game_controller& g) noexcept;
 
 #endif // GAME_CONTROLLER_H

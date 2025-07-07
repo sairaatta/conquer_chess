@@ -2411,18 +2411,71 @@ void test_game_controller() //!OCLINT tests may be many
     assert(white_queen_messages[1] == message_type::start_attack);
     assert(white_queen_messages[2] == message_type::cannot);
   }
-
-  // When a piece is attacking the right squares, castling is interrupted
+  #ifdef FIX_INTERRUPT_WHITE_KINGSIDE_CASTLING_BY_CAPTURING_WHITE_ROOK
+  // Interrupt white king-side castling, by capturing the white rook
   {
+    game_controller c(
+      create_game_with_starting_position(starting_position_type::ready_to_castle)
+    );
 
+    // Black attacks king-side rook
+    do_select(c, "h8", side::rhs);
+    move_cursor_to(c, "h1", side::rhs);
+    assert(count_selected_units(c, chess_color::black) == 1);
+    add_user_input(c, create_press_action_1(side::rhs));
+    c.apply_user_inputs_to_game();
+
+    // Get that black pawn attacking
+    c.tick(delta_t(0.75));
+
+    // White starts king-side castle
+    do_select(c, "e1", side::lhs);
+    move_cursor_to(c, "e4", side::lhs); // So cursor is on empty square
+    assert(count_selected_units(c, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs)); // Start king-side castle
+    c.apply_user_inputs_to_game();
+
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      c.tick(delta_t(0.25));
+    }
+
+    std::clog << to_board_str(c) << '\n';
+
+    assert(is_piece_at(c, square("h1")));
+    assert(is_piece_at(c, square("e1")));
+    assert(!is_piece_at(c, square("h8"))); // The black rook captured the white one
+
+    const auto black_rook_messages{get_piece_at(c, "h1").get_messages()};
+    assert(black_rook_messages.size() == 3);
+    assert(black_rook_messages[0] == message_type::select);
+    assert(black_rook_messages[1] == message_type::start_attack);
+    assert(black_rook_messages[2] == message_type::done);
+
+    const auto white_king{get_piece_at(c, "e1")};
+    const auto white_king_messages{white_king.get_messages()};
+    assert(white_king_messages.size() == 3);
+    assert(white_king_messages[0] == message_type::select);
+    assert(white_king_messages[1] == message_type::start_castling_kingside);
+    assert(white_king_messages[2] == message_type::cannot);
+    assert(!"Yay");
   }
-
+  #endif // FIX_INTERRUPT_WHITE_KINGSIDE_CASTLING_BY_CAPTURING_WHITE_ROOK
   #endif // NDEBUG // no tests in release
 }
 
 void game_controller::tick(const delta_t& dt)
 {
   m_game.tick(dt);
+}
+
+std::string to_board_str(
+  const game_controller& c,
+  const board_to_text_options& options
+) noexcept
+{
+  return to_board_str(c.get_game(), options);
 }
 
 std::ostream& operator<<(std::ostream& os, const game_controller& g) noexcept

@@ -655,6 +655,12 @@ void draw_unit_info(game_view& view, const side player_side)
   draw_text(s.str(), text_rect, 20);
 }
 
+void game_view::set_lobby_options(const lobby_options& lo) noexcept
+{
+  m_lobby_options = lo;
+}
+
+
 void game_view::start_impl()
 {
   m_clock.restart();
@@ -664,7 +670,14 @@ void game_view::start_impl()
   game_resources::get().get_sound_effects().set_master_volume(
     get_sound_effects_volume(m_game_options)
   );
-  m_game_controller = game_controller();
+  m_game_controller = game_controller(
+    create_game_with_starting_position(
+      m_game_options.get_starting_position(),
+      m_lobby_options.get_race(side::lhs),
+      m_lobby_options.get_race(side::rhs)
+    ),
+    m_lobby_options
+  );
   assert(!is_active());
   set_is_active(true);
 

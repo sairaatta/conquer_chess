@@ -116,3 +116,6 @@ If multiple pieces attack the same square (due to realtime speed),
 the attacked piece will lose health faster.
 :construction: It is the first attacker that will move to the square.
 
+Like regular chess, a move, once started, cannot be stopped or undone.
+Think before you do a move!
+

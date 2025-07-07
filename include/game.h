@@ -256,7 +256,11 @@ game create_game_with_standard_starting_position() noexcept;
 
 /// Create a game with all default settings
 /// and a specific starting position
-game create_game_with_starting_position(starting_position_type t) noexcept;
+game create_game_with_starting_position(
+  starting_position_type t,
+  const race lhs_race = race::classic,
+  const race rhs_race = race::classic
+) noexcept;
 
 /// Find zero, one or more chess pieces of the specified type and color
 std::vector<piece> find_pieces(
@@ -394,6 +398,11 @@ void tick(game& g, const delta_t dt);
 
 /// Call game::tick until all pieces are idle
 void tick_until_idle(game& g);
+
+std::string to_board_str(
+  const game& g,
+  const board_to_text_options& options = board_to_text_options()
+) noexcept;
 
 /// Convert the game's position to a FEN string
 fen_string to_fen_string(const game& g);
