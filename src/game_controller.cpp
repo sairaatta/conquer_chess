@@ -2280,7 +2280,7 @@ void test_game_controller() //!OCLINT tests may be many
   //----------------------------------------------------------------------------
   // Moves that do not complete
   //----------------------------------------------------------------------------
-  // When two pieces want to move to the same square, one will go back
+  // When two pieces of the same color want to move to the same square, one will go back
   {
     game_controller c;
     //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))};
@@ -2319,11 +2319,99 @@ void test_game_controller() //!OCLINT tests may be many
     assert(knight_messages[3] == message_type::cannot);
     assert(knight_messages[4] == message_type::done);
   }
+  // When two pieces of the same color want to move to the same square, one will go back
+  {
+    game_controller c(
+      create_game_with_starting_position(starting_position_type::queen_end_game)
+    );
+
+    // Start white Qd1-d5
+    do_select(c, "d1", side::lhs);
+    move_cursor_to(c, "d5", side::lhs);
+    assert(count_selected_units(c, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game();
+
+    // Get that queen moving
+    c.tick(delta_t(0.25));
+
+    // Start black Qd8-d5
+    do_select(c, "d8", side::rhs);
+    move_cursor_to(c, "d5", side::rhs);
+    assert(count_selected_units(c, chess_color::black) == 1);
+    add_user_input(c, create_press_action_1(side::rhs));
+    c.apply_user_inputs_to_game();
+
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      c.tick(delta_t(0.25));
+    }
+    assert(is_piece_at(c, square("d5")));
+    assert(is_piece_at(c, square("d8")));
+    assert(!is_piece_at(c, square("d1"))); // The white queen got there first
+
+    const auto white_queen_messages{get_piece_at(c, "d5").get_messages()};
+    assert(white_queen_messages.size() == 3);
+    assert(white_queen_messages[0] == message_type::select);
+    assert(white_queen_messages[1] == message_type::start_move);
+    assert(white_queen_messages[2] == message_type::done);
+
+    const auto black_queen_messages{get_piece_at(c, "d8").get_messages()};
+    assert(black_queen_messages.size() == 5);
+    assert(black_queen_messages[0] == message_type::select);
+    assert(black_queen_messages[1] == message_type::start_move);
+    assert(black_queen_messages[2] == message_type::start_move);
+    assert(black_queen_messages[3] == message_type::cannot);
+    assert(black_queen_messages[4] == message_type::done);
+  }
   // When a piece is attacking a piece that is fleeing successfully,
   // there is no capture
   {
+    game_controller c(
+      create_game_with_starting_position(starting_position_type::kasparov_vs_topalov)
+    );
 
+    // Start white g6-g5
+    do_select(c, "g6", side::rhs);
+    move_cursor_to(c, "g5", side::rhs);
+    assert(count_selected_units(c, chess_color::black) == 1);
+    add_user_input(c, create_press_action_1(side::rhs));
+    c.apply_user_inputs_to_game();
+
+    // Get that black pawn moving
+    c.tick(delta_t(0.25));
+
+    // White starts attack Qf6-g6
+    do_select(c, "f6", side::lhs);
+    move_cursor_to(c, "g6", side::lhs);
+    assert(count_selected_units(c, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game();
+
+    // Should take 1 time unit
+    for (int i{0}; i!=4; ++i)
+    {
+      c.tick(delta_t(0.25));
+    }
+    assert(is_piece_at(c, square("g5")));
+    assert(is_piece_at(c, square("f6")));
+    assert(!is_piece_at(c, square("g6"))); // The pawn fled
+
+    const auto black_pawn_messages{get_piece_at(c, "g5").get_messages()};
+    assert(black_pawn_messages.size() == 3);
+    assert(black_pawn_messages[0] == message_type::select);
+    assert(black_pawn_messages[1] == message_type::start_move);
+    assert(black_pawn_messages[2] == message_type::done);
+
+    const auto white_queen{get_piece_at(c, "f6")};
+    const auto white_queen_messages{white_queen.get_messages()};
+    assert(white_queen_messages.size() == 3);
+    assert(white_queen_messages[0] == message_type::select);
+    assert(white_queen_messages[1] == message_type::start_attack);
+    assert(white_queen_messages[2] == message_type::cannot);
   }
+
   // When a piece is attacking the right squares, castling is interrupted
   {
 
