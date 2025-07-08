@@ -2232,6 +2232,27 @@ void test_game_controller() //!OCLINT tests may be many
     assert(count_selected_units(c, chess_color::white) == 1);
     assert(get_piece_actions(c, side::lhs).size() == 0);
   }
+  // A selected piece that is attacking, has no actions
+  {
+    game_controller c(
+      create_game_with_starting_position(starting_position_type::queen_end_game)
+    );
+
+    // Start Qd1xd8
+    do_select(c, "d1", side::lhs);
+    move_cursor_to(c, "d8", side::lhs);
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(get_piece_actions(c, side::lhs).size() == 1); // Attack
+    assert(get_piece_actions(c, side::lhs)[0] == piece_action_type::attack);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game();
+    c.tick(delta_t(0.25));
+
+    // The piece remained selected
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(get_piece_actions(c, side::lhs).size() == 0);
+    assert(!"Yayqwdwe");
+  }
 
   #ifdef FIX_MOVING_QUEEN_CAN_BE_SELECTED
   // When a piece is moving, it can be selected
