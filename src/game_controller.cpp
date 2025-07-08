@@ -4,6 +4,7 @@
 #include "game.h"
 #include "game_options.h"
 #include "lobby_options.h"
+#include "message.h"
 #include "piece.h"
 #include "pieces.h"
 #include "message_type.h"
@@ -502,6 +503,20 @@ bool can_attack(
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
+
+  if (selected_piece.get_current_action_progress() != delta_t(0.0))
+  {
+    // Already moving
+    return false;
+  }
+
+  if (!selected_piece.get_messages().empty()
+    && selected_piece.get_messages().back() == message_type::start_attack
+  )
+  {
+    // Already attacking
+    return false;
+  }
   const square cursor_square(square(c.get_cursor_pos(player_side)));
   return can_do_attack(c.get_game(), selected_piece, cursor_square, lobby_options().get_color(player_side));
 }
@@ -515,6 +530,20 @@ bool can_attack_en_passant(
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
+
+  if (selected_piece.get_current_action_progress() != delta_t(0.0))
+  {
+    // Already moving
+    return false;
+  }
+
+  if (!selected_piece.get_messages().empty()
+    && selected_piece.get_messages().back() == message_type::start_en_passant_attack
+  )
+  {
+    // Already attacking
+    return false;
+  }
   const square cursor_square(square(c.get_cursor_pos(player_side)));
   return can_do_en_passant(c.get_game(), selected_piece, cursor_square, c.get_lobby_options().get_color(player_side));
 }
@@ -529,6 +558,18 @@ bool can_castle_kingside(
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
 
+  if (selected_piece.get_current_action_progress() != delta_t(0.0))
+  {
+    // Already moving
+    return false;
+  }
+
+  if (selected_piece.get_current_action_progress() != delta_t(0.0))
+  {
+    // Already castling
+    return false;
+  }
+
   // 'can_castle_kingside' will check if it is a king
   return can_castle_kingside(selected_piece, c.get_game());
 }
@@ -542,6 +583,12 @@ bool can_castle_queenside(
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
+
+  if (selected_piece.get_current_action_progress() != delta_t(0.0))
+  {
+    // Already castling
+    return false;
+  }
 
   // 'can_castle_kingside' will check if it is a king
   return can_castle_queenside(selected_piece, c.get_game());
@@ -579,7 +626,6 @@ bool can_player_select_piece_at_cursor_pos(
     return false;
   }
   const auto& piece{get_closest_piece_to(c.get_game(), cursor_pos)};
-  //const bool is_piece_already_selected{piece.is_selected()};
   const bool is_piece_already_selected{
     c.get_selected_piece_id(c.get_lobby_options().get_side(cursor_color)) == piece.get_id()
   };
@@ -2230,6 +2276,30 @@ void test_game_controller() //!OCLINT tests may be many
 
     // The piece remained selected
     assert(count_selected_units(c, chess_color::white) == 1);
+
+    // Cannot stop the movement
+    assert(get_piece_actions(c, side::lhs).size() == 0);
+  }
+  // A selected piece that is moving, cannot attack an enemy
+  {
+    game_controller c(
+      create_game_with_starting_position(starting_position_type::queen_end_game)
+    );
+
+    // Start Qd1 d6
+    do_select(c, "d1", side::lhs);
+    move_cursor_to(c, "d6", side::lhs);
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(get_piece_actions(c, side::lhs).size() == 1); // Move
+    assert(get_piece_actions(c, side::lhs)[0] == piece_action_type::move);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game();
+    c.tick(delta_t(0.25));
+
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(get_piece_actions(c, side::lhs).size() == 0);
+
+    move_cursor_to(c, "d8", side::lhs);
     assert(get_piece_actions(c, side::lhs).size() == 0);
   }
   // A selected piece that is attacking, has no actions
@@ -2250,8 +2320,9 @@ void test_game_controller() //!OCLINT tests may be many
 
     // The piece remained selected
     assert(count_selected_units(c, chess_color::white) == 1);
+
+    // Cannot stop the attack
     assert(get_piece_actions(c, side::lhs).size() == 0);
-    assert(!"Yayqwdwe");
   }
 
   #ifdef FIX_MOVING_QUEEN_CAN_BE_SELECTED
