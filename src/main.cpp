@@ -83,7 +83,7 @@
 void test()
 {
 #ifndef NDEBUG
-  return; // For now
+  //return; // For now
   //test_game_controller();
   //assert(!"Yay");
 
