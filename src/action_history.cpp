@@ -189,6 +189,11 @@ void test_action_history()
     const action_history h;
     assert(h.get().empty());
   }
+  // create_action_history_from_game
+  {
+    const action_history r(create_action_history_from_game(game()));
+    assert(get_n_piece_actions(r) == 0);
+  }
   // create_action_history_from_pgn from empty string is OK
   {
     const action_history r(create_action_history_from_pgn(pgn_game_string("")));
