@@ -103,6 +103,15 @@ void game_options::reset()
 void test_game_options()
 {
 #ifndef NDEBUG
+  // contstructor
+  {
+    game_options g;
+    assert(g.get_click_distance() == get_default_click_distance());
+    assert(g.get_game_speed() == get_default_game_speed());
+    assert(g.get_starting_position() == get_default_starting_position());
+    assert(g.get_music_volume() == get_default_music_volume());
+    assert(g.get_sound_effects_volume() == get_default_sound_effects_volume());
+  }
   // decrease_game_speed and increase_game_speed
   {
     game_options g;
@@ -175,14 +184,22 @@ void test_game_options()
     game_options g;
     assert(get_sound_effects_volume(g) == g.get_sound_effects_volume());
   }
+  // get_starting_position
+  {
+    game_options g;
+    assert(get_starting_position(g) == g.get_starting_position());
+  }
   // reset
   {
     game_options g;
-    assert(g.get_click_distance() == get_default_click_distance());
-    assert(g.get_game_speed() == get_default_game_speed());
-    assert(g.get_starting_position() == get_default_starting_position());
-    assert(g.get_music_volume() == get_default_music_volume());
-    assert(g.get_sound_effects_volume() == get_default_sound_effects_volume());
+    decrease_game_speed(g);
+    decrease_music_volume(g);
+    decrease_sound_effects_volume(g);
+    decrease_starting_position(g);
+    const game_options h;
+    assert(g != h);
+    g.reset();
+    assert(g == h);
   }
   // set_game_speed
   {
@@ -228,6 +245,27 @@ void test_game_options()
     assert(!s.str().empty());
   }
 #endif // NDEBUG
+}
+
+bool operator==(const game_options& lhs, const game_options& rhs) noexcept
+{
+  return
+    lhs.get_click_distance() == rhs.get_click_distance()
+    && lhs.get_damage_per_chess_move() == rhs.get_damage_per_chess_move()
+    && lhs.get_game_speed() == rhs.get_game_speed()
+    && lhs.get_message_display_time_secs() == rhs.get_message_display_time_secs()
+    && lhs.get_show_debug_info() == rhs.get_show_debug_info()
+    && lhs.get_show_occupied() == rhs.get_show_occupied()
+    && lhs.get_show_selected() == rhs.get_show_selected()
+    && lhs.get_starting_position() == rhs.get_starting_position()
+    && lhs.get_music_volume() == rhs.get_music_volume()
+    && lhs.get_sound_effects_volume() == rhs.get_sound_effects_volume()
+  ;
+}
+
+bool operator!=(const game_options& lhs, const game_options& rhs) noexcept
+{
+  return !(lhs == rhs);
 }
 
 std::ostream& operator<<(std::ostream& os, const game_options& options) noexcept

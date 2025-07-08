@@ -155,6 +155,8 @@ void increase_starting_position(game_options& g) noexcept;
 /// Test this class and its free functions
 void test_game_options();
 
+bool operator==(const game_options& lhs, const game_options& rhs) noexcept;
+bool operator!=(const game_options& lhs, const game_options& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const game_options& options) noexcept;
 
 #endif // GAME_OPTIONS_H
