@@ -556,6 +556,11 @@ bool can_move(
   if (selected_pieces.empty()) return false;
   assert(selected_pieces.size() == 1);
   const auto& selected_piece{selected_pieces[0]};
+  if (selected_piece.get_current_action_progress() != delta_t(0.0))
+  {
+    // Already moving
+    return false;
+  }
   const square cursor_square(square(c.get_cursor_pos(player_side)));
   return can_do_move(c.get_game(), selected_piece, cursor_square, c.get_lobby_options().get_color(player_side));
 }
@@ -2209,6 +2214,24 @@ void test_game_controller() //!OCLINT tests may be many
   //----------------------------------------------------------------------------
   // Things that cannot be done during a move
   //----------------------------------------------------------------------------
+  // A selected piece that is moving, has no actions
+  {
+    game_controller c;
+
+    // Start e2 e4
+    do_select(c, "e2", side::lhs);
+    move_cursor_to(c, "e4", side::lhs);
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(get_piece_actions(c, side::lhs).size() == 1); // Move
+    assert(get_piece_actions(c, side::lhs)[0] == piece_action_type::move);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game();
+    c.tick(delta_t(0.25));
+
+    // The piece remained selected
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(get_piece_actions(c, side::lhs).size() == 0);
+  }
 
   #ifdef FIX_MOVING_QUEEN_CAN_BE_SELECTED
   // When a piece is moving, it can be selected
