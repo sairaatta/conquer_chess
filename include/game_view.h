@@ -179,9 +179,6 @@ void draw_navigation_controls(game_view& view);
 /// Show debug info on-screen for a player
 void show_debug(game_view& view, const side player_side);
 
-/// Show the layout of the window: board and panels
-void show_layout(game_view& view);
-
 /// Show the log on-screen, i.e. things the pieces say
 void draw_log(game_view& view, const side player);
 

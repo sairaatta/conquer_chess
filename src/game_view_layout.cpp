@@ -221,28 +221,6 @@ const navigation_controls_layout& game_view_layout::get_navigation_controls(cons
   return m_controls.at(player).get_navigation_controls();
 }
 
-std::vector<screen_rect> get_panels(
-  const game_view_layout& layout,
-  const bool show_debug_panel
-)
-{
-  std::vector<screen_rect> v{
-    layout.get_board().get_board(),
-    layout.get_controls(side::lhs).get_background(),
-    layout.get_controls(side::rhs).get_background(),
-    layout.get_log(side::lhs),
-    layout.get_log(side::rhs),
-    layout.get_unit_info(side::lhs),
-    layout.get_unit_info(side::rhs)
-  };
-  if (show_debug_panel)
-  {
-    v.push_back(layout.get_debug(side::lhs));
-    v.push_back(layout.get_debug(side::rhs));
-  }
-  return v;
-}
-
 double get_square_height(const game_view_layout& layout) noexcept
 {
   return static_cast<double>(get_board_height(layout)) / 8.0;
@@ -261,10 +239,6 @@ const screen_rect& game_view_layout::get_unit_info(const side player) const noex
 void test_game_view_layout()
 {
   #ifndef NDEBUG
-  {
-    const game_view_layout layout;
-    assert(!get_panels(layout, false).empty());
-  }
   {
     const game_view_layout layout;
     assert(layout.get_board().get_board().get_br().get_x() > 0.0);

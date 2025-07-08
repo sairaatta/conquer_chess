@@ -77,7 +77,6 @@ void game_view::tick_impl(delta_t dt)
 const physical_controller& get_physical_controller(const game_view& view, const side player_side)
 {
   return view.get_physical_controllers().get_controller(player_side);
-  //return get_physical_controller(view.get_physical_controllers(), player_side);
 }
 
 physical_controller_type get_physical_controller_type(const game_view& view, const side player_side)
@@ -239,9 +238,6 @@ void game_view::draw_impl()
 {
   // Show the layout of the screen: board and sidebars
   draw_background(*this);
-
-  // Show the layout of the screen: board and sidebars
-  show_layout(*this);
 
   // Show the board: squares, unit paths, pieces, health bars
   draw_board(*this, m_game_options.get_show_occupied());
@@ -438,20 +434,6 @@ void game_view::show_mouse_cursor()
     cursor_pos.get_y()
   );
   get_render_window().draw(cursor);
-}
-
-void show_layout(game_view& view)
-{
-  const auto& layout{view.get_layout()};
-  for (const auto& panel: get_panels(layout, view.get_game_options().get_show_debug_info()))
-  {
-    sf::RectangleShape rectangle;
-    set_rect(rectangle, panel);
-    rectangle.setFillColor(sf::Color(0, 0, 0, 128));
-    rectangle.setOutlineThickness(1);
-    rectangle.setOutlineColor(sf::Color::White);
-    get_render_window().draw(rectangle);
-  }
 }
 
 void draw_log(game_view& view, const side player)
