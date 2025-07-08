@@ -45,7 +45,7 @@ private:
   bool m_draw_select{true};
   bool m_draw_up_down{true};
 
-  std::string m_escape_button_text;
+  std::string m_escape_button_text{"Quit"};
 
   physical_controllers m_pc;
 };

@@ -350,24 +350,6 @@ void move_cursor_to(
   const side player_side
 );
 
-/// Put the cursor (i.e. the selector)
-/// at the desired square
-/// @see \link{move_cursor_to} is more general
-void move_keyboard_cursor_to(
-  game_controller& c,
-  const square& s,
-  const side player_side
-);
-
-/// Put the cursor (i.e. the selector, not the mouse pointer)
-/// at the desired square
-/// @see \link{move_cursor_to} is more general
-void move_mouse_cursor_to(
-  game_controller& c,
-  const square& s,
-  const side player_side
-);
-
 /// Play a random game, used for profiling
 game play_random_game(const int n_turns = 2, const int seed = 42);
 

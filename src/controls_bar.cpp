@@ -38,7 +38,7 @@ void controls_bar::draw()
   else
   {
     assert(m_escape_button_text == "Reject changes and go back");
-    label_quit_width = 250;
+    label_quit_width = 350;
   }
   assert(label_quit_width > 0);
 
@@ -177,6 +177,7 @@ void controls_bar::draw()
       show_key(sf::Keyboard::Key::Return);
       const int label_width{250};
       show_text("Accept and go back", label_width);
+      show_spacer();
   }
 
   // Quit

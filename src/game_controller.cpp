@@ -734,22 +734,6 @@ const in_game_time& get_in_game_time(
   return c.get_game().get_in_game_time();
 }
 
-/*
-const physical_controller& game_controller::get_physical_controller(const side player_side) const noexcept
-{
-  return physical_controllers::get().get_controller(player_side);
-}
-
-const physical_controller& get_physical_controller(
-  const game_controller& c,
-  const side player
-) noexcept
-{
-  return c.get_physical_controller(player);
-}
-*/
-
-
 std::vector<piece_action_type> get_piece_actions(
   const game_controller& c,
   const side player_side
@@ -1000,16 +984,6 @@ void move_cursor_to(
 )
 {
   c.set_cursor_pos(to_coordinat(s), player_side);
-}
-
-void move_keyboard_cursor_to(
-  game_controller& c,
-  const square& s,
-  const side player_side
-)
-{
-  c.set_cursor_pos(to_coordinat(s), player_side);
-  assert(s == square(get_cursor_pos(c, player_side)));
 }
 
 game play_random_game(const int n_turns, const int seed)
