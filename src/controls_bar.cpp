@@ -30,7 +30,19 @@ void controls_bar::draw()
   const int label_select_width{100};
   const int label_increase_width{120};
   const int label_decrease_width{120};
-  const int label_quit_width{80};
+  int label_quit_width{0};
+  if (m_escape_button_text == "Quit")
+  {
+    label_quit_width = 80;
+  }
+  else
+  {
+    assert(m_escape_button_text == "Reject changes and go back");
+    label_quit_width = 250;
+  }
+  assert(label_quit_width > 0);
+
+
   const sf::Color semi_transparent(128, 128, 128, 128);
 
   // x coordinate of the last element
@@ -159,10 +171,18 @@ void controls_bar::draw()
     }
   }
 
+  // Enter
+  if (m_draw_enter)
+  {
+      show_key(sf::Keyboard::Key::Return);
+      const int label_width{250};
+      show_text("Accept and go back", label_width);
+  }
+
   // Quit
   show_key(sf::Keyboard::Key::Escape);
   show_key(sf::Keyboard::Key::F4);
-  show_text("Quit", label_quit_width);
+  show_text(m_escape_button_text, label_quit_width);
   show_spacer();
 }
 

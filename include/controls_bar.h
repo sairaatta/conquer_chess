@@ -16,8 +16,12 @@ public:
 
   void draw();
 
+  /// Draw the Enter key, showing the text 'Accept'
+  void set_draw_enter(const bool b) noexcept { m_draw_enter = b; }
+
   /// Show that there is a way to invert a direction, by pressing shift
   void set_draw_invert(const bool b) noexcept { m_draw_invert = b; }
+
   void set_draw_player_controls(const bool b) noexcept { m_draw_player_controls = b; }
 
   /// Draw the arrows to left and right, with the texts 'decrease' and 'increase'
@@ -27,15 +31,21 @@ public:
 
   void set_screen_rect(const screen_rect& r) noexcept { m_background = r; }
 
+  /// Set the text for the escape button, e.g. 'Quit'
+  void set_escape_button_text(const std::string& s) { m_escape_button_text = s; }
+
 private:
 
   screen_rect m_background;
 
+  bool m_draw_enter{false};
   bool m_draw_invert{false};
   bool m_draw_left_right_increase_descrease{false};
   bool m_draw_player_controls{true};
-  bool m_draw_up_down{true};
   bool m_draw_select{true};
+  bool m_draw_up_down{true};
+
+  std::string m_escape_button_text;
 
   physical_controllers m_pc;
 };

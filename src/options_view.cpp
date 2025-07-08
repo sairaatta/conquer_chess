@@ -27,6 +27,8 @@ options_view::options_view()
   m_controls_bar.set_draw_player_controls(false);
   m_controls_bar.set_draw_invert(true);
   m_controls_bar.set_draw_left_right_increase_descrease(true);
+  m_controls_bar.set_draw_enter(true);
+  m_controls_bar.set_escape_button_text("Reject changes and go back");
 
 }
 
@@ -87,14 +89,6 @@ void draw_panel(
   );
   draw_normal_text(panel_text, panel_position);
 }
-
-/*
-physical_controller_type get_physical_controller_type(
-  const side player)
-{
-  return physical_controllers::get().get_controller(player).get_type();
-}
-*/
 
 bool options_view::process_event_impl(sf::Event& event)
 {
