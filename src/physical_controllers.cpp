@@ -145,5 +145,11 @@ void test_physical_controllers()
     const physical_controllers pc_kk{create_two_keyboard_controllers()};
     assert(!has_mouse_controller(pc_kk));
   }
+  // physical_controllers::set
+  {
+    physical_controllers pc{create_two_keyboard_controllers()};
+    pc.set(side::lhs, create_default_mouse_controller());
+    assert(pc.get_controller(side::lhs).get_type() == physical_controller_type::mouse);
+  }
 #endif // NDEBUG
 }
