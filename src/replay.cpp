@@ -167,11 +167,6 @@ bool is_piece_at(const replay& r, const square& coordinate)
   return is_piece_at(r.get_game(), coordinate);
 }
 
-bool is_piece_at(const replay& r, const std::string& square_str)
-{
-  return is_piece_at(r.get_game(), square_str);
-}
-
 void replay::reset() noexcept
 {
   m_game_controller = m_initial_game_controller.get_value();
@@ -447,6 +442,18 @@ void test_replay()
     assert(is_checkmate(r.get_game().get_pieces(), chess_color::black));
     assert(r.get_game().get_winner().value() == chess_color::white);
   }
+  // replayer::reset
+  {
+    // Scholar's mate
+    // 1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? Qxf7# 1-0
+    replay r(create_action_history_from_pgn(pgn_game_string("1. e4 e5 2. Qh5")));
+    assert(r.get_index() == 0);
+    r.do_move(); // e2-e4
+    assert(r.get_index() != 0);
+    r.reset();
+    assert(r.get_index() == 0);
+  }
+
   // to_fen_string
   {
     // Scholar's mate

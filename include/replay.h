@@ -89,12 +89,6 @@ bool is_piece_at(
   const square& coordinat
 );
 
-/// Determine if there is a piece at the coordinat
-bool is_piece_at(
-  const replay& r,
-  const std::string& square_str
-);
-
 /// Test this class and its free functions
 void test_replay();
 
