@@ -49,3 +49,56 @@
 - Usage: These manuals are accessible from the Steam client.
 - Format: Please upload as .pdf files.
 - Online Manuals? Link to online manuals on the Basic Info tab.
+
+
+
+## Library Capsule *600px wide x 900px tall
+
+Design:
+This should be graphically-centric and give the user some sense of the experience. Please use the key art that is being used for any retail boxes or marketing as well as the name of your game, ideally using the same logo / title as printed on any retail or marketing. Do not include quotes, marketing copy, or other strings of text beyond the title of your application. The art should depict something important about your product. The logo should be easily legible against the background.
+Usage:
+This image is primarily used in the library overview and collection views
+Size:
+600px x 900px (an additional half-size 300px x 450px PNG will be auto-generated from larger file)
+
+![Library capsule](library_capsure_600_x_900.png)
+
+## Library Header *920px wide x 430px tall
+Design:
+This image should focus on the branding of your product. For best results, please use similar artwork to the Library Capsule and make sure the logo is clearly legible.
+Usage:
+Appears in various places in the Steam Client Library, including Recent Games. If not set, then the Header Capsule is used.
+Size:
+
+![Library header](library_header_920_x_430.png)
+
+
+## Library Hero *3840px wide x 1240px tall
+The hero graphic and logo are layered and move independently when the page is scrolled, creating a subtle parallax effect. Consider how the product logo will be placed on top of the hero image (left bottom corner or centered). You'll want to ensure the logo is both visible and legible against the background.
+Design:
+This should be a visually rich image that is easily recognizable. For best results, please use the key art that is used for any retail boxes or marketing. Do not include quotes or other strings of text.
+
+At the center of the template is a "safe area" of 860px x 380px. This area will remain uncropped across scaling and resizing of the Steam client window. Artwork should extend across the entire template, but critical content should be within the safe area. For ex: a main character's face should be entirely in the safe area or risk being cropped.
+
+Library Hero image should not contain any text or logos. Your logo to display at the top of your library detail page should be uploaded separately in the Library Logo file (details below).
+Usage:
+Appears at the top of a user's library details page for this product.
+Size:
+
+![Library hero](library_hero_3840_1240.png
+)
+3840px x 1240px (an additional half-size 1920px x 620px PNG will be auto-generated from larger file)
+
+No English image uploaded.
+
+## Library Logo *Either 1280px wide and/or 720px tall
+
+After upload, you can use the preview tool to select the logo's position. Options include: left bottom corner, centered top, centered middle, and centered bottom.
+
+Note: If a hero graphic and logo are not uploaded, the hero area will display a screenshot from the store, with the application name in text overlaid in the bottom left corner.
+Design:
+For best results, use the logo that is being used for any retail boxes or marketing. You’ll want to ensure the logo is both visible and legible against the hero graphic background, sometimes a drop shadow can help. The PNG image should have a transparent background. You should use the best aspect ratio for your art, however the logo must be either 1280px wide and/or 720px tall.
+Usage:
+Appears at the top of a user's library details page for this product, placed on top of the hero graphic.
+Size:
+Either 1280px wide and/or 720px tall (an additional half-size PNG will be auto-generated based on your logo's aspect ratio).
