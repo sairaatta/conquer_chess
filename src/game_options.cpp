@@ -43,12 +43,12 @@ bool do_show_selected(const game_options& g) noexcept
 
 volume get_default_music_volume() noexcept
 {
-  return volume(0);
+  return volume(20);
 }
 
 volume get_default_sound_effects_volume() noexcept
 {
-  return volume(0);
+  return volume(40);
 }
 
 const volume& get_music_volume(const game_options& g) noexcept
