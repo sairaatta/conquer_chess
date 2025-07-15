@@ -2,7 +2,7 @@
 
 ![Original](title_482_x_281.png)
 
-## Header Capsule 
+## Header Capsule
 
 - Design: This image should focus on the branding of your product. For best results, please use the same artwork that you use for any retail box or marketing and make sure the logo is clearly legible.
 - Usage: It will appear at the top of your page in the store, in the 'recommended for you' section, in 'grid view' in customers libraries in the Steam client, in browse views on Big Picture mode, and for daily deals if applicable.
@@ -10,7 +10,7 @@
 
 [Header Capsule](header_capsule_920_x_430.png)
 
-## Small Capsule 
+## Small Capsule
 
 - Design: These are small, so they should focus on making the logo clearly legible, even at the smallest size.
 - Usage: These are used for all the lists throughout Steam. Search results, top-sellers, new releases, etc.
@@ -40,7 +40,7 @@
 
 - Design: This should be ambient so as not to compete with the content on the page, so try to avoid high-contrast images or images with lots of text. A template will automatically be applied to your uploaded file, which will tint it blue and fade out the edges. If you don't upload an image here, we'll automatically take a random screenshot and generate a background image from that.
 - Usage: This is the image that will be used in the background of your store page.
-- Size:	1438px x 810px
+- Size: 1438px x 810px
 
 ![Background](background_1438_x_810.png)
 
@@ -49,7 +49,6 @@
 - Usage: These manuals are accessible from the Steam client.
 - Format: Please upload as .pdf files.
 - Online Manuals? Link to online manuals on the Basic Info tab.
-
 
 
 ## Library Capsule *600px wide x 900px tall
@@ -64,6 +63,7 @@ Size:
 ![Library capsule](library_capsure_600_x_900.png)
 
 ## Library Header *920px wide x 430px tall
+
 Design:
 This image should focus on the branding of your product. For best results, please use similar artwork to the Library Capsule and make sure the logo is clearly legible.
 Usage:
@@ -74,6 +74,7 @@ Size:
 
 
 ## Library Hero *3840px wide x 1240px tall
+
 The hero graphic and logo are layered and move independently when the page is scrolled, creating a subtle parallax effect. Consider how the product logo will be placed on top of the hero image (left bottom corner or centered). You'll want to ensure the logo is both visible and legible against the background.
 Design:
 This should be a visually rich image that is easily recognizable. For best results, please use the key art that is used for any retail boxes or marketing. Do not include quotes or other strings of text.
