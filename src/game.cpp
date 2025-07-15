@@ -37,6 +37,9 @@ game::game(const std::vector<piece>& pieces)
 bool can_castle_kingside(const piece& p, const game& g) noexcept
 {
   if (p.get_type() != piece_type::king) return false;
+  const chess_color player_color{p.get_color()};
+  const chess_color enemy_color{get_other_color(player_color)};
+
   assert(p.get_type() == piece_type::king);
   if (has_moved(p)) return false;
   const auto king_square{p.get_current_square()};
@@ -49,10 +52,13 @@ bool can_castle_kingside(const piece& p, const game& g) noexcept
   if (has_moved(rook)) return false;
   const auto b_pawn_square(square(king_square.get_x(), 1));
   if (!is_empty(g, b_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), b_pawn_square, enemy_color)) return false;
   const auto c_pawn_square(square(king_square.get_x(), 2));
   if (!is_empty(g, c_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), c_pawn_square, enemy_color)) return false;
   const auto d_pawn_square(square(king_square.get_x(), 3));
   if (!is_empty(g, d_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), d_pawn_square, enemy_color)) return false;
   // Do not check for moving through check or into check,
   // this would give recursions
   return true;
@@ -62,6 +68,8 @@ bool can_castle_queenside(const piece& p, const game& g) noexcept
 {
   if (p.get_type() != piece_type::king) return false;
   assert(p.get_type() == piece_type::king);
+  const chess_color player_color{p.get_color()};
+  const chess_color enemy_color{get_other_color(player_color)};
   if (has_moved(p)) return false;
   const auto king_square{p.get_current_square()};
   // In a starting position, it may be that king has not made a new move
@@ -73,8 +81,10 @@ bool can_castle_queenside(const piece& p, const game& g) noexcept
   if (has_moved(rook)) return false;
   const auto f_pawn_square(square(king_square.get_x(), 1));
   if (!is_empty(g, f_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), f_pawn_square, enemy_color)) return false;
   const auto g_pawn_square(square(king_square.get_x(), 2));
   if (!is_empty(g, g_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), g_pawn_square, enemy_color)) return false;
   // Do not check for moving through check or into check,
   // this would give recursions
   return true;

@@ -1367,15 +1367,6 @@ void test_game_controller() //!OCLINT tests may be many
     assert(msg.at(0).get_message_type() == message_type::start_castling_queenside);
     assert(msg.at(2).get_message_type() == message_type::start_castling_queenside);
   }
-  #ifdef FIX_WHERE_TO_PUT_PHYSICAL_CONTROLLERS
-  // has_mouse_controller
-  {
-    const game_controller g(
-      create_game_controller_with_mouse_keyboard()
-    );
-    assert(has_mouse_controller(g));
-  }
-  #endif // FIX_WHERE_TO_PUT_PHYSICAL_CONTROLLERS
   // Clicking a unit once with LMB selects it
   {
     game_controller c{
@@ -1397,7 +1388,6 @@ void test_game_controller() //!OCLINT tests may be many
       game(get_standard_starting_pieces()),
       lobby_options()
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
     assert(count_selected_units(c, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
@@ -1982,13 +1972,12 @@ void test_game_controller() //!OCLINT tests may be many
     assert(!is_piece_at(c, square("g4"))); // White pawn is captured
     assert(is_piece_at(c, square("g3"))); // Black pawn has moved here
   }
-  // castling kingside
+  // castling kingside works when allowed
   {
     game_controller c{
       game(get_pieces_ready_to_castle()),
       lobby_options()
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::ready_to_castle))};
 
     auto& white_king{get_piece_at(c.get_game(), "e1")};
     assert(white_king.get_messages().size() == 0);
@@ -2023,6 +2012,29 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(c, square("g1")));  // K
     assert(is_piece_at(c, square("f1")));  // Rook
   }
+
+  // castling kingside works when allowed
+  {
+    game_controller c{
+      game(get_pieces_ready_to_not_castle()),
+      lobby_options()
+    };
+
+    auto& white_king{get_piece_at(c.get_game(), "e1")};
+    assert(white_king.get_messages().size() == 0);
+    auto& white_rook{get_piece_at(c.get_game(), "h1")};
+    assert(white_rook.get_messages().size() == 0);
+
+    do_select(c, "e1", side::lhs);
+
+    move_cursor_to(c, "a4", side::lhs); // Square is irrelevant, as long as it is empty
+
+    assert(white_king.get_messages().size() == 1); // Selected
+    assert(white_rook.get_messages().size() == 0); // No need to be selected
+    const auto actions = get_piece_actions(c, side::lhs);
+    assert(actions.empty());
+  }
+
   // castling queenside
   {
     game_controller c{
@@ -2324,48 +2336,6 @@ void test_game_controller() //!OCLINT tests may be many
     // Cannot stop the attack
     assert(get_piece_actions(c, side::lhs).size() == 0);
   }
-
-  #ifdef FIX_MOVING_QUEEN_CAN_BE_SELECTED
-  // When a piece is moving, it can be selected
-  {
-    game g{create_game_with_starting_position(starting_position_type::queen_end_game)};
-    game_controller c{create_game_controller_with_two_keyboards()};
-
-    // Start Qd1 d2
-    do_select(c, "d1", side::lhs);
-    assert(get_piece_at(c, square("d1")).is_selected());
-
-    move_cursor_to(c, "d2", side::lhs);
-    assert(count_selected_units(c, chess_color::white) == 1);
-    add_user_input(c, create_press_action_1(side::lhs));
-    c.apply_user_inputs_to_game();
-
-    // Unselected, because of move
-    assert(!get_piece_at(c, square("d1")).is_selected());
-
-    // Get the queen moving
-    c.tick(delta_t(0.01));
-    assert(is_piece_at(g, square("d1")));
-    assert(!get_piece_at(c, square("d1")).is_selected());
-
-    // Select the queen
-    move_cursor_to(c, "d1", side::lhs);
-    add_user_input(c, create_press_action_1(side::lhs));
-    c.apply_user_inputs_to_game();
-    assert(is_piece_at(g, square("d1")));
-    assert(get_piece_at(c, square("d1")).is_selected()); //
-
-    c.tick(delta_t(0.01));
-
-    assert(is_piece_at(g, square("d1")));
-    assert(get_piece_at(c, square("d1")).is_selected());
-
-
-    assert(1 == 2);
-
-  }
-  #endif // FIX_MOVING_QUEEN_CAN_BE_SELECTED
-
   //----------------------------------------------------------------------------
   // Moves that do not complete
   //----------------------------------------------------------------------------
