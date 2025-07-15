@@ -39,26 +39,32 @@ bool can_castle_kingside(const piece& p, const game& g) noexcept
   if (p.get_type() != piece_type::king) return false;
   const chess_color player_color{p.get_color()};
   const chess_color enemy_color{get_other_color(player_color)};
-
   assert(p.get_type() == piece_type::king);
-  if (has_moved(p)) return false;
   const auto king_square{p.get_current_square()};
-  // In a starting position, it may be that king has not made a new move
-  if (king_square != square("e1") && king_square != square("e8")) return false;
-  const auto rook_square(square(king_square.get_x(), 0));
+  if (king_square != get_initial_king_square(player_color)) return false;
+  if (has_moved(p)) return false;
+  assert(to_str(king_square) == "e1" || to_str(king_square) == "e8");
+  const int number_index{king_square.get_x()};
+  assert(number_index == 0 || number_index == 7); // For 1 or 8
+  const int letter_index{king_square.get_y()};
+  assert(letter_index == 4); // For e
+  if (is_square_attacked(g.get_pieces(), king_square, enemy_color)) return false;
+  const auto rook_square(square(king_square.get_x(), 7));
+  assert(to_str(rook_square) == "h1" || to_str(rook_square) == "h8");
   if (!is_piece_at(g, rook_square)) return false;
   const auto rook{get_piece_at(g, rook_square)};
   if (rook.get_type() != piece_type::rook) return false;
   if (has_moved(rook)) return false;
-  const auto b_pawn_square(square(king_square.get_x(), 1));
-  if (!is_empty(g, b_pawn_square)) return false;
-  if (is_square_attacked(g.get_pieces(), b_pawn_square, enemy_color)) return false;
-  const auto c_pawn_square(square(king_square.get_x(), 2));
-  if (!is_empty(g, c_pawn_square)) return false;
-  if (is_square_attacked(g.get_pieces(), c_pawn_square, enemy_color)) return false;
-  const auto d_pawn_square(square(king_square.get_x(), 3));
-  if (!is_empty(g, d_pawn_square)) return false;
-  if (is_square_attacked(g.get_pieces(), d_pawn_square, enemy_color)) return false;
+
+  const auto f_pawn_square(square(king_square.get_x(), 5));
+  assert(to_str(f_pawn_square) == "f1" || to_str(f_pawn_square) == "f8");
+  if (!is_empty(g, f_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), f_pawn_square, enemy_color)) return false;
+  const auto g_pawn_square(square(king_square.get_x(), 6));
+  assert(to_str(g_pawn_square) == "g1" || to_str(g_pawn_square) == "g8");
+  if (!is_empty(g, g_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), g_pawn_square, enemy_color)) return false;
+
   // Do not check for moving through check or into check,
   // this would give recursions
   return true;
@@ -70,21 +76,31 @@ bool can_castle_queenside(const piece& p, const game& g) noexcept
   assert(p.get_type() == piece_type::king);
   const chess_color player_color{p.get_color()};
   const chess_color enemy_color{get_other_color(player_color)};
-  if (has_moved(p)) return false;
   const auto king_square{p.get_current_square()};
-  // In a starting position, it may be that king has not made a new move
-  if (king_square != square("e1") && king_square != square("e8")) return false;
-  const auto rook_square(square(king_square.get_x(), 7));
+  if (king_square != get_initial_king_square(player_color)) return false;
+  assert(to_str(king_square) == "e1" || to_str(king_square) == "e8");
+  if (has_moved(p)) return false;
+  if (is_square_attacked(g.get_pieces(), king_square, enemy_color)) return false;
+  const auto rook_square(square(king_square.get_x(), 0));
+  assert(to_str(rook_square) == "a1" || to_str(rook_square) == "a8");
   if (!is_piece_at(g, rook_square)) return false;
   const auto rook{get_piece_at(g, rook_square)};
   if (rook.get_type() != piece_type::rook) return false;
   if (has_moved(rook)) return false;
-  const auto f_pawn_square(square(king_square.get_x(), 1));
-  if (!is_empty(g, f_pawn_square)) return false;
-  if (is_square_attacked(g.get_pieces(), f_pawn_square, enemy_color)) return false;
-  const auto g_pawn_square(square(king_square.get_x(), 2));
-  if (!is_empty(g, g_pawn_square)) return false;
-  if (is_square_attacked(g.get_pieces(), g_pawn_square, enemy_color)) return false;
+
+  const auto b_pawn_square(square(king_square.get_x(), 1));
+  assert(to_str(b_pawn_square) == "b1" || to_str(b_pawn_square) == "b8");
+  if (!is_empty(g, b_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), b_pawn_square, enemy_color)) return false;
+  const auto c_pawn_square(square(king_square.get_x(), 2));
+  assert(to_str(c_pawn_square) == "c1" || to_str(c_pawn_square) == "c8");
+  if (!is_empty(g, c_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), c_pawn_square, enemy_color)) return false;
+  const auto d_pawn_square(square(king_square.get_x(), 3));
+  assert(to_str(d_pawn_square) == "d1" || to_str(d_pawn_square) == "d8");
+  if (!is_empty(g, d_pawn_square)) return false;
+  if (is_square_attacked(g.get_pieces(), d_pawn_square, enemy_color)) return false;
+
   // Do not check for moving through check or into check,
   // this would give recursions
   return true;

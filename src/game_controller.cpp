@@ -2013,11 +2013,10 @@ void test_game_controller() //!OCLINT tests may be many
     assert(is_piece_at(c, square("f1")));  // Rook
   }
 
-  // castling kingside works when allowed
+  // cannot castle through check
   {
     game_controller c{
-      game(get_pieces_ready_to_not_castle()),
-      lobby_options()
+      game(get_pieces_ready_to_not_castle())
     };
 
     auto& white_king{get_piece_at(c.get_game(), "e1")};
@@ -2034,15 +2033,52 @@ void test_game_controller() //!OCLINT tests may be many
     const auto actions = get_piece_actions(c, side::lhs);
     assert(actions.empty());
   }
+  // cannot castle when king is in check
+  {
+    game_controller c{
+      game(create_pieces_from_fen_string(fen_string("4k3/4q3/8/8/8/8/8/R3K2R w KQ - 0 1")))
+    };
 
+    auto& white_king{get_piece_at(c.get_game(), "e1")};
+    assert(white_king.get_messages().size() == 0);
+    auto& white_rook{get_piece_at(c.get_game(), "h1")};
+    assert(white_rook.get_messages().size() == 0);
+
+    do_select(c, "e1", side::lhs);
+
+    move_cursor_to(c, "a4", side::lhs); // Square is irrelevant, as long as it is empty
+
+    assert(white_king.get_messages().size() == 1); // Selected
+    assert(white_rook.get_messages().size() == 0); // No need to be selected
+    const auto actions = get_piece_actions(c, side::lhs);
+    assert(actions.empty());
+  }
+  // cannot castle when d and f are attacked
+  {
+    game_controller c{
+      game(create_pieces_from_fen_string(fen_string("4k3/3r1r2/8/8/8/8/8/R3K2R w KQ - 0 1")))
+    };
+
+    auto& white_king{get_piece_at(c.get_game(), "e1")};
+    assert(white_king.get_messages().size() == 0);
+    auto& white_rook{get_piece_at(c.get_game(), "h1")};
+    assert(white_rook.get_messages().size() == 0);
+
+    do_select(c, "e1", side::lhs);
+
+    move_cursor_to(c, "a4", side::lhs); // Square is irrelevant, as long as it is empty
+
+    assert(white_king.get_messages().size() == 1); // Selected
+    assert(white_rook.get_messages().size() == 0); // No need to be selected
+    const auto actions = get_piece_actions(c, side::lhs);
+    assert(actions.empty());
+  }
   // castling queenside
   {
     game_controller c{
       game(get_pieces_ready_to_castle()),
       lobby_options()
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::ready_to_castle))};
-
     do_select(c, "e1", side::lhs);
     move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
     assert(count_selected_units(c, chess_color::white) == 1);
