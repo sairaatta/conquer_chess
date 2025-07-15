@@ -2,6 +2,10 @@
 
 ## v0.9
 
+![Conquer Chess v0.9 in the Steam store](20250715.jpg)
+
+> Conquer Chess in the Steam store
+
 ![Replay screen v0.9](20250704_1.jpg)
 
 > The replays screen shows the game statistics widget too
