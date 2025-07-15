@@ -1960,7 +1960,6 @@ void test_game_controller() //!OCLINT tests may be many
     c.apply_user_inputs_to_game();
 
     const auto messages{collect_messages(c.get_game())};
-    // Maybe type must be start_en_passant_attack?
     assert(messages.back().get_message_type() == message_type::start_en_passant_attack);
 
     for (int i{0}; i!=4; ++i)
@@ -2076,8 +2075,7 @@ void test_game_controller() //!OCLINT tests may be many
   // castling queenside
   {
     game_controller c{
-      game(get_pieces_ready_to_castle()),
-      lobby_options()
+      game(get_pieces_ready_to_castle())
     };
     do_select(c, "e1", side::lhs);
     move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
@@ -2372,13 +2370,52 @@ void test_game_controller() //!OCLINT tests may be many
     // Cannot stop the attack
     assert(get_piece_actions(c, side::lhs).size() == 0);
   }
+  // A selected puece doing an en-passant capture, cannot attack anymore
+  {
+    game_controller c{
+      game(get_pieces_before_en_passant())
+    };
+    assert(is_piece_at(c, square("g2"))); // White pawn to be captured
+    assert(is_piece_at(c, square("h4"))); // Black pawn to capture
+    assert(!is_piece_at(c, square("g3"))); // White pawn can move forward
+    assert(!is_piece_at(c, square("g4"))); // White pawn can move forward
+    assert(count_selected_units(c, chess_color::white) == 0);
+
+    // g2-g4
+    do_select(c, "g2", side::lhs); // White pawn
+    move_cursor_to(c, "g4", side::lhs);
+    assert(count_selected_units(c, chess_color::white) == 1);
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game();
+
+    for (int i{0}; i!=5; ++i)
+    {
+      c.tick(delta_t(0.25));
+    }
+    assert(!is_piece_at(c, square("g2")));
+    assert(is_piece_at(c, square("g4")));
+    assert(is_enpassantable(get_piece_at(c.get_game(), "g4"), c.get_game().get_in_game_time()));
+
+    // h4xg3 e.p.
+    do_select(c, "h4", side::rhs); // Black pawn
+    move_cursor_to(c, "g3", side::rhs);
+    add_user_input(c, create_press_action_1(side::rhs));
+    c.apply_user_inputs_to_game();
+
+    const auto messages{collect_messages(c.get_game())};
+    assert(messages.back().get_message_type() == message_type::start_en_passant_attack);
+
+    const auto actions = get_piece_actions(c, side::lhs);
+    // Cannot attack anymore, but can unselect
+    assert(actions.size() == 1);
+    assert(actions[0] == piece_action_type::unselect);
+  }
   //----------------------------------------------------------------------------
   // Moves that do not complete
   //----------------------------------------------------------------------------
   // When two pieces of the same color want to move to the same square, one will go back
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))};
 
     // Start c2-c3
     do_select(c, "c2", side::lhs);
@@ -2506,6 +2543,7 @@ void test_game_controller() //!OCLINT tests may be many
     assert(white_queen_messages[1] == message_type::start_attack);
     assert(white_queen_messages[2] == message_type::cannot);
   }
+  //#define FIX_INTERRUPT_WHITE_KINGSIDE_CASTLING_BY_CAPTURING_WHITE_ROOK
   #ifdef FIX_INTERRUPT_WHITE_KINGSIDE_CASTLING_BY_CAPTURING_WHITE_ROOK
   // Interrupt white king-side castling, by capturing the white rook
   {
