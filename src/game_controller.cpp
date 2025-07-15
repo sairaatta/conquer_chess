@@ -301,9 +301,6 @@ void game_controller::apply_action_type_castle_queenside_to_game(game& g, const 
   };
   assert(is_castle_queenside);
 
-  // Unselect all pieces
-  //unselect_all_pieces(g, player_color);
-
   // King start castling
   const square king_target_square{get_king_target_square(player_color, piece_action_type::castle_queenside)};
   get_piece_at(g, get_initial_king_square(player_color)).add_action(
@@ -1327,11 +1324,10 @@ void test_game_controller() //!OCLINT tests may be many
     // Cannot be done, so no message
     // assert(collect_messages(g).at(1).get_message_type() == message_type::cannot);
   }
-  // 3: white castles kingside
+  // white castles kingside
   {
     game_controller c{
-      game(get_pieces_ready_to_castle()),
-      lobby_options()
+      game(get_pieces_ready_to_castle())
     };
     do_select(c, "e1", side::lhs);
     assert(count_selected_units(c, chess_color::white) == 1);
@@ -1343,13 +1339,11 @@ void test_game_controller() //!OCLINT tests may be many
     const auto msg{collect_messages(c.get_game())};
     assert(msg.at(1).get_message_type() == message_type::start_castling_kingside);
   }
-  // 3: white castles queenside
+  // white castles queenside
   {
     game_controller c{
-      game(get_pieces_ready_to_castle()),
-      lobby_options()
+      game(get_pieces_ready_to_castle())
     };
-    //create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::ready_to_castle))
     do_select(c, "e1", side::lhs);
 
     c.tick(delta_t(0.0));
@@ -1715,8 +1709,7 @@ void test_game_controller() //!OCLINT tests may be many
   // Promote to queen, from black pawn at h1, using mouse
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
@@ -1928,8 +1921,7 @@ void test_game_controller() //!OCLINT tests may be many
   // En-passant capture
   {
     game_controller c{
-      game(get_pieces_before_en_passant()),
-      lobby_options()
+      game(get_pieces_before_en_passant())
     };
     //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::before_en_passant))};
     assert(is_piece_at(c, square("g2"))); // White pawn to be captured
@@ -1984,16 +1976,19 @@ void test_game_controller() //!OCLINT tests may be many
     assert(white_rook.get_messages().size() == 0);
 
     do_select(c, "e1", side::lhs);
-    //assert(white_king.is_selected());
 
-    move_cursor_to(c, "a4", side::lhs); // Square is irrelevant
+    assert(count_selected_units(c, chess_color::white) == 1);
 
+    move_cursor_to(c, "a4", side::lhs); // Square is irrelevant, but it should be empty
+
+    assert(count_selected_units(c, chess_color::white) == 1);
     assert(white_king.get_messages().size() == 1); // Selected
     assert(white_rook.get_messages().size() == 0); // No need to be selected
 
     add_user_input(c, create_press_action_1(side::lhs));
     c.apply_user_inputs_to_game();
 
+    assert(count_selected_units(c, chess_color::white) == 1);
     assert(white_king.get_messages().size() == 2); // Castling started
     assert(white_rook.get_messages().size() == 1); // Castling started
 
@@ -2370,7 +2365,7 @@ void test_game_controller() //!OCLINT tests may be many
     // Cannot stop the attack
     assert(get_piece_actions(c, side::lhs).size() == 0);
   }
-  // A selected puece doing an en-passant capture, cannot attack anymore
+  // A selected piece doing an en-passant capture, cannot attack anymore
   {
     game_controller c{
       game(get_pieces_before_en_passant())
@@ -2407,6 +2402,57 @@ void test_game_controller() //!OCLINT tests may be many
 
     const auto actions = get_piece_actions(c, side::lhs);
     // Cannot attack anymore, but can unselect
+    assert(actions.size() == 1);
+    assert(actions[0] == piece_action_type::unselect);
+  }
+
+  // a selected white king cannot castle when castling kingside
+  {
+    game_controller c{
+      game(get_pieces_ready_to_castle())
+    };
+    do_select(c, "e1", side::lhs);
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(collect_messages(c.get_game()).at(0).get_message_type() == message_type::select);
+    move_cursor_to(c, "g1", side::lhs); // Cursor must not be on king
+    add_user_input(c, create_press_action_1(side::lhs));
+    c.apply_user_inputs_to_game();
+    c.tick(delta_t(0.01));
+    const auto msg{collect_messages(c.get_game())};
+    assert(msg.at(1).get_message_type() == message_type::start_castling_kingside);
+
+    move_cursor_to(c, "e1", side::lhs); // Cursor must be on king again
+
+    const auto actions = get_piece_actions(c, side::lhs);
+    // Cannot castle anymore, but can unselect
+    assert(actions.size() == 1);
+    assert(actions[0] == piece_action_type::unselect);
+  }
+  // a selected white king cannot castle when castling queenside
+  {
+    game_controller c{
+      game(get_pieces_ready_to_castle())
+    };
+    do_select(c, "e1", side::lhs);
+
+    c.tick(delta_t(0.0));
+    assert(count_selected_units(c, chess_color::white) == 1);
+    assert(collect_messages(c.get_game()).at(0).get_message_type() == message_type::select);
+    move_cursor_to(c, "g1", side::lhs); // Cursor must not be on king
+    assert(count_selected_units(c, chess_color::white) == 1);
+
+    add_user_input(c, create_press_action_2(side::lhs));
+    c.apply_user_inputs_to_game();
+    c.tick(delta_t(0.01));
+
+    const auto msg{collect_messages(c.get_game())};
+    assert(msg.at(0).get_message_type() == message_type::start_castling_queenside);
+    assert(msg.at(2).get_message_type() == message_type::start_castling_queenside);
+
+    move_cursor_to(c, "e1", side::lhs); // Cursor must be on king again
+
+    const auto actions = get_piece_actions(c, side::lhs);
+    // Cannot castle anymore, but can unselect
     assert(actions.size() == 1);
     assert(actions[0] == piece_action_type::unselect);
   }
