@@ -4,47 +4,13 @@
 - [FIDE 2023 Laws of Chess site](https://rcc.fide.com/2023-laws-of-chess/)
 - [FIDE 2023 Laws of Chess as PDF](20230101Laws-of-Chess.pdf)
 
-# Castling
-
-Castling is a special move.
-It is the only chess move in which two pieces are moved at the same time.
-In castling, at the same time,
-the king moves two squares towards one of the rooks,
-where the partnering rook will move over the king and end up next to it.
-
-As per regular chess, castling is only possible when:
-
-- the king is not in check
-- the squares the king passes through are not attacked
-- the king's destination square is not under attack
-- the king has never moved
-- the partnering rook has never moved
-
-As Conquer Chess is a real-time strategy game,
-castling can fail while ongoing.
-
-Castling can fail in the first half chess move under these conditions:
-
-- The king's destination square becomes occupied by another piece
-- The rooks's destination square becomes occupied by another piece
-- The king's destination square becomes attacked
-- The rook is killed
-
-
-
-
-when in check, going through check, when the king has moved
-or when the partnering rook has moved. 
-
-
-
 
 ## BASIC RULES OF PLAY
 
 ### Article 1: The Nature and Objectives of the Game of Chess
 
 - 1.1. The game of chess is played between two opponents who move their pieces
-  on a square board called a ‘chessboard’.
+  on a square board called a ‘chessboard'.
 
   In Conquer Chess, however, there may be multiple arenas of different
   shapes added in the future.
@@ -57,23 +23,23 @@ or when the partnering rook has moved.
   move. After waiting for the duration of one chess move, black can start
   doing its many moves.
 
-- 1.3. A player is said to ‘have the move’ when his/her opponent’s move
-  has been ‘made’.
+- 1.3. A player is said to ‘have the move' when his/her opponent's move
+  has been ‘made'.
 
   In Conquer Chess, however, this rule is void: players can do multiple
   moves in succession or do nothing for as long as desired.
 
-- 1.4. The objective of each player is to place the opponent’s king
-  ‘under attack’ in such a way that the opponent has no legal move.
+- 1.4. The objective of each player is to place the opponent's king
+  ‘under attack' in such a way that the opponent has no legal move.
 
   In Conquer Chess, there is a second goal: reducing the health of
   the opponent's king to zero. 
 
-- `[1.4.1]`. The player who achieves this goal is said to have ‘checkmated’
-  the opponent’s king and to have won the game `[1.4.1a]`.
-  Leaving one’s own king under attack `[1.4.1b]`,
-  exposing one’s own king to attack `[1.4.1c]` and also
-  ’capturing’ the opponent’s king is not allowed `[1.4.1d]`.
+- `[1.4.1]`. The player who achieves this goal is said to have ‘checkmated'
+  the opponent's king and to have won the game `[1.4.1a]`.
+  Leaving one's own king under attack `[1.4.1b]`,
+  exposing one's own king to attack `[1.4.1c]` and also
+  'capturing' the opponent's king is not allowed `[1.4.1d]`.
 
   In Conquer Chess, a checkmate is a direct win, even when the opponent's king
   has full health and the attackers have low health.
@@ -85,49 +51,48 @@ or when the partnering rook has moved.
 - 1.4.2. The opponent whose king has been checkmated has lost the game.
 
 - `[1.5]` If the position is such that neither player can possibly checkmate
-  the opponent’s king, the game is drawn (see Article 5.2.2).
+  the opponent's king, the game is drawn (see Article 5.2.2).
 
-Article 2: The Initial Position of the Pieces on the Chessboard
+### Article 2: The Initial Position of the Pieces on the Chessboard
 
-2.1     The chessboard is composed of an 8 x 8 grid of 64 equal squares alternately light (the ‘white’ squares) and dark (the ‘black’ squares).
+- `[2.1]` The chessboard is composed of an 8 x 8 grid of 64 equal squares
+  alternately light (the ‘white' squares) and dark (the ‘black' squares).
 
-The chessboard is placed between the players in such a way that the near corner square to the right of the player is white.
+  The chessboard is placed between the players in such a way
+  that the near corner square to the right of the player is white.
 
-2.2     At the beginning of the game White has 16 light-coloured pieces (the ‘white’ pieces); Black has 16 dark-coloured pieces (the ‘black’ pieces).
+- `[2.2]` At the beginning of the game White has 16 light-coloured pieces
+  (the ‘white' pieces); Black has 16 dark-coloured pieces (the ‘black' pieces).
 
-These pieces are as follows:	 	 	 
-A white king	usually indicated by the symbol		K
-A white queen	usually indicated by the symbol		Q
-Two white rooks	usually indicated by the symbol		R
-Two white bishops	usually indicated by the symbol		B
-Two white knights	usually indicated by the symbol		N
-Eight white pawns	usually indicated by the symbol		 
-A black king	usually indicated by the symbol		K
-A black queen	usually indicated by the symbol		Q
-Two black rooks	usually indicated by the symbol		R
-Two black bishops	usually indicated by the symbol		B
-Two black knights	usually indicated by the symbol		N
-Eight black pawns	usually indicated by the symbol		 
-Staunton Pieces
+- `[2.3]`. The initial position of the pieces on the chessboard is as follows:
 
+```text
+rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+```
 
-p  Q  K  B  N  R
+- 2.4. The eight vertical columns of squares are called ‘files'.
+  The eight horizontal rows of squares are called ‘ranks'.
+  A straight line of squares of the same colour,
+  running from one edge of the board to an adjacent edge,
+  is called a ‘diagonal'.
 
-2.3     The initial position of the pieces on the chessboard is as follows:
+### Article 3: The Moves of the Pieces
 
-Description: A description...
-2.4     The eight vertical columns of squares are called ‘files’. The eight horizontal rows of squares are called ‘ranks’. A straight line of squares of the same colour, running from one edge of the board to an adjacent edge, is called a ‘diagonal’.
+- `[3.1]` It is not permitted to move a piece to a square occupied by a piece
+  of the same colour.
 
-Article 3: The Moves of the Pieces
+- `[3.1.1]` If a piece moves to a square occupied by an opponent's piece
+  the latter is captured and removed from the chessboard
+  as part of the same move.
 
-3.1     It is not permitted to move a piece to a square occupied by a piece of the same colour.
+- `[3.1.2]` A piece is said to attack an opponent's piece
+  if the piece could make a capture on that square according
+  to Articles 3.2 to 3.8.
 
-3.1.1    If a piece moves to a square occupied by an opponent’s piece the latter is captured and removed from the chessboard as part of the same move.
-
-3.1.2    A piece is said to attack an opponent’s piece if the piece could make a capture on that square according to Articles 3.2 to 3.8.
-
-3.1.3    A piece is considered to attack a square even if this piece is constrained from moving to that square because it would then leave or place the king of its own colour under attack.
-
+- `[3.1.3]` A piece is considered to attack a square even if this piece
+  is constrained from moving to that square because it would then leave
+  or place the king of its own colour under attack.
+    
 3.2     The bishop may move to any square along a diagonal on which it stands.
 
 Description: A description...
@@ -148,17 +113,17 @@ Description: A description...
 
 3.7.2    on its first move the pawn may move as in 3.7.1 or alternatively it may advance two squares along the same file, provided that both squares are unoccupied, or
 
-3.7.3    the pawn may move to a square occupied by an opponent’s piece diagonally in front of it on an adjacent file, capturing that piece.
+3.7.3    the pawn may move to a square occupied by an opponent's piece diagonally in front of it on an adjacent file, capturing that piece.
 
 Description: A description...
-3.7.3.1    A pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.
+3.7.3.1    A pawn occupying a square on the same rank as and on an adjacent file to an opponent's pawn which has just advanced two squares in one move from its original square may capture this opponent's pawn as though the latter had been moved only one square.
 
-3.7.3.2    This capture is only legal on the move following this advance and is called an ‘en passant’ capture.
+3.7.3.2    This capture is only legal on the move following this advance and is called an ‘en passant' capture.
 
 Description: A description...
-3.7.3.3    When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.
+3.7.3.3    When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion'.
 
-3.7.3.4    The player’s choice is not restricted to pieces that have been captured previously.
+3.7.3.4    The player's choice is not restricted to pieces that have been captured previously.
 
 3.7.3.5    This exchange of a pawn for another piece is called promotion, and the effect of the new piece is immediate.
 
@@ -167,7 +132,7 @@ Description: A description...
 3.8.1    by moving to an adjoining square
 
 Description: A description...
-3.8.2    by ‘castling’. This is a move of the king and either rook of the same colour along the player’s first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.
+3.8.2    by ‘castling'. This is a move of the king and either rook of the same colour along the player's first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.
 
 Description: A description...	Description: A description...
 Before white kingside castling
@@ -186,13 +151,13 @@ After black kingside castling
 
 3.8.2.2    Castling is prevented temporarily:
 
-3) If the square on which the king stands, or the square which it must cross, or the square which it is to occupy, is attacked by one or more of the opponent’s pieces, or
+3) If the square on which the king stands, or the square which it must cross, or the square which it is to occupy, is attacked by one or more of the opponent's pieces, or
 
 4) If there is any piece between the king and the rook with which castling is to be effected.
 
 3.9     The king in check:
 
-3.9.1    The king is said to be ‘in check’ if it is attacked by one or more of the opponent’s pieces, even if such pieces are constrained from moving to the square occupied by the king because they would then leave or place their own king in check.
+3.9.1    The king is said to be ‘in check' if it is attacked by one or more of the opponent's pieces, even if such pieces are constrained from moving to the square occupied by the king because they would then leave or place their own king in check.
 
 3.9.2    No piece can be moved that will either expose the king of the same colour to check or leave that king in check.
 
@@ -210,7 +175,7 @@ Article 4: The Act of Moving the Pieces
 
 4.2     Adjusting the pieces or other physical contact with a piece:
 
-4.2.1    Only the player having the move may adjust one or more pieces on their squares, provided that he/she first expresses his/her intention (for example by saying “j’adoube” or “I adjust”).
+4.2.1    Only the player having the move may adjust one or more pieces on their squares, provided that he/she first expresses his/her intention (for example by saying “j'adoube” or “I adjust”).
 
 4.2.2    Any other physical contact with a piece, except for clearly accidental contact, shall be considered to be intent.
 
@@ -218,9 +183,9 @@ Article 4: The Act of Moving the Pieces
 
 4.3.1    one or more of his/her own pieces, he/she must move the first piece touched that can be moved.
 
-4.3.2    one or more of his/her opponent’s pieces, he/she must capture the first piece touched that can be captured.
+4.3.2    one or more of his/her opponent's pieces, he/she must capture the first piece touched that can be captured.
 
-4.3.3    one or more pieces of each colour, he/she must capture the first touched opponent’s piece with his/her first touched piece or, if this is illegal, move or capture the first piece touched that can be moved or captured. If it is unclear whether the player’s own piece or his/her opponent’s piece was touched first, the player’s own piece shall be considered to have been touched before his/her opponent’s.
+4.3.3    one or more pieces of each colour, he/she must capture the first touched opponent's piece with his/her first touched piece or, if this is illegal, move or capture the first piece touched that can be moved or captured. If it is unclear whether the player's own piece or his/her opponent's piece was touched first, the player's own piece shall be considered to have been touched before his/her opponent's.
 
 4.4     If a player having the move:
 
@@ -240,29 +205,29 @@ Article 4: The Act of Moving the Pieces
 
 4.6.2    removing the pawn and putting the new piece on the square of promotion may occur in any order.
 
-4.6.3    If an opponent’s piece stands on the square of promotion, it must be captured.
+4.6.3    If an opponent's piece stands on the square of promotion, it must be captured.
 
 4.7     When, as a legal move or part of a legal move, a piece has been released on a square, it cannot be moved to another square on this move. The move is considered to have been made in the case of:
 
 4.7.1    A capture, when the captured piece has been removed from the chessboard and the player, having placed his/her own piece on its new square, has released this capturing piece from his/her hand.
 
-4.7.2    Castling, when the player’s hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.
+4.7.2    Castling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.
 
-4.7.3    Promotion, when the player’s hand has released the new piece on the square of promotion and the pawn has been removed from the board.
+4.7.3    Promotion, when the player's hand has released the new piece on the square of promotion and the pawn has been removed from the board.
 
-4.8     A player forfeits his/her right to claim against his/her opponent’s violation of Articles 4.1 – 4.7 once the player touches a piece with the intention of moving or capturing it.
+4.8     A player forfeits his/her right to claim against his/her opponent's violation of Articles 4.1 – 4.7 once the player touches a piece with the intention of moving or capturing it.
 
 4.9     If a player is unable to move the pieces, an assistant, who shall be acceptable to the arbiter, may be provided by the player to perform this operation.
 
 Article 5: The Completion of the Game
 
-5.1.1    The game is won by the player who has checkmated his/her opponent’s king. This immediately ends the game, provided that the move producing the checkmate position was in accordance with Article 3 and Articles 4.2 – 4.7.
+5.1.1    The game is won by the player who has checkmated his/her opponent's king. This immediately ends the game, provided that the move producing the checkmate position was in accordance with Article 3 and Articles 4.2 – 4.7.
 
-5.1.2    The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.
+5.1.2    The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player's king by any possible series of legal moves. In this case the result of the game is a draw.
 
-5.2.1    The game is drawn when the player to move has no legal move and his/her king is not in check. The game is said to end in ‘stalemate’. This immediately ends the game, provided that the move producing the stalemate position was in accordance with Article 3 and Articles 4.2 – 4.7.
+5.2.1    The game is drawn when the player to move has no legal move and his/her king is not in check. The game is said to end in ‘stalemate'. This immediately ends the game, provided that the move producing the stalemate position was in accordance with Article 3 and Articles 4.2 – 4.7.
 
-5.2.2    The game is drawn when a position has arisen in which neither player can checkmate the opponent’s king with any series of legal moves. The game is said to end in a ‘dead position’. This immediately ends the game, provided that the move producing the position was in accordance with Article 3 and Articles 4.2 – 4.7.
+5.2.2    The game is drawn when a position has arisen in which neither player can checkmate the opponent's king with any series of legal moves. The game is said to end in a ‘dead position'. This immediately ends the game, provided that the move producing the position was in accordance with Article 3 and Articles 4.2 – 4.7.
 
 5.2.3    The game is drawn upon agreement between the two players during the game, provided both players have made at least one move. This immediately ends the game.
 
@@ -270,13 +235,13 @@ COMPETITIVE RULES OF PLAY
 
 Article 6: The Chessclock
 
-6.1     ‘Chessclock’ means a clock with two time displays, connected to each other in such a way that only one of them can run at a time. ‘Clock’ in the Laws of Chess means one of the two time displays. Each time display has a ‘flag’.
+6.1     ‘Chessclock' means a clock with two time displays, connected to each other in such a way that only one of them can run at a time. ‘Clock' in the Laws of Chess means one of the two time displays. Each time display has a ‘flag'.
 
-‘Flag-fall’ means the expiration of the allotted time for a player.
+‘Flag-fall' means the expiration of the allotted time for a player.
 
 6.2     Handling the chessclock:
 
-6.2.1    During the game each player, having made his/her move on the chessboard, shall pause his/her own clock and start his/her opponent’s clock (that is to say, he/she shall press his/her clock). This ‘completes’ the move. A move is also completed if:
+6.2.1    During the game each player, having made his/her move on the chessboard, shall pause his/her own clock and start his/her opponent's clock (that is to say, he/she shall press his/her clock). This ‘completes' the move. A move is also completed if:
 
 6.2.1.1     the move ends the game (see Articles 5.1.1, 5.2.1, 5.2.2, 9.2.1, 9.6.1 and 9.6.2), or
 
@@ -284,7 +249,7 @@ Article 6: The Chessclock
 
 6.2.2    A player must be allowed to pause his/her clock after making his/her move, even after the opponent has made his/her next move. The time between making the move on the chessboard and pressing the clock is regarded as part of the time allotted to the player.
 
-6.2.3    A player must press his/her clock with the same hand with which he/she made his/her move. It is forbidden for a player to keep his/her finger on the clock or to ‘hover’ over it.
+6.2.3    A player must press his/her clock with the same hand with which he/she made his/her move. It is forbidden for a player to keep his/her finger on the clock or to ‘hover' over it.
 
 6.2.4    The players must handle the chessclock properly. It is forbidden to press it forcibly, to pick it up, to press the clock before moving or to knock it over. Improper clock handling shall be penalised in accordance with Article 12.9.
 
@@ -296,13 +261,13 @@ Article 6: The Chessclock
 
 6.3.1    When using a chessclock, each player must complete a minimum number of moves or all moves in an allotted period of time including any additional amount of time added with each move. All these must be specified in advance.
 
-6.3.2    The time saved by a player during one period is added to his/her time available for the next period, where applicable. In the time-delay mode both players receive an allotted ‘main thinking time’. Each player also receives a ‘fixed extra time’ with every move. The countdown of the main thinking time only commences after the fixed extra time has expired. Provided the player presses his/her clock before the expiration of the fixed extra time, the main thinking time does not change, irrespective of the proportion of the fixed extra time used.
+6.3.2    The time saved by a player during one period is added to his/her time available for the next period, where applicable. In the time-delay mode both players receive an allotted ‘main thinking time'. Each player also receives a ‘fixed extra time' with every move. The countdown of the main thinking time only commences after the fixed extra time has expired. Provided the player presses his/her clock before the expiration of the fixed extra time, the main thinking time does not change, irrespective of the proportion of the fixed extra time used.
 
 6.4     Immediately after a flag falls, the requirements of Article 6.3.1 must be checked.
 
 6.5     Before the start of the game the arbiter shall decide where the chessclock is placed.
 
-6.6     At the time determined for the start of the game White’s clock is started.
+6.6     At the time determined for the start of the game White's clock is started.
 
 6.7     Default time:
 
@@ -312,7 +277,7 @@ Article 6: The Chessclock
 
 6.8     A flag is considered to have fallen when the arbiter observes the fact or when either player has made a valid claim to that effect.
 
-6.9     Except where one of Articles 5.1.1, 5.1.2, 5.2.1, 5.2.2, 5.2.3 applies, if a player does not complete the prescribed number of moves in the allotted time, the game is lost by that player. However, the game is drawn if the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves.
+6.9     Except where one of Articles 5.1.1, 5.1.2, 5.2.1, 5.2.2, 5.2.3 applies, if a player does not complete the prescribed number of moves in the allotted time, the game is lost by that player. However, the game is drawn if the position is such that the opponent cannot checkmate the player's king by any possible series of legal moves.
 
 6.10   Chessclock setting:
 
@@ -322,11 +287,11 @@ Article 6: The Chessclock
 
 6.11.1    If the game needs to be interrupted, the arbiter shall pause the chessclock.
 
-6.11.2    A player may pause the chessclock only in order to seek the arbiter’s assistance, for example when promotion has taken place and the piece required is not available.
+6.11.2    A player may pause the chessclock only in order to seek the arbiter's assistance, for example when promotion has taken place and the piece required is not available.
 
 6.11.3    The arbiter shall decide when the game restarts.
 
-6.11.4    If a player pauses the chessclock in order to seek the arbiter’s assistance, the arbiter shall determine whether the player had any valid reason for doing so. If the player has no valid reason for pausing the chessclock, the player shall be penalised in accordance with Article 12.9.
+6.11.4    If a player pauses the chessclock in order to seek the arbiter's assistance, the arbiter shall determine whether the player had any valid reason for doing so. If the player has no valid reason for pausing the chessclock, the player shall be penalised in accordance with Article 12.9.
 
 6.12.1    Screens, monitors, or demonstration boards showing the current position on the chessboard, the moves and the number of moves made/completed, and clocks which also show the number of moves, are allowed in the playing hall.
 
@@ -334,7 +299,7 @@ Article 6: The Chessclock
 
 Article 7: Irregularities
 
-7.1     If an irregularity occurs and the pieces have to be restored to a previous position, the arbiter shall use his/her best judgement to determine the times to be shown on the chessclock. This includes the right not to change the clock times. He/She shall also, if necessary, adjust the clock’s move-counter.
+7.1     If an irregularity occurs and the pieces have to be restored to a previous position, the arbiter shall use his/her best judgement to determine the times to be shown on the chessclock. This includes the right not to change the clock times. He/She shall also, if necessary, adjust the clock's move-counter.
 
 7.2.1    If during a game it is found that the initial position of the pieces was incorrect, the game shall be cancelled and a new game shall be played.
 
@@ -346,7 +311,7 @@ Article 7: Irregularities
 
 7.4.1    If a player displaces one or more pieces, he/she shall re-establish the correct position in his/her own time.
 
-7.4.2    If necessary, either the player or his/her opponent shall pause the chessclock and ask for the arbiter’s assistance.
+7.4.2    If necessary, either the player or his/her opponent shall pause the chessclock and ask for the arbiter's assistance.
 
 7.4.3    The arbiter may penalise the player who displaces the pieces.
 
@@ -360,7 +325,7 @@ Article 7: Irregularities
 
 7.5.4    If a player uses two hands to make a single move (for example in case of castling, capturing or promotion) and pressed the clock, it shall be considered and penalised as if an illegal move.
 
-7.5.5    After the action taken under Article 7.5.1, 7.5.2, 7.5.3 or 7.5.4 for the first completed illegal move by a player, the arbiter shall give two minutes extra time to his/her opponent; for the second completed illegal move by the same player the arbiter shall declare the game lost by this player. However, the game is drawn if the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves.
+7.5.5    After the action taken under Article 7.5.1, 7.5.2, 7.5.3 or 7.5.4 for the first completed illegal move by a player, the arbiter shall give two minutes extra time to his/her opponent; for the second completed illegal move by the same player the arbiter shall declare the game lost by this player. However, the game is drawn if the position is such that the opponent cannot checkmate the player's king by any possible series of legal moves.
 
 7.6     If, during a game it is found that any piece has been displaced from its correct square, the position before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. The game shall then continue from this reinstated position.
 
@@ -370,13 +335,13 @@ Article 8: The recording of the moves
 
 8.1.1    In the course of play each player is required to record his/her own moves and those of his/her opponent in the correct manner, move after move, as clearly and legibly as possible, in one of the following ways:
 
-8.1.1.1    by writing in the algebraic notation (Appendix C), on the paper ‘scoresheet’ prescribed for the competition.
+8.1.1.1    by writing in the algebraic notation (Appendix C), on the paper ‘scoresheet' prescribed for the competition.
 
-8.1.1.2    by entering moves on the FIDE certified ‘electronic scoresheet’ prescribed for the competition.
+8.1.1.2    by entering moves on the FIDE certified ‘electronic scoresheet' prescribed for the competition.
 
 8.1.2    It is forbidden to record the moves in advance, unless the player is claiming a draw according to Article 9.2, or 9.3 or adjourning a game according to Guidelines I.1.1
 
-8.1.3    A player may reply to his/her opponent’s move before recording it, if he/she so wishes. He/She must record his/her previous move before making another.
+8.1.3    A player may reply to his/her opponent's move before recording it, if he/she so wishes. He/She must record his/her previous move before making another.
 
 8.1.4    The scoresheet shall be used only for recording the moves, the times of the clocks, offers of a draw, matters relating to a claim and other relevant data.
 
@@ -392,9 +357,9 @@ Article 8: The recording of the moves
 
 8.5     Incomplete scoresheets:
 
-8.5.1    If neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter’s or the opponent’s scoresheet.
+8.5.1    If neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter's or the opponent's scoresheet.
 
-8.5.2    If only one player has not kept score under Article 8.4, he/she must, as soon as either flag has fallen, update his/her scoresheet completely before moving a piece on the chessboard. Provided it is that player’s move, he/she may use his/her opponent’s scoresheet, but must return it before making a move.
+8.5.2    If only one player has not kept score under Article 8.4, he/she must, as soon as either flag has fallen, update his/her scoresheet completely before moving a piece on the chessboard. Provided it is that player's move, he/she may use his/her opponent's scoresheet, but must return it before making a move.
 
 8.5.3    If no complete scoresheet is available, the players must reconstruct the game on a second chessboard under the control of the arbiter or an assistant. He/She shall first record the actual game position, clock times, whose clock was running and the number of moves made/completed, if this information is available, before reconstruction takes place.
 
@@ -442,7 +407,7 @@ Article 9: The Drawn Game
 
 9.5.2    If the claim is found to be correct, the game is immediately drawn.
 
-9.5.3    If the claim is found to be incorrect, the arbiter shall add two minutes to the opponent’s remaining thinking time. Then the game shall continue. If the claim was based on an intended move, this move must be made in accordance with Articles 3 and 4.
+9.5.3    If the claim is found to be incorrect, the arbiter shall add two minutes to the opponent's remaining thinking time. Then the game shall continue. If the claim was based on an intended move, this move must be made in accordance with Articles 3 and 4.
 
 9.6     If one or both of the following occur(s) then the game is drawn:
 
@@ -462,7 +427,7 @@ Article 11: The Conduct of the Players
 
 11.2   Playing venue and playing area:
 
-11.2.1    The ‘playing venue’ is defined as the ‘playing area’, rest rooms, toilets, refreshment area, area set aside for smoking and other places as designated by the arbiter.
+11.2.1    The ‘playing venue' is defined as the ‘playing area', rest rooms, toilets, refreshment area, area set aside for smoking and other places as designated by the arbiter.
 
 11.2.2    The playing area is defined as the place where the games of a competition are played.
 
@@ -482,7 +447,7 @@ Article 11: The Conduct of the Players
 
 11.3.2    During a game, a player is forbidden to have any electronic device not specifically approved by the arbiter in the playing venue.
 
-11.3.2.1    However, the regulations of an event may allow such devices to be stored in a player’s bag, provided the device is completely switched off. This bag must be placed as agreed with the arbiter. Both players are forbidden to use this bag without permission of the arbiter.
+11.3.2.1    However, the regulations of an event may allow such devices to be stored in a player's bag, provided the device is completely switched off. This bag must be placed as agreed with the arbiter. Both players are forbidden to use this bag without permission of the arbiter.
 
 11.3.2.2    If it is evident that a player has such a device on their person in the playing venue, the player shall lose the game. The opponent shall win. The regulations of an event may specify a different, less severe, penalty.
 
@@ -506,7 +471,7 @@ Article 11: The Conduct of the Players
 
 11.11 Both players must assist the arbiter in any situation requiring reconstruction of the game, including draw claims.
 
-11.12     Checking a ‘three times occurrence of the position’ or a ’50 moves’ claim is a duty of the players, under supervision of the arbiter.
+11.12     Checking a ‘three times occurrence of the position' or a '50 moves' claim is a duty of the players, under supervision of the arbiter.
 
 Article 12: The Role of the Arbiter (see Preface)
 
@@ -552,7 +517,7 @@ Article 12: The Role of the Arbiter (see Preface)
 
 12.9.5    reducing the points scored in the game by the offending person,
 
-12.9.6    declaring the game to be lost by the offending player (the arbiter shall also decide the opponent’s score),
+12.9.6    declaring the game to be lost by the offending player (the arbiter shall also decide the opponent's score),
 
 12.9.7      a fine announced in advance,
 
@@ -564,7 +529,7 @@ APPENDICES
 
 Appendix A. Rapid Chess
 
-A.1    A ‘Rapid chess’ game is one where either all the moves must be completed in a fixed time of more than 10 minutes but less than 60 minutes for each player; or the time allotted plus 60 times any increment is of more than 10 minutes but less than 60 minutes for each player.
+A.1    A ‘Rapid chess' game is one where either all the moves must be completed in a fixed time of more than 10 minutes but less than 60 minutes for each player; or the time allotted plus 60 times any increment is of more than 10 minutes but less than 60 minutes for each player.
 
 A.2    Players do not need to record the moves, but do not lose their rights to claims normally based on a scoresheet. The player can, at any time, ask the arbiter to provide him/her with a scoresheet, in order to write the moves.
 
@@ -588,7 +553,7 @@ A.5.1.2    No claim can be made regarding incorrect set-up or orientation of the
 
 A.5.2    If the arbiter observes an action taken under Article 7.5.1, 7.5.2, 7.5.3 or 7.5.4, he/she shall act according to Article 7.5.5, provided the opponent has not made his/her next move. If the arbiter does not intervene, the opponent is entitled to claim, provided the opponent has not made his/her next move. If the opponent does not claim and the arbiter does not intervene, the illegal move shall stand and the game shall continue. Once the opponent has made his/her next move, an illegal move cannot be corrected unless this is agreed by the players without intervention of the arbiter.
 
-A.5.3    To claim a win on time, the claimant may pause the chessclock and notify the arbiter. However, the game is drawn if the position is such that the claimant cannot checkmate the player’s king by any possible series of legal moves.
+A.5.3    To claim a win on time, the claimant may pause the chessclock and notify the arbiter. However, the game is drawn if the position is such that the claimant cannot checkmate the player's king by any possible series of legal moves.
 
 A.5.4    If the arbiter observes both kings are in check, or a pawn stands on the rank furthest from its starting position, he/she shall wait until the next move is completed. Then, if an illegal position is still on the board, he/she shall declare the game drawn.
 
@@ -598,7 +563,7 @@ A.6    The regulations of an event shall specify whether Article A.4 or Article 
 
 Appendix B. Blitz
 
-B.1    A ‘blitz’ game is one where all the moves must be completed in a fixed time of 10 minutes or less for each player; or the allotted time plus 60 times any increment is 10 minutes or less for each player.
+B.1    A ‘blitz' game is one where all the moves must be completed in a fixed time of 10 minutes or less for each player; or the allotted time plus 60 times any increment is 10 minutes or less for each player.
 
 B.2    The Competitive Rules of Play shall apply if:
 
@@ -618,7 +583,7 @@ FIDE recognises for its own tournaments and matches only one system of notation,
 
 Description of the Algebraic System
 
-C.1    In this description, ‘piece’ means a piece other than a pawn.
+C.1    In this description, ‘piece' means a piece other than a pawn.
 
 C.2    Each piece is indicated by an abbreviation. In the English language it is the first letter, a capital letter, of its name. Example: K=king, Q=queen, R=rook, B=bishop, N=knight. (N is used for a knight, in order to avoid ambiguity.)
 
@@ -645,7 +610,7 @@ C.9.1    the abbreviation of the name of the piece in question and
 
 C.9.2    the square of arrival. Examples: Bxe5, Nxf3, Rxd1, see also C.10.
 
-C.9.3    When a pawn makes a capture, the file of departure must be indicated, then an x may be inserted, then the square of arrival. Examples: dxe5, gxf3, axb5. In the case of an ‘en passant’ capture, ‘e.p.’ may be appended to the notation. Example: exd6 e.p.
+C.9.3    When a pawn makes a capture, the file of departure must be indicated, then an x may be inserted, then the square of arrival. Examples: dxe5, gxf3, axb5. In the case of an ‘en passant' capture, ‘e.p.' may be appended to the notation. Example: exd6 e.p.
 
 C.10  If two identical pieces can move to the same square, the piece that is moved is indicated as follows:
 
@@ -691,7 +656,7 @@ C.13.4    +     = check
 
 C.13.5    ++ or #     = checkmate
 
-C.13.6    e.p.    = captures ‘en passant’
+C.13.6    e.p.    = captures ‘en passant'
 
 Articles C.13.3 – C.13.6 are optional.
 
@@ -761,9 +726,9 @@ Castling is announced “Lange Rochade” (German for long castling) and “Kurz
 
 The pieces bear the names: Koenig, Dame, Turm, Laeufer, Springer, Bauer.
 
-D.2.2    On the visually disabled player’s board a piece shall be considered ‘touched’ when it has been taken out of the securing aperture.
+D.2.2    On the visually disabled player's board a piece shall be considered ‘touched' when it has been taken out of the securing aperture.
 
-D.2.3    A move shall be considered ‘made’ when:
+D.2.3    A move shall be considered ‘made' when:
 
 D.2.3.1    in the case of a capture, the captured piece has been removed from the board of the player whose turn it is to move,
 
@@ -771,7 +736,7 @@ D.2.3.2    a piece has been placed into a different securing aperture,
 
 D.2.3.3    the move has been announced.
 
-D.2.4    Only then shall the opponent’s clock be started.
+D.2.4    Only then shall the opponent's clock be started.
 
 D.2.5    As far as points D.2.2 and D.2.3 are concerned, the normal rules are valid for the sighted player.
 
@@ -789,15 +754,15 @@ D.2.7    The visually disabled player must keep score of the game in Braille or 
 
 D.2.8    A slip of the tongue in the announcement of a move must be corrected immediately and before the clock of the opponent is started.
 
-D.2.9    If during a game, different positions should arise on the two boards, they must be corrected with the assistance of the arbiter and by consulting both players’ game scores. If the two game scores correspond with each other, the player who has written the correct move but made the wrong one must adjust his/her position to correspond with the move on the game scores. When the game scores are found to differ, the moves shall be retraced to the point where the two scores agree, and the arbiter shall readjust the clocks accordingly.
+D.2.9    If during a game, different positions should arise on the two boards, they must be corrected with the assistance of the arbiter and by consulting both players' game scores. If the two game scores correspond with each other, the player who has written the correct move but made the wrong one must adjust his/her position to correspond with the move on the game scores. When the game scores are found to differ, the moves shall be retraced to the point where the two scores agree, and the arbiter shall readjust the clocks accordingly.
 
 D.2.10    The visually disabled player shall have the right to make use of an assistant who shall have any or all of the following duties:
 
-D.2.10.1    making either player’s move on the board of the opponent,
+D.2.10.1    making either player's move on the board of the opponent,
 
 D.2.10.2    announcing the moves of both players,
 
-D.2.10.3    keeping the game score of the visually disabled player and starting his/her opponent’s clock.
+D.2.10.3    keeping the game score of the visually disabled player and starting his/her opponent's clock.
 
 D.2.10.4    informing the visually disabled player, only at his/her request, of the number of moves completed and the time used up by both players,
 
@@ -817,7 +782,7 @@ Guidelines I. Adjourned Games
 
 I.1     Adjournment procedure:
 
-I.1.1     If a game is not finished at the end of the time prescribed for play, the arbiter shall require the player having the move to ‘seal’ that move. The player must write his/her move in unambiguous notation on a paper scoresheet, put his/her scoresheet and that of his/her opponent in an envelope, seal the envelope and only then stop the chessclock. Until he/she has stopped the chessclock the player retains the right to change his/her sealed move. If, after being told by the arbiter to seal his/her move, the player makes a move on the chessboard he/she must write that same move on his/her scoresheet as his/her sealed move.
+I.1.1     If a game is not finished at the end of the time prescribed for play, the arbiter shall require the player having the move to ‘seal' that move. The player must write his/her move in unambiguous notation on a paper scoresheet, put his/her scoresheet and that of his/her opponent in an envelope, seal the envelope and only then stop the chessclock. Until he/she has stopped the chessclock the player retains the right to change his/her sealed move. If, after being told by the arbiter to seal his/her move, the player makes a move on the chessboard he/she must write that same move on his/her scoresheet as his/her sealed move.
 
 I.1.2        A player having the move who adjourns the game before the end of the playing session shall be considered to have sealed at the nominal time for the end of the session, and his/her remaining time shall so be recorded.
 
@@ -861,7 +826,7 @@ I.9.1     the player having to reply to the sealed move is present, the envelope
 
 I.9.2     the player having to reply to the sealed move is not present, his/her clock shall be started; on his/her arrival, he/she may pause his/her clock and summon the arbiter; the envelope is then opened and the sealed move is made on the chessboard; his/her clock is then restarted,
 
-I.9.3     the player who sealed the move is not present, his/her opponent has the right to record his/her reply on the scoresheet, seal his/her scoresheet in a fresh envelope, pause his/her clock and start the absent player’s clock instead of making his/her reply in the normal manner; if so, the envelope shall be handed to the arbiter for safekeeping and opened on the absent player’s arrival.
+I.9.3     the player who sealed the move is not present, his/her opponent has the right to record his/her reply on the scoresheet, seal his/her scoresheet in a fresh envelope, pause his/her clock and start the absent player's clock instead of making his/her reply in the normal manner; if so, the envelope shall be handed to the arbiter for safekeeping and opened on the absent player's arrival.
 
 I.10    Any player who arrives at the chessboard after the default time shall lose the game unless the arbiter decides otherwise. However, if the sealed move resulted in the conclusion of the game, that conclusion shall still apply.
 
@@ -875,11 +840,11 @@ I.12.2     If it is impossible to re-establish the position, the game shall be a
 
 I.13    If, upon resumption of the game, either player points out before making his/her first move that the time used has been incorrectly indicated on either clock, the error must be corrected. If the error is not then established the game shall continue without correction unless the arbiter decides otherwise.
 
-I.14    The duration of each resumption session shall be controlled by the arbiter’s timepiece. The starting time shall be announced in advance.
+I.14    The duration of each resumption session shall be controlled by the arbiter's timepiece. The starting time shall be announced in advance.
 
 Guidelines II. Chess960 Rules
 
-II.1     Before a Chess960 game a starting position is randomly set up, subject to certain rules. After this, the game is played in the same way as regular chess. In particular, pieces and pawns have their normal moves, and each player’s objective is to checkmate the opponent’s king.
+II.1     Before a Chess960 game a starting position is randomly set up, subject to certain rules. After this, the game is played in the same way as regular chess. In particular, pieces and pawns have their normal moves, and each player's objective is to checkmate the opponent's king.
 
 II.2     Starting Position Requirements
 
@@ -910,21 +875,22 @@ II.3.2.4    rook-move-only castling: by making only a move with the rook.
 II.3.2.5    Recommendations:
 
 When castling on a physical board with a human player, it is recommended that the king be moved outside the playing surface next to his/her final position, the rook then be moved from its starting position to its final position, and then the king be placed on his final square.
-After castling, the rook and king’s final positions should be exactly the same positions as they would be in regular chess.
+After castling, the rook and king's final positions should be exactly the same positions as they would be in regular chess.
 II.3.2.6    Clarification
 
 Thus, after c-side castling (notated as 0-0-0 and known as queen-side castling in ortho-dox chess), the king is on the c-square (c1 for white and c8 for black) and the rook is on the d-square (d1 for white and d8 for black). After g-side castling (notated as 0-0 and known as king-side castling in orthodox chess), the king is on the g-square (g1 for white and g8 for black) and the rook is on the f-square (f1 for white and f8 for black).
 
 II.3.2.7    Notes
 
-To avoid any misunderstanding, it may be useful to state “I am about to castle” before castling.
-In some starting positions, the king or rook (but not both) does not move during castling.
- In some starting positions, castling can take place as early as the first move.
-All the squares between the king’s initial and final squares (including the final square) and all the squares between the rook’s initial and final squares (including the final square) must be vacant except for the king and castling rook.
-In some starting positions, some squares can stay filled during castling that would have to be vacant in regular chess. For example, after c-side castling 0-0-0, it is possible to have a, b, and/or e still filled, and after g-side castling (0-0), it is possible to have e and/or h filled.
+- To avoid any misunderstanding, it may be useful to state “I am about to castle” before castling.
+- In some starting positions, the king or rook (but not both) does not move during castling.
+- In some starting positions, castling can take place as early as the first move.
+- All the squares between the king's initial and final squares (including the final square) and all the squares between the rook's initial and final squares (including the final square) must be vacant except for the king and castling rook.
+- In some starting positions, some squares can stay filled during castling that would have to be vacant in regular chess. For example, after c-side castling 0-0-0, it is possible to have a, b, and/or e still filled, and after g-side castling (0-0), it is possible to have e and/or h filled.
+
 Guidelines III. Games without Increment including Quickplay Finishes
 
-III.1    A ‘quickplay finish’ is the phase of a game when all the remaining moves must be completed in a finite time.
+III.1    A ‘quickplay finish' is the phase of a game when all the remaining moves must be completed in a finite time.
 
 III.2.1     The Guidelines below concerning the final period of the game including Quickplay Finishes, shall only be used at an event if their use has been announced beforehand.
 
@@ -956,125 +922,35 @@ III.6.1.2     that his/her opponent has been making no effort to win by normal m
 
 III.6.2     The claim shall be referred to the designated arbiter.
 
-Glossary of Terms in the Laws of Chess
+## Castling
 
-Term	First Reference	Definition
-adjourn	8.1	Instead of playing the game in one session it is temporarily halted and then continued at a later time.
-algebraic notation	8.1	Recording the moves using a-h and 1-8 on the 8×8 board.
-analyse	11.3	Where one or more players make moves on a board to try to determine what is the best continuation.
-appeal	11.10	Normally a player has the right to appeal against a decision of the arbiter or organiser.
-arbiter	Preface	The person(s) responsible for ensuring that the rules of a competition are followed.
-arbiter’s discretion	N/A	There are approximately 39 instances in the Laws where the arbiter must use his/her judgement.
-assistant	8.1	A person who may help the smooth running of the competition in various ways.
-attack	3.1	A piece is said to attack an opponent’s piece if the player’s piece can make a capture on that square.
-black	2.1.1	There are 16 dark-coloured pieces and 32 squares called black. Or 2. When capitalised, this also refers to the player of the black pieces.
-blitz	B	A game where each player’s thinking time is 10 minutes or less.
-board	2.4	Short for chessboard.
-Bronstein mode	6.3.2	See delay mode
-capture	3.1	Where a piece is moved from its square to a square occupied by an opponent’s piece, the latter is removed from the board. See also 3.7.4.1 and 3.4.7.2. In notation x.
-castling	3.8.2	A move of the king towards a rook. See the article. In notation 0-0 kingside castling, 0-0-0 queenside castling.
-cellphone	N/A	See mobile phone.
-check	3.9	Where a king is attacked by one or more of the opponent’s pieces. In notation +.
-checkmate	1.2	Where the king is attacked and cannot parry the threat. In notation ++ or #.
-chessboard	1.1	The 8×8 grid as in 2.1.
-chessclock	6.1	A clock with two time displays connected to each other.
-chess set	N/A	The 32 pieces on the chessboard.
-Chess960	II	A variant of chess where the back-row pieces are set up in one of the 960 distinguishable possible positions
-claim	6.8	The player may make a claim to the arbiter under various circumstances.
-clock	6.1	One of the two time displays.
-completed move	6.2.1	Where a player has made his/her move and then pressed his/her clock.
-contiguous area	12.8	An area touching but not actually part of the playing venue. For example, the area set aside for spectators.
-cumulative (Fischer) mode	N/A	Where a player receives an extra amount of time (often 30 seconds) prior to each move.
-dead position	5.2.2	Where neither player can mate the opponent’s king with any series of legal moves.
-default time	6.7	The specified time a player may be late without being forfeited.
-delay (Bronstein) mode	6.3.2	Both players receive an allotted ‘main thinking time’. Each player also receives a ‘fixed extra time’ with every move. The countdown of the main thinking time only commences after the fixed extra time has expired. Provided the player presses his/her clock before the expiration of the fixed extra time, the main thinking time does not change, irrespective of the proportion of the fixed extra time used.
-demonstration board	6.12.1	A display of the position on the board where the pieces are moved by hand.
-diagonal	2.4	A straight line of squares of the same colour, running from one edge of the board to an adjacent edge.
-disability	6.2.6	A condition, such as a physical or mental handicap, that results in partial or complete loss of a person’s ability to perform certain chess activities.
-displaced	7.4.1	to put or take pieces from their usual place. For example, a pawn from a2 to a4.5; a rook partway between d1 and e1; a piece lying on its side; a piece knocked onto the floor.
-draw	5.2	Where the game is concluded with neither side winning.
-draw offer	9.1.2	Where a player may offer a draw to the opponent. This is indicated on the scoresheet with the symbol (=).
-e-cigarette	N/A	Device containing a liquid that is vaporised and inhaled orally to simulate the act of smoking tobacco.
-en passant	3.7.4.1	See that article for an explanation. In notation e.p.
-exchange	3.7.5.3	1. 3.7.5.3 Where a pawn is promoted.
-2. Where a player captures a piece of the same value as his/her own and this piece is recaptured.
-3. Where one player has lost a rook and the other has lost a bishop or knight.
-explanation	11.9	A player is entitled to have a Law explained.
-fair play	12.2.1	Whether justice has been done has sometimes to be considered when an arbiter finds that the Laws are inadequate.
-file	2.4	A vertical column of eight squares on the chessboard.
-Fischer mode	N/A	See cumulative mode
-flag	6.1	The device that displays when a time period has expired.
-flag-fall	6.1	Where the allotted time of a player has expired.
-forfeit	4.8.1	To lose the right to make a claim or move. Or 2. To lose a game because of an infringement of the Laws.
-handicap	N/A	See disability
-I adjust	N/A	See j’adoube
-illegal	3.10.2	A position or move that is impossible because of the Laws of Chess.
-impairment	N/A	See disability
-increment	6.1	An amount of time (from 2 to 60 seconds) added from the start before each move for the player. This can be in either delay or cumulative mode.
-intervene	12.7	To involve oneself in something that is happening in order to affect the outcome.
-j’adoube	4.2	Giving notice that the player wishes to adjust a piece, but does not necessarily intend to move it.
-kingside	3.8.1	The vertical half of the board on which the king stands at the start of the game.
-legal move	3.10.1	See the article for an explanation
-made	1.1	A move is said to have been ‘made’ when the piece has been moved to its new square, the hand has quit the piece, and the captured piece, if any, has been removed from the board.
-mate	N/A	Abbreviation of checkmate
-minor piece	N/A	Bishop or knight
-mobile phone	11.3.2	Cellphone
-monitor	6.12.1	An electronic display of the position on the board.
-move	1.1	1. 40 moves in 90 minutes, refers to 40 moves by each player.
-2. Having the move refers to the player’s right to play next.
-3. White’s best move refers to the single move by White.
-Move-counter	6.10.2	A device on a chessclock which may be used to record the number of times the clock has been pressed by each player.
-normal means	G.III.5	Playing in a positive manner to try to win; or, having a position such that there is a realistic chance of winning the game other than just flag-fall.
-organiser	8.3	The person responsible for the venue, dates, prize money, invitations, format of the competition and so on.
-over-the-board	Introduction	The Laws cover only this type of chess, not internet, nor correspondence, and so on.
-penalties	12.3	The arbiter may apply penalties as listed in 12.9 in ascending order of severity.
-piece	2.1	One of the 32 figurines on the board. Or 2. A queen, rook, bishop or knight.
-playing area	11.2	The place where the games of a competition are played.
-playing venue	11.2	The only place to which the players have access during play.
-points	10	Normally a player scores 1 point for a win, ½ point for a draw, 0 for a loss. An alternative is 3 for a win, 1 for a draw, 0 for a loss.
-press the clock	6.2.1	The act of pushing the button or lever on a chess clock which stops the player’s clock and starts that of his/her opponent.
-promotion	3.7.5.3	Where a pawn reaches the eighth rank and is replaced by a new queen, rook, bishop or knight of the same colour.
-queen	N/A	As in queen a pawn, meaning to promote a pawn to a queen.
-queenside	3.8.1	The vertical half of the board on which the queen stands at the start of the game.
-quickplay finish	III	The last part of a game where a player must complete an unlimited number of moves in a finite time.
-rank	2.4	A horizontal row of eight squares on the chessboard.
-rapid chess	A	A game where each player’s thinking time is more than 10 minutes, but less than 60.
-repetition	9.2.1	1. A player may claim a draw if the same position occurs three times.
-2. A game is drawn if the same position occurs five times.
-resigns	5.1.2	Where a player gives up, rather than play on until mated.
-rest rooms	11.2	Toilets, also the room set aside in World Championships where the players can relax.
-result	8.7	Usually the result is 1-0, 0-1 or ½-½. In exceptional circumstances both players may lose (Article 11.8), or one score ½ and the other 0. For unplayed games the scores are indicated by +/- (White wins by forfeit), -/+ (Black wins by forfeit), -/- (Both players lose by forfeit).
-regulations of an event	6.7.1	At various points in the Laws there are options. The regulations of an event must state which have been chosen.
-sealed move	I.1.1	Where a game is adjourned the player seals his/her next move in an envelope.
-scoresheet	8.1	A paper sheet with spaces for writing the moves. This can also be electronic.
-screen	6.12.1	An electronic display of the position on the board.
-spectators	11.4	People other than arbiters or players viewing the games. This includes players after their games have been concluded.
-standard chess	III.3.2	A game where each player’s thinking time is at least 60 minutes.
-stalemate	5.2.1	Where the player has no legal move and his/her king is not in check.
-square of promotion	3.7.5.1	The square a pawn lands on when it reached the eighth rank.
-supervise	12.2.5	Inspect or control.
-time control	N/A	1. The regulation about the time the player is allotted. For example, 40 moves in 90 minutes, all the moves in 30 minutes, plus 30 seconds cumulatively from move 1.
-2. A player is said ‘to have reached the time control’, if, for example he/she has completed the 40 moves in less than 90 minutes.
-time period	8.6	A part of the game where the players must complete a number of moves or all the moves in a certain time.
-touch move	4.3	If a player touches a piece with the intention of moving it, He/She is obliged to move it.
-vertical	2.4	The 8th rank is often thought as the highest area on a chessboard. Thus each file is referred to as ‘vertical’.
-white	2.2	1. There are 16 light-coloured pieces and 32 squares called white.
-2. When capitalised, this also refers to the player of the white pieces.
-zero tolerance	6.7.1	Where a player must arrive at the chessboard before the start of the session.
-50-move rule	9.3	A player may claim a draw if the last 50 moves have been completed by each player without the movement of any pawn and without any capture.
-75-move rule	9.6.2	The game is drawn if the last 75 moves have been completed by each player without the movement of any pawn and without any capture.
-Contact the Rules Commission!
-To get in touch with the Rules Commission, go to our contact page!
+Castling is a special move.
+It is the only chess move in which two pieces are moved at the same time.
+In castling, at the same time,
+the king moves two squares towards one of the rooks,
+where the partnering rook will move over the king and end up next to it.
 
-To contact the webmaster you can send one e-mail to rules@fide.com
+As per regular chess, castling is only possible when:
 
-Privacy notice
-Check our privacy policy here.
+- the king is not in check
+- the squares the king passes through are not attacked
+- the king's destination square is not under attack
+- the king has never moved
+- the partnering rook has never moved
 
-Check our cookie policy here.
+As Conquer Chess is a real-time strategy game,
+castling can fail while ongoing.
 
-Check FIDE data protection policy here.
+Castling can fail in the first half chess move under these conditions:
+
+- The king's destination square becomes occupied by another piece
+- The rooks's destination square becomes occupied by another piece
+- The king's destination square becomes attacked
+- The rook is killed
 
 
-Copyright © 2025 FIDE Rules Commission. All rights reserved.
-Theme: ColorMag by ThemeGrill. Powered by WordPress.
+
+
+when in check, going through check, when the king has moved
+or when the partnering rook has moved. 
+

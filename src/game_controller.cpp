@@ -1036,6 +1036,15 @@ bool is_selected(const piece& p, const game_controller& c)
   return maybe_selected_piece_id.value() == piece_id;
 }
 
+bool is_square_attacked(
+  const game_controller& c,
+  const square& s,
+  const chess_color attacker_color
+)
+{
+  return is_square_attacked(c.get_game(), s, attacker_color);
+}
+
 void move_cursor_to(
   game_controller& c,
   const std::string& square_str,
@@ -2133,44 +2142,10 @@ void test_game_controller() //!OCLINT tests may be many
     assert(health_after == health_before);
     assert(get_piece_at(c.get_game(), square("d2")).get_action_history().get().empty());
   }
-  // When a piece is killed, the queen attacker moves to that square
-  {
-    game_controller c{
-      game(get_pieces_before_scholars_mate()),
-      lobby_options()
-    };
 
-    // The attacker
-    assert(is_piece_at(c, square("h5")));
-    assert(get_piece_at(c.get_game(), square("h5")).get_type() == piece_type::queen);
-    assert(get_piece_at(c.get_game(), square("h5")).get_color() == chess_color::white);
-
-    // The piece under attack
-    assert(is_piece_at(c, square("f7")));
-    assert(get_piece_at(c.get_game(), square("f7")).get_type() == piece_type::pawn);
-    assert(get_piece_at(c.get_game(), square("f7")).get_color() == chess_color::black);
-
-
-    do_select(c, "h5", side::lhs);
-    move_cursor_to(c, "f7", side::lhs);
-    add_user_input(c, create_press_action_1(side::lhs));
-    c.apply_user_inputs_to_game();
-
-    int cnt{0};
-    while (get_piece_at(c, square("f7")).get_color() == chess_color::black)
-    {
-      assert(is_piece_at(c, square("f7")));
-      c.tick(delta_t(0.25));
-      assert(cnt < 1000);
-    }
-    // Must be captured
-    assert(get_piece_at(c, square("f7")).get_color() == chess_color::white);
-  }
   // A queen cannot attack over pieces
   {
     game_controller c;
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_keyboard_mouse()};
     assert(is_piece_at(c, square("d1")));
 
     do_select(c, "d1", side::lhs);

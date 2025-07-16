@@ -6,8 +6,6 @@
 
 void test_rule_1_2()
 {
-#ifndef NDEBUG // no tests in release
-
   /// [1.2] The player with the light-coloured pieces (White) makes the first move,
   /// then the players move alternately,
   /// with the player with the dark-coloured pieces (Black) making the next move.
@@ -33,19 +31,16 @@ void test_rule_1_2()
     // Can move now
     assert(!get_piece_actions(c, side::rhs).empty());
   }
-#endif // NDEBUG // no tests in release
 }
 
 void test_rule_1_4_1()
 {
-#ifndef NDEBUG // no tests in release
-
-  // [1.4.1]
-  /// 1.4.1. The player who achieves this goal is said to have ‘checkmated’
-  ///   the opponent’s king and to have won the game.
-  ///   Leaving one’s own king under attack,
-  ///   exposing one’s own king to attack and also
-  ///   ’capturing’ the opponent’s king is not allowed.
+  /// [1.4.1]
+  /// The player who achieves this goal is said to have ‘checkmated’
+  /// the opponent’s king and to have won the game.
+  /// Leaving one’s own king under attack,
+  /// exposing one’s own king to attack and also
+  /// 'capturing' the opponent’s king is not allowed.
   ///
 
   // [1.4.1a]
@@ -145,13 +140,10 @@ void test_rule_1_4_1()
     assert(has_winner(c));
     assert(get_winner(c).value() == chess_color::white);
   }
-#endif // NDEBUG // no tests in release
-
 }
 
 void test_rule_1_5()
 {
-#ifndef NDEBUG // no tests in release
   /// [1.5]. If the position is such that neither player can possibly checkmate
   /// the opponent’s king, the game is drawn (see Article 5.2.2).
 
@@ -170,16 +162,215 @@ void test_rule_1_5()
     assert(!has_winner(c));
     assert(!is_draw(c));
   }
-#endif // NDEBUG // no tests in release
 }
 
+void test_rule_2_1()
+{
+  /// `[2.1]` The chessboard is composed of an 8 x 8 grid of 64 equal squares
+  /// alternately light (the ‘white’ squares) and dark (the ‘black’ squares).
+  ///
+  /// The chessboard is placed between the players in such a way
+  /// that the near corner square to the right of the player is white.
+  //
+  assert(get_all_files().size() == 8);
+  assert(get_all_ranks().size() == 8);
+  assert(to_color(square("d1")) == chess_color::white);
+  assert(to_color(square("e1")) == chess_color::black);
+}
+
+void test_rule_2_2()
+{
+  /// `[2.2]` At the beginning of the game White has 16 light-coloured pieces
+  /// (the ‘white’ pieces); Black has 16 dark-coloured pieces (the ‘black’ pieces).
+
+  const auto pieces = get_standard_starting_pieces();
+  assert(pieces.size() == 32);
+  std::map<chess_color, int> colors;
+  colors[chess_color::white] = 0;
+  colors[chess_color::black] = 0;
+  for (const auto& p: pieces)
+  {
+   ++colors[p.get_color()];
+  }
+  assert(colors[chess_color::white] == 16);
+  assert(colors[chess_color::black] == 16);
+}
+
+void test_rule_2_3()
+{
+  /// `[2.3]`. The initial position of the pieces on the chessboard is as follows:
+  ///
+  /// ```text
+  /// rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+  /// ```
+
+  const auto pieces = get_standard_starting_pieces();
+  // Types
+  assert(get_piece_at(pieces, square("a1")).get_type() == piece_type::rook);
+  assert(get_piece_at(pieces, square("b1")).get_type() == piece_type::knight);
+  assert(get_piece_at(pieces, square("c1")).get_type() == piece_type::bishop);
+  assert(get_piece_at(pieces, square("d1")).get_type() == piece_type::queen);
+  assert(get_piece_at(pieces, square("e1")).get_type() == piece_type::king);
+  assert(get_piece_at(pieces, square("f1")).get_type() == piece_type::bishop);
+  assert(get_piece_at(pieces, square("g1")).get_type() == piece_type::knight);
+  assert(get_piece_at(pieces, square("h1")).get_type() == piece_type::rook);
+
+  assert(get_piece_at(pieces, square("a2")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("b2")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("c2")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("d2")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("e2")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("f2")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("g2")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("h2")).get_type() == piece_type::pawn);
+
+  assert(get_piece_at(pieces, square("a7")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("b7")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("c7")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("d7")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("e7")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("f7")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("g7")).get_type() == piece_type::pawn);
+  assert(get_piece_at(pieces, square("h7")).get_type() == piece_type::pawn);
+
+  assert(get_piece_at(pieces, square("a8")).get_type() == piece_type::rook);
+  assert(get_piece_at(pieces, square("b8")).get_type() == piece_type::knight);
+  assert(get_piece_at(pieces, square("c8")).get_type() == piece_type::bishop);
+  assert(get_piece_at(pieces, square("d8")).get_type() == piece_type::queen);
+  assert(get_piece_at(pieces, square("e8")).get_type() == piece_type::king);
+  assert(get_piece_at(pieces, square("f8")).get_type() == piece_type::bishop);
+  assert(get_piece_at(pieces, square("g8")).get_type() == piece_type::knight);
+  assert(get_piece_at(pieces, square("h8")).get_type() == piece_type::rook);
+
+  // Colors
+  assert(get_piece_at(pieces, square("a1")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("b1")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("c1")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("d1")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("e1")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("f1")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("g1")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("h1")).get_color() == chess_color::white);
+
+  assert(get_piece_at(pieces, square("a2")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("b2")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("c2")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("d2")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("e2")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("f2")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("g2")).get_color() == chess_color::white);
+  assert(get_piece_at(pieces, square("h2")).get_color() == chess_color::white);
+
+  assert(get_piece_at(pieces, square("a7")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("b7")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("c7")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("d7")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("e7")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("f7")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("g7")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("h7")).get_color() == chess_color::black);
+
+  assert(get_piece_at(pieces, square("a8")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("b8")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("c8")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("d8")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("e8")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("f8")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("g8")).get_color() == chess_color::black);
+  assert(get_piece_at(pieces, square("h8")).get_color() == chess_color::black);
+}
+
+void test_rule_3_1()
+{
+  /// `[3.1]` It is not permitted to move a piece to a square occupied
+  /// by a piece of the same colour.
+  {
+    game_controller c;
+    do_select(c, "d1", side::lhs); // White queen
+    move_cursor_to(c, "d2", side::lhs); // White pawn
+    assert(get_piece_actions(c, side::lhs).size() == 1);
+    assert(get_piece_actions(c, side::lhs)[0] == piece_action_type::select);
+  }
+  /// `[3.1.1]` If a piece moves to a square occupied by an opponent's piece
+  /// the latter is captured and removed from the chessboard
+  /// as part of the same move.
+  {
+    game_controller c{
+      game(get_pieces_before_scholars_mate())
+    };
+
+    // The attacker
+    assert(is_piece_at(c, square("h5")));
+    assert(get_piece_at(c.get_game(), square("h5")).get_type() == piece_type::queen);
+    assert(get_piece_at(c.get_game(), square("h5")).get_color() == chess_color::white);
+
+    // The piece under attack
+    assert(is_piece_at(c, square("f7")));
+    assert(get_piece_at(c.get_game(), square("f7")).get_type() == piece_type::pawn);
+    assert(get_piece_at(c.get_game(), square("f7")).get_color() == chess_color::black);
+
+    do_select(c, "h5", side::lhs);
+    move_cursor_to(c, "f7", side::lhs);
+    add_user_input(c, create_press_action_1(side::lhs)); // Attack
+    c.apply_user_inputs_to_game();
+
+    c.tick(delta_t(1.00));
+    // Must be captured
+    assert(get_piece_at(c, square("f7")).get_color() == chess_color::white);
+  }
+  /// `[3.1.2]` A piece is said to attack an opponent's piece
+  /// if the piece could make a capture on that square according
+  /// to Articles 3.2 to 3.8.
+  {
+    game_controller c{
+      game(get_pieces_before_scholars_mate())
+    };
+
+    // The attacker
+    assert(is_piece_at(c, square("h5")));
+    assert(get_piece_at(c.get_game(), square("h5")).get_type() == piece_type::queen);
+    assert(get_piece_at(c.get_game(), square("h5")).get_color() == chess_color::white);
+
+    // The piece under attack
+    assert(is_piece_at(c, square("f7")));
+    assert(get_piece_at(c.get_game(), square("f7")).get_type() == piece_type::pawn);
+    assert(get_piece_at(c.get_game(), square("f7")).get_color() == chess_color::black);
+
+    assert(is_square_attacked(c, square("f7"), chess_color::white));
+  }
+  /// `[3.1.3]` A piece is considered to attack a square even if this piece
+  /// is constrained from moving to that square because it would then leave
+  /// or place the king of its own colour under attack.
+  {
+    game_controller c{
+      game(create_game_from_fen_string(fen_string("4k3/4q3/p7/8/8/8/4Q3/4K3 w - - 0 1")))
+    };
+
+    // The pinned attacker
+    assert(is_piece_at(c, square("e2")));
+    assert(get_piece_at(c.get_game(), square("e2")).get_type() == piece_type::queen);
+    assert(get_piece_at(c.get_game(), square("e2")).get_color() == chess_color::white);
+
+    // The piece under attack
+    assert(is_piece_at(c, square("a6")));
+    assert(get_piece_at(c.get_game(), square("a6")).get_type() == piece_type::pawn);
+    assert(get_piece_at(c.get_game(), square("a6")).get_color() == chess_color::black);
+
+    assert(is_square_attacked(c, square("a6"), chess_color::white));
+  }
+
+  //
+}
 void test_rules()
 {
 #ifndef NDEBUG // no tests in release
   test_rule_1_2();
   test_rule_1_4_1();
   test_rule_1_5();
-
+  test_rule_2_1();
+  test_rule_2_2();
+  test_rule_2_3();
+  test_rule_3_1();
 #endif // NDEBUG // no tests in release
 }
 

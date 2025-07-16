@@ -339,6 +339,20 @@ bool is_selected(
   const game_controller& c
 );
 
+/// Determine if the square is attacked by (another) piece of a certain color.
+///
+/// If the square is empty, it will determine if an enemy piece
+/// is looking at this square.
+///
+/// If the square is occupied, it will determine if an enemy piece
+/// is looking at that piece.
+/// That piece can be of any color.
+bool is_square_attacked(
+  const game_controller& c,
+  const square& s,
+  const chess_color attacker_color
+);
+
 /// Put the cursor (i.e. the selector, not the mouse pointer)
 /// at the desired square
 void move_cursor_to(

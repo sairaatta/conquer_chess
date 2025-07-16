@@ -394,6 +394,20 @@ bool is_piece_at(
   const std::string& square_str
 );
 
+/// Determine if the square is attacked by (another) piece of a certain color.
+///
+/// If the square is empty, it will determine if an enemy piece
+/// is looking at this square.
+///
+/// If the square is occupied, it will determine if an enemy piece
+/// is looking at that piece.
+/// That piece can be of any color.
+bool is_square_attacked(
+  const game& g,
+  const square& s,
+  const chess_color attacker_color
+);
+
 /// Call game::tick safely.
 ///
 /// That is, with a maximum delta t of 0.25

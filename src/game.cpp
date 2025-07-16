@@ -1221,6 +1221,15 @@ bool is_piece_at(
   return is_piece_at(g, square(square_str));
 }
 
+bool is_square_attacked(
+  const game& g,
+  const square& s,
+  const chess_color attacker_color
+)
+{
+  return is_square_attacked(g.get_pieces(), s, attacker_color);
+}
+
 void game::tick(const delta_t& dt)
 {
   // Ensure the tick size is limited to its maximum
