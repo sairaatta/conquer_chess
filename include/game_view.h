@@ -150,8 +150,7 @@ void process_event(
   game_controller& c,
   const physical_controllers& pc,
   const sf::Event& event,
-  const game_view_layout& layout,
-  const in_game_time& t
+  const game_view_layout& layout
 );
 
 

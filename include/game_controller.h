@@ -309,10 +309,16 @@ bool has_selected_pieces(
   const side player_side
 );
 
+/// Does the game have a winner?
+bool has_winner(const game_controller& c) noexcept;
+
 bool is_cursor_on_selected_piece(
   const game_controller& c,
   const side player_side
 ) noexcept;
+
+/// Determine if the game is a draw
+bool is_draw(const game_controller& c);
 
 /// Determine if there is a piece at the coordinat
 bool is_piece_at(

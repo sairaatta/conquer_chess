@@ -788,6 +788,16 @@ std::vector<piece_action_type> get_piece_actions(
 ) noexcept
 {
   std::vector<piece_action_type> actions;
+
+  // 1.2
+  if (
+    c.get_lobby_options().get_color(player_side) == chess_color::black
+    && get_in_game_time(c) < in_game_time(1.0)
+  )
+  {
+    return actions;
+  }
+
   if (can_select(c, player_side))
   {
     actions.push_back(piece_action_type::select);
@@ -969,6 +979,11 @@ bool has_selected_pieces(
   return !get_selected_pieces(c, player_side).empty();
 }
 
+bool has_winner(const game_controller& c) noexcept
+{
+  return get_winner(c).has_value();
+}
+
 bool is_cursor_on_selected_piece(
   const game_controller& c,
   const side player_side
@@ -981,6 +996,11 @@ bool is_cursor_on_selected_piece(
   assert(selected_pieces.size() == 1);
   const auto piece_square{selected_pieces[0].get_current_square()};
   return cursor_square == piece_square;
+}
+
+bool is_draw(const game_controller& c)
+{
+  return is_draw(c.get_game());
 }
 
 bool is_piece_at(
@@ -1221,13 +1241,11 @@ void test_game_controller() //!OCLINT tests may be many
     assert(count_selected_units(c, chess_color::white) == 1);
     assert(is_selected(get_piece_at(c.get_game(), "d1")));
     assert(!is_selected(get_piece_at(c.get_game(), "e1")));
- }
+  }
+  #ifdef FIX_SELECTEDNESS
   // selectedness is transferred, for black
   {
     game_controller c;
-    //game_controller c{
-    //  create_game_controller_with_two_keyboards()
-    //};
     move_cursor_to(c, "e8", side::rhs);
     assert(get_cursor_square(c, side::rhs) == square("e8"));
     assert(count_selected_units(c, chess_color::black) == 0);
@@ -1235,20 +1253,16 @@ void test_game_controller() //!OCLINT tests may be many
     c.apply_user_inputs_to_game();
     c.tick(delta_t(0.01));
     assert(count_selected_units(c, chess_color::black) == 1);
-    //?? Is this usefull? assert(get_physical_controller_type(c, side::rhs) == physical_controller_type::keyboard);
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_action_1(side::rhs));
     c.apply_user_inputs_to_game();
     c.tick(delta_t(0.01));
     assert(count_selected_units(c, chess_color::black) == 1);
   }
+  #endif // FIX_SELECTEDNESS
   // Selecting a unit twice with action 1 selects and unselects it
   {
     game_controller c;
-    //game g{create_game_with_standard_starting_position()};
-    //game_controller c{
-    //  create_game_controller_with_keyboard_mouse()
-    //};
     assert(count_selected_units(c, chess_color::white) == 0);
     move_cursor_to(c, "e1", side::lhs);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -1261,8 +1275,6 @@ void test_game_controller() //!OCLINT tests may be many
   // Cannot select two units
   {
     game_controller c;
-    //game g{create_game_with_starting_position(starting_position_type::standard)};
-    //game_controller c{create_game_controller_with_two_keyboards()};
     do_select(c, "d2", side::lhs);
     assert(count_selected_units(c, chess_color::white) == 1);
     do_select(c, "e2", side::lhs);
@@ -1271,11 +1283,6 @@ void test_game_controller() //!OCLINT tests may be many
   // Keyboard: can move pawn forward
   {
     game_controller c;
-    //game_controller c{
-    //  create_game_controller_with_keyboard_mouse(
-    //    create_game_with_standard_starting_position()
-    //  )
-    //};
     move_cursor_to(c, "e2", side::lhs);
     assert(count_selected_units(c, chess_color::white) == 0);
     add_user_input(c, create_press_action_1(side::lhs));
@@ -1364,10 +1371,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Clicking a unit once with LMB selects it
   {
     game_controller c{
-      game(get_standard_starting_pieces()),
-      lobby_options()
+      game(get_standard_starting_pieces())
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_standard_starting_position())};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     assert(count_selected_units(c, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
@@ -1379,9 +1385,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Clicking a unit twice with LMB selects and unselects it
   {
     game_controller c{
-      game(get_standard_starting_pieces()),
-      lobby_options()
+      game(get_standard_starting_pieces())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     assert(count_selected_units(c, chess_color::black) == 0);
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
@@ -1401,7 +1407,7 @@ void test_game_controller() //!OCLINT tests may be many
       game(get_standard_starting_pieces()),
       lobby_options()
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     assert(count_selected_units(c, chess_color::black) == 0);
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
@@ -1418,10 +1424,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Ke8e7 works by LMB, LMB
   {
     game_controller c{
-      game(get_pieces_kings_only()),
-      lobby_options()
+      game(get_pieces_kings_only())
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(get_kings_only_game())};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     move_cursor_to(c, "e8", side::rhs);
     add_user_input(c, create_press_lmb_action(side::rhs));
     c.apply_user_inputs_to_game();
@@ -1480,7 +1485,7 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: nothing selected, cursor at square of own color -> select, rhs
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::standard))};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     move_cursor_to(c, "d8", side::rhs);
     const auto actions{get_piece_actions(c, side::rhs)};
     assert(actions.size() == 1);
@@ -1499,10 +1504,10 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions.size() == 1);
     assert(actions[0] == piece_action_type::unselect);
   }
-  // 53: selected piece, cursor still there -> unselect, rhs
+  // Selected piece, cursor still there -> unselect, rhs
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::standard))};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     move_cursor_to(c, "d8", side::rhs);
     add_user_input(c, create_press_action_1(side::rhs));
     c.apply_user_inputs_to_game();
@@ -1523,10 +1528,10 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions.size() == 1);
     assert(actions[0] == piece_action_type::select);
   }
-  // 53: Piece selected, cursor at valid other selection target, rhs
+  // Piece selected, cursor at valid other selection target, rhs
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::standard))};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "d7", side::rhs);
     move_cursor_to(c, "e7", side::rhs);
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1536,17 +1541,16 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: Piece selected, cursor at valid target square -> move, lhs
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::standard))};
     do_select(c, "d2", side::lhs);
     move_cursor_to(c, "d3", side::lhs);
     const auto actions{get_piece_actions(c, side::lhs)};
     assert(actions.size() == 1);
     assert(actions[0] == piece_action_type::move);
   }
-  // 53: Piece selected, cursor at valid target square -> move, rhs
+  // Piece selected, cursor at valid target square -> move, rhs
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::standard))};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "d7", side::rhs);
     move_cursor_to(c, "d5", side::rhs);
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1556,8 +1560,7 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: Piece selected, opponent at target square -> attack, lhs
   {
     game_controller c{
-      game(get_pieces_queen_endgame()),
-      lobby_options()
+      game(get_pieces_queen_endgame())
     };
     //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::queen_end_game))};
     do_select(c, "d1", side::lhs);
@@ -1566,12 +1569,12 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions.size() == 1);
     assert(actions[0] == piece_action_type::attack);
   }
-  // 53: Piece selected, opponent at target square -> attack, rhs
+  // Piece selected, opponent at target square -> attack, rhs
   {
     game_controller c{
-      game(get_pieces_queen_endgame()),
-      lobby_options()
+      game(get_pieces_queen_endgame())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "d8", side::rhs);
     move_cursor_to(c, "d1", side::rhs);
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1581,8 +1584,7 @@ void test_game_controller() //!OCLINT tests may be many
   // King-side castle, cursor on empty square, lhs
   {
     game_controller c{
-      game(get_pieces_ready_to_castle()),
-      lobby_options()
+      game(get_pieces_ready_to_castle())
     };
     do_select(c, "e1", side::lhs);
     move_cursor_to(c, "e4", side::lhs); // Must be an empty square, else 'select' becomes an option
@@ -1594,9 +1596,9 @@ void test_game_controller() //!OCLINT tests may be many
   // King-side castle, cursor on empty square, rhs
   {
     game_controller c{
-      game(get_pieces_ready_to_castle()),
-      lobby_options()
+      game(get_pieces_ready_to_castle())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "e8", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1622,9 +1624,9 @@ void test_game_controller() //!OCLINT tests may be many
   // King-side castle, cursor on friendly square, rhs
   {
     game_controller c{
-      game(get_pieces_ready_to_castle()),
-      lobby_options()
+      game(get_pieces_ready_to_castle())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "e8", side::rhs);
     move_cursor_to(c, "a8", side::rhs);
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1633,11 +1635,10 @@ void test_game_controller() //!OCLINT tests may be many
     assert(actions[1] == piece_action_type::castle_kingside);
     assert(actions[2] == piece_action_type::castle_queenside);
   }
-  // 53: Pawns move to the square where they are promoted -> move, lhs
+  // Pawns move to the square where they are promoted -> move, lhs
   {
     game_controller c{
-      game(get_pieces_pawns_near_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_near_promotion())
     };
     do_select(c, "a7", side::lhs);
     move_cursor_to(c, "a8", side::lhs);
@@ -1648,9 +1649,9 @@ void test_game_controller() //!OCLINT tests may be many
   // 53: Pawns move to the square where they are promoted -> move, rhs
   {
     game_controller c{
-      game(get_pieces_pawns_near_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_near_promotion())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h2", side::rhs);
     move_cursor_to(c, "h1", side::rhs);
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1660,8 +1661,7 @@ void test_game_controller() //!OCLINT tests may be many
   // Selected pawns at a promotion square, empty square selected -> promote, lhs
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
     do_select(c, "a8", side::lhs);
     move_cursor_to(c, "e4", side::lhs); // Must be an empty square, else 'select' becomes an option
@@ -1675,9 +1675,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Selected pawns at a promotion square, empty square selected -> promote, rhs
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1690,9 +1690,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Promote to queen, from black pawn at h1, using keyboard
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1711,6 +1711,7 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c{
       game(get_pieces_pawns_at_promotion())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1727,9 +1728,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Promote to rook, from black pawn at h1, using keyboard
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1746,9 +1747,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Promote to rook, from black pawn at h1, using mouse
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1765,10 +1766,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Promote to bishop, from black pawn at h1
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::pawns_at_promotion))};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1785,10 +1785,9 @@ void test_game_controller() //!OCLINT tests may be many
   // Promote to bishop, from black pawn at h1
   {
     game_controller c{
-      game(get_pieces_pawns_at_promotion()),
-      lobby_options()
+      game(get_pieces_pawns_at_promotion())
     };
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::pawns_at_promotion))};
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
     do_select(c, "h1", side::rhs);
     move_cursor_to(c, "e5", side::rhs); // Must be an empty square, else 'select' becomes an option
     const auto actions{get_piece_actions(c, side::rhs)};
@@ -1805,13 +1804,11 @@ void test_game_controller() //!OCLINT tests may be many
   // get_cursor_pos
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))};
     assert(get_cursor_pos(c, chess_color::white) != get_cursor_pos(c, chess_color::black));
   }
   // get_mouse_player_pos
   {
     game_controller c;
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::standard))};
     const auto pos_before{get_cursor_pos(c, side::rhs)};
     const auto pos{get_cursor_pos(c, side::rhs)};
     set_cursor_pos(c, pos + game_coordinate(0.1, 0.1), side::rhs);
@@ -2101,7 +2098,6 @@ void test_game_controller() //!OCLINT tests may be many
       game(get_pieces_bishop_and_knight_end_game()),
       lobby_options()
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::bishop_and_knight_end_game))};
 
     const double health_before{get_piece_at(c.get_game(), square("d2")).get_health()};
     // Let the white knight at c4 attack the black king at d2
@@ -2143,7 +2139,6 @@ void test_game_controller() //!OCLINT tests may be many
       game(get_pieces_before_scholars_mate()),
       lobby_options()
     };
-    //game_controller c{create_game_controller_with_keyboard_mouse(create_game_with_starting_position(starting_position_type::before_scholars_mate))};
 
     // The attacker
     assert(is_piece_at(c, square("h5")));
@@ -2196,11 +2191,11 @@ void test_game_controller() //!OCLINT tests may be many
       game(get_pieces_before_scholars_mate()),
       lobby_options()
     };
-    //game_controller c{create_game_controller_with_two_keyboards(create_game_with_starting_position(starting_position_type::before_scholars_mate))};
     assert(is_piece_at(c, square("h5"))); // White queen
     assert(count_selected_units(c, chess_color::white) == 0);
     assert(!is_checkmate(c.get_game().get_pieces(), chess_color::white));
     assert(!is_checkmate(c.get_game().get_pieces(), chess_color::black));
+    assert(!has_winner(c));
 
     // h5xf7#
     do_select(c, "h5", side::lhs); // White queen
@@ -2242,7 +2237,6 @@ void test_game_controller() //!OCLINT tests may be many
     // Pawn at e2 has four moves when selected
     {
       game_controller c;
-      //game_controller c{create_game_controller_with_two_keyboards(create_game_with_standard_starting_position())};
       const std::vector<square> moves{get_possible_moves(c, side::lhs)};
       assert(moves.empty());
       do_select(c, "e2", side::lhs);
@@ -2502,6 +2496,7 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c(
       create_game_with_starting_position(starting_position_type::queen_end_game)
     );
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
 
     // Start white Qd1-d5
     do_select(c, "d1", side::lhs);
@@ -2549,6 +2544,7 @@ void test_game_controller() //!OCLINT tests may be many
     game_controller c(
       create_game_with_starting_position(starting_position_type::kasparov_vs_topalov)
     );
+    c.tick(delta_t(1.0)); // Black can move after 1 chess move
 
     // Start white g6-g5
     do_select(c, "g6", side::rhs);

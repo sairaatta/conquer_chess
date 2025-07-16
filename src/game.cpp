@@ -1154,6 +1154,11 @@ bool has_piece_with_id(
   return false;
 }
 
+bool is_draw(const game& g)
+{
+  return is_draw(g.get_pieces());
+}
+
 
 bool is_empty(const game& g, const square& s) noexcept
 {

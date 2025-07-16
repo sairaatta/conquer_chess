@@ -87,26 +87,7 @@ int count_piece_actions(
   const chess_color player
 );
 
-/*
-/// Count the number of selected units for both players
-int count_selected_units(
-  const std::vector<piece>& pieces
-);
-
-/// Count the number of selected units of a color
-int count_selected_units(
-  const std::vector<piece>& pieces,
-  const chess_color player
-);
-*/
-
-
 std::vector<piece> create_pieces_from_fen_string(const fen_string& s);
-
-/*
-/// Create the pieces as set up from the global game settings
-std::vector<piece> create_pieces_from_settings();
-*/
 
 /// Get the square where the king of that color is
 square get_current_king_square(
@@ -208,15 +189,6 @@ std::vector<square> get_possible_rook_moves(
   const piece& focal_piece
 );
 
-/*
-/// Get all the selected pieces
-/// @param player the color of the player, which is white for player 1
-/// @see use 'has_selected_piece' to see if there is at least 1 piece selected
-std::vector<piece> get_selected_pieces(
-  const std::vector<piece>& pieces,
-  const chess_color player
-);
-*/
 
 
 /// Get all the pieces in the starting position
@@ -318,13 +290,6 @@ std::vector<piece> get_pieces_ready_to_not_castle(
   const race black_race = race::classic
 ) noexcept;
 
-/*
-/// Get all the pieces in the starting position type
-std::vector<piece> get_starting_pieces(
-  const starting_position_type spt
-) noexcept;
-*/
-
 /// Get all the pieces in the starting position type
 std::vector<piece> get_starting_pieces(
   const starting_position_type t = starting_position_type::standard,
@@ -351,6 +316,9 @@ bool is_checkmate(
   const std::vector<piece>& pieces,
   const chess_color player_in_checkmate
 );
+
+/// Determine if the game is a draw
+bool is_draw(const std::vector<piece>& pieces);
 
 /// Determine if the king of the player is under attack
 bool is_king_under_attack(

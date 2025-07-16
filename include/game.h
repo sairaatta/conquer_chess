@@ -350,6 +350,9 @@ bool has_piece_with_id(
   const piece_id& id
 );
 
+/// Determine if the game is a draw
+bool is_draw(const game& g);
+
 /// Is the square empty?
 bool is_empty(const game& g, const square& s) noexcept;
 

@@ -176,7 +176,7 @@ bool game_view::process_event_impl(sf::Event& event)
   // Become unresponsive when there is a winner
   if (!m_game_controller.get_game().get_winner().has_value())
   {
-    ::process_event(m_game_controller, m_pc, event, m_layout, m_game_controller.get_game().get_in_game_time());
+    ::process_event(m_game_controller, m_pc, event, m_layout);
     m_game_controller.apply_user_inputs_to_game();
   }
   return false;
@@ -200,18 +200,11 @@ void process_event(
   game_controller& c,
   const physical_controllers& pc,
   const sf::Event& event,
-  const game_view_layout& layout,
-  const in_game_time& t
+  const game_view_layout& layout
 )
 {
   for (const auto s: get_all_sides())
   {
-    // Black can do nothing for one chess move
-    if (c.get_lobby_options().get_color(s) == chess_color::black
-      && t < in_game_time(1.0)
-    ) return;
-
-
     const physical_controller& p{pc.get_controller(s)};
     const user_inputs& inputs{p.process_input(event, s, layout)};
     for (const auto& a: inputs.get_user_inputs())

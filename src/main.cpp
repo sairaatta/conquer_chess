@@ -69,7 +69,7 @@
 #include "sfml_helper.h"
 #include "sleep_scheduler.h"
 #include "test_game.h"
-
+#include "test_rules.h"
 #ifndef LOGIC_ONLY
 #include "loading_view.h"
 #include "main_window.h"
@@ -84,7 +84,7 @@ void test()
 {
 #ifndef NDEBUG
   //return; // For now
-  //test_game_controller();
+  //test_rules();
   //assert(!"Yay");
 
   test_about();
@@ -149,6 +149,7 @@ void test()
   test_race();
   test_read_only();
   test_replay();
+  test_rules();
   test_screen_coordinate();
   test_screen_rect();
   test_sfml_helper();

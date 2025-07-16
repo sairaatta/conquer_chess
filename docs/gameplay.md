@@ -119,3 +119,8 @@ the attacked piece will lose health faster.
 Like regular chess, a move, once started, cannot be stopped or undone.
 Think before you do a move!
 
+Castling works the same as in regular chess: one cannot castle
+when in check, going through check, when the king has moved
+or when the partnering rook has moved. 
+
+Detailed rules can be found in [the rulebook](rulebook/README.md).

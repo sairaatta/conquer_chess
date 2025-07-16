@@ -1084,6 +1084,11 @@ bool is_checkmate(
   return p.first == chess::GameResultReason::CHECKMATE;
 }
 
+bool is_draw(const std::vector<piece>& pieces)
+{
+  return pieces.size() <= 2;
+}
+
 bool is_king_under_attack(
   const std::vector<piece>& pieces,
   const chess_color player_color
