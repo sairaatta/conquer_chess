@@ -121,6 +121,6 @@ Think before you do a move!
 
 Castling works the same as in regular chess: one cannot castle
 when in check, going through check, when the king has moved
-or when the partnering rook has moved. 
+or when the partnering rook has moved.
 
 Detailed rules can be found in [the rulebook](rulebook/README.md).

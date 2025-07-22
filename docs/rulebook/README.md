@@ -33,7 +33,7 @@
   ‘under attack' in such a way that the opponent has no legal move.
 
   In Conquer Chess, there is a second goal: reducing the health of
-  the opponent's king to zero. 
+  the opponent's king to zero.
 
 - `[1.4.1]`. The player who achieves this goal is said to have ‘checkmated'
   the opponent's king and to have won the game `[1.4.1a]`.
@@ -92,7 +92,7 @@ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 - `[3.1.3]` A piece is considered to attack a square even if this piece
   is constrained from moving to that square because it would then leave
   or place the king of its own colour under attack.
-    
+
 3.2     The bishop may move to any square along a diagonal on which it stands.
 
 Description: A description...
@@ -134,14 +134,14 @@ Description: A description...
 Description: A description...
 3.8.2    by ‘castling'. This is a move of the king and either rook of the same colour along the player's first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.
 
-Description: A description...	Description: A description...
+Description: A description... Description: A description...
 Before white kingside castling
-Before black queenside castling	After white kingside castling
+Before black queenside castling After white kingside castling
 After black queenside castling
- 	 
-Description: A description...	Description: A description...
+   
+Description: A description... Description: A description...
 Before white queenside castling
-Before black kingside castling	After white queenside castling
+Before black kingside castling After white queenside castling
 After black kingside castling
 3.8.2.1    The right to castle has been lost:
 
@@ -949,8 +949,6 @@ Castling can fail in the first half chess move under these conditions:
 - The rook is killed
 
 
-
-
 when in check, going through check, when the king has moved
-or when the partnering rook has moved. 
+or when the partnering rook has moved.
 
