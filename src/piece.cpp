@@ -642,15 +642,7 @@ void test_piece()
   }
   // can_move, on empty board
   {
-    assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d3")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d5")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("e3")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("e5")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f3")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f5")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f6")));
+    // For bishop movement, see test_rule_3_2
 
     // A king can move 1 square
     assert(can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("d3")));
@@ -664,21 +656,11 @@ void test_piece()
     assert(!can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("f6")));
     assert(!can_move_on_empty_board(chess_color::white, piece_type::king, square("e4"), square("e6")));
 
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d3")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d4")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d5")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("e3")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("e5")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f3")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f4")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f5")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f6")));
-
+    // For movement of the knight, see `test_rule_3_6`
     assert(!can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("d3")));
     assert(!can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("d4")));
     assert(!can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("d5")));
     assert(!can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("e3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("e5")));
 
     // Not in one time unit
     assert(!can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("e6")));
@@ -690,44 +672,12 @@ void test_piece()
     assert(can_move_on_empty_board(chess_color::black, piece_type::pawn, square("e4"), square("e3")));
     assert(!can_move_on_empty_board(chess_color::black, piece_type::pawn, square("e4"), square("e5")));
 
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d5")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e5")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f5")));
+    // For queen movement, see `test_rule_3_4`
 
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e1")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e2")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e4"))); // Can move home
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e5")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e6")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e7")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e8")));
 
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("a4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("b4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("c4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e4"))); // Can move home
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("g4")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("h4")));
 
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f6")));
+    // For rook movement, see `test_rule_3_3`
 
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d4")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d5")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("e3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("e5")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f3")));
-    assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f4")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f5")));
-    assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f6")));
   }
   // can_promote
   {
@@ -905,18 +855,6 @@ void test_piece()
     assert(to_fen_char(piece(chess_color::black, piece_type::queen, "e4")) == 'q');
     assert(to_fen_char(piece(chess_color::black, piece_type::rook, "e4")) == 'r');
   }
-
-  // toggle_select
-  /*
-  {
-    auto p{get_test_white_king()};
-    assert(!p.is_selected());
-    toggle_select(p);
-    assert(p.is_selected());
-    toggle_select(p);
-    assert(!p.is_selected());
-  }
-  */
   // A pawn for the lhs player can move right
   {
     piece p(

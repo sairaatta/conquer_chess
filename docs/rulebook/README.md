@@ -93,34 +93,33 @@ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
   is constrained from moving to that square because it would then leave
   or place the king of its own colour under attack.
 
-3.2     The bishop may move to any square along a diagonal on which it stands.
+- `[3.2]` The bishop may move to any square along a diagonal on which it stands.
 
-Description: A description...
-3.3     The rook may move to any square along the file or the rank on which it stands.
+- `[3.3]` The rook may move to any square along the file or the rank
+  on which it stands.
 
-Description: A description...
-3.4     The queen may move to any square along the file, the rank or a diagonal on which it stands.
+- `[3.4]` The queen may move to any square along the file, the rank or
+  a diagonal on which it stands.
 
-Description: A description...
-3.5     When making these moves, the bishop, rook or queen may not move over any intervening pieces.
+- `[3.5]` When making these moves, the bishop, rook or queen may not move over
+  any intervening pieces.
 
-3.6     The knight may move to one of the squares nearest to that on which it stands but not on the same rank, file or diagonal.
+- `[3.6]` The knight may move to one of the squares nearest to that
+  on which it stands but not on the same rank, file or diagonal.
 
-Description: A description...
 3.7     The pawn:
 
-3.7.1    The pawn may move forward to the square immediately in front of it on the same file, provided that this square is unoccupied, or
+- `[3.7.1]` The pawn may move forward to the square immediately in front of it
+  on the same file, provided that this square is unoccupied, or
 
 3.7.2    on its first move the pawn may move as in 3.7.1 or alternatively it may advance two squares along the same file, provided that both squares are unoccupied, or
 
 3.7.3    the pawn may move to a square occupied by an opponent's piece diagonally in front of it on an adjacent file, capturing that piece.
 
-Description: A description...
 3.7.3.1    A pawn occupying a square on the same rank as and on an adjacent file to an opponent's pawn which has just advanced two squares in one move from its original square may capture this opponent's pawn as though the latter had been moved only one square.
 
 3.7.3.2    This capture is only legal on the move following this advance and is called an ‘en passant' capture.
 
-Description: A description...
 3.7.3.3    When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion'.
 
 3.7.3.4    The player's choice is not restricted to pieces that have been captured previously.
@@ -131,18 +130,8 @@ Description: A description...
 
 3.8.1    by moving to an adjoining square
 
-Description: A description...
 3.8.2    by ‘castling'. This is a move of the king and either rook of the same colour along the player's first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.
-
-Description: A description... Description: A description...
-Before white kingside castling
-Before black queenside castling After white kingside castling
-After black queenside castling
    
-Description: A description... Description: A description...
-Before white queenside castling
-Before black kingside castling After white queenside castling
-After black kingside castling
 3.8.2.1    The right to castle has been lost:
 
 1) If the king has already moved, or
@@ -169,13 +158,13 @@ After black kingside castling
 
 3.10.3    A position is illegal when it cannot have been reached by any series of legal moves.
 
-Article 4: The Act of Moving the Pieces
+### Article 4: The Act of Moving the Pieces
 
-4.1     Each move must be played with one hand only.
+- `[4.1]` Each move must be played with one hand only.
 
-4.2     Adjusting the pieces or other physical contact with a piece:
+- 4.2     Adjusting the pieces or other physical contact with a piece:
 
-4.2.1    Only the player having the move may adjust one or more pieces on their squares, provided that he/she first expresses his/her intention (for example by saying “j'adoube” or “I adjust”).
+- 4.2.1    Only the player having the move may adjust one or more pieces on their squares, provided that he/she first expresses his/her intention (for example by saying “j'adoube” or “I adjust”).
 
 4.2.2    Any other physical contact with a piece, except for clearly accidental contact, shall be considered to be intent.
 
@@ -219,7 +208,7 @@ Article 4: The Act of Moving the Pieces
 
 4.9     If a player is unable to move the pieces, an assistant, who shall be acceptable to the arbiter, may be provided by the player to perform this operation.
 
-Article 5: The Completion of the Game
+### Article 5: The Completion of the Game
 
 5.1.1    The game is won by the player who has checkmated his/her opponent's king. This immediately ends the game, provided that the move producing the checkmate position was in accordance with Article 3 and Articles 4.2 – 4.7.
 
@@ -231,9 +220,9 @@ Article 5: The Completion of the Game
 
 5.2.3    The game is drawn upon agreement between the two players during the game, provided both players have made at least one move. This immediately ends the game.
 
-COMPETITIVE RULES OF PLAY
+## COMPETITIVE RULES OF PLAY
 
-Article 6: The Chessclock
+### Article 6: The Chessclock
 
 6.1     ‘Chessclock' means a clock with two time displays, connected to each other in such a way that only one of them can run at a time. ‘Clock' in the Laws of Chess means one of the two time displays. Each time display has a ‘flag'.
 
@@ -297,7 +286,7 @@ Article 6: The Chessclock
 
 6.12.2    The player may not make a claim relying only on information shown in this manner.
 
-Article 7: Irregularities
+### Article 7: Irregularities
 
 7.1     If an irregularity occurs and the pieces have to be restored to a previous position, the arbiter shall use his/her best judgement to determine the times to be shown on the chessclock. This includes the right not to change the clock times. He/She shall also, if necessary, adjust the clock's move-counter.
 
@@ -329,7 +318,7 @@ Article 7: Irregularities
 
 7.6     If, during a game it is found that any piece has been displaced from its correct square, the position before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. The game shall then continue from this reinstated position.
 
-Article 8: The recording of the moves
+### Article 8: The recording of the moves
 
 8.1     How the moves shall be recorded:
 
@@ -367,7 +356,7 @@ Article 8: The recording of the moves
 
 8.7     At the conclusion of the game both players shall indicate the result of the game by signing both scoresheets or approve the result on their electronic scoresheets. Even if incorrect, this result shall stand, unless the arbiter decides otherwise.
 
-Article 9: The Drawn Game
+### Article 9: The Drawn Game
 
 9.1     Draw offers and event Regulations:
 
@@ -415,13 +404,13 @@ Article 9: The Drawn Game
 
 9.6.2    any series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.
 
-Article 10: Points
+### Article 10: Points
 
 10.1   Unless the regulations of an event specify otherwise, a player who wins his/her game, or wins by forfeit, scores one point (1), a player who loses his/her game, or forfeits, scores no points (0), and a player who draws his/her game scores a half point (½).
 
 10.2   The total score of any game can never exceed the maximum score normally given for that game. Scores given to an individual player must be those normally associated with the game, for example a score of ¾ – ¼ is not allowed.
 
-Article 11: The Conduct of the Players
+### Article 11: The Conduct of the Players
 
 11.1   The players shall take no action that will bring the game of chess into disrepute.
 
@@ -473,7 +462,7 @@ Article 11: The Conduct of the Players
 
 11.12     Checking a ‘three times occurrence of the position' or a '50 moves' claim is a duty of the players, under supervision of the arbiter.
 
-Article 12: The Role of the Arbiter (see Preface)
+### Article 12: The Role of the Arbiter (see Preface)
 
 12.1   The arbiter shall see that the Laws of Chess are observed.
 
@@ -525,9 +514,9 @@ Article 12: The Role of the Arbiter (see Preface)
 
 12.9.9    expulsion from the competition.
 
-APPENDICES
+## APPENDICES
 
-Appendix A. Rapid Chess
+### Appendix A. Rapid Chess
 
 A.1    A ‘Rapid chess' game is one where either all the moves must be completed in a fixed time of more than 10 minutes but less than 60 minutes for each player; or the time allotted plus 60 times any increment is of more than 10 minutes but less than 60 minutes for each player.
 
@@ -561,7 +550,7 @@ A.5.5    The arbiter shall also call a flag fall, if he/she observes it.
 
 A.6    The regulations of an event shall specify whether Article A.4 or Article A.5 shall apply for the entire event.
 
-Appendix B. Blitz
+### Appendix B. Blitz
 
 B.1    A ‘blitz' game is one where all the moves must be completed in a fixed time of 10 minutes or less for each player; or the allotted time plus 60 times any increment is 10 minutes or less for each player.
 
@@ -577,7 +566,7 @@ B.3    Otherwise, play shall be governed by the Rapid chess Laws as in Article A
 
 B.4    The regulations of an event shall specify whether Article B.2 or Article B.3 shall apply for the entire event.
 
-Appendix C. Algebraic Notation
+### Appendix C. Algebraic Notation
 
 FIDE recognises for its own tournaments and matches only one system of notation, the Algebraic System, and recommends the use of this uniform chess notation also for chess literature and periodicals. Scoresheets using a notation system other than algebraic may not be used as evidence in cases where normally the scoresheet of a player is used for that purpose. An arbiter who observes that a player is using a notation system other than the algebraic should warn the player of this requirement.
 
@@ -597,7 +586,6 @@ C.6    The eight ranks (from bottom to top for White and from top to bottom for 
 
 C.7    As a consequence of the previous rules, each of the sixty-four squares is invariably indicated by a unique combination of a letter and a number.
 
-Description: A description...
 C.8    Each move of a piece is indicated by the abbreviation of the name of the piece in question and the square of arrival. There is no need for a hyphen between name and square. Examples: Be5, Nf3, Rd1.
 
 In the case of pawns, only the square of arrival is indicated. Examples: e5, d4, a5.
@@ -668,7 +656,7 @@ Or: 1. e4 e5 2. Nf3 Nf6 3. d4 ed4 4. e5 Ne4 5. Qd4 d5 6. ed6 Nd6 7. Bg5 Nc6 8. Q
 
 Or: 1. e2e4 e7e5 2.Ng1f3 Ng8f6 3. d2d4 e5xd4 4. e4e5 Nf6e4 5. Qd1xd4 d7d5 6. e5xd6 e.p. Ne4xd6 7. Bc1g5 Nb8c6 8. Qd4d3 Bf8e7 9. Nb1d2 0-0 10. 0-0-0 Rf8e8 11. Kb1 (=)
 
-Appendix D. Rules for Play with Blind and Visually Disabled Players
+### Appendix D. Rules for Play with Blind and Visually Disabled Players
 
 D.1    The organiser, after consulting the arbiter, shall have the power to adapt the following rules according to local circumstances. In competitive chess between sighted and visually disabled (legally blind) players either player may demand the use of two boards, the sighted player using a normal board, the visually disabled player using one specially constructed. This board must meet the following requirements:
 
@@ -722,7 +710,7 @@ Unless the arbiter decides otherwise, ranks from White to Black shall be given t
 
 8 – acht
 
-Castling is announced “Lange Rochade” (German for long castling) and “Kurze      Rochade” (German for short castling).
+Castling is announced “Lange Rochade” (German for long castling) and “Kurze Rochade” (German for short castling).
 
 The pieces bear the names: Koenig, Dame, Turm, Laeufer, Springer, Bauer.
 
@@ -772,13 +760,13 @@ D.2.10.6    carrying out the necessary formalities in cases where the game is ad
 
 D.2.11    If the visually disabled player does not make use of an assistant, the sighted player may make use of one who shall carry out the duties mentioned in points D.2.10.1 and D.2.10.2. An assistant must be used in the case of a visually disabled player paired with a hearing-impaired player.
 
-GUIDELINES
+## GUIDELINES
 
-Introduction
+### Introduction
 
 The following Guidelines are here to assist in organizing events where they may be needed. While they are not part of the FIDE Laws of Chess, it is strongly recommended that they be used across all events where applicable.
 
-Guidelines I. Adjourned Games
+### Guidelines I. Adjourned Games
 
 I.1     Adjournment procedure:
 
@@ -842,7 +830,7 @@ I.13    If, upon resumption of the game, either player points out before making 
 
 I.14    The duration of each resumption session shall be controlled by the arbiter's timepiece. The starting time shall be announced in advance.
 
-Guidelines II. Chess960 Rules
+## Guidelines II. Chess960 Rules
 
 II.1     Before a Chess960 game a starting position is randomly set up, subject to certain rules. After this, the game is played in the same way as regular chess. In particular, pieces and pawns have their normal moves, and each player's objective is to checkmate the opponent's king.
 
@@ -888,7 +876,7 @@ II.3.2.7    Notes
 - All the squares between the king's initial and final squares (including the final square) and all the squares between the rook's initial and final squares (including the final square) must be vacant except for the king and castling rook.
 - In some starting positions, some squares can stay filled during castling that would have to be vacant in regular chess. For example, after c-side castling 0-0-0, it is possible to have a, b, and/or e still filled, and after g-side castling (0-0), it is possible to have e and/or h filled.
 
-Guidelines III. Games without Increment including Quickplay Finishes
+### Guidelines III. Games without Increment including Quickplay Finishes
 
 III.1    A ‘quickplay finish' is the phase of a game when all the remaining moves must be completed in a finite time.
 

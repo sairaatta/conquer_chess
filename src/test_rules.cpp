@@ -361,6 +361,104 @@ void test_rule_3_1()
 
   //
 }
+
+void test_rule_3_2()
+{
+  /// - `[3.2]` The bishop may move to any square along a diagonal on which it stands.
+  assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d3")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("d5")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("e3")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("e5")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f3")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f5")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::bishop, square("e4"), square("f6")));
+
+}
+
+void test_rule_3_3()
+{
+  /// - `[3.3]` The rook may move to any square along the file or the rank on which it stands.
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d3")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d4")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("d5")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("e3")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("e5")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f3")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f4")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f5")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::rook, square("e4"), square("f6")));
+
+}
+
+void test_rule_3_4()
+{
+  /// `[3.4]` The queen may move to any square along the file, the rank or a diagonal on which it stands.
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d3")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d5")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e3")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e5")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f3")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f5")));
+
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e1")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e2")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e3")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e4"))); // Can move home
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e5")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e6")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e7")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e8")));
+
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("a4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("b4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("c4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("d4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("e4"))); // Can move home
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("g4")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("h4")));
+
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::queen, square("e4"), square("f6")));
+
+}
+
+void test_rule_3_5()
+{
+  /// `[3.5]` When making these moves, the bishop, rook or queen may not move over
+  /// any intervening pieces.
+  // TODO
+}
+
+void test_rule_3_6()
+{
+  /// `[3.6]` The knight may move to one of the squares nearest to that
+  /// on which it stands but not on the same rank, file or diagonal.
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d3")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d4")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("d5")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("e3")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("e5")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f3")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f4")));
+  assert(!can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f5")));
+  assert(can_move_on_empty_board(chess_color::white, piece_type::knight, square("e4"), square("f6")));
+}
+
+
+void test_rule_3_7()
+{
+  /// - `[3.7.1]` The pawn may move forward to the square immediately in front of it
+  /// on the same file, provided that this square is unoccupied, or
+  {
+    assert(can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("e5")));
+  }
+}
+
+
 void test_rules()
 {
 #ifndef NDEBUG // no tests in release
@@ -371,6 +469,12 @@ void test_rules()
   test_rule_2_2();
   test_rule_2_3();
   test_rule_3_1();
+  test_rule_3_2();
+  test_rule_3_3();
+  test_rule_3_4();
+  test_rule_3_5();
+  test_rule_3_6();
+  test_rule_3_7();
 #endif // NDEBUG // no tests in release
 }
 

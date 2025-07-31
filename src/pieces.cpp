@@ -197,38 +197,6 @@ int count_piece_actions(
   );
 }
 
-/*
-int count_selected_units(
-  const std::vector<piece>& pieces
-)
-{
-  return std::count_if(
-    std::begin(pieces),
-    std::end(pieces),
-    [](const auto& piece)
-    {
-      return piece.is_selected();
-    }
-  );
-}
-
-int count_selected_units(
-  const std::vector<piece>& pieces,
-  const chess_color player
-)
-{
-  return std::count_if(
-    std::begin(pieces),
-    std::end(pieces),
-    [player](const auto& piece)
-    {
-      return piece.is_selected()
-        && piece.get_color() == player;
-    }
-  );
-}
-*/
-
 std::vector<piece> create_pieces_from_fen_string(const fen_string& fen_str)
 {
   const std::string s{fen_str.get()};

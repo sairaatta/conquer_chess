@@ -2,6 +2,14 @@
 
 ## v0.9
 
+![The launch options you will need](20250731_launch_options_needed.png)
+
+> The launch options you will need
+
+![The 2025-07-31 Steam page](20250731_steam_page.png)
+
+> The 2025-07-31 Steam page
+
 ![Conquer Chess v0.9 in the Steam store](20250715.jpg)
 
 > Conquer Chess in the Steam store
