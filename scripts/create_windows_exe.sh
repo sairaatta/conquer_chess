@@ -20,7 +20,7 @@ fi
 
 #Don't put the full path here. It has to be found in the 
 # In /home/yourusername/.bashrc add the following line add the end instead:
-# export PATH=$PATH:/home/richel/GitHubs/ProjectRichelBilderbeek/Libraries/mxe/usr/bin/
+# export PATH=$PATH:/home/richel/GitHubs/RibiLibraries/Libraries/mxe/usr/bin/"
 PATH="$PATH:/home/richel/GitHubs/RibiLibraries/Libraries/mxe/usr/bin/"
 echo $PATH
 

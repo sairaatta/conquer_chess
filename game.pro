@@ -48,9 +48,16 @@ CONFIG(debug, debug|release) {
 QT += core gui widgets
 
 # SFML
+#LIBs += -L../RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+#LIBS += -lsfml
 
-QMAKE_LIBDIR += /home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib
+# LIBS += -L/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lsfml-audio-s
+
+#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-graphics
+#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-window
+#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-system
+#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-audio
 
 # SFGraphing
 DEFINES += USE_SFGRAPHING
