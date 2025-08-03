@@ -5,6 +5,7 @@
 #include <QFile>
 //#include <functional>
 #include <cassert>
+#include <sstream>
 
 loading_screen_textures::loading_screen_textures()
 {

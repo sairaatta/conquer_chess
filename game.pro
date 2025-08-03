@@ -50,6 +50,8 @@ QT += core gui widgets
 # SFML
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
+QMAKE_LIBDIR += /home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib
+
 # SFGraphing
 DEFINES += USE_SFGRAPHING
 SOURCES += $$PWD/../SFGraphing/src/*.cpp

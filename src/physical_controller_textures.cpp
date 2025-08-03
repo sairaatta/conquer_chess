@@ -5,6 +5,7 @@
 #include <QFile>
 
 #include <cassert>
+#include <sstream>
 
 physical_controller_textures::physical_controller_textures()
 {

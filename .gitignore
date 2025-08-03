@@ -46,3 +46,5 @@ build/
 *.bak
 html/
 latex/
+conquer_chess_plugin_import.cpp
+release/
