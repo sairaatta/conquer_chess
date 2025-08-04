@@ -19,6 +19,9 @@ TARGET = conquer_chess
 CONFIG += c++17
 QMAKE_CXXFLAGS += -std=c++17
 
+CFLAGS += SFML_USE_STATIC_STD_LIBS=TRUE
+CFLAGS += -DSFML_STATIC
+
 # High warning levels
 QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 
@@ -49,7 +52,7 @@ QT += core gui widgets
 
 # SFML
 #LIBs += -L../RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib
-LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+LIBS += -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lsfml-audio-s
 #LIBS += -lsfml
 
 # LIBS += -L/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lsfml-audio-s
