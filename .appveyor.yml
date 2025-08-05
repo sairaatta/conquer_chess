@@ -7,7 +7,7 @@ install:
   - set QTDIR=C:\Qt\6.8.1\mingw492_32
   - set PATH=%PATH%;%QTDIR%\bin
   # Boost
-  - set PATH=%PATH%;C:\Libraries\boost_1_63_0
+  - set PATH=%PATH%;C:\Libraries\boost_1_86_0
   # SFML (TODO)
 
 build_script:
@@ -22,7 +22,7 @@ build_script:
   - dir C:\Qt
   - dir C:\Qt\6.8.1
   - dir C:\Libraries
-  - dir C:\Libraries\boost_1_63_0
+  - dir C:\Libraries\boost_1_86_0
   # Find out current folder's content
   - dir
   # magic_enum, download
