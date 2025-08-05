@@ -30,7 +30,8 @@ build_script:
   - echo "Install magic_enum"
   - cd ../magic_enum
   - cmake .
-  - make
+  #- make
+  - mingw32-make.exe
   - cd conquer-chess
   # Disservin's chess-library, download
   - echo "Disservin's chess-library"
@@ -46,7 +47,8 @@ build_script:
   - echo "Building Conquer Chess"
   - qmake game.pro
   - mingw32-cd
-  - make release
+  #- make release
+  - mingw32-make.exe release
   - conquer_chess.exe --version
 
 artifacts:
