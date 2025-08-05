@@ -86,6 +86,7 @@
 - Size: 600px x 900px (an additional half-size 300px x 450px PNG will
   be auto-generated from larger file)
 
+
 ![Library capsule](library_capsure_600_x_900.png)
 
 ## Library Header
