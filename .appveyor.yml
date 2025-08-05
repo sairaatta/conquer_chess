@@ -13,7 +13,7 @@ install:
 build_script:
   # Find out path
   - echo %cd%
-  - dir C:\MinGW\bin
+  - dir /s C:\MinGW\bin
   # Find out current folder's content
   - dir
   # magic_enum, download
