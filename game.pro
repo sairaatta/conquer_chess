@@ -50,6 +50,13 @@ QT += core gui widgets
 # SFML
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
+
+win32 {
+
+  LIBS += -L$$PWD/../SFML-3.0.0
+
+}
+
 # Crosscompile notes
 #CFLAGS += SFML_USE_STATIC_STD_LIBS=TRUE
 #CFLAGS += -DSFML_STATIC
