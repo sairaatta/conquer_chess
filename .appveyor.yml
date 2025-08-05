@@ -6,10 +6,19 @@ install:
   - set PATH=%PATH%;%QTDIR%\bin
   # Boost
   - set PATH=%PATH%;C:\Libraries\boost_1_63_0
+  # SFML (TODO)
 
 build_script:
-  - qmake
-  - mingw32-make
-  - cd release
-  - appveyor_qmake_gcc_cpp14_boost_qt5.exe
-  - type appveyor_qmake_gcc_cpp14_boost_qt5.txt
+  - echo "Download magic_enum"
+  - cd .. ; git clone https://github.com/Neargye/magic_enum ; cd -
+  - echo "Install magic_enum"
+  - cd ../magic_enum ; cmake . ; make ; cd -
+  - echo "Disservin's chess-library"
+  - cd .. ; git clone https://github.com/Disservin/chess-library.git ; cd -
+  - echo "Download Jerrit Gläsker's SFGraphing library"
+  - cd .. ; git clone https://github.com/richelbilderbeek/SFGraphing -b patch-1 ; cd -
+  - echo "Building Conquer Chess"
+  - qmake game.pro
+  - mingw32-cd
+  - make release
+  - conquer_chess.exe --version
