@@ -9,21 +9,32 @@ install:
   # SFML (TODO)
 
 build_script:
-  - echo "Download magic_enum"
+  # Find out path
   - echo %cd%
-  - cd .. 
-  - echo %cd%
-  - git clone https://github.com/Neargye/magic_enum
-  - echo %cd%
+  # Find out current folder's content
   - dir
-  - cd -
-  - echo %cd%
+  # magic_enum, download
+  - echo "Download magic_enum"
+  - cd .. 
+  - git clone https://github.com/Neargye/magic_enum
+  - cd conquer-chess
+  # magic_enum, install
   - echo "Install magic_enum"
-  - cd ../magic_enum ; cmake . ; make ; cd -
+  - cd ../magic_enum
+  - cmake .
+  - make
+  - cd conquer-chess
+  # Disservin's chess-library, download
   - echo "Disservin's chess-library"
-  - cd .. ; git clone https://github.com/Disservin/chess-library.git ; cd -
+  - cd ..
+  - git clone https://github.com/Disservin/chess-library.git
+  - cd conquer-chess
+  # Jerrit Gläsker's SFGraphing library
   - echo "Download Jerrit Gläsker's SFGraphing library"
-  - cd .. ; git clone https://github.com/richelbilderbeek/SFGraphing -b patch-1 ; cd -
+  - cd ..
+  - git clone https://github.com/richelbilderbeek/SFGraphing -b patch-1
+  - cd conquer-chess
+  # Conquer Chess
   - echo "Building Conquer Chess"
   - qmake game.pro
   - mingw32-cd
