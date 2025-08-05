@@ -53,7 +53,8 @@ LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 win32 {
 
-  LIBS += -L$$PWD/..
+  LIBS += -L$$PWD/SFML/lib
+  INCLUDEPATH += -L$$PWD/include
 
 }
 
