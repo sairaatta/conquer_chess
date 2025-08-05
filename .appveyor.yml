@@ -2,9 +2,10 @@ image: Visual Studio 2022
 
 install:
   # g++
+  - set PATH=%PATH%;C:\MinGW\bin
   # Although cygwin looks cleaner, the Qt version 5.6.3 is compatible with
   # MinGW 4.9.0
-  - set PATH=%PATH%;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
+  #- set PATH=%PATH%;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
   # - set PATH=%PATH%;C:\cygwin\bin
   # qmake
   # This is the last documentated Qt version with a compatible MinWG version, 
@@ -18,6 +19,8 @@ install:
   # SFML (TODO)
 
 build_script:
+  # Explore the tools
+  - g++ --version
   # Explore file system
   - echo %cd%
   - dir C:\
