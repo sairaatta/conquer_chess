@@ -23,12 +23,13 @@ build_script:
   - dir C:\
   - dir C:\mingw-w64
   - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64
-  #- dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
+  - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
   #- dir C:\cygwin
   #- dir C:\cygwin\bin
   - dir C:\Qt
   - dir C:\Qt\6.8.1
   - dir C:\Qt\6.8.1\mingw_64
+  - dir C:\Qt\6.8.1\mingw_64\bin
   - dir C:\Libraries
   - dir C:\Libraries\boost_1_86_0
   # Find out current folder's content
