@@ -20,7 +20,7 @@ install:
 
 build_script:
   # Explore the tools
-  - g++ --version
+  - g++.exe --version
   # Explore file system
   - echo %cd%
   - dir C:\
