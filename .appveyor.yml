@@ -13,6 +13,8 @@ install:
 build_script:
   # Find out path
   - echo %cd%
+  - dir /s C:\
+  - dir /s C:\MinGW
   - dir /s C:\MinGW\bin
   # Find out current folder's content
   - dir
