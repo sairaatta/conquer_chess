@@ -22,6 +22,7 @@ build_script:
   - dir C:\Qt
   - dir C:\Qt\6.8.1
   - dir C:\Libraries
+  - dir C:\Libraries\boost_1_63_0
   # Find out current folder's content
   - dir
   # magic_enum, download
