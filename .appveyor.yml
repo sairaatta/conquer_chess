@@ -39,6 +39,9 @@ build_script:
   - cmake .
   - dir
   #- make
+  - dir cmake
+  - dir CMakeFiles
+  - dir example
   - make.exe
   - cd conquer-chess
   # Disservin's chess-library, download
