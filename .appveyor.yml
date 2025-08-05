@@ -1,0 +1,15 @@
+install:
+  # g++
+  - set PATH=%PATH%;C:\MinGW\bin
+  # qmake
+  - set QTDIR=C:\Qt\5.5\mingw492_32
+  - set PATH=%PATH%;%QTDIR%\bin
+  # Boost
+  - set PATH=%PATH%;C:\Libraries\boost_1_63_0
+
+build_script:
+  - qmake
+  - mingw32-make
+  - cd release
+  - appveyor_qmake_gcc_cpp14_boost_qt5.exe
+  - type appveyor_qmake_gcc_cpp14_boost_qt5.txt
