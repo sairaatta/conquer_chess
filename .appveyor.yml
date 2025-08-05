@@ -24,6 +24,8 @@ build_script:
   - echo "Install magic_enum"
   - cd ../magic_enum
   - cmake .
+  # Needed for make???
+  - mingw32-cd
   - make
   - cd conquer-chess
   # Disservin's chess-library, download
