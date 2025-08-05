@@ -2,7 +2,9 @@ image: Visual Studio 2022
 
 install:
   # g++
-  - set PATH=%PATH%;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
+  - set PATH=%PATH%;C:\cygwin\bin
+  # cygwin looks cleaner than this thing below
+  #- set PATH=%PATH%;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
   # qmake
   - set QTDIR=C:\Qt\6.8.1\mingw492_32
   - set PATH=%PATH%;%QTDIR%\bin
@@ -14,9 +16,9 @@ build_script:
   # Explore file system
   - echo %cd%
   - dir C:\
-  - dir C:\mingw-w64
-  - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64
-  - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
+  #- dir C:\mingw-w64
+  #- dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64
+  #- dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
   - dir C:\cygwin
   - dir C:\cygwin\bin
   - dir C:\Qt
@@ -37,7 +39,7 @@ build_script:
   - cmake .
   - dir
   #- make
-  - mingw32-make.exe Makefile
+  - make.exe
   - cd conquer-chess
   # Disservin's chess-library, download
   - echo "Disservin's chess-library"
@@ -54,7 +56,8 @@ build_script:
   - qmake game.pro
   - mingw32-cd
   #- make release
-  - mingw32-make.exe release
+  - make.exe release
+  # - mingw32-make.exe release
   - conquer_chess.exe --version
 
 artifacts:
