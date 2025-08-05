@@ -43,9 +43,9 @@ build_script:
   - rename SFML-3.0.0 SFML
   - dir
   - dir SFML
-  - dir SFML/include
-  - dir SFML/lib
-  # - move SFML-3.0.0 SFML/
+  - dir SFML\include
+  - dir SFML\lib
+  # - move SFML-3.0.0 SFML
   - cd conquer-chess
   # - dir
   # magic_enum, download
