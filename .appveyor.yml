@@ -15,6 +15,7 @@ build_script:
   - echo %cd%
   - git clone https://github.com/Neargye/magic_enum
   - echo %cd%
+  - dir
   - cd -
   - echo %cd%
   - echo "Install magic_enum"
