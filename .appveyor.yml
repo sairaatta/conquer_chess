@@ -2,7 +2,7 @@ image: Visual Studio 2022
 
 install:
   # g++
-  - set PATH=%PATH%;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\bin
+  - set PATH=%PATH%;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
   # qmake
   - set QTDIR=C:\Qt\5.5\mingw492_32
   - set PATH=%PATH%;%QTDIR%\bin
@@ -15,8 +15,8 @@ build_script:
   - echo %cd%
   - dir C:\
   - dir C:\mingw-w64
-  - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0
-  - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\bin
+  - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64
+  - dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
   - dir C:\cygwin
   - dir C:\Qt
   # Find out current folder's content
