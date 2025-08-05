@@ -53,7 +53,7 @@ LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 win32 {
 
-  LIBS += -L$$PWD/../SFML-3.0.0
+  LIBS += -L$$PWD/..
 
 }
 
