@@ -1,27 +1,24 @@
 # Check that all links are valid, i.e. not broken
 name: Check links
 
-# This job only concerns changes to a limited set of files.
-# Thanks to https://stackoverflow.com/a/63822945
-#
-# Check links on the 21st day of the month.
-# 21st as the first letter of this repo is the 21st letter in the alphabet.
+# Check links on the 3rd day of the month.
+# 3rd as the first letter of this repo is the 3rd letter in the alphabet.
 on:
   push:
     paths:
       - .github/workflows/check_links.yaml
-      - "docs/**"
+      - "**.md"
       - mlc_config.json
   pull_request:
     paths:
-      - "docs/**"
+      - "**.md"
       - .github/workflows/check_links.yaml
       - mlc_config.json
   schedule:
-    - cron: "0 0 21 * *"
+    - cron: "0 0 3 * *"
 
 jobs:
-  check-links:
+  check_links:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

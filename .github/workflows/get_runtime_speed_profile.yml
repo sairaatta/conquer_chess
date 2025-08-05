@@ -1,12 +1,20 @@
 # Build and profile the C++ code
 name: Get runtime speed profile
 
+# Check links on the 3rd day of the month.
+# 3rd as the first letter of this repo is the 3rd letter in the alphabet.
 on:
   push:
-  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/get_runtime_speed_profile.yml
+      - "**.cpp"
+      - "**.h"
+      - "**.pro"
+      - "**.pri"
   schedule:
-  - cron: "0 0 1 * *"
-
+    - cron: "0 0 3 * *"
 
 jobs:
   get_runtime_speed_profile:

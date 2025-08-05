@@ -1,8 +1,25 @@
+# Check that the program can be built
+name: Check build
+
+# Check links on the 3rd day of the month.
+# 3rd as the first letter of this repo is the 3rd letter in the alphabet.
 on:
   push:
+    paths:
+      - .github/workflows/check_build.yaml
+      - "**.cpp"
+      - "**.h"
+      - "**.pro"
+      - "**.pri"
+      - "resources/**"
   pull_request:
-
-name: Check build
+    paths:
+      - .github/workflows/check_build.yaml
+      - "**.cpp"
+      - "**.h"
+      - "**.pro"
+      - "**.pri"
+      - "resources/**"
 
 jobs:
   check_build:

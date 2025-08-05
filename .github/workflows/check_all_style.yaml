@@ -5,9 +5,23 @@ name: Check all style
 # 3rd as the first letter of this repository is the 3rd letter in the alphabet.
 on:
   push:
+    paths:
+      - .github/workflows/check_style.yaml
+      # - "**.md" # Done by Markdown checker
+      - "**.cpp"
+      - "**.h"
+      - "**.pro"
+      - "**.pri"
   pull_request:
+      - .github/workflows/check_style.yaml
+      # - "**.md" # Done by Markdown checker
+      - "**.cpp"
+      - "**.h"
+      - "**.pro"
+      - "**.pri"
   schedule:
     - cron: "0 0 3 * *"
+
 
 permissions: {}
 

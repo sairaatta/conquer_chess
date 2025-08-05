@@ -1,5 +1,7 @@
 name: Create website
 
+# Check links on the 3rd day of the month.
+# 3rd as the first letter of this repo is the 3rd letter in the alphabet.
 on:
   push:
     branches:
@@ -8,6 +10,8 @@ on:
       - .github/workflows/create_website.yaml
       - "docs/**"
       - mkdocs.yml
+  schedule:
+    - cron: "0 0 3 * *"
 
 jobs:
   deploy:
