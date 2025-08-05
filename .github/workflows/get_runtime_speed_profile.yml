@@ -9,12 +9,12 @@ on:
       - main
     paths:
       - .github/workflows/get_runtime_speed_profile.yml
-      - "**.cpp"
-      - "**.h"
-      - "**.pro"
-      - "**.pri"
   schedule:
     - cron: "0 0 3 * *"
+  workflow_run:
+    workflows: ["Check build"]
+    types:
+      - completed
 
 jobs:
   get_runtime_speed_profile:
