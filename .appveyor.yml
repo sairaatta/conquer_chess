@@ -65,8 +65,9 @@ build_script:
   - qmake game.pro
   # No idea what 'mingw32-cd' does ...
   # - mingw32-cd
-  #- make release
-  - make.exe release
+  # - make release
+  # - make.exe release
+  - mingw32-make.exe release
   # - mingw32-make.exe release
   - conquer_chess.exe --version
 
