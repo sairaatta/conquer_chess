@@ -62,7 +62,8 @@ build_script:
   # Conquer Chess
   - echo "Building Conquer Chess"
   - qmake game.pro
-  - mingw32-cd
+  # No idea what 'mingw32-cd' does ...
+  # - mingw32-cd
   #- make release
   - make.exe release
   # - mingw32-make.exe release
