@@ -8,8 +8,10 @@ install:
   # - set PATH=%PATH%;C:\cygwin\bin
   # qmake
   # This is the last documentated Qt version with a compatible MinWG version, 
-  #   https://www.appveyor.com/docs/windows-images-software/
-  - set QTDIR=C:\Qt\5.6.3\mingw492_32
+  #   https://www.appveyor.com/docs/windows-images-software/,
+  #   but it does not exist anymore :-/
+  # - set QTDIR=C:\Qt\5.6.3\mingw492_32
+  - set QTDIR=C:\Qt\6.8.1\mingw492_32
   - set PATH=%PATH%;%QTDIR%\bin
   # Boost
   - set PATH=%PATH%;C:\Libraries\boost_1_86_0
@@ -25,8 +27,8 @@ build_script:
   #- dir C:\cygwin
   #- dir C:\cygwin\bin
   - dir C:\Qt
-  - dir C:\Qt\5.6.3
-  - dir C:\Qt\5.6.3\mingw492_32
+  - dir C:\Qt\6.8.1
+  - dir C:\Qt\6.8.1\mingw492_32
   - dir C:\Libraries
   - dir C:\Libraries\boost_1_86_0
   # Find out current folder's content
