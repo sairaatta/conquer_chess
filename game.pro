@@ -53,8 +53,8 @@ LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 win32 {
 
-  LIBS += -L/$$PWD/../SFML/lib
-  INCLUDEPATH += -I/$$PWD/../SFML/include
+  LIBS += $$PWD/../SFML/lib
+  INCLUDEPATH += $$PWD/../SFML/include
 
 }
 
@@ -74,3 +74,4 @@ DEFINES += USE_SFGRAPHING
 SOURCES += $$PWD/../SFGraphing/src/*.cpp
 INCLUDEPATH += $$PWD/../SFGraphing/include
 HEADERS += $$PWD/../SFGraphing/include/SFGraphing
+
