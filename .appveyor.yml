@@ -21,6 +21,7 @@ build_script:
   - dir C:\cygwin\bin
   - dir C:\Qt
   - dir C:\Qt\6.8.1
+  - dir C:\Qt\6.8.1\mingw_64
   - dir C:\Libraries
   - dir C:\Libraries\boost_1_86_0
   # Find out current folder's content
@@ -34,8 +35,9 @@ build_script:
   - echo "Install magic_enum"
   - cd ../magic_enum
   - cmake .
+  - dir
   #- make
-  - mingw32-make.exe
+  - mingw32-make.exe Makefile
   - cd conquer-chess
   # Disservin's chess-library, download
   - echo "Disservin's chess-library"
