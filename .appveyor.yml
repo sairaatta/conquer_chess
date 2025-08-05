@@ -10,7 +10,13 @@ install:
 
 build_script:
   - echo "Download magic_enum"
-  - cd .. ; git clone https://github.com/Neargye/magic_enum ; cd -
+  - echo %cd%
+  - cd .. 
+  - echo %cd%
+  - git clone https://github.com/Neargye/magic_enum
+  - echo %cd%
+  - cd -
+  - echo %cd%
   - echo "Install magic_enum"
   - cd ../magic_enum ; cmake . ; make ; cd -
   - echo "Disservin's chess-library"
@@ -22,3 +28,7 @@ build_script:
   - mingw32-cd
   - make release
   - conquer_chess.exe --version
+
+artifacts:
+  # The goal of this CI script
+  - path: conquer_chess.exe
