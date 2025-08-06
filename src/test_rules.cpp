@@ -451,10 +451,58 @@ void test_rule_3_6()
 
 void test_rule_3_7()
 {
+  /// `[3.7]` The pawn:
   /// - `[3.7.1]` The pawn may move forward to the square immediately in front of it
   /// on the same file, provided that this square is unoccupied, or
   {
     assert(can_move_on_empty_board(chess_color::white, piece_type::pawn, square("e4"), square("e5")));
+  }
+  /// `[3.7.2]` on its first move the pawn may move as in 3.7.1 or
+  ///  alternatively it may advance two squares along the same file,
+  ///  provided that both squares are unoccupied, or
+  {
+    // TOOD
+  }
+  /// `[3.7.3]` the pawn may move to a square occupied by an opponent's piece
+  ///  diagonally in front of it on an adjacent file, capturing that piece.
+  {
+    // TOOD
+  }
+
+  /// `[3.7.3.1]` A pawn occupying a square on the same rank as and
+  ///  on an adjacent file to an opponent's pawn which has just advanced
+  ///  two squares in one move from its original square may capture
+  ///  this opponent's pawn as though the latter had been moved only one square.
+  {
+    // TOOD
+  }
+
+  /// `[3.7.3.2]` This capture is only legal on the move following
+  ///  this advance and is called an ‘en passant' capture.
+  {
+    // TOOD
+  }
+
+  /// `[3.7.3.3]` When a player, having the move, plays a pawn to
+  ///  the rank furthest from its starting position,
+  ///  he/she must exchange that pawn as part of the same move
+  ///  for a new queen, rook, bishop or knight of the same colour
+  ///  on the intended square of arrival.
+  ///  This is called the square of ‘promotion'.
+  {
+    // TOOD
+  }
+
+  /// `[3.7.3.4]` The player's choice is not restricted to pieces
+  ///  that have been captured previously.
+  {
+    // TOOD
+  }
+
+  /// `[3.7.3.5]` This exchange of a pawn for another piece is
+  ///  called promotion, and the effect of the new piece is immediate.
+  {
+    // TOOD
   }
 }
 
