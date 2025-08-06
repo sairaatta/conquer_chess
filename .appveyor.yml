@@ -2,7 +2,7 @@ image: Visual Studio 2022
 
 install:
   # g++
-  - set PATH=%PATH%;C:\MinGW\bin
+  - set PATH=%PATH%;C:\mingw-w64\bin
   # Although cygwin looks cleaner, the Qt version 5.6.3 is compatible with
   # MinGW 4.9.0
   #- set PATH=%PATH%;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
@@ -24,8 +24,8 @@ build_script:
   # Explore file system
   - echo %cd%
   - dir C:\
-  - dir C:\MinGW
-  - dir C:\MinGW\bin
+  - dir C:\mingw-w64
+  - dir C:\mingw-w64\bin
   #- dir C:\mingw-w64
   #- dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64
   #- dir C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin
