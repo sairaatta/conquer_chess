@@ -1,6 +1,10 @@
 # Steamworks resources
 
-![Original](title_482_x_281.png)
+![`title_482_x_281.png`](title_482_x_281.png)
+
+> `title_482_x_281.png`
+
+These are the resources needed for the Steam Store page.
 
 ## Header Capsule
 
@@ -13,7 +17,9 @@
   and for daily deals if applicable.
 - Sizes: 920px x 430px
 
-[Header Capsule](header_capsule_920_x_430.png)
+[`store_header_capsule_920_x_430.png`](store_header_capsule_920_x_430.png)
+
+> `store_header_capsule_920_x_430.png`
 
 ## Small Capsule
 
@@ -26,7 +32,9 @@
   should nearly fill the small capsule.
 - Sizes: 462px x 174px
 
-![Small capsule](small_capsule_462_x_174.png)
+![`small_capsule_462_x_174.png`](small_capsule_462_x_174.png)
+
+> `small_capsule_462_x_174.png`
 
 ## Main capsule
 
@@ -38,7 +46,9 @@
   and recommended carousel.
 - Sizes: 1232px x 706px
 
-![Main capsule](main_capsule_1232_x_706.png)
+![`main_capsule_1232_x_706.png`](main_capsule_1232_x_706.png)
+
+> `main_capsule_1232_x_706.png`
 
 ## Vertical capsule
 
@@ -50,7 +60,9 @@
   and on other new sale pages.
 - Sizes: 748px x 896px
 
-![Vertical capsule](vertical_capsule_748_x_896.png)
+![`vertical_capsule_748_x_896.png`](vertical_capsule_748_x_896.png)
+
+> `vertical_capsule_748_x_896.png`
 
 ## Background
 
@@ -64,7 +76,9 @@
   in the background of your store page.
 - Size: 1438px x 810px
 
-![Background](background_1438_x_810.png)
+![`background_1438_x_810.png`](background_1438_x_810.png)
+
+> `background_1438_x_810.png`
 
 ## Game manuals, quick reference guides, and read-me files
 
@@ -86,8 +100,9 @@
 - Size: 600px x 900px (an additional half-size 300px x 450px PNG will
   be auto-generated from larger file)
 
+![`library_capsule_600_x_900.png`](library_capsule_600_x_900.png)
 
-![Library capsule](library_capsure_600_x_900.png)
+> `library_capsule_600_x_900.png`
 
 ## Library Header
 
@@ -98,8 +113,9 @@
   including Recent Games. If not set, then the Header Capsule is used.
 - Size: 920px wide x 430px tall
 
-![Library header](library_header_920_x_430.png)
+![`library_header_920_x_430.jpg`](library_header_920_x_430.jpg)
 
+> `library_header_920_x_430.jpg`
 
 ## Library Hero
 
@@ -127,7 +143,9 @@
 - Size: 3840px x 1240px (an additional half-size 1920px x 620px PNG
   will be auto-generated from larger file)
 
-![Library hero](library_hero_3840_1240.png)
+![`library_hero_3840_1240.png`](library_hero_3840_1240.png)
+
+> `library_hero_3840_1240.png`
 
 ## Library Logo
 
@@ -150,4 +168,6 @@ with the application name in text overlaid in the bottom left corner.
 - Size: Either 1280px wide and/or 720px tall (an additional half-size PNG
   will be auto-generated based on your logo's aspect ratio).
 
-![library_logo_1280_x_720.png](library_logo_1280_x_720.png)
+![`library_logo_1280_x_720.png`](library_logo_1280_x_720.png)
+
+> `library_logo_1280_x_720.png`
