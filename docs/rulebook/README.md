@@ -145,7 +145,7 @@ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 - `[]` 3.8.1    by moving to an adjoining square
 
 - `[]` 3.8.2    by ‘castling'. This is a move of the king and either rook of the same colour along the player's first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.
-   
+
 - `[]` 3.8.2.1    The right to castle has been lost:
 
 - `[]` 1) If the king has already moved, or
@@ -878,6 +878,7 @@ The starting position can be generated before the game either by a computer prog
 
 When castling on a physical board with a human player, it is recommended that the king be moved outside the playing surface next to his/her final position, the rook then be moved from its starting position to its final position, and then the king be placed on his final square.
 After castling, the rook and king's final positions should be exactly the same positions as they would be in regular chess.
+
 - `[]` II. 3.2.6    Clarification
 
 Thus, after c-side castling (notated as 0-0-0 and known as queen-side castling in ortho-dox chess), the king is on the c-square (c1 for white and c8 for black) and the rook is on the d-square (d1 for white and d8 for black). After g-side castling (notated as 0-0 and known as king-side castling in orthodox chess), the king is on the g-square (g1 for white and g8 for black) and the rook is on the f-square (f1 for white and f8 for black).
