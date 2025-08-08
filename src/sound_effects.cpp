@@ -34,6 +34,8 @@ std::vector<std::tuple<std::reference_wrapper<sf::Sound>, std::reference_wrapper
     std::make_tuple(std::ref(m_attacking_high), std::ref(m_attacking_high_buffer), "attacking_high.ogg"),
     std::make_tuple(std::ref(m_attacking_low), std::ref(m_attacking_low_buffer), "attacking_low.ogg"),
     std::make_tuple(std::ref(m_attacking_mid), std::ref(m_attacking_mid_buffer), "attacking_mid.ogg"),
+    std::make_tuple(std::ref(m_bark_1), std::ref(m_bark_1_buffer), "bark_1.ogg"),
+    std::make_tuple(std::ref(m_bark_2), std::ref(m_bark_2_buffer), "bark_2.ogg"),
     std::make_tuple(std::ref(m_countdown), std::ref(m_countdown_buffer), "countdown.ogg"),
     std::make_tuple(std::ref(m_done_high), std::ref(m_done_high_buffer), "done_high.ogg"),
     std::make_tuple(std::ref(m_done_low), std::ref(m_done_low_buffer), "done_low.ogg"),
@@ -204,6 +206,21 @@ void sound_effects::play(const message& effect)
       break;
     }
   }
+}
+
+void sound_effects::play_bark(const int number)
+{
+  assert(number == 1 || number == 2);
+  if (number == 1)
+  {
+    m_bark_1.play();
+  }
+  else
+  {
+    assert(number == 2);
+    m_bark_2.play();
+  }
+
 }
 
 void sound_effects::play_countdown() noexcept

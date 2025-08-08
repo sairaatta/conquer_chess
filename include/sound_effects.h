@@ -23,6 +23,9 @@ public:
   /// Play a sound effect
   void play(const message& effect);
 
+  /// Play a Thema bark. Number can be either 1 or 2
+  void play_bark(const int number);
+
   /// Play the robotic countdown effect.
   void play_countdown() noexcept;
 
@@ -36,6 +39,8 @@ private:
   sf::Sound m_attacking_high;
   sf::Sound m_attacking_low;
   sf::Sound m_attacking_mid;
+  sf::Sound m_bark_1;
+  sf::Sound m_bark_2;
   sf::Sound m_countdown;
   sf::Sound m_done_high;
   sf::Sound m_done_low;
@@ -72,6 +77,8 @@ private:
   sf::SoundBuffer m_attacking_high_buffer;
   sf::SoundBuffer m_attacking_low_buffer;
   sf::SoundBuffer m_attacking_mid_buffer;
+  sf::SoundBuffer m_bark_1_buffer;
+  sf::SoundBuffer m_bark_2_buffer;
   sf::SoundBuffer m_countdown_buffer;
   sf::SoundBuffer m_done_high_buffer;
   sf::SoundBuffer m_done_low_buffer;

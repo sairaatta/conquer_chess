@@ -118,6 +118,14 @@ bool lobby_view::process_event_impl(sf::Event& event)
     else if (key_pressed == sf::Keyboard::Key::T)
     {
       m_dog_mode = !m_dog_mode;
+      if (m_dog_mode)
+      {
+        game_resources::get().get_sound_effects().play_bark(1);
+      }
+      else
+      {
+        game_resources::get().get_sound_effects().play_bark(2);
+      }
     }
     else if (key_pressed == sf::Keyboard::Key::O)
     {
