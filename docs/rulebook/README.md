@@ -20,7 +20,7 @@ Rules that only apply to Conquer Chess have `CC` in the number of the rule.
 - [`1.1`] The game of chess is played between two opponents who move their pieces
  on a square board called a 'chessboard'.
 
- In Conquer Chess this rule may be expanded to included 
+ In Conquer Chess this rule may be expanded to included
  multiple arenas of different shapes added in the future.
 
 - `[1.2]` The player with the light-coloured pieces (White)
@@ -34,7 +34,7 @@ Rules that only apply to Conquer Chess have `CC` in the number of the rule.
 
 TODO: [Consider adding a option that black can never make more moves than white](https://github.com/richelbilderbeek/conquer_chess/issues/111).
 
-- `[1.2.CC.1]` The pieces of one color are from a race. 
+- `[1.2.CC.1]` The pieces of one color are from a race.
 
 - `[1.2.CC.2]` It is allowed that different colors play with a same race.
  When this is the case, the match is called a 'mirror match'.

@@ -22,7 +22,7 @@ Emails with code will not be accepted.
 Awesome. These are your options:
 
 - Add an issue, with the test that fails
-- Submit a pull request, with the failing test, to the 
+- Submit a pull request, with the failing test, to the
   `main` or `develop` branch
 - Send [`richelbilderbeek`](https://github.com/richelbilderbeek) an email.
   [`richelbilderbeek`](https://github.com/richelbilderbeek)
