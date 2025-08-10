@@ -22,9 +22,11 @@ Emails with code will not be accepted.
 Awesome. These are your options:
 
 - Add an issue, with the test that fails
-- Submit a pull request, with the failing test
-- Send @richelbilderbeek an email.
-  @richelbilderbeek will make an issue of it
+- Submit a pull request, with the failing test, to the 
+  `main` or `develop` branch
+- Send [`richelbilderbeek`](https://github.com/richelbilderbeek) an email.
+  [`richelbilderbeek`](https://github.com/richelbilderbeek)
+  will make an issue of it
 
 If the report was good enough to reproduce the bug
 and the bug was not reported yet,
@@ -32,5 +34,5 @@ you will be mentioned in [the acknowledgements](acknowledgements.md).
 
 ## Branching policy
 
-- The `main` branch is for developers
-- The `develop` branch should always build successfully
+- The `main` branch should always build successfully
+- The `develop` branch is for developers
