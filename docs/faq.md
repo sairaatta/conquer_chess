@@ -34,7 +34,7 @@ These are the three races from
 
 Scion mod race|Description
 --------------|------------
-Genetron      |Terron-like
+Genetron      |Terran-like
 Keiron        |Protoss-like
 Xayid         |Zerg-like
 
