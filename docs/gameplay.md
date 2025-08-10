@@ -25,12 +25,9 @@ The lobby is where the match is set up.
 Here the two players pick who plays which side
 and which races they use.
 
-Classic |Genetron           |Keiron          |Xayid
---------|-------------------|------------------|------------------
-Classic |1.0                |0.0               |None
-Keiron  |0.5                |0.5               |Regenerate 0.25 shield per chess move `[4]`
-Genetron|0.75               |0.0               |None
-Xayid   |0.5                |0.0               |Regenerates 0.25 health per chess move `[3]`
+Classic    |Genetron                                     |Keiron                                   |Xayid
+-----------|---------------------------------------------|-----------------------------------------|-----------------------------------------
+Has no logo| ![Genetron logo](genetron_logo_16_x_16.png) | ![Keiron logo](keiron_logo_16_x_16.png) | ![Xayid logo](xayid_logo_16_x_16.png)
 
 The effect of each side is simple: white, like in regular chess, can start,
 where black has to wait one chess move.
