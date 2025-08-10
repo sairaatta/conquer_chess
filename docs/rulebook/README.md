@@ -39,7 +39,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
 - `[1.2.CC.1]` The pieces of one color are from a race.
 
 - `[1.2.CC.2]` It is allowed that different colors play with a same race.
- When this is the case, the match is called a 'mirror match'.
+  When this is the case, the match is called a 'mirror match'.
 
 - `[1.2.CC.3]` Races are: Classic, Genetron, Keiron and Xayid
 
@@ -49,11 +49,11 @@ TODO: [Consider adding a option that black can never make more moves than white]
 
   The maximum healths per race are as follows:
 
-  Race   |Maximum health
-  -------|--------------
-  Classic|1.0
-  Keiron|0.5
-  Genetron |0.75
+  Race    |Maximum health
+  --------|--------------
+  Classic |1.0
+  Keiron  |0.5
+  Genetron|0.75
   Xayid   |0.5
 
 !!! warning "Need balance patches"
@@ -61,20 +61,59 @@ TODO: [Consider adding a option that black can never make more moves than white]
   These maximum health values are untested and balance patches are to be
   expected.
 
-- `[1.2.CC.5]` All pieces of the Keiron race have a shield
+- `[1.2.CC.5]` All pieces of the Keiron race have a shield,
+  other races do not have a shield
 
   The maximum shield per race are as follows:
 
-  Race   |Maximum shield
-  -------|--------------
-  Classic|0.0
-  Keiron|0.5
-  Genetron |0.0
-  Xayid   |0.0
+  Race    |Maximum shield
+  --------|--------------
+  Classic |None
+  Keiron  |0.5
+  Genetron|None
+  Xayid   |None
 
 !!! warning "Need balance patches"
 
   These maximum shield values are untested and balance patches are to be
+  expected.
+
+- `[1.2.CC.6]` A piece of the Xayid race can regenerate its health.
+  This means that when it has taken damage and given enough time,
+  its health can gradually
+  reach its maximum value again.
+  
+  The regeneration rate per race are as follows:
+
+  Race    |Healhh regeneration rate
+  --------|------------------------
+  Classic |None
+  Keiron  |None
+  Genetron|None
+  Xayid   |0.25 per time unit
+
+!!! warning "Need balance patches"
+
+  These regeneration rates are untested and balance patches are to be
+  expected.
+
+- `[1.2.CC.7]` A piece of the Keiron race can regenerate its shield.
+  This means that when its shield has taken damage and given enough time,
+  its shield can gradually
+  reach its maximum value again.
+  
+  The shiled regeneration rate per race are as follows:
+
+  Race    |Regeneration rate
+  --------|-----------------
+  Classic |None
+  Keiron  |0.25 per time unit
+  Genetron|None
+  Xayid   |None
+
+!!! warning "Need balance patches"
+
+  These shield regeneration rates are untested and balance patches are to be
   expected.
 
 - [`1.3`] A player is said to 'have the move' when his/her opponent's move

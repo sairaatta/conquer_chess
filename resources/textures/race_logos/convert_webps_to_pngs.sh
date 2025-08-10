@@ -1,4 +1,8 @@
 #!/bin/bash
-convert genetron_logo.webp genetron_logo.png
-convert keiron_logo.webp keiron_logo.png
-convert xayid_logo.webp xayid_logo.png
+convert genetron_logo_185_x_185.webp genetron_logo_185_x_185.png
+convert keiron_logo_185_x_185.webp keiron_logo_185_x_185.png
+convert xayid_logo_185_x_185.webp xayid_logo_185_x_185.png
+
+convert -resize 16x16 genetron_logo_185_x_185.webp genetron_logo_16_x_16.png
+convert -resize 16x16 keiron_logo_185_x_185.webp keiron_logo_16_x_16.png
+convert -resize 16x16 xayid_logo_185_x_185.webp xayid_logo_16_x_16.png

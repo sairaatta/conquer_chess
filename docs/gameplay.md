@@ -25,6 +25,13 @@ The lobby is where the match is set up.
 Here the two players pick who plays which side
 and which races they use.
 
+Classic |Genetron           |Keiron          |Xayid
+--------|-------------------|------------------|------------------
+Classic |1.0                |0.0               |None
+Keiron  |0.5                |0.5               |Regenerate 0.25 shield per chess move `[4]`
+Genetron|0.75               |0.0               |None
+Xayid   |0.5                |0.0               |Regenerates 0.25 health per chess move `[3]`
+
 The effect of each side is simple: white, like in regular chess, can start,
 where black has to wait one chess move.
 
@@ -40,17 +47,17 @@ damage:
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-Race   |Maximum health [1] |Maximum shield [2]|Other features
--------|-------------------|------------------|------------------
-Classic|1.0                |0.0               |None
-Keiron|0.5                |0.5               |Shields regenerate :construction:
-Genetron |0.75               |0.0               |None
-Xayid   |0.5                |0.0               |Health regenerates :construction:
+Race    |Maximum health [1] |Maximum shield [2]|Other features
+--------|-------------------|------------------|------------------
+Classic |1.0                |0.0               |None
+Genetron|0.75               |0.0               |None
+Keiron  |0.5                |0.5               |Regenerate 0.25 shield per chess move `[4]`
+Xayid   |0.5                |0.0               |Regenerates 0.25 health per chess move `[3]`
 
-- [1] These values are copied from
-  [the rulebook](rulebook/README.md) rule `[1.2.CC.4]`
-- [2] These values are copied from
-  [the rulebook](rulebook/README.md) rule `[1.2.CC.5]`
+- `[1]` From [the rulebook](rulebook/README.md) rule `[1.2.CC.4]`
+- `[2]` From [the rulebook](rulebook/README.md) rule `[1.2.CC.5]`
+- `[3]` From [the rulebook](rulebook/README.md) rule `[1.2.CC.6]`
+- `[4]` From [the rulebook](rulebook/README.md) rule `[1.2.CC.7]`
 
 <!-- markdownlint-enable MD013 -->
 
@@ -58,11 +65,11 @@ The second difference between the races is the ability to move and attack:
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-Race   |Movement speed [1] |Attack speed [2]
--------|-------------------|------------------
-Classic|1                  |1.0
-Keiron|0.9                |1.1
-Genetron |1.0                |1.0
+Race    |Movement speed [1] |Attack speed [2]
+--------|-------------------|------------------
+Classic |1                  |1.0
+Genetron|1.0                |1.0
+Keiron  |0.9                |1.1
 Xayid   |1.1                |0.9
 
 <!-- markdownlint-enable MD013 -->
