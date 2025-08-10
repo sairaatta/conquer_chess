@@ -44,7 +44,7 @@ Race   |Maximum health [1] |Maximum shield [2]|Other features
 -------|-------------------|------------------|------------------
 Classic|1.0                |0.0               |None
 Keiron|0.5                |0.5               |Shields regenerate :construction:
-Terran |0.75               |0.0               |None
+Genetron |0.75               |0.0               |None
 Xayid   |0.5                |0.0               |Health regenerates :construction:
 
 - [1] These values are copied from
@@ -62,7 +62,7 @@ Race   |Movement speed [1] |Attack speed [2]
 -------|-------------------|------------------
 Classic|1                  |1.0
 Keiron|0.9                |1.1
-Terran |1.0                |1.0
+Genetron |1.0                |1.0
 Xayid   |1.1                |0.9
 
 <!-- markdownlint-enable MD013 -->
@@ -79,7 +79,7 @@ Race   |Effect of being protected
 -------|-------------------------
 Classic|None
 Keiron|Moves faster
-Terran |Heal
+Genetron |Heal
 Xayid   |Attack faster
 
 - :construction: This is under contruction

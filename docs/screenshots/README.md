@@ -88,7 +88,7 @@
 
 ![Game screen v0.8](20250619_4.jpg)
 
-> The game screen, now for keiron (left) versus terran (right)
+> The game screen, now for keiron (left) versus genetron (right)
 
 ![Game screen v0.8](20250619_3.jpg)
 

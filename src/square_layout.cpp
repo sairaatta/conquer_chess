@@ -93,10 +93,10 @@ void test_piece_layout()
     {
       const auto r_classic{layout.get_health_bar_value(0.5, race::classic)};
       const auto r_keiron{layout.get_health_bar_value(0.5, race::keiron)};
-      const auto r_terran{layout.get_health_bar_value(0.5, race::terran)};
+      const auto r_genetron{layout.get_health_bar_value(0.5, race::genetron)};
       const auto r_xayid{layout.get_health_bar_value(0.5, race::xayid)};
       assert(r_classic != r_keiron);
-      assert(r_classic == r_terran);
+      assert(r_classic == r_genetron);
       assert(r_classic == r_xayid);
     }
     // Keiron health and shield bar differ

@@ -53,7 +53,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   -------|--------------
   Classic|1.0
   Keiron|0.5
-  Terran |0.75
+  Genetron |0.75
   Xayid   |0.5
 
 !!! warning "Need balance patches"
@@ -69,7 +69,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   -------|--------------
   Classic|0.0
   Keiron|0.5
-  Terran |0.0
+  Genetron |0.0
   Xayid   |0.0
 
 !!! warning "Need balance patches"
