@@ -27,6 +27,22 @@ Because I incompletely agree with him,
 I pondered on what high-speed chess would look like.
 Conquer Chess is the result of those thoughts.
 
+## What are the three races in Conquer Chess?
+
+These are the three races from
+[the Starcraft 2 Scion mod](https://wiki.sc2.app/scion):
+
+Scion mod race|Description
+--------------|------------
+Genetron      |Terran-like
+Keiron        |Protoss-like
+Xayid         |Zerg-like
+
+## Why did you not pick the classic Starcraft races?
+
+To avoid problems in areas I am unfamiliar with,
+i.e. copyright and intellectual property.
+
 ## Game rules
 
 ### What are the rules of Conquer Chess compared to chess?
@@ -34,13 +50,7 @@ Conquer Chess is the result of those thoughts.
 Conquer Chess follows the rules of chess
 in such a way that regular games can be played with it.
 
-All pieces move and attack in the same way as regular chess
-and a regular game can
-
-However, due to the real-time nature of Conquer Chess,
-these are the differences:
-
-:construction: the exact rules are still under construction :construction:
+All rules can be found [in the rulebook](rulebook/README.md).
 
 - All pieces have an equal amount health
 - All pieces move in the same directions as regular chess.
