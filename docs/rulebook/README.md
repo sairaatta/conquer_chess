@@ -41,14 +41,39 @@ TODO: [Consider adding a option that black can never make more moves than white]
 
 - `[1.2.CC.3]` Races are: Classic, Genetron, Keiron and Xayid
 
-- `[1.2.CC.4]` All pieces of the Classic race have an equal amount of maximum
- health.
+- `[1.2.CC.4]` All pieces of the a race have an equal amount of maximum
+  health, where the maximum health level is defined to be 1.0 for the Classic
+  race.
 
- There are rules yet on the maximum health of the Scion custom races' pieces.
+  The maximum healths per race are as follows:
 
-TODO: [Decide on maximal health rules for the Scion mod races](https://github.com/richelbilderbeek/conquer_chess/issues/114)
+  Race   |Maximum health
+  -------|--------------
+  Classic|1.0
+  Protoss|0.5
+  Terran |0.75
+  Zerg   |0.5
 
-- `[1.2.CC.1]` All pieces of the Keiron race have a shield
+!!! warning "Need balance patches"
+
+  These maximum health values are untested and balance patches are to be
+  expected.
+
+- `[1.2.CC.5]` All pieces of the Keiron race have a shield
+
+  The maximum shield per race are as follows:
+
+  Race   |Maximum shield
+  -------|--------------
+  Classic|0.0
+  Protoss|0.5
+  Terran |0.0
+  Zerg   |0.0
+
+!!! warning "Need balance patches"
+
+  These maximum shield values are untested and balance patches are to be
+  expected.
 
 - [`1.3`] A player is said to 'have the move' when his/her opponent's move
  has been 'made'.

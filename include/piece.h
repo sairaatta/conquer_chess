@@ -88,7 +88,7 @@ public:
   /// The things this piece wants to say
   const auto& get_messages() const noexcept { return m_messages; }
 
-  /// Get the race of piece, e.g class, protoss, terran or zerg
+  /// Get the race of a piece
   const auto& get_race() const noexcept { return m_race.get_value(); }
 
   /// Get the shield value of the unit.

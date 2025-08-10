@@ -40,12 +40,17 @@ damage:
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-Race   |Maximum health     |Maximum shield|Other features
--------|-------------------|--------------|------------------
-Classic|1.0                |0.0           |None
-Protoss|0.5                |0.5           |Shields regenerate :construction:
-Terran |0.75               |0.0           |None
-Zerg   |0.5                |0.0           |Health regenerates :construction:
+Race   |Maximum health [1] |Maximum shield [2]|Other features
+-------|-------------------|------------------|------------------
+Classic|1.0                |0.0               |None
+Protoss|0.5                |0.5               |Shields regenerate :construction:
+Terran |0.75               |0.0               |None
+Zerg   |0.5                |0.0               |Health regenerates :construction:
+
+- [1] These values are copied from
+  [the rulebook](rulebook/README.md) rule `[1.2.CC.4]`
+- [2] These values are copied from
+  [the rulebook](rulebook/README.md) rule `[1.2.CC.5]`
 
 <!-- markdownlint-enable MD013 -->
 
