@@ -8,7 +8,7 @@
 | ------------------------------------ | ------------------ | -------------------------------------------------------------------------- |
 | ![General artwork](protoss_head.jpg) | `protoss_head.jpg` | `starcraft 2, protoss, chess, simple, profile`                             |
 | ![General artwork](terran_head.jpg)  | `terran_head.jpg`  | `starcraft 2, terran, chess, face, chess piece, simple`                    |
-| ![General artwork](zerg_head.jpg)    | `zerg_head.jpg`    | `starcraft 2, zerg, chess piece, face, simple, teeth`                      |
+| ![General artwork](xayid_head.jpg)    | `xayid_head.jpg`    | `starcraft 2, xayid, chess piece, face, simple, teeth`                      |
 | ![General artwork](classic_head.jpg) | `classic_head.jpg` | `chess, classic, head, chesspiece, face, profile, close-up, human, statue` |
 
 <!-- markdownlint-enable MD013 -->

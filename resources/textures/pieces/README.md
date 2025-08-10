@@ -27,16 +27,16 @@
 | ![Piece](terran_white_pawn.jpg)    | `terran_white_pawn.jpg`    | `starcraft 2, terran, a white pawn, symbol, symbolic, pawn, full view`                                             |
 | ![Piece](terran_white_queen.jpg)   | `terran_white_queen.jpg`   | `starcraft 2, terran, a white queen, symbol, symbolic, full view, one chesspiece, simple, bulky, metal`            |
 | ![Piece](terran_white_rook.jpg)    | `terran_white_rook.jpg`    | `white rook, chess, symbol, terran, starcraft 2, simple`                                                           |
-| ![Piece](zerg_black_king.jpg)      | `zerg_black_king.jpg`      | `starcraft 2, zerg, a black king, symbol, symbolic, full view, one chesspiece, simple`                             |
-| ![Piece](zerg_black_knight.jpg)    | `zerg_black_knight.jpg`    | `black knight, chess, zerg, starcraft 2, symbol`                                                                   |
-| ![Piece](zerg_black_pawn.jpg)      | `zerg_black_pawn.jpg`      | `starcraft 2, zerg, a black pawn, chess, symbol, symbolic, full view, single piece, one chesspiece`                |
-| ![Piece](zerg_black_queen.jpg)     | `zerg_black_queen.jpg`     | `starcraft 2, zerg, a black queen, symbol, symbolic, full view, one chesspiece, simple, toxic`                     |
-| ![Piece](zerg_black_rook.jpg)      | `zerg_black_rook.jpg`      | `black rook, chess, symbol, zerg, starcraft 2, simple, cells`                                                      |
-| ![Piece](zerg_white_bishop.jpg)    | `zerg_white_bishop.jpg`    | `starcraft 2, zerg, a white bishop, symbol, symbolic, full view, one chesspiece, simple`                           |
-| ![Piece](zerg_white_king.jpg)      | `zerg_white_king.jpg`      | `starcraft 2, zerg, a white king, symbol, symbolic, full view, one chesspiece, simple, fearsome, big, strong`      |
-| ![Piece](zerg_white_knight.jpg)    | `zerg_white_knight.jpg`    | `white knight, chess, zerg, starcraft 2, symbol, full body view`                                                   |
-| ![Piece](zerg_white_pawn.jpg)      | `zerg_white_pawn.jpg`      | `starcraft 2, zerg, a white pawn, symbol, symbolic, full view, single piece, one chesspiece`                       |
-| ![Piece](zerg_white_queen.jpg)     | `zerg_white_queen.jpg`     | `starcraft 2, zerg, a white queen, symbol, symbolic, full view, one chesspiece, simple, sharp`                     |
-| ![Piece](zerg_white_rook.jpg)      | `zerg_white_rook.jpg`      | `white rook, chess, symbol, zerg, starcraft 2, simple, biology`                                                    |
+| ![Piece](xayid_black_king.jpg)      | `xayid_black_king.jpg`      | `starcraft 2, xayid, a black king, symbol, symbolic, full view, one chesspiece, simple`                             |
+| ![Piece](xayid_black_knight.jpg)    | `xayid_black_knight.jpg`    | `black knight, chess, xayid, starcraft 2, symbol`                                                                   |
+| ![Piece](xayid_black_pawn.jpg)      | `xayid_black_pawn.jpg`      | `starcraft 2, xayid, a black pawn, chess, symbol, symbolic, full view, single piece, one chesspiece`                |
+| ![Piece](xayid_black_queen.jpg)     | `xayid_black_queen.jpg`     | `starcraft 2, xayid, a black queen, symbol, symbolic, full view, one chesspiece, simple, toxic`                     |
+| ![Piece](xayid_black_rook.jpg)      | `xayid_black_rook.jpg`      | `black rook, chess, symbol, xayid, starcraft 2, simple, cells`                                                      |
+| ![Piece](xayid_white_bishop.jpg)    | `xayid_white_bishop.jpg`    | `starcraft 2, xayid, a white bishop, symbol, symbolic, full view, one chesspiece, simple`                           |
+| ![Piece](xayid_white_king.jpg)      | `xayid_white_king.jpg`      | `starcraft 2, xayid, a white king, symbol, symbolic, full view, one chesspiece, simple, fearsome, big, strong`      |
+| ![Piece](xayid_white_knight.jpg)    | `xayid_white_knight.jpg`    | `white knight, chess, xayid, starcraft 2, symbol, full body view`                                                   |
+| ![Piece](xayid_white_pawn.jpg)      | `xayid_white_pawn.jpg`      | `starcraft 2, xayid, a white pawn, symbol, symbolic, full view, single piece, one chesspiece`                       |
+| ![Piece](xayid_white_queen.jpg)     | `xayid_white_queen.jpg`     | `starcraft 2, xayid, a white queen, symbol, symbolic, full view, one chesspiece, simple, sharp`                     |
+| ![Piece](xayid_white_rook.jpg)      | `xayid_white_rook.jpg`      | `white rook, chess, symbol, xayid, starcraft 2, simple, biology`                                                    |
 
 <!-- markdownlint-enable MD013 -->

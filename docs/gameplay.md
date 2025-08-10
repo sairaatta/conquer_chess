@@ -45,7 +45,7 @@ Race   |Maximum health [1] |Maximum shield [2]|Other features
 Classic|1.0                |0.0               |None
 Protoss|0.5                |0.5               |Shields regenerate :construction:
 Terran |0.75               |0.0               |None
-Zerg   |0.5                |0.0               |Health regenerates :construction:
+Xayid   |0.5                |0.0               |Health regenerates :construction:
 
 - [1] These values are copied from
   [the rulebook](rulebook/README.md) rule `[1.2.CC.4]`
@@ -63,7 +63,7 @@ Race   |Movement speed [1] |Attack speed [2]
 Classic|1                  |1.0
 Protoss|0.9                |1.1
 Terran |1.0                |1.0
-Zerg   |1.1                |0.9
+Xayid   |1.1                |0.9
 
 <!-- markdownlint-enable MD013 -->
 
@@ -80,7 +80,7 @@ Race   |Effect of being protected
 Classic|None
 Protoss|Moves faster
 Terran |Heal
-Zerg   |Attack faster
+Xayid   |Attack faster
 
 - :construction: This is under contruction
 

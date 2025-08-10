@@ -11,7 +11,7 @@ enum class race
   classic,
   protoss,
   terran,
-  zerg
+  xayid
 };
 
 std::vector<race> get_all_races() noexcept;

@@ -732,8 +732,8 @@ void test_piece()
   {
     const auto protoss_piece{get_test_white_knight(race::protoss)};
     assert(protoss_piece.get_race() == race::protoss);
-    const auto zerg_piece{get_test_white_knight(race::zerg)};
-    assert(zerg_piece.get_race() == race::zerg);
+    const auto xayid_piece{get_test_white_knight(race::xayid)};
+    assert(xayid_piece.get_race() == race::xayid);
   }
   // get_test_white_king
   {

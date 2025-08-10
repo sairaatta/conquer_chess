@@ -326,11 +326,11 @@
         <file>resources/textures/lobby_menu/ready_yes.jpg</file>
         <file>resources/textures/lobby_menu/terran_head.jpg</file>
         <file>resources/textures/lobby_menu/white_chess_color.jpg</file>
-        <file>resources/textures/lobby_menu/zerg_head.jpg</file>
+        <file>resources/textures/lobby_menu/xayid_head.jpg</file>
         <file>resources/textures/maps/classic_map.jpg</file>
         <file>resources/textures/maps/protoss_map.jpg</file>
         <file>resources/textures/maps/terran_map.jpg</file>
-        <file>resources/textures/maps/zerg_map.jpg</file>
+        <file>resources/textures/maps/xayid_map.jpg</file>
         <file>resources/textures/options_menu/game_speed.jpg</file>
         <file>resources/textures/options_menu/left_controls.jpg</file>
         <file>resources/textures/options_menu/music_volume.jpg</file>
@@ -400,18 +400,18 @@
         <file>resources/textures/pieces/terran_white_pawn.jpg</file>
         <file>resources/textures/pieces/terran_white_queen.jpg</file>
         <file>resources/textures/pieces/terran_white_rook.jpg</file>
-        <file>resources/textures/pieces/zerg_black_bishop.jpg</file>
-        <file>resources/textures/pieces/zerg_black_king.jpg</file>
-        <file>resources/textures/pieces/zerg_black_knight.jpg</file>
-        <file>resources/textures/pieces/zerg_black_pawn.jpg</file>
-        <file>resources/textures/pieces/zerg_black_queen.jpg</file>
-        <file>resources/textures/pieces/zerg_black_rook.jpg</file>
-        <file>resources/textures/pieces/zerg_white_bishop.jpg</file>
-        <file>resources/textures/pieces/zerg_white_king.jpg</file>
-        <file>resources/textures/pieces/zerg_white_knight.jpg</file>
-        <file>resources/textures/pieces/zerg_white_pawn.jpg</file>
-        <file>resources/textures/pieces/zerg_white_queen.jpg</file>
-        <file>resources/textures/pieces/zerg_white_rook.jpg</file>
+        <file>resources/textures/pieces/xayid_black_bishop.jpg</file>
+        <file>resources/textures/pieces/xayid_black_king.jpg</file>
+        <file>resources/textures/pieces/xayid_black_knight.jpg</file>
+        <file>resources/textures/pieces/xayid_black_pawn.jpg</file>
+        <file>resources/textures/pieces/xayid_black_queen.jpg</file>
+        <file>resources/textures/pieces/xayid_black_rook.jpg</file>
+        <file>resources/textures/pieces/xayid_white_bishop.jpg</file>
+        <file>resources/textures/pieces/xayid_white_king.jpg</file>
+        <file>resources/textures/pieces/xayid_white_knight.jpg</file>
+        <file>resources/textures/pieces/xayid_white_pawn.jpg</file>
+        <file>resources/textures/pieces/xayid_white_queen.jpg</file>
+        <file>resources/textures/pieces/xayid_white_rook.jpg</file>
         <file>resources/textures/portraits/classic_black_bishop_portrait.jpg</file>
         <file>resources/textures/portraits/classic_black_king_portrait.jpg</file>
         <file>resources/textures/portraits/classic_black_knight_portrait.jpg</file>
@@ -448,18 +448,18 @@
         <file>resources/textures/portraits/terran_white_pawn_portrait.jpg</file>
         <file>resources/textures/portraits/terran_white_queen_portrait.jpg</file>
         <file>resources/textures/portraits/terran_white_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_black_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_black_king_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_black_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_black_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_black_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_black_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_white_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_white_king_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_white_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_white_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_white_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/zerg_white_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_black_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_black_king_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_black_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_black_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_black_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_black_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_white_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_white_king_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_white_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_white_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_white_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/xayid_white_rook_portrait.jpg</file>
         <file>resources/textures/themba/themba_1.jpg</file>
         <file>resources/textures/themba/themba_2.jpg</file>
         <file>resources/textures/themba/themba_3.jpg</file>

@@ -94,10 +94,10 @@ void test_piece_layout()
       const auto r_classic{layout.get_health_bar_value(0.5, race::classic)};
       const auto r_protoss{layout.get_health_bar_value(0.5, race::protoss)};
       const auto r_terran{layout.get_health_bar_value(0.5, race::terran)};
-      const auto r_zerg{layout.get_health_bar_value(0.5, race::zerg)};
+      const auto r_xayid{layout.get_health_bar_value(0.5, race::xayid)};
       assert(r_classic != r_protoss);
       assert(r_classic == r_terran);
-      assert(r_classic == r_zerg);
+      assert(r_classic == r_xayid);
     }
     // Protoss health and shield bar differ
     {

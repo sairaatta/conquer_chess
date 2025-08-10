@@ -54,7 +54,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Classic|1.0
   Protoss|0.5
   Terran |0.75
-  Zerg   |0.5
+  Xayid   |0.5
 
 !!! warning "Need balance patches"
 
@@ -70,7 +70,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Classic|0.0
   Protoss|0.5
   Terran |0.0
-  Zerg   |0.0
+  Xayid   |0.0
 
 !!! warning "Need balance patches"
 

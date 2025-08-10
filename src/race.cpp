@@ -25,8 +25,8 @@ double get_attack_speed(const race r) noexcept
     case race::protoss: return 1.1;
     case race::terran: return 1.0;
     default:
-    case race::zerg:
-      assert(r == race::zerg);
+    case race::xayid:
+      assert(r == race::xayid);
       return 0.9;
   }
 }
@@ -39,8 +39,8 @@ double get_max_health(const race r)
     case race::protoss: return 0.5;
     case race::terran: return 0.75;
     default:
-    case race::zerg:
-      assert(r == race::zerg);
+    case race::xayid:
+      assert(r == race::xayid);
       return 0.5;
   }
 }
@@ -53,8 +53,8 @@ double get_max_shield(const race r)
     case race::protoss: return 0.5;
     case race::terran: return 0.0;
     default:
-    case race::zerg:
-      assert(r == race::zerg);
+    case race::xayid:
+      assert(r == race::xayid);
       return 0.0;
   }
 }
@@ -67,8 +67,8 @@ double get_movement_speed(const race r) noexcept
     case race::protoss: return 0.9;
     case race::terran: return 1.0;
     default:
-    case race::zerg:
-      assert(r == race::zerg);
+    case race::xayid:
+      assert(r == race::xayid);
       return 1.1;
   }
 }
@@ -117,14 +117,14 @@ void test_race()
     assert(get_max_health(race::classic) == 1.0);
     assert(get_max_health(race::protoss) == 0.5);
     assert(get_max_health(race::terran) == 0.75);
-    assert(get_max_health(race::zerg) == 0.5);
+    assert(get_max_health(race::xayid) == 0.5);
   }
   // get_max_shield
   {
     assert(get_max_shield(race::classic) == 0.0);
     assert(get_max_shield(race::protoss) == 0.5);
     assert(get_max_shield(race::terran) == 0.0);
-    assert(get_max_shield(race::zerg) == 0.0);
+    assert(get_max_shield(race::xayid) == 0.0);
 
   }
   // get_movement_speed
@@ -145,14 +145,14 @@ void test_race()
   // to_human_str
   {
     assert(to_human_str(race::classic) == "Classic");
-    assert(to_human_str(race::zerg) == "Zerg");
+    assert(to_human_str(race::xayid) == "Xayid");
     assert(to_human_str(race::protoss) == "Protoss");
     assert(to_human_str(race::terran) == "Terran");
   }
   // to_str
   {
     assert(to_str(race::classic) == "classic");
-    assert(to_str(race::zerg) == "zerg");
+    assert(to_str(race::xayid) == "xayid");
     assert(to_str(race::protoss) == "protoss");
     assert(to_str(race::terran) == "terran");
   }
@@ -166,7 +166,7 @@ void test_race()
   // operator<<
   {
     std::stringstream s;
-    s << race::zerg;
+    s << race::xayid;
     assert(!s.str().empty());
   }
 #endif // DEBUG
