@@ -311,13 +311,13 @@ double get_f_health(const piece& p) noexcept
 
 double get_f_shield(const piece& p) noexcept
 {
-  assert(p.get_race() == race::protoss);
+  assert(p.get_race() == race::keiron);
   return p.get_shield() / p.get_max_shield();
 }
 
 double piece::get_max_shield() const
 {
-  assert(m_race.get_value() == race::protoss);
+  assert(m_race.get_value() == race::keiron);
   return m_max_shield;
 }
 
@@ -328,7 +328,7 @@ square get_occupied_square(const piece& p) noexcept
 
 double piece::get_shield() const
 {
-  assert(m_race.get_value() == race::protoss);
+  assert(m_race.get_value() == race::keiron);
   return m_shield;
 }
 
@@ -535,9 +535,9 @@ void test_piece()
     const auto health_after{piece.get_health()};
     assert(health_after < health_before);
   }
-  // protoss piece first reduce shields
+  // keiron piece first reduce shields
   {
-    auto piece{get_test_white_knight(race::protoss)};
+    auto piece{get_test_white_knight(race::keiron)};
     const auto health_before{piece.get_health()};
     const auto shield_before{piece.get_shield()};
     piece.receive_damage(0.1);
@@ -546,9 +546,9 @@ void test_piece()
     assert(health_after == health_before);
     assert(shield_after < shield_before);
   }
-  // protoss piece first reduce shields, then health
+  // keiron piece first reduce shields, then health
   {
-    auto piece{get_test_white_knight(race::protoss)};
+    auto piece{get_test_white_knight(race::keiron)};
     while (piece.get_shield() > 0.0)
     {
       assert(piece.get_health() == piece.get_max_health());
@@ -713,9 +713,9 @@ void test_piece()
     const auto p{get_test_white_king()};
     assert(p.get_health() > 0.0);
   }
-  // get_f_shield, protoss
+  // get_f_shield, keiron
   {
-    const auto p{get_test_white_knight(race::protoss)};
+    const auto p{get_test_white_knight(race::keiron)};
     assert(get_f_shield(p) > 0.1);
   }
   // get_max_health
@@ -730,8 +730,8 @@ void test_piece()
   }
   // get_race
   {
-    const auto protoss_piece{get_test_white_knight(race::protoss)};
-    assert(protoss_piece.get_race() == race::protoss);
+    const auto keiron_piece{get_test_white_knight(race::keiron)};
+    assert(keiron_piece.get_race() == race::keiron);
     const auto xayid_piece{get_test_white_knight(race::xayid)};
     assert(xayid_piece.get_race() == race::xayid);
   }

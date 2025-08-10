@@ -51,7 +51,7 @@ screen_rect square_layout::get_health_bar_value(const double f, const race r) co
   assert(f >= 0.0);
   assert(f <= 1.0);
   auto health_bar{create_rect_inside(get_health_bar_outline())};
-  if (r == race::protoss) health_bar = get_upper_half(health_bar);
+  if (r == race::keiron) health_bar = get_upper_half(health_bar);
   return create_partial_rect_from_lhs(health_bar, f);
 }
 
@@ -92,16 +92,16 @@ void test_piece_layout()
     // Health bars
     {
       const auto r_classic{layout.get_health_bar_value(0.5, race::classic)};
-      const auto r_protoss{layout.get_health_bar_value(0.5, race::protoss)};
+      const auto r_keiron{layout.get_health_bar_value(0.5, race::keiron)};
       const auto r_terran{layout.get_health_bar_value(0.5, race::terran)};
       const auto r_xayid{layout.get_health_bar_value(0.5, race::xayid)};
-      assert(r_classic != r_protoss);
+      assert(r_classic != r_keiron);
       assert(r_classic == r_terran);
       assert(r_classic == r_xayid);
     }
-    // Protoss health and shield bar differ
+    // Keiron health and shield bar differ
     {
-      const auto r_health{layout.get_health_bar_value(0.5, race::protoss)};
+      const auto r_health{layout.get_health_bar_value(0.5, race::keiron)};
       const auto r_shield{layout.get_shield_bar_value(0.5)};
       assert(r_health != r_shield);
 

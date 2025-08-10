@@ -22,7 +22,7 @@ double get_attack_speed(const race r) noexcept
   switch (r)
   {
     case race::classic: return 1.0;
-    case race::protoss: return 1.1;
+    case race::keiron: return 1.1;
     case race::terran: return 1.0;
     default:
     case race::xayid:
@@ -36,7 +36,7 @@ double get_max_health(const race r)
   switch (r)
   {
     case race::classic: return 1.0;
-    case race::protoss: return 0.5;
+    case race::keiron: return 0.5;
     case race::terran: return 0.75;
     default:
     case race::xayid:
@@ -50,7 +50,7 @@ double get_max_shield(const race r)
   switch (r)
   {
     case race::classic: return 0.0;
-    case race::protoss: return 0.5;
+    case race::keiron: return 0.5;
     case race::terran: return 0.0;
     default:
     case race::xayid:
@@ -64,7 +64,7 @@ double get_movement_speed(const race r) noexcept
   switch (r)
   {
     case race::classic: return 1.0;
-    case race::protoss: return 0.9;
+    case race::keiron: return 0.9;
     case race::terran: return 1.0;
     default:
     case race::xayid:
@@ -115,14 +115,14 @@ void test_race()
   // get_max_health
   {
     assert(get_max_health(race::classic) == 1.0);
-    assert(get_max_health(race::protoss) == 0.5);
+    assert(get_max_health(race::keiron) == 0.5);
     assert(get_max_health(race::terran) == 0.75);
     assert(get_max_health(race::xayid) == 0.5);
   }
   // get_max_shield
   {
     assert(get_max_shield(race::classic) == 0.0);
-    assert(get_max_shield(race::protoss) == 0.5);
+    assert(get_max_shield(race::keiron) == 0.5);
     assert(get_max_shield(race::terran) == 0.0);
     assert(get_max_shield(race::xayid) == 0.0);
 
@@ -146,14 +146,14 @@ void test_race()
   {
     assert(to_human_str(race::classic) == "Classic");
     assert(to_human_str(race::xayid) == "Xayid");
-    assert(to_human_str(race::protoss) == "Protoss");
+    assert(to_human_str(race::keiron) == "Keiron");
     assert(to_human_str(race::terran) == "Terran");
   }
   // to_str
   {
     assert(to_str(race::classic) == "classic");
     assert(to_str(race::xayid) == "xayid");
-    assert(to_str(race::protoss) == "protoss");
+    assert(to_str(race::keiron) == "keiron");
     assert(to_str(race::terran) == "terran");
   }
   // to_str

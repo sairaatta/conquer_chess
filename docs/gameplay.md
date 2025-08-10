@@ -43,7 +43,7 @@ damage:
 Race   |Maximum health [1] |Maximum shield [2]|Other features
 -------|-------------------|------------------|------------------
 Classic|1.0                |0.0               |None
-Protoss|0.5                |0.5               |Shields regenerate :construction:
+Keiron|0.5                |0.5               |Shields regenerate :construction:
 Terran |0.75               |0.0               |None
 Xayid   |0.5                |0.0               |Health regenerates :construction:
 
@@ -61,7 +61,7 @@ The second difference between the races is the ability to move and attack:
 Race   |Movement speed [1] |Attack speed [2]
 -------|-------------------|------------------
 Classic|1                  |1.0
-Protoss|0.9                |1.1
+Keiron|0.9                |1.1
 Terran |1.0                |1.0
 Xayid   |1.1                |0.9
 
@@ -78,7 +78,7 @@ protected by another piece:
 Race   |Effect of being protected
 -------|-------------------------
 Classic|None
-Protoss|Moves faster
+Keiron|Moves faster
 Terran |Heal
 Xayid   |Attack faster
 

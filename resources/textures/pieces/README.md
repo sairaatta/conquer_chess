@@ -4,17 +4,17 @@
 
 | Image                              | Filename                   | Search terms                                                                                                       |
 | ---------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| ![Piece](protoss_black_bishop.jpg) | `protoss_black_bishop.jpg` | `starcraft 2, chess, protoss, black bishop, symbol, simple, futuristic, single piece`                              |
-| ![Piece](protoss_black_king.jpg)   | `protoss_black_king.jpg`   | `starcraft 2, protoss, a black king, symbol, symbolic, full view, one chesspiece`                                  |
-| ![Piece](protoss_black_knight.jpg) | `protoss_black_knight.jpg` | `black knight, chess, protoss, starcraft 2, symbol`                                                                |
-| ![Piece](protoss_black_queen.jpg)  | `protoss_black_queen.jpg`  | `starcraft 2, protoss, a black queen, symbol, symbolic, full view, one chesspiece, simple`                         |
-| ![Piece](protoss_black_rook.jpg)   | `protoss_black_rook.jpg`   | `black rook, chess, symbol, protoss, starcraft 2, simple, futuristic`                                              |
-| ![Piece](protoss_white_bishop.jpg) | `protoss_white_bishop.jpg` | `starcraft 2, protoss, a white bishop, chess, symbol, symbolic, full view, single piece`                           |
-| ![Piece](protoss_white_king.jpg)   | `protoss_white_king.jpg`   | `starcraft 2, protoss, a white king, symbol, symbolic, full view, one chesspiece, simple`                          |
-| ![Piece](protoss_white_knight.jpg) | `protoss_white_knight.jpg` | `white knight, chess, protoss, starcraft 2, symbol, full body view, simple`                                        |
-| ![Piece](protoss_white_pawn.jpg)   | `protoss_white_pawn.jpg`   | `starcraft 2, protoss, a white pawn, chess, symbol, symbolic, full view, single piece, one chesspiece, futuristic` |
-| ![Piece](protoss_white_queen.jpg)  | `protoss_white_queen.jpg`  | `starcraft 2, protoss, a white queen, symbol, symbolic, full view, one chesspiece, simple`                         |
-| ![Piece](protoss_white_rook.jpg)   | `protoss_white_rook.jpg`   | `white rook, chess, symbol, protoss, starcraft 2, simple, futuristic`                                              |
+| ![Piece](keiron_black_bishop.jpg) | `keiron_black_bishop.jpg` | `starcraft 2, chess, keiron, black bishop, symbol, simple, futuristic, single piece`                              |
+| ![Piece](keiron_black_king.jpg)   | `keiron_black_king.jpg`   | `starcraft 2, keiron, a black king, symbol, symbolic, full view, one chesspiece`                                  |
+| ![Piece](keiron_black_knight.jpg) | `keiron_black_knight.jpg` | `black knight, chess, keiron, starcraft 2, symbol`                                                                |
+| ![Piece](keiron_black_queen.jpg)  | `keiron_black_queen.jpg`  | `starcraft 2, keiron, a black queen, symbol, symbolic, full view, one chesspiece, simple`                         |
+| ![Piece](keiron_black_rook.jpg)   | `keiron_black_rook.jpg`   | `black rook, chess, symbol, keiron, starcraft 2, simple, futuristic`                                              |
+| ![Piece](keiron_white_bishop.jpg) | `keiron_white_bishop.jpg` | `starcraft 2, keiron, a white bishop, chess, symbol, symbolic, full view, single piece`                           |
+| ![Piece](keiron_white_king.jpg)   | `keiron_white_king.jpg`   | `starcraft 2, keiron, a white king, symbol, symbolic, full view, one chesspiece, simple`                          |
+| ![Piece](keiron_white_knight.jpg) | `keiron_white_knight.jpg` | `white knight, chess, keiron, starcraft 2, symbol, full body view, simple`                                        |
+| ![Piece](keiron_white_pawn.jpg)   | `keiron_white_pawn.jpg`   | `starcraft 2, keiron, a white pawn, chess, symbol, symbolic, full view, single piece, one chesspiece, futuristic` |
+| ![Piece](keiron_white_queen.jpg)  | `keiron_white_queen.jpg`  | `starcraft 2, keiron, a white queen, symbol, symbolic, full view, one chesspiece, simple`                         |
+| ![Piece](keiron_white_rook.jpg)   | `keiron_white_rook.jpg`   | `white rook, chess, symbol, keiron, starcraft 2, simple, futuristic`                                              |
 | ![Piece](terran_black_bishop.jpg)  | `terran_black_bishop.jpg`  | `starcraft 2, terran, a black bishop, symbol, symbolic, full view, one chesspiece, simple`                         |
 | ![Piece](terran_black_king.jpg)    | `terran_black_king.jpg`    | `starcraft 2, terran, a black king, symbol, symbolic, full view, single piece`                                     |
 | ![Piece](terran_black_knight.jpg)  | `terran_black_knight.jpg`  | `black knight, chess, terran, starcraft 2, symbol, human, full body view, simple`                                  |

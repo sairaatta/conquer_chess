@@ -9,7 +9,7 @@
 enum class race
 {
   classic,
-  protoss,
+  keiron,
   terran,
   xayid
 };

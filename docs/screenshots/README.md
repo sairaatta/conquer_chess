@@ -44,7 +44,7 @@
 
 ![Game screen v0.9](20250629_2.jpg)
 
-> Protoss pieces have a shield next to a health bar
+> Keiron pieces have a shield next to a health bar
 
 ![Game screen v0.9](20250629_1.jpg)
 
@@ -88,7 +88,7 @@
 
 ![Game screen v0.8](20250619_4.jpg)
 
-> The game screen, now for protoss (left) versus terran (right)
+> The game screen, now for keiron (left) versus terran (right)
 
 ![Game screen v0.8](20250619_3.jpg)
 

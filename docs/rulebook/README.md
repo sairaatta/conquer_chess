@@ -52,7 +52,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race   |Maximum health
   -------|--------------
   Classic|1.0
-  Protoss|0.5
+  Keiron|0.5
   Terran |0.75
   Xayid   |0.5
 
@@ -68,7 +68,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race   |Maximum shield
   -------|--------------
   Classic|0.0
-  Protoss|0.5
+  Keiron|0.5
   Terran |0.0
   Xayid   |0.0
 

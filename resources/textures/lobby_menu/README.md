@@ -6,7 +6,7 @@
 
 | Image                                | Filename           | Search terms                                                               |
 | ------------------------------------ | ------------------ | -------------------------------------------------------------------------- |
-| ![General artwork](protoss_head.jpg) | `protoss_head.jpg` | `starcraft 2, protoss, chess, simple, profile`                             |
+| ![General artwork](keiron_head.jpg) | `keiron_head.jpg` | `starcraft 2, keiron, chess, simple, profile`                             |
 | ![General artwork](terran_head.jpg)  | `terran_head.jpg`  | `starcraft 2, terran, chess, face, chess piece, simple`                    |
 | ![General artwork](xayid_head.jpg)    | `xayid_head.jpg`    | `starcraft 2, xayid, chess piece, face, simple, teeth`                      |
 | ![General artwork](classic_head.jpg) | `classic_head.jpg` | `chess, classic, head, chesspiece, face, profile, close-up, human, statue` |

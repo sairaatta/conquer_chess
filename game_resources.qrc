@@ -321,14 +321,14 @@
         <file>resources/textures/white_strip.png</file>
         <file>resources/textures/lobby_menu/black_chess_color.jpg</file>
         <file>resources/textures/lobby_menu/classic_head.jpg</file>
-        <file>resources/textures/lobby_menu/protoss_head.jpg</file>
+        <file>resources/textures/lobby_menu/keiron_head.jpg</file>
         <file>resources/textures/lobby_menu/ready_no.jpg</file>
         <file>resources/textures/lobby_menu/ready_yes.jpg</file>
         <file>resources/textures/lobby_menu/terran_head.jpg</file>
         <file>resources/textures/lobby_menu/white_chess_color.jpg</file>
         <file>resources/textures/lobby_menu/xayid_head.jpg</file>
         <file>resources/textures/maps/classic_map.jpg</file>
-        <file>resources/textures/maps/protoss_map.jpg</file>
+        <file>resources/textures/maps/keiron_map.jpg</file>
         <file>resources/textures/maps/terran_map.jpg</file>
         <file>resources/textures/maps/xayid_map.jpg</file>
         <file>resources/textures/options_menu/game_speed.jpg</file>
@@ -376,18 +376,18 @@
         <file>resources/textures/pieces/classic_white_queen_with_contour.png</file>
         <file>resources/textures/pieces/classic_white_rook.png</file>
         <file>resources/textures/pieces/classic_white_rook_with_contour.png</file>
-        <file>resources/textures/pieces/protoss_black_bishop.jpg</file>
-        <file>resources/textures/pieces/protoss_black_king.jpg</file>
-        <file>resources/textures/pieces/protoss_black_knight.jpg</file>
-        <file>resources/textures/pieces/protoss_black_pawn.jpg</file>
-        <file>resources/textures/pieces/protoss_black_queen.jpg</file>
-        <file>resources/textures/pieces/protoss_black_rook.jpg</file>
-        <file>resources/textures/pieces/protoss_white_bishop.jpg</file>
-        <file>resources/textures/pieces/protoss_white_king.jpg</file>
-        <file>resources/textures/pieces/protoss_white_knight.jpg</file>
-        <file>resources/textures/pieces/protoss_white_pawn.jpg</file>
-        <file>resources/textures/pieces/protoss_white_queen.jpg</file>
-        <file>resources/textures/pieces/protoss_white_rook.jpg</file>
+        <file>resources/textures/pieces/keiron_black_bishop.jpg</file>
+        <file>resources/textures/pieces/keiron_black_king.jpg</file>
+        <file>resources/textures/pieces/keiron_black_knight.jpg</file>
+        <file>resources/textures/pieces/keiron_black_pawn.jpg</file>
+        <file>resources/textures/pieces/keiron_black_queen.jpg</file>
+        <file>resources/textures/pieces/keiron_black_rook.jpg</file>
+        <file>resources/textures/pieces/keiron_white_bishop.jpg</file>
+        <file>resources/textures/pieces/keiron_white_king.jpg</file>
+        <file>resources/textures/pieces/keiron_white_knight.jpg</file>
+        <file>resources/textures/pieces/keiron_white_pawn.jpg</file>
+        <file>resources/textures/pieces/keiron_white_queen.jpg</file>
+        <file>resources/textures/pieces/keiron_white_rook.jpg</file>
         <file>resources/textures/pieces/terran_black_bishop.jpg</file>
         <file>resources/textures/pieces/terran_black_king.jpg</file>
         <file>resources/textures/pieces/terran_black_knight.jpg</file>
@@ -424,18 +424,18 @@
         <file>resources/textures/portraits/classic_white_pawn_portrait.jpg</file>
         <file>resources/textures/portraits/classic_white_queen_portrait.jpg</file>
         <file>resources/textures/portraits/classic_white_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_black_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_black_king_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_black_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_black_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_black_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_black_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_white_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_white_king_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_white_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_white_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_white_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/protoss_white_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_black_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_black_king_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_black_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_black_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_black_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_black_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_white_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_white_king_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_white_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_white_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_white_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/keiron_white_rook_portrait.jpg</file>
         <file>resources/textures/portraits/terran_black_bishop_portrait.jpg</file>
         <file>resources/textures/portraits/terran_black_king_portrait.jpg</file>
         <file>resources/textures/portraits/terran_black_knight_portrait.jpg</file>
