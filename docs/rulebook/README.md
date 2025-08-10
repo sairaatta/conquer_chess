@@ -20,19 +20,19 @@ one should assume that the rulebook is correct.
 ### Article 1: The Nature and Objectives of the Game of Chess
 
 - [`1.1`] The game of chess is played between two opponents who move their pieces
- on a square board called a 'chessboard'.
+  on a square board called a 'chessboard'.
 
- In Conquer Chess this rule may be expanded to included
- multiple arenas of different shapes added in the future.
+  In Conquer Chess this rule may be expanded to included
+  multiple arenas of different shapes added in the future.
 
 - `[1.2]` The player with the light-coloured pieces (White)
- makes the first move,
- then the players move alternately,
- with the player with the dark-coloured pieces (Black) making the next move.
+  makes the first move,
+  then the players move alternately,
+  with the player with the dark-coloured pieces (Black) making the next move.
 
- In Conquer Chess, white can make multiple moves during the time of the first
- move. After waiting for the duration of one chess move, black can start
- doing its many moves.
+  In Conquer Chess, white can make multiple moves during the time of the first
+  move. After waiting for the duration of one chess move, black can start
+  doing its many moves.
 
 TODO: [Consider adding a option that black can never make more moves than white](https://github.com/richelbilderbeek/conquer_chess/issues/111).
 
@@ -102,7 +102,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   its shield can gradually
   reach its maximum value again.
   
-  The shiled regeneration rate per race are as follows:
+  The shieled regeneration rate per race are as follows:
 
   Race    |Regeneration rate
   --------|-----------------
@@ -116,15 +116,47 @@ TODO: [Consider adding a option that black can never make more moves than white]
   These shield regeneration rates are untested and balance patches are to be
   expected.
 
+- `[1.2.CC.8]` All pieces of a race take an equal amount of time to
+  move to a new square, where the speed is defined to be 1.0 chess move
+  for the Classic race to do a move.
+
+  The movement speed per race are as follows:
+
+  Race    |Movement speed
+  --------|--------------
+  Classic |1.0 
+  Keiron  |0.9
+  Genetron|1.0
+  Xayid   |1.1
+
+!!! warning "Need balance patches"
+
+  These movement speed values are untested and balance patches are to be
+  expected.
+
+- `[1.2.CC.9]` All pieces of a race do an equal amount of damage to
+  a piece-to-be-captured, where this attack speed
+  is defined to be 1.0 health units per chess move for the Classic race.
+
+  The damage rates per race are as follows:
+
+  Race    |Attack speed
+  --------|--------------
+  Classic |1.0
+  Genetron|1.0
+  Keiron  |1.1
+  Xayid   |0.9
+
+!!! warning "Need balance patches"
+
+  These movement speed values are untested and balance patches are to be
+  expected.
+
 - [`1.3`] A player is said to 'have the move' when his/her opponent's move
- has been 'made'.
+  has been 'made'.
 
- In Conquer Chess, due to its real-time nature, this rule is absent:
- players can make multiple moves freely and hence never
- 'have the move'.
-
- In Conquer Chess, however, this rule is void: players can do multiple
- moves in succession or do nothing for as long as desired.
+  In Conquer Chess, however, this rule is void: players can do multiple
+  moves in succession or do nothing for as long as desired.
 
 - [`1.4`] The objective of each player is to place the opponent's king
  'under attack' in such a way that the opponent has no legal move.
@@ -148,28 +180,28 @@ TODO: [Consider adding a option that black can never make more moves than white]
 
 - [`1.4.2`] The opponent whose king has been checkmated has lost the game.
 
- In Conquer Chess, an additional way to lose the game,
- is to have ones king removed by reducing its health to zero.
+  In Conquer Chess, an additional way to lose the game,
+  is to have ones king removed by reducing its health to zero.
 
 - `[1.5]` If the position is such that neither player can possibly checkmate
  the opponent's king, the game is drawn (see Article 5.2.2).
 
- Conquer Chess follows this rule, i.e. the game is a draw if the game
- would be a draw in regular chess, regardless of the health of the
- remaining pieces. For example, a king versus king endgame, where
- the one king has nearly no healh and the other has full health,
- this is still a draw.
+  Conquer Chess follows this rule, i.e. the game is a draw if the game
+  would be a draw in regular chess, regardless of the health of the
+  remaining pieces. For example, a king versus king endgame, where
+  the one king has nearly no healh and the other has full health,
+  this is still a draw.
 
 ### Article 2: The Initial Position of the Pieces on the Chessboard
 
 - `[2.1]` The chessboard is composed of an 8 x 8 grid of 64 equal squares
- alternately light (the 'white' squares) and dark (the 'black' squares).
+  alternately light (the 'white' squares) and dark (the 'black' squares).
 
- The chessboard is placed between the players in such a way
- that the near corner square to the right of the player is white.
+  The chessboard is placed between the players in such a way
+  that the near corner square to the right of the player is white.
 
 - `[2.2]` At the beginning of the game White has 16 light-coloured pieces
- (the 'white' pieces); Black has 16 dark-coloured pieces (the 'black' pieces).
+  (the 'white' pieces); Black has 16 dark-coloured pieces (the 'black' pieces).
 
 - `[2.3]`. The initial position of the pieces on the chessboard is as follows:
 
@@ -177,11 +209,11 @@ TODO: [Consider adding a option that black can never make more moves than white]
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 ```
 
-- [``]2.4. The eight vertical columns of squares are called 'files'.
- The eight horizontal rows of squares are called 'ranks'.
- A straight line of squares of the same colour,
- running from one edge of the board to an adjacent edge,
- is called a 'diagonal'.
+- [`2.4`] The eight vertical columns of squares are called 'files'.
+  The eight horizontal rows of squares are called 'ranks'.
+  A straight line of squares of the same colour,
+  running from one edge of the board to an adjacent edge,
+  is called a 'diagonal'.
 
 ### Article 3: The Moves of the Pieces
 
@@ -189,72 +221,72 @@ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
  of the same colour.
 
 - `[3.1.1]` If a piece moves to a square occupied by an opponent's piece
- the latter is captured and removed from the chessboard
- as part of the same move.
+  the latter is captured and removed from the chessboard
+  as part of the same move.
 
- In Conquer Chess, identical to regular chess,
- it takes the time of one chess move
- to capture a piece. Instead of a regular capture, however,
- the attacking piece starts attacking the piece it intends
- to capture. Such an attack reduces the health of the
- piece under attack. When the health is reduced to zero,
- the captured piece is removed and the attacker is placed
- on its square instantaneous.
+  In Conquer Chess, identical to regular chess,
+  it takes the time of one chess move
+  to capture a piece. Instead of a regular capture, however,
+  the attacking piece starts attacking the piece it intends
+  to capture. Such an attack reduces the health of the
+  piece under attack. When the health is reduced to zero,
+  the captured piece is removed and the attacker is placed
+  on its square instantaneous.
 
 - `[3.1.2]` A piece is said to attack an opponent's piece
- if the piece could make a capture on that square according
- to Articles 3.2 to 3.8.
+  if the piece could make a capture on that square according
+  to Articles 3.2 to 3.8.
 
 - `[3.1.3]` A piece is considered to attack a square even if this piece
- is constrained from moving to that square because it would then leave
- or place the king of its own colour under attack.
+  is constrained from moving to that square because it would then leave
+  or place the king of its own colour under attack.
 
 - `[3.2]` The bishop may move to any square along a diagonal on which it stands.
 
 - `[3.3]` The rook may move to any square along the file or the rank
- on which it stands.
+  on which it stands.
 
 - `[3.4]` The queen may move to any square along the file, the rank or
- a diagonal on which it stands.
+  a diagonal on which it stands.
 
 - `[3.5]` When making these moves, the bishop, rook or queen may not move over
- any intervening pieces.
+  any intervening pieces.
 
 - `[3.6]` The knight may move to one of the squares nearest to that
- on which it stands but not on the same rank, file or diagonal.
+  on which it stands but not on the same rank, file or diagonal.
 
 - `[3.7]` The pawn:
 
 - `[3.7.1]` The pawn may move forward to the square immediately in front of it
- on the same file, provided that this square is unoccupied, or
+  on the same file, provided that this square is unoccupied, or
 
 - `[3.7.2]` on its first move the pawn may move as in 3.7.1 or
- alternatively it may advance two squares along the same file,
- provided that both squares are unoccupied, or
+  alternatively it may advance two squares along the same file,
+  provided that both squares are unoccupied, or
 
 - `[3.7.3]` the pawn may move to a square occupied by an opponent's piece
- diagonally in front of it on an adjacent file, capturing that piece.
+  diagonally in front of it on an adjacent file, capturing that piece.
 
 - `[3.7.3.1]` A pawn occupying a square on the same rank as and
- on an adjacent file to an opponent's pawn which has just advanced
- two squares in one move from its original square may capture
- this opponent's pawn as though the latter had been moved only one square.
+  on an adjacent file to an opponent's pawn which has just advanced
+  two squares in one move from its original square may capture
+  this opponent's pawn as though the latter had been moved only one square.
 
 - `[3.7.3.2]` This capture is only legal on the move following
- this advance and is called an 'en passant' capture.
+  this advance and is called an 'en passant' capture.
 
 - `[3.7.3.3]` When a player, having the move, plays a pawn to
- the rank furthest from its starting position,
- he/she must exchange that pawn as part of the same move
- for a new queen, rook, bishop or knight of the same colour
- on the intended square of arrival.
- This is called the square of 'promotion'.
+  the rank furthest from its starting position,
+  he/she must exchange that pawn as part of the same move
+  for a new queen, rook, bishop or knight of the same colour
+  on the intended square of arrival.
+  This is called the square of 'promotion'.
 
 - `[3.7.3.4]` The player's choice is not restricted to pieces
- that have been captured previously.
+  that have been captured previously.
 
 - `[3.7.3.5]` This exchange of a pawn for another piece is
- called promotion, and the effect of the new piece is immediate.
+  called promotion, and the effect of the new piece is immediate.
 
 - `[3.8]` There are two different ways of moving the king:
 
@@ -309,11 +341,23 @@ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 
 - `[4.1]` Each move must be played with one hand only.
 
+  Does not apply to Conquer Chess, as within the game, a cursor
+  is used to control units.
+
 - `[4.2]` Adjusting the pieces or other physical contact with a piece:
+
+  Does not apply to Conquer Chess, as within the game,
+  pieces are placed perfectly in the middle of a square.
 
 - `[4.2.1]` Only the player having the move may adjust one or more pieces on their squares, provided that he/she first expresses his/her intention (for example by saying “j'adoube” or “I adjust”).
 
+  Does not apply to Conquer Chess, as within the game,
+  pieces are placed perfectly in the middle of a square.
+
 - `[4.2.2]` Any other physical contact with a piece, except for clearly accidental contact, shall be considered to be intent.
+
+  Does not apply to Conquer Chess, as within the game,
+  pieces are placed perfectly in the middle of a square.
 
 - `[4.3]` Except as provided in Article 4.2.1, if the player having the move touches on the chessboard, with the intention of moving or capturing:
 

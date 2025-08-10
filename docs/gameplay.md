@@ -71,19 +71,19 @@ Xayid   |1.1                |0.9
 
 <!-- markdownlint-enable MD013 -->
 
-- :construction: This is under contruction
-- [1] In chess move per time unit
+- `[1]` From [the rulebook](rulebook/README.md) rule `[1.2.CC.8]`
+- `[2]` From [the rulebook](rulebook/README.md) rule `[1.2.CC.9]`
 
 The third difference between the races is the effect of a piece being
 protected by another piece:
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-Race   |Effect of being protected
--------|-------------------------
-Classic|None
-Keiron|Moves faster
-Genetron |Heal
+Race    |Effect of being protected
+--------|-------------------------
+Classic |None
+Keiron  |Moves faster
+Genetron|Heal
 Xayid   |Attack faster
 
 - :construction: This is under contruction
