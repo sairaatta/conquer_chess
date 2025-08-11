@@ -8,6 +8,7 @@
 #
 #DEFINES += LOGIC_ONLY
 
+CONFIG += static
 
 # All files are in here, the rest are just settings
 include(game.pri)
