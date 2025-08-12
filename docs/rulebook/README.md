@@ -162,7 +162,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
   expected.
 
 - `[1.2.CC.10]` A piece that is protected by another piece of its color
-  may receive a benefit, depending on the race of that piece. 
+  may receive a benefit, depending on the race of that piece.
 
   These benefits are as follows:
 
