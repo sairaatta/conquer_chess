@@ -9,7 +9,7 @@ Most deviations from these rules are expensions to take into account
 that Conquer Chess is a real-time version of chess.
 
 Below are the laws of chess with added comments when rules are different
-under Conquer Chess. 
+under Conquer Chess.
 Rules that only apply to Conquer Chess have `CC` in the number of the rule.
 
 In the case that the documentation differs from this rulebook,
@@ -124,7 +124,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
 
   Race    |Movement speed
   --------|--------------
-  Classic |1.0 
+  Classic |1.0
   Rooxx  |0.9
   Kingdom|1.0
   Spawn   |1.1
