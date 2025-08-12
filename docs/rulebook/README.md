@@ -231,9 +231,15 @@ TODO: [Consider adding a option that black can never make more moves than white]
 
 - `[2.3]`. The initial position of the pieces on the chessboard is as follows:
 
-```text
-rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-```
+![The initial position](initial_position.png)
+
+???- info "The initial chess board position as a FEN string"
+
+    ```text
+    rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+    ```
+
+    > The initial chess board position as a FEN string
 
 - [`2.4`] The eight vertical columns of squares are called 'files'.
   The eight horizontal rows of squares are called 'ranks'.
