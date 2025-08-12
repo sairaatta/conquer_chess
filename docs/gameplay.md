@@ -25,9 +25,12 @@ The lobby is where the match is set up.
 Here the two players pick who plays which side
 and which races they use.
 
-Classic    |Kingdom                                      |Rooxx                                    |Spawn
------------|--------------------..-----------------------|-----------------------------------------|-----------------------------------------
-Has no logo| ![Kingdom logo](kingdom_logo_128_x_128.jpg) | ![Rooxx logo](rooxx_logo_128_x_128.jpg) | ![Spawn logo](spawn_logo_128_x_128.jpg)
+Logo                                        |Race   |Description
+--------------------------------------------|-------|--------------------
+.                                           |Classic|Regular chess pieces
+![Kingdom logo](kingdom_logo_128_x_128.jpg) |Kingom |Human-like race
+![Rooxx logo](rooxx_logo_128_x_128.jpg)     |Rooxx  |Advanced alien race
+![Spawn logo](spawn_logo_128_x_128.jpg)     |Spawn  |Primitive alien race
 
 The effect of each side is simple: white, like in regular chess, can start,
 where black has to wait one chess move.
