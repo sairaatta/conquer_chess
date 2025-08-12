@@ -53,4 +53,4 @@ rename "s/${from_faction}/${to_faction}/" **/*
 # find . -not -path '*/\.git/*' -name '*.rb'  -exec sed -i 's/old_string/new_string/g' '{}' \;
 # find . -not \( -path '*/\.git/*' -path '*/\.github/*' -path '*/build/*'  \) -exec sed -i 's/old_string_wiefgiewguwfe/new_string/g' '{}' \;
 # find . -not \( -path '*/\.git/*' -path '*/\.github/*' -path '*/build/*'  \) \( -name "*.md" -o -name "*.cpp" -o -name "*.h" -o -name "*.qrc" \)
-find . -not \( -path '*/\.git/*' -path '*/\.github/*' -path '*/build/*'  \) \( -name "*.md" -o -name "*.cpp" -o -name "*.h" -o -name "*.qrc" \) -exec sed -i "s/${from_faction}/${to_faction}/" '{}' \;
+find . -not \( -path '*/\.git/*' -path '*/\.github/*' -path '*/build/*'  \) -type f \( -name "*.md" -o -name "*.cpp" -o -name "*.h" -o -name "*.qrc" \) -exec sed -i "s/${from_faction}/${to_faction}/" '{}' \;
