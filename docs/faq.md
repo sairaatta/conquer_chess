@@ -29,19 +29,23 @@ Conquer Chess is the result of those thoughts.
 
 ## What are the three races in Conquer Chess?
 
-These are the three races from
-[the Starcraft 2 Scion mod](https://wiki.sc2.app/scion):
+These are the three races in Conquer Chess:
 
-Scion mod race|Description
---------------|------------
-Kingdom      |Terran-like
-Rooxx        |Protoss-like
-Spawn         |Zerg-like
+Race name     |Description
+--------------|-------------------------
+Kingdom       |A human-like species
+Rooxx         |An advanced alien species
+Spawn         |A primitive alien species
 
 ## Why did you not pick the classic Starcraft races?
 
 To avoid problems in areas I am unfamiliar with,
 i.e. copyright and intellectual property.
+
+## Why did you not pick the races from the Starcraf 2 Scion mod?
+
+Because the people from the Starcraft 2 Scion mod
+[preferred me not to](https://github.com/richelbilderbeek/conquer_chess/issues/113).
 
 ## Game rules
 
