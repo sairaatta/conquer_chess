@@ -6,9 +6,9 @@
 
 | Image                                | Filename           | Search terms                                                               |
 | ------------------------------------ | ------------------ | -------------------------------------------------------------------------- |
-| ![General artwork](keiron_head.jpg) | `keiron_head.jpg` | `starcraft 2, keiron, chess, simple, profile`                             |
-| ![General artwork](genetron_head.jpg)  | `genetron_head.jpg`  | `starcraft 2, genetron, chess, face, chess piece, simple`                    |
-| ![General artwork](xayid_head.jpg)    | `xayid_head.jpg`    | `starcraft 2, xayid, chess piece, face, simple, teeth`                      |
+| ![General artwork](rooxx_head.jpg) | `rooxx_head.jpg` | `starcraft 2, keiron, chess, simple, profile`                             |
+| ![General artwork](kingdom_head.jpg)  | `kingdom_head.jpg`  | `starcraft 2, genetron, chess, face, chess piece, simple`                    |
+| ![General artwork](spawn_head.jpg)    | `spawn_head.jpg`    | `starcraft 2, xayid, chess piece, face, simple, teeth`                      |
 | ![General artwork](classic_head.jpg) | `classic_head.jpg` | `chess, classic, head, chesspiece, face, profile, close-up, human, statue` |
 
 <!-- markdownlint-enable MD013 -->

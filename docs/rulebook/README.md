@@ -41,7 +41,7 @@ TODO: [Consider adding a option that black can never make more moves than white]
 - `[1.2.CC.2]` It is allowed that different colors play with a same race.
   When this is the case, the match is called a 'mirror match'.
 
-- `[1.2.CC.3]` Races are: Classic, Genetron, Keiron and Xayid
+- `[1.2.CC.3]` Races are: Classic, Kingdom, Rooxx and Spawn
 
 - `[1.2.CC.4]` All pieces of the a race have an equal amount of maximum
   health, where the maximum health level is defined to be 1.0 for the Classic
@@ -52,16 +52,16 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Maximum health
   --------|--------------
   Classic |1.0
-  Keiron  |0.5
-  Genetron|0.75
-  Xayid   |0.5
+  Rooxx  |0.5
+  Kingdom|0.75
+  Spawn   |0.5
 
 !!! warning "Need balance patches"
 
   These maximum health values are untested and balance patches are to be
   expected.
 
-- `[1.2.CC.5]` All pieces of the Keiron race have a shield,
+- `[1.2.CC.5]` All pieces of the Rooxx race have a shield,
   other races do not have a shield
 
   The maximum shield per race are as follows:
@@ -69,16 +69,16 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Maximum shield
   --------|--------------
   Classic |None
-  Keiron  |0.5
-  Genetron|None
-  Xayid   |None
+  Rooxx  |0.5
+  Kingdom|None
+  Spawn   |None
 
 !!! warning "Need balance patches"
 
   These maximum shield values are untested and balance patches are to be
   expected.
 
-- `[1.2.CC.6]` A piece of the Xayid race can regenerate its health.
+- `[1.2.CC.6]` A piece of the Spawn race can regenerate its health.
   This means that when it has taken damage and given enough time,
   its health can gradually
   reach its maximum value again.
@@ -88,16 +88,16 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Healhh regeneration rate
   --------|------------------------
   Classic |None
-  Keiron  |None
-  Genetron|None
-  Xayid   |0.25 per time unit
+  Rooxx  |None
+  Kingdom|None
+  Spawn   |0.25 per time unit
 
 !!! warning "Need balance patches"
 
   These regeneration rates are untested and balance patches are to be
   expected.
 
-- `[1.2.CC.7]` A piece of the Keiron race can regenerate its shield.
+- `[1.2.CC.7]` A piece of the Rooxx race can regenerate its shield.
   This means that when its shield has taken damage and given enough time,
   its shield can gradually
   reach its maximum value again.
@@ -107,9 +107,9 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Regeneration rate
   --------|-----------------
   Classic |None
-  Keiron  |0.25 per time unit
-  Genetron|None
-  Xayid   |None
+  Rooxx  |0.25 per time unit
+  Kingdom|None
+  Spawn   |None
 
 !!! warning "Need balance patches"
 
@@ -125,9 +125,9 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Movement speed
   --------|--------------
   Classic |1.0 
-  Keiron  |0.9
-  Genetron|1.0
-  Xayid   |1.1
+  Rooxx  |0.9
+  Kingdom|1.0
+  Spawn   |1.1
 
 !!! warning "Need balance patches"
 
@@ -143,9 +143,9 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Attack speed
   --------|--------------
   Classic |1.0
-  Genetron|1.0
-  Keiron  |1.1
-  Xayid   |0.9
+  Kingdom|1.0
+  Rooxx  |1.1
+  Spawn   |0.9
 
 !!! warning "Need balance patches"
 

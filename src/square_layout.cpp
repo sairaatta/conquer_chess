@@ -51,7 +51,7 @@ screen_rect square_layout::get_health_bar_value(const double f, const race r) co
   assert(f >= 0.0);
   assert(f <= 1.0);
   auto health_bar{create_rect_inside(get_health_bar_outline())};
-  if (r == race::keiron) health_bar = get_upper_half(health_bar);
+  if (r == race::rooxx) health_bar = get_upper_half(health_bar);
   return create_partial_rect_from_lhs(health_bar, f);
 }
 
@@ -92,16 +92,16 @@ void test_piece_layout()
     // Health bars
     {
       const auto r_classic{layout.get_health_bar_value(0.5, race::classic)};
-      const auto r_keiron{layout.get_health_bar_value(0.5, race::keiron)};
-      const auto r_genetron{layout.get_health_bar_value(0.5, race::genetron)};
-      const auto r_xayid{layout.get_health_bar_value(0.5, race::xayid)};
-      assert(r_classic != r_keiron);
-      assert(r_classic == r_genetron);
-      assert(r_classic == r_xayid);
+      const auto r_rooxx{layout.get_health_bar_value(0.5, race::rooxx)};
+      const auto r_kingdom{layout.get_health_bar_value(0.5, race::kingdom)};
+      const auto r_spawn{layout.get_health_bar_value(0.5, race::spawn)};
+      assert(r_classic != r_rooxx);
+      assert(r_classic == r_kingdom);
+      assert(r_classic == r_spawn);
     }
-    // Keiron health and shield bar differ
+    // Rooxx health and shield bar differ
     {
-      const auto r_health{layout.get_health_bar_value(0.5, race::keiron)};
+      const auto r_health{layout.get_health_bar_value(0.5, race::rooxx)};
       const auto r_shield{layout.get_shield_bar_value(0.5)};
       assert(r_health != r_shield);
 

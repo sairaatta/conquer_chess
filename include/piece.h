@@ -82,7 +82,7 @@ public:
 
   /// Get the maximum shield value of the unit
   ///
-  /// Assume this unit is a Keiron unit
+  /// Assume this unit is a Rooxx unit
   double get_max_shield() const;
 
   /// The things this piece wants to say
@@ -93,7 +93,7 @@ public:
 
   /// Get the shield value of the unit.
   ///
-  /// Assumes this unit is a Keiron unit
+  /// Assumes this unit is a Rooxx unit
   double get_shield() const;
 
   /// Get the type of piece, e.g. king, queen, rook, bishop, knight, pawn
@@ -172,7 +172,7 @@ private:
   /// The maximum health
   double m_max_health;
 
-  /// The maximum shield, only for Keiron
+  /// The maximum shield, only for Rooxx
   double m_max_shield;
 
   /// The things this piece wants to say
@@ -181,7 +181,7 @@ private:
   /// The race of this piece
   read_only<race> m_race;
 
-  /// The shield value, only for Keiron
+  /// The shield value, only for Rooxx
   double m_shield;
 
   /// The type of piece, e.g. king, queen, rook, bishop, knight, pawn
@@ -239,7 +239,7 @@ double get_f_health(const piece& p) noexcept;
 
 /// Get the fraction of the shield, where 1.0 denotes full shields
 ///
-/// Assumes the piece is a Keiron
+/// Assumes the piece is a Rooxx
 double get_f_shield(const piece& p) noexcept;
 
 /// Get the square that this piece occupies now

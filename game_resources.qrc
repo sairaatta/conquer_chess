@@ -321,16 +321,16 @@
         <file>resources/textures/white_strip.png</file>
         <file>resources/textures/lobby_menu/black_chess_color.jpg</file>
         <file>resources/textures/lobby_menu/classic_head.jpg</file>
-        <file>resources/textures/lobby_menu/keiron_head.jpg</file>
+        <file>resources/textures/lobby_menu/rooxx_head.jpg</file>
         <file>resources/textures/lobby_menu/ready_no.jpg</file>
         <file>resources/textures/lobby_menu/ready_yes.jpg</file>
-        <file>resources/textures/lobby_menu/genetron_head.jpg</file>
+        <file>resources/textures/lobby_menu/kingdom_head.jpg</file>
         <file>resources/textures/lobby_menu/white_chess_color.jpg</file>
-        <file>resources/textures/lobby_menu/xayid_head.jpg</file>
+        <file>resources/textures/lobby_menu/spawn_head.jpg</file>
         <file>resources/textures/maps/classic_map.jpg</file>
-        <file>resources/textures/maps/keiron_map.jpg</file>
-        <file>resources/textures/maps/genetron_map.jpg</file>
-        <file>resources/textures/maps/xayid_map.jpg</file>
+        <file>resources/textures/maps/rooxx_map.jpg</file>
+        <file>resources/textures/maps/kingdom_map.jpg</file>
+        <file>resources/textures/maps/spawn_map.jpg</file>
         <file>resources/textures/options_menu/game_speed.jpg</file>
         <file>resources/textures/options_menu/left_controls.jpg</file>
         <file>resources/textures/options_menu/music_volume.jpg</file>
@@ -376,42 +376,42 @@
         <file>resources/textures/pieces/classic_white_queen_with_contour.png</file>
         <file>resources/textures/pieces/classic_white_rook.png</file>
         <file>resources/textures/pieces/classic_white_rook_with_contour.png</file>
-        <file>resources/textures/pieces/keiron_black_bishop.jpg</file>
-        <file>resources/textures/pieces/keiron_black_king.jpg</file>
-        <file>resources/textures/pieces/keiron_black_knight.jpg</file>
-        <file>resources/textures/pieces/keiron_black_pawn.jpg</file>
-        <file>resources/textures/pieces/keiron_black_queen.jpg</file>
-        <file>resources/textures/pieces/keiron_black_rook.jpg</file>
-        <file>resources/textures/pieces/keiron_white_bishop.jpg</file>
-        <file>resources/textures/pieces/keiron_white_king.jpg</file>
-        <file>resources/textures/pieces/keiron_white_knight.jpg</file>
-        <file>resources/textures/pieces/keiron_white_pawn.jpg</file>
-        <file>resources/textures/pieces/keiron_white_queen.jpg</file>
-        <file>resources/textures/pieces/keiron_white_rook.jpg</file>
-        <file>resources/textures/pieces/genetron_black_bishop.jpg</file>
-        <file>resources/textures/pieces/genetron_black_king.jpg</file>
-        <file>resources/textures/pieces/genetron_black_knight.jpg</file>
-        <file>resources/textures/pieces/genetron_black_pawn.jpg</file>
-        <file>resources/textures/pieces/genetron_black_queen.jpg</file>
-        <file>resources/textures/pieces/genetron_black_rook.jpg</file>
-        <file>resources/textures/pieces/genetron_white_bishop.jpg</file>
-        <file>resources/textures/pieces/genetron_white_king.jpg</file>
-        <file>resources/textures/pieces/genetron_white_knight.jpg</file>
-        <file>resources/textures/pieces/genetron_white_pawn.jpg</file>
-        <file>resources/textures/pieces/genetron_white_queen.jpg</file>
-        <file>resources/textures/pieces/genetron_white_rook.jpg</file>
-        <file>resources/textures/pieces/xayid_black_bishop.jpg</file>
-        <file>resources/textures/pieces/xayid_black_king.jpg</file>
-        <file>resources/textures/pieces/xayid_black_knight.jpg</file>
-        <file>resources/textures/pieces/xayid_black_pawn.jpg</file>
-        <file>resources/textures/pieces/xayid_black_queen.jpg</file>
-        <file>resources/textures/pieces/xayid_black_rook.jpg</file>
-        <file>resources/textures/pieces/xayid_white_bishop.jpg</file>
-        <file>resources/textures/pieces/xayid_white_king.jpg</file>
-        <file>resources/textures/pieces/xayid_white_knight.jpg</file>
-        <file>resources/textures/pieces/xayid_white_pawn.jpg</file>
-        <file>resources/textures/pieces/xayid_white_queen.jpg</file>
-        <file>resources/textures/pieces/xayid_white_rook.jpg</file>
+        <file>resources/textures/pieces/rooxx_black_bishop.jpg</file>
+        <file>resources/textures/pieces/rooxx_black_king.jpg</file>
+        <file>resources/textures/pieces/rooxx_black_knight.jpg</file>
+        <file>resources/textures/pieces/rooxx_black_pawn.jpg</file>
+        <file>resources/textures/pieces/rooxx_black_queen.jpg</file>
+        <file>resources/textures/pieces/rooxx_black_rook.jpg</file>
+        <file>resources/textures/pieces/rooxx_white_bishop.jpg</file>
+        <file>resources/textures/pieces/rooxx_white_king.jpg</file>
+        <file>resources/textures/pieces/rooxx_white_knight.jpg</file>
+        <file>resources/textures/pieces/rooxx_white_pawn.jpg</file>
+        <file>resources/textures/pieces/rooxx_white_queen.jpg</file>
+        <file>resources/textures/pieces/rooxx_white_rook.jpg</file>
+        <file>resources/textures/pieces/kingdom_black_bishop.jpg</file>
+        <file>resources/textures/pieces/kingdom_black_king.jpg</file>
+        <file>resources/textures/pieces/kingdom_black_knight.jpg</file>
+        <file>resources/textures/pieces/kingdom_black_pawn.jpg</file>
+        <file>resources/textures/pieces/kingdom_black_queen.jpg</file>
+        <file>resources/textures/pieces/kingdom_black_rook.jpg</file>
+        <file>resources/textures/pieces/kingdom_white_bishop.jpg</file>
+        <file>resources/textures/pieces/kingdom_white_king.jpg</file>
+        <file>resources/textures/pieces/kingdom_white_knight.jpg</file>
+        <file>resources/textures/pieces/kingdom_white_pawn.jpg</file>
+        <file>resources/textures/pieces/kingdom_white_queen.jpg</file>
+        <file>resources/textures/pieces/kingdom_white_rook.jpg</file>
+        <file>resources/textures/pieces/spawn_black_bishop.jpg</file>
+        <file>resources/textures/pieces/spawn_black_king.jpg</file>
+        <file>resources/textures/pieces/spawn_black_knight.jpg</file>
+        <file>resources/textures/pieces/spawn_black_pawn.jpg</file>
+        <file>resources/textures/pieces/spawn_black_queen.jpg</file>
+        <file>resources/textures/pieces/spawn_black_rook.jpg</file>
+        <file>resources/textures/pieces/spawn_white_bishop.jpg</file>
+        <file>resources/textures/pieces/spawn_white_king.jpg</file>
+        <file>resources/textures/pieces/spawn_white_knight.jpg</file>
+        <file>resources/textures/pieces/spawn_white_pawn.jpg</file>
+        <file>resources/textures/pieces/spawn_white_queen.jpg</file>
+        <file>resources/textures/pieces/spawn_white_rook.jpg</file>
         <file>resources/textures/portraits/classic_black_bishop_portrait.jpg</file>
         <file>resources/textures/portraits/classic_black_king_portrait.jpg</file>
         <file>resources/textures/portraits/classic_black_knight_portrait.jpg</file>
@@ -424,42 +424,42 @@
         <file>resources/textures/portraits/classic_white_pawn_portrait.jpg</file>
         <file>resources/textures/portraits/classic_white_queen_portrait.jpg</file>
         <file>resources/textures/portraits/classic_white_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_black_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_black_king_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_black_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_black_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_black_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_black_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_white_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_white_king_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_white_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_white_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_white_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/keiron_white_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_black_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_black_king_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_black_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_black_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_black_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_black_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_white_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_white_king_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_white_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_white_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_white_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/genetron_white_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_black_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_black_king_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_black_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_black_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_black_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_black_rook_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_white_bishop_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_white_king_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_white_knight_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_white_pawn_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_white_queen_portrait.jpg</file>
-        <file>resources/textures/portraits/xayid_white_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_black_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_black_king_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_black_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_black_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_black_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_black_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_white_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_white_king_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_white_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_white_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_white_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/rooxx_white_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_black_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_black_king_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_black_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_black_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_black_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_black_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_white_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_white_king_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_white_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_white_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_white_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/kingdom_white_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_black_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_black_king_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_black_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_black_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_black_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_black_rook_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_white_bishop_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_white_king_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_white_knight_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_white_pawn_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_white_queen_portrait.jpg</file>
+        <file>resources/textures/portraits/spawn_white_rook_portrait.jpg</file>
         <file>resources/textures/themba/themba_1.jpg</file>
         <file>resources/textures/themba/themba_2.jpg</file>
         <file>resources/textures/themba/themba_3.jpg</file>

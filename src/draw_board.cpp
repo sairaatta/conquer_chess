@@ -129,7 +129,7 @@ void draw_unit_health_bars(
     {
       const double f_health{get_f_health(piece)};
 
-      // Will be lower for keiron
+      // Will be lower for rooxx
       const auto bar_rect{square_layout.get_health_bar_value(f_health, piece.get_race())};
       const sf::Color health_color{f_health_to_color(get_f_health(piece))};
       draw_rectangle(
@@ -141,13 +141,13 @@ void draw_unit_health_bars(
     {
       // OK
     }
-    if (piece.get_race() == race::keiron)
+    if (piece.get_race() == race::rooxx)
     {
       try
       {
         const double f_shield{get_f_shield(piece)};
 
-        // Will be lower for keiron
+        // Will be lower for rooxx
         const auto bar_rect{square_layout.get_shield_bar_value(f_shield)};
         const sf::Color shield_color{f_shield_to_color(get_f_shield(piece))};
         draw_rectangle(

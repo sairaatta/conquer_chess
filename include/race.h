@@ -9,9 +9,9 @@
 enum class race
 {
   classic,
-  keiron,
-  genetron,
-  xayid
+  rooxx,
+  kingdom,
+  spawn
 };
 
 std::vector<race> get_all_races() noexcept;

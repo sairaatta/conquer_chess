@@ -22,11 +22,11 @@ double get_attack_speed(const race r) noexcept
   switch (r)
   {
     case race::classic: return 1.0;
-    case race::keiron: return 1.1;
-    case race::genetron: return 1.0;
+    case race::rooxx: return 1.1;
+    case race::kingdom: return 1.0;
     default:
-    case race::xayid:
-      assert(r == race::xayid);
+    case race::spawn:
+      assert(r == race::spawn);
       return 0.9;
   }
 }
@@ -36,11 +36,11 @@ double get_max_health(const race r)
   switch (r)
   {
     case race::classic: return 1.0;
-    case race::keiron: return 0.5;
-    case race::genetron: return 0.75;
+    case race::rooxx: return 0.5;
+    case race::kingdom: return 0.75;
     default:
-    case race::xayid:
-      assert(r == race::xayid);
+    case race::spawn:
+      assert(r == race::spawn);
       return 0.5;
   }
 }
@@ -50,11 +50,11 @@ double get_max_shield(const race r)
   switch (r)
   {
     case race::classic: return 0.0;
-    case race::keiron: return 0.5;
-    case race::genetron: return 0.0;
+    case race::rooxx: return 0.5;
+    case race::kingdom: return 0.0;
     default:
-    case race::xayid:
-      assert(r == race::xayid);
+    case race::spawn:
+      assert(r == race::spawn);
       return 0.0;
   }
 }
@@ -64,11 +64,11 @@ double get_movement_speed(const race r) noexcept
   switch (r)
   {
     case race::classic: return 1.0;
-    case race::keiron: return 0.9;
-    case race::genetron: return 1.0;
+    case race::rooxx: return 0.9;
+    case race::kingdom: return 1.0;
     default:
-    case race::xayid:
-      assert(r == race::xayid);
+    case race::spawn:
+      assert(r == race::spawn);
       return 1.1;
   }
 }
@@ -115,16 +115,16 @@ void test_race()
   // get_max_health
   {
     assert(get_max_health(race::classic) == 1.0);
-    assert(get_max_health(race::keiron) == 0.5);
-    assert(get_max_health(race::genetron) == 0.75);
-    assert(get_max_health(race::xayid) == 0.5);
+    assert(get_max_health(race::rooxx) == 0.5);
+    assert(get_max_health(race::kingdom) == 0.75);
+    assert(get_max_health(race::spawn) == 0.5);
   }
   // get_max_shield
   {
     assert(get_max_shield(race::classic) == 0.0);
-    assert(get_max_shield(race::keiron) == 0.5);
-    assert(get_max_shield(race::genetron) == 0.0);
-    assert(get_max_shield(race::xayid) == 0.0);
+    assert(get_max_shield(race::rooxx) == 0.5);
+    assert(get_max_shield(race::kingdom) == 0.0);
+    assert(get_max_shield(race::spawn) == 0.0);
 
   }
   // get_movement_speed
@@ -145,16 +145,16 @@ void test_race()
   // to_human_str
   {
     assert(to_human_str(race::classic) == "Classic");
-    assert(to_human_str(race::xayid) == "Xayid");
-    assert(to_human_str(race::keiron) == "Keiron");
-    assert(to_human_str(race::genetron) == "Genetron");
+    assert(to_human_str(race::spawn) == "Spawn");
+    assert(to_human_str(race::rooxx) == "Rooxx");
+    assert(to_human_str(race::kingdom) == "Kingdom");
   }
   // to_str
   {
     assert(to_str(race::classic) == "classic");
-    assert(to_str(race::xayid) == "xayid");
-    assert(to_str(race::keiron) == "keiron");
-    assert(to_str(race::genetron) == "genetron");
+    assert(to_str(race::spawn) == "spawn");
+    assert(to_str(race::rooxx) == "rooxx");
+    assert(to_str(race::kingdom) == "kingdom");
   }
   // to_str
   {
@@ -166,7 +166,7 @@ void test_race()
   // operator<<
   {
     std::stringstream s;
-    s << race::xayid;
+    s << race::spawn;
     assert(!s.str().empty());
   }
 #endif // DEBUG

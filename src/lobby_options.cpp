@@ -70,16 +70,16 @@ void test_lobby_options()
   // constructor, complex setting
   {
     const chess_color lhs_color{chess_color::black};
-    const race lhs_race{race::keiron};
-    const race rhs_race{race::xayid};
+    const race lhs_race{race::rooxx};
+    const race rhs_race{race::spawn};
 
     const lobby_options lo(lhs_color, lhs_race, rhs_race);
     assert(lo.get_color(side::lhs) == chess_color::black);
     assert(lo.get_color(side::rhs) == chess_color::white);
-    assert(lo.get_race(side::lhs) == race::keiron);
-    assert(lo.get_race(side::rhs) == race::xayid);
-    assert(lo.get_race(chess_color::white) == race::xayid);
-    assert(lo.get_race(chess_color::black) == race::keiron);
+    assert(lo.get_race(side::lhs) == race::rooxx);
+    assert(lo.get_race(side::rhs) == race::spawn);
+    assert(lo.get_race(chess_color::white) == race::spawn);
+    assert(lo.get_race(chess_color::black) == race::rooxx);
     assert(lo.get_side(chess_color::white) == side::rhs);
     assert(lo.get_side(chess_color::black) == side::lhs);
   }
@@ -98,26 +98,26 @@ void test_lobby_options()
   // get_race and set_race
   {
     lobby_options options;
-    options.set_race(race::keiron, side::lhs);
-    assert(options.get_race(side::lhs) == race::keiron);
-    options.set_race(race::xayid, side::lhs);
-    assert(options.get_race(side::lhs) == race::xayid);
-    options.set_race(race::keiron, side::rhs);
-    assert(options.get_race(side::rhs) == race::keiron);
-    options.set_race(race::xayid, side::rhs);
-    assert(options.get_race(side::rhs) == race::xayid);
+    options.set_race(race::rooxx, side::lhs);
+    assert(options.get_race(side::lhs) == race::rooxx);
+    options.set_race(race::spawn, side::lhs);
+    assert(options.get_race(side::lhs) == race::spawn);
+    options.set_race(race::rooxx, side::rhs);
+    assert(options.get_race(side::rhs) == race::rooxx);
+    options.set_race(race::spawn, side::rhs);
+    assert(options.get_race(side::rhs) == race::spawn);
   }
   // get_race_of_side
   {
     lobby_options options;
-    options.set_race(race::keiron, side::lhs);
-    assert(options.get_race(side::lhs) == race::keiron);
-    options.set_race(race::xayid, side::lhs);
-    assert(options.get_race(side::lhs) == race::xayid);
-    options.set_race(race::keiron, side::rhs);
-    assert(options.get_race(side::rhs) == race::keiron);
-    options.set_race(race::xayid, side::rhs);
-    assert(options.get_race(side::rhs) == race::xayid);
+    options.set_race(race::rooxx, side::lhs);
+    assert(options.get_race(side::lhs) == race::rooxx);
+    options.set_race(race::spawn, side::lhs);
+    assert(options.get_race(side::lhs) == race::spawn);
+    options.set_race(race::rooxx, side::rhs);
+    assert(options.get_race(side::rhs) == race::rooxx);
+    options.set_race(race::spawn, side::rhs);
+    assert(options.get_race(side::rhs) == race::spawn);
   }
   // 76: set_color ensures the other player has the other color
   {

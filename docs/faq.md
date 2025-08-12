@@ -34,9 +34,9 @@ These are the three races from
 
 Scion mod race|Description
 --------------|------------
-Genetron      |Terran-like
-Keiron        |Protoss-like
-Xayid         |Zerg-like
+Kingdom      |Terran-like
+Rooxx        |Protoss-like
+Spawn         |Zerg-like
 
 ## Why did you not pick the classic Starcraft races?
 

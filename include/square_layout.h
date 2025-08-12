@@ -32,7 +32,7 @@
 /// - 1: symbol to show if the piece is protected
 /// ```
 ///
-/// Or for a keiron piece:
+/// Or for a rooxx piece:
 ///
 /// ```text
 /// +------------------+
