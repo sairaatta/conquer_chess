@@ -750,251 +750,251 @@ TODO: [Add an option to add extra time per move](https://github.com/richelbilder
 
 ### Article 8: The recording of the moves
 
-- `[]` 8.1 How the moves shall be recorded:
+- `[8.1]` How the moves shall be recorded:
 
-- `[]` 8.1.1 In the course of play each player is required to record his/her own moves and those of his/her opponent in the correct manner, move after move, as clearly and legibly as possible, in one of the following ways:
+- `[8.1.1]`  In the course of play each player is required to record his/her own moves and those of his/her opponent in the correct manner, move after move, as clearly and legibly as possible, in one of the following ways:
 
-- `[]` 8.1.1.1 by writing in the algebraic notation (Appendix C), on the paper 'scoresheet' prescribed for the competition.
+- `[8.1.1.1]`  by writing in the algebraic notation (Appendix C), on the paper 'scoresheet' prescribed for the competition.
 
-- `[]` 8.1.1.2 by entering moves on the FIDE certified 'electronic scoresheet' prescribed for the competition.
+- `[8.1.1.2]`  by entering moves on the FIDE certified 'electronic scoresheet' prescribed for the competition.
 
-- `[]` 8.1.2 It is forbidden to record the moves in advance, unless the player is claiming a draw according to Article 9.2, or 9.3 or adjourning a game according to Guidelines I.1.1
+- `[8.1.2]`  It is forbidden to record the moves in advance, unless the player is claiming a draw according to Article 9.2, or 9.3 or adjourning a game according to Guidelines I.1.1
 
-- `[]` 8.1.3 A player may reply to his/her opponent's move before recording it, if he/she so wishes. He/She must record his/her previous move before making another.
+- `[8.1.3]`  A player may reply to his/her opponent's move before recording it, if he/she so wishes. He/She must record his/her previous move before making another.
 
-- `[]` 8.1.4 The scoresheet shall be used only for recording the moves, the times of the clocks, offers of a draw, matters relating to a claim and other relevant data.
+- `[8.1.4]`  The scoresheet shall be used only for recording the moves, the times of the clocks, offers of a draw, matters relating to a claim and other relevant data.
 
-- `[]` 8. 1.5 Both players must record the offer of a draw on the scoresheet with a symbol (=).
+- `[8.1.5]`  Both players must record the offer of a draw on the scoresheet with a symbol (=).
 
-- `[]` 8. 1.6 If a player is unable to keep score, an assistant, who must be acceptable to the arbiter, may be provided by the player to record the moves. His/Her clock shall be adjusted by the arbiter in an equitable way. This adjustment of the clock shall not apply to a player with a disability.
+- `[8.1.6]`  If a player is unable to keep score, an assistant, who must be acceptable to the arbiter, may be provided by the player to record the moves. His/Her clock shall be adjusted by the arbiter in an equitable way. This adjustment of the clock shall not apply to a player with a disability.
 
-- `[]` 8. 2 The scoresheet shall be visible to the arbiter throughout the game.
+- `[8.2]`  The scoresheet shall be visible to the arbiter throughout the game.
 
-- `[]` 8. 3 The scoresheets are the property of the organiser of the competition. An electronic scoresheet with an evident defect shall be replaced by the arbiter.
+- `[8.3]`  The scoresheets are the property of the organiser of the competition. An electronic scoresheet with an evident defect shall be replaced by the arbiter.
 
-- `[]` 8. 4 If a player has less than five minutes left on his/her clock during an allotted period of time and does not have additional time of 30 seconds or more added with each move, then for the remainder of the period he/she is not obliged to meet the requirements of Article 8.1.1.
+- `[8.4]`  If a player has less than five minutes left on his/her clock during an allotted period of time and does not have additional time of 30 seconds or more added with each move, then for the remainder of the period he/she is not obliged to meet the requirements of Article 8.1.1.
 
-- `[]` 8. 5 Incomplete scoresheets:
+- `[8.5]`  Incomplete scoresheets:
 
-- `[]` 8. 5.1 If neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter's or the opponent's scoresheet.
+- `[8.5.1]`  If neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter's or the opponent's scoresheet.
 
-- `[]` 8. 5.2 If only one player has not kept score under Article 8.4, he/she must, as soon as either flag has fallen, update his/her scoresheet completely before moving a piece on the chessboard. Provided it is that player's move, he/she may use his/her opponent's scoresheet, but must return it before making a move.
+- `[8. 5.2]`  If only one player has not kept score under Article 8.4, he/she must, as soon as either flag has fallen, update his/her scoresheet completely before moving a piece on the chessboard. Provided it is that player's move, he/she may use his/her opponent's scoresheet, but must return it before making a move.
 
-- `[]` 8. 5.3 If no complete scoresheet is available, the players must reconstruct the game on a second chessboard under the control of the arbiter or an assistant. He/She shall first record the actual game position, clock times, whose clock was running and the number of moves made/completed, if this information is available, before reconstruction takes place.
+- `[8. 5.3]`  If no complete scoresheet is available, the players must reconstruct the game on a second chessboard under the control of the arbiter or an assistant. He/She shall first record the actual game position, clock times, whose clock was running and the number of moves made/completed, if this information is available, before reconstruction takes place.
 
-- `[]` 8. 6 If the scoresheets cannot be brought up to date showing that a player has overstepped the allotted time, the next move made shall be considered as the first of the following time period, unless there is evidence that more moves have been made or completed.
+- `[8. 6]`  If the scoresheets cannot be brought up to date showing that a player has overstepped the allotted time, the next move made shall be considered as the first of the following time period, unless there is evidence that more moves have been made or completed.
 
-- `[]` 8. 7 At the conclusion of the game both players shall indicate the result of the game by signing both scoresheets or approve the result on their electronic scoresheets. Even if incorrect, this result shall stand, unless the arbiter decides otherwise.
+- `[8. 7]`  At the conclusion of the game both players shall indicate the result of the game by signing both scoresheets or approve the result on their electronic scoresheets. Even if incorrect, this result shall stand, unless the arbiter decides otherwise.
 
 ### Article 9: The Drawn Game
 
-- `[]` 9. 1 Draw offers and event Regulations:
+- `[9. 1]`  Draw offers and event Regulations:
 
-- `[]` 9. 1.1 The regulations of an event may specify that players cannot offer or agree to a draw, whether in less than a specified number of moves or at all, without the consent of the arbiter.
+- `[9. 1.1]`  The regulations of an event may specify that players cannot offer or agree to a draw, whether in less than a specified number of moves or at all, without the consent of the arbiter.
 
-- `[]` 9. 1.2 However, if the regulations of an event allow a draw agreement the following shall apply:
+- `[9. 1.2]`  However, if the regulations of an event allow a draw agreement the following shall apply:
 
-- `[]` 9. 1.2.1 A player wishing to offer a draw shall do so after having made a move on the chessboard and before pressing his/her clock. An offer at any other time during play is still valid but Article 11.5 must be considered. No conditions can be attached to the offer. In both cases the offer cannot be withdrawn and remains valid until the opponent accepts it, rejects it orally, rejects it by touching a piece with the intention of moving or capturing it, or the game is concluded in some other way.
+- `[9. 1.2.1]`  A player wishing to offer a draw shall do so after having made a move on the chessboard and before pressing his/her clock. An offer at any other time during play is still valid but Article 11.5 must be considered. No conditions can be attached to the offer. In both cases the offer cannot be withdrawn and remains valid until the opponent accepts it, rejects it orally, rejects it by touching a piece with the intention of moving or capturing it, or the game is concluded in some other way.
 
-- `[]` 9. 1.2.2 The offer of a draw shall be recorded by each player on his/her scoresheet with the symbol (=).
+- `[9. 1.2.2]`  The offer of a draw shall be recorded by each player on his/her scoresheet with the symbol (=).
 
-- `[]` 9. 1.2.3 A claim of a draw under Article 9.2 or 9.3 shall be considered to be an offer of a draw.
+- `[9. 1.2.3]`  A claim of a draw under Article 9.2 or 9.3 shall be considered to be an offer of a draw.
 
-- `[]` 9. 2 The game is drawn, upon a correct claim by a player having the move, when the same position for at least the third time (not necessarily by a repetition of moves):
+- `[9. 2]`  The game is drawn, upon a correct claim by a player having the move, when the same position for at least the third time (not necessarily by a repetition of moves):
 
-- `[]` 9. 2.1 is about to appear, if he/she first indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move, or
+- `[9. 2.1]`  is about to appear, if he/she first indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move, or
 
-- `[]` 9. 2.2 has just appeared, and the player claiming the draw has the move.
+- `[9. 2.2]`  has just appeared, and the player claiming the draw has the move.
 
-- `[]` 9. 2.3 Positions are considered the same if and only if the same player has the move, pieces of the same kind and colour occupy the same squares and the possible moves of all the pieces of both players are the same. Thus positions are not the same if:
+- `[9. 2.3]`  Positions are considered the same if and only if the same player has the move, pieces of the same kind and colour occupy the same squares and the possible moves of all the pieces of both players are the same. Thus positions are not the same if:
 
-- `[]` 9. 2.3.1 at the start of the sequence a pawn could have been captured en passant.
+- `[9. 2.3.1]`  at the start of the sequence a pawn could have been captured en passant.
 
-- `[]` 9. 2.3.2 a king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.
+- `[9. 2.3.2]`  a king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.
 
-- `[]` 9. 3 The game is drawn, upon a correct claim by a player having the move, if:
+- `[9. 3]`  The game is drawn, upon a correct claim by a player having the move, if:
 
-- `[]` 9. 3.1 he/she indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move which will result in the last 50 moves by each player having been made without the movement of any pawn and without any capture, or
+- `[9. 3.1]`  he/she indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move which will result in the last 50 moves by each player having been made without the movement of any pawn and without any capture, or
 
-- `[]` 9. 3.2 the last 50 moves by each player have been completed without the movement of any pawn and without any capture.
+- `[9. 3.2]`  the last 50 moves by each player have been completed without the movement of any pawn and without any capture.
 
-- `[]` 9. 4 If the player touches a piece as in Article 4.3, he/she loses the right to claim a draw under Article 9.2 or 9.3 on that move.
+- `[9. 4]`  If the player touches a piece as in Article 4.3, he/she loses the right to claim a draw under Article 9.2 or 9.3 on that move.
 
-- `[]` 9. 5 Draw claims:
+- `[9. 5]`  Draw claims:
 
-- `[]` 9. 5.1 If a player claims a draw under Article 9.2 or 9.3, he/she or the arbiter shall pause the chessclock. He/She is not allowed to withdraw his/her claim.
+- `[9. 5.1]`  If a player claims a draw under Article 9.2 or 9.3, he/she or the arbiter shall pause the chessclock. He/She is not allowed to withdraw his/her claim.
 
-- `[]` 9. 5.2 If the claim is found to be correct, the game is immediately drawn.
+- `[9. 5.2]`  If the claim is found to be correct, the game is immediately drawn.
 
-- `[]` 9. 5.3 If the claim is found to be incorrect, the arbiter shall add two minutes to the opponent's remaining thinking time. Then the game shall continue. If the claim was based on an intended move, this move must be made in accordance with Articles 3 and 4.
+- `[9. 5.3]`  If the claim is found to be incorrect, the arbiter shall add two minutes to the opponent's remaining thinking time. Then the game shall continue. If the claim was based on an intended move, this move must be made in accordance with Articles 3 and 4.
 
-- `[]` 9. 6 If one or both of the following occur(s) then the game is drawn:
+- `[9. 6]`  If one or both of the following occur(s) then the game is drawn:
 
-- `[]` 9. 6.1 the same position has appeared, as in 9.2.2 at least five times.
+- `[9. 6.1]`  the same position has appeared, as in 9.2.2 at least five times.
 
-- `[]` 9. 6.2 any series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.
+- `[9. 6.2]`  any series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.
 
 ### Article 10: Points
 
-- `[]` 10. 1 Unless the regulations of an event specify otherwise, a player who wins his/her game, or wins by forfeit, scores one point (1), a player who loses his/her game, or forfeits, scores no points (0), and a player who draws his/her game scores a half point (½).
+- `[10. 1]`  Unless the regulations of an event specify otherwise, a player who wins his/her game, or wins by forfeit, scores one point (1), a player who loses his/her game, or forfeits, scores no points (0), and a player who draws his/her game scores a half point (½).
 
-- `[]` 10. 2 The total score of any game can never exceed the maximum score normally given for that game. Scores given to an individual player must be those normally associated with the game, for example a score of ¾ - ¼ is not allowed.
+- `[10. 2]`  The total score of any game can never exceed the maximum score normally given for that game. Scores given to an individual player must be those normally associated with the game, for example a score of ¾ - ¼ is not allowed.
 
 ### Article 11: The Conduct of the Players
 
-- `[]` 11. 1 The players shall take no action that will bring the game of chess into disrepute.
+- `[11. 1]`  The players shall take no action that will bring the game of chess into disrepute.
 
-- `[]` 11. 2 Playing venue and playing area:
+- `[11. 2]`  Playing venue and playing area:
 
-- `[]` 11. 2.1 The 'playing venue' is defined as the 'playing area', rest rooms, toilets, refreshment area, area set aside for smoking and other places as designated by the arbiter.
+- `[11. 2.1]`  The 'playing venue' is defined as the 'playing area', rest rooms, toilets, refreshment area, area set aside for smoking and other places as designated by the arbiter.
 
-- `[]` 11. 2.2 The playing area is defined as the place where the games of a competition are played.
+- `[11. 2.2]`  The playing area is defined as the place where the games of a competition are played.
 
-- `[]` 11. 2.3 Only with the permission of the arbiter can:
+- `[11. 2.3]`  Only with the permission of the arbiter can:
 
-- `[]` 11. 2.3.1 a player leave the playing venue,
+- `[11. 2.3.1]`  a player leave the playing venue,
 
-- `[]` 11. 2.3.2 the player having the move be allowed to leave the playing area.
+- `[11. 2.3.2]`  the player having the move be allowed to leave the playing area.
 
-- `[]` 11. 2.3.3 a person who is neither a player nor arbiter be allowed access to the playing area.
+- `[11. 2.3.3]`  a person who is neither a player nor arbiter be allowed access to the playing area.
 
-- `[]` 11. 2.4 The regulations of an event may specify that the opponent of the player having a move must report to the arbiter when he/she wishes to leave the playing area.
+- `[11. 2.4]`  The regulations of an event may specify that the opponent of the player having a move must report to the arbiter when he/she wishes to leave the playing area.
 
-- `[]` 11. 3 Notes and electronic devices:
+- `[11. 3]`  Notes and electronic devices:
 
-- `[]` 11. 3.1 During play the players are forbidden to use any notes, sources of information or advice, or analyse any game on another chessboard.
+- `[11. 3.1]`  During play the players are forbidden to use any notes, sources of information or advice, or analyse any game on another chessboard.
 
-- `[]` 11. 3.2 During a game, a player is forbidden to have any electronic device not specifically approved by the arbiter in the playing venue.
+- `[11. 3.2]`  During a game, a player is forbidden to have any electronic device not specifically approved by the arbiter in the playing venue.
 
-- `[]` 11. 3.2.1 However, the regulations of an event may allow such devices to be stored in a player's bag, provided the device is completely switched off. This bag must be placed as agreed with the arbiter. Both players are forbidden to use this bag without permission of the arbiter.
+- `[11. 3.2.1]`  However, the regulations of an event may allow such devices to be stored in a player's bag, provided the device is completely switched off. This bag must be placed as agreed with the arbiter. Both players are forbidden to use this bag without permission of the arbiter.
 
-- `[]` 11. 3.2.2 If it is evident that a player has such a device on their person in the playing venue, the player shall lose the game. The opponent shall win. The regulations of an event may specify a different, less severe, penalty.
+- `[11. 3.2.2]`  If it is evident that a player has such a device on their person in the playing venue, the player shall lose the game. The opponent shall win. The regulations of an event may specify a different, less severe, penalty.
 
-- `[]` 11. 3.3 The arbiter may require the player to allow his/her clothes, bags, other items or body to be inspected, in private. The arbiter or person authorised by the arbiter shall inspect the player, and shall be of the same gender as the player. If a player refuses to cooperate with these obligations, the arbiter shall take measures in accordance with Article 12.9.
+- `[11. 3.3]`  The arbiter may require the player to allow his/her clothes, bags, other items or body to be inspected, in private. The arbiter or person authorised by the arbiter shall inspect the player, and shall be of the same gender as the player. If a player refuses to cooperate with these obligations, the arbiter shall take measures in accordance with Article 12.9.
 
-- `[]` 11. 3.4 Smoking, including e-cigarettes, is permitted only in the section of the venue designated by the arbiter.
+- `[11. 3.4]`  Smoking, including e-cigarettes, is permitted only in the section of the venue designated by the arbiter.
 
-- `[]` 11. 4 Players who have finished their games shall be considered to be spectators.
+- `[11. 4]`  Players who have finished their games shall be considered to be spectators.
 
-- `[]` 11. 5 It is forbidden to distract or annoy the opponent in any manner whatsoever. This includes unreasonable claims, unreasonable offers of a draw or the introduction of a source of noise into the playing area.
+- `[11. 5]`  It is forbidden to distract or annoy the opponent in any manner whatsoever. This includes unreasonable claims, unreasonable offers of a draw or the introduction of a source of noise into the playing area.
 
-- `[]` 11. 6 Infraction of any part of Articles 11.1 - 11.5 shall lead to penalties in accordance with Article 12.9.
+- `[11. 6]`  Infraction of any part of Articles 11.1 - 11.5 shall lead to penalties in accordance with Article 12.9.
 
-- `[]` 11. 7 Persistent refusal by a player to comply with the Laws of Chess shall be penalised by loss of the game. The arbiter shall decide the score of the opponent.
+- `[11. 7]`  Persistent refusal by a player to comply with the Laws of Chess shall be penalised by loss of the game. The arbiter shall decide the score of the opponent.
 
-- `[]` 11. 8 If both players are found guilty according to Article 11.7, the game shall be declared lost by both players.
+- `[11. 8]`  If both players are found guilty according to Article 11.7, the game shall be declared lost by both players.
 
-- `[]` 11. 9 A player shall have the right to request from the arbiter an explanation of particular points in the Laws of Chess.
+- `[11. 9]`  A player shall have the right to request from the arbiter an explanation of particular points in the Laws of Chess.
 
-- `[]` 11. 10 Unless the regulations of an event specify otherwise, a player may appeal against any decision of the arbiter, even if the player has signed the scoresheet (see Article 8.7).
+- `[11. 10]`  Unless the regulations of an event specify otherwise, a player may appeal against any decision of the arbiter, even if the player has signed the scoresheet (see Article 8.7).
 
-- `[]` 11. 11 Both players must assist the arbiter in any situation requiring reconstruction of the game, including draw claims.
+- `[11. 11]`  Both players must assist the arbiter in any situation requiring reconstruction of the game, including draw claims.
 
-- `[]` 11. 12 Checking a 'three times occurrence of the position' or a '50 moves' claim is a duty of the players, under supervision of the arbiter.
+- `[11. 12]`  Checking a 'three times occurrence of the position' or a '50 moves' claim is a duty of the players, under supervision of the arbiter.
 
 ### Article 12: The Role of the Arbiter (see Preface)
 
-- `[]` 12. 1 The arbiter shall see that the Laws of Chess are observed.
+- `[12. 1]`  The arbiter shall see that the Laws of Chess are observed.
 
-- `[]` 12. 2 The arbiter shall:
+- `[12. 2]`  The arbiter shall:
 
-- `[]` 12. 2.1 ensure fair play,
+- `[12. 2.1]`  ensure fair play,
 
-- `[]` 12. 2.2 act in the best interest of the competition,
+- `[12. 2.2]`  act in the best interest of the competition,
 
-- `[]` 12. 2.3 ensure that a good playing environment is maintained,
+- `[12. 2.3]`  ensure that a good playing environment is maintained,
 
-- `[]` 12. 2.4 ensure that the players are not disturbed,
+- `[12. 2.4]`  ensure that the players are not disturbed,
 
-- `[]` 12. 2.5 supervise the progress of the competition,
+- `[12. 2.5]`  supervise the progress of the competition,
 
-- `[]` 12. 2.6 take special measures in the interests of disabled players and those who need medical attention,
+- `[12. 2.6]`  take special measures in the interests of disabled players and those who need medical attention,
 
-- `[]` 12. 2.7 follow the Fair-Play Rules or Guidelines
+- `[12. 2.7]`  follow the Fair-Play Rules or Guidelines
 
-- `[]` 12. 3 The arbiter shall observe the games, especially when the players are short of time, enforce decisions he/she has made, and impose penalties on players where appropriate.
+- `[12. 3]`  The arbiter shall observe the games, especially when the players are short of time, enforce decisions he/she has made, and impose penalties on players where appropriate.
 
-- `[]` 12. 4 The arbiter may appoint assistants to observe games, for example when several players are short of time.
+- `[12. 4]`  The arbiter may appoint assistants to observe games, for example when several players are short of time.
 
-- `[]` 12. 5 The arbiter may award either or both players additional time in the event of external disturbance of the game.
+- `[12. 5]`  The arbiter may award either or both players additional time in the event of external disturbance of the game.
 
-- `[]` 12. 6 The arbiter must not intervene in a game except in cases described by the Laws of Chess. He/She shall not indicate the number of moves completed, except in applying Article 8.5 when at least one flag has fallen. The arbiter shall refrain from informing a player that his/her opponent has completed a move or that the player has not pressed his/her clock.
+- `[12. 6]`  The arbiter must not intervene in a game except in cases described by the Laws of Chess. He/She shall not indicate the number of moves completed, except in applying Article 8.5 when at least one flag has fallen. The arbiter shall refrain from informing a player that his/her opponent has completed a move or that the player has not pressed his/her clock.
 
-- `[]` 12. 7 If someone observes an irregularity, he/she may inform only the arbiter. Players in other games must not to speak about or otherwise interfere in a game. Spectators are not allowed to interfere in a game. The arbiter may expel offenders from the playing venue.
+- `[12. 7]`  If someone observes an irregularity, he/she may inform only the arbiter. Players in other games must not to speak about or otherwise interfere in a game. Spectators are not allowed to interfere in a game. The arbiter may expel offenders from the playing venue.
 
-- `[]` 12. 8 Unless authorised by the arbiter, it is forbidden for anybody to use a mobile phone or any kind of communication device in the playing venue or any contiguous area designated by the arbiter.
+- `[12. 8]`  Unless authorised by the arbiter, it is forbidden for anybody to use a mobile phone or any kind of communication device in the playing venue or any contiguous area designated by the arbiter.
 
-- `[]` 12. 9 Options available to the arbiter concerning penalties:
+- `[12. 9]`  Options available to the arbiter concerning penalties:
 
-- `[]` 12. 9.1 warning,
+- `[12. 9.1]`  warning,
 
-- `[]` 12. 9.2 increasing the remaining time of the opponent,
+- `[12. 9.2]`  increasing the remaining time of the opponent,
 
-- `[]` 12. 9.3 reducing the remaining time of the offending player,
+- `[12. 9.3]`  reducing the remaining time of the offending player,
 
-- `[]` 12. 9.4 increasing the points scored in the game by the opponent to the maximum available for that game,
+- `[12. 9.4]`  increasing the points scored in the game by the opponent to the maximum available for that game,
 
-- `[]` 12. 9.5 reducing the points scored in the game by the offending person,
+- `[12. 9.5]`  reducing the points scored in the game by the offending person,
 
-- `[]` 12. 9.6 declaring the game to be lost by the offending player (the arbiter shall also decide the opponent's score),
+- `[12. 9.6]`  declaring the game to be lost by the offending player (the arbiter shall also decide the opponent's score),
 
-- `[]` 12. 9.7 a fine announced in advance,
+- `[12. 9.7]`  a fine announced in advance,
 
-- `[]` 12. 9.8 exclusion from one or more rounds,
+- `[12. 9.8]`  exclusion from one or more rounds,
 
-- `[]` 12. 9.9 expulsion from the competition.
+- `[12. 9.9]`  expulsion from the competition.
 
 ## APPENDICES
 
 ### Appendix A. Rapid Chess
 
-- `[]` A. 1 A 'Rapid chess' game is one where either all the moves must be completed in a fixed time of more than 10 minutes but less than 60 minutes for each player; or the time allotted plus 60 times any increment is of more than 10 minutes but less than 60 minutes for each player.
+- `[A. 1]`  A 'Rapid chess' game is one where either all the moves must be completed in a fixed time of more than 10 minutes but less than 60 minutes for each player; or the time allotted plus 60 times any increment is of more than 10 minutes but less than 60 minutes for each player.
 
-- `[]` A. 2 Players do not need to record the moves, but do not lose their rights to claims normally based on a scoresheet. The player can, at any time, ask the arbiter to provide him/her with a scoresheet, in order to write the moves.
+- `[A. 2]`  Players do not need to record the moves, but do not lose their rights to claims normally based on a scoresheet. The player can, at any time, ask the arbiter to provide him/her with a scoresheet, in order to write the moves.
 
-- `[]` A. 3 The penalties mentioned in Articles 7 and 9 of the Competitive Rules of Play shall be one minute instead of two minutes.
+- `[A. 3]`  The penalties mentioned in Articles 7 and 9 of the Competitive Rules of Play shall be one minute instead of two minutes.
 
-- `[]` A. 4 The Competitive Rules of Play shall apply if:
+- `[A. 4]`  The Competitive Rules of Play shall apply if:
 
-- `[]` A. 4.1 one arbiter supervises at most three games and
+- `[A. 4.1]`  one arbiter supervises at most three games and
 
-- `[]` A. 4.2 each game is recorded by the arbiter or his/her assistant and, if possible, by electronic means.
+- `[A. 4.2]`  each game is recorded by the arbiter or his/her assistant and, if possible, by electronic means.
 
-- `[]` A. 4.3 The player may at any time, when it is his/her move, ask the arbiter or his/her assistant to show him/her the scoresheet. This may be requested a maximum of five times in a game. More requests shall be considered as a distraction of the opponent.
+- `[A. 4.3]`  The player may at any time, when it is his/her move, ask the arbiter or his/her assistant to show him/her the scoresheet. This may be requested a maximum of five times in a game. More requests shall be considered as a distraction of the opponent.
 
-- `[]` A. 5 Otherwise the following apply:
+- `[A. 5]`  Otherwise the following apply:
 
-- `[]` A. 5.1 From the initial position, once 10 moves have been completed by each player,
+- `[A. 5.1]`  From the initial position, once 10 moves have been completed by each player,
 
-- `[]` A. 5.1.1 No change can be made to the clock setting, unless the schedule of the event would be adversely affected.
+- `[A. 5.1.1]`  No change can be made to the clock setting, unless the schedule of the event would be adversely affected.
 
-- `[]` A. 5.1.2 No claim can be made regarding incorrect set-up or orientation of the chessboard. In case of incorrect king placement, castling is not allowed. In case of incorrect rook placement, castling with this rook is not allowed.
+- `[A. 5.1.2]`  No claim can be made regarding incorrect set-up or orientation of the chessboard. In case of incorrect king placement, castling is not allowed. In case of incorrect rook placement, castling with this rook is not allowed.
 
-- `[]` A. 5.2 If the arbiter observes an action taken under Article 7.5.1, 7.5.2, 7.5.3 or 7.5.4, he/she shall act according to Article 7.5.5, provided the opponent has not made his/her next move. If the arbiter does not intervene, the opponent is entitled to claim, provided the opponent has not made his/her next move. If the opponent does not claim and the arbiter does not intervene, the illegal move shall stand and the game shall continue. Once the opponent has made his/her next move, an illegal move cannot be corrected unless this is agreed by the players without intervention of the arbiter.
+- `[A. 5.2]`  If the arbiter observes an action taken under Article 7.5.1, 7.5.2, 7.5.3 or 7.5.4, he/she shall act according to Article 7.5.5, provided the opponent has not made his/her next move. If the arbiter does not intervene, the opponent is entitled to claim, provided the opponent has not made his/her next move. If the opponent does not claim and the arbiter does not intervene, the illegal move shall stand and the game shall continue. Once the opponent has made his/her next move, an illegal move cannot be corrected unless this is agreed by the players without intervention of the arbiter.
 
-- `[]` A. 5.3 To claim a win on time, the claimant may pause the chessclock and notify the arbiter. However, the game is drawn if the position is such that the claimant cannot checkmate the player's king by any possible series of legal moves.
+- `[A. 5.3]`  To claim a win on time, the claimant may pause the chessclock and notify the arbiter. However, the game is drawn if the position is such that the claimant cannot checkmate the player's king by any possible series of legal moves.
 
-- `[]` A. 5.4 If the arbiter observes both kings are in check, or a pawn stands on the rank furthest from its starting position, he/she shall wait until the next move is completed. Then, if an illegal position is still on the board, he/she shall declare the game drawn.
+- `[A. 5.4]`  If the arbiter observes both kings are in check, or a pawn stands on the rank furthest from its starting position, he/she shall wait until the next move is completed. Then, if an illegal position is still on the board, he/she shall declare the game drawn.
 
-- `[]` A. 5.5 The arbiter shall also call a flag fall, if he/she observes it.
+- `[A. 5.5]`  The arbiter shall also call a flag fall, if he/she observes it.
 
-- `[]` A. 6 The regulations of an event shall specify whether Article A.4 or Article A.5 shall apply for the entire event.
+- `[A. 6]`  The regulations of an event shall specify whether Article A.4 or Article A.5 shall apply for the entire event.
 
 ### Appendix B. Blitz
 
-- `[]` B. 1 A 'blitz' game is one where all the moves must be completed in a fixed time of 10 minutes or less for each player; or the allotted time plus 60 times any increment is 10 minutes or less for each player.
+- `[B. 1]`  A 'blitz' game is one where all the moves must be completed in a fixed time of 10 minutes or less for each player; or the allotted time plus 60 times any increment is 10 minutes or less for each player.
 
-- `[]` B. 2 The Competitive Rules of Play shall apply if:
+- `[B. 2]`  The Competitive Rules of Play shall apply if:
 
-- `[]` B. 2.1 one arbiter supervises one game and
+- `[B. 2.1]`  one arbiter supervises one game and
 
-- `[]` B. 2.2 each game is recorded by the arbiter or his/her assistant and, if possible, by electronic means.
+- `[B. 2.2]`  each game is recorded by the arbiter or his/her assistant and, if possible, by electronic means.
 
-- `[]` B. 2.3 The player may at any time, when it is his/her move, ask the arbiter or his/her assistant to show him/her the scoresheet. This may be requested a maximum of five times in a game. More requests shall be considered as a distraction of the opponent.
+- `[B. 2.3]`  The player may at any time, when it is his/her move, ask the arbiter or his/her assistant to show him/her the scoresheet. This may be requested a maximum of five times in a game. More requests shall be considered as a distraction of the opponent.
 
-- `[]` B. 3 Otherwise, play shall be governed by the Rapid chess Laws as in Article A.2, A.3 and A.5.
+- `[B. 3]`  Otherwise, play shall be governed by the Rapid chess Laws as in Article A.2, A.3 and A.5.
 
-- `[]` B. 4 The regulations of an event shall specify whether Article B.2 or Article B.3 shall apply for the entire event.
+- `[B. 4]`  The regulations of an event shall specify whether Article B.2 or Article B.3 shall apply for the entire event.
 
 ### Appendix C. Algebraic Notation
 
@@ -1002,193 +1002,193 @@ FIDE recognises for its own tournaments and matches only one system of notation,
 
 Description of the Algebraic System
 
-- `[]` C. 1 In this description, 'piece' means a piece other than a pawn.
+- `[C. 1]`  In this description, 'piece' means a piece other than a pawn.
 
-- `[]` C. 2 Each piece is indicated by an abbreviation. In the English language it is the first letter, a capital letter, of its name. Example: K=king, Q=queen, R=rook, B=bishop, N=knight. (N is used for a knight, in order to avoid ambiguity.)
+- `[C. 2]`  Each piece is indicated by an abbreviation. In the English language it is the first letter, a capital letter, of its name. Example: K=king, Q=queen, R=rook, B=bishop, N=knight. (N is used for a knight, in order to avoid ambiguity.)
 
-- `[]` C. 3 For the abbreviation of the name of the pieces, each player is free to use the name which is commonly used in his/her country. Examples: F = fou (French for bishop), L = loper (Dutch for bishop). In printed periodicals, the use of figurines is recommended.
+- `[C. 3]`  For the abbreviation of the name of the pieces, each player is free to use the name which is commonly used in his/her country. Examples: F = fou (French for bishop), L = loper (Dutch for bishop). In printed periodicals, the use of figurines is recommended.
 
-- `[]` C. 4 Pawns are not indicated by their first letter, but are recognised by the absence of such a letter. Examples: the moves are written e5, d4, a5, not pe5, Pd4, pa5.
+- `[C. 4]`  Pawns are not indicated by their first letter, but are recognised by the absence of such a letter. Examples: the moves are written e5, d4, a5, not pe5, Pd4, pa5.
 
-- `[]` C. 5 The eight files (from left to right for White and from right to left for Black) are indicated by the small letters, a, b, c, d, e, f, g and h, respectively.
+- `[C. 5]`  The eight files (from left to right for White and from right to left for Black) are indicated by the small letters, a, b, c, d, e, f, g and h, respectively.
 
-- `[]` C. 6 The eight ranks (from bottom to top for White and from top to bottom for Black) are numbered 1, 2, 3, 4, 5, 6, 7, 8, respectively. Consequently, in the initial position the white pieces and pawns are placed on the first and second ranks; the black pieces and pawns on the eighth and seventh ranks.
+- `[C. 6]`  The eight ranks (from bottom to top for White and from top to bottom for Black) are numbered 1, 2, 3, 4, 5, 6, 7, 8, respectively. Consequently, in the initial position the white pieces and pawns are placed on the first and second ranks; the black pieces and pawns on the eighth and seventh ranks.
 
-- `[]` C. 7 As a consequence of the previous rules, each of the sixty-four squares is invariably indicated by a unique combination of a letter and a number.
+- `[C. 7]`  As a consequence of the previous rules, each of the sixty-four squares is invariably indicated by a unique combination of a letter and a number.
 
-- `[]` C. 8 Each move of a piece is indicated by the abbreviation of the name of the piece in question and the square of arrival. There is no need for a hyphen between name and square. Examples: Be5, Nf3, Rd1.
+- `[C. 8]`  Each move of a piece is indicated by the abbreviation of the name of the piece in question and the square of arrival. There is no need for a hyphen between name and square. Examples: Be5, Nf3, Rd1.
 
 In the case of pawns, only the square of arrival is indicated. Examples: e5, d4, a5.
 
 A longer form containing the square of departure is acceptable. Examples: Bb2e5, Ng1f3, Ra1d1, e7e5, d2d4, a6a5.
 
-- `[]` C. 9 When a piece makes a capture, an x may be inserted between:
+- `[C. 9]`  When a piece makes a capture, an x may be inserted between:
 
-- `[]` C. 9.1 the abbreviation of the name of the piece in question and
+- `[C. 9.1]`  the abbreviation of the name of the piece in question and
 
-- `[]` C. 9.2 the square of arrival. Examples: Bxe5, Nxf3, Rxd1, see also C.10.
+- `[]C. 9.2`  the square of arrival. Examples: Bxe5, Nxf3, Rxd1, see also C.10.
 
-- `[]` C. 9.3 When a pawn makes a capture, the file of departure must be indicated, then an x may be inserted, then the square of arrival. Examples: dxe5, gxf3, axb5. In the case of an 'en passant' capture, 'e.p.' may be appended to the notation. Example: exd6 e.p.
+- `[C. 9.3]`  When a pawn makes a capture, the file of departure must be indicated, then an x may be inserted, then the square of arrival. Examples: dxe5, gxf3, axb5. In the case of an 'en passant' capture, 'e.p.' may be appended to the notation. Example: exd6 e.p.
 
-- `[]` C. 10 If two identical pieces can move to the same square, the piece that is moved is indicated as follows:
+- `[C. 10]`  If two identical pieces can move to the same square, the piece that is moved is indicated as follows:
 
-- `[]` C. 10.1 If both pieces are on the same rank by:
+- `[C. 10.1]`  If both pieces are on the same rank by:
 
-- `[]` C. 10.1.1 The abbreviation of the name of the piece,
+- `[C. 10.1.1]`  The abbreviation of the name of the piece,
 
-- `[]` C. 10.1.2 The file of departure, and
+- `[C. 10.1.2]`  The file of departure, and
 
-- `[]` C. 10.1.2 The square of arrival.
+- `[C. 10.1.2]`  The square of arrival.
 
-- `[]` C. 10.2 If both pieces are on the same file by:
+- `[C. 10.2]`  If both pieces are on the same file by:
 
-- `[]` C. 10.2.1 The abbreviation of the name of the piece,
+- `[C. 10.2.1]`  The abbreviation of the name of the piece,
 
-- `[]` C. 10.2.2 The rank of the square of departure, and
+- `[C. 10.2.2]`  The rank of the square of departure, and
 
-- `[]` C. 10.2.3 The square of arrival.
+- `[C. 10.2.3]`  The square of arrival.
 
-- `[]` C. 10.3 If the pieces are on different ranks and files, method 1 is preferred. Examples:
+- `[C. 10.3]`  If the pieces are on different ranks and files, method 1 is preferred. Examples:
 
-- `[]` C. 10.3.1 There are two knights, on the squares g1 and e1, and one of them moves to the square f3: either Ngf3 or Nef3, as the case may be.
+- `[C. 10.3.1]`  There are two knights, on the squares g1 and e1, and one of them moves to the square f3: either Ngf3 or Nef3, as the case may be.
 
-- `[]` C. 10.3.2 There are two knights, on the squares g5 and g1, and one of them moves to the square f3: either N5f3 or N1f3, as the case may be.
+- `[C. 10.3.2]`  There are two knights, on the squares g5 and g1, and one of them moves to the square f3: either N5f3 or N1f3, as the case may be.
 
-- `[]` C. 10.3.3 There are two knights, on the squares h2 and d4, and one of them moves to the square f3: either Nhf3 or Ndf3, as the case may be.
+- `[C. 10.3.3]`  There are two knights, on the squares h2 and d4, and one of them moves to the square f3: either Nhf3 or Ndf3, as the case may be.
 
-- `[]` C. 10.3.4 If a capture takes place on the square f3, the notation of the previous examples is still applicable, but an x may be inserted: 1) either Ngxf3 or Nexf3, 2) either N5xf3 or N1xf3, 3) either Nhxf3 or Ndxf3, as the case may be.
+- `[C. 10.3.4]`  If a capture takes place on the square f3, the notation of the previous examples is still applicable, but an x may be inserted: 1) either Ngxf3 or Nexf3, 2) either N5xf3 or N1xf3, 3) either Nhxf3 or Ndxf3, as the case may be.
 
-- `[]` C. 11 In the case of the promotion of a pawn, the actual pawn move is indicated, followed immediately by the abbreviation of the new piece. Examples: d8Q, exf8N, b1B, g1R.
+- `[C. 11]`  In the case of the promotion of a pawn, the actual pawn move is indicated, followed immediately by the abbreviation of the new piece. Examples: d8Q, exf8N, b1B, g1R.
 
-- `[]` C. 12 The offer of a draw shall be marked as (=).
+- `[C. 12]`  The offer of a draw shall be marked as (=).
 
-- `[]` C. 13 Abbreviations
+- `[C. 13]`  Abbreviations
 
-- `[]` C. 13.1 0-0 = castling with rook h1 or rook h8 (kingside castling)
+- `[C. 13.1]`  `0-0` = castling with rook h1 or rook h8 (kingside castling)
 
-- `[]` C. 13.2 0-0-0 = castling with rook a1 or rook a8 (queenside castling)
+- `[C. 13.2]`  `0-0-0` = castling with rook a1 or rook a8 (queenside castling)
 
-- `[]` C. 13.3 x = captures
+- `[C. 13.3]`  `x` = captures
 
-- `[]` C. 13.4 + = check
+- `[C. 13.4]`  `+` = check
 
-- `[]` C. 13.5 ++ or # = checkmate
+- `[C. 13.5]`  `++` or `#` = checkmate
 
-- `[]` C. 13.6 e.p. = captures 'en passant'
+- `[C. 13.6]`  `e.p.` = captures 'en passant'
 
 Articles C.13.3 - C.13.6 are optional.
 
 Sample game:
 
+```text
 1.e4 e5 2. Nf3 Nf6 3. d4 exd4 4. e5 Ne4 5. Qxd4 d5 6. exd6 e.p. Nxd6 7. Bg5 Nc6 8. Qe3+ Be7 9. Nbd2 0-0 10. 0-0-0 Re8 11. Kb1 (=)
+```
 
-Or: 1. e4 e5 2. Nf3 Nf6 3. d4 ed4 4. e5 Ne4 5. Qd4 d5 6. ed6 Nd6 7. Bg5 Nc6 8. Qe3 Be7 9 Nbd2 0-0 10. 0-0-0 Re8 11. Kb1 (=)
+Or:
 
-Or: 1. e2e4 e7e5 2.Ng1f3 Ng8f6 3. d2d4 e5xd4 4. e4e5 Nf6e4 5. Qd1xd4 d7d5 6. e5xd6 e.p. Ne4xd6 7. Bc1g5 Nb8c6 8. Qd4d3 Bf8e7 9. Nb1d2 0-0 10. 0-0-0 Rf8e8 11. Kb1 (=)
+```text
+1. e4 e5 2. Nf3 Nf6 3. d4 ed4 4. e5 Ne4 5. Qd4 d5 6. ed6 Nd6 7. Bg5 Nc6 8. Qe3 Be7 9 Nbd2 0-0 10. 0-0-0 Re8 11. Kb1 (=)
+```
+
+Or:
+
+```text
+1. e2e4 e7e5 2.Ng1f3 Ng8f6 3. d2d4 e5xd4 4. e4e5 Nf6e4 5. Qd1xd4 d7d5 6. e5xd6 e.p. Ne4xd6 7. Bc1g5 Nb8c6 8. Qd4d3 Bf8e7 9. Nb1d2 0-0 10. 0-0-0 Rf8e8 11. Kb1 (=)
+```
 
 ### Appendix D. Rules for Play with Blind and Visually Disabled Players
 
-- `[]` D. 1 The organiser, after consulting the arbiter, shall have the power to adapt the following rules according to local circumstances. In competitive chess between sighted and visually disabled (legally blind) players either player may demand the use of two boards, the sighted player using a normal board, the visually disabled player using one specially constructed. This board must meet the following requirements:
+- `[D. 1]`  The organiser, after consulting the arbiter, shall have the power to adapt the following rules according to local circumstances. In competitive chess between sighted and visually disabled (legally blind) players either player may demand the use of two boards, the sighted player using a normal board, the visually disabled player using one specially constructed. This board must meet the following requirements:
 
-- `[]` D. 1.1 measure at least 20 cm by 20 cm,
+- `[D. 1.1]`  measure at least 20 cm by 20 cm,
 
-- `[]` D. 1.2 have the black squares slightly raised,
+- `[D. 1.2]`  have the black squares slightly raised,
 
-- `[]` D. 1.3 have a securing aperture in each square,
+- `[D. 1.3]`  have a securing aperture in each square,
 
-- `[]` D. 1.4 The requirements for the pieces are:
+- `[D. 1.4]`  The requirements for the pieces are:
 
-- `[]` D. 1.4.1 all are provided with a peg that fits into the securing aperture of the board,
+- `[D. 1.4.1]`  all are provided with a peg that fits into the securing aperture of the board,
 
-- `[]` D. 1.4.2 all are of Staunton design, the black pieces being specially marked.
+- `[D. 1.4.2]`  all are of Staunton design, the black pieces being specially marked.
 
-- `[]` D. 2 The following regulations shall govern play:
+- `[D. 2]`  The following regulations shall govern play:
 
-- `[]` D. 2.1 The moves shall be announced clearly, repeated by the opponent and executed on his/her chessboard. When promoting a pawn, the player must announce which piece is chosen. To make the announcement as clear as possible, the use of the following names is suggested instead of the corresponding letters:
+- `[D. 2.1]`  The moves shall be announced clearly, repeated by the opponent and executed on his/her chessboard. When promoting a pawn, the player must announce which piece is chosen. To make the announcement as clear as possible, the use of the following names is suggested instead of the corresponding letters:
 
+```text
 A - Anna
-
 B - Bella
-
 C - Cesar
-
 D - David
-
 E - Eva
-
 F - Felix
-
 G - Gustav
-
 H - Hector
+```
 
 Unless the arbiter decides otherwise, ranks from White to Black shall be given the German numbers
 
+```text
 1 - eins
-
 2 - zwei
-
 3 - drei
-
 4 - vier
-
 5 - fuenf
-
 6 - sechs
-
 7 - sieben
-
 8 - acht
+```
 
 Castling is announced "Lange Rochade" (German for long castling) and "Kurze Rochade" (German for short castling).
 
 The pieces bear the names: Koenig, Dame, Turm, Laeufer, Springer, Bauer.
 
-- `[]` D. 2.2 On the visually disabled player's board a piece shall be considered 'touched' when it has been taken out of the securing aperture.
+- `[D. 2.2]`  On the visually disabled player's board a piece shall be considered 'touched' when it has been taken out of the securing aperture.
 
-- `[]` D. 2.3 A move shall be considered 'made' when:
+- `[D. 2.3]`  A move shall be considered 'made' when:
 
-- `[]` D. 2.3.1 in the case of a capture, the captured piece has been removed from the board of the player whose turn it is to move,
+- `[D. 2.3.1]`  in the case of a capture, the captured piece has been removed from the board of the player whose turn it is to move,
 
-- `[]` D. 2.3.2 a piece has been placed into a different securing aperture,
+- `[D. 2.3.2]`  a piece has been placed into a different securing aperture,
 
-- `[]` D. 2.3.3 the move has been announced.
+- `[D. 2.3.3]`  the move has been announced.
 
-- `[]` D. 2.4 Only then shall the opponent's clock be started.
+- `[D. 2.4]`  Only then shall the opponent's clock be started.
 
-- `[]` D. 2.5 As far as points D.2.2 and D.2.3 are concerned, the normal rules are valid for the sighted player.
+- `[D. 2.5]`  As far as points D.2.2 and D.2.3 are concerned, the normal rules are valid for the sighted player.
 
-- `[]` D. 2.6 Chessclock for visually disabled players:
+- `[D. 2.6]`  Chessclock for visually disabled players:
 
-- `[]` D. 2.6.1 A specially constructed chessclock for the visually disabled shall be admissible. It should be able to announce the time and number of moves to the visually disabled player.
+- `[D. 2.6.1]`  A specially constructed chessclock for the visually disabled shall be admissible. It should be able to announce the time and number of moves to the visually disabled player.
 
-- `[]` D. 2.6.2 Alternatively an analogue clock with the following features may be considered:
+- `[D. 2.6.2]`  Alternatively an analogue clock with the following features may be considered:
 
 1) a dial fitted with reinforced hands, with every five minutes marked by one raised dot, and every 15 minutes by two raised dots, and
 
 2) a flag which can be easily felt; care should be taken that the flag is so arranged as to allow the player to feel the minute hand during the last five minutes of the full hour.
 
-- `[]` D. 2.7 The visually disabled player must keep score of the game in Braille or longhand, or record the moves on a recording device.
+- `[D. 2.7]`  The visually disabled player must keep score of the game in Braille or longhand, or record the moves on a recording device.
 
-- `[]` D. 2.8 A slip of the tongue in the announcement of a move must be corrected immediately and before the clock of the opponent is started.
+- `[D. 2.8]`  A slip of the tongue in the announcement of a move must be corrected immediately and before the clock of the opponent is started.
 
-- `[]` D. 2.9 If during a game, different positions should arise on the two boards, they must be corrected with the assistance of the arbiter and by consulting both players' game scores. If the two game scores correspond with each other, the player who has written the correct move but made the wrong one must adjust his/her position to correspond with the move on the game scores. When the game scores are found to differ, the moves shall be retraced to the point where the two scores agree, and the arbiter shall readjust the clocks accordingly.
+- `[D. 2.9]`  If during a game, different positions should arise on the two boards, they must be corrected with the assistance of the arbiter and by consulting both players' game scores. If the two game scores correspond with each other, the player who has written the correct move but made the wrong one must adjust his/her position to correspond with the move on the game scores. When the game scores are found to differ, the moves shall be retraced to the point where the two scores agree, and the arbiter shall readjust the clocks accordingly.
 
-- `[]` D. 2.10 The visually disabled player shall have the right to make use of an assistant who shall have any or all of the following duties:
+- `[D. 2.10]`  The visually disabled player shall have the right to make use of an assistant who shall have any or all of the following duties:
 
-- `[]` D. 2.10.1 making either player's move on the board of the opponent,
+- `[D. 2.10.1]`  making either player's move on the board of the opponent,
 
-- `[]` D. 2.10.2 announcing the moves of both players,
+- `[D. 2.10.2]`  announcing the moves of both players,
 
-- `[]` D. 2.10.3 keeping the game score of the visually disabled player and starting his/her opponent's clock.
+- `[D. 2.10.3]`  keeping the game score of the visually disabled player and starting his/her opponent's clock.
 
-- `[]` D. 2.10.4 informing the visually disabled player, only at his/her request, of the number of moves completed and the time used up by both players,
+- `[D. 2.10.4]`  informing the visually disabled player, only at his/her request, of the number of moves completed and the time used up by both players,
 
-- `[]` D. 2.10.5 claiming the game in cases where the time limit has been exceeded and informing the arbiter when the sighted player has touched one of his/her pieces,
+- `[D. 2.10.5]`  claiming the game in cases where the time limit has been exceeded and informing the arbiter when the sighted player has touched one of his/her pieces,
 
-- `[]` D. 2.10.6 carrying out the necessary formalities in cases where the game is adjourned.
+- `[D. 2.10.6]`  carrying out the necessary formalities in cases where the game is adjourned.
 
-- `[]` D. 2.11 If the visually disabled player does not make use of an assistant, the sighted player may make use of one who shall carry out the duties mentioned in points D.2.10.1 and D.2.10.2. An assistant must be used in the case of a visually disabled player paired with a hearing-impaired player.
+- `[D. 2.11]`  If the visually disabled player does not make use of an assistant, the sighted player may make use of one who shall carry out the duties mentioned in points D.2.10.1 and D.2.10.2. An assistant must be used in the case of a visually disabled player paired with a hearing-impaired player.
 
 ## GUIDELINES
 
@@ -1198,108 +1198,108 @@ The following Guidelines are here to assist in organizing events where they may 
 
 ### Guidelines I. Adjourned Games
 
-- `[]` I. 1 Adjournment procedure:
+- `[I. 1]`  Adjournment procedure:
 
-- `[]` I. 1.1 If a game is not finished at the end of the time prescribed for play, the arbiter shall require the player having the move to 'seal' that move. The player must write his/her move in unambiguous notation on a paper scoresheet, put his/her scoresheet and that of his/her opponent in an envelope, seal the envelope and only then stop the chessclock. Until he/she has stopped the chessclock the player retains the right to change his/her sealed move. If, after being told by the arbiter to seal his/her move, the player makes a move on the chessboard he/she must write that same move on his/her scoresheet as his/her sealed move.
+- `[I. 1.1]`  If a game is not finished at the end of the time prescribed for play, the arbiter shall require the player having the move to 'seal' that move. The player must write his/her move in unambiguous notation on a paper scoresheet, put his/her scoresheet and that of his/her opponent in an envelope, seal the envelope and only then stop the chessclock. Until he/she has stopped the chessclock the player retains the right to change his/her sealed move. If, after being told by the arbiter to seal his/her move, the player makes a move on the chessboard he/she must write that same move on his/her scoresheet as his/her sealed move.
 
-- `[]` I. 1.2 A player having the move who adjourns the game before the end of the playing session shall be considered to have sealed at the nominal time for the end of the session, and his/her remaining time shall so be recorded.
+- `[I. 1.2]`  A player having the move who adjourns the game before the end of the playing session shall be considered to have sealed at the nominal time for the end of the session, and his/her remaining time shall so be recorded.
 
-- `[]` I. 2. The following shall be indicated upon the envelope:
+- `[I. 2]`  The following shall be indicated upon the envelope:
 
-- `[]` I. 2.1 the names of the players,
+- `[I. 2.1]`  the names of the players,
 
-- `[]` I. 2.2 the position immediately before the sealed move,
+- `[I. 2.2]`  the position immediately before the sealed move,
 
-- `[]` I. 2.3 the time used by each player,
+- `[I. 2.3]`  the time used by each player,
 
-- `[]` I. 2.4 the name of the player who has sealed the move,
+- `[I. 2.4]`  the name of the player who has sealed the move,
 
-- `[]` I. 2.5 the number of the sealed move,
+- `[I. 2.5]`  the number of the sealed move,
 
-- `[]` I. 2.6 the offer of a draw, if the proposal is current,
+- `[I. 2.6]`  the offer of a draw, if the proposal is current,
 
-- `[]` I. 2.7 the date, time and venue of resumption of play.
+- `[I. 2.7]`  the date, time and venue of resumption of play.
 
-- `[]` I. 3 The arbiter shall check the accuracy of the information on the envelope and is responsible for its safekeeping.
+- `[I. 3]`  The arbiter shall check the accuracy of the information on the envelope and is responsible for its safekeeping.
 
-- `[]` I. 4 If a player proposes a draw after his/her opponent has sealed his/her move, the offer is valid until the opponent has accepted it or rejected it as in Article 9.1.
+- `[I. 4]`  If a player proposes a draw after his/her opponent has sealed his/her move, the offer is valid until the opponent has accepted it or rejected it as in Article 9.1.
 
-- `[]` I. 5 Before the game is to be resumed, the position immediately before the sealed move shall be set up on the chessboard, and the times used by each player when the game was adjourned shall be indicated on the clocks.
+- `[I. 5]`  Before the game is to be resumed, the position immediately before the sealed move shall be set up on the chessboard, and the times used by each player when the game was adjourned shall be indicated on the clocks.
 
-- `[]` I. 6 If prior to the resumption the game is agreed drawn, or if one of the players notifies the arbiter that he/she resigns, the game is concluded.
+- `[I. 6]`  If prior to the resumption the game is agreed drawn, or if one of the players notifies the arbiter that he/she resigns, the game is concluded.
 
-- `[]` I. 7 The envelope shall be opened only when the player who must reply to the sealed move is present.
+- `[I. 7]`  The envelope shall be opened only when the player who must reply to the sealed move is present.
 
-- `[]` I. 8 Except in the cases mentioned in Articles 5, 5.2.2, 6.9 and 9.6, the game is lost by a player whose recording of his/her sealed move:
+- `[I. 8]`  Except in the cases mentioned in Articles 5, 5.2.2, 6.9 and 9.6, the game is lost by a player whose recording of his/her sealed move:
 
-- `[]` I. 8.1 is ambiguous, or
+- `[I. 8.1]`  is ambiguous, or
 
-- `[]` I. 8.2 is recorded in such a way that its true significance is impossible to establish, or
+- `[I. 8.2]`  is recorded in such a way that its true significance is impossible to establish, or
 
-- `[]` I. 8.3 is illegal.
+- `[I. 8.3]`  is illegal.
 
-- `[]` I. 9 If, at the agreed resumption time:
+- `[I. 9]`  If, at the agreed resumption time:
 
-- `[]` I. 9.1 the player having to reply to the sealed move is present, the envelope is opened, the sealed move is made on the chessboard and his/her clock is started,
+- `[I. 9.1]`  the player having to reply to the sealed move is present, the envelope is opened, the sealed move is made on the chessboard and his/her clock is started,
 
-- `[]` I. 9.2 the player having to reply to the sealed move is not present, his/her clock shall be started; on his/her arrival, he/she may pause his/her clock and summon the arbiter; the envelope is then opened and the sealed move is made on the chessboard; his/her clock is then restarted,
+- `[I. 9.2]`  the player having to reply to the sealed move is not present, his/her clock shall be started; on his/her arrival, he/she may pause his/her clock and summon the arbiter; the envelope is then opened and the sealed move is made on the chessboard; his/her clock is then restarted,
 
-- `[]` I. 9.3 the player who sealed the move is not present, his/her opponent has the right to record his/her reply on the scoresheet, seal his/her scoresheet in a fresh envelope, pause his/her clock and start the absent player's clock instead of making his/her reply in the normal manner; if so, the envelope shall be handed to the arbiter for safekeeping and opened on the absent player's arrival.
+- `[I. 9.3]`  the player who sealed the move is not present, his/her opponent has the right to record his/her reply on the scoresheet, seal his/her scoresheet in a fresh envelope, pause his/her clock and start the absent player's clock instead of making his/her reply in the normal manner; if so, the envelope shall be handed to the arbiter for safekeeping and opened on the absent player's arrival.
 
-- `[]` I. 10 Any player who arrives at the chessboard after the default time shall lose the game unless the arbiter decides otherwise. However, if the sealed move resulted in the conclusion of the game, that conclusion shall still apply.
+- `[I. 10]`  Any player who arrives at the chessboard after the default time shall lose the game unless the arbiter decides otherwise. However, if the sealed move resulted in the conclusion of the game, that conclusion shall still apply.
 
-- `[]` I. 11 If the regulations of an event specify that the default time is not zero, the following shall apply: If neither player is present initially, the player who has to reply to the sealed move shall lose all the time that elapses until he/she arrives, unless the regulations of an event specify or the arbiter decides otherwise.
+- `[I. 11]`  If the regulations of an event specify that the default time is not zero, the following shall apply: If neither player is present initially, the player who has to reply to the sealed move shall lose all the time that elapses until he/she arrives, unless the regulations of an event specify or the arbiter decides otherwise.
 
-- `[]` I. 12 Resuming an adjourned game:
+- `[I. 12]`  Resuming an adjourned game:
 
-- `[]` I. 12.1 If the envelope containing the sealed move is missing, the game shall continue from the adjourned position, with the clock times recorded at the time of adjournment. If the time used by each player cannot be re-established, the arbiter shall set the clocks. The player who sealed the move shall make the move he/she states he/she sealed on the chessboard.
+- `[I. 12.1]`  If the envelope containing the sealed move is missing, the game shall continue from the adjourned position, with the clock times recorded at the time of adjournment. If the time used by each player cannot be re-established, the arbiter shall set the clocks. The player who sealed the move shall make the move he/she states he/she sealed on the chessboard.
 
-- `[]` I. 12.2 If it is impossible to re-establish the position, the game shall be annulled and a new game shall be played.
+- `[I. 12.2]`  If it is impossible to re-establish the position, the game shall be annulled and a new game shall be played.
 
-- `[]` I. 13 If, upon resumption of the game, either player points out before making his/her first move that the time used has been incorrectly indicated on either clock, the error must be corrected. If the error is not then established the game shall continue without correction unless the arbiter decides otherwise.
+- `[I. 13]`  If, upon resumption of the game, either player points out before making his/her first move that the time used has been incorrectly indicated on either clock, the error must be corrected. If the error is not then established the game shall continue without correction unless the arbiter decides otherwise.
 
-- `[]` I. 14 The duration of each resumption session shall be controlled by the arbiter's timepiece. The starting time shall be announced in advance.
+- `[I. 14]`  The duration of each resumption session shall be controlled by the arbiter's timepiece. The starting time shall be announced in advance.
 
 ## Guidelines II. Chess960 Rules
 
-- `[]` II. 1 Before a Chess960 game a starting position is randomly set up, subject to certain rules. After this, the game is played in the same way as regular chess. In particular, pieces and pawns have their normal moves, and each player's objective is to checkmate the opponent's king.
+- `[II. 1]`  Before a Chess960 game a starting position is randomly set up, subject to certain rules. After this, the game is played in the same way as regular chess. In particular, pieces and pawns have their normal moves, and each player's objective is to checkmate the opponent's king.
 
-- `[]` II. 2 Starting Position Requirements
+- `[II. 2]`  Starting Position Requirements
 
 The starting position for Chess960 must meet certain rules. White pawns are placed on the second rank as in regular chess. All remaining white pieces are placed randomly on the first rank, but with the following restrictions:
 
-- `[]` II. 2.1 the king is placed somewhere between the two rooks, and
+- `[II. 2.1]`  the king is placed somewhere between the two rooks, and
 
-- `[]` II. 2.2 the bishops are placed on opposite-coloured squares, and
+- `[II. 2.2]`  the bishops are placed on opposite-coloured squares, and
 
-- `[]` II. 2.3 the black pieces are placed opposite the white pieces.
+- `[II. 2.3]`  the black pieces are placed opposite the white pieces.
 
 The starting position can be generated before the game either by a computer program or using dice, coin, cards, etc.
 
-- `[]` II. 3 Chess960 castling rules
+- `[II. 3]`  Chess960 castling rules
 
-- `[]` II. 3.1 Chess960 allows each player to castle once per game, a move by potentially both the king and rook in a single move. However, a few interpretations of regular chess rules are needed for castling, because the regular rules presume initial locations of the rook and king that are often not applicable in Chess960.
+- `[II. 3.1]`  Chess960 allows each player to castle once per game, a move by potentially both the king and rook in a single move. However, a few interpretations of regular chess rules are needed for castling, because the regular rules presume initial locations of the rook and king that are often not applicable in Chess960.
 
-- `[]` II. 3.2 How to castle. In Chess960, depending on the pre-castling position of the castling king and rook, the castling manoeuvre is performed by one of these four methods:
+- `[II. 3.2]`  How to castle. In Chess960, depending on the pre-castling position of the castling king and rook, the castling manoeuvre is performed by one of these four methods:
 
-- `[]` II. 3.2.1 double-move castling: by making a move with the king and a move with the rook, or
+- `[II. 3.2.1]`  double-move castling: by making a move with the king and a move with the rook, or
 
-- `[]` II. 3.2.2 transposition castling: by transposing the position of the king and the rook, or
+- `[II. 3.2.2]`  transposition castling: by transposing the position of the king and the rook, or
 
-- `[]` II. 3.2.3 king-move-only castling: by making only a move with the king, or
+- `[II. 3.2.3]`  king-move-only castling: by making only a move with the king, or
 
-- `[]` II. 3.2.4 rook-move-only castling: by making only a move with the rook.
+- `[II. 3.2.4]`  rook-move-only castling: by making only a move with the rook.
 
-- `[]` II. 3.2.5 Recommendations:
+- `[II. 3.2.5]`  Recommendations:
 
 When castling on a physical board with a human player, it is recommended that the king be moved outside the playing surface next to his/her final position, the rook then be moved from its starting position to its final position, and then the king be placed on his final square.
 After castling, the rook and king's final positions should be exactly the same positions as they would be in regular chess.
 
-- `[]` II. 3.2.6 Clarification
+- `[II. 3.2.6]`  Clarification
 
 Thus, after c-side castling (notated as 0-0-0 and known as queen-side castling in ortho-dox chess), the king is on the c-square (c1 for white and c8 for black) and the rook is on the d-square (d1 for white and d8 for black). After g-side castling (notated as 0-0 and known as king-side castling in orthodox chess), the king is on the g-square (g1 for white and g8 for black) and the rook is on the f-square (f1 for white and f8 for black).
 
-- `[]` II. 3.2.7 Notes
+- `[II. 3.2.7]`  Notes
 
 - To avoid any misunderstanding, it may be useful to state "I am about to castle" before castling.
 - In some starting positions, the king or rook (but not both) does not move during castling.
@@ -1309,37 +1309,37 @@ Thus, after c-side castling (notated as 0-0-0 and known as queen-side castling i
 
 ### Guidelines III. Games without Increment including Quickplay Finishes
 
-- `[]` III. 1 A 'quickplay finish' is the phase of a game when all the remaining moves must be completed in a finite time.
+- `[III. 1]`  A 'quickplay finish' is the phase of a game when all the remaining moves must be completed in a finite time.
 
-- `[]` III. 2.1 The Guidelines below concerning the final period of the game including Quickplay Finishes, shall only be used at an event if their use has been announced beforehand.
+- `[III. 2.1]`  The Guidelines below concerning the final period of the game including Quickplay Finishes, shall only be used at an event if their use has been announced beforehand.
 
-- `[]` III. 2.2 These Guidelines shall apply only to standard chess and rapid chess games without increment and not to blitz games.
+- `[III. 2.2]`  These Guidelines shall apply only to standard chess and rapid chess games without increment and not to blitz games.
 
-- `[]` III. 3.1 If both flags have fallen and it is impossible to establish which flag fell first then:
+- `[III. 3.1]`  If both flags have fallen and it is impossible to establish which flag fell first then:
 
-- `[]` III. 3.1.1 the game shall continue if this occurs in any period of the game except the last period.
+- `[III. 3.1.1]`  the game shall continue if this occurs in any period of the game except the last period.
 
-- `[]` III. 3.1.2 the game is drawn if this occurs in the period of a game in which all remaining moves must be completed.
+- `[III. 3.1.2]`  the game is drawn if this occurs in the period of a game in which all remaining moves must be completed.
 
-- `[]` III. 4 If the player having the move has less than two minutes left on his/her clock, he/she may request that an increment extra five seconds be introduced for both players. This constitutes the offer of a draw. If the offer refused, and the arbiter agrees to the request, the clocks shall then be set with the extra time; the opponent shall be awarded two extra minutes and the game shall continue.
+- `[III. 4]`  If the player having the move has less than two minutes left on his/her clock, he/she may request that an increment extra five seconds be introduced for both players. This constitutes the offer of a draw. If the offer refused, and the arbiter agrees to the request, the clocks shall then be set with the extra time; the opponent shall be awarded two extra minutes and the game shall continue.
 
-- `[]` III. 5 If Article III.4 does not apply and the player having the move has less than two minutes left on his/her clock, he/she may claim a draw before his/her flag falls (see also Article 6.12.2). He/She shall summon the arbiter and may pause the chessclock. He/She may claim on the basis that his/her opponent cannot win by normal means, and/or that his/her opponent has been making no effort to win by normal means:
+- `[III. 5]`  If Article III.4 does not apply and the player having the move has less than two minutes left on his/her clock, he/she may claim a draw before his/her flag falls (see also Article 6.12.2). He/She shall summon the arbiter and may pause the chessclock. He/She may claim on the basis that his/her opponent cannot win by normal means, and/or that his/her opponent has been making no effort to win by normal means:
 
-- `[]` III. 5.1 If the arbiter agrees that the opponent cannot win by normal means, or that the opponent has been making no effort to win the game by normal means, he/she shall declare the game drawn. Otherwise he/she shall postpone his/her decision or reject the claim.
+- `[III. 5.1]`  If the arbiter agrees that the opponent cannot win by normal means, or that the opponent has been making no effort to win the game by normal means, he/she shall declare the game drawn. Otherwise he/she shall postpone his/her decision or reject the claim.
 
-- `[]` III. 5.2 If the arbiter postpones his/her decision, the opponent may be awarded two extra minutes and the game shall continue, if possible, in the presence of an arbiter. The arbiter shall declare the final result later in the game or as soon as possible after the flag of either player has fallen. He/She shall declare the game drawn if he/she agrees that the opponent of the player whose flag has fallen cannot win by normal means, or that he/she was not making sufficient attempts to win by normal means.
+- `[III. 5.2]`  If the arbiter postpones his/her decision, the opponent may be awarded two extra minutes and the game shall continue, if possible, in the presence of an arbiter. The arbiter shall declare the final result later in the game or as soon as possible after the flag of either player has fallen. He/She shall declare the game drawn if he/she agrees that the opponent of the player whose flag has fallen cannot win by normal means, or that he/she was not making sufficient attempts to win by normal means.
 
-- `[]` III. 5.3 If the arbiter has rejected the claim, the opponent shall be awarded two extra minutes.
+- `[III. 5.3]`  If the arbiter has rejected the claim, the opponent shall be awarded two extra minutes.
 
-- `[]` III. 6 The following shall apply when the competition is not supervised by an arbiter:
+- `[III. 6]`  The following shall apply when the competition is not supervised by an arbiter:
 
-- `[]` III. 6.1 A player may claim a draw when he/she has less than two minutes left on his/her clock and before his/her flag falls. This concludes the game. He/She may claim on the basis:
+- `[III. 6.1]`  A player may claim a draw when he/she has less than two minutes left on his/her clock and before his/her flag falls. This concludes the game. He/She may claim on the basis:
 
-- `[]` III. 6.1.1 that his/her opponent cannot win by normal means, and/or
+- `[III. 6.1.1]`  that his/her opponent cannot win by normal means, and/or
 
-- `[]` III. 6.1.2 that his/her opponent has been making no effort to win by normal means. In III.6.1.1 the player must write down the final position and his/her opponent must verify it. In III.6.1.2 the player must write down the final position and submit an up-to-date scoresheet. The opponent shall verify both the scoresheet and the final position.
+- `[III. 6.1.2]`  that his/her opponent has been making no effort to win by normal means. In III.6.1.1 the player must write down the final position and his/her opponent must verify it. In III.6.1.2 the player must write down the final position and submit an up-to-date scoresheet. The opponent shall verify both the scoresheet and the final position.
 
-- `[]` III. 6.2 The claim shall be referred to the designated arbiter.
+- `[III. 6.2]`  The claim shall be referred to the designated arbiter.
 
 ## Castling
 
