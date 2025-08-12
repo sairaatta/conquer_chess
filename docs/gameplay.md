@@ -25,9 +25,9 @@ The lobby is where the match is set up.
 Here the two players pick who plays which side
 and which races they use.
 
-Classic    |Kingdom                                     |Rooxx                                   |Spawn
------------|---------------------------------------------|-----------------------------------------|-----------------------------------------
-Has no logo| ![Kingdom logo](kingdom_logo_16_x_16.png) | ![Rooxx logo](rooxx_logo_16_x_16.png) | ![Spawn logo](spawn_logo_16_x_16.png)
+Classic    |Kingdom                                    |Rooxx                                  |Spawn
+-----------|-------------------------------------------|---------------------------------------|-----------------------------------------
+Has no logo| ![Kingdom logo](kingdom_logo_16_x_16.jpg) | ![Rooxx logo](rooxx_logo_16_x_16.jpg) | ![Spawn logo](spawn_logo_16_x_16.jpg)
 
 The effect of each side is simple: white, like in regular chess, can start,
 where black has to wait one chess move.
