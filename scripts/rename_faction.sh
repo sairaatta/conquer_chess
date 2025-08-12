@@ -19,4 +19,10 @@ if [[ "$PWD" =~ scripts$ ]]; then
     exit 42
 fi
 
-rename --nono 's/xayid/spawn/' *
+# Thanks to pa4080, from
+# https://askubuntu.com/questions/1287359/how-to-use-the-command-rename-on-subdirectories-as-well#1287371
+shopt -s globstar
+
+rename --nono 's/xayid/spawn/' **/*
+rename --nono 's/genetron/kingdom/' **/*
+rename --nono 's/keiron/rooxx/' **/*
