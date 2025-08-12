@@ -54,8 +54,8 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Maximum health
   --------|--------------
   Classic |1.0
-  Rooxx  |0.5
-  Kingdom|0.75
+  Rooxx   |0.5
+  Kingdom |0.75
   Spawn   |0.5
 
 !!! warning "Need balance patches"
@@ -71,8 +71,8 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Maximum shield
   --------|--------------
   Classic |None
-  Rooxx  |0.5
-  Kingdom|None
+  Rooxx   |0.5
+  Kingdom |None
   Spawn   |None
 
 !!! warning "Need balance patches"
@@ -90,8 +90,8 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Healhh regeneration rate
   --------|------------------------
   Classic |None
-  Rooxx  |None
-  Kingdom|None
+  Rooxx   |None
+  Kingdom |None
   Spawn   |0.25 per time unit
 
 !!! warning "Need balance patches"
@@ -109,8 +109,8 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Regeneration rate
   --------|-----------------
   Classic |None
-  Rooxx  |0.25 per time unit
-  Kingdom|None
+  Rooxx   |0.25 per time unit
+  Kingdom |None
   Spawn   |None
 
 !!! warning "Need balance patches"
@@ -127,8 +127,8 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Movement speed
   --------|--------------
   Classic |1.0
-  Rooxx  |0.9
-  Kingdom|1.0
+  Rooxx   |0.9
+  Kingdom |1.0
   Spawn   |1.1
 
 !!! warning "Need balance patches"
@@ -145,9 +145,26 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Race    |Attack speed
   --------|--------------
   Classic |1.0
-  Kingdom|1.0
-  Rooxx  |1.1
+  Kingdom |1.0
+  Rooxx   |1.1
   Spawn   |0.9
+
+!!! warning "Need balance patches"
+
+  These movement speed values are untested and balance patches are to be
+  expected.
+
+- `[1.2.CC.10]` A piece that is protected by another piece of its color
+  may receive a benefit, depending on the race of that piece. 
+
+  These benefits are as follows:
+
+  Race    |Effect of being protected
+  --------|-------------------------
+  Classic |None
+  Rooxx   |Increase movement speed by 20%
+  Kingdom |Heal at a rate of 0.25 health per time unit
+  Spawn   |Increase attack rate by 20%
 
 !!! warning "Need balance patches"
 
