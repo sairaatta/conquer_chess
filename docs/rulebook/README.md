@@ -26,7 +26,7 @@ one should assume that the rulebook is correct.
   multiple arenas of any shape added in the future.
 
 TODO: [Consider allowing multiple chessboards per match](https://github.com/richelbilderbeek/conquer_chess/issues/122).
-
+  
 - `[1.2]` The player with the light-coloured pieces (White)
   makes the first move,
   then the players move alternately,
@@ -38,6 +38,13 @@ TODO: [Consider allowing multiple chessboards per match](https://github.com/rich
 
 TODO: [Consider adding a option that black can never make more moves than white](https://github.com/richelbilderbeek/conquer_chess/issues/111).
 
+- `[1.1.CC.0]` The time unit used in the game is a chess move.
+
+  For example, one can say: 'It takes one chess move to move a piece'.
+
+  How much seconds a chess move takes is set up in the game options.
+  From this, one can say: 'A chess move takes 8 seconds'.
+  
 - `[1.2.CC.1]` The pieces of one color are from a race.
 
 - `[1.2.CC.2]` It is allowed that different colors play with a same race.
@@ -178,24 +185,24 @@ TODO: [Consider adding a option that black can never make more moves than white]
   moves in succession or do nothing for as long as desired.
 
 - [`1.4`] The objective of each player is to place the opponent's king
- 'under attack' in such a way that the opponent has no legal move.
+  'under attack' in such a way that the opponent has no legal move.
 
- In Conquer Chess, there is an additional second goal: reducing the health of
- the opponent's king to zero.
+  In Conquer Chess, there is an additional second goal: reducing the health of
+  the opponent's king to zero.
 
 - `[1.4.1]`. The player who achieves this goal is said to have 'checkmated'
- the opponent's king and to have won the game `[1.4.1a]`.
- Leaving one's own king under attack `[1.4.1b]`,
- exposing one's own king to attack `[1.4.1c]` and also
- 'capturing' the opponent's king is not allowed `[1.4.1d]`.
+  the opponent's king and to have won the game `[1.4.1a]`.
+  Leaving one's own king under attack `[1.4.1b]`,
+  exposing one's own king to attack `[1.4.1c]` and also
+  'capturing' the opponent's king is not allowed `[1.4.1d]`.
 
- In Conquer Chess, a checkmate is a direct win,
- even when the opponent's king
- has full health and the attackers have low health.
+  In Conquer Chess, a checkmate is a direct win,
+  even when the opponent's king
+  has full health and the attackers have low health.
 
- In Conquer Chess, 'capturing' the opponent's king is possible
- (i.e. reducing that king's health to zero)
- and results in a win.
+  In Conquer Chess, 'capturing' the opponent's king is possible
+  (i.e. reducing that king's health to zero)
+  and results in a win.
 
 - [`1.4.2`] The opponent whose king has been checkmated has lost the game.
 
