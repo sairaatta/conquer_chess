@@ -83,6 +83,7 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d4/da1/helper_8h_source.html">helper.h</a>&quot;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -90,17 +91,19 @@ Include dependency graph for helper.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d1/d6c/helper_8cpp__incl.png" border="0" usemap="#asrc_2helper_8cpp" alt=""/></div>
 <map name="asrc_2helper_8cpp" id="asrc_2helper_8cpp">
-<area shape="rect" title=" " alt="" coords="260,5,372,31"/>
+<area shape="rect" title=" " alt="" coords="285,5,397,31"/>
 <area shape="rect" href="../../d4/da1/helper_8h.html" title=" " alt="" coords="192,79,267,104"/>
-<area shape="poly" title=" " alt="" coords="304,33,256,72,252,68,300,29"/>
+<area shape="poly" title=" " alt="" coords="325,33,261,73,258,69,322,28"/>
 <area shape="rect" title=" " alt="" coords="5,152,75,177"/>
-<area shape="poly" title=" " alt="" coords="288,33,181,81,70,147,67,142,179,76,286,28"/>
+<area shape="poly" title=" " alt="" coords="305,33,246,54,181,81,120,114,69,147,66,142,118,110,179,76,244,49,303,28"/>
 <area shape="rect" title=" " alt="" coords="291,152,354,177"/>
-<area shape="poly" title=" " alt="" coords="319,31,324,138,319,138,314,31"/>
+<area shape="poly" title=" " alt="" coords="342,31,329,139,323,138,337,31"/>
 <area shape="rect" title=" " alt="" coords="378,152,441,177"/>
-<area shape="poly" title=" " alt="" coords="326,30,397,139,392,142,321,33"/>
-<area shape="rect" title=" " alt="" coords="404,79,479,104"/>
-<area shape="poly" title=" " alt="" coords="337,28,410,69,408,74,335,33"/>
+<area shape="poly" title=" " alt="" coords="349,30,401,138,396,141,344,32"/>
+<area shape="rect" title=" " alt="" coords="405,79,478,104"/>
+<area shape="poly" title=" " alt="" coords="359,29,415,68,412,73,356,33"/>
+<area shape="rect" title=" " alt="" coords="503,79,577,104"/>
+<area shape="poly" title=" " alt="" coords="374,28,495,71,494,76,372,33"/>
 <area shape="rect" title=" " alt="" coords="181,152,267,177"/>
 <area shape="poly" title=" " alt="" coords="231,105,229,139,223,138,226,104"/>
 <area shape="poly" title=" " alt="" coords="200,107,85,149,83,144,198,102"/>
@@ -113,6 +116,9 @@ Include dependency graph for helper.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a5dd2722dfbe690dcb85e6b9ea2cb7d51" id="r_a5dd2722dfbe690dcb85e6b9ea2cb7d51"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/helper_8cpp.html#a5dd2722dfbe690dcb85e6b9ea2cb7d51">bool_to_str</a> (const bool b) noexcept</td></tr>
+<tr class="memdesc:a5dd2722dfbe690dcb85e6b9ea2cb7d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert 'true' to 'true' and 'false' to 'false'.  <br /></td></tr>
+<tr class="separator:a5dd2722dfbe690dcb85e6b9ea2cb7d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a353476512fbc99fdefda33c9f225c544" id="r_a353476512fbc99fdefda33c9f225c544"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/helper_8cpp.html#a353476512fbc99fdefda33c9f225c544">calc_angle_degrees</a> (const double dx, const double dy)</td></tr>
 <tr class="memdesc:a353476512fbc99fdefda33c9f225c544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the angle in degrees.  <br /></td></tr>
 <tr class="separator:a353476512fbc99fdefda33c9f225c544"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,14 +131,48 @@ Functions</h2></td></tr>
 <tr class="memitem:a09374206d40f24fbd4d9752c3db756c9" id="r_a09374206d40f24fbd4d9752c3db756c9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/helper_8cpp.html#a09374206d40f24fbd4d9752c3db756c9">make_sequence</a> (const int from, const int to, const int increment)</td></tr>
 <tr class="memdesc:a09374206d40f24fbd4d9752c3db756c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a sequence in an inclusive way.  <br /></td></tr>
 <tr class="separator:a09374206d40f24fbd4d9752c3db756c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac868b8fd156ed18b827f9febb18ec260" id="r_ac868b8fd156ed18b827f9febb18ec260"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/helper_8cpp.html#ac868b8fd156ed18b827f9febb18ec260">read_lines</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:ac868b8fd156ed18b827f9febb18ec260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a file's content to a collection of strings.  <br /></td></tr>
+<tr class="separator:ac868b8fd156ed18b827f9febb18ec260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac581a14a6644ccbc61ee9f08048de37e" id="r_ac581a14a6644ccbc61ee9f08048de37e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/helper_8cpp.html#ac581a14a6644ccbc61ee9f08048de37e">split_str</a> (const std::string &amp;s, const char seperator)</td></tr>
 <tr class="memdesc:ac581a14a6644ccbc61ee9f08048de37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split a string.  <br /></td></tr>
 <tr class="separator:ac581a14a6644ccbc61ee9f08048de37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd95d8e89fee7baf6774e82cc1c30205" id="r_acd95d8e89fee7baf6774e82cc1c30205"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/helper_8cpp.html#acd95d8e89fee7baf6774e82cc1c30205">test_helper</a> ()</td></tr>
 <tr class="memdesc:acd95d8e89fee7baf6774e82cc1c30205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test the help functions.  <br /></td></tr>
 <tr class="separator:acd95d8e89fee7baf6774e82cc1c30205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeace1549d3c5a26fd4b1a3b5b113301" id="r_aaeace1549d3c5a26fd4b1a3b5b113301"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/helper_8cpp.html#aaeace1549d3c5a26fd4b1a3b5b113301">to_wstring</a> (const std::string s)</td></tr>
+<tr class="memdesc:aaeace1549d3c5a26fd4b1a3b5b113301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to a wide string.  <br /></td></tr>
+<tr class="separator:aaeace1549d3c5a26fd4b1a3b5b113301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a5dd2722dfbe690dcb85e6b9ea2cb7d51" name="a5dd2722dfbe690dcb85e6b9ea2cb7d51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dd2722dfbe690dcb85e6b9ea2cb7d51">&#9670;&#160;</a></span>bool_to_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string bool_to_str </td>
+          <td>(</td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert 'true' to 'true' and 'false' to 'false'. </p>
+
+</div>
+</div>
 <a id="a353476512fbc99fdefda33c9f225c544" name="a353476512fbc99fdefda33c9f225c544"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a353476512fbc99fdefda33c9f225c544">&#9670;&#160;</a></span>calc_angle_degrees()</h2>
 
@@ -295,6 +335,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac868b8fd156ed18b827f9febb18ec260" name="ac868b8fd156ed18b827f9febb18ec260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac868b8fd156ed18b827f9febb18ec260">&#9670;&#160;</a></span>read_lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; read_lines </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a file's content to a collection of strings. </p>
+<dl class="section note"><dt>Note</dt><dd>Adapted from \url{<a href="https://github.com/richelbilderbeek/cpp/blob/master/content/CppFileToVector.md">https://github.com/richelbilderbeek/cpp/blob/master/content/CppFileToVector.md</a>} </dd></dl>
+
+</div>
+</div>
 <a id="ac581a14a6644ccbc61ee9f08048de37e" name="ac581a14a6644ccbc61ee9f08048de37e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac581a14a6644ccbc61ee9f08048de37e">&#9670;&#160;</a></span>split_str()</h2>
 
@@ -343,6 +404,26 @@ Functions</h2></td></tr>
 
 <p>Test the help functions. </p>
 <p>Test the help functions. </p>
+
+</div>
+</div>
+<a id="aaeace1549d3c5a26fd4b1a3b5b113301" name="aaeace1549d3c5a26fd4b1a3b5b113301"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeace1549d3c5a26fd4b1a3b5b113301">&#9670;&#160;</a></span>to_wstring()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::wstring to_wstring </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a string to a wide string. </p>
 
 </div>
 </div>

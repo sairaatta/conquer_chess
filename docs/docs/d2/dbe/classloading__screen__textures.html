@@ -87,19 +87,17 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaaf5f6113abd43df7689955020f3ca07" id="r_aaaf5f6113abd43df7689955020f3ca07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#aaaf5f6113abd43df7689955020f3ca07">loading_screen_textures</a> ()</td></tr>
 <tr class="separator:aaaf5f6113abd43df7689955020f3ca07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56e1e596be1dcb57007ad093a6e4d5c7" id="r_a56e1e596be1dcb57007ad093a6e4d5c7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#a56e1e596be1dcb57007ad093a6e4d5c7">get_filename</a> (const int i) const noexcept</td></tr>
+<tr class="separator:a56e1e596be1dcb57007ad093a6e4d5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60a213ddb0d8c3faa0336c19083024f1" id="r_a60a213ddb0d8c3faa0336c19083024f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#a60a213ddb0d8c3faa0336c19083024f1">get_n_textures</a> () const noexcept</td></tr>
 <tr class="separator:a60a213ddb0d8c3faa0336c19083024f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a48dd054cc726c0987044df684b138b" id="r_a0a48dd054cc726c0987044df684b138b"><td class="memItemLeft" align="right" valign="top">sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#a0a48dd054cc726c0987044df684b138b">get_all_races_1</a> () noexcept</td></tr>
-<tr class="separator:a0a48dd054cc726c0987044df684b138b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19f2e49258715c8105335e28affb81e5" id="r_a19f2e49258715c8105335e28affb81e5"><td class="memItemLeft" align="right" valign="top">sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#a19f2e49258715c8105335e28affb81e5">get_all_races_2</a> () noexcept</td></tr>
-<tr class="separator:a19f2e49258715c8105335e28affb81e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af73beff3bced883032265e5faa81aae7" id="r_af73beff3bced883032265e5faa81aae7"><td class="memItemLeft" align="right" valign="top">sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#af73beff3bced883032265e5faa81aae7">get_all_races_3</a> () noexcept</td></tr>
-<tr class="separator:af73beff3bced883032265e5faa81aae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2fce9fd6a15bcc7cafafff75d46d5a0" id="r_ac2fce9fd6a15bcc7cafafff75d46d5a0"><td class="memItemLeft" align="right" valign="top">sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#ac2fce9fd6a15bcc7cafafff75d46d5a0">get_all_races_4</a> () noexcept</td></tr>
-<tr class="separator:ac2fce9fd6a15bcc7cafafff75d46d5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3fe5f02f96b7bb22258bcddc483901" id="r_abd3fe5f02f96b7bb22258bcddc483901"><td class="memItemLeft" align="right" valign="top">sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/classloading__screen__textures.html#abd3fe5f02f96b7bb22258bcddc483901">get_all_races</a> (const int i)</td></tr>
+<tr class="memdesc:abd3fe5f02f96b7bb22258bcddc483901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get texture of a artwork with all races.  <br /></td></tr>
+<tr class="separator:abd3fe5f02f96b7bb22258bcddc483901"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The textures used in the loading screen. </p>
+<p>This must a seperate class, so that the loading screen only loads the minimal amount of resources at the start. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaaf5f6113abd43df7689955020f3ca07" name="aaaf5f6113abd43df7689955020f3ca07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaaf5f6113abd43df7689955020f3ca07">&#9670;&#160;</a></span>loading_screen_textures()</h2>
@@ -119,33 +117,28 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0a48dd054cc726c0987044df684b138b" name="a0a48dd054cc726c0987044df684b138b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a48dd054cc726c0987044df684b138b">&#9670;&#160;</a></span>get_all_races_1()</h2>
+<a id="abd3fe5f02f96b7bb22258bcddc483901" name="abd3fe5f02f96b7bb22258bcddc483901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd3fe5f02f96b7bb22258bcddc483901">&#9670;&#160;</a></span>get_all_races()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Texture &amp; loading_screen_textures::get_all_races_1 </td>
+          <td class="memname">sf::Texture &amp; loading_screen_textures::get_all_races </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
+<p>Get texture of a artwork with all races. </p>
+
 </div>
 </div>
-<a id="a19f2e49258715c8105335e28affb81e5" name="a19f2e49258715c8105335e28affb81e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19f2e49258715c8105335e28affb81e5">&#9670;&#160;</a></span>get_all_races_2()</h2>
+<a id="a56e1e596be1dcb57007ad093a6e4d5c7" name="a56e1e596be1dcb57007ad093a6e4d5c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56e1e596be1dcb57007ad093a6e4d5c7">&#9670;&#160;</a></span>get_filename()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,65 +147,16 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Texture &amp; loading_screen_textures::get_all_races_2 </td>
+          <td class="memname">std::string loading_screen_textures::get_filename </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af73beff3bced883032265e5faa81aae7" name="af73beff3bced883032265e5faa81aae7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af73beff3bced883032265e5faa81aae7">&#9670;&#160;</a></span>get_all_races_3()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Texture &amp; loading_screen_textures::get_all_races_3 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac2fce9fd6a15bcc7cafafff75d46d5a0" name="ac2fce9fd6a15bcc7cafafff75d46d5a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2fce9fd6a15bcc7cafafff75d46d5a0">&#9670;&#160;</a></span>get_all_races_4()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Texture &amp; loading_screen_textures::get_all_races_4 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

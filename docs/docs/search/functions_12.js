@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['volume_0',['volume',['../d1/d2e/classvolume.html#a7156882ab8ef5067f7a3a7ba93bc7afb',1,'volume']]]
+  ['user_5finput_0',['user_input',['../df/d60/classuser__input.html#acc381692708d9566bf1395cef7c0c139',1,'user_input']]],
+  ['user_5finputs_1',['user_inputs',['../d4/d4d/classuser__inputs.html#a8f4bcbe4efd33db9b98108b561fd76a7',1,'user_inputs']]]
 ];

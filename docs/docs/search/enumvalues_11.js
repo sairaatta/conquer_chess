@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['white_0',['white',['../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3ad508fe45cecaf653904a0e774084bb5c',1,'chess_color.h']]]
+  ['value_0',['value',['../d3/d83/game__statistic__type_8h.html#a6e2f534d4e11cf05b495397d034db9e1a2063c1608d6e0baf80249c42e2be5804',1,'game_statistic_type.h']]]
 ];

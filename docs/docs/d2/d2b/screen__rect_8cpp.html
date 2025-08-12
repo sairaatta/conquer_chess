@@ -82,6 +82,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d4/d78/screen__rect_8h_source.html">screen_rect.h</a>&quot;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -89,35 +90,67 @@ Include dependency graph for screen_rect.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../dc/dcc/screen__rect_8cpp__incl.png" border="0" usemap="#asrc_2screen__rect_8cpp" alt=""/></div>
 <map name="asrc_2screen__rect_8cpp" id="asrc_2screen__rect_8cpp">
-<area shape="rect" title=" " alt="" coords="229,5,375,31"/>
-<area shape="rect" href="../../d4/d78/screen__rect_8h.html" title=" " alt="" coords="85,79,194,104"/>
-<area shape="poly" title=" " alt="" coords="277,33,180,75,177,71,275,28"/>
-<area shape="rect" title=" " alt="" coords="218,79,287,104"/>
-<area shape="poly" title=" " alt="" coords="296,33,271,69,266,66,292,29"/>
-<area shape="rect" title=" " alt="" coords="311,79,391,104"/>
-<area shape="poly" title=" " alt="" coords="312,29,338,66,333,69,308,33"/>
-<area shape="rect" title=" " alt="" coords="415,79,490,104"/>
-<area shape="poly" title=" " alt="" coords="327,28,417,70,414,75,325,33"/>
+<area shape="rect" title=" " alt="" coords="327,5,474,31"/>
+<area shape="rect" href="../../d4/d78/screen__rect_8h.html" title=" " alt="" coords="142,79,251,104"/>
+<area shape="poly" title=" " alt="" coords="369,33,243,77,242,72,367,28"/>
+<area shape="rect" title=" " alt="" coords="275,79,345,104"/>
+<area shape="poly" title=" " alt="" coords="388,33,337,72,334,68,384,29"/>
+<area shape="rect" title=" " alt="" coords="369,79,432,104"/>
+<area shape="poly" title=" " alt="" coords="403,31,403,65,398,65,398,31"/>
+<area shape="rect" title=" " alt="" coords="457,79,537,104"/>
+<area shape="poly" title=" " alt="" coords="418,29,471,68,468,72,415,33"/>
+<area shape="rect" title=" " alt="" coords="561,79,635,104"/>
+<area shape="poly" title=" " alt="" coords="433,28,554,71,552,76,431,33"/>
 <area shape="rect" href="../../dd/d3e/screen__coordinate_8h.html" title=" " alt="" coords="5,152,159,177"/>
-<area shape="poly" title=" " alt="" coords="132,106,102,143,98,139,128,103"/>
-<area shape="rect" title=" " alt="" coords="107,225,171,251"/>
-<area shape="poly" title=" " alt="" coords="150,103,162,125,173,151,174,168,171,185,158,215,153,212,166,184,169,168,167,153,158,127,145,106"/>
-<area shape="poly" title=" " alt="" coords="94,176,123,213,119,216,89,179"/>
+<area shape="poly" title=" " alt="" coords="180,106,114,147,111,142,177,102"/>
+<area shape="rect" title=" " alt="" coords="95,225,159,251"/>
+<area shape="poly" title=" " alt="" coords="197,105,188,138,172,179,148,216,144,213,168,176,183,137,192,103"/>
+<area shape="rect" href="../../db/d21/side_8h.html" title=" " alt="" coords="234,152,295,177"/>
+<area shape="poly" title=" " alt="" coords="210,102,246,140,242,144,206,106"/>
+<area shape="poly" title=" " alt="" coords="92,176,115,212,110,215,87,179"/>
+<area shape="poly" title=" " alt="" coords="244,180,163,221,161,217,241,175"/>
+<area shape="rect" title=" " alt="" coords="183,225,255,251"/>
+<area shape="poly" title=" " alt="" coords="259,179,236,215,232,212,255,176"/>
+<area shape="rect" title=" " alt="" coords="279,225,338,251"/>
+<area shape="poly" title=" " alt="" coords="274,176,297,212,292,215,270,179"/>
+<area shape="rect" title=" " alt="" coords="363,225,425,251"/>
+<area shape="poly" title=" " alt="" coords="287,175,362,216,359,221,284,180"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac7e1580dd5ba7906c16a37cd96957f0c" id="r_ac7e1580dd5ba7906c16a37cd96957f0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dd/d97/classscreen__coordinate.html">screen_coordinate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#ac7e1580dd5ba7906c16a37cd96957f0c">get_center</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
-<tr class="separator:ac7e1580dd5ba7906c16a37cd96957f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6d9db9aeec8679cde0510a4491a5d9a" id="r_ad6d9db9aeec8679cde0510a4491a5d9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#ad6d9db9aeec8679cde0510a4491a5d9a">create_partial_rect_from_lhs</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r, const double f)</td></tr>
+<tr class="memdesc:ad6d9db9aeec8679cde0510a4491a5d9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a partial rectangle, from the left hand side.  <br /></td></tr>
+<tr class="separator:ad6d9db9aeec8679cde0510a4491a5d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9559b7ab2c492f3e724f725a41d5a22d" id="r_a9559b7ab2c492f3e724f725a41d5a22d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a9559b7ab2c492f3e724f725a41d5a22d">create_partial_rect_from_rhs</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r, const double f)</td></tr>
+<tr class="memdesc:a9559b7ab2c492f3e724f725a41d5a22d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a partial rectangle, from the right hand side.  <br /></td></tr>
+<tr class="separator:a9559b7ab2c492f3e724f725a41d5a22d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d7ccbabb088887af4beaf08461cd8a" id="r_a42d7ccbabb088887af4beaf08461cd8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a42d7ccbabb088887af4beaf08461cd8a">create_partial_rect_from_side</a> (const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a> s, const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r, const double f)</td></tr>
+<tr class="memdesc:a42d7ccbabb088887af4beaf08461cd8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a partial rectangle from a certain side.  <br /></td></tr>
+<tr class="separator:a42d7ccbabb088887af4beaf08461cd8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dbca6d15139e68af5f0b8cad889928d" id="r_a3dbca6d15139e68af5f0b8cad889928d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a3dbca6d15139e68af5f0b8cad889928d">create_rect_inside</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
+<tr class="memdesc:a3dbca6d15139e68af5f0b8cad889928d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a rectangle that is exactly one pixel inside the given one.  <br /></td></tr>
+<tr class="separator:a3dbca6d15139e68af5f0b8cad889928d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69a6e2ebfb6c94f3299827242b259d46" id="r_a69a6e2ebfb6c94f3299827242b259d46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a69a6e2ebfb6c94f3299827242b259d46">get_bottom_left_corner</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
 <tr class="memdesc:a69a6e2ebfb6c94f3299827242b259d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the bottom-left corner (i.e. 25% of the rect)  <br /></td></tr>
 <tr class="separator:a69a6e2ebfb6c94f3299827242b259d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89dd76735b7d8a396c31a963cd06110c" id="r_a89dd76735b7d8a396c31a963cd06110c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a89dd76735b7d8a396c31a963cd06110c">get_bottom_right_corner</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
 <tr class="memdesc:a89dd76735b7d8a396c31a963cd06110c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the bottom-right corner (i.e. 25% of the rect)  <br /></td></tr>
 <tr class="separator:a89dd76735b7d8a396c31a963cd06110c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34f8265169041ed17143fd96bbc7680f" id="r_a34f8265169041ed17143fd96bbc7680f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a34f8265169041ed17143fd96bbc7680f">create_centered_rect</a> (const <a class="el" href="../../dd/d97/classscreen__coordinate.html">screen_coordinate</a> c, const int w, const int h) noexcept</td></tr>
+<tr class="memdesc:a34f8265169041ed17143fd96bbc7680f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a rectangle that is centered around a point, with a custom height and width.  <br /></td></tr>
+<tr class="separator:a34f8265169041ed17143fd96bbc7680f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7e1580dd5ba7906c16a37cd96957f0c" id="r_ac7e1580dd5ba7906c16a37cd96957f0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dd/d97/classscreen__coordinate.html">screen_coordinate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#ac7e1580dd5ba7906c16a37cd96957f0c">get_center</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
+<tr class="separator:ac7e1580dd5ba7906c16a37cd96957f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee1cf74329b41d296dd9f7fa18ada296" id="r_aee1cf74329b41d296dd9f7fa18ada296"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#aee1cf74329b41d296dd9f7fa18ada296">get_default_screen_rect</a> () noexcept</td></tr>
+<tr class="memdesc:aee1cf74329b41d296dd9f7fa18ada296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the default screen rectangle.  <br /></td></tr>
+<tr class="separator:aee1cf74329b41d296dd9f7fa18ada296"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada55be2f362cb8149a4f8a34592c7c33" id="r_ada55be2f362cb8149a4f8a34592c7c33"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#ada55be2f362cb8149a4f8a34592c7c33">get_height</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
 <tr class="separator:ada55be2f362cb8149a4f8a34592c7c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e7429c17bb06a06b62365517ec4fb7c" id="r_a1e7429c17bb06a06b62365517ec4fb7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a1e7429c17bb06a06b62365517ec4fb7c">get_lhs_half</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
+<tr class="memdesc:a1e7429c17bb06a06b62365517ec4fb7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the left-hand side half (i.e. 50% of the rect)  <br /></td></tr>
+<tr class="separator:a1e7429c17bb06a06b62365517ec4fb7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab04f405aa8210531a1fab858b4ea6fef" id="r_ab04f405aa8210531a1fab858b4ea6fef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#ab04f405aa8210531a1fab858b4ea6fef">get_lower_eighth</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
 <tr class="memdesc:ab04f405aa8210531a1fab858b4ea6fef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lower eighth (i.e.  <br /></td></tr>
 <tr class="separator:ab04f405aa8210531a1fab858b4ea6fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,6 +160,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a9fe96b66ae74f8fa15081bc947c8bfec" id="r_a9fe96b66ae74f8fa15081bc947c8bfec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a9fe96b66ae74f8fa15081bc947c8bfec">get_lower_half</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
 <tr class="memdesc:a9fe96b66ae74f8fa15081bc947c8bfec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the lower half (i.e. 50% of the rect)  <br /></td></tr>
 <tr class="separator:a9fe96b66ae74f8fa15081bc947c8bfec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f3b0ab0bc46a6f523fdc238e963d8d3" id="r_a6f3b0ab0bc46a6f523fdc238e963d8d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a6f3b0ab0bc46a6f523fdc238e963d8d3">get_rhs_half</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
+<tr class="memdesc:a6f3b0ab0bc46a6f523fdc238e963d8d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the right-hand side half (i.e. 50% of the rect)  <br /></td></tr>
+<tr class="separator:a6f3b0ab0bc46a6f523fdc238e963d8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addb72299f51df527075a0b6a31363e97" id="r_addb72299f51df527075a0b6a31363e97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#addb72299f51df527075a0b6a31363e97">get_top_left_corner</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
 <tr class="memdesc:addb72299f51df527075a0b6a31363e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the top-left corner (i.e. 25% of the rect)  <br /></td></tr>
 <tr class="separator:addb72299f51df527075a0b6a31363e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,12 +184,214 @@ Functions</h2></td></tr>
 <tr class="separator:ab9b1cccd7db19beba7ced5d7c94cf272"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7581d78653451e946970c09613c80090" id="r_a7581d78653451e946970c09613c80090"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a7581d78653451e946970c09613c80090">operator!=</a> (const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;<a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445ae48b7bf1a447021da85214b43f51fd4e">lhs</a>, const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;<a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445a83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>) noexcept</td></tr>
 <tr class="separator:a7581d78653451e946970c09613c80090"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac560be5f65a2245bffdf57b35c209adf" id="r_ac560be5f65a2245bffdf57b35c209adf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#ac560be5f65a2245bffdf57b35c209adf">operator+=</a> (<a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;rect, const <a class="el" href="../../dd/d97/classscreen__coordinate.html">screen_coordinate</a> &amp;delta) noexcept</td></tr>
-<tr class="separator:ac560be5f65a2245bffdf57b35c209adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4eec34274708d88b5222ef9d2c2c2735" id="r_a4eec34274708d88b5222ef9d2c2c2735"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d2b/screen__rect_8cpp.html#a4eec34274708d88b5222ef9d2c2c2735">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;r) noexcept</td></tr>
 <tr class="separator:a4eec34274708d88b5222ef9d2c2c2735"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a34f8265169041ed17143fd96bbc7680f" name="a34f8265169041ed17143fd96bbc7680f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34f8265169041ed17143fd96bbc7680f">&#9670;&#160;</a></span>create_centered_rect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> create_centered_rect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../dd/d97/classscreen__coordinate.html">screen_coordinate</a>&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a rectangle that is centered around a point, with a custom height and width. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>the location of the center </td></tr>
+    <tr><td class="paramname">w</td><td>the width of the rectangle </td></tr>
+    <tr><td class="paramname">h</td><td>the height of the rectangle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad6d9db9aeec8679cde0510a4491a5d9a" name="ad6d9db9aeec8679cde0510a4491a5d9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6d9db9aeec8679cde0510a4491a5d9a">&#9670;&#160;</a></span>create_partial_rect_from_lhs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> create_partial_rect_from_lhs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a partial rectangle, from the left hand side. </p>
+<div class="fragment"><div class="line">Source:</div>
+<div class="line"> </div>
+<div class="line">+--------------------+</div>
+<div class="line">|                    |</div>
+<div class="line">+--------------------+</div>
+<div class="line"> </div>
+<div class="line">Result, for f around 0.25:</div>
+<div class="line"> </div>
+<div class="line">+---+.................</div>
+<div class="line">|   |                .</div>
+<div class="line">+---+.................</div>
+</div><!-- fragment --><p>This rectangle will not overlap with create_partial_rect_from_rhs} </p>
+
+</div>
+</div>
+<a id="a9559b7ab2c492f3e724f725a41d5a22d" name="a9559b7ab2c492f3e724f725a41d5a22d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9559b7ab2c492f3e724f725a41d5a22d">&#9670;&#160;</a></span>create_partial_rect_from_rhs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> create_partial_rect_from_rhs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a partial rectangle, from the right hand side. </p>
+<div class="fragment"><div class="line">Source:</div>
+<div class="line"> </div>
+<div class="line">+--------------------+</div>
+<div class="line">|                    |</div>
+<div class="line">+--------------------+</div>
+<div class="line"> </div>
+<div class="line">Result, for f around 0.75:</div>
+<div class="line"> </div>
+<div class="line">.....+---------------+</div>
+<div class="line">.....|               |</div>
+<div class="line">.....+---------------+</div>
+</div><!-- fragment --><p>This rectangle will not overlap with create_partial_rect_from_lhs} </p>
+
+</div>
+</div>
+<a id="a42d7ccbabb088887af4beaf08461cd8a" name="a42d7ccbabb088887af4beaf08461cd8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42d7ccbabb088887af4beaf08461cd8a">&#9670;&#160;</a></span>create_partial_rect_from_side()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> create_partial_rect_from_side </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../db/d21/side_8h.html#afc015eff6557e84151d2e53b94375445">side</a>&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a partial rectangle from a certain side. </p>
+<ul>
+<li><code>create_partial_rect_from_side(side::lhs, r, f)</code> is equal to <code>create_partial_rect_from_lhs(side::lhs, r, f)</code>.</li>
+<li><code>create_partial_rect_from_side(side::rhs, r, f)</code> is equal to <code>create_partial_rect_from_rhs(side::lhs, r, f)</code>. </li>
+</ul>
+
+</div>
+</div>
+<a id="a3dbca6d15139e68af5f0b8cad889928d" name="a3dbca6d15139e68af5f0b8cad889928d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dbca6d15139e68af5f0b8cad889928d">&#9670;&#160;</a></span>create_rect_inside()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> create_rect_inside </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a rectangle that is exactly one pixel inside the given one. </p>
+
+</div>
+</div>
 <a id="a69a6e2ebfb6c94f3299827242b259d46" name="a69a6e2ebfb6c94f3299827242b259d46"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69a6e2ebfb6c94f3299827242b259d46">&#9670;&#160;</a></span>get_bottom_left_corner()</h2>
 
@@ -236,6 +474,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aee1cf74329b41d296dd9f7fa18ada296" name="aee1cf74329b41d296dd9f7fa18ada296"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee1cf74329b41d296dd9f7fa18ada296">&#9670;&#160;</a></span>get_default_screen_rect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> get_default_screen_rect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the default screen rectangle. </p>
+<p>This is used mostly in testing of layouts. </p>
+
+</div>
+</div>
 <a id="ada55be2f362cb8149a4f8a34592c7c33" name="ada55be2f362cb8149a4f8a34592c7c33"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ada55be2f362cb8149a4f8a34592c7c33">&#9670;&#160;</a></span>get_height()</h2>
 
@@ -259,6 +525,34 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e7429c17bb06a06b62365517ec4fb7c" name="a1e7429c17bb06a06b62365517ec4fb7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e7429c17bb06a06b62365517ec4fb7c">&#9670;&#160;</a></span>get_lhs_half()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> get_lhs_half </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the left-hand side half (i.e. 50% of the rect) </p>
 
 </div>
 </div>
@@ -344,6 +638,34 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the lower half (i.e. 50% of the rect) </p>
+
+</div>
+</div>
+<a id="a6f3b0ab0bc46a6f523fdc238e963d8d3" name="a6f3b0ab0bc46a6f523fdc238e963d8d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f3b0ab0bc46a6f523fdc238e963d8d3">&#9670;&#160;</a></span>get_rhs_half()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> get_rhs_half </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the right-hand side half (i.e. 50% of the rect) </p>
 
 </div>
 </div>
@@ -515,42 +837,6 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const <a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac560be5f65a2245bffdf57b35c209adf" name="ac560be5f65a2245bffdf57b35c209adf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac560be5f65a2245bffdf57b35c209adf">&#9670;&#160;</a></span>operator+=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp; operator+= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d7/d5e/classscreen__rect.html">screen_rect</a> &amp;&#160;</td>
-          <td class="paramname"><em>rect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="../../dd/d97/classscreen__coordinate.html">screen_coordinate</a> &amp;&#160;</td>
-          <td class="paramname"><em>delta</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['exec_0',['exec',['../d3/d76/classabout__view.html#adc474ca2f743b5d6a0581a2b424c4fd7',1,'about_view::exec()'],['../d5/d4c/classcontrols__view.html#a8ea4d7ee98b263e57f14367c45c0509a',1,'controls_view::exec()'],['../de/d01/classgame__view.html#a6d4a8f7731e597c3e4d9486084b5ad1c',1,'game_view::exec()'],['../d9/d62/classloading__view.html#a07dd7ee1568318cb6169adf8dd994a6e',1,'loading_view::exec()'],['../db/dbc/classlobby__view.html#a86241c669efb179e99384ecb38773799',1,'lobby_view::exec()'],['../d4/d9b/classmenu__view.html#a759684f514963fde994b59b54805563e',1,'menu_view::exec()'],['../d8/dd9/classoptions__view.html#a2f16d2fc46679997fd53f9cd52aa61f6',1,'options_view::exec()'],['../d0/d02/classplayed__game__view.html#ac00587e64482dd887f4a6ce9e3c2aafd',1,'played_game_view::exec()']]]
+  ['exec_0',['exec',['../d9/de2/classmain__window.html#aa5ab61fd01e543ac4946a45b0677f85f',1,'main_window']]],
+  ['extract_5fgame_5fstatistics_5fin_5ftime_1',['extract_game_statistics_in_time',['../dd/d02/replay_8h.html#afc9ca8b17bb31fad5338872111292167',1,'extract_game_statistics_in_time(const replay &amp;r, const delta_t &amp;dt):&#160;replay.cpp'],['../d4/d8f/replay_8cpp.html#a7425a3e1f4dd3f59670abfd6186108ed',1,'extract_game_statistics_in_time(const replay &amp;r_original, const delta_t &amp;dt):&#160;replay.cpp']]]
 ];

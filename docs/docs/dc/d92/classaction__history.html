@@ -90,12 +90,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a546a63ce317f8362c5c07ae2a87f6a07" id="r_a546a63ce317f8362c5c07ae2a87f6a07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html#a546a63ce317f8362c5c07ae2a87f6a07">add_action</a> (const <a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a> &amp;<a class="el" href="../../de/d00/classin__game__time.html">in_game_time</a>, const <a class="el" href="../../df/dc6/classpiece__action.html">piece_action</a> &amp;action) noexcept</td></tr>
 <tr class="memdesc:a546a63ce317f8362c5c07ae2a87f6a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an action, when started.  <br /></td></tr>
 <tr class="separator:a546a63ce317f8362c5c07ae2a87f6a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f1e6dc3d71f5855e4f7197b3acded62" id="r_a4f1e6dc3d71f5855e4f7197b3acded62"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html#a4f1e6dc3d71f5855e4f7197b3acded62">get_timed_actions</a> () const noexcept</td></tr>
-<tr class="memdesc:a4f1e6dc3d71f5855e4f7197b3acded62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the collected in-game times of actions, in chrononical order.  <br /></td></tr>
-<tr class="separator:a4f1e6dc3d71f5855e4f7197b3acded62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60799af7dc20226ba783b56d99e060c3" id="r_a60799af7dc20226ba783b56d99e060c3"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d92/classaction__history.html#a60799af7dc20226ba783b56d99e060c3">get</a> () const noexcept</td></tr>
+<tr class="memdesc:a60799af7dc20226ba783b56d99e060c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the collected in-game times of actions, in chrononical order.  <br /></td></tr>
+<tr class="separator:a60799af7dc20226ba783b56d99e060c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The collected in-game times of actions, in chrononical order. </p>
+<p>With the time and the full piece action, one can perfectly replay a game. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae916346690302cb43d1a34a7490eb2bb" name="ae916346690302cb43d1a34a7490eb2bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae916346690302cb43d1a34a7490eb2bb">&#9670;&#160;</a></span>action_history()</h2>
@@ -154,8 +155,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4f1e6dc3d71f5855e4f7197b3acded62" name="a4f1e6dc3d71f5855e4f7197b3acded62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f1e6dc3d71f5855e4f7197b3acded62">&#9670;&#160;</a></span>get_timed_actions()</h2>
+<a id="a60799af7dc20226ba783b56d99e060c3" name="a60799af7dc20226ba783b56d99e060c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60799af7dc20226ba783b56d99e060c3">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,7 +165,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const auto &amp; action_history::get_timed_actions </td>
+          <td class="memname">const auto &amp; action_history::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

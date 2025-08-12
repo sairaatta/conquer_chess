@@ -107,12 +107,12 @@ Include dependency graph for piece_type.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac516566e2b28c8b6d1ad482f6151589b" id="r_ac516566e2b28c8b6d1ad482f6151589b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d47/piece__type_8cpp.html#ac516566e2b28c8b6d1ad482f6151589b">get_max_health</a> (const <a class="el" href="../../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3">piece_type</a> <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca599dcce2998a6b40b1e38e8c6006cb0a">type</a>)</td></tr>
-<tr class="memdesc:ac516566e2b28c8b6d1ad482f6151589b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the maximum health for a piece.  <br /></td></tr>
-<tr class="separator:ac516566e2b28c8b6d1ad482f6151589b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93533f5221b297814df481a21b8d7724" id="r_a93533f5221b297814df481a21b8d7724"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3">piece_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d47/piece__type_8cpp.html#a93533f5221b297814df481a21b8d7724">get_all_piece_types</a> () noexcept</td></tr>
 <tr class="memdesc:a93533f5221b297814df481a21b8d7724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the piece types.  <br /></td></tr>
 <tr class="separator:a93533f5221b297814df481a21b8d7724"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e2fe2fd95b96b6c90b4ed974164148c" id="r_a3e2fe2fd95b96b6c90b4ed974164148c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d47/piece__type_8cpp.html#a3e2fe2fd95b96b6c90b4ed974164148c">get_piece_value</a> (const <a class="el" href="../../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3">piece_type</a> <a class="el" href="../../d9/d3a/controls__view__item_8h.html#abc00731847552b81e3c855cf1b0be4eca599dcce2998a6b40b1e38e8c6006cb0a">type</a>)</td></tr>
+<tr class="memdesc:a3e2fe2fd95b96b6c90b4ed974164148c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the pieces.  <br /></td></tr>
+<tr class="separator:a3e2fe2fd95b96b6c90b4ed974164148c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49d08faf3fe219cebb618d8cae9d8378" id="r_a49d08faf3fe219cebb618d8cae9d8378"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d47/piece__type_8cpp.html#a49d08faf3fe219cebb618d8cae9d8378">test_piece_type</a> ()</td></tr>
 <tr class="memdesc:a49d08faf3fe219cebb618d8cae9d8378"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test this class and its free functions.  <br /></td></tr>
 <tr class="separator:a49d08faf3fe219cebb618d8cae9d8378"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,14 +153,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac516566e2b28c8b6d1ad482f6151589b" name="ac516566e2b28c8b6d1ad482f6151589b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac516566e2b28c8b6d1ad482f6151589b">&#9670;&#160;</a></span>get_max_health()</h2>
+<a id="a3e2fe2fd95b96b6c90b4ed974164148c" name="a3e2fe2fd95b96b6c90b4ed974164148c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2fe2fd95b96b6c90b4ed974164148c">&#9670;&#160;</a></span>get_piece_value()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double get_max_health </td>
+          <td class="memname">int get_piece_value </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="../../de/d45/piece__type_8h.html#a468557e39605f442cb3f6247ae7a37a3">piece_type</a>&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
@@ -169,7 +169,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the maximum health for a piece. </p>
+<p>Get the value of the pieces. </p>
+<p>A king has a value of zero, although in practice its value is infinite </p>
 
 </div>
 </div>

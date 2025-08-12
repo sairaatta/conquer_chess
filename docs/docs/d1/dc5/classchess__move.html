@@ -85,15 +85,21 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af5362394f66b4ff0e93b090aba78c1fa" id="r_af5362394f66b4ff0e93b090aba78c1fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#af5362394f66b4ff0e93b090aba78c1fa">chess_move</a> (std::string pgn_str, const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> <a class="el" href="../../db/d90/lobby__view__item_8h.html#aa96663822bdafb05ef5af33c23950133a70dda5dfb8053dc6d1c492574bce9bfd">color</a>)</td></tr>
-<tr class="memdesc:af5362394f66b4ff0e93b090aba78c1fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Need to now the player's color, e.g. for 'O-O-O' or '1-0'.  <br /></td></tr>
-<tr class="separator:af5362394f66b4ff0e93b090aba78c1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb86b3f517fed91cdeed87983e245a54" id="r_afb86b3f517fed91cdeed87983e245a54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#afb86b3f517fed91cdeed87983e245a54">chess_move</a> (const <a class="el" href="../../dc/de7/classpgn__move__string.html">pgn_move_string</a> &amp;pgn_str, const <a class="el" href="../../da/d4b/classfen__string.html">fen_string</a> &amp;fen_str=<a class="el" href="../../d9/d57/fen__string_8h.html#a27bb71481faec8331e6da2cdc734a751">create_fen_string_of_standard_starting_position</a>())</td></tr>
+<tr class="memdesc:afb86b3f517fed91cdeed87983e245a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves always happen on a board.  <br /></td></tr>
+<tr class="separator:afb86b3f517fed91cdeed87983e245a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ecb5926dd3459eba94db553a14148a0" id="r_a4ecb5926dd3459eba94db553a14148a0"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a4ecb5926dd3459eba94db553a14148a0">get_action_type</a> () const noexcept</td></tr>
+<tr class="memdesc:a4ecb5926dd3459eba94db553a14148a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of action this move is.  <br /></td></tr>
+<tr class="separator:a4ecb5926dd3459eba94db553a14148a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c2e69b892bfdad270594b0a35716a9f" id="r_a8c2e69b892bfdad270594b0a35716a9f"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a8c2e69b892bfdad270594b0a35716a9f">get_castling_type</a> () const noexcept</td></tr>
 <tr class="memdesc:a8c2e69b892bfdad270594b0a35716a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the castling type.  <br /></td></tr>
 <tr class="separator:a8c2e69b892bfdad270594b0a35716a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae165dfc30ee8889f50bff910e10b50f5" id="r_ae165dfc30ee8889f50bff910e10b50f5"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#ae165dfc30ee8889f50bff910e10b50f5">get_color</a> () const noexcept</td></tr>
 <tr class="memdesc:ae165dfc30ee8889f50bff910e10b50f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the color of the player that did this move.  <br /></td></tr>
 <tr class="separator:ae165dfc30ee8889f50bff910e10b50f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b304d5bb720e9606dd6102458ced7fb" id="r_a4b304d5bb720e9606dd6102458ced7fb"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a4b304d5bb720e9606dd6102458ced7fb">get_from</a> () const noexcept</td></tr>
+<tr class="memdesc:a4b304d5bb720e9606dd6102458ced7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the source/from square, e.g.  <br /></td></tr>
+<tr class="separator:a4b304d5bb720e9606dd6102458ced7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6acdc734f72f6b35e41b6f91290d1568" id="r_a6acdc734f72f6b35e41b6f91290d1568"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a6acdc734f72f6b35e41b6f91290d1568">get_pgn_str</a> () const noexcept</td></tr>
 <tr class="memdesc:a6acdc734f72f6b35e41b6f91290d1568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the original PGN string back.  <br /></td></tr>
 <tr class="separator:a6acdc734f72f6b35e41b6f91290d1568"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -103,9 +109,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5dcd4107daa61a3773cbe084af67004c" id="r_a5dcd4107daa61a3773cbe084af67004c"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a5dcd4107daa61a3773cbe084af67004c">get_to</a> () const noexcept</td></tr>
 <tr class="memdesc:a5dcd4107daa61a3773cbe084af67004c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the target square, e.g.  <br /></td></tr>
 <tr class="separator:a5dcd4107daa61a3773cbe084af67004c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1817a72decf6b01a5f3303cd0c587aab" id="r_a1817a72decf6b01a5f3303cd0c587aab"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a1817a72decf6b01a5f3303cd0c587aab">get_type</a> () const noexcept</td></tr>
-<tr class="memdesc:a1817a72decf6b01a5f3303cd0c587aab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of chess piece.  <br /></td></tr>
-<tr class="separator:a1817a72decf6b01a5f3303cd0c587aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05f029f26d22473a30ca3245b71d7f09" id="r_a05f029f26d22473a30ca3245b71d7f09"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a05f029f26d22473a30ca3245b71d7f09">get_piece_type</a> () const noexcept</td></tr>
+<tr class="memdesc:a05f029f26d22473a30ca3245b71d7f09"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of chess piece.  <br /></td></tr>
+<tr class="separator:a05f029f26d22473a30ca3245b71d7f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f22702f728eda26c1cbf8343ded47af" id="r_a7f22702f728eda26c1cbf8343ded47af"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc5/classchess__move.html#a7f22702f728eda26c1cbf8343ded47af">get_winner</a> () const noexcept</td></tr>
 <tr class="memdesc:a7f22702f728eda26c1cbf8343ded47af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the winner.  <br /></td></tr>
 <tr class="separator:a7f22702f728eda26c1cbf8343ded47af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,8 +124,8 @@ Public Member Functions</h2></td></tr>
 <p>A chess move, e.g. 'e4'.</p>
 <dl class="section note"><dt>Note</dt><dd>This called is called <code><a class="el" href="../../d1/dc5/classchess__move.html" title="A chess move.">chess_move</a></code> instead of <code>move</code> to avoid conflicts with &lsquo;std::move&rsquo;`. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af5362394f66b4ff0e93b090aba78c1fa" name="af5362394f66b4ff0e93b090aba78c1fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5362394f66b4ff0e93b090aba78c1fa">&#9670;&#160;</a></span>chess_move()</h2>
+<a id="afb86b3f517fed91cdeed87983e245a54" name="afb86b3f517fed91cdeed87983e245a54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb86b3f517fed91cdeed87983e245a54">&#9670;&#160;</a></span>chess_move()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,14 +136,14 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">chess_move::chess_move </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../dc/de7/classpgn__move__string.html">pgn_move_string</a> &amp;&#160;</td>
           <td class="paramname"><em>pgn_str</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a>&#160;</td>
-          <td class="paramname"><em>color</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../da/d4b/classfen__string.html">fen_string</a> &amp;&#160;</td>
+          <td class="paramname"><em>fen_str</em> = <code><a class="el" href="../../d9/d57/fen__string_8h.html#a27bb71481faec8331e6da2cdc734a751">create_fen_string_of_standard_starting_position</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -152,11 +158,38 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Need to now the player's color, e.g. for 'O-O-O' or '1-0'. </p>
+<p>Moves always happen on a board. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4ecb5926dd3459eba94db553a14148a0" name="a4ecb5926dd3459eba94db553a14148a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ecb5926dd3459eba94db553a14148a0">&#9670;&#160;</a></span>get_action_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto &amp; chess_move::get_action_type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The type of action this move is. </p>
+
+</div>
+</div>
 <a id="a8c2e69b892bfdad270594b0a35716a9f" name="a8c2e69b892bfdad270594b0a35716a9f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c2e69b892bfdad270594b0a35716a9f">&#9670;&#160;</a></span>get_castling_type()</h2>
 
@@ -212,6 +245,35 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a4b304d5bb720e9606dd6102458ced7fb" name="a4b304d5bb720e9606dd6102458ced7fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b304d5bb720e9606dd6102458ced7fb">&#9670;&#160;</a></span>get_from()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto &amp; chess_move::get_from </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the source/from square, e.g. </p>
+<p>'b1' in 'Pc3'.</p>
+<p>Result will be empty when winning (e.g. '1-0') </p>
+
+</div>
+</div>
 <a id="a6acdc734f72f6b35e41b6f91290d1568" name="a6acdc734f72f6b35e41b6f91290d1568"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6acdc734f72f6b35e41b6f91290d1568">&#9670;&#160;</a></span>get_pgn_str()</h2>
 
@@ -236,6 +298,34 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the original PGN string back. </p>
+
+</div>
+</div>
+<a id="a05f029f26d22473a30ca3245b71d7f09" name="a05f029f26d22473a30ca3245b71d7f09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05f029f26d22473a30ca3245b71d7f09">&#9670;&#160;</a></span>get_piece_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto &amp; chess_move::get_piece_type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The type of chess piece. </p>
+<p>Result will be empty when castling (e.g. 'O-O') or winning (e.g. '1-0') </p>
 
 </div>
 </div>
@@ -291,35 +381,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the target square, e.g. </p>
-<p>'e4' in 'Pxe4'. Result will be empty when castling (e.g. 'O-O') or winning (e.g. '1-0') </p><dl class="section see"><dt>See also</dt><dd>use the free function <a class="el" href="../../d0/dcd/chess__move_8h.html#a5e3e2def20cd82028098a697342bb047" title="Get the square the piece doing the move came from.">get_from</a>} to determine the <a class="el" href="../../d5/d20/classsquare.html" title="A chess square.">square</a> where the pieces comes from </dd></dl>
-
-</div>
-</div>
-<a id="a1817a72decf6b01a5f3303cd0c587aab" name="a1817a72decf6b01a5f3303cd0c587aab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1817a72decf6b01a5f3303cd0c587aab">&#9670;&#160;</a></span>get_type()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const auto &amp; chess_move::get_type </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The type of chess piece. </p>
-<p>Result will be empty when castling (e.g. 'O-O') or winning (e.g. '1-0') </p>
+<p>'e4' in 'Pxe4'. Result will be empty when castling (e.g. 'O-O') or winning (e.g. '1-0') </p><dl class="section see"><dt>See also</dt><dd>use the free function <a class="el" href="../../d1/dc5/classchess__move.html#a4b304d5bb720e9606dd6102458ced7fb" title="Get the source/from square, e.g.">get_from</a>} to determine the <a class="el" href="../../d5/d20/classsquare.html" title="A chess square.">square</a> where the pieces comes from </dd></dl>
 
 </div>
 </div>

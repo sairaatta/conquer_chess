@@ -123,6 +123,11 @@ Functions</h2></td></tr>
 <tr class="memitem:adf158e3e1f080bc683b00334c2d9fd0c" id="r_adf158e3e1f080bc683b00334c2d9fd0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d52/chess__color_8cpp.html#adf158e3e1f080bc683b00334c2d9fd0c">test_chess_color</a> ()</td></tr>
 <tr class="memdesc:adf158e3e1f080bc683b00334c2d9fd0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test the chess_color functions.  <br /></td></tr>
 <tr class="separator:adf158e3e1f080bc683b00334c2d9fd0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b147ea1d2ffe04ec3edccf53ad351b" id="r_a88b147ea1d2ffe04ec3edccf53ad351b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d52/chess__color_8cpp.html#a88b147ea1d2ffe04ec3edccf53ad351b">to_human_str</a> (const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> c) noexcept</td></tr>
+<tr class="separator:a88b147ea1d2ffe04ec3edccf53ad351b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4799fefed1da28d134e67e6586da31" id="r_a7d4799fefed1da28d134e67e6586da31"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d52/chess__color_8cpp.html#a7d4799fefed1da28d134e67e6586da31">to_fen_char</a> (const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> c) noexcept</td></tr>
+<tr class="memdesc:a7d4799fefed1da28d134e67e6586da31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the color to a FEN character.  <br /></td></tr>
+<tr class="separator:a7d4799fefed1da28d134e67e6586da31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49ecaf4aeb5332f728c1f58c3a9d562f" id="r_a49ecaf4aeb5332f728c1f58c3a9d562f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d52/chess__color_8cpp.html#a49ecaf4aeb5332f728c1f58c3a9d562f">to_str</a> (const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> c) noexcept</td></tr>
 <tr class="separator:a49ecaf4aeb5332f728c1f58c3a9d562f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2078ca2a496f314fb884894b3d13b17e" id="r_a2078ca2a496f314fb884894b3d13b17e"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d52/chess__color_8cpp.html#a2078ca2a496f314fb884894b3d13b17e">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a> c) noexcept</td></tr>
@@ -263,6 +268,68 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Test the chess_color functions. </p>
+
+</div>
+</div>
+<a id="a7d4799fefed1da28d134e67e6586da31" name="a7d4799fefed1da28d134e67e6586da31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d4799fefed1da28d134e67e6586da31">&#9670;&#160;</a></span>to_fen_char()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char to_fen_char </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a>&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert the color to a FEN character. </p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Color   </th><th class="markdownTableHeadNone">FEN character    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">white   </td><td class="markdownTableBodyNone"><code>w</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">black   </td><td class="markdownTableBodyNone"><code>b</code>   </td></tr>
+</table>
+
+</div>
+</div>
+<a id="a88b147ea1d2ffe04ec3edccf53ad351b" name="a88b147ea1d2ffe04ec3edccf53ad351b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b147ea1d2ffe04ec3edccf53ad351b">&#9670;&#160;</a></span>to_human_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string to_human_str </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d8/d10/chess__color_8h.html#af7d02f30eb7d7fd7c40228d013f694a3">chess_color</a>&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

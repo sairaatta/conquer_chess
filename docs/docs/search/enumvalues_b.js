@@ -17,5 +17,5 @@ var searchData=
   ['promote_5fto_5fknight_14',['promote_to_knight',['../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50ad60d5e6003d25d35a3e74b59776c2ced',1,'piece_action_type.h']]],
   ['promote_5fto_5fqueen_15',['promote_to_queen',['../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50a4229ced561495f81904017ae93b281e9',1,'piece_action_type.h']]],
   ['promote_5fto_5frook_16',['promote_to_rook',['../dc/dd7/piece__action__type_8h.html#a030a3df524487ad755418e3dc1836f50a091cb28cdd365c9b60350b00a0da89b3',1,'piece_action_type.h']]],
-  ['protoss_17',['protoss',['../d6/d82/race_8h.html#a4af597f2d773ab29c7609dfd203b7d1fa05b7f3ad5d98f0652f6cf605e5a5bd92',1,'race.h']]]
+  ['protectedness_17',['protectedness',['../d3/d83/game__statistic__type_8h.html#a6e2f534d4e11cf05b495397d034db9e1ab5dc8ca39022bf0e5ee4030450774fcb',1,'game_statistic_type.h']]]
 ];
