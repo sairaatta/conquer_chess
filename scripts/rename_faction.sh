@@ -43,8 +43,13 @@ echo "To (uppercase): ${to_uppercase_faction}"
 # Thanks to pa4080, from
 # https://askubuntu.com/questions/1287359/how-to-use-the-command-rename-on-subdirectories-as-well#1287371
 shopt -s globstar
-rename --nono "s/${from_faction}/${to_faction}/" **/*
+rename "s/${from_faction}/${to_faction}/" **/*
 
 #rename --nono 's/xayid/spawn/' **/*
 #rename --nono 's/genetron/kingdom/' **/*
 #rename --nono 's/keiron/rooxx/' **/*
+
+# find . -not -path '*/\.git/*' -name '*.rb'  -exec sed -i 's/old_string/new_string/g' '{}' \;
+# find . -not \( -path '*/\.git/*' -path '*/\.github/*' -path '*/build/*'  \) -exec sed -i 's/old_string_wiefgiewguwfe/new_string/g' '{}' \;
+# find . -not \( -path '*/\.git/*' -path '*/\.github/*' -path '*/build/*'  \) \( -name "*.md" -o -name "*.cpp" -o -name "*.h" -o -name "*.qrc" \)
+find . -not \( -path '*/\.git/*' -path '*/\.github/*' -path '*/build/*'  \) \( -name "*.md" -o -name "*.cpp" -o -name "*.h" -o -name "*.qrc" \) -exec sed -i "s/${from_faction}/${to_faction}/" '{}' \;
