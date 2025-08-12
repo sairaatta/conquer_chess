@@ -38,7 +38,7 @@ Here is a general overview of the races:
 
 Logo                                        |Race    |Description
 --------------------------------------------|--------|--------------------
-.                                           |Classic |Regular chess pieces
+![Classic logo](classic_logo_128_x_128.jpg) |Classic |Regular chess pieces
 ![Kingdom logo](kingdom_logo_128_x_128.jpg) |Kingdom |Human-like race
 ![Rooxx logo](rooxx_logo_128_x_128.jpg)     |Rooxx   |Advanced alien race
 ![Spawn logo](spawn_logo_128_x_128.jpg)     |Spawn   |Primitive alien race
