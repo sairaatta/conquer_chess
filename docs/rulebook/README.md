@@ -23,7 +23,9 @@ one should assume that the rulebook is correct.
   on a square board called a 'chessboard'.
 
   In Conquer Chess this rule may be expanded to included
-  multiple arenas of different shapes added in the future.
+  multiple arenas of any shape added in the future.
+
+TODO: [Consider allowing multiple chessboards per match](https://github.com/richelbilderbeek/conquer_chess/issues/122).
 
 - `[1.2]` The player with the light-coloured pieces (White)
   makes the first move,
