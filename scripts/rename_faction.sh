@@ -25,6 +25,7 @@ if [ "$#" -ne 2 ]; then
     echo "  ./scripts/rename_faction.sh xayid spawn"
     echo " "
     echo "Number of arguments used: $#"
+    exit 43
 fi
 
 from_faction=$1
