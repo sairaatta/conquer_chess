@@ -229,9 +229,11 @@ TODO: [Consider adding a option that black can never make more moves than white]
 - `[2.2]` At the beginning of the game White has 16 light-coloured pieces
   (the 'white' pieces); Black has 16 dark-coloured pieces (the 'black' pieces).
 
-- `[2.3]`. The initial position of the pieces on the chessboard is as follows:
+- `[2.3]` The initial position of the pieces on the chessboard is as follows:
 
 ![The initial position](initial_position.png)
+
+> The initial position in Conquer Chess, see also rule `[2.3.CC.1]`
 
 ???- info "The initial chess board position as a FEN string"
 
@@ -240,6 +242,10 @@ TODO: [Consider adding a option that black can never make more moves than white]
     ```
 
     > The initial chess board position as a FEN string
+
+- `[2.3.CC.1]` In Conquer Chess the board is rotated in such a way
+  as if the White player is at the left-hand side of the screen
+  and the Black player is at the right-hand side of the screen
 
 - [`2.4`] The eight vertical columns of squares are called 'files'.
   The eight horizontal rows of squares are called 'ranks'.
@@ -381,165 +387,366 @@ TODO: [Consider adding a option that black can never make more moves than white]
   Does not apply to Conquer Chess, as within the game,
   pieces are placed perfectly in the middle of a square.
 
-- `[4.2.1]` Only the player having the move may adjust one or more pieces on their squares, provided that he/she first expresses his/her intention (for example by saying “j'adoube” or “I adjust”).
+- `[4.2.1]` Only the player having the move may adjust one or more pieces
+  on their squares, provided that he/she first expresses his/her intention
+  (for example by saying "j'adoube" or "I adjust").
 
   Does not apply to Conquer Chess, as within the game,
   pieces are placed perfectly in the middle of a square.
 
-- `[4.2.2]` Any other physical contact with a piece, except for clearly accidental contact, shall be considered to be intent.
+- `[4.2.2]` Any other physical contact with a piece,
+  except for clearly accidental contact,
+  shall be considered to be intent.
 
-  Does not apply to Conquer Chess, as within the game,
-  pieces are placed perfectly in the middle of a square.
+  In Conquer Chess, selecting a piece is considered physical contact with
+  a piece. For new players, this can be turned off.
 
-- `[4.3]` Except as provided in Article 4.2.1, if the player having the move touches on the chessboard, with the intention of moving or capturing:
+- `[4.3]` Except as provided in Article 4.2.1,
+  if the player having the move touches on the chessboard,
+  with the intention of moving or capturing:
 
-- `[4.3.1]` one or more of his/her own pieces, he/she must move the first piece touched that can be moved.
+- `[4.3.1]` one or more of his/her own pieces,
+  he/she must move the first piece touched that can be moved.
 
-- `[4.3.2]` one or more of his/her opponent's pieces, he/she must capture the first piece touched that can be captured.
+- `[4.3.2]` one or more of his/her opponent's pieces,
+  he/she must capture the first piece touched that can be captured.
 
-- `[4.3.3]` one or more pieces of each colour, he/she must capture the first touched opponent's piece with his/her first touched piece or, if this is illegal, move or capture the first piece touched that can be moved or captured. If it is unclear whether the player's own piece or his/her opponent's piece was touched first, the player's own piece shall be considered to have been touched before his/her opponent's.
+- `[4.3.3]` one or more pieces of each colour,
+  he/she must capture the first touched opponent's piece
+  with his/her first touched piece or, if this is illegal,
+  move or capture the first piece touched that can be moved or captured.
+  If it is unclear whether the player's own piece or
+  his/her opponent's piece was touched first,
+  the player's own piece shall be considered to
+  have been touched before his/her opponent's.
 
 - `[4.4]` If a player having the move:
 
-- `[4.4.1]` touches his/her king and a rook he/she must castle on that side if it is legal to do so
+  In Conquer Chess, a player always has the move,
+  except for black for one chess move.
 
-- `[4.4.2]` deliberately touches a rook and then his/her king he/she is not allowed to castle on that side on that move and the situation shall be governed by Article 4.3.1.
+- `[4.4.1]` touches his/her king and a rook he/she must castle on that side
+  if it is legal to do so
 
-- `[4.4.3]` intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.
+- `[4.4.2]` deliberately touches a rook and then his/her king
+  he/she is not allowed to castle on that side on that move
+  and the situation shall be governed by Article 4.3.1.
 
-- `[4.4.4]` promotes a pawn, the choice of the piece is finalised when the piece has touched the square of promotion.
+- `[4.4.3]` intending to castle, touches the king and then a rook,
+  but castling with this rook is illegal, the player must make another legal
+  move with his/her king (which may include castling with the other rook).
+  If the king has no legal move, the player is free to make any legal move.
 
-- `[4.5]` If none of the pieces touched in accordance with Article 4.3 or Article 4.4 can be moved or captured, the player may make any legal move.
+- `[4.4.4]` promotes a pawn, the choice of the piece is finalised when the
+  piece has touched the square of promotion.
+
+- `[4.5]` If none of the pieces touched in accordance with
+  Article 4.3 or Article 4.4 can be moved or captured,
+  the player may make any legal move.
 
 - `[4.6]` The act of promotion may be performed in various ways:
 
 - `[4.6.1]` the pawn does not have to be placed on the square of arrival.
 
-- `[4.6.2]` removing the pawn and putting the new piece on the square of promotion may occur in any order.
+- `[4.6.2]` removing the pawn and putting the new piece on the square of
+  promotion may occur in any order.
 
-- `[4.6.3]` If an opponent's piece stands on the square of promotion, it must be captured.
+- `[4.6.3]` If an opponent's piece stands on the square of promotion,
+  it must be captured.
 
-- `[4.7]` When, as a legal move or part of a legal move, a piece has been released on a square, it cannot be moved to another square on this move. The move is considered to have been made in the case of:
+- `[4.7]` When, as a legal move or part of a legal move,
+  a piece has been released on a square,
+  it cannot be moved to another square on this move.
+  The move is considered to have been made in the case of:
 
-- `[4.7.1]` A capture, when the captured piece has been removed from the chessboard and the player, having placed his/her own piece on its new square, has released this capturing piece from his/her hand.
+- `[4.7.1]` A capture, when the captured piece has been removed
+  from the chessboard and the player, having placed his/her own piece
+  on its new square, has released this capturing piece from his/her hand.
 
-- `[4.7.2]` Castling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.
+- `[4.7.2]` Castling, when the player's hand has released the rook
+  on the square previously crossed by the king.
+  When the player has released the king from his/her hand,
+  the move is not yet made, but the player no longer has the right to make
+  any move other than castling on that side, if this is legal.
+  If castling on this side is illegal,
+  the player must make another legal move with his/her king
+  (which may include castling with the other rook).
+  If the king has no legal move, the player is free to make any legal move.
 
-- `[4.7.3]` Promotion, when the player's hand has released the new piece on the square of promotion and the pawn has been removed from the board.
+- `[4.7.3]` Promotion, when the player's hand has released the new piece on
+  the square of promotion and the pawn has been removed from the board.
 
-- `[4.8]` A player forfeits his/her right to claim against his/her opponent's violation of Articles 4.1 - 4.7 once the player touches a piece with the intention of moving or capturing it.
+- `[4.8]` A player forfeits his/her right to claim against
+  his/her opponent's violation of Articles 4.1 - 4.7
+  once the player touches a piece with the intention of moving or capturing it.
 
-- `[4.9]` If a player is unable to move the pieces, an assistant, who shall be acceptable to the arbiter, may be provided by the player to perform this operation.
+- `[4.9]` If a player is unable to move the pieces, an assistant,
+  who shall be acceptable to the arbiter,
+  may be provided by the player to perform this operation.
 
 ### Article 5: The Completion of the Game
 
-- `[5.1.1]` The game is won by the player who has checkmated his/her opponent's king. This immediately ends the game, provided that the move producing the checkmate position was in accordance with Article 3 and Articles 4.2 - 4.7.
+- `[5.1.1]` The game is won by the player who has checkmated
+  his/her opponent's king.
+  This immediately ends the game,
+  provided that the move producing the checkmate position
+  was in accordance with Article 3 and Articles 4.2 - 4.7.
 
-- `[5.1.2]` The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player's king by any possible series of legal moves. In this case the result of the game is a draw.
+- `[5.1.2]` The game is lost by the player who declares
+  he/she resigns (this immediately ends the game),
+  unless the position is such that the opponent cannot checkmate
+  the player's king by any possible series of legal moves.
+  In this case the result of the game is a draw.
 
-- `[5.2.1]` The game is drawn when the player to move has no legal move and his/her king is not in check. The game is said to end in 'stalemate'. This immediately ends the game, provided that the move producing the stalemate position was in accordance with Article 3 and Articles 4.2 - 4.7.
+- `[5.2.1]` The game is drawn when the player to move has no legal move
+  and his/her king is not in check. The game is said to end in 'stalemate'.
+  This immediately ends the game, provided that the move producing
+  the stalemate position was in accordance
+  with Article 3 and Articles 4.2 - 4.7.
 
-- `[5.2.2]` The game is drawn when a position has arisen in which neither player can checkmate the opponent's king with any series of legal moves. The game is said to end in a 'dead position'. This immediately ends the game, provided that the move producing the position was in accordance with Article 3 and Articles 4.2 - 4.7.
+- `[5.2.2]` The game is drawn when a position has arisen in which
+  neither player can checkmate the opponent's king
+  with any series of legal moves.
+  The game is said to end in a 'dead position'.
+  This immediately ends the game, provided that the move
+  producing the position was in accordance
+  with Article 3 and Articles 4.2 - 4.7.
 
-- `[5.2.3]` The game is drawn upon agreement between the two players during the game, provided both players have made at least one move. This immediately ends the game.
+- `[5.2.3]` The game is drawn upon agreement between the two players
+  during the game,
+  provided both players have made at least one move.
+  This immediately ends the game.
 
 ## COMPETITIVE RULES OF PLAY
 
 ### Article 6: The Chessclock
 
-- `[6.1]` 'Chessclock' means a clock with two time displays, connected to each other in such a way that only one of them can run at a time. 'Clock' in the Laws of Chess means one of the two time displays. Each time display has a 'flag'.
+- `[6.1]` 'Chessclock' means a clock with two time displays,
+  connected to each other in such a way that only
+  one of them can run at a time.
+  'Clock' in the Laws of Chess means one of the two time displays.
+  Each time display has a 'flag'.
 
 - `[6.1.1]` 'Flag-fall' means the expiration of the allotted time for a player.
 
 - `[6.2]` Handling the chessclock:
 
-- `[6.2.1]` During the game each player, having made his/her move on the chessboard, shall pause his/her own clock and start his/her opponent's clock (that is to say, he/she shall press his/her clock). This 'completes' the move. A move is also completed if:
+- `[6.2.1]` During the game each player,
+  having made his/her move on the chessboard,
+  shall pause his/her own clock and start his/her opponent's clock
+  (that is to say, he/she shall press his/her clock).
+  This 'completes' the move. A move is also completed if:
 
-- `[6.2.1.1]` the move ends the game (see Articles 5.1.1, 5.2.1, 5.2.2, 9.2.1, 9.6.1 and 9.6.2), or
+  In Conquer Chess, White always has the move from the start,
+  where Black always has the move after one chess move.
 
-- `[6.2.1.2]` the player has made his/her next move, when his/her previous move was not completed.
+- `[6.2.1.1]` the move ends the game
+  (see Articles 5.1.1, 5.2.1, 5.2.2, 9.2.1, 9.6.1 and 9.6.2), or
 
-- `[6.2.2]` A player must be allowed to pause his/her clock after making his/her move, even after the opponent has made his/her next move. The time between making the move on the chessboard and pressing the clock is regarded as part of the time allotted to the player.
+- `[6.2.1.2]` the player has made his/her next move,
+  when his/her previous move was not completed.
 
-- `[6.2.3]` A player must press his/her clock with the same hand with which he/she made his/her move. It is forbidden for a player to keep his/her finger on the clock or to 'hover' over it.
+- `[6.2.2]` A player must be allowed to pause his/her clock
+  after making his/her move,
+  even after the opponent has made his/her next move.
+  The time between making the move on the chessboard and
+  pressing the clock is regarded as part of the time allotted to the player.
 
-- `[6.2.4]` The players must handle the chessclock properly. It is forbidden to press it forcibly, to pick it up, to press the clock before moving or to knock it over. Improper clock handling shall be penalised in accordance with Article 12.9.
+  In Conquer Chess, this rule is void,
+  as White always has the move from the start,
+  where Black always has the move after one chess move.
+
+- `[6.2.3]` A player must press his/her clock with the same hand
+  with which he/she made his/her move.
+  It is forbidden for a player to keep his/her finger on the clock
+  or to 'hover' over it.
+
+  In Conquer Chess, this rule is not needed.
+
+- `[6.2.4]` The players must handle the chessclock properly.
+  It is forbidden to press it forcibly,
+  to pick it up, to press the clock before moving or to knock it over.
+  Improper clock handling shall be penalised in accordance with Article 12.9.
 
 - `[6.2.5]` Only the player whose clock is running is allowed to adjust the pieces.
 
-- `[6.2.6]` If a player is unable to use the clock, an assistant, who must be acceptable to the arbiter, may be provided by the player to perform this operation. His/Her clock shall be adjusted by the arbiter in an equitable way. This adjustment of the clock shall not apply to the clock of a player with a disability.
+  In Conquer Chess, White always has its clock running
+  where Black always has its clock running after one chess move.
+
+- `[6.2.6]` If a player is unable to use the clock, an assistant,
+  who must be acceptable to the arbiter,
+  may be provided by the player to perform this operation.
+  His/Her clock shall be adjusted by the arbiter in an equitable way.
+  This adjustment of the clock shall not apply
+  to the clock of a player with a disability.
+
+  In Conquer Chess, this rule is not needed.
 
 - `[6.3]` Allotted time:
 
-- `[6.3.1]` When using a chessclock, each player must complete a minimum number of moves or all moves in an allotted period of time including any additional amount of time added with each move. All these must be specified in advance.
+- `[6.3.1]` When using a chessclock,
+  each player must complete a minimum number of moves
+  or all moves in an allotted period of time
+  including any additional amount of time added with each move.
+  All these must be specified in advance.
 
-- `[6.3.2]` The time saved by a player during one period is added to his/her time available for the next period, where applicable. In the time-delay mode both players receive an allotted 'main thinking time'. Each player also receives a 'fixed extra time' with every move. The countdown of the main thinking time only commences after the fixed extra time has expired. Provided the player presses his/her clock before the expiration of the fixed extra time, the main thinking time does not change, irrespective of the proportion of the fixed extra time used.
+TODO: [Add an option to add extra time per move](https://github.com/richelbilderbeek/conquer_chess/issues/125)
 
-- `[6.4]` Immediately after a flag falls, the requirements of Article 6.3.1 must be checked.
+- `[6.3.2]` The time saved by a player during one period is added
+  to his/her time available for the next period, where applicable.
+  In the time-delay mode both players receive an allotted 'main thinking time'.
+  Each player also receives a 'fixed extra time' with every move.
+  The countdown of the main thinking time only commences
+  after the fixed extra time has expired.
+  Provided the player presses his/her clock before the expiration
+  of the fixed extra time, the main thinking time does not change,
+  irrespective of the proportion of the fixed extra time used.
 
-- `[6.5]` Before the start of the game the arbiter shall decide where the chessclock is placed.
+- `[6.4]` Immediately after a flag falls,
+  the requirements of Article 6.3.1 must be checked.
 
-- `[6.6]` At the time determined for the start of the game White's clock is started.
+- `[6.5]` Before the start of the game
+  the arbiter shall decide where the chessclock is placed.
+
+- `[6.6]` At the time determined for the start of the game
+  White's clock is started.
 
 - `[6.7]` Default time:
 
-- `[6.7.1]` The regulations of an event shall specify a default time in advance. If the default time is not specified, then it is zero. Any player who arrives at the chessboard after the default time shall lose the game unless the arbiter decides otherwise.
+- `[6.7.1]` The regulations of an event shall specify a default time
+  in advance. If the default time is not specified, then it is zero.
+  Any player who arrives at the chessboard after the default time
+  shall lose the game unless the arbiter decides otherwise.
 
-- `[6.7.2]` If the regulations of an event specify that the default time is not zero and if neither player is present initially, White shall lose all the time that elapses until he/she arrives, unless the regulations of an event specify or the arbiter decides otherwise.
+- `[6.7.2]` If the regulations of an event specify that the default time
+  is not zero and if neither player is present initially,
+  White shall lose all the time that elapses until he/she arrives,
+  unless the regulations of an event specify or the arbiter decides otherwise.
 
-- `[6.8]` A flag is considered to have fallen when the arbiter observes the fact or when either player has made a valid claim to that effect.
+- `[6.8]` A flag is considered to have fallen when the arbiter
+  observes the fact or when either player has made a valid claim to that effect.
 
-- `[6.9]` Except where one of Articles 5.1.1, 5.1.2, 5.2.1, 5.2.2, 5.2.3 applies, if a player does not complete the prescribed number of moves in the allotted time, the game is lost by that player. However, the game is drawn if the position is such that the opponent cannot checkmate the player's king by any possible series of legal moves.
+- `[6.9]` Except where one of Articles 5.1.1, 5.1.2, 5.2.1, 5.2.2, 5.2.3
+  applies, if a player does not complete the prescribed number of moves
+  in the allotted time, the game is lost by that player.
+  However, the game is drawn if the position is such
+  that the opponent cannot checkmate the player's king
+  by any possible series of legal moves.
 
 - `[6.10]` Chessclock setting:
 
-- `[6.10.1]` Every indication given by the chessclock is considered to be conclusive in the absence of any evident defect. A chessclock with an evident defect shall be replaced by the arbiter, who shall use his/her best judgement when determining the times to be shown on the replacement chessclock.
+- `[6.10.1]` Every indication given by the chessclock is considered
+  to be conclusive in the absence of any evident defect.
+  A chessclock with an evident defect shall be replaced by the arbiter,
+  who shall use his/her best judgement when determining
+  the times to be shown on the replacement chessclock.
 
-- `[6.10.2]` If during a game it is found that the setting of either or both clocks is incorrect, either player or the arbiter shall stop the chessclock immediately. The arbiter shall install the correct setting and adjust the times and move-counter, if necessary. He/She shall use his/her best judgement when determining the clock settings.
+- `[6.10.2]` If during a game it is found that the setting
+  of either or both clocks is incorrect,
+  either player or the arbiter shall stop the chessclock immediately.
+  The arbiter shall install the correct setting and
+  adjust the times and move-counter, if necessary.
+  He/She shall use his/her best judgement when determining the clock settings.
 
-- `[6.11.1]` If the game needs to be interrupted, the arbiter shall pause the chessclock.
+- `[6.11.1]` If the game needs to be interrupted,
+  the arbiter shall pause the chessclock.
 
-- `[6.11.2]` A player may pause the chessclock only in order to seek the arbiter's assistance, for example when promotion has taken place and the piece required is not available.
+- `[6.11.2]` A player may pause the chessclock only in order
+  to seek the arbiter's assistance,
+  for example when promotion has taken place
+  and the piece required is not available.
 
 - `[6.11.3]` The arbiter shall decide when the game restarts.
 
-- `[6.11.4]` If a player pauses the chessclock in order to seek the arbiter's assistance, the arbiter shall determine whether the player had any valid reason for doing so. If the player has no valid reason for pausing the chessclock, the player shall be penalised in accordance with Article 12.9.
+- `[6.11.4]` If a player pauses the chessclock in order to seek
+  the arbiter's assistance, the arbiter shall determine
+  whether the player had any valid reason for doing so.
+  If the player has no valid reason for pausing the chessclock,
+  the player shall be penalised in accordance with Article 12.9.
 
-- `[6.12.1]` Screens, monitors, or demonstration boards showing the current position on the chessboard, the moves and the number of moves made/completed, and clocks which also show the number of moves, are allowed in the playing hall.
+- `[6.12.1]` Screens, monitors, or demonstration boards showing
+  the current position on the chessboard,
+  the moves and the number of moves made/completed,
+  and clocks which also show the number of moves,
+  are allowed in the playing hall.
 
-- `[6.12.2]` The player may not make a claim relying only on information shown in this manner.
+- `[6.12.2]` The player may not make a claim relying only on information
+  shown in this manner.
 
 ### Article 7: Irregularities
 
-- `[7.1]` If an irregularity occurs and the pieces have to be restored to a previous position, the arbiter shall use his/her best judgement to determine the times to be shown on the chessclock. This includes the right not to change the clock times. He/She shall also, if necessary, adjust the clock's move-counter.
+- `[7.1]` If an irregularity occurs and the pieces
+  have to be restored to a previous position,
+  the arbiter shall use his/her best judgement to determine
+  the times to be shown on the chessclock.
+  This includes the right not to change the clock times.
+  He/She shall also, if necessary, adjust the clock's move-counter.
 
-- `[7.2.1]` If during a game it is found that the initial position of the pieces was incorrect, the game shall be cancelled and a new game shall be played.
+- `[7.2.1]` If during a game it is found that the initial position
+  of the pieces was incorrect, the game shall be cancelled
+  and a new game shall be played.
 
-- `[7.2.2]` If during a game it is found that the chessboard has been placed contrary to Article 2.1, the game shall continue but the position reached must be transferred to a correctly placed chessboard.
+- `[7.2.2]` If during a game it is found that the chessboard
+  has been placed contrary to Article 2.1,
+  the game shall continue but the position reached
+  must be transferred to a correctly placed chessboard.
 
-- `[7.3]` If a game has started with colours reversed then, if less than 10 moves have been made by both players, it shall be discontinued and a new game played with the correct colours. After 10 moves or more, the game shall continue.
+- `[7.3]` If a game has started with colours reversed then,
+  if less than 10 moves have been made by both players,
+  it shall be discontinued and a new game played with the correct colours.
+  After 10 moves or more, the game shall continue.
 
 - `[7.4]` Dispaced pieces:
 
-- `[7.4.1]` If a player displaces one or more pieces, he/she shall re-establish the correct position in his/her own time.
+- `[7.4.1]` If a player displaces one or more pieces,
+  he/she shall re-establish the correct position in his/her own time.
 
-- `[7.4.2]` If necessary, either the player or his/her opponent shall pause the chessclock and ask for the arbiter's assistance.
+- `[7.4.2]` If necessary, either the player or his/her opponent
+  shall pause the chessclock and ask for the arbiter's assistance.
 
 - `[7.4.3]` The arbiter may penalise the player who displaces the pieces.
 
 - `[7.5]` Illegal moves:
 
-- `[]` 7.5.1 An illegal move is completed once the player has pressed his/her clock. If during a game it is found that an illegal move has been completed, the position immediately before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. Articles 4.3 and 4.7 apply to the move replacing the illegal move. The game shall then continue from this reinstated position.
+- `[7.5.1]` An illegal move is completed once the player
+  has pressed his/her clock.
+  If during a game it is found that an illegal move has been completed,
+  the position immediately before the irregularity shall be reinstated.
+  If the position immediately before the irregularity cannot be determined,
+  the game shall continue from the last identifiable position prior
+  to the irregularity.
+  Articles 4.3 and 4.7 apply to the move replacing the illegal move.
+  The game shall then continue from this reinstated position.
 
-- `[]` 7.5.2 If the player has moved a pawn to the furthest distant rank, pressed the clock, but not replaced the pawn with a new piece, the move is illegal. The pawn shall be replaced by a queen of the same colour as the pawn.
+- `[7.5.2]` If the player has moved a pawn to the furthest distant rank,
+  pressed the clock, but not replaced the pawn with a new piece,
+  the move is illegal.
+  The pawn shall be replaced by a queen of the same colour as the pawn.
 
-- `[]` 7.5.3 If the player presses the clock without making a move, it shall be considered and penalised as if an illegal move.
+- `[7.5.3]` If the player presses the clock without making a move,
+  it shall be considered and penalised as if an illegal move.
 
-- `[]` 7.5.4 If a player uses two hands to make a single move (for example in case of castling, capturing or promotion) and pressed the clock, it shall be considered and penalised as if an illegal move.
+- `[7.5.4]`  If a player uses two hands to make a single move
+  (for example in case of castling, capturing or promotion)
+  and pressed the clock, it shall be considered
+  and penalised as if an illegal move.
 
-- `[]` 7.5.5 After the action taken under Article 7.5.1, 7.5.2, 7.5.3 or 7.5.4 for the first completed illegal move by a player, the arbiter shall give two minutes extra time to his/her opponent; for the second completed illegal move by the same player the arbiter shall declare the game lost by this player. However, the game is drawn if the position is such that the opponent cannot checkmate the player's king by any possible series of legal moves.
+- `[7.5.5]` After the action taken under Article 7.5.1, 7.5.2, 7.5.3
+  or 7.5.4 for the first completed illegal move by a player,
+  the arbiter shall give two minutes extra time to his/her opponent;
+  for the second completed illegal move by the same player
+  the arbiter shall declare the game lost by this player.
+  However, the game is drawn if the position is such
+  that the opponent cannot checkmate the player's king
+  by any possible series of legal moves.
 
-- `[]` 7.6 If, during a game it is found that any piece has been displaced from its correct square, the position before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. The game shall then continue from this reinstated position.
+- `[7.6]` If, during a game it is found that any piece has been displaced
+  from its correct square, the position before the irregularity
+  shall be reinstated.
+  If the position immediately before the irregularity cannot be determined,
+  the game shall continue from the last identifiable position prior
+  to the irregularity.
+  The game shall then continue from this reinstated position.
 
 ### Article 8: The recording of the moves
 
@@ -933,7 +1140,7 @@ Unless the arbiter decides otherwise, ranks from White to Black shall be given t
 
 8 - acht
 
-Castling is announced “Lange Rochade” (German for long castling) and “Kurze Rochade” (German for short castling).
+Castling is announced "Lange Rochade" (German for long castling) and "Kurze Rochade" (German for short castling).
 
 The pieces bear the names: Koenig, Dame, Turm, Laeufer, Springer, Bauer.
 
@@ -1094,7 +1301,7 @@ Thus, after c-side castling (notated as 0-0-0 and known as queen-side castling i
 
 - `[]` II. 3.2.7 Notes
 
-- To avoid any misunderstanding, it may be useful to state “I am about to castle” before castling.
+- To avoid any misunderstanding, it may be useful to state "I am about to castle" before castling.
 - In some starting positions, the king or rook (but not both) does not move during castling.
 - In some starting positions, castling can take place as early as the first move.
 - All the squares between the king's initial and final squares (including the final square) and all the squares between the rook's initial and final squares (including the final square) must be vacant except for the king and castling rook.
