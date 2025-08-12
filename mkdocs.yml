@@ -9,7 +9,7 @@ nav:
   - Screenshots: screenshots/README.md
   - Build and run: build_and_run.md
   - Gameplay: gameplay.md
-  - Lauch on Steam: launch_on_steam.md
+  - Lauch on Steam: launch_on_steam/README.md
   - Misc:
     - Acknowledgements: acknowledgements.md
     - Architecture: architecture/README.md
