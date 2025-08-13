@@ -28,7 +28,7 @@ fi
 
 make debug
 
-exe_path=release/conquer_chess_linux_static
+exe_path=conquer_chess_linux_static
 if [ ! -f ${exe_path} ]; then
     echo "ERROR: file '${exe_path}' not created."
     exit 42

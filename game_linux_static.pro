@@ -55,7 +55,7 @@ CONFIG(debug, debug|release) {
 QT += core gui widgets
 
 # SFML
-LIBS += -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lsfml-audio-s
+LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # SFGraphing
 DEFINES += USE_SFGRAPHING
