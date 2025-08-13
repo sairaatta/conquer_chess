@@ -7,4 +7,4 @@ rm -f Makefile.Release
 rm -f game
 rm -f ./*.gcda
 rm -f ./*.gcno
-
+rm conquer_chess_linux_static

@@ -5,10 +5,28 @@
 # is to create a static version
 # for Linux only.
 
-# From
-# https://stackoverflow.com/a/20799203/3364162
+# From https://stackoverflow.com/a/20799203/3364162
 CONFIG += static
 CONFIG += staticlib
+
+# From https://stackoverflow.com/a/17712841/3364162
+CONFIG += static-libgcc
+CONFIG += static-libstdc++
+
+# From https://doc.qt.io/qt-6/qmake-advanced-usage.html
+CONFIG += create_prl
+CONFIG += link_prl
+
+# Do have the Qt source files installed.
+# You can check this in the maintenance tool
+# at ~/Qt/MaintenanceTool
+# 
+# To find the Qt maintenance tool, from https://askubuntu.com/a/898189/1757050 :
+#
+# sudo apt-get install mlocate
+# sudo updatedb
+# locate -i maintenance | grep -i qt
+
 
 # All files are in here, the rest are just settings
 include(game.pri)
@@ -55,7 +73,7 @@ CONFIG(debug, debug|release) {
 QT += core gui widgets
 
 # SFML
-LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+# LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # SFGraphing
 DEFINES += USE_SFGRAPHING
