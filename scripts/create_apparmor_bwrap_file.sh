@@ -6,14 +6,17 @@
 #
 # Usage:
 #
-#   sudo create_apparmor_bwrap_file.sh
+#   ./create_apparmor_bwrap_file.sh
 # 
 
 
 echo "Modifying the file '/etc/apparmor.d/bwrap'"
 
-cat >/etc/apparmor.d/bwrap <<EOL
 
+sudo cat >/etc/apparmor.d/bwrap <<EOL
+
+
+# From https://etbe.coker.com.au/2024/04/24/ubuntu-24-04-bubblewrap/
 
 abi <abi/4.0>,
 include <tunables/global>
@@ -33,7 +36,7 @@ cat /etc/apparmor.d/bwrap
 
 echo "Running systemctl"
 
-systemctl reload apparmor
+sudo systemctl reload apparmor
 
 echo "Done"
 
