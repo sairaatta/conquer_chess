@@ -1,7 +1,7 @@
 "AppBuild"
 {
 	"AppID" "3873940" // your AppID
-	"Desc" "This is a simple build script" // internal description for this build
+	"Desc" "First build from Valve Data Format files" // internal description for this build
 
 	"ContentRoot" "../" // root content folder, relative to location of this file
 	"BuildOutput" "../steam_output" // build output folder for build logs and build cache files

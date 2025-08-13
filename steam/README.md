@@ -1,6 +1,16 @@
 # Steam
 
-File to be used with the `steamcmd` tool.
+## Sniper
+
+/home/richel/.local/share/Steam/steamapps/common/SteamLinuxRuntime_sniper
+
+
+## Valve Data Format 
+
+These are files that setup the relation
+between application and depot.
+
+These are to be used with the `steamcmd` tool.
 
 Parameter|Value  |Script
 ---------|-------|------
@@ -44,6 +54,7 @@ IPC function call IClientUtils::GetAPICallResult took too long: 56 msec
 ```
 
 ## My Conquer Chess Steam folder
-```
+
+```bash
 /home/richel/.local/share/Steam/steamapps/common/conquer_chess
 ```
