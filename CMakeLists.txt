@@ -11,12 +11,16 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets)
 
 qt_standard_project_setup()
 
+file(GLOB SFGRAPHING_SRC "${CMAKE_SOURCE_DIR}/../SFGraphing/src/*.cpp")
+file(GLOB LOCAL_SRC "${CMAKE_SOURCE_DIR}/src/*.cpp")
+# file(GLOB LOCAL_HEADERS "${CMAKE_SOURCE_DIR}/include/*.h")
+
 qt_add_executable(conquer_chess WIN32 MACOSX_BUNDLE
-    ../SFGraphing/include/SFGraphing
-    /home/richel/GitHubs/SFGraphing/src/*.cpp
-    include/*.h
-    src/*.cpp
+    ${SFGRAPHING_SRC}
+    ${LOCAL_SRC}
+    # ${LOCAL_HEADERS}
 )
+
 target_include_directories(conquer_chess PRIVATE
     ../SFGraphing/include
     include
