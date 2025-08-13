@@ -11,6 +11,6 @@ DepotID  |3873941|[depot_build_3873941.vdf](depot_build_3873941.vdf)
 ```
 run_app_build app_build_3873940.vdf
 
-run_app_build /home/richel/GitHubs/conquer_chess/app_build_3873940.vdf
+run_app_build /home/richel/GitHubs/conquer_chess/steam/app_build_3873940.vdf
 
 ```
