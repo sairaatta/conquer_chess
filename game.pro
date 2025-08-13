@@ -1,6 +1,8 @@
 # This is the general project file,
 # to be used to simply run the game.
 #
+# I will leave it as is, so that Sajid can do his job :-)
+#
 # Other .pro files are used for specific tasks,
 # such as codecov or profiling
 
