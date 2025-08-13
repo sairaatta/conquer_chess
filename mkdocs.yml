@@ -10,6 +10,7 @@ nav:
   - Build and run: build_and_run.md
   - Gameplay: gameplay.md
   - Lauch on Steam: launch_on_steam/README.md
+  - Report a bug: report_a_bug.md
   - Misc:
     - Acknowledgements: acknowledgements.md
     - Architecture: architecture/README.md

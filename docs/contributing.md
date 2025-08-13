@@ -4,17 +4,9 @@ Awesome that you are reading this.
 
 This GitHub follows the [Contributor Covenant Code of Conduct](code_of_conduct.md).
 
-- For reporting bugs, you can create an Issue
+- For reporting bugs, see [how to report a bug](report_a_bug.md)
 - For questions, you can create an Issue
 - Code changes go via Pull Requests
-
-## Reporting bugs
-
-Conquer Chess has created a log file.
-
-Please
-[create an issue](https://github.com/richelbilderbeek/conquer_chess/issues)
-which includes the error message in that file.
 
 ## Submitting code
 
