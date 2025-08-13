@@ -2,8 +2,9 @@
 
 ## Sniper
 
-/home/richel/.local/share/Steam/steamapps/common/SteamLinuxRuntime_sniper
-
+```bash
+~/.local/share/Steam/steamapps/common/SteamLinuxRuntime_sniper
+```
 
 ## Valve Data Format 
 
