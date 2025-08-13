@@ -1,3 +1,9 @@
+---
+tags:
+  - videos
+  - YouTube
+---
+
 # Videos
 
 Most recent video at the top.

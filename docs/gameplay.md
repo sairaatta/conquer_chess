@@ -1,3 +1,9 @@
+---
+tags:
+  - gameplay
+  - tutorial
+---
+
 # Gameplay
 
 This page describes how to play Conquer Chess.

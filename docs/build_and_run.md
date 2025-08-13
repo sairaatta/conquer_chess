@@ -1,3 +1,9 @@
+---
+tags:
+  - build
+  - run
+---
+
 # Build and run
 
 !!! info "This guide assumes Ubuntu"

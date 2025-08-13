@@ -1,3 +1,9 @@
+---
+tags:
+  - roadmap
+  - future plans
+---
+
 # Roadmap
 
 ## v1.0

@@ -1,3 +1,11 @@
+---
+tags:
+  - contributing
+  - helping
+  - reporting
+  - submitting
+---
+
 # Contributing
 
 Awesome that you are reading this.

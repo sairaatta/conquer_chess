@@ -1,4 +1,12 @@
-## Report a bug
+---
+tags:
+  - bug
+  - error
+  - report
+  - submit
+---
+
+# Report a bug
 
 Conquer Chess has bugs.
 
