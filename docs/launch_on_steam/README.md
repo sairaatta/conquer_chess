@@ -19,7 +19,6 @@ sudo apt install libqt6core6t64 libqt6gui6t64 libqt6widgets6t64 libsfml-*
 
 This is only partially tested on Ubuntu 24.04 LTS
 and is not tested on other Linux distributions.
-Please [report a bug](report_a_bug.md) if this does not work.
 
 ## 1. Click on 'Manage'
 
@@ -43,3 +42,13 @@ and force the use of 'Legacy runtime 1.0':
 ## 4. Play Conquer Chess
 
 Click on 'Play' to start Conquer Chess.
+
+If nothing happens, try to run the game from the terminal:
+
+```
+cd ~/.local/share/Steam/steamapps/common/conquer_chess
+./conquer_chess
+cat conquer_chess_error.txt
+```
+
+Please [report a bug](report_a_bug.md) with the error messages.
