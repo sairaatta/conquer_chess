@@ -176,7 +176,7 @@ void test()
 #include <filesystem>
 
 // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
-void handle_abort_signal(int signal)
+void handle_abort_signal(int /* signal */)
 {
     std::cerr
       << "ERROR!\n"
@@ -187,7 +187,11 @@ void handle_abort_signal(int signal)
         << std::filesystem::current_path() << "/conquer_chess_error.txt"
         << "'. \n"
       << "\n"
-      << "It would be helpful to share this file with me,\n"
+      << "It would be helpful to share this file with me. \n"
+      << "You will be added as a contributor \n"
+      << "if you create a proper bug report :-) \n"
+      << "\n"
+      << "Sorry, the Conquer Chess developer\n"
     ;
     //
     // Stacktrace at https://stackoverflow.com/a/54365144/3364162
