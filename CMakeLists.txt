@@ -33,16 +33,6 @@ target_link_libraries(conquer_chess PRIVATE
     sfml-window
 )
 
-target_compile_options(conquer_chess
-    -Wall
-    -Wextra
-    -Wnon-virtual-dtor
-    -Wshadow
-    -pedantic
-    -std=c++17
-)
-
-
 # Resources:
 set(game_resources_resource_files
     "resources/fonts/16114_FuturistFixed-width.ttf"

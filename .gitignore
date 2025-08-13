@@ -49,3 +49,4 @@ latex/
 conquer_chess_plugin_import.cpp
 release/
 conquer_chess_linux_static
+build_cmake/
