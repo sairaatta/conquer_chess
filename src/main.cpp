@@ -178,7 +178,7 @@ void test()
 // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
 void handle_abort_signal(int /* signal */)
 {
-    std::cerr
+    std::cout
       << "ERROR!\n"
       << "\n"
       << "I am sorry. This should never have happened. \n"
@@ -192,6 +192,7 @@ void handle_abort_signal(int /* signal */)
       << "if you create a proper bug report :-) \n"
       << "\n"
       << "Sorry, the Conquer Chess developer\n"
+      << "\n"
     ;
     //
     // Stacktrace at https://stackoverflow.com/a/54365144/3364162
