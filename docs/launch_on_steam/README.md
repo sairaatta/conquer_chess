@@ -1,11 +1,29 @@
 # Launch on Steam
 
 Conquer Chess does not launch out of the box yet.
-Here are the steps to launch Conquer Chess on Steam.
+This is being worked on.
+
+For now, here are the steps to launch Conquer Chess on Steam.
+
+## 0. Install the dependencies
+
+Conquer Chess is not yet provided as
+[a stand-alone Linux executable](https://github.com/richelbilderbeek/conquer_chess/issues/120).
+For now, these libraries must be installed by the user :-/
+
+In a terminal, install the Qt and SFML libraries:
+
+```bash
+sudo apt install libqt6core6t64 libqt6gui6t64 libqt6widgets6t64 libsfml-* 
+```
+
+This is only partially tested on Ubuntu 24.04 LTS
+and is not tested on other Linux distributions.
+Please [report a bug](report_a_bug.md) if this does not work.
 
 ## 1. Click on 'Manage'
 
-Go to 'Conquer Chess' in your Steam Library and click on 'Manage'.
+In Steam, go to 'Conquer Chess' in your Steam Library and click on 'Manage'.
 
 ![1. Click 'Manage'](1_click_manage.png)
 
