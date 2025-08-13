@@ -55,22 +55,9 @@ LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 
 win32 {
-
   LIBS += $$PWD/../SFML/lib
   INCLUDEPATH += $$PWD/../SFML/include
-
 }
-
-# Crosscompile notes
-#CFLAGS += SFML_USE_STATIC_STD_LIBS=TRUE
-#CFLAGS += -DSFML_STATIC
-#LIBs += -L../RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib
-#LIBS += -lsfml
-# LIBS += -L/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lsfml-audio-s
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-graphics
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-window
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-system
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-audio
 
 # SFGraphing
 DEFINES += USE_SFGRAPHING

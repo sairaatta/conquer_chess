@@ -218,6 +218,10 @@ bool menu_view::process_event_impl(sf::Event& event)
       // Developer shortcut
       set_next_state(program_state::replay);
     }
+    else if (key_pressed == sf::Keyboard::Key::F7)
+    {
+      assert(1 == 2);
+    }
   }
   if (event.type == sf::Event::MouseMoved)
   {
