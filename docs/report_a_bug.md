@@ -6,12 +6,19 @@ tags:
   - submit
 ---
 
-# Report a bug
+# Reporting a bug
 
 Conquer Chess has bugs.
 
+All known bugs can be found at
+[the Conquer Chess issues](https://github.com/richelbilderbeek/conquer_chess/issues).
+
 To help reporting bugs,
-Conquer Chess creates a file that contains the error.
+Conquer Chess creates a file that contains the error:
+
+```text
+~/.local/share/Steam/steamapps/common/conquer_chess/conquer_chess_error.txt
+```
 
 Please
 [create an issue](https://github.com/richelbilderbeek/conquer_chess/issues)
