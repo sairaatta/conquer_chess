@@ -18,12 +18,8 @@ if [[ "$PWD" =~ scripts$ ]]; then
     exit 42
 fi
 
-#Don't put the full path here. It has to be found in the 
-# In /home/yourusername/.bashrc add the following line add the end instead:
-# export PATH=$PATH:/home/richel/GitHubs/RibiLibraries/Libraries/mxe/usr/bin/"
 PATH="$PATH:/home/richel/GitHubs/RibiLibraries/Libraries/mxe/usr/bin/"
 echo $PATH
-
 
 myqmake="i686-w64-mingw32.static-qmake-qt5"
 echo "Displaying cross compiler version (if it is not found, set the path to YourFolder/mxe/usr/bin"

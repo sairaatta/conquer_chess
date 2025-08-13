@@ -14,7 +14,7 @@ CONFIG += staticlib
 include(game.pri)
 include(game_view.pri)
 
-TARGET = conquer_chess_static
+TARGET = conquer_chess_linux_static
 
 # Use the C++ version that all team members can use
 CONFIG += c++17
@@ -26,6 +26,9 @@ QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 # Debug and release settings
 CONFIG += debug_and_release
 CONFIG(release, debug|release) {
+
+  message("Compiling in release mode")
+
   DEFINES += NDEBUG
 
   # gprof
@@ -34,6 +37,9 @@ CONFIG(release, debug|release) {
 }
 
 CONFIG(debug, debug|release) {
+
+  message("Compiling in debug mode")
+
   # High warning levels
   QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 
@@ -50,17 +56,6 @@ QT += core gui widgets
 
 # SFML
 LIBS += -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lsfml-audio-s
-
-# Crosscompile notes
-#CFLAGS += SFML_USE_STATIC_STD_LIBS=TRUE
-#CFLAGS += -DSFML_STATIC
-#LIBs += -L../RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib
-#LIBS += -lsfml
-# LIBS += -L/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lsfml-audio-s
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-graphics
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-window
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-system
-#LIBs += -l/home/richel/GitHubs/RibiLibraries/mxe/usr/i686-w64-mingw32.static/lib/sfml-audio
 
 # SFGraphing
 DEFINES += USE_SFGRAPHING
