@@ -56,4 +56,4 @@ cd ~/.local/share/Steam/steamapps/common/conquer_chess
 cat conquer_chess_error.txt
 ```
 
-Please [report a bug](report_a_bug.md) with the error messages.
+Please [report a bug](../report_a_bug.md) with the error messages.
