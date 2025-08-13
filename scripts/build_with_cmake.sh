@@ -1,11 +1,10 @@
 #!/bin/bash
 #
-# Fix Markdown style errors,
-# as is recommended by the Markdown checker.
+# Build using CMake
 #
 # Usage:
 #
-#   ./scripts/fix_markdown_style_errors.sh
+#   ./scripts/build_with_cmake.sh
 
 if [[ "$PWD" =~ scripts$ ]]; then
     echo "FATAL ERROR."
@@ -14,11 +13,14 @@ if [[ "$PWD" =~ scripts$ ]]; then
     echo " "
     echo "Tip: like this"
     echo " "
-    echo "  ./scripts/fix_markdown_style_errors.sh"
+    echo "  ./scripts/build_with_cmake.sh"
     echo " "
     exit 42
 fi
 
-markdownlint --fix "**/*.md"
-git status
+# From https://cmake.org/cmake/help/latest/guide/tutorial/A%20Basic%20Starting%20Point.html
+mkdir build_cmake
+cd build_cmake
+cmake ../
+cmake --build .
 
