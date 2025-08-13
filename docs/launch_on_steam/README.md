@@ -50,7 +50,7 @@ Click on 'Play' to start Conquer Chess.
 
 If nothing happens, try to run the game from the terminal:
 
-```
+```bash
 cd ~/.local/share/Steam/steamapps/common/conquer_chess
 ./conquer_chess
 cat conquer_chess_error.txt
