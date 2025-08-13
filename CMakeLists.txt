@@ -5,6 +5,11 @@ project(conquer_chess VERSION 1.0 LANGUAGES C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# Static build, from https://stackoverflow.com/a/24671474/3364162
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+set(BUILD_SHARED_LIBS OFF)
+set(CMAKE_EXE_LINKER_FLAGS "-static")
+
 
 find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets)
@@ -30,15 +35,25 @@ target_compile_definitions(conquer_chess PRIVATE
     USE_SFGRAPHING
 )
 
-target_link_libraries(conquer_chess PRIVATE
-    Qt::Core
-    Qt::Gui
-    Qt::Widgets
-    sfml-audio
-    sfml-graphics
-    sfml-system
-    sfml-window
-)
+
+# Static build, from https://stackoverflow.com/a/24671474/3364162
+target_link_libraries(Qt::Core -static)
+target_link_libraries(Qt::Gui -static)
+target_link_libraries(Qt::Widgets -static)
+target_link_libraries(sfml-audio -static)
+target_link_libraries(sfml-graphics -static)
+target_link_libraries(sfml-system -static)
+target_link_libraries(sfml-window -static)
+    
+# target_link_libraries(conquer_chess PRIVATE
+#     Qt::Core
+#     Qt::Gui
+#     Qt::Widgets
+#     sfml-audio
+#     sfml-graphics
+#     sfml-system
+#     sfml-window
+# )
 
 # Resources:
 set(game_resources_resource_files
