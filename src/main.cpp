@@ -79,7 +79,9 @@
 
 #include <cassert>
 #include <csignal>
+#include <cstdio>
 #include <fstream>
+#include <filesystem>
 
 /// All tests are called from here, only in debug mode
 void test()
@@ -172,9 +174,9 @@ void test()
 #endif // NDEBUG
 }
 
-
-#include <filesystem>
-
+/// Handle the abort signal, as triggered by a failing assert.
+/// Note that this is mostly cosmetic: in main, the stderr is redirected
+/// to a file.
 // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
 void handle_abort_signal(int /* signal */)
 {
@@ -194,8 +196,6 @@ void handle_abort_signal(int /* signal */)
       << "Sorry, the Conquer Chess developer\n"
       << "\n"
     ;
-    //
-    // Stacktrace at https://stackoverflow.com/a/54365144/3364162
 }
 
 std::vector<std::string> collect_args(int argc, char **argv) {
@@ -244,18 +244,38 @@ void get_runtime_speed_profile()
   assert(!"Do not profile in debug mode");
   std::exit(42);
   #endif
-
 }
 
-#include <cstdio>
+std::string get_error_log_filename()  noexcept
+{
+  return "conquer_chess_error.txt";
+}
+
+void create_error_log_file_start()
+{
+  const auto now = std::chrono::system_clock::now();
+  const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+
+  std::ofstream f(get_error_log_filename());
+  f
+    << "Conquer Chess error log file." << '\n'
+    << "Compile date: " << __DATE__ << '\n'
+    << "Compile time: " << __TIME__ << '\n'
+    << "Current time and date: " << std::ctime(&now_time) << '\n'
+  ;
+}
+
 
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
   // Set up the signal handler for SIGABRT
   // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
   signal(SIGABRT, handle_abort_signal);
-  std::freopen("conquer_chess_error.txt", "a", stderr);
 
+  // Redirect errors to the error log filename
+  std::freopen(get_error_log_filename().c_str(), "a", stderr);
+
+  create_error_log_file_start();
 
   const auto args = collect_args(argc, argv);
   if (args.size() == 2 && args[1] == "--profile")
