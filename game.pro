@@ -53,7 +53,6 @@ QT += core gui widgets
 # SFML
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
-
 win32 {
   LIBS += $$PWD/../SFML/lib
   INCLUDEPATH += $$PWD/../SFML/include

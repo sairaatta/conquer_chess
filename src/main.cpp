@@ -78,6 +78,8 @@
 #include <SFML/Graphics.hpp>
 
 #include <cassert>
+#include <csignal>
+#include <fstream>
 
 /// All tests are called from here, only in debug mode
 void test()
@@ -170,6 +172,27 @@ void test()
 #endif // NDEBUG
 }
 
+
+#include <filesystem>
+
+// From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
+void handle_abort_signal(int signal)
+{
+    std::cerr
+      << "ERROR!\n"
+      << "\n"
+      << "I am sorry. This should never have happened. \n"
+      << "\n"
+      << "Error is written to '"
+        << std::filesystem::current_path() << "/conquer_chess_error.txt"
+        << "'. \n"
+      << "\n"
+      << "It would be helpful to share this file with me,\n"
+    ;
+    //
+    // Stacktrace at https://stackoverflow.com/a/54365144/3364162
+}
+
 std::vector<std::string> collect_args(int argc, char **argv) {
   std::vector<std::string> v(argv, argv + argc);
   return v;
@@ -219,8 +242,16 @@ void get_runtime_speed_profile()
 
 }
 
+#include <cstdio>
+
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
+  // Set up the signal handler for SIGABRT
+  // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
+  signal(SIGABRT, handle_abort_signal);
+  std::freopen("conquer_chess_error.txt", "a", stderr);
+
+
   const auto args = collect_args(argc, argv);
   if (args.size() == 2 && args[1] == "--profile")
   {
