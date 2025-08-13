@@ -5,6 +5,11 @@ This is being worked on.
 
 For now, here are the steps to launch Conquer Chess on Steam.
 
+???- question "Prefer a video?"
+
+    Then watch the YouTube video
+    [Conquer Chess: how to launch from Steam and report a bug](https://youtu.be/DT8WSVPvu9w)
+
 ## 0. Install the dependencies
 
 Conquer Chess is not yet provided as

@@ -8,6 +8,7 @@ tags:
 
 Most recent video at the top.
 
+- [Conquer Chess v0.12: how to launch from Steam and report a bug](https://youtu.be/DT8WSVPvu9w)
 - [Conquer Chess v0.9 status (2025-07-07) on YouTube](https://youtu.be/HEchJ8TbQkY)
 - [Conquer Chess v0.9 replay screen (2025-07-07) on YouTube](https://youtu.be/pPetet_fIdY)
 - [2023-01-09 YouTube video](https://youtu.be/60E1Rc_4ORs)
