@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(conquer_chess VERSION 1.0 LANGUAGES C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 
 find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets)
@@ -10,7 +13,7 @@ qt_standard_project_setup()
 
 qt_add_executable(conquer_chess WIN32 MACOSX_BUNDLE
     ../SFGraphing/include/SFGraphing
-    ../SFGraphing/src/*.cpp
+    /home/richel/GitHubs/SFGraphing/src/*.cpp
     include/*.h
     src/*.cpp
 )
