@@ -16,5 +16,5 @@ fi
 qt_version=$(qmake6 --version | grep -o "Qt version .* in " | grep -o "[0-9]\\.[0-9]\\.[0-9]")
 echo "Qt version: ${qt_version}"
 
-# qmake2cmake
+qmake2cmake game.pro --min-qt-version ${qt_version}
 
