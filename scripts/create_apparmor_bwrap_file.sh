@@ -14,6 +14,7 @@ echo "Modifying the file '/etc/apparmor.d/bwrap'"
 
 cat >/etc/apparmor.d/bwrap <<EOL
 
+
 abi <abi/4.0>,
 include <tunables/global>
 
@@ -26,7 +27,14 @@ profile bwrap /usr/bin/bwrap flags=(unconfined) {
 
 EOL
 
+echo "Content of '/etc/apparmor.d/bwrap':"
+
 cat /etc/apparmor.d/bwrap
 
+echo "Running systemctl"
+
+systemctl reload apparmor
+
+echo "Done"
 
 
