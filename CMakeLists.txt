@@ -1,3 +1,8 @@
+#
+# CMake script for creating a standalone Linux executable
+#
+#
+
 cmake_minimum_required(VERSION 3.16)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -36,24 +41,17 @@ target_compile_definitions(conquer_chess PRIVATE
 )
 
 
-# Static build, from https://stackoverflow.com/a/24671474/3364162
-target_link_libraries(Qt::Core -static)
-target_link_libraries(Qt::Gui -static)
-target_link_libraries(Qt::Widgets -static)
-target_link_libraries(sfml-audio -static)
-target_link_libraries(sfml-graphics -static)
-target_link_libraries(sfml-system -static)
-target_link_libraries(sfml-window -static)
-    
-# target_link_libraries(conquer_chess PRIVATE
-#     Qt::Core
-#     Qt::Gui
-#     Qt::Widgets
-#     sfml-audio
-#     sfml-graphics
-#     sfml-system
-#     sfml-window
-# )
+# Static build by adding '-static'
+# Thanks https://stackoverflow.com/a/24671474/3364162
+target_link_libraries(conquer_chess PRIVATE
+    Qt::Core -static
+    Qt::Gui -static
+    Qt::Widgets -static
+    sfml-audio -static
+    sfml-graphics -static
+    sfml-system -static
+    sfml-window -static
+)
 
 # Resources:
 set(game_resources_resource_files
