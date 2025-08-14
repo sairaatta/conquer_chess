@@ -292,7 +292,10 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   else
   {
     #ifndef NDEBUG
-    test();
+    if (args.size() != 2 || args[1] != "--no-test")
+    {
+      test();
+    }
     #endif
 
     #ifndef LOGIC_ONLY
