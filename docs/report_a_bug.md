@@ -18,6 +18,7 @@ Conquer Chess creates a file that contains the error:
 
 ```text
 ~/.local/share/Steam/steamapps/common/conquer_chess/conquer_chess_error.txt
+~/snap/steam/common/.local/share/Steam/steamapps/common/conquer_chess/conquer_chess_error.txt
 ```
 
 Please
