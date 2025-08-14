@@ -18,6 +18,7 @@ Conquer Chess creates a file that contains the error:
 
 ```text
 ~/.local/share/Steam/steamapps/common/conquer_chess/conquer_chess_error.txt
+~/snap/steam/common/.local/share/Steam/steamapps/common/conquer_chess/conquer_chess_error.txt
 ```
 
 Please
@@ -26,3 +27,9 @@ which includes the error message in that file.
 
 Users that submit a proper bug report will be
 [acknowledged](acknowledgements.md).
+
+
+## Missing libraries
+```
+./conquer_chess: error while loading shared libraries: libsfml-graphics.so.2.6: cannot open shared object file: No such file or directory
+```
