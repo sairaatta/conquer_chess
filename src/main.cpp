@@ -256,8 +256,9 @@ void create_error_log_file_start()
   const auto now = std::chrono::system_clock::now();
   const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
 
-  std::ofstream f(get_error_log_filename());
+  std::ofstream f(get_error_log_filename(), std::ios::app);
   f
+    << "---------------------------------------------------------------" << '\n'
     << "Conquer Chess error log file." << '\n'
     << "Compile date: " << __DATE__ << '\n'
     << "Compile time: " << __TIME__ << '\n'
