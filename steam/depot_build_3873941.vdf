@@ -5,15 +5,14 @@
 
     "FileMapping"
     {
-        "LocalPath" "conquer_chess/build/Desktop-Debug/conquer_chess"
+        "LocalPath" "conquer_chess"
         "DepotPath" "."
-        "Recursive" "0"
+        "Recursive" "1"
     }
-
-    "FileMapping"
-    {
-        "LocalPath" "../../../lib/x86_64-linux-gnu/libsfml-*"
-        "DepotPath" "."
-        "Recursive" "0"
-    }
+    "FileExclusion" "*.png"
+    "FileExclusion" "*.ogg"
+    "FileExclusion" "*.jpg"
+    "FileExclusion" "*.ttf"
+    "FileExclusion" "*.txt"
+    "FileExclusion" "*.csv"
 }
