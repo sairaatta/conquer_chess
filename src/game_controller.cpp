@@ -429,6 +429,7 @@ void game_controller::apply_action_type_select_to_game(
   // Unselect the old piece
   if (m_selected_piece_id[player_side].has_value())
   {
+    assert(has_piece_with_id(g, m_selected_piece_id[player_side].value()) && "#137");
     auto& previously_selected_piece{get_piece_with_id(g, m_selected_piece_id[player_side].value())};
     assert(previously_selected_piece.get_color() == player_color);
     previously_selected_piece.add_action(
