@@ -540,7 +540,7 @@ void test_screen_rect()
       screen_coordinate(3, 4)
     );
     const std::string s{to_wkt(r)};
-    assert(s == "POLYGON((1 2, 3 2, 3 4, 1 4))");
+    assert(s == "POLYGON((1 2, 3 2, 3 4, 1 4, 1 2))");
 
   }
   // operator==
@@ -579,7 +579,8 @@ std::string to_wkt(const screen_rect& r) noexcept
     << x1 << " " << y1 << ", "
     << x2 << " " << y1 << ", "
     << x2 << " " << y2 << ", "
-    << x1 << " " << y2 << "))"
+    << x1 << " " << y2 << ", "
+    << x1 << " " << y1 << "))"
   ;
   return s.str();
 }

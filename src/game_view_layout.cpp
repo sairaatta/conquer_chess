@@ -10,6 +10,7 @@
 #include <cassert>
 #include <cmath>
 #include <fstream>
+#include <filesystem>
 #include <iostream>
 #include <sstream>
 
@@ -395,6 +396,24 @@ void test_game_view_layout()
   {
     const game_view_layout layout;
     assert(layout.get_navigation_controls(side::lhs) != layout.get_navigation_controls(side::rhs));
+  }
+  // to_wkt
+  {
+    const game_view_layout layout;
+    const std::string wkt{to_wkt(layout)};
+    assert(!wkt.empty());
+  }
+  // to_wkt_file
+  {
+    const game_view_layout layout;
+    const std::string filename{"tmp_game_view_layout.wkt"};
+    if (std::filesystem::exists(filename))
+    {
+      std::filesystem::remove(filename);
+    }
+    assert(!std::filesystem::exists(filename));
+    to_wkt_file(layout, filename);
+    assert(std::filesystem::exists(filename));
   }
   #endif
 }
