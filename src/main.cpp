@@ -88,6 +88,7 @@ void test()
 {
 #ifndef NDEBUG
   //return; // For now
+  //test_game_view_layout();
   //test_rules();
   //assert(!"Yay");
 

@@ -18,6 +18,8 @@ game_view_layout::game_view_layout(
   const screen_rect& r
 ) : m_background{r}
 {
+  assert(r.get_tl().get_x() == 0);
+  assert(r.get_tl().get_y() == 0);
 
   // Vertical
   const int margin_height{get_default_margin_width()};
@@ -70,12 +72,17 @@ game_view_layout::game_view_layout(
 
   const int x1{margin_width};
   const int x2{x1 + panel_width};
-  const int x3{x2 + margin_width};
-  const int x4{x3 + (board_width / 2) + (margin_width / 2)};
-  const int x5{x4 + margin_width};
-  const int x6{x5 + (board_width / 2)};
-  const int x7{x6 + margin_width};
-  const int x8{x7 + panel_width};
+  const int x4{(w / 2) - (margin_width / 2)};
+  const int x5{(w / 2) + (margin_width / 2)};
+  const int x8{w - margin_width};
+  const int x7{x8 - panel_width};
+
+  const int x3{(w / 2) - (board_width / 2)};
+
+  // const int x6{(w / 2) + (board_width / 2)}; // Unused
+
+
+
 
   const int y1{debug_top_bar_height + margin_height};
   const int y2{y1 + unit_info_height};
@@ -106,7 +113,7 @@ game_view_layout::game_view_layout(
     m_controls[s] = in_game_controls_layout(
       screen_rect(
         screen_coordinate(x_left, y2),
-        screen_coordinate(x_right, y4)
+        screen_coordinate(x_right, y3)
       )
     );
   }
@@ -449,7 +456,10 @@ void test_game_view_layout()
   // to_wkt_file
   {
     const game_view_layout layout;
-    const std::string filename{"tmp_game_view_layout.wkt"};
+    assert(get_width(layout.get_background()) == 1920);
+    assert(get_height(layout.get_background()) == 1080);
+    const std::string filename{"tmp_game_view_layout_1920_x_1080.wkt"};
+
     if (std::filesystem::exists(filename))
     {
       std::filesystem::remove(filename);
@@ -460,7 +470,11 @@ void test_game_view_layout()
   }
   // to_wkt_file for 1600x900
   {
-    const game_view_layout layout;
+    const game_view_layout layout(
+      screen_rect(screen_coordinate(0,0), screen_coordinate(1600, 900))
+    );
+    assert(get_width(layout.get_background()) == 1600);
+    assert(get_height(layout.get_background()) == 900);
     const std::string filename{"tmp_game_view_layout_1600_x_900.wkt"};
     if (std::filesystem::exists(filename))
     {
