@@ -276,7 +276,11 @@ void test_game_view_layout()
     assert(get_square_width(layout) > 0.0);
     assert(get_square_height(layout) > 0.0);
     assert(get_board_width(layout) == get_board_height(layout));
+
     assert(get_square_width(layout) == get_square_height(layout));
+
+    // Monitor is wider than high, #138
+    assert(get_width(layout.get_background()) > get_height(layout.get_background()));
   }
   // collect_screen_rects
   {

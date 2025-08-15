@@ -140,7 +140,7 @@ screen_coordinate get_center(const screen_rect& r) noexcept
 screen_rect get_default_screen_rect() noexcept
 {
   const screen_coordinate tl(0, 0);
-  const screen_coordinate br(1080, 1920);
+  const screen_coordinate br(1920, 1080);
   return screen_rect(tl, br);
 }
 
