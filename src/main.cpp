@@ -27,6 +27,7 @@
 #include "chess_move.h"
 #include "controls_view_item.h"
 #include "controls_view_layout.h"
+#include "diagnostics_file.h"
 #include "fps_clock.h"
 #include "game.h"
 #include "game_controller.h"
@@ -80,7 +81,6 @@
 #include <cassert>
 #include <csignal>
 #include <cstdio>
-#include <fstream>
 #include <filesystem>
 
 /// All tests are called from here, only in debug mode
@@ -175,9 +175,10 @@ void test()
 }
 
 /// Handle the abort signal, as triggered by a failing assert.
-/// Note that this is mostly cosmetic: in main, the stderr is redirected
+/// Note that, for now, this is mostly cosmetic:
+/// in main, the stderr is redirected
 /// to a file.
-// From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
+/// @note From \url{https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/}
 void handle_abort_signal(int /* signal */)
 {
     std::cout
@@ -246,37 +247,18 @@ void get_runtime_speed_profile()
   #endif
 }
 
-std::string get_error_log_filename()  noexcept
-{
-  return "conquer_chess_error.txt";
-}
-
-void create_error_log_file_start()
-{
-  const auto now = std::chrono::system_clock::now();
-  const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
-
-  std::ofstream f(get_error_log_filename(), std::ios::app);
-  f
-    << "---------------------------------------------------------------" << '\n'
-    << "Conquer Chess error log file." << '\n'
-    << "Compile date: " << __DATE__ << '\n'
-    << "Compile time: " << __TIME__ << '\n'
-    << "Current time and date: " << std::ctime(&now_time) << '\n'
-  ;
-}
-
-
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
   // Set up the signal handler for SIGABRT
   // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
   signal(SIGABRT, handle_abort_signal);
 
-  // Redirect errors to the error log filename
-  std::freopen(get_error_log_filename().c_str(), "a", stderr);
+  // Redirect errors to the error log filename:
+  // errors will be appended
+  std::freopen(get_default_diagnostics_filename().c_str(), "a", stderr);
 
-  create_error_log_file_start();
+  // Compile date, current time
+  diagnostics_file().add_header();
 
   const auto args = collect_args(argc, argv);
   if (args.size() == 2 && args[1] == "--profile")

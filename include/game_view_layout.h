@@ -96,6 +96,9 @@ private:
   std::map<side, screen_rect> m_unit_info;
 };
 
+/// Collect all the screen rects in this layout
+std::vector<screen_rect> collect_screen_rects(const game_view_layout& layout);
+
 /// Convert an in-game coordinat to an on-screen coordinat
 screen_coordinate convert_to_screen_coordinate(
   const game_coordinate& coordinat,
@@ -134,6 +137,14 @@ double get_square_width(const game_view_layout& layout) noexcept;
 
 /// Test the game_view_layout class
 void test_game_view_layout();
+
+/// Convert a \link{game_view_layout} to the Well Known Text format
+/// @seealso Use \link{to_wkt_file} to save the result to a file
+std::string to_wkt(const game_view_layout& layout);
+
+/// Convert a \link{game_view_layout} to a Well Known Text file
+/// @seealso Use \link{to_wkt} to get the WKT as text
+void to_wkt_file(const game_view_layout& layout, const std::string filename);
 
 std::ostream& operator<<(std::ostream& os, const game_view_layout& layout) noexcept;
 

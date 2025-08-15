@@ -534,6 +534,15 @@ void test_screen_rect()
     assert(!is_in(screen_coordinate(50, 0), r));
     assert(!is_in(screen_coordinate(60, 600), r));
   }
+  {
+    const screen_rect r(
+      screen_coordinate(1, 2),
+      screen_coordinate(3, 4)
+    );
+    const std::string s{to_wkt(r)};
+    assert(s == "POLYGON((1 2, 3 2, 3 4, 1 4))");
+
+  }
   // operator==
   {
     const screen_rect a;
@@ -559,6 +568,22 @@ void test_screen_rect()
 #endif // DEBUG
 }
 
+std::string to_wkt(const screen_rect& r) noexcept
+{
+  const int x1{r.get_tl().get_x()};
+  const int x2{r.get_br().get_x()};
+  const int y1{r.get_tl().get_y()};
+  const int y2{r.get_br().get_y()};
+  std::stringstream s;
+  s << "POLYGON(("
+    << x1 << " " << y1 << ", "
+    << x2 << " " << y1 << ", "
+    << x2 << " " << y2 << ", "
+    << x1 << " " << y2 << "))"
+  ;
+  return s.str();
+}
+
 bool operator==(const screen_rect& lhs, const screen_rect& rhs) noexcept
 {
   return lhs.get_tl() == rhs.get_tl()
@@ -570,17 +595,6 @@ bool operator!=(const screen_rect& lhs, const screen_rect& rhs) noexcept
 {
   return !(lhs == rhs);
 }
-
-/*
-screen_rect& operator+=(screen_rect& rect, const screen_coordinate& delta) noexcept
-{
-  rect = screen_rect(
-    rect.get_tl() + delta,
-    rect.get_br() + delta
-  );
-  return rect;
-}
-*/
 
 std::ostream& operator<<(std::ostream& os, const screen_rect& r) noexcept
 {

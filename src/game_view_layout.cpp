@@ -6,10 +6,10 @@
 #include "game_rect.h"
 #include "game_coordinate.h"
 #include "square.h"
-#include "game_options.h"
 
 #include <cassert>
 #include <cmath>
+#include <fstream>
 #include <iostream>
 #include <sstream>
 
@@ -122,6 +122,22 @@ game_view_layout::game_view_layout(
   assert(get_board_width(*this) == get_board_height(*this));
   assert(get_square_width(*this) == get_square_height(*this));
 
+}
+
+
+std::vector<screen_rect> collect_screen_rects(const game_view_layout& layout)
+{
+  std::vector<screen_rect> v;
+  v.push_back(layout.get_background());
+  v.push_back(layout.get_board().get_board());
+  for (const auto s: get_all_sides())
+  {
+    v.push_back(layout.get_controls(s).get_background());
+    v.push_back(layout.get_debug(s));
+    v.push_back(layout.get_log(s));
+    v.push_back(layout.get_unit_info(s));
+  }
+  return v;
 }
 
 game_coordinate convert_to_game_coordinate(
@@ -261,6 +277,12 @@ void test_game_view_layout()
     assert(get_board_width(layout) == get_board_height(layout));
     assert(get_square_width(layout) == get_square_height(layout));
   }
+  // collect_screen_rects
+  {
+    const game_view_layout layout;
+    const auto v{collect_screen_rects(layout)};
+    assert(v.size() == 10);
+  }
   // get_controls_key
   {
     const game_view_layout layout;
@@ -375,6 +397,26 @@ void test_game_view_layout()
     assert(layout.get_navigation_controls(side::lhs) != layout.get_navigation_controls(side::rhs));
   }
   #endif
+}
+
+std::string to_wkt(const game_view_layout& layout)
+{
+  const auto rs = collect_screen_rects(layout);
+  std::stringstream s;
+  for (const screen_rect& r: rs)
+  {
+    s << to_wkt(r) << '\n';
+  }
+  std::string t{s.str()};
+  assert(!t.empty());
+  t.pop_back();
+  return t;
+}
+
+void to_wkt_file(const game_view_layout& layout, const std::string filename)
+{
+  std::ofstream f(filename);
+  f << to_wkt(layout);
 }
 
 std::ostream& operator<<(std::ostream& os, const game_view_layout& layout) noexcept

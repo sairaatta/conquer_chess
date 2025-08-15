@@ -4,6 +4,7 @@
 
 #include "about_view.h"
 #include "controls_view.h"
+#include "diagnostics_file.h"
 #include "draw.h"
 #include "game_options.h"
 #include "game_resources.h"
@@ -125,6 +126,9 @@ void main_window::process_resize_event(sf::Event& event)
 {
   assert(event.type == sf::Event::Resized);
 
+  // Add screen size to diagnostics file
+  diagnostics_file().add_screen_size(event.size.width, event.size.height);
+
   // From https://www.sfml-dev.org/tutorials/2.2/graphics-view.php#showing-more-when-the-window-is-resized
   const sf::FloatRect visible_area(0, 0, event.size.width, event.size.height);
   get_render_window().setView(sf::View(visible_area));
@@ -134,6 +138,7 @@ void main_window::process_resize_event(sf::Event& event)
   {
     m_views[s]->process_resize_event(event);
   }
+
 }
 
 void main_window::set_new_state(const program_state s)

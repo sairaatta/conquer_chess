@@ -135,6 +135,32 @@ bool is_in(const screen_coordinate& pos, const screen_rect& r) noexcept;
 /// Test this class and its free functions
 void test_screen_rect();
 
+/// Convert a \link{screen_rect} to a Well Known Text string.
+///
+/// The order of the polygon points is
+///
+/// - Top left
+/// - Top right
+/// - Bottom right
+/// - Bottom left
+///
+/// For example,
+///
+/// ```
+/// const screen_rect r(
+///   screen_coordinate(1, 2),
+///   screen_coordinate(3, 4)
+/// )
+/// ```
+///
+/// Turns into:
+///
+/// ```
+/// POLYGON((1 2, 3 2, 3 4, 1 4))
+/// ```
+///
+std::string to_wkt(const screen_rect& r) noexcept;
+
 bool operator==(const screen_rect& lhs, const screen_rect& rhs) noexcept;
 bool operator!=(const screen_rect& lhs, const screen_rect& rhs) noexcept;
 
