@@ -283,7 +283,16 @@ void test_game_view_layout()
     // Monitor is wider than high, #138
     assert(get_width(layout.get_background()) > get_height(layout.get_background()));
 
-     //
+    // Debug is in screen, #138
+    assert(is_in(layout.get_debug(side::lhs), layout.get_background()));
+
+    // All rects within background
+    for (const auto r: collect_screen_rects(layout))
+    {
+      const auto background{layout.get_background()};
+      if (r == background) continue;
+      assert(is_in(r, background));
+    }
   }
   // collect_screen_rects
   {

@@ -256,6 +256,15 @@ bool is_in(const screen_coordinate& pos, const screen_rect& r) noexcept
   ;
 }
 
+bool is_in(const screen_rect& inner_rect, const screen_rect& outer_rect) noexcept
+{
+  // Maybe good enough?
+  return
+       is_in(inner_rect.get_tl(), outer_rect)
+    && is_in(inner_rect.get_br(), outer_rect)
+  ;
+}
+
 void test_screen_rect()
 {
 #ifndef NDEBUG
@@ -522,7 +531,7 @@ void test_screen_rect()
     assert(r.get_br().get_x() > 320);
     assert(r.get_br().get_y() > 200);
   }
-  // is_in
+  // is_in, points
   {
     const screen_rect r(
       screen_coordinate(10, 20),
@@ -534,6 +543,29 @@ void test_screen_rect()
     assert(!is_in(screen_coordinate(50, 0), r));
     assert(!is_in(screen_coordinate(60, 600), r));
   }
+  // is_in, rects
+  {
+    const screen_rect outer(
+      screen_coordinate(0, 0),
+      screen_coordinate(100, 100)
+    );
+    const screen_rect inner(
+      screen_coordinate(10, 10),
+      screen_coordinate(90, 90)
+    );
+    const screen_rect bad_tl(
+      screen_coordinate(-10, 0),
+      screen_coordinate(90, 90)
+    );
+    const screen_rect bad_br(
+      screen_coordinate(10, 10),
+      screen_coordinate(100, 110)
+    );
+    assert(is_in(inner, outer));
+    assert(!is_in(bad_tl, outer));
+    assert(!is_in(bad_br, outer));
+  }
+  // to_wkt
   {
     const screen_rect r(
       screen_coordinate(1, 2),

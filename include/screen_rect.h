@@ -132,6 +132,9 @@ int get_width(const screen_rect& r) noexcept;
 /// Is the coordinat in the rectangle?
 bool is_in(const screen_coordinate& pos, const screen_rect& r) noexcept;
 
+/// Is the coordinat in the rectangle?
+bool is_in(const screen_rect& inner_rect, const screen_rect& outer_rect) noexcept;
+
 /// Test this class and its free functions
 void test_screen_rect();
 

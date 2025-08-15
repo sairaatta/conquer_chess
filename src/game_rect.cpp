@@ -39,6 +39,7 @@ bool is_in(const game_coordinate& pos, const game_rect& r) noexcept
   ;
 }
 
+
 void test_game_rect()
 {
 #ifndef NDEBUG
@@ -73,7 +74,7 @@ void test_game_rect()
     assert(c.get_x() == 6);
     assert(c.get_y() == 3);
   }
-  // is_in
+  // is_in, points
   {
     const game_rect r(
       game_coordinate(10, 20),
