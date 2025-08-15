@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # From https://stackoverflow.com/a/44542839/3364162
 # color=$( convert filename.png -format "%[pixel:p{0,0}]" info:- )
@@ -9,3 +10,4 @@
 
 # From https://stackoverflow.com/a/24511102/3364162
 convert original.png -fuzz 10% -transparent white transparent.png
+
