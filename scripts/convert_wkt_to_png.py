@@ -40,12 +40,15 @@ def wkt_polygon_to_png(wkt_file, png_file):
 
 if len(sys.argv) != 3:
     print(
-      "FATAL ERROR. ",
-      "Please add the filename of the input and output file. ",
-      " ",
-      "For example: ",
-      " ",
-      ".wkt_polygon_to_png.py from.wkt to.png"
+      "FATAL ERROR.\n",
+      "\n",
+      "Please add the filename of the input and output file.\n",
+      "\n",
+      "For example:\n",
+      "\n",
+      "  ./wkt_polygon_to_png.py from.wkt to.png \n",
+      "\n",
+      sep = ''
     )
     sys.exit(42)
 
