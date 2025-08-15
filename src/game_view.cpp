@@ -70,8 +70,6 @@ void game_view::tick_impl(delta_t dt)
 
   // Show the new state
   draw_impl();
-
-  //game_resources::get().get_songs().get_wonderful_time().stop();
 }
 
 const physical_controller& get_physical_controller(const game_view& view, const side player_side)
@@ -170,6 +168,16 @@ bool game_view::process_event_impl(sf::Event& event)
     {
       set_next_state(program_state::lobby);
       return false;
+    }
+    if (key_pressed == sf::Keyboard::Key::F7)
+    {
+      // Use a lower resolution
+      m_layout = game_view_layout(
+        screen_rect(
+          screen_coordinate(0,0),
+          screen_coordinate(1600, 900)
+        )
+      );
     }
   }
 
