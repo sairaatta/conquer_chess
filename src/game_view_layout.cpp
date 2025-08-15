@@ -131,6 +131,7 @@ std::vector<screen_rect> collect_screen_rects(const game_view_layout& layout)
   std::vector<screen_rect> v;
   v.push_back(layout.get_background());
   v.push_back(layout.get_board().get_board());
+  v.push_back(layout.get_game_info().get_background());
   for (const auto s: get_all_sides())
   {
     v.push_back(layout.get_controls(s).get_background());
@@ -281,12 +282,14 @@ void test_game_view_layout()
 
     // Monitor is wider than high, #138
     assert(get_width(layout.get_background()) > get_height(layout.get_background()));
+
+     //
   }
   // collect_screen_rects
   {
     const game_view_layout layout;
     const auto v{collect_screen_rects(layout)};
-    assert(v.size() == 10);
+    assert(v.size() == 11);
   }
   // get_controls_key
   {
