@@ -15,31 +15,57 @@
 #include <sstream>
 
 game_view_layout::game_view_layout(
-  const screen_rect& r,
-  const int margin_width
+  const screen_rect& r
 ) : m_background{r}
 {
-  const int unit_info_height{300};
 
-  /// 2 for the ASDW, then 1 per action key
-  const int controls_height{(2 + 4) * 64};
-
+  // Vertical
+  const int margin_height{get_default_margin_width()};
+  const int debug_top_bar_height{24}; // The F3 info oneliners
   const int h{get_height(r)};
+
+
+  const int controls_height{(2 + 4) * 64}; // 2 for the ASDW, then 1 per action key
+  const int unit_info_height{300};
+  const int game_info_height{80};
 
   const int log_panel_height{
     (
       h
-      - (4 * margin_width)
+      - (5 * margin_height)
       - unit_info_height
       - controls_height
+      - game_info_height
+      - debug_top_bar_height
     )
     / 2
   };
   const int debug_panel_height{log_panel_height};
+
+  // Width
+  const int margin_width{get_default_margin_width()};
+  const int w{get_width(r)};
+
   const int panel_width{300};
-  const int game_info_height{80};
-  const int board_width{64 * 8};
+  const int board_width_1{
+    w - (2 * panel_width) - (4 * margin_width)
+  };
+
+  // Height again
+  const int board_height_1{
+    h
+    - (5 * margin_height)
+    //- unit_info_height // Here is where it hangs out
+    //- controls_height // Here is where it hangs out
+    - game_info_height
+    - log_panel_height
+    - debug_panel_height
+    - debug_top_bar_height
+  };
+  const int board_width{std::min(board_width_1, board_height_1)};
+  assert(board_width > 0);
   const int board_height{board_width};
+  assert(board_height > 0);
   assert(board_width == board_height);
 
   const int x1{margin_width};
@@ -51,14 +77,15 @@ game_view_layout::game_view_layout(
   const int x7{x6 + margin_width};
   const int x8{x7 + panel_width};
 
-  const int y1{24 + margin_width};
+  const int y1{debug_top_bar_height + margin_height};
   const int y2{y1 + unit_info_height};
-  const int y3{y2 + controls_height - game_info_height};
-  const int y4{y3 + game_info_height};
-  const int y5{y4 + margin_width};
-  const int y6{y5 + log_panel_height};
-  const int y7{y6 + margin_width};
-  const int y8{y7 + debug_panel_height};
+  const int y3{y2 + controls_height};
+  const int y4{y3 + margin_height};
+  const int y5{y4 + game_info_height};
+  const int y6{y5 + margin_width};
+  const int y7{y6 + log_panel_height};
+  const int y8{y7 + margin_width};
+  const int y9{y8 + debug_panel_height};
 
   // Unit info and controls
   for (const side s: get_all_sides())
@@ -95,12 +122,12 @@ game_view_layout::game_view_layout(
       case side::rhs: x_left = x5; x_right = x8; break;
     }
     m_log[s] = screen_rect(
-      screen_coordinate(x_left, y5),
-      screen_coordinate(x_right, y6)
+      screen_coordinate(x_left, y6),
+      screen_coordinate(x_right, y7)
       );
     m_debug[s] = screen_rect(
-      screen_coordinate(x_left, y7),
-      screen_coordinate(x_right, y8)
+      screen_coordinate(x_left, y8),
+      screen_coordinate(x_right, y9)
     );
   }
 
@@ -114,8 +141,8 @@ game_view_layout::game_view_layout(
 
   // Game info
   m_game_statistics = screen_rect(
-    screen_coordinate(x3, y3),
-    screen_coordinate(x6, y4)
+    screen_coordinate(x1, y4),
+    screen_coordinate(x8, y5)
   );
 
   // Must be square
@@ -423,6 +450,18 @@ void test_game_view_layout()
   {
     const game_view_layout layout;
     const std::string filename{"tmp_game_view_layout.wkt"};
+    if (std::filesystem::exists(filename))
+    {
+      std::filesystem::remove(filename);
+    }
+    assert(!std::filesystem::exists(filename));
+    to_wkt_file(layout, filename);
+    assert(std::filesystem::exists(filename));
+  }
+  // to_wkt_file for 1600x900
+  {
+    const game_view_layout layout;
+    const std::string filename{"tmp_game_view_layout_1600_x_900.wkt"};
     if (std::filesystem::exists(filename))
     {
       std::filesystem::remove(filename);

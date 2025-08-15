@@ -189,10 +189,7 @@ void game_view::process_resize_event_impl(sf::Event& event)
     screen_coordinate(0, 0),
     screen_coordinate(event.size.width, event.size.height)
   );
-  m_layout = game_view_layout(
-    w,
-    get_default_margin_width()
-  );
+  m_layout = game_view_layout(w);
   m_controls_bar.set_screen_rect(w);
 }
 
