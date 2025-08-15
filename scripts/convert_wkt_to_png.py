@@ -52,3 +52,5 @@ if len(sys.argv) != 3:
 wkt_file = sys.argv[1]
 png_file = sys.argv[2]
 wkt_polygon_to_png(wkt_file, png_file)
+
+
