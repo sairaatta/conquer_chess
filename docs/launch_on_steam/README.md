@@ -16,11 +16,20 @@ Conquer Chess is not yet provided as
 [a stand-alone Linux executable](https://github.com/richelbilderbeek/conquer_chess/issues/120).
 For now, these libraries must be installed by the user :-/
 
-In a terminal, install the Qt and SFML libraries:
+In a terminal, install the SFML libraries:
 
 ```bash
-sudo apt install libqt6core6t64 libqt6gui6t64 libqt6widgets6t64 libsfml-* 
+sudo apt install libsfml-* 
 ```
+
+In a terminal, install the Qt libraries (:warning: this is untested):
+
+```bash
+sudo apt install libqt6core* libqt6gui* libqt6widgets* 
+```
+
+
+
 
 This is only partially tested on Ubuntu 24.04 LTS
 and is not tested on other Linux distributions.
