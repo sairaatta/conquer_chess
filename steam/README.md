@@ -38,7 +38,7 @@ Waiting for user info...OK
 
 Build:
 
-```
+```bash
 Steam>run_app_build /home/richel/GitHubs/conquer_chess/steam/app_build_3873940.vdf
 [2025-08-13 17:15:28]: Starting AppID 3873940 build (flags 0x0).
 [2025-08-13 17:15:28]: Building depot 3873941...

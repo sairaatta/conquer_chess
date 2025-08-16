@@ -31,6 +31,10 @@ Users that submit a proper bug report will be
 
 ## Missing libraries
 
-```
+<!-- markdownlint-disable MD013 --><!-- Verbatim output cannot be split up over lines, hence will break 80 characters per line -->
+
+```text
 ./conquer_chess: error while loading shared libraries: libsfml-graphics.so.2.6: cannot open shared object file: No such file or directory
 ```
+
+<!-- markdownlint-enable MD013 -->
