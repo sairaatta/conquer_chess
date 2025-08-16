@@ -12,6 +12,7 @@ tags:
 - Selecting the portraits for the classic pieces: Johanna Söderström
 - Bug report: Leonid Rutkowski
 - Beta testing: Björn Engström
+- Beta testing: Herman Adsten
 
 ## Fellow programmers
 
