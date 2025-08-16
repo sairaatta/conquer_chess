@@ -6,7 +6,7 @@
 ~/.local/share/Steam/steamapps/common/SteamLinuxRuntime_sniper
 ```
 
-## Valve Data Format 
+## Valve Data Format
 
 These are files that setup the relation
 between application and depot.

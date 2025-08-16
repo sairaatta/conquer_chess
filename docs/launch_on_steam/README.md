@@ -29,8 +29,6 @@ sudo apt install libqt6core* libqt6gui* libqt6widgets*
 ```
 
 
-
-
 This is only partially tested on Ubuntu 24.04 LTS
 and is not tested on other Linux distributions.
 
