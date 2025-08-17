@@ -12,11 +12,11 @@ tags:
 ![The Conquer Chess contributors](contributors.png)
 
 - Artwork:
-  - Johanna Söderström
-- Beta testing: 
-  - Björn Engström
-  - Herman Adsten
-  - Leonid Rutkowski
+    - Johanna Söderström
+- Beta testing:
+    - Björn Engström
+    - Herman Adsten
+    - Leonid Rutkowski
 
 ## Fellow programmers
 
