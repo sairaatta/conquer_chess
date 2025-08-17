@@ -15,6 +15,8 @@ std::string get_homepage_url() noexcept
 std::vector<sf::String> get_contributor_names() noexcept
 {
   return {
+    sf::String(L"Björn Engström"),
+    sf::String(L"Herman Adsten"),
     sf::String(L"Johanna Söderström"),
     sf::String(L"Leonid Rutkowski")
   };
