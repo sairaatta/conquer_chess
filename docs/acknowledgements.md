@@ -35,4 +35,6 @@ these are my favorite, in alphabetical order:
 - `Harstem`
 - `Lowko`
 - `PiG`
+- `uThermal`
+- `winter`
 - `ZombieGrub`
