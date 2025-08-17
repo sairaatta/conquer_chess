@@ -9,10 +9,14 @@ tags:
 
 ## Contributors
 
-- Selecting the portraits for the classic pieces: Johanna Söderström
-- Bug report: Leonid Rutkowski
-- Beta testing: Björn Engström
-- Beta testing: Herman Adsten
+![The Conquer Chess contributors](contributors.png)
+
+- Artwork:
+  - Johanna Söderström
+- Beta testing: 
+  - Björn Engström
+  - Herman Adsten
+  - Leonid Rutkowski
 
 ## Fellow programmers
 

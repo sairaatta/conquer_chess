@@ -35,7 +35,7 @@ void test_about()
   }
   // get_contributor_names
   {
-    assert(get_contributor_names().size() == 2);
+    assert(get_contributor_names().size() == 4);
   }
 #endif // NDEBUG
 }

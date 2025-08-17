@@ -10,6 +10,7 @@ about_view_layout::about_view_layout(
 {
   const int panel_height{64};
   const int panel_width{800};
+  const int contributors_height{panel_height * 4};
   const int x1{128};
   const int x2{x1 + margin_width};
   const int x3{x2 + panel_width};
@@ -25,7 +26,7 @@ about_view_layout::about_view_layout(
   const int y8{y7 + margin_width};
   const int y9{y8 + (1 * panel_height)};
   const int y10{y9 + margin_width};
-  const int y11{y10 + (2 * panel_height)};
+  const int y11{y10 + contributors_height};
   const int y12{y11 + margin_width};
 
   m_title = screen_rect(
