@@ -20,6 +20,9 @@ if [[ "$PWD" =~ scripts$ ]]; then
     exit 42
 fi
 
+echo "Update build script"
+
+
 echo "Creating new build"
 
 steamcmd +login richelbilderbeek +run_app_build /home/richel/GitHubs/conquer_chess/steam/app_build_3873940.vdf +quit
