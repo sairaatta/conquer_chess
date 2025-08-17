@@ -140,6 +140,13 @@ map_textures& game_resources::get_map_textures() noexcept
   return m_map_textures.value();
 }
 
+misc_textures& game_resources::get_misc_textures() noexcept
+{
+  if (!m_misc_textures) m_misc_textures = misc_textures();
+  assert(m_misc_textures);
+  return m_misc_textures.value();
+}
+
 int game_resources::get_n_artwork_textures() noexcept
 {
   return get_artwork_textures().get_n_textures();
