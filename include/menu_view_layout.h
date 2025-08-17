@@ -67,33 +67,28 @@ public:
     const int margin_width = get_default_margin_width()
   );
 
-  /// Get a screen rect
+  /// Get the rectangle to indicate selectness of an item
   const screen_rect& get_selectable_rect(const menu_view_item item) const noexcept;
 
-  /// The rectangle around the buttons
-  const auto& get_menu_panel() const noexcept { return m_menu_panel; }
-
-  /// The screen area where the frames per seconds are displayed
-  const auto& get_title() const noexcept { return m_title; }
-  const auto& get_subtitle() const noexcept { return m_subtitle; }
-  const auto& get_background_image() const noexcept { return m_background_image; }
-  const auto& get_start() const noexcept { return m_start; }
   const auto& get_about() const noexcept { return m_about; }
+  const auto& get_background_image() const noexcept { return m_background_image; }
+  const auto& get_menu_panel() const noexcept { return m_menu_panel; }
   const auto& get_options() const noexcept { return m_options; }
   const auto& get_quit() const noexcept { return m_quit; }
+  const auto& get_start() const noexcept { return m_start; }
+  const auto& get_subtitle() const noexcept { return m_subtitle; }
+  const auto& get_title() const noexcept { return m_title; }
 
 private:
 
-  /// The panel around the buttons
-  screen_rect m_menu_panel;
-
-  screen_rect m_title;
-  screen_rect m_subtitle;
-  screen_rect m_background_image;
-  screen_rect m_start;
-  screen_rect m_options;
   screen_rect m_about;
+  screen_rect m_background_image;
+  screen_rect m_menu_panel;
+  screen_rect m_options;
   screen_rect m_quit;
+  screen_rect m_start;
+  screen_rect m_subtitle;
+  screen_rect m_title;
 };
 
 /// Get the panels in the layout

@@ -37,7 +37,19 @@ void draw_about_button(const screen_rect& sr)
     key_rect,
     sf::Color(128, 128, 128, 128)
   );
-
+  const screen_rect discord_rect{
+    screen_coordinate(
+      sr.get_br().get_x() - 64 - 16,
+      sr.get_br().get_y() - 64 - 16
+    ),
+    screen_coordinate(
+      sr.get_br().get_x() - 16,
+      sr.get_br().get_y() - 16
+    )
+  };
+  draw_discord_logo(
+    discord_rect
+  );
 }
 
 void draw_big_text(const sf::String& s, const screen_rect& sr)
@@ -75,6 +87,17 @@ void draw_controls_label(const screen_rect& sr)
   get_render_window().draw(rectangle);
 
   draw_normal_fancy_text("Controls", sr);
+}
+
+void draw_discord_logo(const screen_rect& sr)
+{
+  sf::RectangleShape rectangle;
+
+  set_rect(rectangle, sr);
+  rectangle.setTexture(
+    &game_resources::get().get_misc_textures().get_discord_logo()
+  );
+  get_render_window().draw(rectangle);
 }
 
 void draw_fancy_physical_controller_label(const physical_controller_type& t, const screen_rect& sr)
