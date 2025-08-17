@@ -1,13 +1,13 @@
 "DepotBuild"
 {
     "DepotID" "3873941"
-    "ContentRoot" "../"
+    "ContentRoot" "."
 
     "FileMapping"
     {
-        "LocalPath" "../build/Desktop-Debug/conquer_chess"
+        "LocalPath" "conquer_chess"
         "DepotPath" "."
-        "Recursive" "1"
+        "Recursive" "0"
     }
     "FileExclusion" "*.png"
     "FileExclusion" "*.ogg"
