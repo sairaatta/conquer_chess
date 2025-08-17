@@ -12,6 +12,7 @@
 #include "loading_screen_fonts.h"
 #include "loading_screen_songs.h"
 #include "loading_screen_textures.h"
+#include "misc_textures.h"
 #include "map_textures.h"
 #include "message.h"
 #include "physical_controller_textures.h"
@@ -66,6 +67,7 @@ public:
   int get_n_loading_screen_textures() noexcept;
   int get_n_lobby_menu_textures() noexcept;
   int get_n_map_textures() noexcept;
+  int get_n_misc_textures() noexcept;
   int get_n_options_menu_textures() noexcept;
   int get_n_physical_controller_type_textures() noexcept;
   int get_n_piece_action_textures() noexcept;
@@ -85,6 +87,8 @@ public:
   lobby_menu_textures& get_lobby_menu_textures() noexcept;
 
   map_textures& get_map_textures() noexcept;
+
+  misc_textures& get_misc_textures() noexcept;
 
   options_menu_textures& get_options_menu_textures() noexcept;
 
@@ -118,6 +122,7 @@ private:
   static std::optional<loading_screen_textures> m_loading_screen_textures;
   static std::optional<lobby_menu_textures> m_lobby_menu_textures;
   static std::optional<map_textures> m_map_textures;
+  static std::optional<misc_textures> m_misc_textures;
   static std::optional<options_menu_textures> m_options_menu_textures;
   static std::optional<physical_controller_textures> m_physical_controller_type_textures;
   static std::optional<piece_action_textures> m_piece_action_textures;

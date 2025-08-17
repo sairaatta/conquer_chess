@@ -16,6 +16,7 @@ std::optional<loading_screen_fonts> game_resources::m_loading_screen_fonts = {};
 loading_screen_songs * game_resources::m_loading_screen_songs{nullptr};
 std::optional<loading_screen_textures> game_resources::m_loading_screen_textures = {};
 std::optional<map_textures> game_resources::m_map_textures = {};
+std::optional<misc_textures> game_resources::m_misc_textures = {};
 std::optional<physical_controller_textures> game_resources::m_physical_controller_type_textures = {};
 std::optional<piece_action_textures> game_resources::m_piece_action_textures = {};
 std::optional<piece_textures> game_resources::m_piece_textures = {};
@@ -182,6 +183,11 @@ int game_resources::get_n_loading_screen_textures() noexcept
 int game_resources::get_n_map_textures() noexcept
 {
   return get_map_textures().get_n_textures();
+}
+
+int game_resources::get_n_misc_textures() noexcept
+{
+  return get_misc_textures().get_n_textures();
 }
 
 int game_resources::get_n_physical_controller_type_textures() noexcept
