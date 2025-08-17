@@ -9,6 +9,7 @@ nav:
   - Gameplay: gameplay.md
   - Lauch on Steam: launch_on_steam/README.md
   - Report a bug: report_a_bug.md
+  - Community: community.md
   - Misc:
     - Acknowledgements: acknowledgements.md
     - Architecture: architecture/README.md
