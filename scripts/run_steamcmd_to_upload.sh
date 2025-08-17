@@ -2,7 +2,24 @@
 #
 # Run steamcmd to create a new build
 #
+# Usage:
 #
+#   ./scripts/run_steamcmd_to_upload.sh
+#
+#
+
+if [[ "$PWD" =~ scripts$ ]]; then
+    echo "FATAL ERROR."
+    echo "Please run the script from the project root. "
+    echo "Present working director: $PWD"
+    echo " "
+    echo "Tip: like this"
+    echo " "
+    echo "  ./scripts/run_steamcmd_to_upload.sh"
+    echo " "
+    exit 42
+fi
+
 echo "Creating new build"
 
 steamcmd +login richelbilderbeek +run_app_build /home/richel/GitHubs/conquer_chess/steam/app_build_3873940.vdf
