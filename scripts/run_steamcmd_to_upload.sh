@@ -22,6 +22,7 @@ fi
 
 echo "Update build script"
 
+sed -i "s/  \"Desc\".*/  \"Desc\" \"Upload at $(date)\"/g" steam/app_build_3873940.vdf
 
 echo "Creating new build"
 
