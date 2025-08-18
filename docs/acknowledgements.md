@@ -14,8 +14,8 @@ tags:
 - Artwork:
     - Johanna Söderström
 - Beta testing:
-    - Björn Engström
-    - Herman Adsten
+    - [Björn Engström](https://github.com/bEPHen)
+    - [Herman Adsten](https://github.com/hha2011)
     - Leonid Rutkowski
 
 ## Fellow programmers
