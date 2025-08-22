@@ -48,7 +48,7 @@ CONFIG(debug, debug|release) {
 }
 
 # Qt5
-QT += core gui widgets
+QT += core
 
 # SFML
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
