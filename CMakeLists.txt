@@ -16,10 +16,18 @@ set(BUILD_SHARED_LIBS OFF)
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 
-find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+set(SFML_DIR "C:/SFML-2.6.1/lib/cmake/SFML")
 
+
+find_package(SFML 2.6 COMPONENTS system window graphics network audio REQUIRED)
+
+
+find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
 qt_standard_project_setup()
+
 
 file(GLOB SFGRAPHING_SRC "${CMAKE_SOURCE_DIR}/../SFGraphing/src/*.cpp")
 file(GLOB LOCAL_SRC "${CMAKE_SOURCE_DIR}/src/*.cpp")
@@ -539,7 +547,7 @@ if(CMAKE_BUILD_TYPE STREQUAL Release)
         NDEBUG
     )
 
-    target_compile_options(conquer_chess
+    target_compile_options(conquer_chess PRIVATE
         -pg
     )
 endif()
@@ -562,13 +570,23 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 endif()
 
 if(WIN32)
+    
+    target_include_directories(conquer_chess PRIVATE C:/SFML-2.6.1/include)
+
     target_include_directories(conquer_chess PRIVATE
-        ../SFML/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/magic_enum/include
+)
+
+
+     # Add chess-library headers
+    target_include_directories(conquer_chess PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/../chess-library/include
     )
 
-    target_link_libraries(conquer_chess PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/../SFML/lib
-    )
+    # SFGraphing headers
+    target_include_directories(conquer_chess PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../SFGraphing/include
+)
 endif()
 
 install(TARGETS conquer_chess
