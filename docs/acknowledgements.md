@@ -9,10 +9,14 @@ tags:
 
 ## Contributors
 
-- Selecting the portraits for the classic pieces: Johanna Söderström
-- Bug report: Leonid Rutkowski
-- Beta testing: Björn Engström
-- Beta testing: Herman Adsten
+![The Conquer Chess contributors](contributors.png)
+
+- Artwork:
+    - Johanna Söderström
+- Beta testing:
+    - [Björn Engström](https://github.com/bEPHen)
+    - [Herman Adsten](https://github.com/hha2011)
+    - Leonid Rutkowski
 
 ## Fellow programmers
 
@@ -31,4 +35,6 @@ these are my favorite, in alphabetical order:
 - `Harstem`
 - `Lowko`
 - `PiG`
+- `uThermal`
+- `winter`
 - `ZombieGrub`

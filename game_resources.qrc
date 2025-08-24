@@ -3,6 +3,7 @@
         <file>resources/fonts/16114_FuturistFixed-width.ttf</file>
         <file>resources/fonts/arial.ttf</file>
         <file>resources/fonts/CodeSquaredRegular-AYRg.ttf</file>
+        <file>resources/textures/misc/discord_logo.png</file>
         <file>resources/textures/input_prompts/input_prompt_textures.xml</file>
         <file>resources/textures/input_prompts/keyboard_0_outline.png</file>
         <file>resources/textures/input_prompts/keyboard_0.png</file>

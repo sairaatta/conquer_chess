@@ -55,12 +55,5 @@ and force the use of 'Legacy runtime 1.0':
 
 Click on 'Play' to start Conquer Chess.
 
-If nothing happens, try to run the game from the terminal:
-
-```bash
-cd ~/.local/share/Steam/steamapps/common/conquer_chess
-./conquer_chess
-cat conquer_chess_error.txt
-```
-
-Please [report a bug](../report_a_bug.md) with the error messages.
+If nothing happens,
+consider [reporting a pre-game bug](../report_a_pre_game_bug.md).

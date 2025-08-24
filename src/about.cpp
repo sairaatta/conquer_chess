@@ -16,6 +16,8 @@ std::string get_homepage_url() noexcept
 std::vector<sf::String> get_contributor_names() noexcept
 {
   return {
+    sf::String(L"Björn Engström"),
+    sf::String(L"Herman Adsten"),
     sf::String(L"Johanna Söderström"),
     sf::String(L"Leonid Rutkowski")
   };
@@ -34,7 +36,7 @@ void test_about()
   }
   // get_contributor_names
   {
-    assert(get_contributor_names().size() == 2);
+    assert(get_contributor_names().size() == 4);
   }
 #endif // NDEBUG
 }

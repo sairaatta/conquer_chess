@@ -140,9 +140,14 @@ void resource_loader::process_next()
         + std::to_string(resources.get_n_board_game_textures())
         + " board game textures";
       break;
-    default:
     case 19:
-      assert(m_index == 19);
+      m_descriptor = "Loaded "
+        + std::to_string(resources.get_n_misc_textures())
+        + " miscellaneous textures";
+      break;
+    default:
+    case 20:
+      assert(m_index == 20);
       assert(m_index + 1 == get_n_items() && "Decrease the value in resource_load::get_n_items");
       m_descriptor = "Loaded "
         + std::to_string(resources.get_n_textures())

@@ -33,6 +33,11 @@ void draw_chessboard_strip_texture(const chess_color c, const screen_rect& sr);
 /// A fancy label that shows the text 'Controls'
 void draw_controls_label(const screen_rect& sr);
 
+/// Draw a Discord logo
+void draw_discord_logo(
+  const screen_rect& r
+);
+
 /// Draw the fancy physical controller texture with a text on it
 void draw_fancy_physical_controller_label(const physical_controller_type& t, const screen_rect& sr);
 
