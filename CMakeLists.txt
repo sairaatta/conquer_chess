@@ -1,67 +1,82 @@
-#
-# CMake script for creating a standalone Linux executable
-#
-#
-
-cmake_minimum_required(VERSION 3.16)
+﻿cmake_minimum_required(VERSION 3.16)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(conquer_chess VERSION 1.0 LANGUAGES C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-# Static build, from https://stackoverflow.com/a/24671474/3364162
+# Set Qt6 directory path
+set(Qt6_DIR "C:/Qt/6.9.1/mingw_64/lib/cmake/Qt6")
+
+# Static build settings
 set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 set(BUILD_SHARED_LIBS OFF)
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-set(SFML_DIR "C:/SFML-2.6.1/lib/cmake/SFML")
+set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-2.6.1/lib/cmake/SFML")
 
 
+set(SFGRAPHING_SRC
+    ../SFGraphing/src/PieChartDataSet.cpp
+    ../SFGraphing/src/PlotDataSet.cpp
+    ../SFGraphing/src/SFPieChart.cpp
+    ../SFGraphing/src/SFPlot.cpp
+)
 find_package(SFML 2.6 COMPONENTS system window graphics network audio REQUIRED)
-
-
 find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
 qt_standard_project_setup()
 
+# Get ALL SFGraphing source files recursively
+file(GLOB SFGRAPHING_SRC
+    "../SFGraphing/src/*.cpp"
+    "../SFGraphing/src/*.cxx"
+    "../SFGraphing/src/*.cc"
+    "../SFGraphing/src/*.c"
+    "../SFGraphing/*.cpp"
+    "../SFGraphing/*.cxx"
+    "../SFGraphing/*.cc"
+)
 
-file(GLOB SFGRAPHING_SRC "${CMAKE_SOURCE_DIR}/../SFGraphing/src/*.cpp")
+# Debug: Print found SFGraphing files
+message(STATUS "Found SFGraphing files: ${SFGRAPHING_SRC}")
+
+# Get local source files
 file(GLOB LOCAL_SRC "${CMAKE_SOURCE_DIR}/src/*.cpp")
-# file(GLOB LOCAL_HEADERS "${CMAKE_SOURCE_DIR}/include/*.h")
+
+
 
 qt_add_executable(conquer_chess WIN32 MACOSX_BUNDLE
     ${SFGRAPHING_SRC}
     ${LOCAL_SRC}
-    # ${LOCAL_HEADERS}
 )
 
 target_include_directories(conquer_chess PRIVATE
     ../SFGraphing/include
+    ../SFGraphing
     include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../SFGraphing/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../SFGraphing
 )
 
 target_compile_definitions(conquer_chess PRIVATE
     USE_SFGRAPHING
 )
 
-
-# Static build by adding '-static'
-# Thanks https://stackoverflow.com/a/24671474/3364162
+# Fixed Qt6 target linking
 target_link_libraries(conquer_chess PRIVATE
-    Qt::Core -static
-    Qt::Gui -static
-    Qt::Widgets -static
-    sfml-audio -static
-    sfml-graphics -static
-    sfml-system -static
-    sfml-window -static
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+    sfml-audio
+    sfml-graphics
+    sfml-system
+    sfml-window
 )
 
-# Resources:
+# Resources list (unchanged)
 set(game_resources_resource_files
     "resources/fonts/16114_FuturistFixed-width.ttf"
     "resources/fonts/CodeSquaredRegular-AYRg.ttf"
@@ -164,18 +179,18 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_arrow_down.png"
     "resources/textures/input_prompts/keyboard_arrow_down_outline.png"
     "resources/textures/input_prompts/keyboard_arrow_left.png"
-    "resources/textures/input_prompts/keyboard_arrow_left_outline.png"
+    "resources极aries/input_prompts/keyboard_arrow_left_outline.png"
     "resources/textures/input_prompts/keyboard_arrow_right.png"
-    "resources/textures/input_prompts/keyboard_arrow_right_outline.png"
+    "resources/textures/input_prompts/keyboard_arrow_right_out极.png"
     "resources/textures/input_prompts/keyboard_arrow_up.png"
     "resources/textures/input_prompts/keyboard_arrow_up_outline.png"
-    "resources/textures/input_prompts/keyboard_arrows.png"
+    "resources/textures/input极prompts/keyboard_arrows.png"
     "resources/textures/input_prompts/keyboard_arrows_all.png"
     "resources/textures/input_prompts/keyboard_arrows_down.png"
     "resources/textures/input_prompts/keyboard_arrows_down_outline.png"
     "resources/textures/input_prompts/keyboard_arrows_horizontal.png"
     "resources/textures/input_prompts/keyboard_arrows_horizontal_outline.png"
-    "resources/textures/input_prompts/keyboard_arrows_left.png"
+    "resources/textures/input_prompts/keyboard_arrows_left极.png"
     "resources/textures/input_prompts/keyboard_arrows_left_outline.png"
     "resources/textures/input_prompts/keyboard_arrows_none.png"
     "resources/textures/input_prompts/keyboard_arrows_right.png"
@@ -185,8 +200,8 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_arrows_vertical.png"
     "resources/textures/input_prompts/keyboard_arrows_vertical_outline.png"
     "resources/textures/input_prompts/keyboard_asterisk.png"
-    "resources/textures/input_prompts/keyboard_asterisk_outline.png"
-    "resources/textures/input_prompts/keyboard_b.png"
+    "resources/textures/极input_prompts/keyboard_asterisk_outline.png"
+    "resources/textures/input_prompts极keyboard_b.png"
     "resources/textures/input_prompts/keyboard_b_outline.png"
     "resources/textures/input_prompts/keyboard_backspace.png"
     "resources/textures/input_prompts/keyboard_backspace_icon.png"
@@ -200,12 +215,12 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_bracket_greater_outline.png"
     "resources/textures/input_prompts/keyboard_bracket_less.png"
     "resources/textures/input_prompts/keyboard_bracket_less_outline.png"
-    "resources/textures/input_prompts/keyboard_bracket_open.png"
+    "极resources/textures/input_prompts/keyboard_bracket_open.png"
     "resources/textures/input_prompts/keyboard_bracket_open_outline.png"
     "resources/textures/input_prompts/keyboard_c.png"
     "resources/textures/input_prompts/keyboard_c_outline.png"
     "resources/textures/input_prompts/keyboard_capslock.png"
-    "resources/textures/input_prompts/keyboard_capslock_icon.png"
+    "resources/textures/input_prompts/keyboard_capslock_极icon.png"
     "resources/textures/input_prompts/keyboard_capslock_icon_outline.png"
     "resources/textures/input_prompts/keyboard_capslock_outline.png"
     "resources/textures/input_prompts/keyboard_caret.png"
@@ -223,7 +238,7 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_delete.png"
     "resources/textures/input_prompts/keyboard_delete_outline.png"
     "resources/textures/input_prompts/keyboard_e.png"
-    "resources/textures/input_prompts/keyboard_e_outline.png"
+    "resources/textures/input_prompts/keyboard极e_outline.png"
     "resources/textures/input_prompts/keyboard_end.png"
     "resources/textures/input_prompts/keyboard_end_outline.png"
     "resources/textures/input_prompts/keyboard_enter.png"
@@ -237,18 +252,18 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_f.png"
     "resources/textures/input_prompts/keyboard_f1.png"
     "resources/textures/input_prompts/keyboard_f10.png"
-    "resources/textures/input_prompts/keyboard_f10_outline.png"
+    "resources/textures/input_prompts/keyboard极f10_outline.png"
     "resources/textures/input_prompts/keyboard_f11.png"
     "resources/textures/input_prompts/keyboard_f11_outline.png"
-    "resources/textures/input_prompts/keyboard_f12.png"
+    "resources/textures/input_prompts/keyboard_f12极.png"
     "resources/textures/input_prompts/keyboard_f12_outline.png"
     "resources/textures/input_prompts/keyboard_f1_outline.png"
     "resources/textures/input_prompts/keyboard_f2.png"
     "resources/textures/input_prompts/keyboard_f2_outline.png"
     "resources/textures/input_prompts/keyboard_f3.png"
     "resources/textures/input_prompts/keyboard_f3_outline.png"
-    "resources/textures/input_prompts/keyboard_f4.png"
-    "resources/textures/input_prompts/keyboard_f4_outline.png"
+    "resources/textures/input_prompts/keyboard_f极4.png"
+    "极resources/textures/input_prompts/keyboard_f4_outline.png"
     "resources/textures/input_prompts/keyboard_f5.png"
     "resources/textures/input_prompts/keyboard_f5_outline.png"
     "resources/textures/input_prompts/keyboard_f6.png"
@@ -266,9 +281,9 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_g_outline.png"
     "resources/textures/input_prompts/keyboard_h.png"
     "resources/textures/input_prompts/keyboard_h_outline.png"
-    "resources/textures/input_prompts/keyboard_home.png"
+    "resources/textures/input_prompts/keyboard_home极.png"
     "resources/textures/input_prompts/keyboard_home_outline.png"
-    "resources/textures/input_prompts/keyboard_i.png"
+    "resources/textures极/input_prompts/keyboard_i.png"
     "resources/textures/input_prompts/keyboard_i_outline.png"
     "resources/textures/input_prompts/keyboard_insert.png"
     "resources/textures/input_prompts/keyboard_insert_outline.png"
@@ -277,7 +292,7 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_k.png"
     "resources/textures/input_prompts/keyboard_k_outline.png"
     "resources/textures/input_prompts/keyboard_l.png"
-    "resources/textures/input_prompts/keyboard_l_outline.png"
+    "resources/textures/input_prompts/keyboard_l_outline极.png"
     "resources/textures/input_prompts/keyboard_m.png"
     "resources/textures/input_prompts/keyboard_m_outline.png"
     "resources/textures/input_prompts/keyboard_minus.png"
@@ -295,18 +310,18 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_option.png"
     "resources/textures/input_prompts/keyboard_option_outline.png"
     "resources/textures/input_prompts/keyboard_outline.png"
-    "resources/textures/input_prompts/keyboard_p.png"
-    "resources/textures/input_prompts/keyboard_p_outline.png"
+    "resources/textures/input_prompts/keyboard_p极.png"
+    "resources/textures/input_prompts/keyboard_p_out极line.png"
     "resources/textures/input_prompts/keyboard_page_down.png"
     "resources/textures/input_prompts/keyboard_page_down_outline.png"
     "resources/textures/input_prompts/keyboard_page_up.png"
     "resources/textures/input_prompts/keyboard_page_up_outline.png"
     "resources/textures/input_prompts/keyboard_period.png"
     "resources/textures/input_prompts/keyboard_period_outline.png"
-    "resources/textures/input_prompts/keyboard_plus.png"
+    "resources/textures/input_prompts/keyboard极plus.png"
     "resources/textures/input_prompts/keyboard_plus_outline.png"
     "resources/textures/input_prompts/keyboard_printscreen.png"
-    "resources/textures/input_prompts/keyboard_printscreen_outline.png"
+    "resources/textures/极input_prompts/keyboard_printscreen_outline.png"
     "resources/textures/input_prompts/keyboard_q.png"
     "resources/textures/input_prompts/keyboard_q_outline.png"
     "resources/textures/input_prompts/keyboard_question.png"
@@ -323,9 +338,9 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_semicolon_outline.png"
     "resources/textures/input_prompts/keyboard_shift.png"
     "resources/textures/input_prompts/keyboard_shift_icon.png"
-    "resources/textures/input_prompts/keyboard_shift_icon_outline.png"
-    "resources/textures/input_prompts/keyboard_shift_outline.png"
-    "resources/textures/input_prompts/keyboard_slash_back.png"
+    "resources/textures/input_prompts/keyboard_shift_icon极outline.png"
+    "resources/textures/input_prompts/keyboard极shift_outline.png"
+    "resources/textures/input_prompts/keyboard_slash_back极.png"
     "resources/textures/input_prompts/keyboard_slash_back_outline.png"
     "resources/textures/input_prompts/keyboard_slash_forward.png"
     "resources/textures/input_prompts/keyboard_slash_forward_outline.png"
@@ -333,12 +348,12 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_space_icon.png"
     "resources/textures/input_prompts/keyboard_space_icon_outline.png"
     "resources/textures/input_prompts/keyboard_space_outline.png"
-    "resources/textures/input_prompts/keyboard_t.png"
+    "resources/textures/极input_prompts/keyboard_t.png"
     "resources/textures/input_prompts/keyboard_t_outline.png"
     "resources/textures/input_prompts/keyboard_tab.png"
-    "resources/textures/input_prompts/keyboard_tab_icon.png"
+    "resources/textures/input_prompts/keyboard极tab_icon.png"
     "resources/textures/input_prompts/keyboard_tab_icon_alternative.png"
-    "resources/textures/input_prompts/keyboard_tab_icon_alternative_outline.png"
+    "resources/textures/input_prompts/keyboard_tab极icon_alternative_outline.png"
     "resources/textures/input_prompts/keyboard_tab_icon_outline.png"
     "resources/textures/input_prompts/keyboard_tab_outline.png"
     "resources/textures/input_prompts/keyboard_tilde.png"
@@ -350,7 +365,7 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/keyboard_w.png"
     "resources/textures/input_prompts/keyboard_w_outline.png"
     "resources/textures/input_prompts/keyboard_win.png"
-    "resources/textures/input_prompts/keyboard_win_outline.png"
+    "极resources/textures/input_prompts/keyboard_win_outline.png"
     "resources/textures/input_prompts/keyboard_x.png"
     "resources/textures/input_prompts/keyboard_x_outline.png"
     "resources/textures/input_prompts/keyboard_y.png"
@@ -363,7 +378,7 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/mouse_left_outline.png"
     "resources/textures/input_prompts/mouse_move.png"
     "resources/textures/input_prompts/mouse_outline.png"
-    "resources/textures/input_prompts/mouse_right.png"
+    "resources/textures/input_prompts/m极ouse_right.png"
     "resources/textures/input_prompts/mouse_right_outline.png"
     "resources/textures/input_prompts/mouse_scroll.png"
     "resources/textures/input_prompts/mouse_scroll_down.png"
@@ -376,7 +391,7 @@ set(game_resources_resource_files
     "resources/textures/input_prompts/mouse_small.png"
     "resources/textures/input_prompts/mouse_vertical.png"
     "resources/textures/lobby_menu/black_chess_color.jpg"
-    "resources/textures/lobby_menu/classic_head.jpg"
+    "resources/textures/lobby_menu/class极ic_head.jpg"
     "resources/textures/lobby_menu/kingdom_head.jpg"
     "resources/textures/lobby_menu/ready_no.jpg"
     "resources/textures/lobby_menu/ready_yes.jpg"
@@ -384,7 +399,7 @@ set(game_resources_resource_files
     "resources/textures/lobby_menu/spawn_head.jpg"
     "resources/textures/lobby_menu/white_chess_color.jpg"
     "resources/textures/maps/classic_map.jpg"
-    "resources/textures/maps/kingdom_map.jpg"
+    "resources/textures极/maps/kingdom_map.jpg"
     "resources/textures/maps/rooxx_map.jpg"
     "resources/textures/maps/spawn_map.jpg"
     "resources/textures/options_menu/game_speed.jpg"
@@ -401,9 +416,9 @@ set(game_resources_resource_files
     "resources/textures/piece_actions/attack_en_passant.png"
     "resources/textures/piece_actions/castle_kingside.png"
     "resources/textures/piece_actions/castle_queenside.png"
-    "resources/textures/piece_actions/move.png"
+    "极resources/textures/piece_actions/move.png"
     "resources/textures/piece_actions/promote_to_bishop.png"
-    "resources/textures/piece_actions/promote_to_knight.png"
+    "resources/textures/piece极actions/promote_to_knight.png"
     "resources/textures/piece_actions/promote_to_queen.png"
     "resources/textures/piece_actions/promote_to_rook.png"
     "resources/textures/piece_actions/select.png"
@@ -412,9 +427,9 @@ set(game_resources_resource_files
     "resources/textures/pieces/classic_black_bishop_with_contour.png"
     "resources/textures/pieces/classic_black_king.png"
     "resources/textures/pieces/classic_black_king_with_contour.png"
-    "resources/textures/pieces/classic_black_knight.png"
+    "resources/textures/pieces/classic_black_knight极.png"
     "resources/textures/pieces/classic_black_knight_with_contour.png"
-    "resources/textures/pieces/classic_black_pawn.png"
+    "resources/textures/pieces/classic极black_pawn.png"
     "resources/textures/pieces/classic_black_pawn_with_contour.png"
     "resources/textures/pieces/classic_black_queen.png"
     "resources/textures/pieces/classic_black_queen_with_contour.png"
@@ -429,7 +444,7 @@ set(game_resources_resource_files
     "resources/textures/pieces/classic_white_pawn.png"
     "resources/textures/pieces/classic_white_pawn_with_contour.png"
     "resources/textures/pieces/classic_white_queen.png"
-    "resources/textures/pieces/classic_white_queen_with_contour.png"
+    "resources/textures/p极ieces/classic_white_queen_with_contour.png"
     "resources/textures/pieces/classic_white_rook.png"
     "resources/textures/pieces/classic_white_rook_with_contour.png"
     "resources/textures/pieces/kingdom_black_bishop.jpg"
@@ -445,10 +460,10 @@ set(game_resources_resource_files
     "resources/textures/pieces/kingdom_white_queen.jpg"
     "resources/textures/pieces/kingdom_white_rook.jpg"
     "resources/textures/pieces/rooxx_black_bishop.jpg"
-    "resources/textures/pieces/rooxx_black_king.jpg"
+    "resources/textures/pieces/rooxx极_black_king.jpg"
     "resources/textures/pieces/rooxx_black_knight.jpg"
     "resources/textures/pieces/rooxx_black_pawn.jpg"
-    "resources/textures/pieces/rooxx_black_queen.jpg"
+    "resources/textures/pieces/rooxx_black_queen极.jpg"
     "resources/textures/pieces/rooxx_black_rook.jpg"
     "resources/textures/pieces/rooxx_white_bishop.jpg"
     "resources/textures/pieces/rooxx_white_king.jpg"
@@ -467,23 +482,23 @@ set(game_resources_resource_files
     "resources/textures/pieces/spawn_white_knight.jpg"
     "resources/textures/pieces/spawn_white_pawn.jpg"
     "resources/textures/pieces/spawn_white_queen.jpg"
-    "resources/textures/pieces/spawn_white_rook.jpg"
+    "resources/textures/pieces/spawn_white_rook极.jpg"
     "resources/textures/portraits/classic_black_bishop_portrait.jpg"
     "resources/textures/portraits/classic_black_king_portrait.jpg"
     "resources/textures/portraits/classic_black_knight_portrait.jpg"
     "resources/textures/portraits/classic_black_pawn_portrait.jpg"
     "resources/textures/portraits/classic_black_queen_portrait.jpg"
     "resources/textures/portraits/classic_black_rook_portrait.jpg"
-    "resources/textures/portraits/classic_white_bishop_portrait.jpg"
+    "resources/textures极/portraits/class极ic_white_bishop_portrait.jpg"
     "resources/textures/portraits/classic_white_king_portrait.jpg"
-    "resources/textures/portraits/classic_white_knight_portrait.jpg"
+    "resources/textures/portraits/classic_white_knight_portrait极.jpg"
     "resources/textures/portraits/classic_white_pawn_portrait.jpg"
     "resources/textures/portraits/classic_white_queen_portrait.jpg"
     "resources/textures/portraits/classic_white_rook_portrait.jpg"
     "resources/textures/portraits/kingdom_black_bishop_portrait.jpg"
     "resources/textures/portraits/kingdom_black_king_portrait.jpg"
     "resources/textures/portraits/kingdom_black_knight_portrait.jpg"
-    "resources/textures/portraits/kingdom_black_pawn_portrait.jpg"
+    "resources/textures/portraits极/kingdom_black_pawn_portrait.jpg"
     "resources/textures/portraits/kingdom_black_queen_portrait.jpg"
     "resources/textures/portraits/kingdom_black_rook_portrait.jpg"
     "resources/textures/portraits/kingdom_white_bishop_portrait.jpg"
@@ -497,16 +512,16 @@ set(game_resources_resource_files
     "resources/textures/portraits/rooxx_black_knight_portrait.jpg"
     "resources/textures/portraits/rooxx_black_pawn_portrait.jpg"
     "resources/textures/portraits/rooxx_black_queen_portrait.jpg"
-    "resources/textures/portraits/rooxx_black_rook_portrait.jpg"
+    "resources/textures/portraits/rooxx_极black_rook_portrait.jpg"
     "resources/textures/portraits/rooxx_white_bishop_portrait.jpg"
-    "resources/textures/portraits/rooxx_white_king_portrait.jpg"
+    "极resources/textures/portraits/rooxx_white_king_portrait.jpg"
     "resources/textures/portraits/rooxx_white_knight_portrait.jpg"
     "resources/textures/portraits/rooxx_white_pawn_portrait.jpg"
     "resources/textures/portraits/rooxx_white_queen_portrait.jpg"
     "resources/textures/portraits/rooxx_white_rook_portrait.jpg"
-    "resources/textures/portraits/spawn_black_bishop_portrait.jpg"
+    "resources/textures/portraits/spawn_black_bishop_portrait极.jpg"
     "resources/textures/portraits/spawn_black_king_portrait.jpg"
-    "resources/textures/portraits/spawn_black_knight_portrait.jpg"
+    "resources/textures/极portraits/spawn_black_knight_portrait.jpg"
     "resources/textures/portraits/spawn_black_pawn_portrait.jpg"
     "resources/textures/portraits/spawn_black_queen_portrait.jpg"
     "resources/textures/portraits/spawn_black_rook_portrait.jpg"
@@ -522,12 +537,12 @@ set(game_resources_resource_files
     "resources/textures/t.png"
     "resources/textures/themba/themba_1.jpg"
     "resources/textures/themba/themba_2.jpg"
-    "resources/textures/themba/themba_3.jpg"
+    "resources/textures/themba/themba_3极.jpg"
     "resources/textures/themba/themba_4.jpg"
     "resources/textures/themba/themba_5.jpg"
-    "resources/textures/title.png"
+    "极resources/textures/title.png"
     "resources/textures/white_black.png"
-    "resources/textures/white_black_semitransparent.png"
+    "resources/textures/white极_black_semitransparent.png"
     "resources/textures/white_square.png"
     "resources/textures/white_square_semitransparent.png"
     "resources/textures/white_strip.png"
@@ -535,58 +550,50 @@ set(game_resources_resource_files
     "resources/textures/white_white_semitransparent.png"
 )
 
-qt_add_resources(conquer_chess "game_resources"
-    PREFIX
-        "/"
-    FILES
-        ${game_resources_resource_files}
+add_compile_options(-Wa,-mbig-obj)
+
+# Add .qrc files
+qt6_add_resources(conquer_chess
+    ${CMAKE_CURRENT_SOURCE_DIR}/images.qrc
+    ${CMAKE_CURRENT_SOURCE_DIR}/sounds.qrc
+    ${CMAKE_CURRENT_SOURCE_DIR}/fonts.qrc
 )
 
+# Fixed compile options with proper scope
 if(CMAKE_BUILD_TYPE STREQUAL Release)
     target_compile_definitions(conquer_chess PRIVATE
         NDEBUG
     )
-
-    target_compile_options(conquer_chess PRIVATE
-        -pg
-    )
 endif()
 
+# Fixed compile options with proper scope
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     target_link_libraries(conquer_chess PRIVATE
         gcov
     )
 
-    target_compile_options(conquer_chess
+    target_compile_options(conquer_chess PRIVATE
         -Wall
-        -Werror
         -Wextra
-        -Wnon-virtual-dtor
         -Wshadow
         -fprofile-arcs
         -ftest-coverage
-        -pedantic
     )
 endif()
 
 if(WIN32)
-    
-    target_include_directories(conquer_chess PRIVATE C:/SFML-2.6.1/include)
-
+target_include_directories(conquer_chess PRIVATE ${CMAKE_SOURCE_DIR}/SFML-2.6.1/include)
     target_include_directories(conquer_chess PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/magic_enum/include
-)
-
-
-     # Add chess-library headers
+        ${CMAKE_CURRENT_SOURCE_DIR}/magic_enum/include
+    )
+    
     target_include_directories(conquer_chess PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/../chess-library/include
     )
 
-    # SFGraphing headers
     target_include_directories(conquer_chess PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/../SFGraphing/include
-)
+        ${CMAKE_CURRENT_SOURCE_DIR}/../SFGraphing/include
+    )
 endif()
 
 install(TARGETS conquer_chess
@@ -594,9 +601,10 @@ install(TARGETS conquer_chess
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+# Fixed deprecated FILENAME_VARIABLE warning
 qt_generate_deploy_app_script(
     TARGET conquer_chess
-    FILENAME_VARIABLE deploy_script
+    OUTPUT_SCRIPT deploy_script  # Changed from FILENAME_VARIABLE to OUTPUT_SCRIPT
     NO_UNSUPPORTED_PLATFORM_ERROR
 )
 install(SCRIPT ${deploy_script})

@@ -1,6 +1,7 @@
 #include "SFGraphing/SFPlot.h"
 
-using namespace csrc;
+namespace csrc {
+
 
 void SFPlot::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
@@ -304,4 +305,5 @@ void SFPlot::ClearVertices()
     _axesIndicatorVertexArray.clear();
     _dataSetsVertexArrays.clear();
     _textElementArray.clear();
+}
 }
