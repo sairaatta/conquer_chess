@@ -12,21 +12,26 @@ cache:
   - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
 
 install:
+  # Go to vcpkg folder, update it, and bootstrap
   - cmd: >
       cd %VCPKG_ROOT% &&
       git pull &&
       .\bootstrap-vcpkg.bat
+
+  # Install SFML for x64-windows triplet
   - cmd: >
       %VCPKG_ROOT%\vcpkg.exe install sfml --triplet x64-windows
+
+  # Return to your project folder
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
+
 
 build_script:
   - cmd: >
-      mkdir build && cd build &&
-      cmake -A x64 ..
-        -DCMAKE_BUILD_TYPE=Release
-        -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake
-        -DVCPKG_TARGET_TRIPLET=x64-windows &&
+      cd %APPVEYOR_BUILD_FOLDER% &&
+      mkdir build &&
+      cd build &&
+      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x64-windows" &&
       cmake --build . --config Release
 
 after_build:
