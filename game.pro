@@ -51,16 +51,35 @@ CONFIG(debug, debug|release) {
 QT += core
 
 # SFML
-LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-
 win32 {
-  LIBS += $$PWD/../SFML/lib
-  INCLUDEPATH += $$PWD/../SFML/include
+  # Include path
+  INCLUDEPATH += $$PWD/SFML-2.6.1/include
+
+  # Library path
+  LIBS += -L$$PWD/SFML-2.6.1/lib
+
+  # Link SFML modules
+  LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 }
+
+
 
 # SFGraphing
 DEFINES += USE_SFGRAPHING
-SOURCES += $$PWD/../SFGraphing/src/*.cpp
-INCLUDEPATH += $$PWD/../SFGraphing/include
-HEADERS += $$PWD/../SFGraphing/include/SFGraphing
 
+# Expand all .cpp and .h files explicitly
+SFGRAPHING_SRCS = $$files($$PWD/SFGraphing/src/*.cpp)
+SOURCES += $$SFGRAPHING_SRCS
+
+SFGRAPHING_HDRS = $$files($$PWD/SFGraphing/include/SFGraphing/*.h)
+HEADERS += $$SFGRAPHING_HDRS
+
+# Add include directory
+INCLUDEPATH += $$PWD/SFGraphing/include
+
+# Add chess-library include path
+INCLUDEPATH += $$PWD/chess-library/include
+
+# Debug output (will show when running qmake)
+message("SFGraphing sources: $$SFGRAPHING_SRCS")
+message("SFGraphing headers: $$SFGRAPHING_HDRS")

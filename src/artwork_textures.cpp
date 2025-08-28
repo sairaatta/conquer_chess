@@ -3,6 +3,7 @@
 #ifndef LOGIC_ONLY
 
 #include "game_resources.h"
+#include <SFML/Graphics.hpp>
 
 #include <QFile>
 #include <cassert>
