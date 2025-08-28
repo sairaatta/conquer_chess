@@ -7,6 +7,9 @@
 | `main`    | [![Check build](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml/badge.svg?branch=main)](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml)    | [![codecov](https://codecov.io/gh/richelbilderbeek/conquer_chess/branch/main/graph/badge.svg?token=OWVGV7PST8)](https://codecov.io/gh/richelbilderbeek/conquer_chess)    |
 | `develop` | [![Check build](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml/badge.svg?branch=develop)](https://github.com/richelbilderbeek/conquer_chess/actions/workflows/check_build.yaml) | [![codecov](https://codecov.io/gh/richelbilderbeek/conquer_chess/branch/develop/graph/badge.svg?token=OWVGV7PST8)](https://codecov.io/gh/richelbilderbeek/conquer_chess) |
 
+
+- Windows build: [![Build status](https://ci.appveyor.com/api/projects/status/rom1qe03qfl84ky1?svg=true)](https://ci.appveyor.com/project/richelbilderbeek/conquer-chess)
+
 <!-- markdownlint-enable MD013 -->
 
 Chess variant.
