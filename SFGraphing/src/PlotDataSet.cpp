@@ -9,14 +9,21 @@ PlotDataSet::PlotDataSet()
     _pType = PlottingType::POINTS;
 }
 
-PlotDataSet::PlotDataSet(const sf::Color& color, const std::string& label, const PlottingType& type)
-    : _color(color), _label(label), _pType(type)
+PlotDataSet::PlotDataSet(const std::vector<float>& xValues,
+                         const std::vector<float>& yValues,
+						 const sf::Color& color, 
+						 const std::string& label,
+						 const PlottingType& type)
+    : _xValues(xValues), _yValues(yValues), _color(color), _label(label), _pType(type)
 {
 }
 
-PlotDataSet::PlotDataSet(const std::vector<float>& xValues, const std::vector<float>& yValues, const sf::Color& color, const std::string& label,
+PlotDataSet::PlotDataSet(const std::vector<float>& xValues,
+                         const std::vector<float>& yValues,
+                         const sf::Color& color,
+                         const std::string& label,
                          const PlottingType& type)
-    : _xValues(xValues), _yValues(yValues), _color(color), _label(label), _pType(type)
+    : _yValues(yValues), _xValues(xValues), _color(color), _label(label), _pType(type)
 {
     if (_xValues.size() != _yValues.size())
     {
