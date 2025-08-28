@@ -1,2 +1,5 @@
 RESOURCES += \
-    $$PWD/game_resources.qrc
+    $$PWD/images.qrc \
+    $$PWD/fonts.qrc \
+    $$PWD/sounds.qrc \
+    $$PWD/sounds2.qrc

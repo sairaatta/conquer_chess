@@ -26,8 +26,7 @@ build_script:
       cmake -A x64 ..
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake
-        -DVCPKG_TARGET_TRIPLET=x64-windows
-        .. &&
+        -DVCPKG_TARGET_TRIPLET=x64-windows &&
       cmake --build . --config Release
 
 after_build:
