@@ -16,7 +16,6 @@ set(CMAKE_EXE_LINKER_FLAGS "-static")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-3.0.0/lib/cmake/SFML")
 
 
 set(SFGRAPHING_SRC
@@ -25,7 +24,7 @@ set(SFGRAPHING_SRC
     ../SFGraphing/src/SFPieChart.cpp
     ../SFGraphing/src/SFPlot.cpp
 )
-find_package(SFML 3 COMPONENTS System Window Graphics Network Audio REQUIRED)
+find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Audio Network)
 find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
 qt_standard_project_setup()
 
@@ -70,11 +69,13 @@ target_link_libraries(conquer_chess PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
-    SFML::Audio
     SFML::Graphics
-    SFML::System
     SFML::Window
+    SFML::System
+    SFML::Audio
+    SFML::Network
 )
+
 
 # Resources list (unchanged)
 set(game_resources_resource_files
@@ -580,7 +581,6 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 endif()
 
 if(WIN32)
-    target_include_directories(conquer_chess PRIVATE ${CMAKE_SOURCE_DIR}/SFML-3.0.0/include)
     target_include_directories(conquer_chess PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/magic_enum/include
     )
