@@ -70,10 +70,10 @@ target_link_libraries(conquer_chess PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
-    sfml-audio
-    sfml-graphics
-    sfml-system
-    sfml-window
+    SFML::Audio
+    SFML::Graphics
+    SFML::System
+    SFML::Window
 )
 
 # Resources list (unchanged)
@@ -580,7 +580,7 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 endif()
 
 if(WIN32)
-target_include_directories(conquer_chess PRIVATE ${CMAKE_SOURCE_DIR}/SFML-3.0.0/include)
+    target_include_directories(conquer_chess PRIVATE ${CMAKE_SOURCE_DIR}/SFML-3.0.0/include)
     target_include_directories(conquer_chess PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/magic_enum/include
     )
