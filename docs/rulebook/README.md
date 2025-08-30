@@ -27,6 +27,13 @@ one should assume that the rulebook is correct.
 
 TODO: [Consider allowing multiple chessboards per match](https://github.com/richelbilderbeek/conquer_chess/issues/122).
   
+- `[1.1.CC.0]` The time unit used in the game is a chess move.
+
+  For example, one can say: 'It takes one chess move to move a piece'.
+
+  How much seconds a chess move takes is set up in the game options.
+  From this, one can say: 'A chess move takes 8 seconds'.
+
 - `[1.2]` The player with the light-coloured pieces (White)
   makes the first move,
   then the players move alternately,
@@ -37,13 +44,6 @@ TODO: [Consider allowing multiple chessboards per match](https://github.com/rich
   doing its many moves.
 
 TODO: [Consider adding a option that black can never make more moves than white](https://github.com/richelbilderbeek/conquer_chess/issues/111).
-
-- `[1.1.CC.0]` The time unit used in the game is a chess move.
-
-  For example, one can say: 'It takes one chess move to move a piece'.
-
-  How much seconds a chess move takes is set up in the game options.
-  From this, one can say: 'A chess move takes 8 seconds'.
   
 - `[1.2.CC.1]` The pieces of one color are from a race.
 
