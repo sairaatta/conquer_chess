@@ -20,7 +20,8 @@ install:
 
   # Install SFML + Qt dependencies (single-line to avoid cmd parsing issues)
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows qttools:x64-windows --triplet x64-windows --recurse --binarycaching --verbose
+     %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows qttools:x64-windows --triplet x64-windows --recurse --binarycaching
+
 
   # Return to your project folder
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
