@@ -1,4 +1,4 @@
-# Build a Windows x64 Release exe with SFML + Qt via vcpkg and upload it as an artifact.
+# Build a Windows x64 Release exe with SFML + Qt6 via vcpkg and upload it as an artifact.
 version: '{build}'
 image: Visual Studio 2022
 
@@ -7,25 +7,22 @@ environment:
   VCPKG_DEFAULT_TRIPLET: x64-windows
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
 
-# Avoid rebuilds by caching installed vcpkg packages
+# Speed up repeat builds by caching vcpkg-installed packages.
 cache:
   - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
 
-
 install:
-  # Go to vcpkg folder, update, clean caches, and bootstrap
+  # Go to vcpkg folder, update it, and bootstrap
   - cmd: >
       cd %VCPKG_ROOT% &&
       git pull &&
-      rmdir /s /q buildtrees downloads &&
       .\bootstrap-vcpkg.bat
 
-  # Install dependencies (with binary caching & verbose output)
+  # Install SFML + Qt dependencies (single-line to avoid cmd parsing issues)
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows qttools:x64-windows ^
-        --triplet x64-windows --recurse --binarycaching --verbose
+      %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows qttools:x64-windows --triplet x64-windows --recurse --binarycaching --verbose
 
-  # Return to project root
+  # Return to your project folder
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
@@ -33,9 +30,9 @@ build_script:
       cd %APPVEYOR_BUILD_FOLDER% &&
       mkdir build &&
       cd build &&
-      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release ^
-        -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
-        -DVCPKG_TARGET_TRIPLET="x64-windows" ^
+      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release
+        -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake"
+        -DVCPKG_TARGET_TRIPLET="x64-windows"
         -DCMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows\share\qt6" &&
       cmake --build . --config Release
 
@@ -45,7 +42,7 @@ after_build:
       $out  = Join-Path $root 'dist'
       New-Item -ItemType Directory -Force -Path $out | Out-Null
 
-      # Grab first Release exe (adjust if needed)
+      # Grab the first Release exe produced (adjust if you have a specific target exe)
       $exe = Get-ChildItem -Recurse -Filter *.exe -Path "$root\build" |
              Where-Object { $_.FullName -match '\\Release\\' } |
              Sort-Object Length -Descending |
@@ -55,7 +52,7 @@ after_build:
 
       Copy-Item $exe.FullName $out
 
-      # Copy runtime DLLs from vcpkg
+      # Copy SFML + Qt DLLs
       $bin = Join-Path $env:VCPKG_ROOT 'installed\x64-windows\bin'
       $patterns = @(
         'sfml-*.dll',
@@ -71,7 +68,7 @@ after_build:
       )
       foreach ($p in $patterns) { Copy-Item (Join-Path $bin $p) $out -ErrorAction SilentlyContinue }
 
-      # Ship assets if present
+      # Ship game assets if present
       foreach ($folder in @('resources','images')) {
         $src = Join-Path $root $folder
         if (Test-Path $src) { Copy-Item $src $out -Recurse -Force }
