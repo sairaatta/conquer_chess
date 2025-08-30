@@ -20,7 +20,7 @@ install:
 
   # Install SFML for x64-windows triplet
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install sfml --triplet x64-windows
+      %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows qttools:x64-windows --triplet x64-windows
 
   # Return to your project folder
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
@@ -31,7 +31,11 @@ build_script:
       cd %APPVEYOR_BUILD_FOLDER% &&
       mkdir build &&
       cd build &&
-      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x64-windows" &&
+      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release ^
+      -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
+      -DVCPKG_TARGET_TRIPLET="x64-windows" ^
+      find_package(Qt6 CONFIG REQUIRED COMPONENTS Core Gui Widgets)
+-DCMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows\share\qt6" &&
       cmake --build . --config Release
 
 after_build:
