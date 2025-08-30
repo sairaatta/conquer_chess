@@ -11,9 +11,9 @@ environment:
 cache:
   - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
 
-# Increase build timeout (in minutes)
-timeout:
-  build_script: 120
+build:
+  verbosity: minimal
+  timeout: 120   
 
 install:
   # Go to vcpkg folder, update, clean caches, and bootstrap
