@@ -11,9 +11,6 @@ environment:
 cache:
   - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
 
-build:
-  verbosity: minimal
-  timeout: 120   
 
 install:
   # Go to vcpkg folder, update, clean caches, and bootstrap
