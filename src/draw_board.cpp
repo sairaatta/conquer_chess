@@ -193,25 +193,24 @@ void draw_unit_paths(
       };
       const auto from_pixel{get_center(square_from)};
       const auto to_pixel{get_center(square_to)};
-      /*
-      const auto from_pixel{
-        convert_to_screen_coordinate(
-          to_coordinat(action.get_from()),
-          layout
-        )
-      };
-      const auto to_pixel{
-        convert_to_screen_coordinate(
-          to_coordinat(action.get_to()),
-          layout
-        )
-      };
-      */
       const auto center_pixel{(to_pixel + from_pixel) / 2.0};
       const double length{calc_distance(from_pixel, to_pixel)};
       const double angle_degrees{calc_angle_degrees(center_pixel, to_pixel)};
       sf::RectangleShape rect;
-      assert(get_width(square_piece) == get_width(square_to));
+
+      // Bug: sizes mismatch #152
+      {
+        const int square_piece_width{get_width(square_piece)};
+        const int square_to_width{get_width(square_to)};
+        if (square_piece_width != square_to_width)
+        {
+          std::cerr << "ERROR:\n"
+            << "square_piece_width: " << square_piece_width << '\n'
+            << "square_to_width: " << square_to_width << '\n'
+          ;
+        }
+        assert(square_piece_width == square_to_width);
+      }
       assert(get_width(square_from) == get_width(square_to));
       const double max_square_height{static_cast<double>(get_width(square_piece))};
       const double height{std::max(2.0, max_square_height * 0.05)};
