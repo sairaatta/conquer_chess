@@ -294,4 +294,8 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   main_window v;
   v.exec();
   #endif // LOGIC_ONLY
+
+  // Game ended successfully
+  file.add_footer();
+
 }
