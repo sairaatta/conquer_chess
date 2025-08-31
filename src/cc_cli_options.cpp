@@ -14,6 +14,16 @@ cc_cli_options::cc_cli_options(const std::vector<std::string>& args) :
   if (n_args) m_conquer_chess_exe_path = args[0];
   for (int i{1}; i<n_args; ++i)
   {
+    if (!is_valid_cli_arg(args[i]))
+    {
+      std::stringstream s;
+      s
+        << "Invalid CLI argument: '" << args[i] << "'\n"
+        << "Index: " << i << '\n'
+        << "All arguments: " << to_comma_seperated_str(args) << '\n'
+      ;
+      throw std::logic_error(s.str());
+    }
     assert(is_valid_cli_arg(args[i]));
   }
 
@@ -73,6 +83,19 @@ void test_cli_options()
   {
     const cc_cli_options options;
     assert(options.get_do_test());
+  }
+  // constructor with invalid arguments
+  {
+    bool has_thrown{false};
+    try
+    {
+      const cc_cli_options options( { "conquer_chess", "--nonsense" } );
+    }
+    catch (std::logic_error& e)
+    {
+      has_thrown = true;
+    }
+    assert(has_thrown);
   }
   // --assert_to_log
   {
