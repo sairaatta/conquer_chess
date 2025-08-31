@@ -90,6 +90,7 @@
 void test()
 {
 #ifndef NDEBUG
+  test_board_layout();
   //return; // For now
   //test_game_view_layout();
   //test_rules();

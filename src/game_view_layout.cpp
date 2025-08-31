@@ -64,11 +64,14 @@ game_view_layout::game_view_layout(
     - debug_panel_height
     - debug_top_bar_height
   };
-  const int board_width{std::min(board_width_1, board_height_1)};
-  assert(board_width > 0);
+  const int board_width_too_big{std::min(board_width_1, board_height_1)};
+  assert(board_width_too_big > 0);
+  const int board_width{board_width_too_big - (board_width_too_big % 8)};
   const int board_height{board_width};
   assert(board_height > 0);
   assert(board_width == board_height);
+  assert(board_width % 8 == 0 && "All squares must be of equal size");
+  assert(board_height % 8 == 0 && "All squares must be of equal size");
 
   const int x1{margin_width};
   const int x2{x1 + panel_width};
@@ -139,6 +142,8 @@ game_view_layout::game_view_layout(
   }
 
   // Board
+  assert(board_width % 8 == 0 && "All squares must be of equal size");
+  assert(board_height % 8 == 0 && "All squares must be of equal size");
   m_board = board_layout(
     screen_rect(
       screen_coordinate(x3, y1),

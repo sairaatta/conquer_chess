@@ -9,6 +9,8 @@ board_layout::board_layout(const screen_rect& r)
 {
   assert(get_width(r) >= 8);
   assert(get_height(r) >= 8);
+  assert(get_width(r) % 8 == 0 && "All squares must be of equal size");
+  assert(get_height(r) % 8 == 0 && "All squares must be of equal size");
 
 
   // Create the x coordinates of the squares
@@ -108,6 +110,27 @@ void test_board_layout()
     assert(get_height(layout) == 64);
     assert(get_width(layout.get_board()) == 64);
     assert(get_height(layout.get_board()) == 64);
+  }
+  // All squares have the same width and height, #152
+  {
+    const screen_coordinate tl(618, 40);
+    // This invalid bottom-right caused the problem
+    //const screen_coordinate br(1302, 724);
+
+    const screen_coordinate br(618 + 64, 40 + 64);
+    const board_layout layout(screen_rect(tl, br));
+    const int w{get_width(layout.get_square(0, 0).get_square())};
+    const int h{get_width(layout.get_square(0, 0).get_square())};
+    for (int i{0}; i!=8; ++i)
+    {
+      for (int j{0}; j!=8; ++j)
+      {
+        const int w_here{get_width(layout.get_square(i, j).get_square())};
+        const int h_here{get_width(layout.get_square(i, j).get_square())};
+        assert(w == w_here);
+        assert(h == h_here);
+      }
+    }
   }
 
 #endif // NDEBUG
