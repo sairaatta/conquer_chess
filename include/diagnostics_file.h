@@ -1,6 +1,8 @@
 #ifndef DIAGNOSTICS_FILE_H
 #define DIAGNOSTICS_FILE_H
 
+#include "ccfwd.h"
+
 #include <string>
 
 std::string get_default_diagnostics_filename()  noexcept;
@@ -12,6 +14,7 @@ class diagnostics_file
 {
 public:
   diagnostics_file(const std::string filename = get_default_diagnostics_filename());
+  void add_cli_options(const cc_cli_options& options);
   void add_header();
   void add_screen_size(const int width, const int height);
 

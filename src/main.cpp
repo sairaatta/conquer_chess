@@ -25,7 +25,7 @@
 #include "board_to_text_options.h"
 #include "castling_type.h"
 #include "chess_move.h"
-#include "cli_options.h"
+#include "cc_cli_options.h"
 #include "controls_view_item.h"
 #include "controls_view_layout.h"
 #include "diagnostics_file.h"
@@ -252,18 +252,26 @@ void get_runtime_speed_profile()
 
 int main(int argc, char **argv) //!OCLINT tests may be long
 {
-  // Set up the signal handler for SIGABRT
-  // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
-  signal(SIGABRT, handle_abort_signal);
 
-  // Redirect errors to the error log filename:
-  // errors will be appended
-  std::freopen(get_default_diagnostics_filename().c_str(), "a", stderr);
+  const auto options{cc_cli_options(collect_args(argc, argv))};
+  diagnostics_file file;
 
   // Compile date, current time
-  diagnostics_file().add_header();
+  file.add_header();
 
-  const auto options{cli_options(collect_args(argc, argv))};
+  file.add_cli_options(options);
+
+  if (options.get_do_assert_to_log())
+  {
+    // Set up the signal handler for SIGABRT
+    // From https://www.geeksforgeeks.org/cpp/how-to-handle-sigabrt-signal-in-cpp/
+    signal(SIGABRT, handle_abort_signal);
+
+    // Redirect errors to the error log filename:
+    // errors will be appended
+    std::freopen(get_default_diagnostics_filename().c_str(), "a", stderr);
+  }
+
 
   if (options.get_do_profile())
   {
