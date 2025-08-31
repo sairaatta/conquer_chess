@@ -1,11 +1,14 @@
 #include "cc_cli_options.h"
 
+#include "helper.h"
+
 #include <algorithm>
 #include <cassert>
 #include <sstream>
 #include <iostream>
 
-cc_cli_options::cc_cli_options(const std::vector<std::string>& args)
+cc_cli_options::cc_cli_options(const std::vector<std::string>& args) :
+  m_args{args}
 {
   const int n_args = args.size();
   if (n_args) m_conquer_chess_exe_path = args[0];
@@ -141,12 +144,13 @@ std::ostream& operator<<(std::ostream& os, const cc_cli_options& options) noexce
 {
   os
     << "Conquer Chess executable path: " << options.m_conquer_chess_exe_path << '\n'
-    << "Compiled in debug mode: " << options.m_compiled_in_debug_move << '\n'
-    << "Redirect assert output to log: " << options.m_do_assert_to_log << '\n'
-    << "Play a standard random game: " << options.m_do_play_standard_random_game << '\n'
-    << "Show debug info at startup: " << options.m_do_show_debug_info << '\n'
-    << "Run a run-time speed profile: " << options.m_do_profile << '\n'
-    << "Run all tests: " << options.m_do_test
+    << "Raw CLI arguments: " << to_comma_seperated_str(options.m_args) << '\n'
+    << "Compiled in debug mode: " << bool_to_str(options.m_compiled_in_debug_move) << '\n'
+    << "Redirect assert output to log: " << bool_to_str(options.m_do_assert_to_log) << '\n'
+    << "Play a standard random game: " << bool_to_str(options.m_do_play_standard_random_game) << '\n'
+    << "Show debug info at startup: " << bool_to_str(options.m_do_show_debug_info) << '\n'
+    << "Run a run-time speed profile: " << bool_to_str(options.m_do_profile) << '\n'
+    << "Run all tests: " << bool_to_str(options.m_do_test)
   ;
   return os;
 }

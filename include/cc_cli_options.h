@@ -39,6 +39,9 @@ public:
 
 private:
 
+  /// The original CLI arguments
+  std::vector<std::string> m_args;
+
   std::string m_conquer_chess_exe_path;
 
   #ifndef NDEBUG

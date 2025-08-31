@@ -3,6 +3,7 @@
 #include "game.h"
 #include "game_controller.h"
 #include "game_statistics.h"
+#include "helper.h"
 
 #include <cassert>
 #include <fstream>
@@ -58,30 +59,4 @@ void test_game_statistics_output_file()
     assert(to_comma_seperated_str(v) == "a,b");
   }
 #endif
-}
-
-template<class T>
-std::string to_comma_seperated_str_impl(const std::vector<T>& v)
-{
-  std::stringstream s;
-  for (const auto& t: v)
-  {
-    s << t << ',';
-  }
-  std::string t{s.str()};
-  if (!t.empty()) t.pop_back();
-  return t;
-}
-
-
-// No templates, to reduce compile-time
-std::string to_comma_seperated_str(const std::vector<double>& v)
-{
-  return to_comma_seperated_str_impl(v);
-}
-
-// No templates, to reduce compile-time
-std::string to_comma_seperated_str(const std::vector<std::string>& v)
-{
-  return to_comma_seperated_str_impl(v);
 }

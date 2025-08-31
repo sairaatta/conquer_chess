@@ -291,7 +291,7 @@ int main(int argc, char **argv) //!OCLINT tests may be long
 
   #ifndef LOGIC_ONLY
   std::clog << "Starting game\n";
-  main_window v;
+  main_window v(options);
   v.exec();
   #endif // LOGIC_ONLY
 
