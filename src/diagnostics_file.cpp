@@ -22,6 +22,17 @@ void diagnostics_file::add_cli_options(const cc_cli_options& options)
   ;
 }
 
+void diagnostics_file::add_footer()
+{
+  const auto now = std::chrono::system_clock::now();
+  const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+
+  std::ofstream f(m_filename, std::ios::app); // Append
+  f
+    << "Game ended successfully at " << std::ctime(&now_time) << '\n'
+  ;
+}
+
 void diagnostics_file::add_header()
 {
   const auto now = std::chrono::system_clock::now();

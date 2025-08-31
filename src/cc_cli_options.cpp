@@ -32,6 +32,9 @@ cc_cli_options::cc_cli_options(const std::vector<std::string>& args)
 
   const bool do_play_standard_random_game = std::count(std::begin(args), std::end(args), "--play_standard_random_game");
   if (do_play_standard_random_game) m_do_play_standard_random_game = true;
+
+  const bool do_show_debug_info = std::count(std::begin(args), std::end(args), "--show_debug_info");
+  if (do_show_debug_info) m_do_show_debug_info = true;
 }
 
 std::vector<std::string> collect_args(int argc, char **argv)
@@ -49,6 +52,7 @@ std::vector<std::string> get_all_cli_args() noexcept
     "--no-profile",
     "--play_standard_random_game",
     "--profile",
+    "--show_debug_info",
     "--test"
   };
 }
@@ -121,6 +125,7 @@ void test_cli_options()
     assert(is_valid_cli_arg("--test"));
     assert(is_valid_cli_arg("--no-test"));
     assert(is_valid_cli_arg("--assert_to_log"));
+    assert(is_valid_cli_arg("--show_debug_info"));
   }
   // operator<<
   {
@@ -139,6 +144,7 @@ std::ostream& operator<<(std::ostream& os, const cc_cli_options& options) noexce
     << "Compiled in debug mode: " << options.m_compiled_in_debug_move << '\n'
     << "Redirect assert output to log: " << options.m_do_assert_to_log << '\n'
     << "Play a standard random game: " << options.m_do_play_standard_random_game << '\n'
+    << "Show debug info at startup: " << options.m_do_show_debug_info << '\n'
     << "Run a run-time speed profile: " << options.m_do_profile << '\n'
     << "Run all tests: " << options.m_do_test
   ;

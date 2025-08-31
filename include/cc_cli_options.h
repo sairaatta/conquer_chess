@@ -33,6 +33,10 @@ public:
   auto get_do_test() const noexcept { return m_do_test; }
   auto get_do_play_standard_random_game() const noexcept { return m_do_play_standard_random_game; }
 
+  /// Show the in-game debug info at the start
+  auto get_do_show_debug_info() const noexcept { return m_do_show_debug_info; }
+
+
 private:
 
   std::string m_conquer_chess_exe_path;
@@ -47,6 +51,7 @@ private:
   bool m_do_assert_to_log{false};
   bool m_do_play_standard_random_game{false};
   bool m_do_profile{false};
+  bool m_do_show_debug_info{false};
   bool m_do_test{true};
 
   friend std::ostream& operator<<(std::ostream& os, const cc_cli_options& options) noexcept;
