@@ -15,7 +15,7 @@ get_random_key <- function() {
 }
 
 run <- function(n_presses = 10000) {
-
+  message("You have three seconds to put the Conquer Chess window in focus")
   Sys.sleep(3.0) # seconds
 
   for (i in seq_len(n_presses)) {
