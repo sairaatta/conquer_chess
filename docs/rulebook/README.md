@@ -39,12 +39,16 @@ TODO: [Consider allowing multiple chessboards per match](https://github.com/rich
   then the players move alternately,
   with the player with the dark-coloured pieces (Black) making the next move.
 
-  In Conquer Chess, white can make multiple moves during the time of the first
-  move. After waiting for the duration of one chess move, black can start
-  doing its many moves.
+  In Conquer Chess, one can decide how this works:
 
-TODO: [Consider adding a option that black can never make more moves than white](https://github.com/richelbilderbeek/conquer_chess/issues/111).
-  
+  When to make a move rule|Descriptiom
+  ------------------------|-----------------------
+  `classic`               |Same as regular chess
+  `rts`                   |Both players always can make a move
+  `white_first`           |Black can start making moves after one chess move
+
+TODO: [Allow a user to seta 'when to make a move' rule](https://github.com/richelbilderbeek/conquer_chess/issues/111).
+
 - `[1.2.CC.1]` The pieces of one color are from a race.
 
 - `[1.2.CC.2]` It is allowed that different colors play with a same race.
