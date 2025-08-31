@@ -25,6 +25,7 @@
 #include "board_to_text_options.h"
 #include "castling_type.h"
 #include "chess_move.h"
+#include "cli_options.h"
 #include "controls_view_item.h"
 #include "controls_view_layout.h"
 #include "diagnostics_file.h"
@@ -46,6 +47,7 @@
 #include "game_statistics_view_layout.h"
 #include "in_game_controls_layout.h"
 #include "key_bindings.h"
+#include "laws.h"
 #include "lobby_options.h"
 #include "lobby_view_item.h"
 #include "lobby_view_layout.h"
@@ -71,6 +73,7 @@
 #include "sleep_scheduler.h"
 #include "test_game.h"
 #include "test_rules.h"
+#include "when_to_make_a_move_law.h"
 #ifndef LOGIC_ONLY
 #include "loading_view.h"
 #include "main_window.h"
@@ -105,6 +108,7 @@ void test()
   test_controller();
   test_controls_view_item();
   test_controls_view_layout();
+  test_cli_options();
   test_delta_t();
   test_fen_string();
   test_fps_clock();
@@ -126,6 +130,7 @@ void test()
   test_in_game_controls_layout();
   test_in_game_time();
   test_key_bindings();
+  test_laws();
   test_lobby_options();
   test_lobby_view_item();
   test_lobby_view_layout();
@@ -166,6 +171,7 @@ void test()
   test_user_input();
   test_user_inputs();
   test_volume();
+  test_when_to_make_a_move_law();
 
 #ifndef LOGIC_ONLY
   test_loading_view();
@@ -200,10 +206,6 @@ void handle_abort_signal(int /* signal */)
     ;
 }
 
-std::vector<std::string> collect_args(int argc, char **argv) {
-  std::vector<std::string> v(argv, argv + argc);
-  return v;
-}
 
 void play_standard_random_game()
 {
@@ -261,29 +263,27 @@ int main(int argc, char **argv) //!OCLINT tests may be long
   // Compile date, current time
   diagnostics_file().add_header();
 
-  const auto args = collect_args(argc, argv);
-  if (args.size() == 2 && args[1] == "--profile")
+  const auto options{cli_options(collect_args(argc, argv))};
+
+  if (options.get_do_profile())
   {
     std::clog << "Start profiling\n";
     get_runtime_speed_profile();
   }
-  else if (args.size() == 2 && args[1] == "--play_standard_random_game")
+  if (options.get_do_play_standard_random_game())
   {
     std::clog << "Start playing a standard random game\n";
     play_standard_random_game();
   }
-  else
+  if (options.get_do_test())
   {
-    #ifndef NDEBUG
-    if (args.size() != 2 || args[1] != "--no-test")
-    {
-      test();
-    }
-    #endif
-
-    #ifndef LOGIC_ONLY
-    main_window v;
-    v.exec();
-    #endif // LOGIC_ONLY
+    std::clog << "Start tests\n";
+    test();
   }
+
+  #ifndef LOGIC_ONLY
+  std::clog << "Starting game\n";
+  main_window v;
+  v.exec();
+  #endif // LOGIC_ONLY
 }
