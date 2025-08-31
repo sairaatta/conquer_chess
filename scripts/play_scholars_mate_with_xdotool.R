@@ -35,7 +35,7 @@ xdotool::keystroke("u") # go
 Sys.sleep(sleep_time_secs)
 
 # "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? 4. Qxf7# 1-0"
-#              --
+#              ---
 #
 # White cursor at e4, black at e5
 # White is to move
@@ -56,7 +56,7 @@ xdotool::keystroke("q") # go
 Sys.sleep(sleep_time_secs)
 
 # "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? 4. Qxf7# 1-0"
-#                  --
+#                  ---
 #
 # White cursor at h5, black at e5
 # Black is to move
@@ -73,25 +73,6 @@ xdotool::keystroke("j") # b6
 xdotool::keystroke("k") # c6
 xdotool::keystroke("u") # go
 Sys.sleep(sleep_time_secs)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? 4. Qxf7# 1-0"
 #                         ---
@@ -115,7 +96,7 @@ xdotool::keystroke("q") # go
 Sys.sleep(sleep_time_secs)
 
 # "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? 4. Qxf7# 1-0"
-#                             --
+#                             -----
 #
 # White cursor at c4, black at c6
 # Black is to move
@@ -132,11 +113,8 @@ xdotool::keystroke("i") # f6
 xdotool::keystroke("u") # go
 Sys.sleep(sleep_time_secs)
 
-
-
-
 # "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6?? 4. Qxf7# 1-0"
-#                         ---
+#                                      -----
 #
 # White cursor at c4, black at f6
 # White is to move
