@@ -122,5 +122,5 @@
         <file>resources/textures/pieces/spawn_white_pawn.jpg</file>
         <file>resources/textures/pieces/spawn_white_queen.jpg</file>
         <file>resources/textures/pieces/spawn_white_rook.jpg</file>
-        </qresource>
+     </qresource>
 </RCC>
