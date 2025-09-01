@@ -1,4 +1,4 @@
-# Build a Windows x64 Release exe with SFML + Qt6 via vcpkg and upload it as an artifact.
+# Build a Windows x64 Release exe with SFML (and optional QtCore) via vcpkg
 version: '{build}'
 image: Visual Studio 2022
 
@@ -7,7 +7,7 @@ environment:
   VCPKG_DEFAULT_TRIPLET: x64-windows
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
 
-# Speed up repeat builds by caching vcpkg-installed packages.
+# Speed up repeat builds by caching vcpkg-installed packages
 cache:
   - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
 
@@ -18,12 +18,11 @@ install:
       git pull &&
       .\bootstrap-vcpkg.bat
 
-  # Install SFML + Qt dependencies (single-line to avoid cmd parsing issues)
+  # Install only SFML + minimal QtCore (no GUI/Widgets)
   - cmd: >
-     %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows qttools:x64-windows --triplet x64-windows --recurse --binarycaching
+      %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows --triplet x64-windows --recurse
 
-
-  # Return to your project folder
+  # Return to project folder
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
@@ -31,10 +30,10 @@ build_script:
       cd %APPVEYOR_BUILD_FOLDER% &&
       mkdir build &&
       cd build &&
-      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release
-        -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake"
-        -DVCPKG_TARGET_TRIPLET="x64-windows"
-        -DCMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows\share\qt6" &&
+      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release ^
+      -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
+      -DVCPKG_TARGET_TRIPLET="x64-windows" ^
+      -DCMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows\share\qtbase" &&
       cmake --build . --config Release
 
 after_build:
@@ -43,17 +42,16 @@ after_build:
       $out  = Join-Path $root 'dist'
       New-Item -ItemType Directory -Force -Path $out | Out-Null
 
-      # Grab the first Release exe produced (adjust if you have a specific target exe)
+      # Grab the first Release exe produced
       $exe = Get-ChildItem -Recurse -Filter *.exe -Path "$root\build" |
              Where-Object { $_.FullName -match '\\Release\\' } |
              Sort-Object Length -Descending |
              Select-Object -First 1
 
       if (-not $exe) { throw "No exe found in the Release build." }
-
       Copy-Item $exe.FullName $out
 
-      # Copy SFML + Qt DLLs
+      # Copy runtime DLLs (SFML + QtCore)
       $bin = Join-Path $env:VCPKG_ROOT 'installed\x64-windows\bin'
       $patterns = @(
         'sfml-*.dll',
@@ -65,7 +63,7 @@ after_build:
         'vorbisenc*.dll',
         'zlib*.dll',
         'brotli*.dll',
-        'Qt6*.dll'
+        'Qt6Core*.dll'
       )
       foreach ($p in $patterns) { Copy-Item (Join-Path $bin $p) $out -ErrorAction SilentlyContinue }
 
