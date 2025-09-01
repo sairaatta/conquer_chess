@@ -48,7 +48,7 @@ CONFIG(debug, debug|release) {
 }
 
 # Qt5
-QT += core
+# QT += core
 
 # SFML
 win32 {
