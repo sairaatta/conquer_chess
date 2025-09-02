@@ -2,23 +2,21 @@
 
 #ifndef LOGIC_ONLY
 
-#include <QFile>
 
 #include <cassert>
+#include <filesystem>
 #include <sstream>
 
 piece_action_textures::piece_action_textures()
 {
   for (const auto r: get_all_piece_action_types())
   {
-    const std::string filename_str{get_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/piece_actions/" + filename);
-    f.copy(filename);
-    if (!m_textures[r].loadFromFile(filename.toStdString()))
+    const std::string filename{get_filename(r)};
+    assert(std::filesystem::exists(filename));
+    if (!m_textures[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }
@@ -28,7 +26,7 @@ std::string piece_action_textures::get_filename(
 ) const noexcept
 {
   std::stringstream s;
-  s << t << ".png";
+  s << "resources/textures/piece_actions/" << t << ".png";
   return s.str();
 }
 

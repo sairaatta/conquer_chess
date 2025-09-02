@@ -1,18 +1,16 @@
 #include "loading_screen_fonts.h"
 
-#include <QFile>
+#include <stdexcept>
 
 loading_screen_fonts::loading_screen_fonts()
 {
   // Load font file
   {
-    const QString filename{"arial.ttf"};
-    QFile f(":/resources/fonts/" + filename);
-    f.copy(filename);
-    if (!m_arial_font.loadFromFile(filename.toStdString()))
+    const std::string filename{"resources/fonts/arial.ttf"};
+    if (!m_arial_font.loadFromFile(filename))
     {
-      QString msg{"Cannot find font file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find font file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }

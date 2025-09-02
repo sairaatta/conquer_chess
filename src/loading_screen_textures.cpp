@@ -2,7 +2,6 @@
 
 #ifndef LOGIC_ONLY
 
-#include <QFile>
 //#include <functional>
 #include <cassert>
 #include <sstream>
@@ -11,14 +10,11 @@ loading_screen_textures::loading_screen_textures()
 {
   for (int i=1 ; i!=5; ++i)
   {
-    const std::string filename_str{get_filename(i)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/artwork/" + filename);
-    f.copy(filename);
-    if (!m_all_races[i].loadFromFile(filename.toStdString()))
+    const std::string filename{get_filename(i)};
+    if (!m_all_races[i].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
   /*
@@ -30,13 +26,13 @@ loading_screen_textures::loading_screen_textures()
   };
   for (const auto& p: v)
   {
-    const QString filename{p.second.c_str()};
+    const auto filename{p.second.c_str()};
     QFile f(":/resources/textures/artwork/" + filename);
-    f.copy(filename);
-    if (!p.first.get().loadFromFile(filename.toStdString()))
+
+    if (!p.first.get().loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
   */
@@ -54,7 +50,7 @@ std::string loading_screen_textures::get_filename(
 ) const noexcept
 {
   std::stringstream s;
-  s << "all_races_" << i << ".jpg";
+  s << "resources/textures/artwork/all_races_" << i << ".jpg";
   return s.str();
 }
 

@@ -14,7 +14,7 @@ public:
   physical_controllers(
     const std::vector<physical_controller> controllers = {
       create_left_keyboard_controller(),
-      create_default_mouse_controller()
+      create_right_keyboard_controller()
     }
   );
 

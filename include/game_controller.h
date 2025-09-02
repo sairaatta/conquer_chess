@@ -82,7 +82,10 @@ private:
   /// The options as set in the lobby: sides, colors, races
   lobby_options m_lobby_options;
 
-  /// The selected squares, if any
+  /// The selected squares, if any.
+  ///
+  /// Use \link{check_selected_pieces_exist} if the pieces that
+  /// are selected actually exist
   std::map<side, std::optional<piece_id>> m_selected_piece_id;
 
   /// The user inputs that need to be processed
@@ -100,6 +103,14 @@ private:
   void apply_action_type_promote_to_game(game& g, const piece_type promote_to_type, const side s);
   void apply_action_type_select_to_game(game& g, const side s);
   void apply_action_type_unselect_to_game(game& g, const side s);
+
+  /// Check that the pieces that are selected (by m_selected_piece_id)
+  /// actually exist in m_game
+  void check_selected_pieces_exist();
+
+  /// When pieces die in m_game, this class needs to update the
+  /// selected pieces
+  void update_selectedness_due_to_captures();
 
   friend class game_view;
 };

@@ -705,7 +705,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
         && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
-        assert(!"YAY, triggered en-passant for FIX_ISSUE_21");
+        // This code is indeed active, as found out by Virtual Bastard 2025-09-01
         actions.push_back(piece_action(color, type, piece_action_type::attack_en_passant, from, to_square));
       }
     }
@@ -719,7 +719,7 @@ std::vector<piece_action> collect_all_pawn_en_passant_actions(
         && has_just_double_moved(get_piece_at(g, enemy_square), g.get_in_game_time())
       )
       {
-        assert(!"YAY");
+        // This code can be triggered, e.g. by the Virtual Bastard on 2025-09-01
         actions.push_back(piece_action(color, type, piece_action_type::attack_en_passant, from, to_square));
       }
     }

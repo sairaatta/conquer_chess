@@ -28,21 +28,21 @@
 /// ..........| |              |                        |
 /// ..........| | +----------+ |                        | y6
 /// ..........| | |spaces    | |                        |
-/// ..........| | +----------+ |                        | y7
-/// ..........| |              |                        |
-/// ..........| | +----------+ |                        | y8
-/// ..........| | | start    | |                        |
-/// ..........| | +----------+ |                        | y9
-/// ..........| |              |                        |
-/// ..........| | +----------+ |                        | y10
-/// ..........| | | options  | |                        |
-/// ..........| | +----------+ |                        | y11
-/// ..........| |              |                        |
-/// ..........| | +----------+ |                        | y12
-/// ..........| | | about    | |                        |
-/// ..........| | +----------+ |                        | y13
-/// ..........| |              |                        |
-/// ..........| | +----------+ |                        | y14
+/// ..........| | +----------+ | +--------------+       | y7
+/// ..........| |              | |              |       |
+/// ..........| | +----------+ | | +----------+ |       | y8
+/// ..........| | | start    | | | | laws     | |       |
+/// ..........| | +----------+ | | +----------+ |       | y9
+/// ..........| |              | |              |       |
+/// ..........| | +----------+ | | +----------+ |       | y10
+/// ..........| | | options  | | | | controls | |       |
+/// ..........| | +----------+ | | +----------+ |       | y11
+/// ..........| |              | |              |       |
+/// ..........| | +----------+ | | +----------+ |       | y12
+/// ..........| | | about    | | | | vid&aud  | |       |
+/// ..........| | +----------+ | | +----------+ |       | y13
+/// ..........| |              | |              |       |
+/// ..........| | +----------+ | +--------------+       | y14
 /// ..........| | | quit     | |                        |
 /// ..........| | +----------+ |                        | y15
 /// ..........| |              |                        |
@@ -73,7 +73,19 @@ public:
   const auto& get_about() const noexcept { return m_about; }
   const auto& get_background_image() const noexcept { return m_background_image; }
   const auto& get_menu_panel() const noexcept { return m_menu_panel; }
+
+  /// Main menu, options
   const auto& get_options() const noexcept { return m_options; }
+
+  /// Submenu of options, controls
+  const auto& get_options_controls() const noexcept { return m_options_controls; }
+
+  /// Submenu of options, laws
+  const auto& get_options_laws() const noexcept { return m_options_laws; }
+
+  /// Submenu of options, video and audio
+  const auto& get_options_video_and_audio() const noexcept { return m_options_video_and_audio; }
+
   const auto& get_quit() const noexcept { return m_quit; }
   const auto& get_start() const noexcept { return m_start; }
   const auto& get_subtitle() const noexcept { return m_subtitle; }
@@ -85,6 +97,9 @@ private:
   screen_rect m_background_image;
   screen_rect m_menu_panel;
   screen_rect m_options;
+  screen_rect m_options_controls;
+  screen_rect m_options_laws;
+  screen_rect m_options_video_and_audio;
   screen_rect m_quit;
   screen_rect m_start;
   screen_rect m_subtitle;

@@ -100,6 +100,15 @@ std::vector<std::string> split_str(
 /// Test the help functions.
 void test_helper();
 
+/// Convert a vector to one comma seperated string
+// No templates, to reduce compile-time
+std::string to_comma_seperated_str(const std::vector<double>& v);
+
+/// Convert a vector to one comma seperated string
+// No templates, to reduce compile-time
+std::string to_comma_seperated_str(const std::vector<std::string>& v);
+
+
 /// Convert a string to a wide string
 std::wstring to_wstring(const std::string s);
 

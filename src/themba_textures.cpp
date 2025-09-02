@@ -2,7 +2,6 @@
 
 #ifndef LOGIC_ONLY
 
-#include <QFile>
 #include <cassert>
 
 themba_textures::themba_textures()
@@ -10,13 +9,14 @@ themba_textures::themba_textures()
   for (int i=1; i!=6; ++i)
   {
     const std::string filename_str{get_filename(i)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/themba/" + filename);
-    f.copy(filename);
-    if (!m_textures[i].loadFromFile(filename.toStdString()))
+    const auto filename{
+      std::string("resources/textures/themba/")
+      + filename_str.c_str()
+    };
+    if (!m_textures[i].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }

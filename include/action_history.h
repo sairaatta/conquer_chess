@@ -47,6 +47,19 @@ action_history create_action_history_from_game(const game& g);
 /// Create an action history from a PGN string
 action_history create_action_history_from_pgn(const pgn_game_string& s);
 
+#ifdef REALLY_NEED_ISSUE_153
+// This is quite a complex beast!
+
+/// Create an xdotool script from a PGN string
+/// @param s a PGN string
+/// @param r_filename path to the to-be-made R scrip
+/// @example
+/// const pgn_game_string s("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0");
+/// create_r_scrip_from_pgn(s, "play_scholars_mate.R");
+void create_r_script_from_pgn(const pgn_game_string& s, const std::string& r_filename);
+#endif // REALLY_NEED_ISSUE_153
+
+
 /// Get the number of moves in the action history
 int get_n_piece_actions(const action_history& r) noexcept;
 

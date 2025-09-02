@@ -186,7 +186,41 @@ void test_helper()
     f.close();
     assert(read_lines(filename).size() == 1);
   }
+  // to_comma_seperated_str
+  {
+    std::vector<std::string> v1;
+    assert(to_comma_seperated_str(v1) == "");
+    std::vector<std::string> v2 = { "A" };
+    assert(to_comma_seperated_str(v2) == "A");
+    std::vector<std::string> v3 = { "A", "B" };
+    assert(to_comma_seperated_str(v3) == "A,B");
+    std::vector<std::string> v4 = { "A", "B", "C" };
+    assert(to_comma_seperated_str(v4) == "A,B,C");
+  }
 #endif
+}
+
+template<class T>
+std::string to_comma_seperated_str_impl(const std::vector<T>& v)
+{
+  std::stringstream s;
+  for (const auto& t: v)
+  {
+    s << t << ',';
+  }
+  std::string t{s.str()};
+  if (!t.empty()) t.pop_back();
+  return t;
+}
+
+std::string to_comma_seperated_str(const std::vector<double>& v)
+{
+  return to_comma_seperated_str_impl(v);
+}
+
+std::string to_comma_seperated_str(const std::vector<std::string>& v)
+{
+  return to_comma_seperated_str_impl(v);
 }
 
 std::wstring to_wstring(const std::string s)
