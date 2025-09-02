@@ -14,14 +14,17 @@ get_random_key <- function() {
   sample(get_useful_keys(), 1)
 }
 
-run <- function(n_presses = 10000) {
+run <- function(n_presses = 1000000) {
   message("You have three seconds to put the Conquer Chess window in focus")
   Sys.sleep(3.0) # seconds
 
-  for (i in seq_len(n_presses)) {
+  i <- 0
+  while (TRUE) {
+    if (i == n_presses) return()
     key <- get_random_key()
-    message(i, ": pressing key: ", key)
-    xdotool::keystroke(key)
+    # message(i, ": pressing key: ", key)
+    xdotool::keystroke(key, delay = 20)
+    i <- i + 1
   }
 }
 
