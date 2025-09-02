@@ -58,3 +58,6 @@ game_view_layout_1920_x_1080.png
 conquer_chess
 conquer_chess_error.txt
 tmp.txt
+tmp.csv
+tmp_*.wkt
+tmp_read_lines_test.txt

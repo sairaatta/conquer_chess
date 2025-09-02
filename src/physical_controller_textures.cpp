@@ -4,6 +4,7 @@
 
 
 #include <cassert>
+#include <filesystem>
 #include <sstream>
 
 physical_controller_textures::physical_controller_textures()
@@ -12,6 +13,7 @@ physical_controller_textures::physical_controller_textures()
   for (const auto r: get_all_physical_controller_types())
   {
     const std::string filename{get_filename(r)};
+    assert(std::filesystem::exists(filename));
     if (!m_symbols[r].loadFromFile(filename))
     {
       auto msg{"Cannot find image file '" + filename + "'"};
@@ -24,6 +26,7 @@ physical_controller_textures::physical_controller_textures()
   for (const auto r: get_all_physical_controller_types())
   {
     const std::string filename{get_fancy_filename(r)};
+    assert(std::filesystem::exists(filename));
     if (!m_fancy_textures[r].loadFromFile(filename))
     {
       auto msg{"Cannot find image file '" + filename + "'"};
@@ -44,7 +47,9 @@ std::string physical_controller_textures::get_fancy_filename(
   const physical_controller_type t
 ) const noexcept
 {
-  return std::string("resources/textures/physical_controller/fancy_") + get_filename(t);
+  std::stringstream s;
+  s << "resources/textures/physical_controller/fancy_" << t << ".png";
+  return s.str();
 }
 
 std::string physical_controller_textures::get_filename(

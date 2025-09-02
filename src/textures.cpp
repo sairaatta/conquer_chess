@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <cassert>
+#include <filesystem>
 #include <sstream>
 
 textures::textures()
@@ -15,8 +16,11 @@ textures::textures()
   };
   for (const auto& p: v)
   {
-    const std::string& filename{p.second.c_str()};
-
+    const std::string& filename{
+      std::string("resources/textures/")
+      + p.second.c_str()
+    };
+    assert(std::filesystem::exists(filename));
     if (!p.first.get().loadFromFile(filename))
     {
       auto msg{"Cannot find image file '" + filename + "'"};
@@ -26,7 +30,11 @@ textures::textures()
 
   for (const auto r: get_all_chess_colors())
   {
-    const std::string filename{get_square_filename(r)};
+    const std::string filename{
+      std::string("resources/textures/")
+      + get_square_filename(r)
+    };
+    assert(std::filesystem::exists(filename));
     if (!m_squares[r].loadFromFile(filename))
     {
       auto msg{"Cannot find image file '" + filename + "'"};
@@ -35,7 +43,11 @@ textures::textures()
   }
   for (const auto r: get_all_chess_colors())
   {
-    const std::string filename{get_square_semitransparent_filename(r)};
+    const std::string filename{
+      std::string("resources/textures/")
+      + get_square_semitransparent_filename(r)
+    };
+    assert(std::filesystem::exists(filename));
     if (!m_semitransparent_squares[r].loadFromFile(filename))
     {
       auto msg{"Cannot find image file '" + filename + "'"};
@@ -45,7 +57,11 @@ textures::textures()
 
   for (const auto r: get_all_chess_colors())
   {
-    const std::string filename{get_strip_filename(r)};
+    const std::string filename{
+      std::string("resources/textures/")
+      + get_strip_filename(r)
+    };
+    assert(std::filesystem::exists(filename));
     if (!m_strips[r].loadFromFile(filename))
     {
       auto msg{"Cannot find image file '" + filename + "'"};
@@ -63,6 +79,7 @@ textures::textures()
           occupant_color
         )
       };
+      assert(std::filesystem::exists(filename));
       if (!m_occupied_squares[square_color][occupant_color].loadFromFile(filename))
       {
         auto msg{"Cannot find image file '" + filename + "'"};
@@ -82,6 +99,7 @@ textures::textures()
           occupant_color
         )
       };
+      assert(std::filesystem::exists(filename));
       if (!m_semitransparent_occupied_squares[square_color][occupant_color].loadFromFile(filename))
       {
         auto msg{"Cannot find image file '" + filename + "'"};
@@ -114,7 +132,7 @@ std::string textures::get_occupied_square_filename(
 ) const noexcept
 {
   std::stringstream s;
-  s << square_color << "_" << occupant_color << ".png";
+  s << "resources/textures/" << square_color << "_" << occupant_color << ".png";
   return s.str();
 }
 
@@ -124,7 +142,7 @@ std::string textures::get_occupied_square_semitransparent_filename(
 ) const noexcept
 {
   std::stringstream s;
-  s << square_color << "_" << occupant_color << "_semitransparent.png";
+  s << "resources/textures/" << square_color << "_" << occupant_color << "_semitransparent.png";
   return s.str();
 }
 

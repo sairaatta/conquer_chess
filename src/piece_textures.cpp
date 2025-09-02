@@ -4,6 +4,7 @@
 
 
 #include <cassert>
+#include <filesystem>
 #include <sstream>
 
 piece_textures::piece_textures()
@@ -15,6 +16,7 @@ piece_textures::piece_textures()
       for (const auto p: get_all_piece_types())
       {
         const std::string filename{get_filename(r, c, p)};
+        assert(std::filesystem::exists(filename));
         if (!m_textures[r][c][p].loadFromFile(filename))
         {
           auto msg{"Cannot find image file '" + filename + "'"};
@@ -32,7 +34,10 @@ std::string piece_textures::get_filename(
 ) const noexcept
 {
   std::stringstream s;
-  s << r << "_" << color << "_" << type;
+  s
+    << "resources/textures/pieces/"
+    << r << "_" << color << "_" << type
+  ;
   if (r == race::classic)
   {
     s << "_with_contour.png";
