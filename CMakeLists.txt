@@ -552,6 +552,7 @@ add_compile_options(-Wa,-mbig-obj)
 
 # Add .qrc files
 # Copy resources (instead of Qt .qrc system)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 
 
