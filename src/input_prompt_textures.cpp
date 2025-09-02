@@ -14,24 +14,21 @@ input_prompt_textures::input_prompt_textures()
   // The description of what is in the files
   std::vector<std::string> texture_names;
   {
-    const std::string filename_str{"input_prompt_textures.xml"};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/input_prompts/" + filename);
-    f.copy(filename);
-    texture_names = read_texture_names(filename_str);
+    const std::string filename{"resources/textures/input_prompts/input_prompt_textures.xml"};
+    texture_names = read_texture_names(filename);
   }
   assert(!texture_names.empty());
 
   for (const std::string& texture_name: texture_names)
   {
-    const std::string filename_str{texture_name + ".png"};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/input_prompts/" + filename);
-    f.copy(filename);
-    if (!m_textures[texture_name].loadFromFile(filename.toStdString()))
+    const std::string filename{
+      std::string("resources/textures/input_prompts/")
+      + texture_name + ".png"
+    };
+    if (!m_textures[texture_name].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 

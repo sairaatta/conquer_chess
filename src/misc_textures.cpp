@@ -12,13 +12,13 @@ misc_textures::misc_textures()
 
   for (const auto& p: v)
   {
-    const QString filename{p.second.c_str()};
-    QFile f(":/resources/textures/misc/" + filename);
-    f.copy(filename);
-    if (!p.first.get().loadFromFile(filename.toStdString()))
+    const auto filename{
+      std::string("resources/textures/misc/") + p.second.c_str()
+    };
+    if (!p.first.get().loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }

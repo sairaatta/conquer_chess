@@ -14,14 +14,11 @@ piece_textures::piece_textures()
     {
       for (const auto p: get_all_piece_types())
       {
-        const std::string filename_str{get_filename(r, c, p)};
-        const QString filename{filename_str.c_str()};
-        QFile f(":/resources/textures/pieces/" + filename);
-        f.copy(filename);
-        if (!m_textures[r][c][p].loadFromFile(filename.toStdString()))
+        const std::string filename{get_filename(r, c, p)};
+        if (!m_textures[r][c][p].loadFromFile(filename))
         {
-          QString msg{"Cannot find image file '" + filename + "'"};
-          throw std::runtime_error(msg.toStdString());
+          auto msg{"Cannot find image file '" + filename + "'"};
+          throw std::runtime_error(msg);
         }
       }
     }

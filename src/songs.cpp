@@ -1,6 +1,6 @@
 #include "songs.h"
 
-#include <QResource>
+#include <filesystem>
 
 songs::songs()
 {
@@ -14,22 +14,24 @@ songs::songs()
   };
   for (const auto& p: v)
   {
-    const QString filename{p.second.c_str()};
-    QFile f(":/resources/songs/" + filename);
-    f.copy(filename);
-    if (!f.exists(filename))
+    const auto filename{
+      std::string("resources/songs/")
+      + p.second.c_str()
+    };
+
+    if (!std::filesystem::exists(filename))
     {
-      QString msg{
+      auto msg{
         "Cannot write sound file '" + filename + "'.\n"
         "Tip 1: check the spelling of the filename\n"
         "Tip 2: do not load resources in static initialization time"
       };
-      throw std::runtime_error(msg.toStdString());
+      throw std::runtime_error(msg);
     }
-    if (!p.first.get().openFromFile(filename.toStdString()))
+    if (!p.first.get().openFromFile(filename))
     {
-      QString msg{"Cannot find song file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find song file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
     p.first.get().setLoop(true);
   }

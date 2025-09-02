@@ -15,13 +15,14 @@ piece_portrait_textures::piece_portrait_textures()
       for (const auto p: get_all_piece_types())
       {
         const std::string filename_str{get_filename(r, c, p)};
-        const QString filename{filename_str.c_str()};
-        QFile f(":/resources/textures/portraits/" + filename);
-        f.copy(filename);
-        if (!m_textures[r][c][p].loadFromFile(filename.toStdString()))
+        const auto filename{
+          std::string("resources/textures/portraits/")
+           + filename_str.c_str()
+        };
+        if (!m_textures[r][c][p].loadFromFile(filename))
         {
-          QString msg{"Cannot find image file '" + filename + "'"};
-          throw std::runtime_error(msg.toStdString());
+          auto msg{"Cannot find image file '" + filename + "'"};
+          throw std::runtime_error(msg);
         }
       }
     }

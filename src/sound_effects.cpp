@@ -2,7 +2,7 @@
 
 #include "volume.h"
 
-
+#include <cassert>
 #include <functional>
 
 #ifndef LOGIC_ONLY
@@ -13,13 +13,14 @@ sound_effects::sound_effects()
 
   for (const auto& p: v)
   {
-    const QString filename{std::get<2>(p).c_str()};
-    QFile f(":/resources/sound_effects/" + filename);
-    f.copy(filename);
-    if (!std::get<1>(p).get().loadFromFile(filename.toStdString()))
+    const auto filename{
+      std::string("resources/sound_effects/")
+      + std::get<2>(p).c_str()
+    };
+    if (!std::get<1>(p).get().loadFromFile(filename))
     {
-      QString msg{"Cannot find sound file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find sound file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
     // Connect sound with its buffer
     std::get<0>(p).get().setBuffer(std::get<1>(p).get());

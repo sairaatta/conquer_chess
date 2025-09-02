@@ -11,13 +11,13 @@ piece_action_textures::piece_action_textures()
   for (const auto r: get_all_piece_action_types())
   {
     const std::string filename_str{get_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/piece_actions/" + filename);
-    f.copy(filename);
-    if (!m_textures[r].loadFromFile(filename.toStdString()))
+    const auto filename{
+      std::string(":/resources/textures/piece_actions/") + filename_str.c_str()
+    };
+    if (!m_textures[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }

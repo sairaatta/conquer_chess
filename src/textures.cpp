@@ -15,51 +15,41 @@ textures::textures()
   };
   for (const auto& p: v)
   {
-    const QString filename{p.second.c_str()};
-    QFile f(":/resources/textures/" + filename);
-    f.copy(filename);
-    if (!p.first.get().loadFromFile(filename.toStdString()))
+    const std::string& filename{p.second.c_str()};
+
+    if (!p.first.get().loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 
   for (const auto r: get_all_chess_colors())
   {
-    const std::string filename_str{get_square_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/" + filename);
-    f.copy(filename);
-    if (!m_squares[r].loadFromFile(filename.toStdString()))
+    const std::string filename{get_square_filename(r)};
+    if (!m_squares[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
   for (const auto r: get_all_chess_colors())
   {
-    const std::string filename_str{get_square_semitransparent_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/" + filename);
-    f.copy(filename);
-    if (!m_semitransparent_squares[r].loadFromFile(filename.toStdString()))
+    const std::string filename{get_square_semitransparent_filename(r)};
+    if (!m_semitransparent_squares[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 
   for (const auto r: get_all_chess_colors())
   {
-    const std::string filename_str{get_strip_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/" + filename);
-    f.copy(filename);
-    if (!m_strips[r].loadFromFile(filename.toStdString()))
+    const std::string filename{get_strip_filename(r)};
+    if (!m_strips[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 
@@ -67,19 +57,16 @@ textures::textures()
   {
     for (const auto occupant_color: get_all_chess_colors())
     {
-      const std::string filename_str{
+      const std::string filename{
         get_occupied_square_filename(
           square_color,
           occupant_color
         )
       };
-      const QString filename{filename_str.c_str()};
-      QFile f(":/resources/textures/" + filename);
-      f.copy(filename);
-      if (!m_occupied_squares[square_color][occupant_color].loadFromFile(filename.toStdString()))
+      if (!m_occupied_squares[square_color][occupant_color].loadFromFile(filename))
       {
-        QString msg{"Cannot find image file '" + filename + "'"};
-        throw std::runtime_error(msg.toStdString());
+        auto msg{"Cannot find image file '" + filename + "'"};
+        throw std::runtime_error(msg);
       }
     }
   }
@@ -89,19 +76,16 @@ textures::textures()
   {
     for (const auto occupant_color: get_all_chess_colors())
     {
-      const std::string filename_str{
+      const std::string filename{
         get_occupied_square_semitransparent_filename(
           square_color,
           occupant_color
         )
       };
-      const QString filename{filename_str.c_str()};
-      QFile f(":/resources/textures/" + filename);
-      f.copy(filename);
-      if (!m_semitransparent_occupied_squares[square_color][occupant_color].loadFromFile(filename.toStdString()))
+      if (!m_semitransparent_occupied_squares[square_color][occupant_color].loadFromFile(filename))
       {
-        QString msg{"Cannot find image file '" + filename + "'"};
-        throw std::runtime_error(msg.toStdString());
+        auto msg{"Cannot find image file '" + filename + "'"};
+        throw std::runtime_error(msg);
       }
     }
   }

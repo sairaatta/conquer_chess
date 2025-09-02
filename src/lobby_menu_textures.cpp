@@ -12,39 +12,41 @@ lobby_menu_textures::lobby_menu_textures()
   for (const auto r: get_all_races())
   {
     const std::string filename_str{get_head_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/lobby_menu/" + filename);
-    f.copy(filename);
-    if (!m_heads[r].loadFromFile(filename.toStdString()))
+    const auto filename{
+      std::string("resources/textures/lobby_menu/")
+      + filename_str.c_str()
+    };
+    if (!m_heads[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 
   for (const auto r: get_all_chess_colors())
   {
     const std::string filename_str{get_color_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/lobby_menu/" + filename);
-    f.copy(filename);
-    if (!m_color[r].loadFromFile(filename.toStdString()))
+    const auto filename{
+      std::string("resources/textures/lobby_menu/")
+      + filename_str.c_str()
+    };
+    if (!m_color[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 
   for (const auto b: {true, false})
   {
     const std::string filename_str{get_ready_filename(b)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/lobby_menu/" + filename);
-    f.copy(filename);
-    if (!m_ready[b].loadFromFile(filename.toStdString()))
+    const auto filename{std::string("resources/textures/lobby_menu/")
+      + filename_str.c_str()
+    };
+    if (!m_ready[b].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }

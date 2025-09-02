@@ -10,13 +10,14 @@ options_menu_textures::options_menu_textures()
   for (const auto r: get_all_options_view_items())
   {
     const std::string filename_str{get_filename(r)};
-    const QString filename{filename_str.c_str()};
-    QFile f(":/resources/textures/options_menu/" + filename);
-    f.copy(filename);
-    if (!m_textures[r].loadFromFile(filename.toStdString()))
+    const auto filename{
+      std::string("resources/textures/options_menu/")
+      + filename_str.c_str()
+    };
+    if (!m_textures[r].loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }

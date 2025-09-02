@@ -22,13 +22,11 @@ board_game_textures::board_game_textures()
 
   for (const auto& p: v)
   {
-    const QString filename{p.second.c_str()};
-    QFile f(":/resources/textures/board_game/" + filename);
-    f.copy(filename);
-    if (!p.first.get().loadFromFile(filename.toStdString()))
+    const auto filename{std::string("resources/textures/board_game/") + p.second.c_str()};
+    if (!p.first.get().loadFromFile(filename))
     {
-      QString msg{"Cannot find image file '" + filename + "'"};
-      throw std::runtime_error(msg.toStdString());
+      auto msg{"Cannot find image file '" + filename + "'"};
+      throw std::runtime_error(msg);
     }
   }
 }
