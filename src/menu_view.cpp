@@ -60,6 +60,16 @@ void menu_view::draw_impl()
   draw_quit_panel(*this);
   m_controls_bar.draw();
 
+  switch (this->get_selected())
+  {
+    case menu_view_item::about: break;
+    case menu_view_item::options:
+      draw_options_sub_menu(*this);
+      break;
+    case menu_view_item::quit: break;
+    case menu_view_item::start: break;
+  }
+
   draw_selected_panel(*this);
 
 }
@@ -83,6 +93,11 @@ void draw_background_image(menu_view& v)
 void draw_menu_outline(menu_view& v)
 {
   draw_outline(v.get_layout().get_menu_panel());
+}
+
+void draw_options_sub_menu(menu_view& )
+{
+
 }
 
 void draw_options_panel(menu_view& v)

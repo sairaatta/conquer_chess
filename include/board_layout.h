@@ -36,7 +36,6 @@ private:
 
   screen_rect m_background;
 
-  //std::vector<std::vector<screen_rect>> m_rects;
   std::vector<std::vector<square_layout>> m_rects;
 };
 

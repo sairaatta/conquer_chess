@@ -47,6 +47,8 @@ void add_user_inputs(game_controller& c, const user_inputs& inputs)
 
 void game_controller::apply_user_inputs_to_game()
 {
+  check_selected_pieces_exist();
+
   game& g{m_game};
   std::map<side, std::vector<user_input>> user_inputs;
   user_inputs[side::lhs] = {};
@@ -143,6 +145,7 @@ void game_controller::apply_user_inputs_to_game()
     }
   }
   m_user_inputs = std::vector<user_input>();
+  check_selected_pieces_exist();
 }
 
 void game_controller::apply_action_type_to_game(game& g, const piece_action_type t, const side s)
@@ -673,6 +676,15 @@ bool can_unselect(
 ) noexcept
 {
   return is_cursor_on_selected_piece(c, player_side);
+}
+
+void game_controller::check_selected_pieces_exist()
+{
+  for (const side s: get_all_sides())
+  {
+    if (!m_selected_piece_id[s].has_value()) continue;
+    assert(has_piece_with_id(m_game, m_selected_piece_id[s].value()) && "#137");
+  }
 }
 
 std::vector<piece_id> collect_selected_piece_ids(const game_controller& c)
@@ -2618,7 +2630,11 @@ void test_game_controller() //!OCLINT tests may be many
 
 void game_controller::tick(const delta_t& dt)
 {
+  check_selected_pieces_exist();
   m_game.tick(dt);
+
+  update_selectedness_due_to_captures();
+  check_selected_pieces_exist();
 }
 
 std::string to_board_str(
@@ -2627,6 +2643,20 @@ std::string to_board_str(
 ) noexcept
 {
   return to_board_str(c.get_game(), options);
+}
+
+void game_controller::update_selectedness_due_to_captures()
+{
+  for (const side s: get_all_sides())
+  {
+    if (!m_selected_piece_id[s].has_value()) continue;
+    // A piece that died
+    if (!has_piece_with_id(m_game, m_selected_piece_id[s].value()))
+    {
+      m_selected_piece_id[s] = {};
+    }
+  }
+  check_selected_pieces_exist();
 }
 
 std::ostream& operator<<(std::ostream& os, const game_controller& g) noexcept

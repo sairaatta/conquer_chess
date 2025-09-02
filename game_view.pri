@@ -1,2 +1,4 @@
-RESOURCES += \
-    $$PWD/game_resources.qrc
+# No Qt
+#
+#RESOURCES += \
+#    $$PWD/game_resources.qrc

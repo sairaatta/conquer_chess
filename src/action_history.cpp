@@ -5,12 +5,13 @@
 #include "pgn_game_string.h"
 #include "chess_move.h"
 #include "pgn_game_string.h"
-#include "pieces.h"
+//#include "pieces.h"
 #include "game.h"
 
 
 #include <algorithm>
 #include <cassert>
+#include <fstream>
 #include <iostream>
 #include <regex>
 #include <sstream>
@@ -79,6 +80,46 @@ action_history create_action_history_from_pgn(const pgn_game_string& s)
   }
   return h;
 }
+
+#ifdef REALLY_NEED_ISSUE_153
+void create_r_script_from_pgn(const pgn_game_string& s, const std::string& r_filename)
+{
+  std::vector<std::string> cmds; // For the R script
+
+  const auto move_strs{split_pgn_str(s)};
+  const int n_moves = move_strs.size();
+  game_controller c;
+  for (int i{0}; i!=n_moves; ++i)
+  {
+    const in_game_time t(i);
+    const fen_string fen_str{to_fen_string(c.get_game())};
+    const chess_move m(move_strs[i], fen_str);
+    const chess_color piece_color{m.get_color()};
+    const std::optional<piece_type> pt{m.get_piece_type()};
+    const std::optional<piece_action_type> at{m.get_action_type()};
+    if (pt.has_value() && at.has_value()) // A win is not a piece action
+    {
+      const square& from{m.get_from().value()};
+      const square& to{m.get_to().value()};
+
+      /*
+      const piece_action pa(
+        piece_color,
+        pt.value(),
+        at.value(),
+        from,
+        to
+      );
+      h.add_action(t, pa);
+      get_piece_at(c.get_game(), from).add_action(pa);
+      */
+    }
+    c.tick();
+  }
+  return h;
+}
+#endif // REALLY_NEED_ISSUE_153
+
 
 std::vector<piece_action> collect_actions_in_timespan(
   const action_history& history,
@@ -224,6 +265,20 @@ void test_action_history()
     assert(get_n_piece_actions(r) > 8);
   }
   #endif // FIX_COMPLEX_PGN_20250702
+  #ifdef REALLY_NEED_ISSUE_153
+  // create_r_scrip_from_pgn
+  {
+    const std::string filename{"tmp_create_r_scrip_from_pgn.R"};
+    if (std::filesystem::exists(filename))
+    {
+      std::filesystem::remove(filename);
+    }
+    const pgn_game_string s("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 Qxf7# 1-0");
+    create_r_scrip_from_pgn(s, "play_scholars_mate.R");
+    assert(std::filesystem::exists(filename));
+  }
+  #endif // REALLY_NEED_ISSUE_153
+
   // merge_action_histories
   {
     const action_history a{

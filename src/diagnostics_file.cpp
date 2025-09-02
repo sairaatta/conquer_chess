@@ -1,5 +1,7 @@
 #include "diagnostics_file.h"
 
+#include "cc_cli_options.h"
+
 #include <chrono>
 #include <fstream>
 #include <ios>
@@ -11,14 +13,35 @@ diagnostics_file::diagnostics_file(
 
 }
 
+void diagnostics_file::add_cli_options(const cc_cli_options& options)
+{
+  std::ofstream f(m_filename, std::ios::app); // Append
+  f
+    << "---------------------------------------------------------------" << '\n'
+    << options << '\n'
+  ;
+}
+
+void diagnostics_file::add_footer()
+{
+  const auto now = std::chrono::system_clock::now();
+  const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+
+  std::ofstream f(m_filename, std::ios::app); // Append
+  f
+    << "Game ended successfully at " << std::ctime(&now_time) << '\n'
+  ;
+}
+
 void diagnostics_file::add_header()
 {
   const auto now = std::chrono::system_clock::now();
   const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
 
-  std::ofstream f(m_filename, std::ios::app);
+  std::ofstream f(m_filename, std::ios::app); // Append
   f
-    << "---------------------------------------------------------------" << '\n'
+    << " " << '\n'
+    << "===============================================================" << '\n'
     << "Conquer Chess log file." << '\n'
     << "Compile date: " << __DATE__ << '\n'
     << "Compile time: " << __TIME__ << '\n'

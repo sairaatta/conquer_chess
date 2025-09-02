@@ -4,6 +4,7 @@
 #ifndef LOGIC_ONLY
 
 #include "ccfwd.h"
+#include "cc_cli_options.h"
 #include "sleep_scheduler.h"
 #include "program_state.h"
 #include "game_options.h"
@@ -20,7 +21,7 @@
 class main_window
 {
 public:
-  main_window();
+  main_window(const cc_cli_options& options);
 
   /// Run the window, until the user quits
   void exec();
@@ -28,6 +29,8 @@ public:
   const auto& get_program_state() const noexcept { return m_program_state; }
 
 private:
+  /// The command-line options at startup
+  cc_cli_options m_cli_options;
 
   std::map<program_state, std::unique_ptr<view>> m_views;
 

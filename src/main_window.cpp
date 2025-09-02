@@ -21,7 +21,8 @@
 #include <cassert>
 #include <cmath>
 
-main_window::main_window()
+main_window::main_window(const cc_cli_options& options)
+  : m_cli_options{options}
 {
   game_resources::get().get_loading_screen_songs().get_heroes().setVolume(
     10
@@ -65,8 +66,11 @@ main_window::main_window()
     assert(!m_views[s]->is_active());
   }
 
-  // Use all defaults
-  m_game_options.reset();
+  // Setup the game options
+  m_game_options.reset(); // All default
+  m_game_options.set_show_debug_info(
+    m_cli_options.get_do_show_debug_info()
+  );
 }
 
 void main_window::exec()
@@ -264,7 +268,8 @@ void test_main_window()
 {
   #ifndef NDEBUG
   {
-    main_window w;
+    cc_cli_options options;
+    main_window w(options);
     assert(w.get_program_state() == program_state::loading);
   }
 

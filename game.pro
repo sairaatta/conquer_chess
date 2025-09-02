@@ -47,9 +47,6 @@ CONFIG(debug, debug|release) {
   LIBS += -lgcov
 }
 
-# Qt5
-QT += core
-
 # SFML
 win32 {
   # Include path

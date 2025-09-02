@@ -17,6 +17,7 @@ std::vector<castling_type> get_all_castling_types() noexcept;
 /// Test this class and its free functions
 void test_castling_type();
 
+/// Convert the type to a string that spelled identical to the C++ value
 std::string to_str(const castling_type t) noexcept;
 
 

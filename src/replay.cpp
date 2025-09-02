@@ -6,6 +6,7 @@
 #include "pgn_game_string.h"
 #include <cassert>
 
+#include <filesystem>
 #include <sstream>
 
 replay::replay(
@@ -19,7 +20,6 @@ replay::replay(
 {
 
 }
-
 
 void replay::do_move(const delta_t& dt)
 {
@@ -453,7 +453,6 @@ void test_replay()
     r.reset();
     assert(r.get_index() == 0);
   }
-
   // to_fen_string
   {
     // Scholar's mate

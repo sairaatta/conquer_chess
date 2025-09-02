@@ -6,6 +6,7 @@ class action_history;
 class action_number;
 class board_layout;
 class chess_move;
+class cc_cli_options;
 class delta_t;
 class fen_string;
 class game;
