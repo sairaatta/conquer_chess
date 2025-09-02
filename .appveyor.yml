@@ -20,7 +20,7 @@ install:
 
   # Install only SFML + minimal QtCore (no GUI/Widgets)
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows qtbase:x64-windows --triplet x64-windows --recurse
+     %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows --triplet x64-windows --recurse
 
   # Return to project folder
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
