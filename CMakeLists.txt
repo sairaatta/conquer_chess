@@ -25,8 +25,8 @@ set(SFGRAPHING_SRC
     ../SFGraphing/src/SFPlot.cpp
 )
 find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Audio Network)
-find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
-qt_standard_project_setup()
+#find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
+#qt_standard_project_setup()
 
 # Get ALL SFGraphing source files recursively
 file(GLOB SFGRAPHING_SRC
@@ -47,7 +47,7 @@ file(GLOB LOCAL_SRC "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
 
 
-qt_add_executable(conquer_chess WIN32 MACOSX_BUNDLE
+add_executable(conquer_chess WIN32 MACOSX_BUNDLE
     ${SFGRAPHING_SRC}
     ${LOCAL_SRC}
 )
@@ -66,9 +66,6 @@ target_compile_definitions(conquer_chess PRIVATE
 
 # Fixed Qt6 target linking
 target_link_libraries(conquer_chess PRIVATE
-    Qt6::Core
-    Qt6::Gui
-    Qt6::Widgets
     SFML::Graphics
     SFML::Window
     SFML::System
@@ -554,11 +551,6 @@ set(game_resources_resource_files
 add_compile_options(-Wa,-mbig-obj)
 
 # Add .qrc files
-qt6_add_resources(conquer_chess
-    ${CMAKE_CURRENT_SOURCE_DIR}/images.qrc
-    ${CMAKE_CURRENT_SOURCE_DIR}/sounds.qrc
-    ${CMAKE_CURRENT_SOURCE_DIR}/fonts.qrc
-)
 
 # Fixed compile options with proper scope
 if(CMAKE_BUILD_TYPE STREQUAL Release)
@@ -599,10 +591,3 @@ install(TARGETS conquer_chess
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-# Fixed deprecated FILENAME_VARIABLE warning
-qt_generate_deploy_app_script(
-    TARGET conquer_chess
-    OUTPUT_SCRIPT deploy_script  # Changed from FILENAME_VARIABLE to OUTPUT_SCRIPT
-    NO_UNSUPPORTED_PLATFORM_ERROR
-)
-install(SCRIPT ${deploy_script})
