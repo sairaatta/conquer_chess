@@ -2,7 +2,6 @@
 
 #include "volume.h"
 
-#include <QFile>
 
 #include <functional>
 

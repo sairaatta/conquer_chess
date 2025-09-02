@@ -2,7 +2,6 @@
 
 #ifndef LOGIC_ONLY
 
-#include <QFile>
 #include <cassert>
 #include <sstream>
 

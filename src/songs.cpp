@@ -1,6 +1,5 @@
 #include "songs.h"
 
-#include <QFile>
 #include <QResource>
 
 songs::songs()

@@ -1,6 +1,5 @@
 #include "fonts.h"
 
-#include <QFile>
 
 fonts::fonts()
 {

@@ -1,6 +1,5 @@
 #include "loading_screen_fonts.h"
 
-#include <QFile>
 
 loading_screen_fonts::loading_screen_fonts()
 {

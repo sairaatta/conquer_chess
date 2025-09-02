@@ -5,7 +5,6 @@
 #include "helper.h"
 #include "sfml_helper.h"
 
-#include <QFile>
 
 #include <cassert>
 #include <regex>

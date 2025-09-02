@@ -1,6 +1,5 @@
 #include "loading_screen_songs.h"
 
-#include <QFile>
 #include <QResource>
 
 loading_screen_songs::loading_screen_songs()
