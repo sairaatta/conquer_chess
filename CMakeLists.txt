@@ -551,6 +551,11 @@ set(game_resources_resource_files
 add_compile_options(-Wa,-mbig-obj)
 
 # Add .qrc files
+# Copy resources (instead of Qt .qrc system)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/images DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/sounds DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/fonts  DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 
 # Fixed compile options with proper scope
 if(CMAKE_BUILD_TYPE STREQUAL Release)
