@@ -81,6 +81,7 @@ target_link_libraries(conquer_chess PRIVATE
 )
 
 
+
 # Resources list (unchanged)
 set(game_resources_resource_files
     "resources/fonts/16114_FuturistFixed-width.ttf"

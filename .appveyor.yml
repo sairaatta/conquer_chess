@@ -35,8 +35,11 @@ build_script:
       -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
       -DVCPKG_TARGET_TRIPLET="x64-windows" ^
       -DCMAKE_CXX_STANDARD=20 ^
-      -DCMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows\share\sfml" &&
+      -DSFML_DIR="%VCPKG_ROOT%\installed\x64-windows\share\SFML" &&
       cmake --build . --config Release
+
+
+
 
 
 
