@@ -18,9 +18,9 @@ install:
       git pull &&
       .\bootstrap-vcpkg.bat
 
-  # Install only SFML (Qt removed)
+  # Install dependencies from vcpkg.json (instead of inline version pinning)
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows --triplet x64-windows --recurse
+      %VCPKG_ROOT%\vcpkg.exe install --triplet x64-windows --recurse
 
   # Return to project folder
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
@@ -32,8 +32,11 @@ build_script:
       cd build &&
       cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release ^
       -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
-      -DVCPKG_TARGET_TRIPLET="x64-windows" &&
+      -DVCPKG_TARGET_TRIPLET="x64-windows" ^
+      -DCMAKE_CXX_STANDARD=20 ^
+      -DCMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows/share/sfml" &&
       cmake --build . --config Release
+
 
 after_build:
   - ps: |

@@ -16,6 +16,12 @@ set(CMAKE_EXE_LINKER_FLAGS "-static")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_PREFIX_PATH "C:/Tools/vcpkg/installed/x64-windows/share/sfml")
+
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 set(SFGRAPHING_SRC
@@ -24,7 +30,8 @@ set(SFGRAPHING_SRC
     ../SFGraphing/src/SFPieChart.cpp
     ../SFGraphing/src/SFPlot.cpp
 )
-find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Audio Network)
+find_package(SFML 2.6 CONFIG REQUIRED COMPONENTS graphics window system audio network)
+
 #find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
 #qt_standard_project_setup()
 
