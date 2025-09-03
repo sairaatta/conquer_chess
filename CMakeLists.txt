@@ -30,7 +30,7 @@ set(SFGRAPHING_SRC
     ../SFGraphing/src/SFPieChart.cpp
     ../SFGraphing/src/SFPlot.cpp
 )
-find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Audio Network)
+find_package(SFML COMPONENTS graphics window system audio network REQUIRED)
 
 #find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
 #qt_standard_project_setup()
@@ -73,12 +73,13 @@ target_compile_definitions(conquer_chess PRIVATE
 
 # Fixed Qt6 target linking
 target_link_libraries(conquer_chess PRIVATE
-    SFML::Graphics
-    SFML::Window
-    SFML::System
-    SFML::Audio
-    SFML::Network
+    sfml-graphics
+    sfml-window
+    sfml-system
+    sfml-audio
+    sfml-network
 )
+
 
 
 
