@@ -30,7 +30,7 @@ set(SFGRAPHING_SRC
     ../SFGraphing/src/SFPieChart.cpp
     ../SFGraphing/src/SFPlot.cpp
 )
-find_package(SFML 2.6 CONFIG REQUIRED COMPONENTS graphics window system audio network)
+find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Audio Network)
 
 #find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
 #qt_standard_project_setup()
