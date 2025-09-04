@@ -13,6 +13,7 @@
 #include <cassert>
 #include <numeric>
 #include <sstream>
+#include <iterator>
 #include <optional>
 #include <regex>
 
