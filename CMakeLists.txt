@@ -16,7 +16,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-static")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_PREFIX_PATH "C:/Tools/vcpkg/installed/x64-windows/share/sfml")
+#set(CMAKE_PREFIX_PATH "C:/Tools/vcpkg/installed/x64-windows")
 
 
 set(CMAKE_CXX_STANDARD 17)
@@ -30,10 +30,7 @@ set(SFGRAPHING_SRC
     ../SFGraphing/src/SFPieChart.cpp
     ../SFGraphing/src/SFPlot.cpp
 )
-find_package(SFML COMPONENTS graphics window system audio network REQUIRED)
-
-#find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
-#qt_standard_project_setup()
+find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Network Audio)
 
 # Get ALL SFGraphing source files recursively
 file(GLOB SFGRAPHING_SRC
@@ -72,14 +69,14 @@ target_compile_definitions(conquer_chess PRIVATE
 )
 
 # Fixed Qt6 target linking
-target_link_libraries(conquer_chess PRIVATE
-    sfml-graphics
-    sfml-window
-    sfml-system
-    sfml-audio
-    sfml-network
+target_link_libraries(conquer_chess
+    PRIVATE
+        SFML::Graphics
+        SFML::Window
+        SFML::System
+        SFML::Network
+        SFML::Audio
 )
-
 
 
 
@@ -557,13 +554,15 @@ set(game_resources_resource_files
     "resources/textures/white_white_semitransparent.png"
 )
 
-add_compile_options(-Wa,-mbig-obj)
+if(MSVC)
+    add_compile_options(/bigobj)
+else()
+    add_compile_options(-Wa,-mbig-obj)
+endif()
 
 # Add .qrc files
 # Copy resources (instead of Qt .qrc system)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
-
 
 # Fixed compile options with proper scope
 if(CMAKE_BUILD_TYPE STREQUAL Release)

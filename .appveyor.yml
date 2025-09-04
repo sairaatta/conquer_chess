@@ -39,11 +39,6 @@ build_script:
       cmake --build . --config Release
 
 
-
-
-
-
-
 after_build:
   - ps: |
       $root = $env:APPVEYOR_BUILD_FOLDER

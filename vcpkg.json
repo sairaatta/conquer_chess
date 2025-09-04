@@ -1,7 +1,10 @@
 {
   "name": "conquer-chess",
-  "version-string": "1.0.0",
+  "version": "1.0.0",
   "dependencies": [
-    "sfml"
+    {
+      "name": "sfml",
+      "version=": "2.6.2"
+    }
   ]
 }
