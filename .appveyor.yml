@@ -3,10 +3,9 @@ version: '{build}'
 image: Visual Studio 2022
 
 environment:
-  VCPKG_ROOT: C:\Users\PMLS\Desktop\vcpkg
+  VCPKG_ROOT: C:\Tools\vcpkg
   VCPKG_DEFAULT_TRIPLET: x64-windows
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
-
 
 # Speed up repeat builds by caching vcpkg-installed packages
 cache:
