@@ -17,17 +17,17 @@ install:
       cd %VCPKG_ROOT% &&
       .\bootstrap-vcpkg.bat
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install --triplet x64-windows --x-manifest-root=%APPVEYOR_BUILD_FOLDER%
-
+      %VCPKG_ROOT%\vcpkg.exe install sfml[all]:x64-windows --head
 
 
 
 build_script:
-  - cmake -B build -S %APPVEYOR_BUILD_FOLDER% -A x64 ^
+  - cmd: cmake -B build -S %APPVEYOR_BUILD_FOLDER% -A x64 ^
       -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
       -DCMAKE_BUILD_TYPE=Release ^
       -DCMAKE_CXX_STANDARD=20
-  - cmake --build build --config Release
+  - cmd: cmake --build build --config Release
+
 
 
 
