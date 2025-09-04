@@ -12,31 +12,22 @@ cache:
   - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
 
 install:
-  # Delete old vcpkg cache if it exists
-  - if exist C:\Tools\vcpkg\installed rmdir /s /q C:\Tools\vcpkg\installed
-
-  # Go to vcpkg folder, update it, and bootstrap
+  - git -C %VCPKG_ROOT% pull
   - cmd: >
       cd %VCPKG_ROOT% &&
-      git pull &&
       .\bootstrap-vcpkg.bat
-
-  # Install dependencies from vcpkg.json or latest SFML
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install --triplet x64-windows --recurse
+     %VCPKG_ROOT%\vcpkg.exe install --triplet x64-windows
+
 
 
 build_script:
-  - cmd: >
-      cd %APPVEYOR_BUILD_FOLDER% &&
-      mkdir build &&
-      cd build &&
-      cmake -A x64 .. -DCMAKE_BUILD_TYPE=Release ^
+  - cmake -B build -S %APPVEYOR_BUILD_FOLDER% -A x64 ^
       -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
-      -DVCPKG_TARGET_TRIPLET="x64-windows" ^
-      -DCMAKE_CXX_STANDARD=20 ^
-      -DSFML_DIR="%VCPKG_ROOT%\installed\x64-windows\share\sfml" &&
-      cmake --build . --config Release
+      -DCMAKE_BUILD_TYPE=Release ^
+      -DCMAKE_CXX_STANDARD=20
+  - cmake --build build --config Release
+
 
 
 after_build:

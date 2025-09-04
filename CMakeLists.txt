@@ -6,16 +6,16 @@ project(conquer_chess VERSION 1.0 LANGUAGES C CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Set Qt6 directory path
-set(Qt6_DIR "C:/Qt/6.9.1/mingw_64/lib/cmake/Qt6")
+#set(Qt6_DIR "C:/Qt/6.9.1/mingw_64/lib/cmake/Qt6")
 
 # Static build settings
 set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 set(BUILD_SHARED_LIBS OFF)
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
+#set(CMAKE_AUTOMOC ON)
+#set(CMAKE_AUTOUIC ON)
+#set(CMAKE_AUTORCC ON)
 #set(CMAKE_PREFIX_PATH "C:/Tools/vcpkg/installed/x64-windows")
 
 
@@ -30,7 +30,6 @@ set(SFGRAPHING_SRC
     ../SFGraphing/src/SFPieChart.cpp
     ../SFGraphing/src/SFPlot.cpp
 )
-find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Network Audio)
 
 # Get ALL SFGraphing source files recursively
 file(GLOB SFGRAPHING_SRC
@@ -67,6 +66,9 @@ target_include_directories(conquer_chess PRIVATE
 target_compile_definitions(conquer_chess PRIVATE
     USE_SFGRAPHING
 )
+
+find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window System Network Audio)
+
 
 # Fixed Qt6 target linking
 target_link_libraries(conquer_chess
