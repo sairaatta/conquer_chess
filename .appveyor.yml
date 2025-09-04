@@ -17,7 +17,8 @@ install:
       cd %VCPKG_ROOT% &&
       .\bootstrap-vcpkg.bat
   - cmd: >
-     %VCPKG_ROOT%\vcpkg.exe install --triplet x64-windows
+      %VCPKG_ROOT%\vcpkg.exe install --triplet x64-windows --x-manifest-root=%APPVEYOR_BUILD_FOLDER%
+
 
 
 
