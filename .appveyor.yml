@@ -3,9 +3,10 @@ version: '{build}'
 image: Visual Studio 2022
 
 environment:
-  VCPKG_ROOT: C:\Tools\vcpkg
+  VCPKG_ROOT: C:\Users\PMLS\Desktop\vcpkg
   VCPKG_DEFAULT_TRIPLET: x64-windows
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
+
 
 # Speed up repeat builds by caching vcpkg-installed packages
 cache:
@@ -15,7 +16,8 @@ install:
   - git -C %VCPKG_ROOT% pull
   - cmd: cd %VCPKG_ROOT% && .\bootstrap-vcpkg.bat
   - cmd: >
-      %VCPKG_ROOT%\vcpkg.exe install sfml[all]:x64-windows --triplet x64-windows --classic
+     %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows --triplet x64-windows --classic
+
 
 
 
@@ -25,7 +27,6 @@ build_script:
       -DCMAKE_BUILD_TYPE=Release ^
       -DCMAKE_CXX_STANDARD=20
   - cmd: cmake --build build --config Release
-
 
 
 
