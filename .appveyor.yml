@@ -9,25 +9,16 @@ environment:
 
 # Speed up repeat builds by caching vcpkg-installed packages
 cache:
-  - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
+  - C:\Tools\vcpkg\installed -> appveyor.yml
 
 install:
-  - git -C %VCPKG_ROOT% pull
-  - cmd: cd %VCPKG_ROOT% && .\bootstrap-vcpkg.bat
-  - cmd: >
-     %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows --triplet x64-windows --classic
-
-
-
+  - git clone https://github.com/Microsoft/vcpkg.git C:\Tools\vcpkg
+  - cmd: cd C:\Tools\vcpkg && .\bootstrap-vcpkg.bat
+  - cmd: C:\Tools\vcpkg\vcpkg.exe install sfml[core,graphics,window,system,network,audio]:x64-windows --triplet x64-windows
 
 build_script:
-  - cmd: cmake -B build -S %APPVEYOR_BUILD_FOLDER% -A x64 ^
-      -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake" ^
-      -DCMAKE_BUILD_TYPE=Release ^
-      -DCMAKE_CXX_STANDARD=20
-  - cmd: cmake --build build --config Release
-
-
+  - cmd: cmake -B build -S %APPVEYOR_BUILD_FOLDER% -A x64 -DCMAKE_TOOLCHAIN_FILE="C:\Tools\vcpkg\scripts\buildsystems\vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=20
+  - cmd: cmake --build build --config Release --target ALL_BUILD
 
 after_build:
   - ps: |
@@ -44,8 +35,8 @@ after_build:
       if (-not $exe) { throw "No exe found in the Release build." }
       Copy-Item $exe.FullName $out
 
-      # Copy runtime DLLs (only SFML now, Qt removed)
-      $bin = Join-Path $env:VCPKG_ROOT 'installed\x64-windows\bin'
+      # Copy runtime DLLs from vcpkg
+      $bin = Join-Path "C:\Tools\vcpkg" 'installed\x64-windows\bin'
       $patterns = @(
         'sfml-*.dll',
         'openal32.dll',
@@ -57,7 +48,10 @@ after_build:
         'zlib*.dll',
         'brotli*.dll'
       )
-      foreach ($p in $patterns) { Copy-Item (Join-Path $bin $p) $out -ErrorAction SilentlyContinue }
+      foreach ($p in $patterns) { 
+        Get-ChildItem -Path $bin -Filter $p -ErrorAction SilentlyContinue | 
+        Copy-Item -Destination $out -ErrorAction SilentlyContinue 
+      }
 
       # Ship game assets if present
       foreach ($folder in @('resources','images')) {
