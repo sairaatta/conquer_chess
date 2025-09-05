@@ -62,23 +62,15 @@ target_compile_definitions(conquer_chess PRIVATE
 )
 
 
-find_package(SFML CONFIG REQUIRED 
-    COMPONENTS 
-        Graphics 
-        Window 
-        System 
-        Network 
-        Audio
-)
+find_package(SFML COMPONENTS system window graphics audio network CONFIG REQUIRED)
 
 # Fixed Qt6 target linking
-target_link_libraries(conquer_chess
-    PRIVATE
-        SFML::Graphics
-        SFML::Window
-        SFML::System
-        SFML::Network
-        SFML::Audio
+target_link_libraries(conquer_chess PRIVATE
+    sfml-system
+    sfml-window
+    sfml-graphics
+    sfml-audio
+    sfml-network
 )
 
 

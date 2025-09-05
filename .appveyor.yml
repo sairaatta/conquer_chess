@@ -10,26 +10,22 @@ environment:
 # Speed up repeat builds by caching vcpkg-installed packages
 cache:
   - C:\Tools\vcpkg\installed -> appveyor.yml
-
 install:
   - ps: |
       $vcpkg = "C:\Tools\vcpkg"
       if (-not (Test-Path $vcpkg)) {
-        Write-Host "Cloning vcpkg..."
         git clone https://github.com/microsoft/vcpkg.git $vcpkg
       } else {
-        Write-Host "vcpkg already exists. Updating..."
         git -C $vcpkg fetch --all
         git -C $vcpkg reset --hard origin/master
       }
-
       if (-not (Test-Path "$vcpkg\vcpkg.exe")) {
-        Write-Host "Bootstrapping vcpkg..."
         & "$vcpkg\bootstrap-vcpkg.bat"
       }
 
       Write-Host "Installing SFML..."
-      & "$vcpkg\vcpkg.exe" install sfml[core,graphics,window,system,network,audio]:x64-windows --triplet x64-windows --classic
+      & "$vcpkg\vcpkg.exe" install sfml:x64-windows --classic
+
 
 build_script:
   - cmd: cmake -B build -S %APPVEYOR_BUILD_FOLDER% -A x64 -DCMAKE_TOOLCHAIN_FILE="C:\Tools\vcpkg\scripts\buildsystems\vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=20
