@@ -12,10 +12,32 @@ cache:
   - C:\Tools\vcpkg\installed -> appveyor.yml
 
 install:
-  - git clone https://github.com/Microsoft/vcpkg.git C:\Tools\vcpkg
-  - cmd: cd C:\Tools\vcpkg && .\bootstrap-vcpkg.bat
-  - cmd: C:\Tools\vcpkg\vcpkg.exe install sfml[core,graphics,window,system,network,audio]:x64-windows --triplet x64-windows
+  - ps: |
+      $vcpkg = 'C:\Tools\vcpkg'
+      if (-not (Test-Path $vcpkg)) {
+        Write-Host "vcpkg not found. Cloning..."
+        git clone https://github.com/microsoft/vcpkg.git $vcpkg --depth 1
+      } else {
+        Write-Host "vcpkg already exists. Fetching latest and resetting to origin/master..."
+        # Keep repository in a clean state to avoid local divergence causing errors
+        git -C $vcpkg fetch --all
+        git -C $vcpkg reset --hard origin/master
+      }
 
+      # Bootstrap only if vcpkg.exe is missing (saves time)
+      $vcpkgExe = Join-Path $vcpkg 'vcpkg.exe'
+      if (-not (Test-Path $vcpkgExe)) {
+        Write-Host "Bootstrapping vcpkg..."
+        & "$vcpkg\bootstrap-vcpkg.bat"
+      } else {
+        Write-Host "vcpkg.exe present, skipping bootstrap."
+      }
+
+      # Install packages (vcpkg is smart and will skip already-installed packages in the cached installed/ folder)
+      Write-Host "Installing SFML via vcpkg..."
+      & "$vcpkg\vcpkg.exe" install sfml[core,graphics,window,system,network,audio]:x64-windows --triplet x64-windows
+
+# build_script, after_build, artifacts, on_failure keep the same as you had
 build_script:
   - cmd: cmake -B build -S %APPVEYOR_BUILD_FOLDER% -A x64 -DCMAKE_TOOLCHAIN_FILE="C:\Tools\vcpkg\scripts\buildsystems\vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=20
   - cmd: cmake --build build --config Release --target ALL_BUILD
@@ -26,7 +48,6 @@ after_build:
       $out  = Join-Path $root 'dist'
       New-Item -ItemType Directory -Force -Path $out | Out-Null
 
-      # Grab the first Release exe produced
       $exe = Get-ChildItem -Recurse -Filter *.exe -Path "$root\build" |
              Where-Object { $_.FullName -match '\\Release\\' } |
              Sort-Object Length -Descending |
@@ -35,7 +56,6 @@ after_build:
       if (-not $exe) { throw "No exe found in the Release build." }
       Copy-Item $exe.FullName $out
 
-      # Copy runtime DLLs from vcpkg
       $bin = Join-Path "C:\Tools\vcpkg" 'installed\x64-windows\bin'
       $patterns = @(
         'sfml-*.dll',
@@ -53,7 +73,6 @@ after_build:
         Copy-Item -Destination $out -ErrorAction SilentlyContinue 
       }
 
-      # Ship game assets if present
       foreach ($folder in @('resources','images')) {
         $src = Join-Path $root $folder
         if (Test-Path $src) { Copy-Item $src $out -Recurse -Force }
