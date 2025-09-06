@@ -1,4 +1,4 @@
-# Build a Windows x64 Release exe with SFML via vcpkg
+# Build a Windows x64 Release exe with SFML 2.6.2 via vcpkg
 version: '{build}'
 image: Visual Studio 2022
 
@@ -7,23 +7,22 @@ environment:
   VCPKG_DEFAULT_TRIPLET: x64-windows
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
 
-
 # Speed up repeat builds by caching vcpkg-installed packages
 cache:
   - C:\Tools\vcpkg\installed -> **\CMakeLists.txt
 
 install:
   - cd %VCPKG_ROOT%
+  # Checkout a commit from when vcpkg still provided SFML 2.6.2
+  - git checkout 66c5623e3d0c9ccae45e82775b316c9591de7b37
   - .\bootstrap-vcpkg.bat
+  # Install SFML 2.6.2
+  - .\vcpkg.exe install sfml[core,graphics,window,network,audio]:x64-windows --classic
   - cd %APPVEYOR_BUILD_FOLDER%
-
-
-
 
 build_script:
   - cmake -B build -S . -A x64 -DCMAKE_TOOLCHAIN_FILE="C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_MANIFEST_MODE=OFF
   - cmake --build build --config Release
-
 
 after_build:
   - ps: |
@@ -40,7 +39,7 @@ after_build:
       if (-not $exe) { throw "No exe found in the Release build." }
       Copy-Item $exe.FullName $out
 
-      # Copy runtime DLLs (only SFML now, Qt removed)
+      # Copy runtime DLLs (SFML + deps)
       $bin = Join-Path $env:VCPKG_ROOT 'installed\x64-windows\bin'
       $patterns = @(
         'sfml-*.dll',
