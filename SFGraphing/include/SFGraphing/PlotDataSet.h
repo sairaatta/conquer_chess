@@ -26,8 +26,8 @@ enum PlottingType
 class PlotDataSet
 {
 private:
-    std::vector<float> _yValues;
     std::vector<float> _xValues;
+    std::vector<float> _yValues;
     sf::Color _color;
     std::string _label;
     PlottingType _pType;
