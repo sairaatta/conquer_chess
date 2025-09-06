@@ -15,8 +15,9 @@ cache:
 install:
   - git -C %VCPKG_ROOT% pull
   - cmd: cd %VCPKG_ROOT% && .\bootstrap-vcpkg.bat
-  - cmd: > 
-     %VCPKG_ROOT%\vcpkg.exe install sfml:x64-windows --triplet x64-windows --classic
+  - cmd: >
+      %VCPKG_ROOT%\vcpkg.exe install sfml[core,graphics,window,network,audio]:x64-windows=2.6.2 --triplet x64-windows --classic
+
 
 
 build_script:
