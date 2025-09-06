@@ -63,7 +63,6 @@ target_compile_definitions(conquer_chess PRIVATE
 # Tell CMake to use SFML from vcpkg
 find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
 
-add_executable(conquer_chess main.cpp)
 
 
 # Link against SFML targets (vcpkg uses lowercase names)
