@@ -1,11 +1,16 @@
 {
-  "name": "conquer-chess",
-  "version-string": "1.0.0",
-  "builtin-baseline": "df6921c0b6cdf95269a4a3093e267b59e4bf0f5b",
+  "name": "conquer_chess",
+  "version": "1.0.0",
   "dependencies": [
     {
       "name": "sfml",
-      "features": [ "core", "graphics", "window", "network", "audio" ]
+      "version>=": "2.6.2",
+      "features": [
+        "graphics",
+        "window",
+        "network",
+        "audio"
+      ]
     }
   ]
 }
