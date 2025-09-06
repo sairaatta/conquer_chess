@@ -60,16 +60,17 @@ target_include_directories(conquer_chess PRIVATE
 target_compile_definitions(conquer_chess PRIVATE
     USE_SFGRAPHING
 )
+# Tell CMake to use SFML from vcpkg
+find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
+
+add_executable(conquer_chess main.cpp)
 
 
-find_package(SFML COMPONENTS system window graphics audio network CONFIG REQUIRED)
-
-# Fixed Qt6 target linking
+# Link against SFML targets (vcpkg uses lowercase names)
 target_link_libraries(conquer_chess PRIVATE
     sfml-system
     sfml-window
     sfml-graphics
-    sfml-audio
     sfml-network
 )
 
